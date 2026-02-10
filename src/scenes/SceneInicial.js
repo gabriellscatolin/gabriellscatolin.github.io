@@ -83,8 +83,7 @@ export default class SceneInicial extends Phaser.Scene {
   
 
   startGame() {
-    console.log("Iniciar jogo");
-    // this.scene.start("SceneJogo");
+    this.scene.start("SceneJogo");
   }
 
   openSettings() {
