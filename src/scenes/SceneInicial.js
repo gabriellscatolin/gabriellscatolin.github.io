@@ -12,6 +12,7 @@ export default class SceneInicial extends Phaser.Scene {
         botaoCreditos: "src/assets/imagens/imagensBotoes/botaoCreditos.png",  //Botão "créditos"
         configFundo: "src/assets/imagens/imagensPopUps/fundoConfig.png"       //Tela de fundo das configurações
       },
+      
 //Definição de posição e tamanho dos botões
      BOTOES: [
     { key: "botaoConfig", x: "center", y: 870, scale: 0.48, action: "openSettings" },
