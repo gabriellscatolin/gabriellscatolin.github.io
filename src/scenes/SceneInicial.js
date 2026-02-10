@@ -14,9 +14,9 @@ export default class SceneInicial extends Phaser.Scene {
       },
 //Definição de posição e tamanho dos botões
      BOTOES: [
-    { key: "botaoConfig", x: "center", y: 870, scale: 0.5, action: "openSettings" },
+    { key: "botaoConfig", x: "center", y: 870, scale: 0.48, action: "openSettings" },
     { key: "botaoJogar", x: "center", y: 600, scale: 0.5, action: "startGame" },
-    { key: "botaoCreditos", x: "center", y: 750, scale: 0.5, action: "fecharJogo" }
+    { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo" }
 ]
     };
   }

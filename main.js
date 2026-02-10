@@ -1,4 +1,4 @@
-import SceneInicial from "./src/Scenes/SceneInicial.js";
+import SceneInicial from "./src/scenes/SceneInicial.js";
 
 //Configuração do jogo phaser
 const config = {
