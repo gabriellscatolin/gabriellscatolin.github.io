@@ -16,13 +16,25 @@ export default class SceneJogo extends Phaser.Scene {
 
     // Personagem (placeholder - trocar por sprite depois)
     this.personagem = this.add.rectangle(
-      this.scale.width / 2,  // posição X inicial (centro)
-      this.scale.height / 2, // posição Y inicial (centro)
-      40, 60,                // largura e altura do retângulo
-      0x3498db               // cor azul
+      this.scale.width / 2, // posição X inicial (centro)
+      684,                   // posição Y inicial (meio da faixa de terra)
+      30, 45,               // largura e altura
+      0x3498db              // cor azul
     );
     this.physics.add.existing(this.personagem);
     this.personagem.body.setCollideWorldBounds(true);
+
+    // Paredes invisíveis - só permite andar na faixa de terra horizontal
+    this.paredes = this.physics.add.staticGroup();
+
+    // Parede de cima (tudo acima de Y=618)
+    this.criarParede(960, 309, 1920, 618);
+
+    // Parede de baixo (tudo abaixo de Y=750)
+    this.criarParede(960, 915, 1920, 330);
+
+    // Colisão personagem com paredes
+    this.physics.add.collider(this.personagem, this.paredes);
 
     // Controles WASD
     this.teclas = this.input.keyboard.addKeys({
@@ -44,11 +56,43 @@ export default class SceneJogo extends Phaser.Scene {
       }
     });
 
-    // Resizez
-    window.addEventListener("resize", () => {
-      this.fundo.displayWidth = this.scale.width;
-      this.fundo.displayHeight = this.scale.height;
-    });
+    // Transição de entrada (desfaz os pixels pretos)
+    this.transicaoEntrada();
+  }
+
+  criarParede(x, y, largura, altura) {
+    const parede = this.add.rectangle(x, y, largura, altura, 0xff0000, 0);
+    this.physics.add.existing(parede, true); // true = estática
+    this.paredes.add(parede);
+  }
+
+  transicaoEntrada() {
+    const colunas = 24;
+    const linhas = 14;
+    const larguraBloco = Math.ceil(this.scale.width / colunas);
+    const alturaBloco = Math.ceil(this.scale.height / linhas);
+
+    for (let i = 0; i < colunas; i++) {
+      for (let j = 0; j < linhas; j++) {
+        const bloco = this.add.rectangle(
+          i * larguraBloco + larguraBloco / 2,
+          j * alturaBloco + alturaBloco / 2,
+          larguraBloco + 2, alturaBloco + 2,
+          0x000000
+        ).setDepth(100);
+
+        // Encolhe cada bloco com delay aleatório (abre a tela)
+        this.tweens.add({
+          targets: bloco,
+          width: 0,
+          height: 0,
+          duration: 300,
+          delay: Math.random() * 500,
+          ease: "Cubic.easeOut",
+          onComplete: () => bloco.destroy()
+        });
+      }
+    }
   }
 
   update() {

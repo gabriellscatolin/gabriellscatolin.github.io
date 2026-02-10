@@ -85,7 +85,41 @@ export default class SceneInicial extends Phaser.Scene {
   
 
   startGame() {
-    this.scene.start("SceneJogo");
+    // Transição pixelada
+    const colunas = 24;
+    const linhas = 14;
+    const larguraBloco = Math.ceil(this.scale.width / colunas);
+    const alturaBloco = Math.ceil(this.scale.height / linhas);
+    const blocos = [];
+
+    // Cria grid de blocos pretos pequenos
+    for (let i = 0; i < colunas; i++) {
+      for (let j = 0; j < linhas; j++) {
+        const bloco = this.add.rectangle(
+          i * larguraBloco + larguraBloco / 2,
+          j * alturaBloco + alturaBloco / 2,
+          0, 0, 0x000000
+        ).setDepth(100);
+        blocos.push(bloco);
+      }
+    }
+
+    // Anima cada bloco crescendo com delay aleatório
+    blocos.forEach((bloco, index) => {
+      this.tweens.add({
+        targets: bloco,
+        width: larguraBloco + 2,
+        height: alturaBloco + 2,
+        duration: 300,
+        delay: Math.random() * 500,
+        ease: "Cubic.easeIn"
+      });
+    });
+
+    // Depois que todos os blocos cobriram a tela, muda de cena
+    this.time.delayedCall(900, () => {
+      this.scene.start("SceneJogo");
+    });
   }
 
   openSettings() {
