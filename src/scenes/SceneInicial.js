@@ -6,17 +6,17 @@ export default class SceneInicial extends Phaser.Scene {
 // Configurações da cena (Partes fixas)
     this.CONFIG = {
       ASSETS: {
-        botaoJogar: "src/assets/imagens/imagensBotoes/botaoJogar.png",   //Botão "jogar 
-        fundo: "src/assets/imagens/imagensMapa/mapaInicial.png",         //Fundo de tela inicial
-        botaoConfig: "src/assets/imagens/imagensBotoes/botaoc.png",      //Botão "configurações"
-        botaoSair: "src/assets/imagens/imagensBotoes/botaosair.png",     //Botão "sair"
-        configFundo: "src/assets/imagens/imagensPopUps/fundoConfig.png"  //Tela de fundo das configurações
+        botaoJogar: "src/assets/imagens/imagensBotoes/botaoJogar.png",        //Botão "jogar 
+        fundo: "src/assets/imagens/imagensMapa/mapaInicial.png",              //Fundo de tela inicial
+        botaoConfig: "src/assets/imagens/imagensBotoes/botaoConfig.png",      //Botão "configurações"
+        botaoCreditos: "src/assets/imagens/imagensBotoes/botaoCreditos.png",  //Botão "créditos"
+        configFundo: "src/assets/imagens/imagensPopUps/fundoConfig.png"       //Tela de fundo das configurações
       },
 //Definição de posição e tamanho dos botões
      BOTOES: [
     { key: "botaoConfig", x: "center", y: 870, scale: 0.5, action: "openSettings" },
     { key: "botaoJogar", x: "center", y: 600, scale: 0.5, action: "startGame" },
-    { key: "botaoSair", x: "center", y: 750, scale: 0.5, action: "fecharJogo" }
+    { key: "botaoCreditos", x: "center", y: 750, scale: 0.5, action: "fecharJogo" }
 ]
     };
   }
@@ -27,7 +27,7 @@ export default class SceneInicial extends Phaser.Scene {
     this.load.image("fundo", this.CONFIG.ASSETS.fundo);
     this.load.image("botaoJogar", this.CONFIG.ASSETS.botaoJogar);
     this.load.image("botaoConfig", this.CONFIG.ASSETS.botaoConfig);
-    this.load.image("botaoSair", this.CONFIG.ASSETS.botaoSair);
+    this.load.image("botaoCreditos", this.CONFIG.ASSETS.botaoCreditos);
   }
 //Configura os elementos visuais e interativos das cenas
   create() {
