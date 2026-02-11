@@ -21,12 +21,10 @@ export default class SceneInicial extends Phaser.Scene {
      BOTOES: [
     { key: "botaoConfig", x: "center", y: 870, scale: 0.48, action: "openSettings" },
     { key: "botaoJogar", x: "center", y: 600, scale: 0.5, action: "startGame" },
-    { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo" }
-]
+    { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo" }]
     };
   }
   
-
 // Carrega os assets
   preload() {
     this.load.image("fundo", this.CONFIG.ASSETS.fundo);
@@ -55,16 +53,14 @@ export default class SceneInicial extends Phaser.Scene {
     window.addEventListener("resize", this.redimensionarFundo.bind(this));
   } //Redimensionar fundo de tela
 
-  
-
   adicionarBotoes() {
     this.CONFIG.BOTOES.forEach(botao => {
-      let x = botao.x === "center" ? this.scale.width / 2 : botao.x;//Centraliza x se "Center"
+      let x = botao.x === "center" ? this.scale.width / 2 : botao.x;//Centralizar os botões horizontalmente, ou usar a posição definida
       let y = botao.y;
 
-      const btn = this.add.image(x, y, botao.key)
-        .setScale(botao.scale)
-        .setInteractive({ useHandCursor: true });
+      const btn = this.add.image(x, y, botao.key) //Adicionar o botão à cena
+        .setScale(botao.scale)     //tamanho botão
+        .setInteractive({ useHandCursor: true }); //Função phaser para ações interativas
 
     //Define ações ao clicar nos botões
       btn.on("pointerdown", () => {
@@ -82,7 +78,7 @@ export default class SceneInicial extends Phaser.Scene {
     const largura = this.scale.width;  //Redimensionar largura
     const altura = this.scale.height;  // Redimensionar altura
 
-    this.fundo.displayWidth = largura;
+    this.fundo.displayWidth = largura;  // Ajusta a largura do fundo para preencher a tela
     this.fundo.displayHeight = altura;
   }
 
@@ -94,7 +90,7 @@ export default class SceneInicial extends Phaser.Scene {
 
   this.add.tween({
     targets: pixelated,
-    duration: this.CONFIG.PIXELATE_DURATION,
+    duration: this.CONFIG.PIXELATE_DURATION, //Duração do pixelado
     amount: 1,
     onComplete: () => {
       this.scene.start("SceneJogo");
@@ -102,9 +98,90 @@ export default class SceneInicial extends Phaser.Scene {
   });
 }
 
-
   openSettings() {
-    console.log("Abrir configurações");
+    this.abrirPopupConfig();  //Abre o pop-up de configurações
+  }
+
+  abrirPopupConfig(){ //Função para tornar o botão Configurações executavel
+    // Fundo escuro
+    this.fundoPopup = this.add.rectangle(
+      this.scale.width / 2,
+      this.scale.height / 2,
+      this.scale.width,
+      this.scale.height,
+      0x000000,
+      0.5
+    ).setDepth(100);
+   //Configurações do pop-up
+    this.caixaPopup = this.add.rectangle(
+      this.scale.width / 2,   
+      this.scale.height / 2,
+      700,
+      400,                //Tamanho do pop-up
+      0x1e1e1e
+    ).setDepth(101);
+
+    // Título do pop-up
+    this.textoPopup = this.add.text(
+      this.scale.width / 2,
+      this.scale.height / 2 - 150,
+      "CONFIGURAÇÕES",              
+      { fontSize: "36px", color: "#ffffff" }
+    ).setOrigin(0.5).setDepth(102);
+
+     // Texto Volume
+    this.textVolume = this.add.text(
+      this.scale.width / 2 - 200,
+      this.scale.height / 2,
+      "VOLUME:",
+      { fontSize: "26px", color: "#ffffff" }  //Detalhes da fonte do texto
+    ).setDepth(102);
+
+     // Botão de diminuir volume
+    this.botaoMenos = this.add.text(  //Configurações do botão de diminuir volume
+      this.scale.width / 2 - 20,
+      this.scale.height / 2,
+      "-",
+      { fontSize: "36px", color: "#ffffff" } //Fonte e cor dos textos
+    ).setDepth(102).setInteractive({ useHandCursor: true });  //cria uma função interativa no phaser
+
+    // Botão de aumentar volume
+    this.botaoMais = this.add.text(
+      this.scale.width / 2 + 40,     //Escalas e tamanho do botão de aumentar volume
+      this.scale.height / 2,
+      "+",
+      { fontSize: "36px", color: "#ffffff" }
+    ).setDepth(102).setInteractive({ useHandCursor: true });
+
+    this.botaoMais.on("pointerdown", () => {      //configurações ao clicar no botão de aumentar volume
+      this.sound.volume = Phaser.Math.Clamp(this.sound.volume + 0.1, 0, 1);
+    });
+
+    this.botaoMenos.on("pointerdown", () => {   //configurações ao clicar no botão de diminuir volume
+      this.sound.volume = Phaser.Math.Clamp(this.sound.volume - 0.1, 0, 1);
+    });
+
+    // Botão fechar
+    this.botaoFechar = this.add.text(
+      this.scale.width / 2,
+      this.scale.height / 2 + 150,
+      "FECHAR",
+      { fontSize: "28px", color: "#ff5555" }   //Cor do botão fechar
+    ).setOrigin(0.5).setDepth(102).setInteractive({ useHandCursor: true });
+
+    this.botaoFechar.on("pointerdown", () => {
+      this.fecharPopupConfig();
+    });
+  }
+
+  fecharPopupConfig() {   //Função para fechar o pop-up de configurações
+    this.fundoPopup.destroy();
+    this.caixaPopup.destroy();   //Destrói os elementos do pop-up para fechar
+    this.textoPopup.destroy();
+    this.textVolume.destroy();
+    this.botaoMais.destroy();
+    this.botaoMenos.destroy();
+    this.botaoFechar.destroy();
   }
 
   fecharJogo() {
@@ -112,5 +189,3 @@ export default class SceneInicial extends Phaser.Scene {
     // window.close(); // navegador bloqueia normalmente
   }
 }
-
-
