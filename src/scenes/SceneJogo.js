@@ -6,6 +6,15 @@ export default class SceneJogo extends Phaser.Scene {
 
   preload() {
     this.load.image("mapaPonte", "src/assets/imagens/imagensMapa/mapaPonte.png");
+
+    // Sprites do personagem (4 frames por direção)
+    const caminho = "src/assets/imagens/imagensPersonagens/homem_banco_VF";
+    for (let i = 1; i <= 4; i++) {
+      this.load.image(`hb_frente_${i}`, `${caminho}/HB_frente_${i}.png`);
+      this.load.image(`hb_tras_${i}`, `${caminho}/HB_tras_${i}.png`);
+      this.load.image(`hb_direita_${i}`, `${caminho}/HB_direita_${i}.png`);
+      this.load.image(`hb_esquerda_${i}`, `${caminho}/HB_esquerda_${i}.png`);
+    }
   }
 
   create() {
@@ -14,27 +23,16 @@ export default class SceneJogo extends Phaser.Scene {
     this.fundo.displayWidth = this.scale.width;
     this.fundo.displayHeight = this.scale.height;
 
-    // Personagem (placeholder - trocar por sprite depois)
-    this.personagem = this.add.rectangle(
+    // Criar animações do personagem
+    this.criarAnimacoes();
+
+    // Personagem com sprite
+    this.personagem = this.add.sprite(
       this.scale.width / 2, // posição X inicial (centro)
       684,                   // posição Y inicial (meio da faixa de terra)
-      30, 45,               // largura e altura
-      0x3498db              // cor azul
-    );
+      "hb_frente_1"         // imagem inicial (olhando pra frente)
+    ).setScale(0.15);
     this.physics.add.existing(this.personagem);
-    this.personagem.body.setCollideWorldBounds(true);
-
-    // Paredes invisíveis - só permite andar na faixa de terra horizontal
-    this.paredes = this.physics.add.staticGroup();
-
-    // Parede de cima (tudo acima de Y=618)
-    this.criarParede(960, 309, 1920, 618);
-
-    // Parede de baixo (tudo abaixo de Y=750)
-    this.criarParede(960, 915, 1920, 330);
-
-    // Colisão personagem com paredes
-    this.physics.add.collider(this.personagem, this.paredes);
 
     // Controles WASD
     this.teclas = this.input.keyboard.addKeys({
@@ -60,10 +58,58 @@ export default class SceneJogo extends Phaser.Scene {
     this.transicaoEntrada();
   }
 
-  criarParede(x, y, largura, altura) {
-    const parede = this.add.rectangle(x, y, largura, altura, 0xff0000, 0);
-    this.physics.add.existing(parede, true); // true = estática
-    this.paredes.add(parede);
+  criarAnimacoes() {
+    // Frente (S - pra baixo)
+    this.anims.create({
+      key: "andar_frente",
+      frames: [
+        { key: "hb_frente_1" },
+        { key: "hb_frente_2" },
+        { key: "hb_frente_3" },
+        { key: "hb_frente_4" }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
+
+    // Trás (W - pra cima)
+    this.anims.create({
+      key: "andar_tras",
+      frames: [
+        { key: "hb_tras_1" },
+        { key: "hb_tras_2" },
+        { key: "hb_tras_3" },
+        { key: "hb_tras_4" }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
+
+    // Direita (D)
+    this.anims.create({
+      key: "andar_direita",
+      frames: [
+        { key: "hb_direita_1" },
+        { key: "hb_direita_2" },
+        { key: "hb_direita_3" },
+        { key: "hb_direita_4" }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
+
+    // Esquerda (A)
+    this.anims.create({
+      key: "andar_esquerda",
+      frames: [
+        { key: "hb_esquerda_1" },
+        { key: "hb_esquerda_2" },
+        { key: "hb_esquerda_3" },
+        { key: "hb_esquerda_4" }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
   }
 
   transicaoEntrada() {
@@ -81,7 +127,6 @@ export default class SceneJogo extends Phaser.Scene {
           0x000000
         ).setDepth(100);
 
-        // Encolhe cada bloco com delay aleatório (abre a tela)
         this.tweens.add({
           targets: bloco,
           width: 0,
@@ -97,21 +142,38 @@ export default class SceneJogo extends Phaser.Scene {
 
   update() {
     const body = this.personagem.body;
-
-    // Reset velocidade
     body.setVelocity(0);
 
-    // Movimento WASD
+    let andando = false;
+
+    // Movimento WASD com animação
     if (this.teclas.a.isDown) {
       body.setVelocityX(-this.velocidade);
+      this.personagem.anims.play("andar_esquerda", true);
+      andando = true;
     } else if (this.teclas.d.isDown) {
       body.setVelocityX(this.velocidade);
+      this.personagem.anims.play("andar_direita", true);
+      andando = true;
     }
 
     if (this.teclas.w.isDown) {
       body.setVelocityY(-this.velocidade);
+      if (!andando) this.personagem.anims.play("andar_tras", true);
+      andando = true;
     } else if (this.teclas.s.isDown) {
       body.setVelocityY(this.velocidade);
+      if (!andando) this.personagem.anims.play("andar_frente", true);
+      andando = true;
     }
+
+    // Parado = para a animação no primeiro frame
+    if (!andando) {
+      this.personagem.anims.stop();
+    }
+
+    // Limita o personagem à faixa de terra
+    this.personagem.y = Phaser.Math.Clamp(this.personagem.y, 578, 690);
+    this.personagem.x = Phaser.Math.Clamp(this.personagem.x, 0, 1920);
   }
 }
