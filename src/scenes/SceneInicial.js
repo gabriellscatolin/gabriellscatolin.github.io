@@ -31,6 +31,7 @@ export default class SceneInicial extends Phaser.Scene {
     this.load.image("botaoJogar", this.CONFIG.ASSETS.botaoJogar);
     this.load.image("botaoConfig", this.CONFIG.ASSETS.botaoConfig);
     this.load.image("botaoCreditos", this.CONFIG.ASSETS.botaoCreditos);
+    this.load.image("configFundo", this.CONFIG.ASSETS.configFundo);
   }
 //Configura os elementos visuais e interativos das cenas
   create() {
@@ -113,13 +114,11 @@ export default class SceneInicial extends Phaser.Scene {
       0.5
     ).setDepth(100);
    //Configurações do pop-up
-    this.caixaPopup = this.add.rectangle(
-      this.scale.width / 2,   
-      this.scale.height / 2,
-      700,
-      400,                //Tamanho do pop-up
-      0x1e1e1e
-    ).setDepth(101);
+   this.caixaPopup = this.add.image(
+  this.scale.width / 2,  
+  this.scale.height / 2, 
+  "configFundo"
+).setScale(2.5).setDepth(101); 
 
     // Título do pop-up
     this.textoPopup = this.add.text(
