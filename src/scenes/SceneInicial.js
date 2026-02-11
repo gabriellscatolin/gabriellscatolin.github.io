@@ -24,7 +24,7 @@ export default class SceneInicial extends Phaser.Scene {
     { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo" }]
     };
   }
-  
+
 // Carrega os assets
   preload() {
     this.load.image("fundo", this.CONFIG.ASSETS.fundo);
@@ -93,7 +93,7 @@ export default class SceneInicial extends Phaser.Scene {
     duration: this.CONFIG.PIXELATE_DURATION, //Duração do pixelado
     amount: 1,
     onComplete: () => {
-      this.scene.start("SceneJogo");
+      this.scene.start("ScenePersonagem");
     }
   });
 }

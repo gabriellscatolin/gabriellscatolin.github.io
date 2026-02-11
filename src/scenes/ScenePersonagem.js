@@ -1,44 +1,68 @@
-// Classe que representa a cena de seleção de personagens
 export default class ScenePersonagem extends Phaser.Scene {
     constructor() {
-        super({ key: "ScenePersonagem" }); // Identificador da cena
-    }
-        
-    // Carrega as imagens usadas na cena
-    preload() {
-        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png'); // Fundo da tela
-        
-        this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');
-        this.load.image('Lucas', 'Lucas.png'); 
-        this.load.image('Maya', 'Maya.png'); 
-        this.load.image('Joao', 'Joao.png'); 
-        this.load.image('Dandara', 'Dandara.png');
+        super("ScenePersonagem" );
+
+        this.CONFIG = {
+            BOTOES: [
+                { key: "Lucas", x: 300, y: 700, scale: 0.6, action: "selecionarLucas" },
+                { key: "Maya", x: 730, y: 700, scale: 0.6, action: "selecionarMaya" },
+                { key: "Joao", x: 1170, y: 700, scale: 0.6, action: "selecionarJoao" },
+                { key: "Dandara", x: 1600, y: 700, scale: 0.6, action: "selecionarDandara" }
+            ]
+        };
     }
 
-    // Cria os elementos visuais da cena
+    preload() {
+        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png');
+        this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');
+        
+        // Loop para carregar todas as imagens do array CONFIG
+        this.CONFIG.BOTOES.forEach(botao => {
+            this.load.image(botao.key, `${botao.key}.png`);
+        });
+    }
+
     create() {
-        // Adiciona o fundo e ajusta ao tamanho da tela
+        // Configura o fundo
         this.fundo = this.add.image(0, 0, "fundoPersonagem").setOrigin(0, 0);
         this.fundo.displayWidth = this.scale.width;
         this.fundo.displayHeight = this.scale.height;
 
-        // Adiciona os personagens na tela, com posição e interação ativada
-        const Personagem1 = this.add.image(313, 700, 'Lucas').setScale(0.6).setInteractive();
-        const Maya = this.add.image(730, 700, 'Maya').setScale(0.6).setInteractive();
-        const personagem3 = this.add.image(1170, 700, 'Joao').setScale(0.6).setInteractive();
-        const personagem4 = this.add.image(1600, 700, 'Dandara').setScale(0.6).setInteractive();
+        // Chama a função que cria os botões e o efeito de zoom
+        this.adicionarBotoes();
     }
 
-    // Define os comportamentos de hover e clique para cada personagem
-    configurarInteracao(personagem, fichaTecnica, callbackSelecao) {
+    adicionarBotoes() {
+        this.CONFIG.BOTOES.forEach(botao => {
+            let x = botao.x === "center" ? this.scale.width / 2 : botao.x;
+            let y = botao.y;
 
-        // Quando o personagem for clicado
-        personagem.on('pointerdown', callbackSelecao);
+            // Cria o botão
+            const btn = this.add.image(x, y, botao.key)
+                .setScale(botao.scale)
+                .setInteractive({ useHandCursor: true });
+
+            // Ação de clique
+            btn.on("pointerdown", () => {
+                this.selecionarPersonagem(botao.key);
+            });
+
+            // Efeito de ZOOM 
+            btn.on("pointerover", () => {
+                btn.setScale(botao.scale * 1.1); // Aumenta 10%
+                btn.setDepth(1); // Traz para a frente para não ser cortado pelos vizinhos
+            });
+
+            btn.on("pointerout", () => {
+                btn.setScale(botao.scale); // Volta ao normal
+                btn.setDepth(0);
+            });
+        });
     }
 
-     // Salva a escolha do personagem e vai para a próxima cena
-    selecionarPersonagem(personagem) {
-        localStorage.setItem('personagemSelecionado', personagem); // Salva no navegador
-        this.scene.start('Tutorial'); // Avança para o tutorial
+    selecionarPersonagem(nome) {
+        console.log("Selecionado:", nome);
+        localStorage.setItem('personagemSelecionado', nome);
+        this.scene.start('SceneJogo');
     }
-} 
+}
