@@ -118,7 +118,7 @@ export default class SceneInicial extends Phaser.Scene {
 
     // Depois que todos os blocos cobriram a tela, muda de cena
     this.time.delayedCall(900, () => {
-      this.scene.start("SceneJogo");
+      this.scene.start("ScenePersonagem");
     });
   }
 

@@ -1,5 +1,6 @@
 import SceneInicial from "./src/scenes/SceneInicial.js";
 import SceneJogo from "./src/scenes/SceneJogo.js";
+import ScenePersonagem from "./src/scenes/ScenePersonagem.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -19,7 +20,7 @@ const config = {
       debug: false   //Desativa linhas de depuração
     }
   },
-  scene: [SceneInicial, SceneJogo]
+  scene: [SceneInicial, SceneJogo, ScenePersonagem]
 };
 
 new Phaser.Game(config); //Cria o jogo

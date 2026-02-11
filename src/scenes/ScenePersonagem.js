@@ -1,36 +1,32 @@
 // Classe que representa a cena de seleção de personagens
-export default class Personagem extends Phaser.Scene {
+export default class ScenePersonagem extends Phaser.Scene {
     constructor() {
-        super({ key: "Personagem" }); // Identificador da cena
-
-        // Variáveis da cena
-        this.personagemSelecionado = null; // Vai guardar o nome do personagem escolhido
-       
-
+        super({ key: "ScenePersonagem" }); // Identificador da cena
+    }
+        
     // Carrega as imagens usadas na cena
     preload() {
-        this.load.image('fundo', './assets/telas/personagem/fundo.png'); // Fundo da tela
-        this.load.image('personagem1', './assets/mauro/mauro1.png');     // Imagem do personagem 1
-        this.load.image('personagem2', './assets/chris/chris1.png');     // Imagem do personagem 2
-        this.load.image('personagem3', './assets/tiago/tiago1.png');     // Imagem do personagem 3
+        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png'); // Fundo da tela
+        
+        this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');
+        this.load.image('Lucas', 'Lucas.png'); 
+        this.load.image('Maya', 'Maya.png'); 
+        this.load.image('Joao', 'Joao.png'); 
+        this.load.image('Dandara', 'Dandara.png');
     }
 
     // Cria os elementos visuais da cena
     create() {
         // Adiciona o fundo e ajusta ao tamanho da tela
-        const fundo = this.add.image(0, 0, 'fundo').setOrigin(0, 0);
-        fundo.displayWidth = this.cameras.main.width;
-        fundo.displayHeight = this.cameras.main.height;
+        this.fundo = this.add.image(0, 0, "fundoPersonagem").setOrigin(0, 0);
+        this.fundo.displayWidth = this.scale.width;
+        this.fundo.displayHeight = this.scale.height;
 
         // Adiciona os personagens na tela, com posição e interação ativada
-        const personagem1 = this.add.image(313, 424, 'personagem1').setScale(1.0).setInteractive();
-        const personagem2 = this.add.image(730, 421, 'personagem2').setScale(1).setInteractive();
-        const personagem3 = this.add.image(1145, 430, 'personagem3').setScale(1.0).setInteractive();
-
-        // Define o que acontece quando o jogador interage com cada personagem
-        this.configurarInteracao(personagem1, 'ficha01', () => this.selecionarPersonagem('personagem1'));
-        this.configurarInteracao(personagem2, 'ficha02', () => this.selecionarPersonagem('personagem2'));
-        this.configurarInteracao(personagem3, 'ficha03', () => this.selecionarPersonagem('personagem3'));
+        const Personagem1 = this.add.image(313, 700, 'Lucas').setScale(0.6).setInteractive();
+        const Maya = this.add.image(730, 700, 'Maya').setScale(0.6).setInteractive();
+        const personagem3 = this.add.image(1170, 700, 'Joao').setScale(0.6).setInteractive();
+        const personagem4 = this.add.image(1600, 700, 'Dandara').setScale(0.6).setInteractive();
     }
 
     // Define os comportamentos de hover e clique para cada personagem
@@ -40,7 +36,7 @@ export default class Personagem extends Phaser.Scene {
         personagem.on('pointerdown', callbackSelecao);
     }
 
-    // Salva a escolha do personagem e vai para a próxima cena
+     // Salva a escolha do personagem e vai para a próxima cena
     selecionarPersonagem(personagem) {
         localStorage.setItem('personagemSelecionado', personagem); // Salva no navegador
         this.scene.start('Tutorial'); // Avança para o tutorial
