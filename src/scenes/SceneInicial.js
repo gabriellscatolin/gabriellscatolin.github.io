@@ -93,7 +93,7 @@ export default class SceneInicial extends Phaser.Scene {
     duration: this.CONFIG.PIXELATE_DURATION, //Duração do pixelado
     amount: 1,
     onComplete: () => {
-      this.scene.start("ScenePersonagem");
+      this.scene.start("SceneJogo");
     }
   });
 }
