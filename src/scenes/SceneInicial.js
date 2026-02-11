@@ -5,6 +5,10 @@ export default class SceneInicial extends Phaser.Scene {
 
 // Configurações da cena (Partes fixas)
     this.CONFIG = {
+      //Efeito de pixelado ao trocar de cena
+      FADE_DURATION: 1000, // Duração do fade
+      PIXELATE_AMOUNT: 60, // Pixelização inicial
+      PIXELATE_DURATION: 1100, // Duração da pixelização
       ASSETS: {
         botaoJogar: "src/assets/imagens/imagensBotoes/botaoJogar.png",        //Botão "jogar 
         fundo: "src/assets/imagens/imagensMapa/mapaInicial.png",              //Fundo de tela inicial
@@ -82,45 +86,22 @@ export default class SceneInicial extends Phaser.Scene {
     this.fundo.displayHeight = altura;
   }
 
-  
-
   startGame() {
-    // Transição pixelada
-    const colunas = 24;
-    const linhas = 14;
-    const larguraBloco = Math.ceil(this.scale.width / colunas);
-    const alturaBloco = Math.ceil(this.scale.height / linhas);
-    const blocos = [];
+  // Transição com efeito de pixelado antes de iniciar o jogo
+  const cam = this.cameras.main;
 
-    // Cria grid de blocos pretos pequenos
-    for (let i = 0; i < colunas; i++) {
-      for (let j = 0; j < linhas; j++) {
-        const bloco = this.add.rectangle(
-          i * larguraBloco + larguraBloco / 2,
-          j * alturaBloco + alturaBloco / 2,
-          0, 0, 0x000000
-        ).setDepth(100);
-        blocos.push(bloco);
-      }
-    }
+  const pixelated = cam.postFX.addPixelate(this.CONFIG.PIXELATE_AMOUNT);
 
-    // Anima cada bloco crescendo com delay aleatório
-    blocos.forEach((bloco, index) => {
-      this.tweens.add({
-        targets: bloco,
-        width: larguraBloco + 2,
-        height: alturaBloco + 2,
-        duration: 300,
-        delay: Math.random() * 500,
-        ease: "Cubic.easeIn"
-      });
-    });
-
-    // Depois que todos os blocos cobriram a tela, muda de cena
-    this.time.delayedCall(900, () => {
+  this.add.tween({
+    targets: pixelated,
+    duration: this.CONFIG.PIXELATE_DURATION,
+    amount: 1,
+    onComplete: () => {
       this.scene.start("SceneJogo");
-    });
-  }
+    }
+  });
+}
+
 
   openSettings() {
     console.log("Abrir configurações");

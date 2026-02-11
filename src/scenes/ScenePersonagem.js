@@ -13,7 +13,7 @@ export default class Personagem extends Phaser.Scene {
         this.load.image('personagem1', './assets/mauro/mauro1.png');     // Imagem do personagem 1
         this.load.image('personagem2', './assets/chris/chris1.png');     // Imagem do personagem 2
         this.load.image('personagem3', './assets/tiago/tiago1.png');     // Imagem do personagem 3
-    }
+    },
 
     // Cria os elementos visuais da cena
     create() {
@@ -45,4 +45,5 @@ export default class Personagem extends Phaser.Scene {
         localStorage.setItem('personagemSelecionado', personagem); // Salva no navegador
         this.scene.start('Tutorial'); // Avança para o tutorial
     }
+} 
 }
