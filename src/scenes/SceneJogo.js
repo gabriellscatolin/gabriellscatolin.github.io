@@ -6,6 +6,7 @@ export default class SceneJogo extends Phaser.Scene {
 
   preload() {
     this.load.image("mapaPonte", "src/assets/imagens/imagensMapa/mapaPonte.png");
+    this.load.image("wasd", "src/assets/imagens/imagensBotoes/wasd.png");
 
     const caminho = "src/assets/imagens/imagensPersonagens/homem_banco_VF";
     for (let i = 1; i <= 4; i++) {
@@ -47,7 +48,9 @@ export default class SceneJogo extends Phaser.Scene {
       }
     });
 
-    // 👉 chama a transição aqui
+    this.add.image(90, 80, "wasd").setScale(0.12).setScrollFactor(0).setDepth(10);
+
+    // transição aqui
     this.transicaoEntradaPixel();
   }
 
