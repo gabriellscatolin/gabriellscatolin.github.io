@@ -40,9 +40,13 @@
 ## Lista de figuras
 
 Figura 1 - Sprite sheet personagens jogáveis
+
 Figura 2 - Personagens jogáveis
+
 Figura 3 - Personagens secundários
+
 Figura 4 - Foto perfil personagens secundários
+
 Figura 5 - Cenários dos estabelecimentos internamente
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
