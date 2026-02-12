@@ -1,4 +1,4 @@
-//Cena de selção dos personagens
+//Cena de seleção dos personagens
 export default class ScenePersonagem extends Phaser.Scene {
     constructor() {
         super("ScenePersonagem");
