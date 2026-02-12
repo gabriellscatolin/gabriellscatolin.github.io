@@ -37,6 +37,13 @@
 
 <br>
 
+## Lista de figuras
+
+Figura 1 - Sprite sheet personagens jogáveis
+Figura 2 - Personagens jogáveis
+Figura 3 - Personagens secundários
+Figura 4 - Foto perfil personagens secundários
+Figura 5 - Cenários dos estabelecimentos internamente
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
@@ -262,7 +269,16 @@ Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D ut
 Os personagens foram pensados para permitir futuras animações.
 Sprites dos personagens jogáveis:
 
-(ADICIONAR FOTO AQUI)
+<div align="center">
+	
+<sub>Figura 1 - Sprite sheet personagens jogáveis</sub>
+
+<img src="assets\imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
+
+<sub>Figura 2 - Personagens jogáveis</sub>
+
+<img src="assets\imagens/imagensGdd/personagens_protagonistas_gdd.png">
+
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
@@ -275,13 +291,19 @@ Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitan
 Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
 Sprites dos personagens secundários:
 
-(ADICIONAR FOTO AQUI)
+<div align="center">
+	
+<sub>Figura 3 - Personagens secundários </sub>
+
+<img src="assets\imagens?imagensGdd/personagens_secundarios_gdd.png">
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel (2026) Descrição: imagem dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
+	
+<sub>Figura 4 - Foto perfil personagens secundários </sub>
 
-(ADICIONAR FOTO AQUI)
+<img src="assets\imagens?imagensGdd/fotos_personagens_secundarios_gdd.png">
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
@@ -290,11 +312,12 @@ Sprites dos personagens secundários:
 3. Estrutura dos cenários iniciais:
 Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de inteligência artificial. Esses cenários representam os primeiros ambientes que o jogador irá explorar.
 
-(ADICIONAR FOTO AQUI)
+<sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
+
+<img src="assets\imagens/imagensGdd/foto_cenarios_gdd.png">
 
 <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
-
 
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
