@@ -1,68 +1,57 @@
+//Cena de selção dos personagens
 export default class ScenePersonagem extends Phaser.Scene {
     constructor() {
-        super("ScenePersonagem" );
+        super("ScenePersonagem");
 
-        this.CONFIG = {
-            BOTOES: [
-                { key: "Lucas", x: 300, y: 700, scale: 0.6, action: "selecionarLucas" },
-                { key: "Maya", x: 730, y: 700, scale: 0.6, action: "selecionarMaya" },
-                { key: "Joao", x: 1170, y: 700, scale: 0.6, action: "selecionarJoao" },
-                { key: "Dandara", x: 1600, y: 700, scale: 0.6, action: "selecionarDandara" }
-            ]
-        };
+        // Centralização de dados para facilitar a adição de novos personagens
+        this.PERSONAGENS = [
+            { key: "Lucas", x: 300, y: 700, scale: 0.6 },
+            { key: "Maya", x: 730, y: 700, scale: 0.6 },
+            { key: "Joao", x: 1170, y: 700, scale: 0.6 },
+            { key: "Dandara", x: 1600, y: 700, scale: 0.6 }
+        ];
     }
 
     preload() {
-        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png');
-        this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');
-        
-        // Loop para carregar todas as imagens do array CONFIG
-        this.CONFIG.BOTOES.forEach(botao => {
-            this.load.image(botao.key, `${botao.key}.png`);
-        });
+        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png'); //Carrega o fundo
+        this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');                  //Define o destino para carregar as imagens dos personagens
+
+        // Carregamento dinâmico: evita repetir load.image para cada personagem
+        this.PERSONAGENS.forEach(p => this.load.image(p.key, `${p.key}.png`));
     }
 
     create() {
-        // Configura o fundo
-        this.fundo = this.add.image(0, 0, "fundoPersonagem").setOrigin(0, 0);
-        this.fundo.displayWidth = this.scale.width;
-        this.fundo.displayHeight = this.scale.height;
+        // Inicializa os elementos visuais da interface
+        this.add.image(0, 0, "fundoPersonagem").setOrigin(0, 0)
+            .setDisplaySize(this.scale.width, this.scale.height);
 
-        // Chama a função que cria os botões e o efeito de zoom
-        this.adicionarBotoes();
+        this.criarMenuSelecao();
     }
 
-    adicionarBotoes() {
-        this.CONFIG.BOTOES.forEach(botao => {
-            let x = botao.x === "center" ? this.scale.width / 2 : botao.x;
-            let y = botao.y;
-
-            // Cria o botão
-            const btn = this.add.image(x, y, botao.key)
-                .setScale(botao.scale)
+    criarMenuSelecao() {
+        // Constrói os botões e atribui seus comportamentos
+        this.PERSONAGENS.forEach(dados => {
+            const btn = this.add.image(dados.x, dados.y, dados.key)
+                .setScale(dados.scale)
                 .setInteractive({ useHandCursor: true });
 
-            // Ação de clique
-            btn.on("pointerdown", () => {
-                this.selecionarPersonagem(botao.key);
-            });
-
-            // Efeito de ZOOM 
-            btn.on("pointerover", () => {
-                btn.setScale(botao.scale * 1.1); // Aumenta 10%
-                btn.setDepth(1); // Traz para a frente para não ser cortado pelos vizinhos
-            });
-
-            btn.on("pointerout", () => {
-                btn.setScale(botao.scale); // Volta ao normal
-                btn.setDepth(0);
-            });
+            this.configurarEventos(btn, dados);
         });
     }
 
-    selecionarPersonagem(nome) {
-        console.log("Selecionado:", nome);
-        localStorage.setItem('personagemSelecionado', nome);
-        this.scene.start('SceneJogo');
+    configurarEventos(btn, dados) {
+        // Inicia a cena principal passando o personagem escolhido como parâmetro
+        btn.on("pointerdown", () => {
+            this.scene.start('SceneJogo', { personagem: dados.key });
+        });
+
+        // Efeito de destaque (Zoom e Profundidade) no hover
+        btn.on("pointerover", () => {
+            btn.setScale(dados.scale * 1.1).setDepth(1);
+        });
+
+        btn.on("pointerout", () => {
+            btn.setScale(dados.scale).setDepth(0);
+        });
     }
 }
