@@ -255,29 +255,35 @@ index.html: arquivo responsável pelas configurações da página web e pela int
 
 2. Estrutura dos Personagens:
 A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+
 2.1. Desenvolvimento de personagens jogáveis:
+
 Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
-Os personagens foram pensados para permitir futuras animações, como:
+Os personagens foram pensados para permitir futuras animações.
 Sprites dos personagens jogáveis:
 
 (ADICIONAR FOTO AQUI)
 
+<div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
 
 Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
 
 2.2. Desenvolvimento de personagens secundários:
+
 Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
 Sprites dos personagens secundários:
 
 (ADICIONAR FOTO AQUI)
 
+<div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel (2026) Descrição: imagem dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
 
 (ADICIONAR FOTO AQUI)
 
+<div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
 
