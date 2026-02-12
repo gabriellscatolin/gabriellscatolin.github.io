@@ -8,8 +8,14 @@
 ## Nome do Grupo
 
 #### Nomes dos integrantes do grupo
-
-
+- Ana Alícia Medina Santos da Rocha Nunes
+- Eduardo Melquiades Amaral 
+- Gabriel Thomas Correia Scatolin 
+- Lucas Komatsu Borten 
+- Matheus Correia
+- Nicolas Dely 
+- Rachel Silvestre
+- Sofia Brandão
 
 ## Sumário
 
@@ -38,7 +44,8 @@
 
 ### 1.1.1. Contexto da indústria (sprint 2)
 
-*Posicione aqui o texto que explica o contexto da indústria/mercado do qual o parceiro de projeto faz parte. Contextualize o segmento de atuação do parceiro (pode ser indústria, comércio ou serviço). Caracterize as atividades executadas pelo negócio do parceiro e a abrangência de suas atividades (âmbito internacional, nacional ou regional).*
+A Cielo é uma das principais empresas brasileiras do setor de meios de pagamento e serviços financeiros, atuando como credenciadora fornecendo soluções tecnológicas para o varejo. Fundada em 1995, inicialmente como VisaNet, está presente em 99% do território brasileiro. Em 2022, atendeu 700 mil clientes, processou cerca de 9 bilhões de transações e movimentou 7% do Produto Interno Bruto brasileiro. Seu portfólio vai além da maquininha de cartão, abrangendo pagamentos físicos e digitais. Inserida em um mercado competitivo e em transformação digital, a Cielo concorre com empresas como Rede, Stone, Getnet e PagSeguro, acompanhando tendências tecnológicas e foco no cliente.
+
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
@@ -70,17 +77,26 @@
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
-*Posicione aqui a lista de requisitos levantados para o projeto, sejam pedidos do parceiro ou invenções do grupo. Descreva-os de forma objetiva, de modo que seja possível entender claramente como implementá-los tecnicamente.*
+Os requisitos do projeto descrevem as funcionalidades e características necessárias para o desenvolvimento do jogo, considerando as demandas do parceiro e as decisões do grupo. Eles orientam a implementação técnica e a experiência do usuário, devendo ser atualizados sempre que houver mudanças no projeto.
 
-*ATUALIZE ESTA SEÇÃO SEMPRE QUE ALGUM REQUISITO MUDAR EM SEU PROJETO*
+<div align="center">
 
-*Exemplo de tabela de requisitos*
+<sub>Tabela 1 - Requisitos do Projeto</sub>
+
 \# | Requisito  
 --- | ---
-1 | O controle do personagem será realizado usando as teclas WASD para navegação pelas fases
-2 | O personagem perde uma vida toda vez que tocar em um inimigo ou em algum projétil inimigo
-3 | O jogo deve possuir uma tela de abertura para o jogador selecionar se quer jogar sozinho ou em dupla
-4 | ...
+1 | O jogo contará com uma tela inicial contendo as opções de “Jogar”, “Créditos” e “Configurações”.
+2 | O controle do personagem será realizado por meio das teclas WASD para movimentação no ambiente do jogo.
+3 | O jogo será desenvolvido com foco na plataforma web, garantindo acesso via navegador sem necessidade de instalação.
+4 | O jogo apresentará um mapa interativo que representa estabelecimentos do cotidiano dos usuários, permitindo acompanhar o deslocamento e progresso do personagem.
+5 | O jogador poderá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
+6 | As mecânicas do jogo possibilitarão o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
+7 | O jogo contará com missões vinculadas ao ganho de moedas ou pontos, utilizadas como sistema de progressão e recompensa.
+8 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
+9 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
+10 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
+<sub>Fonte: Autoria Própria (2026) </sub>
+</div>
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
