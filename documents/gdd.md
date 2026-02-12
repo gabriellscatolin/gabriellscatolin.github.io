@@ -95,6 +95,7 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 8 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
 9 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
 10 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
+
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
 
