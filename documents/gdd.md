@@ -5,8 +5,8 @@
 
 **_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final_**
 
-## Nome do Grupo
-
+## Nome do Grupo:
+Cielitos
 #### Nomes dos integrantes do grupo
 - Ana Alícia Medina Santos da Rocha Nunes
 - Eduardo Melquiades Amaral 
@@ -257,14 +257,14 @@ Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
 
 ## 4.1. Desenvolvimento preliminar do jogo (sprint 1)
 
-1. Estrutura do projeto: 
+## 1. Estrutura do projeto: 
 O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
 Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
 Os principais arquivos são:
 Main.js: arquivo responsável por inicializar o jogo e gerenciar as cenas.
 index.html: arquivo responsável pelas configurações da página web e pela integração com o main.js.
 
-2. Estrutura dos Personagens:
+## 2. Estrutura dos Personagens:
 A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
 
 2.1. Desenvolvimento de personagens jogáveis:
@@ -310,7 +310,7 @@ Sprites dos personagens secundários:
 <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
 
-3. Estrutura dos cenários iniciais:
+## 3. Estrutura dos cenários iniciais:
 Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de inteligência artificial. Esses cenários representam os primeiros ambientes que o jogador irá explorar.
 
 <sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
