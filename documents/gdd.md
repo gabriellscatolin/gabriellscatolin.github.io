@@ -284,7 +284,8 @@ Sprites dos personagens jogáveis:
 <img src="assets\imagens/imagensGdd/personagens_protagonistas_gdd.png">
 
 <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
-
+</div>
+	
 Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
 
 2.2. Desenvolvimento de personagens secundários:
@@ -297,6 +298,7 @@ Sprites dos personagens secundários:
 <sub>Figura 3 - Personagens secundários </sub>
 
 <img src="assets\imagens?imagensGdd/personagens_secundarios_gdd.png">
+</div>
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel (2026) Descrição: imagem dos personagens secundários que trabalham no comércios do jogo</sub>
@@ -319,7 +321,6 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
-
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
