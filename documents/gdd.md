@@ -277,11 +277,11 @@ Sprites dos personagens jogáveis:
 	
 <sub>Figura 1 - Sprite sheet personagens jogáveis</sub>
 
-<img src="../src/assets/imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
+<img src="https://gold-secret-mink-234.mypinata.cloud/ipfs/bafkreibhvjehdldu5zdg55b7zu7rllkum4gdhttf2dyonvhcbg7j3lyzxa">
 
 <sub>Figura 2 - Personagens jogáveis</sub>
 
-<img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png">
+<img src="https://gold-secret-mink-234.mypinata.cloud/ipfs/bafkreihus4hlhb4nigpbrfejc3cvugbvyg3zppjhgqh75fimfuvlfdgeqa">
 
 <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
@@ -317,7 +317,7 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 <sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
 
-<img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
+<img src="https://gold-secret-mink-234.mypinata.cloud/ipfs/bafybeiflcquywbzjqrbzoxao74arxfiuc67z2uyflvs2g5nexcvtskznpi">
 
 <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
