@@ -297,7 +297,7 @@ Sprites dos personagens secundários:
 	
 <sub>Figura 3 - Personagens secundários </sub>
 
-<img src="../src/assets\imagens/imagensGdd/personagens_secundarios_gdd.png">
+<img src="../../assets/imagens/imagensGdd/personagens_secundarios_gdd.png">
 </div>
 
 <div align="center">
@@ -306,7 +306,7 @@ Sprites dos personagens secundários:
 	
 <sub>Figura 4 - Foto perfil personagens secundários </sub>
 
-<img src="../src/assets\imagens/imagensGdd/fotos_personagens_secundarios_gdd.png">
+<img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png">
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
