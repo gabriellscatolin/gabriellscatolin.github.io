@@ -314,11 +314,11 @@ Sprites dos personagens secundários:
 
 ## 3. Estrutura dos cenários iniciais:
 Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de inteligência artificial. Esses cenários representam os primeiros ambientes que o jogador irá explorar.
-
+<div align="center">
 <sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
 
 <img src="https://gold-secret-mink-234.mypinata.cloud/ipfs/bafybeiflcquywbzjqrbzoxao74arxfiuc67z2uyflvs2g5nexcvtskznpi">
-
+</div>
 <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
 
