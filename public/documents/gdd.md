@@ -99,15 +99,15 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 --- | ---
 1 | O jogo contará com uma tela inicial contendo as opções de “Jogar”, “Créditos” e “Configurações”.
 2 | 
-2 | O controle do personagem será realizado por meio das teclas WASD para movimentação no ambiente do jogo.
-3 | O jogo será desenvolvido com foco na plataforma web, garantindo acesso via navegador sem necessidade de instalação.
-4 | O jogo apresentará um mapa interativo que representa estabelecimentos do cotidiano dos usuários, permitindo acompanhar o deslocamento e progresso do personagem.
-5 | O jogador poderá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
-6 | As mecânicas do jogo possibilitarão o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
-7 | O jogo contará com missões vinculadas ao ganho de moedas ou pontos, utilizadas como sistema de progressão e recompensa.
-8 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
-9 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
-10 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
+3 | O controle do personagem será realizado por meio das teclas WASD para movimentação no ambiente do jogo.
+4 | O jogo será desenvolvido com foco na plataforma web, garantindo acesso via navegador sem necessidade de instalação.
+5 | O jogo apresentará um mapa interativo que representa estabelecimentos do cotidiano dos usuários, permitindo acompanhar o deslocamento e progresso do personagem.
+6 | O jogador poderá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
+7 | As mecânicas do jogo possibilitarão o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
+8 | O jogo contará com missões vinculadas ao ganho de moedas ou pontos, utilizadas como sistema de progressão e recompensa.
+9 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
+10 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
+11 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
 
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
