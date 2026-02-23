@@ -5,10 +5,10 @@ export default class ScenePersonagem extends Phaser.Scene {
 
         // Centralização de dados para facilitar a adição de novos personagens
         this.PERSONAGENS = [
-            { key: "Lucas", x: 300, y: 700, scale: 0.6 },
-            { key: "Maya", x: 730, y: 700, scale: 0.6 },
-            { key: "Joao", x: 1170, y: 700, scale: 0.6 },
-            { key: "Dandara", x: 1600, y: 700, scale: 0.6 }
+            { key: "Gabriel", x: 300, y: 700, scale: 0.42 },
+            { key: "Maya", x: 730, y: 700, scale: 0.42 },
+            { key: "Joao", x: 1170, y: 700, scale: 0.42 },
+            { key: "Dandara", x: 1600, y: 700, scale: 0.42 }
         ];
     }
 
