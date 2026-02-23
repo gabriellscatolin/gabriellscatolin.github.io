@@ -3,63 +3,66 @@ export default class SceneJogo extends Phaser.Scene {
         super("SceneJogo");
     }
 
+    // Recebe os dados de transferência entre cenas
     init(data) {
-        // Recebe os dados da ScenePersonagem ou usa Gabriel/HB como padrão
-        this.personagemEscolhido = data.personagem || "Gabriel";
+        this.nomePastaEscolhida = data.nomePasta || "Gabriel";
         this.prefixoEscolhido = data.prefixo || "HB";
     }
 
     preload() {
-        this.load.image("mapaPonte", "src/assets/imagens/imagensMapa/mapaPonte.png");
-        this.load.image("wasd", "src/assets/imagens/imagensBotoes/wasd.png");
+        // Carregamento do cenário e elementos da interface
+        this.load.image("mapaPonteImage", "src/assets/imagens/imagensMapa/mapaPonte.png");
+        this.load.image("tutorialWasdImage", "src/assets/imagens/imagensBotoes/wasd.png");
 
-        // Montagem do caminho dinâmico
-        const pasta = this.personagemEscolhido; 
+        // Construção do caminho dinâmico para carregar os sprites do personagem selecionado
+        const caminhoBase = `src/assets/imagens/imagensPersonagens/${this.nomePastaEscolhida}`;
         const pre = this.prefixoEscolhido;
-        const caminhoBase = `src/assets/imagens/imagensPersonagens/${pasta}`;
 
         for (let i = 1; i <= 4; i++) {
-            // Internamente chamamos sempre de 'hb_...', mas buscamos o arquivo correto (ex: MB_frente_1.png)
-            this.load.image(`hb_frente_${i}`, `${caminhoBase}/${pre}_frente_${i}.png`);
-            this.load.image(`hb_tras_${i}`, `${caminhoBase}/${pre}_tras_${i}.png`);
-            this.load.image(`hb_direita_${i}`, `${caminhoBase}/${pre}_direita_${i}.png`);
-            this.load.image(`hb_esquerda_${i}`, `${caminhoBase}/${pre}_esquerda_${i}.png`);
+            this.load.image(`sprite_frente_${i}`, `${caminhoBase}/${pre}_frente_${i}.png`);
+            this.load.image(`sprite_tras_${i}`, `${caminhoBase}/${pre}_tras_${i}.png`);
+            this.load.image(`sprite_direita_${i}`, `${caminhoBase}/${pre}_direita_${i}.png`);
+            this.load.image(`sprite_esquerda_${i}`, `${caminhoBase}/${pre}_esquerda_${i}.png`);
         }
     }
 
     create() {
-        this.fundo = this.add.image(0, 0, "mapaPonte").setOrigin(0, 0);
-        this.fundo.displayWidth = this.scale.width;
-        this.fundo.displayHeight = this.scale.height;
+        // Configuração do ambiente e física do jogo
+        this.fundoImage = this.add.image(0, 0, "mapaPonteImage").setOrigin(0, 0);
+        this.fundoImage.displayWidth = this.scale.width;
+        this.fundoImage.displayHeight = this.scale.height;
 
         this.criarAnimacoes();
 
-        // O sprite usa a chave carregada no preload
-        this.personagem = this.add.sprite(this.scale.width / 2, 684, "hb_frente_1").setScale(0.15);
-        this.physics.add.existing(this.personagem);
+        // Inicialização do sprite do jogador com física
+        this.personagemSprite = this.add.sprite(this.scale.width / 2, 684, "sprite_frente_1").setScale(0.15);
+        this.physics.add.existing(this.personagemSprite);
 
-        this.teclas = this.input.keyboard.addKeys({
+        // Mapeamento das teclas de controle
+        this.teclasControl = this.input.keyboard.addKeys({
             w: Phaser.Input.Keyboard.KeyCodes.W,
             a: Phaser.Input.Keyboard.KeyCodes.A,
             s: Phaser.Input.Keyboard.KeyCodes.S,
             d: Phaser.Input.Keyboard.KeyCodes.D
         });
 
-        this.velocidade = 300;
-        this.add.image(90, 80, "wasd").setScale(0.12).setScrollFactor(0).setDepth(10);
-        this.transicaoEntradaPixel();
+        this.velocidadePersonagem = 300;
+        this.add.image(90, 80, "tutorialWasdImage").setScale(0.12).setScrollFactor(0).setDepth(10);
+        
+        this.executarTransicaoEntrada();
     }
 
     criarAnimacoes() {
+        // Definição dos loops de animação para as quatro direções de movimento
         const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
         direcoes.forEach(dir => {
             this.anims.create({
                 key: `andar_${dir}`,
                 frames: [
-                    { key: `hb_${dir}_1` },
-                    { key: `hb_${dir}_2` },
-                    { key: `hb_${dir}_3` },
-                    { key: `hb_${dir}_4` }
+                    { key: `sprite_${dir}_1` },
+                    { key: `sprite_${dir}_2` },
+                    { key: `sprite_${dir}_3` },
+                    { key: `sprite_${dir}_4` }
                 ],
                 frameRate: 8,
                 repeat: -1
@@ -68,49 +71,53 @@ export default class SceneJogo extends Phaser.Scene {
     }
 
     update() {
-        const body = this.personagem.body;
-        body.setVelocity(0);
-        let andando = false;
+        // Lógica de atualização de movimento e troca de animações por frame
+        const corpoFisico = this.personagemSprite.body;
+        corpoFisico.setVelocity(0);
+        let estaAndando = false;
 
-        // Movimento Horizontal
-        if (this.teclas.a.isDown) {
-            body.setVelocityX(-this.velocidade);
-            if (this.personagem.anims.currentAnim?.key !== "andar_esquerda") this.personagem.anims.play("andar_esquerda");
-            andando = true;
-        } else if (this.teclas.d.isDown) {
-            body.setVelocityX(this.velocidade);
-            if (this.personagem.anims.currentAnim?.key !== "andar_direita") this.personagem.anims.play("andar_direita");
-            andando = true;
+        if (this.teclasControl.a.isDown) {
+            corpoFisico.setVelocityX(-this.velocidadePersonagem);
+            this.personagemSprite.anims.play("andar_esquerda", true);
+            estaAndando = true;
+        } else if (this.teclasControl.d.isDown) {
+            corpoFisico.setVelocityX(this.velocidadePersonagem);
+            this.personagemSprite.anims.play("andar_direita", true);
+            estaAndando = true;
         }
 
-        // Movimento Vertical
-        if (this.teclas.w.isDown) {
-            body.setVelocityY(-this.velocidade);
-            if (!andando && this.personagem.anims.currentAnim?.key !== "andar_tras") this.personagem.anims.play("andar_tras");
-            andando = true;
-        } else if (this.teclas.s.isDown) {
-            body.setVelocityY(this.velocidade);
-            if (!andando && this.personagem.anims.currentAnim?.key !== "andar_frente") this.personagem.anims.play("andar_frente");
-            andando = true;
+        if (this.teclasControl.w.isDown) {
+            corpoFisico.setVelocityY(-this.velocidadePersonagem);
+            if (!estaAndando) this.personagemSprite.anims.play("andar_tras", true);
+            estaAndando = true;
+        } else if (this.teclasControl.s.isDown) {
+            corpoFisico.setVelocityY(this.velocidadePersonagem);
+            if (!estaAndando) this.personagemSprite.anims.play("andar_frente", true);
+            estaAndando = true;
         }
 
-        if (!andando) {
-            this.personagem.anims.pause();
+        // Controle de pausa da animação quando o jogador está parado
+        if (!estaAndando) {
+            this.personagemSprite.anims.pause();
         } else {
-            this.personagem.anims.resume();
+            this.personagemSprite.anims.resume();
         }
 
-        this.personagem.y = Phaser.Math.Clamp(this.personagem.y, 578, 690);
-        this.personagem.x = Phaser.Math.Clamp(this.personagem.x, 0, 1920);
+        // Limitação do espaço de movimentação no mapa (Boundaries)
+        this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
+        this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
     }
 
-    transicaoEntradaPixel() {
-        const cam = this.cameras.main;
-        const pixelated = cam.postFX.addPixelate(60);
+    executarTransicaoEntrada() {
+        // Efeito visual de pixelização ao iniciar a fase
+        const cameraPrincipal = this.cameras.main;
+        const efeitoPixel = cameraPrincipal.postFX.addPixelate(60);
+        
         this.add.tween({
-            targets: pixelated,
-            amount: 1, duration: 1000,
-            onComplete: () => { cam.postFX.remove(pixelated); }
+            targets: efeitoPixel,
+            amount: 1,
+            duration: 1000,
+            onComplete: () => { cameraPrincipal.postFX.remove(efeitoPixel); }
         });
     }
 }

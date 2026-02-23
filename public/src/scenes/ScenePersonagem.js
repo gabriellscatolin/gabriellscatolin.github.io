@@ -2,55 +2,59 @@ export default class ScenePersonagem extends Phaser.Scene {
     constructor() {
         super("ScenePersonagem");
 
-        // Centralização de dados com a inclusão do PREFIXO de cada arquivo
-        this.PERSONAGENS = [
-            { key: "Gabriel", x: 300,  y: 700, scale: 0.42, prefixo: "HB" },
-            { key: "Maya",    x: 730,  y: 700, scale: 0.42, prefixo: "ML" },
-            { key: "Joao",    x: 1170, y: 700, scale: 0.42, prefixo: "HM" },
-            { key: "Dandara", x: 1600, y: 700, scale: 0.42, prefixo: "MM" }
+        // Lista de configuração dos personagens: define chaves, posições e prefixos dos arquivos
+        this.listaPersonagens = [
+            { id: "Gabriel", x: 300,  y: 700, escala: 0.42, prefixoArquivo: "HB" },
+            { id: "Maya",    x: 730,  y: 700, escala: 0.42, prefixoArquivo: "ML" },
+            { id: "Joao",    x: 1170, y: 700, escala: 0.42, prefixoArquivo: "HM" },
+            { id: "Dandara", x: 1600, y: 700, escala: 0.42, prefixoArquivo: "MM" }
         ];
     }
 
     preload() {
-        this.load.image('fundoPersonagem', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png');
+        // Carregamento dos recursos visuais da interface de seleção
+        this.load.image('fundoSelecaoImage', 'src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png');
         this.load.setPath('src/assets/imagens/imagensPersonagens/selecaoPersonagens/');
 
-        // Carrega as fotos de exibição do menu
-        this.PERSONAGENS.forEach(p => this.load.image(p.key, `${p.key}.png`));
+        // Loop para carregar dinamicamente as imagens de visualização de cada personagem
+        this.listaPersonagens.forEach(p => this.load.image(p.id, `${p.id}.png`));
     }
 
     create() {
-        this.add.image(0, 0, "fundoPersonagem").setOrigin(0, 0)
+        // Configuração do plano de fundo da cena
+        this.add.image(0, 0, "fundoSelecaoImage").setOrigin(0, 0)
             .setDisplaySize(this.scale.width, this.scale.height);
 
         this.criarMenuSelecao();
     }
 
     criarMenuSelecao() {
-        this.PERSONAGENS.forEach(dados => {
-            const btn = this.add.image(dados.x, dados.y, dados.key)
-                .setScale(dados.scale)
+        // Instancia os botões de personagem e configura a interatividade
+        this.listaPersonagens.forEach(dados => {
+            const personagemButton = this.add.image(dados.x, dados.y, dados.id)
+                .setScale(dados.escala)
                 .setInteractive({ useHandCursor: true });
 
-            this.configurarEventos(btn, dados);
+            this.configurarEventos(personagemButton, dados);
         });
     }
 
-    configurarEventos(btn, dados) {
-        btn.on("pointerdown", () => {
-            // Passamos o NOME (para a pasta) e o PREFIXO (para o arquivo)
+    configurarEventos(botao, dados) {
+        // Inicia a cena do jogo enviando os dados do personagem escolhido
+        botao.on("pointerdown", () => {
             this.scene.start('SceneJogo', { 
-                personagem: dados.key, 
-                prefixo: dados.prefixo 
+                nomePasta: dados.id, 
+                prefixo: dados.prefixoArquivo 
             });
         });
 
-        btn.on("pointerover", () => {
-            btn.setScale(dados.scale * 1.1).setDepth(1);
+        // Efeitos visuais ao passar o mouse (hover)
+        botao.on("pointerover", () => {
+            botao.setScale(dados.escala * 1.1).setDepth(1);
         });
 
-        btn.on("pointerout", () => {
-            btn.setScale(dados.scale).setDepth(0);
+        botao.on("pointerout", () => {
+            botao.setScale(dados.escala).setDepth(0);
         });
     }
 }
