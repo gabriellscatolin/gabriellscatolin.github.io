@@ -69,7 +69,22 @@ A Cielo é uma das principais empresas brasileiras do setor de meios de pagament
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
-*Posicione aqui a Missão, Visão e Valores do seu projeto.*
+Missão: Desenvolver um jogo educacional capaz de capacitar gerentes de negócios a área comercial que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos.
+
+Visão: Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, alta jogabilidade e impacto na democratização do aprendizado.
+
+Valores: 
+Acessibilidade — garantir que o aprendizado esteja disponível para profissionais independentemente de sua localização ou condição.
+
+Equidade — reduzir desigualdades no acesso à capacitação em vendas.
+
+Inovação — utilizar tecnologia e gamificação para transformar a forma de aprender.
+
+Aprendizagem contínua — incentivar o desenvolvimento constante de habilidades profissionais.
+
+Usabilidade e jogabilidade — priorizar uma experiência simples, intuitiva e envolvente.
+
+Impacto social — contribuir para a formação profissional e geração de oportunidades.
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
