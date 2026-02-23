@@ -26,6 +26,7 @@ export default class ScenePersonagem extends Phaser.Scene {
             .setDisplaySize(this.scale.width, this.scale.height);
 
         this.criarMenuSelecao();
+        this.executarTransicaoEntrada();
     }
 
     criarMenuSelecao() {
@@ -66,6 +67,20 @@ export default class ScenePersonagem extends Phaser.Scene {
 
         botao.on("pointerout", () => {
             botao.setScale(dados.escala).setDepth(0);
+        });
+    }
+
+    executarTransicaoEntrada() {
+        // Efeito de despixelado ao entrar na cena (igual à SceneJogo)
+        const cam = this.cameras.main;
+        const pixelated = cam.postFX.addPixelate(40);
+
+        this.add.tween({
+            targets: pixelated,
+            amount: 1,
+            duration: 800,
+            ease: "Sine.easeOut",
+            onComplete: () => { cam.postFX.remove(pixelated); }
         });
     }
 }
