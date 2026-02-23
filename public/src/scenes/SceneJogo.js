@@ -157,16 +157,7 @@ export default class SceneJogo extends Phaser.Scene {
   }
 
   executarTransicaoEntrada() {
-  // Efeito de pixelado ao entrar na cena
-  const cam = this.cameras.main;
-  const pixelated = cam.postFX.addPixelate(40);
-
-    this.add.tween({
-      targets: pixelated,
-      amount: 1,
-      duration: 800,
-      ease: "Sine.easeOut",
-      onComplete: () => { cam.postFX.remove(pixelated); }
-    });
+    // Efeito de fade in suave ao entrar na cena
+    this.cameras.main.fadeIn(800, 0, 0, 0);
   }
 }

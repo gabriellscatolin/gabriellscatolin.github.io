@@ -41,22 +41,15 @@ export default class ScenePersonagem extends Phaser.Scene {
     }
 
     configurarEventos(botao, dados) {
-        // Inicia a cena do jogo com efeito de pixelado
+        // Inicia a cena do jogo com efeito de fade out
         botao.on("pointerdown", () => {
-            const cam = this.cameras.main;
-            const pixelated = cam.postFX.addPixelate(1);
+            this.cameras.main.fadeOut(800, 0, 0, 0);
 
-            this.add.tween({
-                targets: pixelated,
-                amount: 40,
-                duration: 800,
-                ease: "Sine.easeIn",
-                onComplete: () => {
-                    this.scene.start('SceneJogo', {
-                        nomePasta: dados.id,
-                        prefixo: dados.prefixoArquivo
-                    });
-                }
+            this.cameras.main.once("camerafadeoutcomplete", () => {
+                this.scene.start('SceneJogo', {
+                    nomePasta: dados.id,
+                    prefixo: dados.prefixoArquivo
+                });
             });
         });
 
@@ -71,16 +64,7 @@ export default class ScenePersonagem extends Phaser.Scene {
     }
 
     executarTransicaoEntrada() {
-        // Efeito de despixelado ao entrar na cena (igual à SceneJogo)
-        const cam = this.cameras.main;
-        const pixelated = cam.postFX.addPixelate(40);
-
-        this.add.tween({
-            targets: pixelated,
-            amount: 1,
-            duration: 800,
-            ease: "Sine.easeOut",
-            onComplete: () => { cam.postFX.remove(pixelated); }
-        });
+        // Efeito de fade in suave ao entrar na cena
+        this.cameras.main.fadeIn(800, 0, 0, 0);
     }
 }
