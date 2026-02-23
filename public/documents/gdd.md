@@ -61,7 +61,82 @@ A Cielo é uma das principais empresas brasileiras do setor de meios de pagament
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-*Posicione aqui o modelo de 5 Forças de Porter para sustentar o contexto da indústria.*
+A Cielo está inserida em um mercado altamente competitivo, caracterizado pela rápida evolução tecnológica e pela crescente presença de fintechs e soluções alternativas de pagamento no mercado brasileiro. Nesse contexto, a aplicação do modelo das 5 Forças de Porter é fundamental para a compreensão dos desafios e das oportunidades estratégicas enfrentadas pela empresa, especialmente no que se refere à rivalidade entre concorrentes e ao poder de barganha dos clientes.
+
+Ameaça de Novos Entrantes
+
+A ameaça de novos entrantes no setor de pagamentos e adquirência em que a Cielo atua é considerada moderada a baixa, devido à presença de barreiras estruturais, regulatórias e competitivas. As principais barreiras incluem:
+
+Regulação e compliance:
+ A entrada no mercado exige autorização do Banco Central do Brasil, além do cumprimento de normas rigorosas de segurança, governança e compliance, tornando o processo complexo, custoso e demorado.
+Requisitos de capital e tecnologia:
+ São necessários investimentos elevados em infraestrutura tecnológica, segurança da informação, sistemas de processamento de pagamentos e mão de obra altamente especializada.
+Escala operacional:
+ Operar de forma competitiva requer grande volume de transações para diluição de custos, o que dificulta a entrada de novos players sem escala consolidada.
+
+Impacto Potencial:
+ Apesar das barreiras, fintechs e soluções digitais inovadoras exercem pressão competitiva ao oferecer serviços mais flexíveis, integrados e de menor custo.
+
+Ameaça de Produtos ou Serviços Substitutos
+
+A ameaça de produtos ou serviços substitutos para a Cielo é considerada alta, devido à existência de alternativas que podem reduzir a dependência dos comerciantes das maquininhas tradicionais. Os principais substitutos incluem:
+
+Substitutos diretos:
+ Empresas consolidadas do setor de adquirência, como Stone, PagSeguro, Rede e Getnet, oferecem soluções similares de processamento de pagamentos, competindo diretamente com os serviços da Cielo.
+
+Alternativas às maquininhas tradicionais:
+ O Pix permite pagamentos instantâneos sem a necessidade de maquininhas, reduzindo custos para os comerciantes e aumentando sua adoção.
+ Além disso, transações via criptomoedas surgem como uma alternativa emergente, eliminando intermediários e, em alguns casos, dispensando o uso de adquirentes.
+
+Impacto do Nível de Ameaça:
+    A crescente adoção de meios de pagamento digitais e instantâneos pressiona o modelo tradicional de adquirência, podendo reduzir volumes de transações e margens.
+
+
+Análise do Poder de Barganha dos Clientes
+
+A base de clientes da Cielo é composta por pequenos e médios comerciantes, grandes redes varejistas e negócios digitais.
+
+Pequenos e Médios Comerciantes:
+  Possuem alto poder de barganha devido à baixa barreira de saída e à alta sensibilidade a preços, o que pressiona a redução de taxas.
+
+Grandes Varejistas:
+  Exercem forte pressão por meio do alto volume transacionado, exigindo condições personalizadas que impactam as margens da empresa.
+
+Negócios Digitais:
+ Demandam integração tecnológica e segurança, exigindo investimentos contínuos em inovação.
+Impacto na Indústria: O elevado poder de barganha dos clientes gera uma compressão das margens de lucro. A Cielo mitiga esse cenário utilizando sua infraestrutura robusta e portfólio de serviços integrados para elevar o custo de troca e reter os clientes.
+
+
+Análise do Poder de Barganha dos Fornecedores
+
+Os principais fornecedores da Cielo são as bandeiras de cartão (Visa, Mastercard, Elo), fabricantes de terminais POS (maquininhas), provedores de infraestrutura de nuvem e desenvolvedores de software de segurança.
+
+Bandeiras e Tecnologia Crítica:
+ Possuem alto poder de barganha por definirem padrões mundiais e oferecerem tecnologias de difícil substituição, o que torna a Cielo dependente de suas regras e sistemas.
+
+Fornecedores de Insumos Padronizados: 
+ Apresentam baixo poder de barganha, pois a Cielo utiliza plataformas de gestão e compras em escala para forçar a competitividade entre diferentes empresas de serviços
+
+Gestão de Fornecedores:
+ A Cielo aplica códigos de conduta e auditorias de conformidade para reduzir riscos e evitar a dependência excessiva de parceiros específicos.
+
+Impacto na Indústria: O poder de barganha é moderado a relevante. Enquanto as bandeiras limitam a flexibilidade de custos, a Cielo mitiga esse impacto através de processos estratégicos de sourcing e automação, garantindo que fornecedores de menor complexidade não comprometam sua margem operacional.
+
+Rivalidade entre Concorrentes Existentes
+
+A rivalidade no setor de meios de pagamento eletrônicos no Brasil é considerada alta, com grandes competidores como PagSeguro, Stone, Mercado Pago, Rede, SafraPay, InfinitePay, SumUp, C6 Pay e SuperGet. Os principais fatores que intensificam essa rivalidade enfrentada pela Cielo incluem:
+
+Baixa diferenciação dos produtos:
+ As empresas oferecem soluções funcionalmente semelhantes, como maquininhas de cartão, pagamentos digitais e integrações para e-commerce, reduzindo a diferenciação percebida pelos clientes.
+
+Competição por preço e condições comerciais:
+ A disputa ocorre principalmente em torno de taxas cobradas, prazos de recebimento e custos de equipamentos, pressionando margens e tornando a concorrência mais agressiva.
+
+Baixo custo de troca e baixa fidelização:
+ A ausência de contratos de exclusividade permite que comerciantes utilizem múltiplas maquininhas simultaneamente, aumentando o poder de escolha dos clientes e dificultando a retenção.
+
+Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do setor e exige investimentos contínuos em inovação, tecnologia e diferenciação. Como resposta, as empresas buscam ampliar seus portfólios com serviços financeiros integrados, como antecipação de recebíveis, crédito e soluções de gestão, com o objetivo de aumentar o valor percebido e fortalecer a fidelização dos clientes.
+
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
@@ -126,6 +201,8 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 9 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
 10 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
 11 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
+12 | As missões  do jogo serão inspiradas nas rotas utilizadas pelos vendedores no dia a dia de vendas e da Cielo.
+
 
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
