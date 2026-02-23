@@ -15,6 +15,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.load.image("mapaPonteImage", "src/assets/imagens/imagensMapa/mapaPonte.png");
     this.load.image("botaoJogarTutorial", "src/assets/imagens/imagensBotoes/botaoJogarTutorial.png");
     this.load.image("configFundo", "src/assets/imagens/imagensPopUps/fundoConfig.png");
+    this.load.image("imagemTutorial", "src/assets/imagens/imagensPopUps/imagemTutorial.png");
 
     // Carrega os sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${this.nomePastaEscolhida}`;
@@ -87,84 +88,19 @@ export default class SceneJogo extends Phaser.Scene {
 
 //Pop-up de tutorial que aparece ao iniciar a fase
   mostrarTutorial() {
-    const cx = this.scale.width / 2;  //Centro horizontal da tela
-    const cy = this.scale.height / 2; //Centro vertical da tela
-    this.elementosTutorial = []; //Array para armazenar todos os elementos do tutorial
-
-    // Lista de controles para gerar as linhas do tutorial
-    const controles = [
-      { teclas: ["W", "A", "S", "D"], descricao: "Movimentar personagem" },
-      { teclas: ["F"],                descricao: "Tela cheia" },
-      { teclas: ["E"],                descricao: "Interagir com personagens" },
-      { teclas: ["ESC"],              descricao: "Menu de pausa" }
-    ];
-
-    const estiloDescricao = { fontSize: "20px", color: "#ffffff" }; //Estilo das descrições
-    const estiloKeycap = { fontSize: "16px", color: "#ffffff", fontStyle: "bold" }; //Estilo do texto dentro das teclas
-    const inicioY = cy - 80; //Posição Y da primeira linha
-    const espacoEntreLinhas = 55; //Espaçamento vertical entre cada linha
+    const cx = this.scale.width / 2;
+    const cy = this.scale.height / 2;
+    this.elementosTutorial = [];
 
     // Fundo escuro semi-transparente
     this.elementosTutorial.push(this.add.rectangle(
       cx, cy, this.scale.width, this.scale.height, 0x000000, 0.7
     ).setDepth(50).setScrollFactor(0));
 
-    // Painel de fundo do tutorial
-    this.elementosTutorial.push(this.add.rectangle(
-      cx, cy, 650, 450, 0x0d1b2a
-    ).setStrokeStyle(3, 0x4a90d9).setDepth(51).setScrollFactor(0));
-
-    // Borda interna decorativa
-    this.elementosTutorial.push(this.add.rectangle(
-      cx, cy, 630, 430, 0x0d1b2a, 0
-    ).setStrokeStyle(1, 0x1e3a5f).setDepth(51).setScrollFactor(0));
-
-    // Título do tutorial
-    this.elementosTutorial.push(this.add.text(
-      cx, cy - 175,
-      "COMO JOGAR",
-      { fontSize: "32px", color: "#ffffff", fontStyle: "bold" }
-    ).setOrigin(0.5).setDepth(52).setScrollFactor(0));
-
-    // Linha separadora decorativa abaixo do título
-    this.elementosTutorial.push(this.add.rectangle(
-      cx, cy - 140, 250, 2, 0x4a90d9
-    ).setDepth(52).setScrollFactor(0));
-
-    const colKeycap = cx - 270; //Posição X inicial das keycaps
-    const colDescricao = cx - 50; //Posição X das descrições
-
-    // Gera cada linha de controle dinamicamente
-    controles.forEach((ctrl, i) => {
-      const linhaY = inicioY + (i * espacoEntreLinhas); //Posição Y da linha atual
-      let teclaX = colKeycap; //Posição X inicial das teclas
-
-      // Cria uma keycap visual para cada tecla do controle
-      ctrl.teclas.forEach(tecla => {
-        const largura = tecla.length > 1 ? 50 : 34; //Teclas maiores (ESC) ficam mais largas
-
-        // Fundo da keycap (retângulo com borda)
-        this.elementosTutorial.push(this.add.rectangle(
-          teclaX + largura / 2, linhaY, largura, 34, 0x1a3a5c
-        ).setStrokeStyle(2, 0x4a90d9).setDepth(52).setScrollFactor(0));
-
-        // Texto da tecla dentro da keycap
-        this.elementosTutorial.push(this.add.text(
-          teclaX + largura / 2, linhaY,
-          tecla,
-          estiloKeycap
-        ).setOrigin(0.5).setDepth(53).setScrollFactor(0));
-
-        teclaX += largura + 6; //Avança para a próxima tecla com espaçamento
-      });
-
-      // Descrição do controle
-      this.elementosTutorial.push(this.add.text(
-        colDescricao, linhaY,
-        ctrl.descricao,
-        estiloDescricao
-      ).setOrigin(0, 0.5).setDepth(52).setScrollFactor(0));
-    });
+    // Imagem do tutorial
+    this.elementosTutorial.push(this.add.image(
+      cx, cy, "imagemTutorial"
+    ).setDepth(51).setScrollFactor(0));
 
     // Botão "Jogar!" para fechar o tutorial
     this.botaoJogarTutorial = this.add.image(
