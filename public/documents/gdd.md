@@ -138,27 +138,34 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 2.1. Objetivos do Jogo (sprint 2)
 
-*Descreva o que o jogador deve cumprir para avançar ou concluir o jogo*
+O objetivo do jogo é capacitar o jogador em técnicas de atendimento e vendas por meio de missões interativas que simulam situações reais do cotidiano comercial. Para avançar, o jogador deve interagir com NPCs, resolver desafios, responder quizzes e concluir tarefas relacionadas ao processo de venda. A progressão ocorre por fases e recompensas, permitindo acompanhar a evolução das habilidades desenvolvidas ao longo da experiência.
+
+Fonte: Elaboração própria com base em conceitos de serious games (Michael & Chen, 2006; Deterding et al., 2011).
 
 ## 2.2. Características do Jogo (sprint 2)
+O jogo possui foco educacional com elementos de gamificação, priorizando acessibilidade, narrativa guiada e aprendizado progressivo por meio de simulação de contextos comerciais.
 
 ### 2.2.1. Gênero do Jogo (sprint 2)
-
-*simulação, RPG, corrida, estratégia, esportes, ação, aventura etc.*  
+O jogo é classificado como serious game educacional, combinando elementos de simulação, RPG leve e aventura narrativa. A experiência enfatiza tomada de decisão, interação com personagens e resolução de situações de venda baseadas em cenários reais.
 
 ### 2.2.2. Plataforma do Jogo (sprint 2)
 
-*quanto ao dispositivo: desktop, smartphones, tablets, TV etc.*
+O jogo será desenvolvido para desktop, com acesso via navegador, dispensando instalação.
 
-*quanto ao sistema: navegadores compatíveis*
+Dispositivo: Computadores desktop e notebooks.
+Sistema: Navegadores modernos compatíveis (Google Chrome, Microsoft Edge e Firefox).
 
 ### 2.2.3. Número de jogadores (sprint 2)
 
-*1 jogador, 2 jogadores versus, 2 jogadores cooperação, multiplayer etc.*
+O jogo é projetado para um jogador (single player), permitindo experiência individual focada no aprendizado e na progressão personalizada das habilidades de vendas.
 
 ### 2.2.4. Títulos semelhantes e inspirações (sprint 2)
 
-*Liste e descreva títulos semelhantes e jogos que inspiram e são usados como referência do projeto*
+O projeto se inspira em jogos que utilizam progressão por tarefas, interação com personagens e evolução gradual do jogador. Um dos principais referenciais é Stardew Valley, que apresenta mecânicas de rotina, missões e interação com NPCs, influenciando a estrutura de progressão do jogo.
+
+Outra inspiração é Pokémon FireRed, que contribui com a lógica de progressão por objetivos, desbloqueio de novas áreas e evolução contínua das habilidades do jogador. Esses elementos orientam a organização das fases e o sistema de recompensas do projeto.
+
+O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
