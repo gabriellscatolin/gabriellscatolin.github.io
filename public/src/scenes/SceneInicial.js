@@ -7,8 +7,8 @@ export default class SceneInicial extends Phaser.Scene {
     this.CONFIG = {
       //Efeito de pixelado ao trocar de cena
       FADE_DURATION: 1000, // Duração do fade
-      PIXELATE_AMOUNT: 60, // Pixelização inicial
-      PIXELATE_DURATION: 1100, // Duração da pixelização
+      PIXELATE_AMOUNT: 40, // Pixelização máxima
+      PIXELATE_DURATION: 800, // Duração da pixelização
       ASSETS: {
         botaoJogar: "src/assets/imagens/imagensBotoes/botaoJogar.png",        //Botão "jogar 
         fundo: "src/assets/imagens/imagensMapa/mapaInicial.png",              //Fundo de tela inicial
@@ -87,12 +87,13 @@ export default class SceneInicial extends Phaser.Scene {
   // Transição com efeito de pixelado antes de iniciar o jogo
   const cam = this.cameras.main;
 
-  const pixelated = cam.postFX.addPixelate(this.CONFIG.PIXELATE_AMOUNT);
+  const pixelated = cam.postFX.addPixelate(1);
 
   this.add.tween({
     targets: pixelated,
     duration: this.CONFIG.PIXELATE_DURATION, //Duração do pixelado
-    amount: 1,
+    amount: this.CONFIG.PIXELATE_AMOUNT,
+    ease: "Sine.easeIn",
     onComplete: () => {
       this.scene.start("ScenePersonagem");
     }

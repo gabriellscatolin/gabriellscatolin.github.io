@@ -40,11 +40,22 @@ export default class ScenePersonagem extends Phaser.Scene {
     }
 
     configurarEventos(botao, dados) {
-        // Inicia a cena do jogo enviando os dados do personagem escolhido
+        // Inicia a cena do jogo com efeito de pixelado
         botao.on("pointerdown", () => {
-            this.scene.start('SceneJogo', { 
-                nomePasta: dados.id, 
-                prefixo: dados.prefixoArquivo 
+            const cam = this.cameras.main;
+            const pixelated = cam.postFX.addPixelate(1);
+
+            this.add.tween({
+                targets: pixelated,
+                amount: 40,
+                duration: 800,
+                ease: "Sine.easeIn",
+                onComplete: () => {
+                    this.scene.start('SceneJogo', {
+                        nomePasta: dados.id,
+                        prefixo: dados.prefixoArquivo
+                    });
+                }
             });
         });
 
