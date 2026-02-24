@@ -27,6 +27,14 @@ export default class ScenePersonagem extends Phaser.Scene {
 
         this.criarMenuSelecao();
         this.executarTransicaoEntrada();
+
+        this.input.keyboard.on("keydown-F", () => {
+            if (this.scale.isFullscreen) {
+                this.scale.stopFullscreen();
+            } else {
+                this.scale.startFullscreen();
+            }
+        });
     }
 
     criarMenuSelecao() {

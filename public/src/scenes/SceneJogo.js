@@ -65,6 +65,15 @@ export default class SceneJogo extends Phaser.Scene {
       }
     });
 
+    // Tecla F para tela cheia
+    this.input.keyboard.on("keydown-F", () => {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    });
+
     this.executarTransicaoEntrada();
     this.mostrarTutorial();
   }

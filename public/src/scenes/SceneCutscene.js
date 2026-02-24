@@ -41,6 +41,15 @@ export default class SceneCutscene extends Phaser.Scene {
 
     this.video.play();
 
+    // Tecla F para tela cheia
+    this.input.keyboard.on("keydown-F", () => {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    });
+
     // Aos 7.5 segundos, faz clock wipe no sentido horário
     this.time.delayedCall(this.CONFIG.TEMPO_CORTE, () => {
       this.clockWipe(true, () => {
