@@ -8,6 +8,16 @@ export default class SceneJogo extends Phaser.Scene {
   init(data) {
     this.nomePastaEscolhida = data.nomePasta || "Gabriel";
     this.prefixoEscolhido = data.prefixo || "HB";
+
+    // Seleciona um NPC aleatório que NÃO seja o personagem escolhido
+    const todosPersonagens = [
+      { id: "Gabriel", prefixo: "HB" },
+      { id: "Maya",    prefixo: "ML" },
+      { id: "Joao",    prefixo: "HM" },
+      { id: "Dandara", prefixo: "MM" }
+    ];
+    const outrosPersonagens = todosPersonagens.filter(p => p.id !== this.nomePastaEscolhida);
+    this.npcDados = outrosPersonagens[Math.floor(Math.random() * outrosPersonagens.length)];
   }
 
   preload() {
@@ -28,6 +38,10 @@ export default class SceneJogo extends Phaser.Scene {
       this.load.image(`sprite_direita_${i}`, `${caminhoBase}/${pre}_direita_${i}.png`);
       this.load.image(`sprite_esquerda_${i}`, `${caminhoBase}/${pre}_esquerda_${i}.png`);
     }
+
+    // Carrega o sprite de frente do NPC (personagem parado)
+    const caminhoNpc = `src/assets/imagens/imagensPersonagens/${this.npcDados.id}`;
+    this.load.image('npc_frente', `${caminhoNpc}/${this.npcDados.prefixo}_frente_1.png`);
   }
 
   create() {
@@ -55,6 +69,22 @@ export default class SceneJogo extends Phaser.Scene {
     this.menuPausaAberto = false; //Controle do menu de pausa
     this.configAberta = false; //Controle do popup de configurações
     this.transicaoAtiva = false; //Controle para não disparar a transição mais de uma vez
+    this.dialogoNpcAberto = false; //Controle do diálogo do NPC
+
+    // NPC parado no início da ponte
+    this.npcSprite = this.add.sprite(430, 725, 'npc_frente').setScale(0.15).setDepth(5);
+
+    // Indicador [E] que aparece quando o jogador está perto do NPC
+    this.indicadorE = this.add.text(430, 725, '[E]', {
+      fontSize: '18px',
+      color: '#ffffff',
+      fontStyle: 'bold',
+      stroke: '#000000',
+      strokeThickness: 4
+    }).setOrigin(0.5).setDepth(6).setVisible(false);
+
+    // Tecla E para interagir com o NPC
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Tecla ESC para abrir/fechar o menu de pausa
     this.input.keyboard.on("keydown-ESC", () => {
@@ -135,7 +165,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.elementosTutorial.forEach(el => el.destroy()); //Destrói todos os elementos do tutorial
     this.elementosTutorial = [];
     this.podeMover = true;
-    this.mostrarDialogoObjetivo();
+    // Diálogo agora só aparece ao apertar E perto do NPC
   }
 
   mostrarDialogoObjetivo() {
@@ -186,6 +216,7 @@ export default class SceneJogo extends Phaser.Scene {
     if (this.bannerFundo)     { this.bannerFundo.destroy();     this.bannerFundo = null; }
     if (this.bannerTexto)     { this.bannerTexto.destroy();     this.bannerTexto = null; }
     if (this.bannerFechar)    { this.bannerFechar.destroy();    this.bannerFechar = null; }
+    this.dialogoNpcAberto = false;
   }
 
   update() {
@@ -225,6 +256,19 @@ export default class SceneJogo extends Phaser.Scene {
     // Limites do mapa (Boundaries)
     this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
     this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+
+    // Proximidade ao NPC: mostra indicador [E] e abre diálogo ao pressionar E
+    const distNpc = Phaser.Math.Distance.Between(
+      this.personagemSprite.x, this.personagemSprite.y,
+      this.npcSprite.x, this.npcSprite.y
+    );
+    const pertoDoNpc = distNpc < 150;
+    this.indicadorE.setVisible(pertoDoNpc && !this.dialogoNpcAberto);
+
+    if (pertoDoNpc && !this.dialogoNpcAberto && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.dialogoNpcAberto = true;
+      this.mostrarDialogoObjetivo();
+    }
 
     // Detecta quando o personagem chega na borda direita da tela
     if (this.personagemSprite.x >= 1880 && !this.transicaoAtiva) {
