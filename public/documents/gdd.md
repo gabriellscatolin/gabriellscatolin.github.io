@@ -63,7 +63,7 @@ A Cielo é uma das principais empresas brasileiras do setor de meios de pagament
 
 A Cielo está inserida em um mercado altamente competitivo, caracterizado pela rápida evolução tecnológica e pela crescente presença de fintechs e soluções alternativas de pagamento no mercado brasileiro. Nesse contexto, a aplicação do modelo das 5 Forças de Porter é fundamental para a compreensão dos desafios e das oportunidades estratégicas enfrentadas pela empresa, especialmente no que se refere à rivalidade entre concorrentes e ao poder de barganha dos clientes.
 
-Ameaça de Novos Entrantes
+**Ameaça de Novos Entrantes**
 
 A ameaça de novos entrantes no setor de pagamentos e adquirência em que a Cielo atua é considerada moderada a baixa, devido à presença de barreiras estruturais, regulatórias e competitivas. As principais barreiras incluem:
 
@@ -77,7 +77,7 @@ Escala operacional:
 Impacto Potencial:
  Apesar das barreiras, fintechs e soluções digitais inovadoras exercem pressão competitiva ao oferecer serviços mais flexíveis, integrados e de menor custo.
 
-Ameaça de Produtos ou Serviços Substitutos
+**Ameaça de Produtos ou Serviços Substitutos**
 
 A ameaça de produtos ou serviços substitutos para a Cielo é considerada alta, devido à existência de alternativas que podem reduzir a dependência dos comerciantes das maquininhas tradicionais. Os principais substitutos incluem:
 
@@ -92,7 +92,7 @@ Impacto do Nível de Ameaça:
     A crescente adoção de meios de pagamento digitais e instantâneos pressiona o modelo tradicional de adquirência, podendo reduzir volumes de transações e margens.
 
 
-Análise do Poder de Barganha dos Clientes
+**Análise do Poder de Barganha dos Clientes**
 
 A base de clientes da Cielo é composta por pequenos e médios comerciantes, grandes redes varejistas e negócios digitais.
 
@@ -107,7 +107,7 @@ Negócios Digitais:
 Impacto na Indústria: O elevado poder de barganha dos clientes gera uma compressão das margens de lucro. A Cielo mitiga esse cenário utilizando sua infraestrutura robusta e portfólio de serviços integrados para elevar o custo de troca e reter os clientes.
 
 
-Análise do Poder de Barganha dos Fornecedores
+**Análise do Poder de Barganha dos Fornecedores**
 
 Os principais fornecedores da Cielo são as bandeiras de cartão (Visa, Mastercard, Elo), fabricantes de terminais POS (maquininhas), provedores de infraestrutura de nuvem e desenvolvedores de software de segurança.
 
@@ -122,7 +122,7 @@ Gestão de Fornecedores:
 
 Impacto na Indústria: O poder de barganha é moderado a relevante. Enquanto as bandeiras limitam a flexibilidade de custos, a Cielo mitiga esse impacto através de processos estratégicos de sourcing e automação, garantindo que fornecedores de menor complexidade não comprometam sua margem operacional.
 
-Rivalidade entre Concorrentes Existentes
+**Rivalidade entre Concorrentes Existentes**
 
 A rivalidade no setor de meios de pagamento eletrônicos no Brasil é considerada alta, com grandes competidores como PagSeguro, Stone, Mercado Pago, Rede, SafraPay, InfinitePay, SumUp, C6 Pay e SuperGet. Os principais fatores que intensificam essa rivalidade enfrentada pela Cielo incluem:
 
@@ -190,19 +190,19 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 \# | Requisito  
 --- | ---
-1 | O jogo contará com uma tela inicial contendo as opções de “Jogar”, “Créditos” e “Configurações”.
-2 | 
-3 | O controle do personagem será realizado por meio das teclas WASD para movimentação no ambiente do jogo.
-4 | O jogo será desenvolvido com foco na plataforma web, garantindo acesso via navegador sem necessidade de instalação.
-5 | O jogo apresentará um mapa interativo que representa estabelecimentos do cotidiano dos usuários, permitindo acompanhar o deslocamento e progresso do personagem.
-6 | O jogador poderá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
-7 | As mecânicas do jogo possibilitarão o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
-8 | O jogo contará com missões vinculadas ao ganho de moedas ou pontos, utilizadas como sistema de progressão e recompensa.
-9 | O jogo utilizará referências visuais, cores e logos da Cielo, respeitando a identidade visual do parceiro.
-10 | Quizzes e puzzles serão inseridos ao longo do jogo para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
-11 | O jogo deverá apresentar instruções claras e progressivas, permitindo que o jogador compreenda as mecânicas e avance de forma intuitiva.
-12 | As missões  do jogo serão inspiradas nas rotas utilizadas pelos vendedores no dia a dia de vendas e da Cielo.
-
+1| O jogo deverá apresentar uma tela inicial contendo as opções “Jogar”, “Créditos” e “Configurações”.
+2| O controle do personagem deverá ser realizado por meio das teclas WASD para movimentação no ambiente do jogo.
+3| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
+4| O jogo deverá apresentar um mapa interativo que represente estabelecimentos do cotidiano dos usuários, possibilitando o acompanhamento do deslocamento e progresso do personagem.
+5| O jogador deverá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
+6| As mecânicas do jogo deverão possibilitar o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
+7| O jogo deverá conter missões vinculadas ao ganho de moedas, utilizadas como sistema de progressão e recompensa.
+8| O jogo deverá utilizar referências visuais, cores e logotipos da Cielo, respeitando a identidade visual do parceiro.
+9| O jogo deverá incluir quizzes e puzzles ao longo da experiência para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
+10| O jogo deverá apresentar instruções claras e progressivas, possibilitando que o jogador compreenda as mecânicas e avance de forma intuitiva.
+11| As missões do jogo deverão ser inspiradas em missões reais já utilizadas pelo parceiro, e o trajeto do personagem deverá ser baseado nas rotas reais utilizadas pelos vendedores da Cielo.
+12| O jogo deverá contar com uma câmera de acompanhamento no formato side-scroller/top-down.
+13| As etapas de venda do parceiro deverão seguir o mesmo passo a passo ao longo do jogo durante as interações.
 
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
