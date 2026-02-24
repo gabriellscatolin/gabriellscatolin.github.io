@@ -16,6 +16,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.load.image("botaoJogarTutorial", "src/assets/imagens/imagensBotoes/botaoJogarTutorial.png");
     this.load.image("configFundo", "src/assets/imagens/imagensPopUps/fundoConfig.png");
     this.load.image("imagemTutorial", "src/assets/imagens/imagensPopUps/imagemTutorial.png");
+    this.load.image("falaVanessa", "src/assets/imagens/imagensFalas/falaVanessa.png");
 
     // Carrega os sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${this.nomePastaEscolhida}`;
@@ -134,36 +135,57 @@ export default class SceneJogo extends Phaser.Scene {
     this.elementosTutorial.forEach(el => el.destroy()); //Destrói todos os elementos do tutorial
     this.elementosTutorial = [];
     this.podeMover = true;
-    this.mostrarBannerObjetivo();
+    this.mostrarDialogoObjetivo();
   }
 
-  mostrarBannerObjetivo() {
+  mostrarDialogoObjetivo() {
     const cx = this.scale.width / 2;
-    const margemTopo = 55;
-    const padH = 32;
-    const padV = 14;
+    const cy = this.scale.height / 2;
+    const mensagem = "Atravesse a ponte e pegue o ônibus para a cidade!";
 
-    // Texto criado primeiro para medir dimensões
+    this.bannerFundo = this.add.image(cx, cy, "falaVanessa")
+      .setScale(1.5).setDepth(20).setScrollFactor(0);
+
+    const iW = this.bannerFundo.displayWidth;
+    const iH = this.bannerFundo.displayHeight;
+
+    // Texto com efeito typewriter — centralizado no campo de texto (esquerda do card)
     this.bannerTexto = this.add.text(
-      cx, margemTopo + padV,
-      "Atravesse a ponte e pegue o ônibus para a cidade!",
-      { fontSize: "21px", color: "#ffffff", fontStyle: "bold" }
-    ).setOrigin(0.5, 0).setDepth(12).setScrollFactor(0);
+      cx - iW * 0.15, cy,
+      "",
+      { fontSize: "24px", color: "#1a1a1a", fontStyle: "bold",
+        wordWrap: { width: iW * 0.58 }, align: "center" }
+    ).setOrigin(0.5, 0.5).setDepth(21).setScrollFactor(0);
 
-    const bW = this.bannerTexto.width + padH * 2;
-    const bH = this.bannerTexto.height + padV * 2;
-    const bLeft = cx - bW / 2;
+    // Botão X na ponta direita do card
+    this.bannerFechar = this.add.text(
+      cx + iW / 2 - 28, cy - iH / 2 + 190,
+      "✕",
+      { fontSize: "17px", color: "#555555", fontStyle: "bold" }
+    ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
+      .setInteractive({ useHandCursor: true });
 
-    // Fundo escuro semi-transparente
-    this.bannerFundo = this.add.rectangle(
-      cx, margemTopo, bW, bH, 0x111827, 0.82
-    ).setOrigin(0.5, 0).setDepth(10).setScrollFactor(0);
+    this.bannerFechar.on("pointerover", () => this.bannerFechar.setColor("#000000"));
+    this.bannerFechar.on("pointerout",  () => this.bannerFechar.setColor("#555555"));
+    this.bannerFechar.on("pointerdown", () => this.fecharDialogoObjetivo());
 
-    // Faixa de destaque dourada na borda esquerda
-    this.bannerAccent = this.add.rectangle(
-      bLeft, margemTopo, 5, bH, 0xf5a623, 1
-    ).setOrigin(0, 0).setDepth(11).setScrollFactor(0);
+    let charIndex = 0;
+    this.bannerTimer = this.time.addEvent({
+      delay: 45,
+      repeat: mensagem.length - 1,
+      callback: () => {
+        charIndex++;
+        this.bannerTexto.setText(mensagem.substring(0, charIndex));
+      }
+    });
+  }
 
+  fecharDialogoObjetivo() {
+    if (this.bannerTimer)     { this.bannerTimer.remove();      this.bannerTimer = null; }
+    if (this.bannerAutoFechar){ this.bannerAutoFechar.remove(); this.bannerAutoFechar = null; }
+    if (this.bannerFundo)     { this.bannerFundo.destroy();     this.bannerFundo = null; }
+    if (this.bannerTexto)     { this.bannerTexto.destroy();     this.bannerTexto = null; }
+    if (this.bannerFechar)    { this.bannerFechar.destroy();    this.bannerFechar = null; }
   }
 
   update() {
@@ -210,9 +232,7 @@ export default class SceneJogo extends Phaser.Scene {
       this.podeMover = false;
       this.personagemSprite.body.setVelocity(0);
       this.personagemSprite.anims.pause();
-      if (this.bannerFundo) this.bannerFundo.destroy();
-      if (this.bannerTexto) this.bannerTexto.destroy();
-      if (this.bannerAccent) this.bannerAccent.destroy();
+      this.fecharDialogoObjetivo();
       this.iniciarClockWipe();
     }
   }
