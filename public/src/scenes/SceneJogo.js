@@ -53,6 +53,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.podeMover = false; //Bloqueado até fechar o tutorial
     this.menuPausaAberto = false; //Controle do menu de pausa
     this.configAberta = false; //Controle do popup de configurações
+    this.transicaoAtiva = false; //Controle para não disparar a transição mais de uma vez
 
     // Tecla ESC para abrir/fechar o menu de pausa
     this.input.keyboard.on("keydown-ESC", () => {
@@ -163,6 +164,53 @@ export default class SceneJogo extends Phaser.Scene {
     // Limites do mapa (Boundaries)
     this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
     this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+
+    // Detecta quando o personagem chega na borda direita da tela
+    if (this.personagemSprite.x >= 1880 && !this.transicaoAtiva) {
+      this.transicaoAtiva = true;
+      this.podeMover = false;
+      this.personagemSprite.body.setVelocity(0);
+      this.personagemSprite.anims.pause();
+      this.iniciarClockWipe();
+    }
+  }
+
+  // Transição clock wipe sentido horário antes de ir para a cutscene
+  iniciarClockWipe() {
+    const cx = this.scale.width / 2;
+    const cy = this.scale.height / 2;
+    const raio = Math.hypot(this.scale.width, this.scale.height) / 2;
+
+    const maskGraphics = this.make.graphics();
+    const mask = maskGraphics.createGeometryMask();
+    this.cameras.main.setMask(mask);
+
+    this.tweens.add({
+      targets: { progress: 0 },
+      progress: 1,
+      duration: 1000,
+      ease: "Sine.easeInOut",
+      onUpdate: (tween) => {
+        const progress = tween.getValue();
+        maskGraphics.clear();
+        maskGraphics.fillStyle(0xffffff);
+        maskGraphics.beginPath();
+        maskGraphics.moveTo(cx, cy);
+
+        // Sentido horário: área visível encolhe no sentido horário
+        const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
+        const endAngle = -Math.PI / 2 + Math.PI * 2;
+        maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
+
+        maskGraphics.closePath();
+        maskGraphics.fillPath();
+      },
+      onComplete: () => {
+        this.cameras.main.clearMask(true);
+        maskGraphics.destroy();
+        this.scene.start("SceneCutscene");
+      }
+    });
   }
 
 //Menu de pausa ao apertar ESC
