@@ -134,6 +134,36 @@ export default class SceneJogo extends Phaser.Scene {
     this.elementosTutorial.forEach(el => el.destroy()); //Destrói todos os elementos do tutorial
     this.elementosTutorial = [];
     this.podeMover = true;
+    this.mostrarBannerObjetivo();
+  }
+
+  mostrarBannerObjetivo() {
+    const cx = this.scale.width / 2;
+    const margemTopo = 55;
+    const padH = 32;
+    const padV = 14;
+
+    // Texto criado primeiro para medir dimensões
+    this.bannerTexto = this.add.text(
+      cx, margemTopo + padV,
+      "Atravesse a ponte e pegue o ônibus para a cidade!",
+      { fontSize: "21px", color: "#ffffff", fontStyle: "bold" }
+    ).setOrigin(0.5, 0).setDepth(12).setScrollFactor(0);
+
+    const bW = this.bannerTexto.width + padH * 2;
+    const bH = this.bannerTexto.height + padV * 2;
+    const bLeft = cx - bW / 2;
+
+    // Fundo escuro semi-transparente
+    this.bannerFundo = this.add.rectangle(
+      cx, margemTopo, bW, bH, 0x111827, 0.82
+    ).setOrigin(0.5, 0).setDepth(10).setScrollFactor(0);
+
+    // Faixa de destaque dourada na borda esquerda
+    this.bannerAccent = this.add.rectangle(
+      bLeft, margemTopo, 5, bH, 0xf5a623, 1
+    ).setOrigin(0, 0).setDepth(11).setScrollFactor(0);
+
   }
 
   update() {
@@ -180,6 +210,9 @@ export default class SceneJogo extends Phaser.Scene {
       this.podeMover = false;
       this.personagemSprite.body.setVelocity(0);
       this.personagemSprite.anims.pause();
+      if (this.bannerFundo) this.bannerFundo.destroy();
+      if (this.bannerTexto) this.bannerTexto.destroy();
+      if (this.bannerAccent) this.bannerAccent.destroy();
       this.iniciarClockWipe();
     }
   }
