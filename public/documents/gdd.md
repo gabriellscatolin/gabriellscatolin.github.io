@@ -283,7 +283,13 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
-Considerando as personagens do game, analise se estas estão alinhadas ao público-alvo do jogo (seção 1.3), e compare-as dentro da realidade da sociedade brasileira. Por fim, discorra sobre qual é o impacto esperado da escolha dessas personagens.
+ A concepção do elenco fundamenta-se na senioridade e capilaridade nacional dos gerentes de vendas da Cielo (Seção 1.3), espelhando a pluralidade demográfica reportada pelo IBGE (Censo 2022). O grupo, com idade média de 44 anos, reflete a maturidade exigida pelo cargo de gestão. A escolha de nomes e sobrenomes frequentes no registro civil brasileiro (Santos, Oliveira, Souza) âncora os avatares na realidade cotidiana, evitando o distanciamento causado por nomes estrangeiros ou genéricos.
+
+**Adequação ao Público-Alvo:** O jogo apresenta estrita consonância com o perfil dos colaboradores. Ao utilizar avatares que ocupam a mesma faixa geracional e profissional dos jogadores, estabelece-se o pertencimento. Dandara, Gabriel, João Vitor e Maya não são apenas figuras estéticas; eles representam a diversidade regional (SP, PE, RS, BA) em que a Cielo atua. Isso garante que o treinamento corporativo seja percebido como uma extensão do ambiente de trabalho real, aumentando o engajamento através da identificação.
+
+**Justificativa e Equidade:** As escolhas de design promovem a equidade ao descentralizar a liderança de um único perfil fenotípico. A inclusão de Dandara Santos (mulher negra, 44 anos) e João Vitor (homem negro, 45 anos) em cargos de gerência valida a presença de grupos historicamente sub-representados em postos de decisão. O projeto assegura que a autoridade no jogo seja distribuída de forma equânime entre gêneros e raças, reforçando o compromisso da marca com uma cultura corporativa inclusiva.
+
+**Inovação na Representatividade:** A inovação deste projeto reside na desconstrução de estereótipos regionais e étnicos. Ao posicionar João Vitor, um homem negro, como representante de Pelotas (RS), e Maya Souza, uma mulher branca, representando Salvador (BA), o jogo desafia o viés inconsciente que tende a homogeneizar a população de certas regiões. Essa escolha demonstra criatividade ao celebrar a miscigenação real e a mobilidade profissional dentro do território brasileiro, oferecendo uma representação mais sofisticada e menos caricata do que a mídia tradicional costuma apresentar.
 
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
