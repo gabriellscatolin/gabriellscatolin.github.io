@@ -482,6 +482,9 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 | 9  | Colisão com obstáculos.                                  | Tentar atravessar as barreiras.                                                      | Personagem não atravessa os obstáculos.                                      |
 | 10 | Tutorial.                                                | Observar o tutorial após iniciar o jogo.                                            | O tutorial aparece corretamente.                                             |
 
+<sub>Fonte: Autoria Própria (2026) </sub>
+</div>
+
 ## 5.2. Testes de jogabilidade (playtests) (sprint 5)
 
 ### 5.2.1 Registros de testes
