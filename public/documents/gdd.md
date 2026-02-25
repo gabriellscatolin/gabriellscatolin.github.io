@@ -140,7 +140,13 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
-*Posicione aqui a análise SWOT relacionada ao parceiro de projeto. Utilize a análise SWOT para fazer uma análise ambiental do parceiro no âmbito estratégico. Leve em consideração o contexto da indústria, concorrência e as características do ambiente interno (forças e fraquezas) e externo (oportunidades e ameaças) do parceiro.*
+A Análise SWOT é uma ferramenta de planejamento estratégico que permite às empresas identificar suas forças (Strengths), fraquezas (Weaknesses), oportunidades (Opportunities) e ameaças (Threats) em relação ao mercado. Ela visa compreender os aspectos internos, que são controláveis pela organização, e os fatores externos, que estão além do seu controle, mas que podem influenciar o negócio (Hofrichter, 2017). A seguir, apresenta-se a análise ambiental da Cielo sob essa perspectiva, considerando o contexto da indústria de meios de pagamento e o posicionamento competitivo da empresa.
+
+![alt text](image.png)
+
+Forças: A Cielo possui presença em 99% do território nacional, marca consolidada no varejo e infraestrutura tecnológica robusta, processando bilhões de transações por ano. Seu portfólio diversificado — que inclui maquininhas, antecipação de recebíveis, link de pagamento e inteligência de dados — eleva o custo de troca e aprofunda o relacionamento com os clientes (Blog Cielo, 2023).
+
+Fraquezas: A percepção de taxas menos competitivas em relação às fintechs pressiona sua base de pequenos e médios comerciantes, que possuem alta sensibilidade a preço e baixa barreira de saída. Internamente, a estrutura corporativa tende a tornar os ciclos de inovação mais lentos em comparação com concorrentes nativos digitais (UFRJ, 2018).
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
