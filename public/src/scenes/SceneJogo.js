@@ -39,9 +39,13 @@ export default class SceneJogo extends Phaser.Scene {
       this.load.image(`sprite_esquerda_${i}`, `${caminhoBase}/${pre}_esquerda_${i}.png`);
     }
 
-    // Carrega o sprite de frente do NPC (personagem parado)
-    const caminhoNpc = `src/assets/imagens/imagensPersonagens/${this.npcDados.id}`;
-    this.load.image('npc_frente', `${caminhoNpc}/${this.npcDados.prefixo}_frente_1.png`);
+    // Carrega as sprites fixas da Vanessa (NPC)
+    const caminhoNpc = `src/assets/imagens/imagensPersonagens/Vanessa`;
+    this.load.image('npc_frente', `${caminhoNpc}/MR_frente.png`);
+    this.load.image('npc_direita_1', `${caminhoNpc}/MR_direito_1.png`);
+    this.load.image('npc_direita_2', `${caminhoNpc}/MR_direita_2.png`);
+    this.load.image('npc_direita_3', `${caminhoNpc}/MR_direita_3.png`);
+    this.load.image('npc_direita_4', `${caminhoNpc}/MR_direita_4.png`);
   }
 
   create() {
@@ -70,12 +74,14 @@ export default class SceneJogo extends Phaser.Scene {
     this.configAberta = false; //Controle do popup de configurações
     this.transicaoAtiva = false; //Controle para não disparar a transição mais de uma vez
     this.dialogoNpcAberto = false; //Controle do diálogo do NPC
+    this.npcPartiu = false; //Torna true quando NPC começa a caminhar para fora
 
     // NPC parado no início da ponte
-    this.npcSprite = this.add.sprite(430, 725, 'npc_frente').setScale(0.15).setDepth(5);
+    this.npcSprite = this.add.sprite(430, 615, 'npc_frente').setScale(0.15).setDepth(5);
+
 
     // Indicador [E] que aparece quando o jogador está perto do NPC
-    this.indicadorE = this.add.text(430, 725, '[E]', {
+    this.indicadorE = this.add.text(430, 615, '[E]', {
       fontSize: '18px',
       color: '#ffffff',
       fontStyle: 'bold',
@@ -105,6 +111,12 @@ export default class SceneJogo extends Phaser.Scene {
       }
     });
 
+    // DEBUG — mostra posição do mouse em tempo real (remova quando não precisar)
+    this.debugMouse = this.add.text(8, 8, '', {
+      fontSize: '22px', color: '#ffff00',
+      backgroundColor: '#000000', padding: { x: 8, y: 6 }
+    }).setDepth(999).setScrollFactor(0);
+
     this.executarTransicaoEntrada();
     this.mostrarTutorial();
   }
@@ -124,6 +136,19 @@ export default class SceneJogo extends Phaser.Scene {
         frameRate: 8,
         repeat: -1
       });
+    });
+
+    // Animação de caminhada do NPC para a direita
+    this.anims.create({
+      key: 'npc_andar_direita',
+      frames: [
+        { key: 'npc_direita_1' },
+        { key: 'npc_direita_2' },
+        { key: 'npc_direita_3' },
+        { key: 'npc_direita_4' }
+      ],
+      frameRate: 8,
+      repeat: -1
     });
   }
 
@@ -179,13 +204,30 @@ export default class SceneJogo extends Phaser.Scene {
     const iW = this.bannerFundo.displayWidth;
     const iH = this.bannerFundo.displayHeight;
 
-    // Texto com efeito typewriter — centralizado no campo de texto (esquerda do card)
+    // Texto com efeito typewriter — parte superior do campo de fala
     this.bannerTexto = this.add.text(
-      cx - iW * 0.15, cy,
+      cx - iW * 0.15, cy - iH * 0.12,
       "",
       { fontSize: "24px", color: "#1a1a1a", fontStyle: "bold",
         wordWrap: { width: iW * 0.58 }, align: "center" }
     ).setOrigin(0.5, 0.5).setDepth(21).setScrollFactor(0);
+
+    // Botão "Vamos!" — aparece só depois que o texto terminar de ser escrito
+    this.bannerBotaoVamos = this.add.text(
+      cx - iW * 0.15, 560,
+      "Vamos!",
+      { fontSize: "20px", color: "#2255cc", fontStyle: "bold",
+        backgroundColor: "#ffffff", padding: { x: 14, y: 7 } }
+    ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
+      .setInteractive({ useHandCursor: true })
+      .setVisible(false); // escondido até o texto terminar
+
+    this.bannerBotaoVamos.on("pointerover", () => this.bannerBotaoVamos.setColor("#0033aa"));
+    this.bannerBotaoVamos.on("pointerout",  () => this.bannerBotaoVamos.setColor("#2255cc"));
+    this.bannerBotaoVamos.on("pointerdown", () => {
+      this.fecharDialogoObjetivo();
+      this.npcCaminharESair();
+    });
 
     // Botão X na ponta direita do card
     this.bannerFechar = this.add.text(
@@ -206,6 +248,10 @@ export default class SceneJogo extends Phaser.Scene {
       callback: () => {
         charIndex++;
         this.bannerTexto.setText(mensagem.substring(0, charIndex));
+        // Mostra o botão "Vamos!" assim que o último caractere for escrito
+        if (charIndex >= mensagem.length) {
+          this.bannerBotaoVamos.setVisible(true);
+        }
       }
     });
   }
@@ -213,13 +259,38 @@ export default class SceneJogo extends Phaser.Scene {
   fecharDialogoObjetivo() {
     if (this.bannerTimer)     { this.bannerTimer.remove();      this.bannerTimer = null; }
     if (this.bannerAutoFechar){ this.bannerAutoFechar.remove(); this.bannerAutoFechar = null; }
-    if (this.bannerFundo)     { this.bannerFundo.destroy();     this.bannerFundo = null; }
-    if (this.bannerTexto)     { this.bannerTexto.destroy();     this.bannerTexto = null; }
-    if (this.bannerFechar)    { this.bannerFechar.destroy();    this.bannerFechar = null; }
+    if (this.bannerFundo)       { this.bannerFundo.destroy();       this.bannerFundo = null; }
+    if (this.bannerTexto)       { this.bannerTexto.destroy();       this.bannerTexto = null; }
+    if (this.bannerBotaoVamos)  { this.bannerBotaoVamos.destroy();  this.bannerBotaoVamos = null; }
+    if (this.bannerFechar)      { this.bannerFechar.destroy();      this.bannerFechar = null; }
     this.dialogoNpcAberto = false;
   }
 
+  npcCaminharESair() {
+    this.npcPartiu = true;
+    this.indicadorE.setVisible(false);
+    this.npcSprite.anims.play('npc_andar_direita');
+
+    const distancia = this.scale.width + 100 - this.npcSprite.x; // pixels até sair pela direita
+    const duracao = (distancia / 200) * 1000; // velocidade de 200px/s em ms
+
+    this.tweens.add({
+      targets: this.npcSprite,
+      x: this.scale.width + 100,
+      duration: duracao,
+      ease: 'Linear',
+      onComplete: () => {
+        this.npcSprite.destroy();
+        this.npcSprite = null;
+      }
+    });
+  }
+
   update() {
+    // DEBUG mouse — remove quando não precisar mais
+    const p = this.input.activePointer;
+    this.debugMouse.setText(`x: ${Math.round(p.x)}  y: ${Math.round(p.y)}`);
+
     if (!this.podeMover) return; //Não move enquanto tutorial estiver aberto
 
     const corpoFisico = this.personagemSprite.body;
@@ -258,16 +329,18 @@ export default class SceneJogo extends Phaser.Scene {
     this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
 
     // Proximidade ao NPC: mostra indicador [E] e abre diálogo ao pressionar E
-    const distNpc = Phaser.Math.Distance.Between(
-      this.personagemSprite.x, this.personagemSprite.y,
-      this.npcSprite.x, this.npcSprite.y
-    );
-    const pertoDoNpc = distNpc < 150;
-    this.indicadorE.setVisible(pertoDoNpc && !this.dialogoNpcAberto);
+    if (this.npcSprite) {
+      const distNpc = Phaser.Math.Distance.Between(
+        this.personagemSprite.x, this.personagemSprite.y,
+        this.npcSprite.x, this.npcSprite.y
+      );
+      const pertoDoNpc = distNpc < 150;
+      this.indicadorE.setVisible(pertoDoNpc && !this.dialogoNpcAberto && !this.npcPartiu);
 
-    if (pertoDoNpc && !this.dialogoNpcAberto && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.dialogoNpcAberto = true;
-      this.mostrarDialogoObjetivo();
+      if (pertoDoNpc && !this.dialogoNpcAberto && !this.npcPartiu && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+        this.dialogoNpcAberto = true;
+        this.mostrarDialogoObjetivo();
+      }
     }
 
     // Detecta quando o personagem chega na borda direita da tela
