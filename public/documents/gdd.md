@@ -467,14 +467,18 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 5.1. Casos de Teste (sprints 2 a 4)
 
-*Descreva nesta seção os casos de teste comuns que podem ser executados a qualquer momento para testar o funcionamento e integração das partes do jogo. Utilize tabelas para facilitar a organização.*
-
-*Exemplo de tabela*
-\# | pré-condição | descrição do teste | pós-condição 
---- | --- | --- | --- 
-1 | posicionar o jogo na tela de abertura | iniciar o jogo desde seu início | o jogo deve iniciar da fase 1
-2 | posicionar o personagem em local seguro de inimigos | aguardar o tempo passar até o final da contagem | o personagem deve perder uma vida e reiniciar a fase
-3 | ...
+| #  | Pré-condição                                             | Descrição do teste                                                                 | Pós-condição                                                                 |
+|----|----------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1  | Carregamento da tela inicial.                            | Iniciar SceneInicial.js                                                             | Cena carregada corretamente.                                                 |
+| 2  | Exibição do fundo.                                       | Verificar se o fundo carrega corretamente.                                          | Fundo visível e na posição correta.                                          |
+| 3  | Botões da tela inicial.                                  | Verificar se os botões da tela inicial estão funcionando.                           | Os botões da tela inicial estão funcionando corretamente.                    |
+| 4  | Animação dos botões da tela inicial.                     | Checar o funcionamento das animações dos botões da tela inicial.                   | As animações estão funcionando.                                              |
+| 5  | Transição da tela inicial para seleção de personagens.   | Transição da SceneInicial para ScenePersonagem.                                     | A transição está em funcionamento.                                           |
+| 6  | Seleção de personagens.                                  | Ver se os personagens carregam corretamente e passar o mouse sobre eles.           | Personagens carregam como esperado e a interação ao passar o mouse funciona.|
+| 7  | Carregar o mundo com o personagem escolhido.             | Clicar no ícone do personagem e verificar se o mundo carrega corretamente.         | Mundo carregado com o spritesheet do personagem escolhido.                  |
+| 8  | Movimentação do jogador.                                 | Usar teclas direcionais para mover o jogador.                                       | Personagem se move como esperado.                                            |
+| 9  | Colisão com obstáculos.                                  | Tentar atravessar as barreiras.                                                      | Personagem não atravessa os obstáculos.                                      |
+| 10 | Tutorial.                                                | Observar o tutorial após iniciar o jogo.                                            | O tutorial aparece corretamente.                                             |
 
 ## 5.2. Testes de jogabilidade (playtests) (sprint 5)
 
