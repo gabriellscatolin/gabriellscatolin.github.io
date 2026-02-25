@@ -220,7 +220,11 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-*Posicione aqui uma descrição justificada do público-alvo do jogo, em termos demográficos e de preferências/gostos pessoais.*
+O jogo “Mini Mundo Cielo” foi desenvolvido com o objetivo de aprimorar a qualidade do treinamento de novos Gerentes de Negócios da área comercial da Cielo, utilizando a gamificação como ferramenta de aprendizado prático e acessível.
+O público-alvo do projeto é composto por adultos com ensino médio completo, com idade média em torno de 44 anos, distribuídos por todo o território brasileiro. Anualmente, a Cielo forma aproximadamente 3.000 novos Gerentes de Negócios, com a seguinte distribuição regional: cerca de 100 profissionais na região Norte, 315 no Nordeste, 200 no Centro-Oeste, 2.000 no Sudeste e 340 no Sul, evidenciando um público geograficamente diverso.
+Atualmente, a Cielo já utiliza jogos físicos em seus treinamentos presenciais, os quais são bem recebidos pelos participantes e demonstram eficácia no desenvolvimento de habilidades comerciais. Nesse contexto, o Mini Mundo Cielo surge como uma evolução dessa estratégia, propondo a digitalização e gamificação do treinamento, tornando-o acessível a todos os Gerentes de Negócios, independentemente de sua localização geográfica.
+Além de ampliar o alcance dos treinamentos, o jogo busca traduzir a cultura da Cielo para o ambiente digital, proporcionando uma experiência alinhada aos valores da empresa e promovendo aprendizado padronizado e escalável. 
+
 
 # <a name="c2"></a>2. Visão Geral do Jogo (sprint 2)
 
