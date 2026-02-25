@@ -467,6 +467,8 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 5.1. Casos de Teste (sprints 2 a 4)
 
+*Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
+
 | #  | Pré-condição                                             | Descrição do teste                                                                 | Pós-condição                                                                 |
 |----|----------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | 1  | Carregamento da tela inicial.                            | Iniciar SceneInicial.js                                                             | Cena carregada corretamente.                                                 |
