@@ -220,7 +220,11 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-*Posicione aqui uma descrição justificada do público-alvo do jogo, em termos demográficos e de preferências/gostos pessoais.*
+O jogo “Mini Mundo Cielo” foi desenvolvido com o objetivo de aprimorar a qualidade do treinamento de novos Gerentes de Negócios da área comercial da Cielo, utilizando a gamificação como ferramenta de aprendizado prático e acessível.
+O público-alvo do projeto é composto por adultos com ensino médio completo, com idade média em torno de 44 anos, distribuídos por todo o território brasileiro. Anualmente, a Cielo forma aproximadamente 3.000 novos Gerentes de Negócios, com a seguinte distribuição regional: cerca de 100 profissionais na região Norte, 315 no Nordeste, 200 no Centro-Oeste, 2.000 no Sudeste e 340 no Sul, evidenciando um público geograficamente diverso.
+Atualmente, a Cielo já utiliza jogos físicos em seus treinamentos presenciais, os quais são bem recebidos pelos participantes e demonstram eficácia no desenvolvimento de habilidades comerciais. Nesse contexto, o Mini Mundo Cielo surge como uma evolução dessa estratégia, propondo a digitalização e gamificação do treinamento, tornando-o acessível a todos os Gerentes de Negócios, independentemente de sua localização geográfica.
+Além de ampliar o alcance dos treinamentos, o jogo busca traduzir a cultura da Cielo para o ambiente digital, proporcionando uma experiência alinhada aos valores da empresa e promovendo aprendizado padronizado e escalável. 
+
 
 # <a name="c2"></a>2. Visão Geral do Jogo (sprint 2)
 
@@ -283,7 +287,13 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
-Considerando as personagens do game, analise se estas estão alinhadas ao público-alvo do jogo (seção 1.3), e compare-as dentro da realidade da sociedade brasileira. Por fim, discorra sobre qual é o impacto esperado da escolha dessas personagens.
+ A concepção do elenco fundamenta-se na senioridade e capilaridade nacional dos gerentes de vendas da Cielo (Seção 1.3), espelhando a pluralidade demográfica reportada pelo IBGE (Censo 2022). O grupo, com idade média de 44 anos, reflete a maturidade exigida pelo cargo de gestão. A escolha de nomes e sobrenomes frequentes no registro civil brasileiro (Santos, Oliveira, Souza) âncora os avatares na realidade cotidiana, evitando o distanciamento causado por nomes estrangeiros ou genéricos.
+
+**Adequação ao Público-Alvo:** O jogo apresenta estrita consonância com o perfil dos colaboradores. Ao utilizar avatares que ocupam a mesma faixa geracional e profissional dos jogadores, estabelece-se o pertencimento. Dandara, Gabriel, João Vitor e Maya não são apenas figuras estéticas; eles representam a diversidade regional (SP, PE, RS, BA) em que a Cielo atua. Isso garante que o treinamento corporativo seja percebido como uma extensão do ambiente de trabalho real, aumentando o engajamento através da identificação.
+
+**Justificativa e Equidade:** As escolhas de design promovem a equidade ao descentralizar a liderança de um único perfil fenotípico. A inclusão de Dandara Santos (mulher negra, 44 anos) e João Vitor (homem negro, 45 anos) em cargos de gerência valida a presença de grupos historicamente sub-representados em postos de decisão. O projeto assegura que a autoridade no jogo seja distribuída de forma equânime entre gêneros e raças, reforçando o compromisso da marca com uma cultura corporativa inclusiva.
+
+**Inovação na Representatividade:** A inovação deste projeto reside na desconstrução de estereótipos regionais e étnicos. Ao posicionar João Vitor, um homem negro, como representante de Pelotas (RS), e Maya Souza, uma mulher branca, representando Salvador (BA), o jogo desafia o viés inconsciente que tende a homogeneizar a população de certas regiões. Essa escolha demonstra criatividade ao celebrar a miscigenação real e a mobilidade profissional dentro do território brasileiro, oferecendo uma representação mais sofisticada e menos caricata do que a mídia tradicional costuma apresentar.
 
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
@@ -457,14 +467,23 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 5.1. Casos de Teste (sprints 2 a 4)
 
-*Descreva nesta seção os casos de teste comuns que podem ser executados a qualquer momento para testar o funcionamento e integração das partes do jogo. Utilize tabelas para facilitar a organização.*
+*Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
 
-*Exemplo de tabela*
-\# | pré-condição | descrição do teste | pós-condição 
---- | --- | --- | --- 
-1 | posicionar o jogo na tela de abertura | iniciar o jogo desde seu início | o jogo deve iniciar da fase 1
-2 | posicionar o personagem em local seguro de inimigos | aguardar o tempo passar até o final da contagem | o personagem deve perder uma vida e reiniciar a fase
-3 | ...
+| #  | Pré-condição                                             | Descrição do teste                                                                 | Pós-condição                                                                 |
+|----|----------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1  | Carregamento da tela inicial.                            | Iniciar SceneInicial.js                                                             | Cena carregada corretamente.                                                 |
+| 2  | Exibição do fundo.                                       | Verificar se o fundo carrega corretamente.                                          | Fundo visível e na posição correta.                                          |
+| 3  | Botões da tela inicial.                                  | Verificar se os botões da tela inicial estão funcionando.                           | Os botões da tela inicial estão funcionando corretamente.                    |
+| 4  | Animação dos botões da tela inicial.                     | Checar o funcionamento das animações dos botões da tela inicial.                   | As animações estão funcionando.                                              |
+| 5  | Transição da tela inicial para seleção de personagens.   | Transição da SceneInicial para ScenePersonagem.                                     | A transição está em funcionamento.                                           |
+| 6  | Seleção de personagens.                                  | Ver se os personagens carregam corretamente e passar o mouse sobre eles.           | Personagens carregam como esperado e a interação ao passar o mouse funciona.|
+| 7  | Carregar o mundo com o personagem escolhido.             | Clicar no ícone do personagem e verificar se o mundo carrega corretamente.         | Mundo carregado com o spritesheet do personagem escolhido.                  |
+| 8  | Movimentação do jogador.                                 | Usar teclas direcionais para mover o jogador.                                       | Personagem se move como esperado.                                            |
+| 9  | Colisão com obstáculos.                                  | Tentar atravessar as barreiras.                                                      | Personagem não atravessa os obstáculos.                                      |
+| 10 | Tutorial.                                                | Observar o tutorial após iniciar o jogo.                                            | O tutorial aparece corretamente.                                             |
+
+<sub>Fonte: Autoria Própria (2026) </sub>
+</div>
 
 ## 5.2. Testes de jogabilidade (playtests) (sprint 5)
 
