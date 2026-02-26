@@ -205,17 +205,17 @@ Missão, Visão e Valores são os três pilares fundamentais que definem a ident
 
 **Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
 
-**Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. 
+**Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. [12](#ref12)
 
 Equidade e Acessibilidade: Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
 
 Inovação e Gamificação: Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.
 
-Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [2]
+Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [2](#ref2)
 
 Foco na Experiência (UX/Gamer): Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
 
-Impacto Social e Produtivo: Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [8]
+Impacto Social e Produtivo: Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [8](#ref8)
 
 
 ### 1.1.4. Proposta de Valor (sprint 4)
@@ -263,10 +263,23 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-O jogo “Mini Mundo Cielo” foi desenvolvido com o objetivo de aprimorar a qualidade do treinamento de novos Gerentes de Negócios da área comercial da Cielo, utilizando a gamificação como ferramenta de aprendizado prático e acessível.
-O público-alvo do projeto é composto por adultos com ensino médio completo, com idade média em torno de 44 anos, distribuídos por todo o território brasileiro. Anualmente, a Cielo forma aproximadamente 3.000 novos Gerentes de Negócios, com a seguinte distribuição regional: cerca de 100 profissionais na região Norte, 315 no Nordeste, 200 no Centro-Oeste, 2.000 no Sudeste e 340 no Sul, evidenciando um público geograficamente diverso.
-Atualmente, a Cielo já utiliza jogos físicos em seus treinamentos presenciais, os quais são bem recebidos pelos participantes e demonstram eficácia no desenvolvimento de habilidades comerciais. Nesse contexto, o Mini Mundo Cielo surge como uma evolução dessa estratégia, propondo a digitalização e gamificação do treinamento, tornando-o acessível a todos os Gerentes de Negócios, independentemente de sua localização geográfica.
-Além de ampliar o alcance dos treinamentos, o jogo busca traduzir a cultura da Cielo para o ambiente digital, proporcionando uma experiência alinhada aos valores da empresa e promovendo aprendizado padronizado e escalável. 
+O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11] No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional.
+
+### Perfil Demográfico e Profissional
+**Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
+
+**Escolaridade:** Ensino Médio completo (mínimo exigido para a função).
+
+**Faixa Etária Média:** 44 anos (Perfil de adultos com experiência prévia em vendas ou transição de carreira).
+
+**Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [1]
+
+**Distribuição Geográfica e Escala**
+  O projeto visa atender uma demanda anual de aproximadamente 3.000 novos profissionais, caracterizando-se por uma alta dispersão geográfica que justifica a digitalização do treinamento.
+
+**Justificativa de Gamificação Digital**
+A transição dos jogos físicos presenciais para o Mini Mundo Cielo representa a evolução da estratégia de learning & development da companhia. Ao digitalizar dinâmicas que já possuem eficácia comprovada, a Cielo elimina barreiras geográficas e garante que um Gerente de Negócios no Norte tenha a mesma equidade de aprendizado e acesso às ferramentas que um profissional no Sudeste. [14] 
+
 
 
 # <a name="c2"></a>2. Visão Geral do Jogo (sprint 2)
@@ -581,7 +594,8 @@ Exame. (2016, maio 3). Cielo vê concorrência mais agressiva e retração de cl
 <br><a name="ref9">[9]:</a>Kotler, P.; Keller, K. Administração de Marketing.
 Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 2026
 <br><a name="ref10">[10]:</a> Corrales, J. A. (2019, maio 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content - BR; Rock Content. https://rockcontent.com/br/blog/missao-e-visao
-
+<br><a name="ref11">[11]:</a>Desidério, M. (2017, agosto 14). 5 dicas essenciais para definir o público-alvo do seu negócio. Exame. https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref12">[12]:</a>Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae). (s.d.). ESG: o que é e qual é a importância? Saiba aqui! https://sebrae.com.br/sites/PortalSebrae/ufs/pe/artigos/esg-o-que-e-e-qual-e-a-importancia-saiba-aqui,4ef39fd767ede710VgnVCM100000d701210aRCRD Acesso em: 26 fevereiro 2026.
 
 
 
