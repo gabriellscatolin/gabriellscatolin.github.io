@@ -191,13 +191,49 @@ export default class SceneJogo extends Phaser.Scene {
     this.elementosTutorial.forEach(el => el.destroy()); //Destrói todos os elementos do tutorial
     this.elementosTutorial = [];
     this.podeMover = true;
-    // Diálogo agora só aparece ao apertar E perto do NPC
+    this.mostrarMissao();
+  }
+
+  mostrarMissao() {
+    const cx = this.scale.width / 2;
+    const mensagem = "Missão: Fale com a Vanessa e embarque no ônibus!";
+
+    // Mede a largura real do texto final antes de criar o fundo
+    const medidor = this.add.text(-9999, -9999, mensagem, {
+      fontSize: "20px", fontStyle: "bold"
+    });
+    const larguraFinal = medidor.displayWidth + 48;
+    medidor.destroy();
+
+    this.missaoBg = this.add.rectangle(cx, 110, larguraFinal, 50, 0x000000, 0.55)
+      .setDepth(10).setScrollFactor(0);
+
+    this.missaoTexto = this.add.text(cx, 110, "", {
+      fontSize: "20px", color: "#ffffff", fontStyle: "bold",
+      stroke: "#000000", strokeThickness: 2
+    }).setOrigin(0.5).setDepth(11).setScrollFactor(0);
+
+    let charIndex = 0;
+    this.missaoTimer = this.time.addEvent({
+      delay: 40,
+      repeat: mensagem.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoTexto.setText(mensagem.substring(0, charIndex));
+      }
+    });
+  }
+
+  fecharMissao() {
+    if (this.missaoTimer) { this.missaoTimer.remove(); this.missaoTimer = null; }
+    if (this.missaoBg)    { this.missaoBg.destroy();   this.missaoBg = null; }
+    if (this.missaoTexto) { this.missaoTexto.destroy(); this.missaoTexto = null; }
   }
 
   mostrarDialogoObjetivo() {
     const cx = this.scale.width / 2;
     const cy = this.scale.height / 2;
-    const mensagem = "Atravesse a ponte e pegue o ônibus para a cidade!";
+    const mensagem = "Atravesse a ponte e pegue o ônibus para a cidade. Me siga!";
 
     this.bannerFundo = this.add.image(cx, cy, "falaVanessa")
       .setScale(1.5).setDepth(20).setScrollFactor(0);
@@ -209,38 +245,31 @@ export default class SceneJogo extends Phaser.Scene {
     this.bannerTexto = this.add.text(
       cx - iW * 0.15, cy - iH * 0.12,
       "",
-      { fontSize: "24px", color: "#1a1a1a", fontStyle: "bold",
-        wordWrap: { width: iW * 0.58 }, align: "center" }
+      { fontSize: "26px", color: "#1a1a1a", fontStyle: "bold",
+        wordWrap: { width: iW * 0.50, useAdvancedWrap: true }, align: "center" }
     ).setOrigin(0.5, 0.5).setDepth(21).setScrollFactor(0);
 
     // Botão "Vamos!" — aparece só depois que o texto terminar de ser escrito
     this.bannerBotaoVamos = this.add.text(
       cx - iW * 0.15, 560,
-      "Vamos!",
-      { fontSize: "20px", color: "#2255cc", fontStyle: "bold",
-        backgroundColor: "#ffffff", padding: { x: 14, y: 7 } }
+      "  Vamos!  ",
+      { fontSize: "20px", color: "#ffffff", fontStyle: "bold",
+        backgroundColor: "#3a7bd5", padding: { x: 16, y: 9 },
+        stroke: "#1a4fa0", strokeThickness: 2 }
     ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
       .setInteractive({ useHandCursor: true })
       .setVisible(false); // escondido até o texto terminar
 
-    this.bannerBotaoVamos.on("pointerover", () => this.bannerBotaoVamos.setColor("#0033aa"));
-    this.bannerBotaoVamos.on("pointerout",  () => this.bannerBotaoVamos.setColor("#2255cc"));
+    this.bannerBotaoVamos.on("pointerover", () =>
+      this.bannerBotaoVamos.setStyle({ backgroundColor: "#1a55b8", color: "#ffffff" })
+    );
+    this.bannerBotaoVamos.on("pointerout", () =>
+      this.bannerBotaoVamos.setStyle({ backgroundColor: "#3a7bd5", color: "#ffffff" })
+    );
     this.bannerBotaoVamos.on("pointerdown", () => {
       this.fecharDialogoObjetivo();
       this.npcCaminharESair();
     });
-
-    // Botão X na ponta direita do card
-    this.bannerFechar = this.add.text(
-      cx + iW / 2 - 28, cy - iH / 2 + 190,
-      "✕",
-      { fontSize: "17px", color: "#555555", fontStyle: "bold" }
-    ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
-      .setInteractive({ useHandCursor: true });
-
-    this.bannerFechar.on("pointerover", () => this.bannerFechar.setColor("#000000"));
-    this.bannerFechar.on("pointerout",  () => this.bannerFechar.setColor("#555555"));
-    this.bannerFechar.on("pointerdown", () => this.fecharDialogoObjetivo());
 
     let charIndex = 0;
     this.bannerTimer = this.time.addEvent({
@@ -249,9 +278,15 @@ export default class SceneJogo extends Phaser.Scene {
       callback: () => {
         charIndex++;
         this.bannerTexto.setText(mensagem.substring(0, charIndex));
-        // Mostra o botão "Vamos!" assim que o último caractere for escrito
+        // Mostra o botão e habilita Enter assim que o último caractere for escrito
         if (charIndex >= mensagem.length) {
           this.bannerBotaoVamos.setVisible(true);
+          this.input.keyboard.once("keydown-ENTER", () => {
+            if (this.dialogoNpcAberto) {
+              this.fecharDialogoObjetivo();
+              this.npcCaminharESair();
+            }
+          });
         }
       }
     });
@@ -263,7 +298,6 @@ export default class SceneJogo extends Phaser.Scene {
     if (this.bannerFundo)       { this.bannerFundo.destroy();       this.bannerFundo = null; }
     if (this.bannerTexto)       { this.bannerTexto.destroy();       this.bannerTexto = null; }
     if (this.bannerBotaoVamos)  { this.bannerBotaoVamos.destroy();  this.bannerBotaoVamos = null; }
-    if (this.bannerFechar)      { this.bannerFechar.destroy();      this.bannerFechar = null; }
     this.dialogoNpcAberto = false;
   }
 
@@ -350,6 +384,7 @@ export default class SceneJogo extends Phaser.Scene {
 
       if (pertoDoNpc && !this.dialogoNpcAberto && !this.npcPartiu && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
         this.dialogoNpcAberto = true;
+        this.fecharMissao();
         this.mostrarDialogoObjetivo();
       }
     }
