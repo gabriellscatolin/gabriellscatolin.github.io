@@ -144,13 +144,13 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
-&emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados.([[6]](#ref6)) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. ([[2]](#ref2))
+&emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados. [6](#ref6) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. [2](#ref2)
 
 &emsp; A Figura 2 apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
 
 <div align="center">
 <sub>Figura 2 - Análise SWOT - Cielo</sub>
-<img src="../assets/imagens/gdd/matriz_swoat.png">
+<img src="../../../src/assets/imagens/gdd/matriz_swot.png">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -169,7 +169,7 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 2. **Custos Operacionais Elevados:** A logística de manutenção e substituição de hardware (maquininhas) gera um custo fixo significativamente maior que o de competidores puramente digitais.
 
-3. **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel. [7]
+3. **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel. [7](#ref7)
 
 ### Oportunidades (Opportunities)
 
