@@ -148,13 +148,13 @@ A Análise SWOT identifica forças, fraquezas, oportunidades e ameaças de uma o
 
 ![alt text](image.png)
 
-**Forças:** Presença em 99% do território nacional, marca consolidada e portfólio diversificado com maquininhas, antecipação de recebíveis e inteligência de dados (Blog Cielo, 2023).
+**Forças:** Alcance geográfico, produtos diferentes de acordo com o perfil do cliente, homologada com as principais bandeiras do mercado e tecnologia NFC (Cielo Tap).
 
-**Fraquezas:** Taxas percebidas como menos competitivas frente às fintechs e ciclos de inovação mais lentos devido à estrutura corporativa (UFRJ, 2018).
+**Fraquezas:** Dependência do varejo físico, custos operacionais elevados, dificuldade de criar fidelidade com o cliente e necessidade de volume de vendas.
 
-**Oportunidades:** Digitalização do varejo, expansão do crédito para PMEs e crescimento dos pagamentos por aproximação (NFC) (Blog Cielo, 2023).
+**Oportunidades:** Crescimento dos meios digitais (Pix, e-commerce), aumento do número de serviços de entrega (necessidade de mais maquininhas), marca consolidada e tecnologia NFC (Cielo Tap).
 
-**Ameaças:** Concorrência de Stone, PagSeguro e Mercado Pago, além da adoção crescente do Pix como substituto às maquininhas (Banco Central do Brasil, 2023; UFRJ, 2018).
+**Ameaças:** Concorrência agressiva, fraudes envolvendo maquininha/cartão trazendo insegurança, novas tecnologias como blockchain e possíveis crises financeiras.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)

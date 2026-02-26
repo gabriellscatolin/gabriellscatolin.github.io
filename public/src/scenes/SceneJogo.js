@@ -27,6 +27,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.load.image("configFundo", "src/assets/imagens/imagensPopUps/fundoConfig.png");
     this.load.image("imagemTutorial", "src/assets/imagens/imagensPopUps/imagemTutorial.png");
     this.load.image("falaVanessa", "src/assets/imagens/imagensFalas/falaVanessa.png");
+    this.load.image("onibus", "src/assets/imagens/sprites/onibus.png");
 
     // Carrega os sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${this.nomePastaEscolhida}`;
@@ -53,6 +54,9 @@ export default class SceneJogo extends Phaser.Scene {
     this.fundoImage = this.add.image(0, 0, "mapaPonteImage").setOrigin(0, 0);
     this.fundoImage.displayWidth = this.scale.width;
     this.fundoImage.displayHeight = this.scale.height;
+
+    // Ônibus estático com só a traseira aparecendo na borda direita
+    this.onibusSprite = this.add.image(2100, 620, "onibus").setScale(0.9).setDepth(1);
 
     this.criarAnimacoes();
 
