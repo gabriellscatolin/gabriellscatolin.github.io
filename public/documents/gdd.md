@@ -524,18 +524,17 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 
 ## 7. Referências
 
-### Ref 1 — CIELO S.A. Quem somos
-CIELO S.A. Quem somos. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
+<a id="ref1"></a>
+[1] CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
 
-### Ref 2 — CIELO S.A. Relatório Integrado 2022
-CIELO S.A. Relatório Integrado 2022. Central de Resultados RI. Disponível em: https://ri.cielo.com.br/. Acesso em: 26 fev. 2026.
+<a id="ref2"></a>
+[2] CIELO S.A. **Relatório Integrado 2022**. Central de Resultados RI. Disponível em: https://ri.cielo.com.br/. Acesso em: 26 fev. 2026.
 
-### Ref 3 — Valor Econômico — Guerra das maquininhas
-VALOR ECONÔMICO. Guerra das maquininhas: Cielo reage e disputa se acirra. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
+<a id="ref3"></a>
+[3] VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
 
-### Ref 4 — Harvard Business Review — Gamification
-HARVARD BUSINESS REVIEW. How Gamification Can Help Your Employees Learn. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
-
+<a id="ref4"></a>
+[4] HARVARD BUSINESS REVIEW. **How Gamification Can Help Your Employees Learn**. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
 
 
 
