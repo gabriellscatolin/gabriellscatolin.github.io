@@ -6,18 +6,18 @@
 
 <br>
 
-# Nome do projeto
+# Mini Mundo Cielo
 
-## Nome do grupo
+## Cielitos
 
 ## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 5</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 6</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 7</a>
+- <a href="https://www.linkedin.com/in/ana-alícia-medina-5261431aa">Ana Alícia Medina Santos da Rocha Nunes</a>
+- <a href="(http://www.linkedin.com/in/eduardomelquiades">Eduardo Melquiades Amaral</a>
+- <a href="https://www.linkedin.com/in/victorbarq/">Gabriel Thomas Correia Scatolin</a> 
+- <a href="https://www.linkedin.com/in/victorbarq/">Lucas Komatsu Borten</a> 
+- <a href="https://www.linkedin.com/in/victorbarq/">Nicolas Brosse Dely</a>
+- <a href="https://www.linkedin.com/in/victorbarq/">Rachel Durante Silvestre</a> 
+- <a href="https://www.linkedin.com/in/sofia-farias-brand%C3%A3o-8602b7391/">Sofia Farias Brandão</a>
 
 ## 👩‍🏫 Professores:
 ### Orientador(a) 
