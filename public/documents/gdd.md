@@ -56,10 +56,10 @@ Figura 5 - Cenários dos estabelecimentos internamente
 
 ### 1.1.1. Contexto da indústria (sprint 2)
 
-&emsp; A Cielo S.A. posiciona-se como a líder nacional no setor de adquirência e serviços financeiros, desempenhando um papel sistêmico na economia brasileira. Fundada em 1995 (originalmente como VisaNet), a companhia evoluiu de uma processadora de transações para uma plataforma de tecnologia de ponta voltada ao varejo. Com presença capilarizada em 99% do território nacional, a Cielo detém uma abrangência sem paralelos, atendendo desde microempreendedores até gigantes do varejo corporativo.([[1]](#ref1)) <br>&emsp;
-O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações, movimentando o equivalente a 7% do Produto Interno Bruto (PIB) brasileiro. ([[2]](#ref2))<br>&emsp; Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
-Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. ([[3]](#ref3))<br>&emsp; Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
-A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. ([[4]](#ref4))<br>&emsp;
+&emsp; A Cielo S.A. posiciona-se como a líder nacional no setor de adquirência e serviços financeiros, desempenhando um papel sistêmico na economia brasileira. Fundada em 1995 (originalmente como VisaNet), a companhia evoluiu de uma processadora de transações para uma plataforma de tecnologia de ponta voltada ao varejo. Com presença capilarizada em 99% do território nacional, a Cielo detém uma abrangência sem paralelos, atendendo desde microempreendedores até gigantes do varejo corporativo.[1](#ref1)
+O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações, movimentando o equivalente a 7% do Produto Interno Bruto (PIB) brasileiro. [2](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
+Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [3](#ref3)Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
+A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. [4](#ref4)
 
 
 
@@ -522,10 +522,10 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
 
-<br><a name="ref1">[1]:</a> CIELO S.A. Quem somos. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
-<br><a name="ref2">[2]:</a> CIELO S.A. Relatório Integrado 2022. Central de Resultados RI. Disponível em: https://ri.cielo.com.br/. Acesso em: 26 fev. 2026.
-<br><a name="ref3">[3]:</a> VALOR ECONÔMICO. Guerra das maquininhas: Cielo reage e disputa se acirra. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
-<br><a name="ref4">[4]:</a>  HARVARD BUSINESS REVIEW. How Gamification Can Help Your Employees Learn. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
+<a id="ref1"></a> CIELO S.A. Quem somos. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
+<a id="ref2"></a>CIELO S.A. Relatório Integrado 2022. Central de Resultados RI. Disponível em: https://ri.cielo.com.br/. Acesso em: 26 fev. 2026.
+<a id="ref3"></a> VALOR ECONÔMICO. Guerra das maquininhas: Cielo reage e disputa se acirra. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
+<a id="ref4"></a>  HARVARD BUSINESS REVIEW. How Gamification Can Help Your Employees Learn. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
 
 
 
