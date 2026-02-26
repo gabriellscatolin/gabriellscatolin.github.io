@@ -65,7 +65,7 @@ Figura 5 - Cenários dos estabelecimentos internamente
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-A Cielo está inserida em um mercado altamente competitivo, caracterizado pela rápida evolução tecnológica e pela crescente presença de fintechs e soluções alternativas de pagamento no mercado brasileiro. Nesse contexto, a aplicação do modelo das 5 Forças de Porter é fundamental para a compreensão dos desafios e das oportunidades estratégicas enfrentadas pela empresa, especialmente no que se refere à rivalidade entre concorrentes e ao poder de barganha dos clientes.
+&emsp; A Análise de 5 Forças de Porter é um framework utilizado para entender a competitividade que uma marca tem no mercado frente a agentes externos: a ameaça de novos entrantes no mercado, o poder de barganha dos seus fornecedores, o poder de barganha dos seus clientes, a ameaça de produtos substitutos e a rivalidade com seus concorrentes. [5](#ref5)
 
 **Ameaça de Novos Entrantes**
 
@@ -144,17 +144,47 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
-A Análise SWOT identifica forças, fraquezas, oportunidades e ameaças de uma organização, diferenciando fatores internos dos externos (Hofrichter, 2017).
+&emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados.([[6]](#ref6)) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. ([[2]](#ref2))
 
-![alt text](image.png)
+&emsp; A Figura 2 apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
 
-**Forças:** Alcance geográfico, produtos diferentes de acordo com o perfil do cliente, homologada com as principais bandeiras do mercado e tecnologia NFC (Cielo Tap).
+<div align="center">
+<sub>Figura 2 - Análise SWOT - Cielo</sub>
+<img src="../assets/imagens/gdd/matriz_swoat.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-**Fraquezas:** Dependência do varejo físico, custos operacionais elevados, dificuldade de criar fidelidade com o cliente e necessidade de volume de vendas.
+#### Forças (Strengths) 
+1. **Liderança e Capilaridade de Mercado:** Presente em 99% do território brasileiro, a Cielo possui a maior rede de aceitação do país, o que garante uma vantagem competitiva em volume de transações.
 
-**Oportunidades:** Crescimento dos meios digitais (Pix, e-commerce), aumento do número de serviços de entrega (necessidade de mais maquininhas), marca consolidada e tecnologia NFC (Cielo Tap).
+2. **Ecossistema Tecnológico Adaptativo:** A implementação de tecnologias como o Cielo Tap (NFC) transforma smartphones em maquininhas, reduzindo a barreira de entrada para microempreendedores
 
-**Ameaças:** Concorrência agressiva, fraudes envolvendo maquininha/cartão trazendo insegurança, novas tecnologias como blockchain e possíveis crises financeiras.
+3. **Multibandeira e Homologação:** A companhia é homologada com as principais bandeiras globais e locais, oferecendo segurança e estabilidade operacional superior aos novos entrantes.
+
+4. **Portfólio Customizado:** Capacidade de oferecer produtos distintos (Cielo Lio, Cielo Zip, e-commerce) que atendem desde o pequeno varejo até grandes corporações.
+
+### Fraquezas (Weaknesses)
+
+1. **Dependência do Varejo Físico:** Embora esteja em transição digital, a maior parte da receita ainda provém de transações físicas, tornando-a vulnerável a crises de mobilidade ou fechamento de comércio
+
+2. **Custos Operacionais Elevados:** A logística de manutenção e substituição de hardware (maquininhas) gera um custo fixo significativamente maior que o de competidores puramente digitais.
+
+3. **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel. [7]
+
+### Oportunidades (Opportunities)
+
+1. **Expansão dos Meios Digitais:** O crescimento exponencial do Pix e do e-commerce permite à Cielo atuar como gateway de pagamento, indo além do hardware físico. 
+
+2. **Novos Modelos de Negócio (Logística):** O aumento do serviço de entregas (delivery) gera demanda por soluções de pagamento móveis e integradas a aplicativos. 
+
+3. **Data Intelligence:** Utilizar o volume massivo de dados transacionados (7% do PIB) para oferecer serviços de consultoria e análise de crédito para lojistas. 
+
+### Ameaças (Threats)
+1. **Hipercompetitividade (Guerra de Taxas):** A entrada agressiva de players como Stone, PagSeguro e fintechs força a compressão das margens de lucro. 
+
+2. **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em cartões trazem riscos financeiros e de reputação para a marca. [14]
+
+3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
@@ -525,16 +555,22 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 ## 7. Referências
 
 <br><a name="ref1">[1]:</a>
-[1] CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
-
+CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
 <br><a name="ref2">[2]:</a> 
-[2] CIELO S.A. **Relatório Integrado 2022**. Central de Resultados RI. Disponível em: https://ri.cielo.com.br/. Acesso em: 26 fev. 2026.
-
+Cielo. (2022). Relatório anual integrado 2022. Recuperado em 26 fev. 2026, de
+https://www.cielo.com.br/docs/sustentabilidade/2022/pt-br/Relatorio-Anual-Integrado-2022.pdf
 <br><a name="ref3">[3]:</a>
-[3] VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
-
+VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
 <br><a name="ref4">[4]:</a>
-[4] HARVARD BUSINESS REVIEW. **How Gamification Can Help Your Employees Learn**. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
+ HARVARD BUSINESS REVIEW. **How Gamification Can Help Your Employees Learn**. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
+<br><a name="ref5">[5]:</a> 
+Júnior, H. (2015). As cinco forças de porter e os fatores críticos de sucesso: Uma análise da tomada de decisões estratégicas na empresa Total Eletro em Pau dos Ferros-RN. Universidade do Estado do Rio Grande do Norte. Disponível em: https://www.uern.br/controledepaginas/2015-/arquivos/5018helder_viana_marinho_de_oliveira_janior.pdf. Acesso em: 26 fev. 2026.
+<br><a name="ref6">[6]:</a> Cielo. (s.d.). Como fazer análise SWOT. Blog Cielo. 
+https://blog.cielo.com.br/vender/como-fazer-analise-swot/ acesso em 26 fev. 2026
+<br><a name="ref7">[7]:</a> Exame. (2020, janeiro 27). O pior da guerra das maquininhas de fato passou para a Cielo? Exame. https://exame.com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/ Acesso em: 26 fevereiro 2026.
+
+
+
 
 
 
