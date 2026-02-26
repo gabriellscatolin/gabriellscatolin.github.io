@@ -199,6 +199,7 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
+Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.([[10]](#ref10)) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
 
 **Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [9](#ref9)
 
@@ -579,6 +580,7 @@ https://blog.cielo.com.br/vender/como-fazer-analise-swot/ acesso em 26 fev. 2026
 Exame. (2016, maio 3). Cielo vê concorrência mais agressiva e retração de clientes. Exame. https://exame.com/negocios/cielo-ve-concorrencia-mais-agressiva-e-retracao-de-clientes/ Acesso em: 26 fevereiro 2026.
 <br><a name="ref9">[9]:</a>Kotler, P.; Keller, K. Administração de Marketing.
 Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 2026
+<br><a name="ref10">[10]:</a> Corrales, J. A. (2019, maio 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content - BR; Rock Content. https://rockcontent.com/br/blog/missao-e-visao
 
 
 
