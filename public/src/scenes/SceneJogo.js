@@ -80,6 +80,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.npcSprite = this.add.sprite(430, 615, 'npc_frente').setScale(0.15).setDepth(5);
 
 
+
     // Indicador [E] que aparece quando o jogador está perto do NPC
     this.indicadorE = this.add.text(430, 615, '[E]', {
       fontSize: '18px',
@@ -269,6 +270,7 @@ export default class SceneJogo extends Phaser.Scene {
   npcCaminharESair() {
     this.npcPartiu = true;
     this.indicadorE.setVisible(false);
+
     this.npcSprite.anims.play('npc_andar_direita');
 
     const distancia = this.scale.width + 100 - this.npcSprite.x; // pixels até sair pela direita
@@ -327,6 +329,15 @@ export default class SceneJogo extends Phaser.Scene {
     // Limites do mapa (Boundaries)
     this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
     this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+
+    // Colisão com o NPC — impede o personagem de passar pelo NPC (bloqueia só X)
+    // Permanece ativa enquanto o sprite do NPC existir (inclusive durante a caminhada)
+    if (this.npcSprite) {
+      const limiteX = this.npcSprite.x - 60; // 60px à esquerda do centro do NPC
+      if (this.personagemSprite.x > limiteX) {
+        this.personagemSprite.x = limiteX;
+      }
+    }
 
     // Proximidade ao NPC: mostra indicador [E] e abre diálogo ao pressionar E
     if (this.npcSprite) {
