@@ -150,7 +150,7 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 <div align="center">
 <sub>Figura 2 - Análise SWOT - Cielo</sub>
-<img src="../../../src/assets/imagens/gdd/matriz_swot.png">
+<img src="/gdd_images/matriz_swot.png">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
