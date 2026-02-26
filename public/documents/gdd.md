@@ -149,9 +149,9 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 &emsp; A Figura 2 apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
 
 <div align="center">
-<sub>Figura 2 - Análise SWOT - Cielo</sub>
-<img src="/gdd_images/matriz_swot.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+  <sub>Figura 2 - Análise SWOT - Cielo</sub>
+  <img src="../gdd_images/matriz_swot.png">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 #### Forças (Strengths) 
