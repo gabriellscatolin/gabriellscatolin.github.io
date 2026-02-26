@@ -199,23 +199,23 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
-Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.([[10]](#ref10)) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
+Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.[10](#ref10) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
 
 **Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [9](#ref9)
 
 **Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
 
-**Valores:** Acessibilidade —garantir que o aprendizado esteja disponível para profissionais independentemente de sua localização ou condição.
+**Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. 
 
-Equidade — reduzir desigualdades no acesso à capacitação em vendas.
+Equidade e Acessibilidade: Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
 
-Inovação — utilizar tecnologia e gamificação para transformar a forma de aprender.
+Inovação e Gamificação: Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.
 
-Aprendizagem contínua — incentivar o desenvolvimento constante de habilidades profissionais.
+Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [2]
 
-Usabilidade e jogabilidade — priorizar uma experiência simples, intuitiva e envolvente.
+Foco na Experiência (UX/Gamer): Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
 
-Impacto social — contribuir para a formação profissional e geração de oportunidades.
+Impacto Social e Produtivo: Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [8]
 
 
 ### 1.1.4. Proposta de Valor (sprint 4)
