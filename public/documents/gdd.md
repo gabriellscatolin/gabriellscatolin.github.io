@@ -144,13 +144,13 @@ A Análise SWOT identifica forças, fraquezas, oportunidades e ameaças de uma o
 
 ![alt text](image.png)
 
-**Forças:** Portfólio de marcas fortes, diversificação de produtos, capital privado e investimentos em sustentabilidade.
+**Forças:** Alcance geográfico, produtos diferentes de acordo com o perfil do cliente, homologada com as principais bandeiras do mercado e tecnologia NFC (Cielo Tap).
 
-**Fraquezas:** Dependência de ingredientes específicos, necessidade de atualização tecnológica, desafios na gestão de franquias e fornecedores, e adaptação às novas demandas do consumidor.
+**Fraquezas:** Dependência do varejo físico, custos operacionais elevados, dificuldade de criar fidelidade com o cliente e necessidade de volume de vendas.
 
-**Oportunidades:** Expansão em mercados emergentes, aquisições estratégicas, adoção de tecnologias avançadas e crescimento do mercado pet.
+**Oportunidades:** Crescimento dos meios digitais (Pix, e-commerce), aumento do número de serviços de entrega (necessidade de mais maquininhas), marca consolidada e tecnologia NFC (Cielo Tap).
 
-**Ameaças:** Concorrência intensa, mudanças nas preferências dos consumidores, regulamentações mais rígidas, flutuações nos custos de matérias-primas, pressões ambientais e sociais, e dependência de fornecedores e cadeia de suprimentos global.
+**Ameaças:** Concorrência agressiva, fraudes envolvendo maquininha/cartão trazendo insegurança, novas tecnologias como blockchain e possíveis crises financeiras.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
