@@ -67,6 +67,14 @@ Figura 5 - Cenários dos estabelecimentos internamente
 
 &emsp; A Análise de 5 Forças de Porter é um framework utilizado para entender a competitividade que uma marca tem no mercado frente a agentes externos: a ameaça de novos entrantes no mercado, o poder de barganha dos seus fornecedores, o poder de barganha dos seus clientes, a ameaça de produtos substitutos e a rivalidade com seus concorrentes. [5](#ref5)
 
+&emsp; Sob essa perspectiva, observa-se na figura 1 a análise feita pelo grupo de forma personalizada buscando entender as possíveis adversidades no mercado, mostrando preparo e cuidado ao entender as necessidades do parceiro.
+
+<div align="center">
+<sub>Figura 1 - Análise de 5 Forças de Porter - Cielo</sub>
+<img src="../gdd_images/forças_porter.jpeg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 **Ameaça de Novos Entrantes**
 
 A ameaça de novos entrantes no setor de pagamentos e adquirência em que a Cielo atua é considerada moderada a baixa, devido à presença de barreiras estruturais, regulatórias e competitivas. As principais barreiras incluem:
@@ -186,15 +194,17 @@ Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do se
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
+&emsp; Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1][2] Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5][8] Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [3][6] Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
-Missão: Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos.
 
-Visão: Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
+**Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [9](#ref9)
 
-Valores: 
-Acessibilidade — garantir que o aprendizado esteja disponível para profissionais independentemente de sua localização ou condição.
+**Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
+
+**Valores:** Acessibilidade —garantir que o aprendizado esteja disponível para profissionais independentemente de sua localização ou condição.
 
 Equidade — reduzir desigualdades no acesso à capacitação em vendas.
 
@@ -206,9 +216,7 @@ Usabilidade e jogabilidade — priorizar uma experiência simples, intuitiva e e
 
 Impacto social — contribuir para a formação profissional e geração de oportunidades.
 
-Referências:
-Kotler, P.; Keller, K. Administração de Marketing.
-Sebrae (2022). Planejamento estratégico empresarial.
+
 ### 1.1.4. Proposta de Valor (sprint 4)
 
 *Posicione aqui o canvas de proposta de valor. Descreva os aspectos essenciais para a criação de valor da ideia do produto com o objetivo de ajudar a entender melhor a realidade do cliente e entregar uma solução que está alinhado com o que ele espera.*
@@ -567,8 +575,10 @@ VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. D
 Júnior, H. (2015). As cinco forças de porter e os fatores críticos de sucesso: Uma análise da tomada de decisões estratégicas na empresa Total Eletro em Pau dos Ferros-RN. Universidade do Estado do Rio Grande do Norte. Disponível em: https://www.uern.br/controledepaginas/2015-/arquivos/5018helder_viana_marinho_de_oliveira_janior.pdf. Acesso em: 26 fev. 2026.
 <br><a name="ref6">[6]:</a> Cielo. (s.d.). Como fazer análise SWOT. Blog Cielo. 
 https://blog.cielo.com.br/vender/como-fazer-analise-swot/ acesso em 26 fev. 2026
-<br><a name="ref7">[7]:</a> Exame. (2020, janeiro 27). O pior da guerra das maquininhas de fato passou para a Cielo? Exame. https://exame.com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/ Acesso em: 26 fevereiro 2026.
-
+<br><a name="ref7">[7]:</a> Exame. (2020, janeiro 27). O pior da guerra das maquininhas de fato passou para a Cielo? Exame. https://exame.<br><a name="ref8">[8]:</a>com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/ Acesso em: 26 fevereiro 2026.
+Exame. (2016, maio 3). Cielo vê concorrência mais agressiva e retração de clientes. Exame. https://exame.com/negocios/cielo-ve-concorrencia-mais-agressiva-e-retracao-de-clientes/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref9">[9]:</a>Kotler, P.; Keller, K. Administração de Marketing.
+Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 2026
 
 
 
