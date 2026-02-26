@@ -144,13 +144,13 @@ A Análise SWOT identifica forças, fraquezas, oportunidades e ameaças de uma o
 
 ![alt text](image.png)
 
-**Forças:** Presença em 99% do território nacional, marca consolidada e portfólio diversificado com maquininhas, antecipação de recebíveis e inteligência de dados (Blog Cielo, 2023).
+**Forças:** Portfólio de marcas fortes, diversificação de produtos, capital privado e investimentos em sustentabilidade.
 
-**Fraquezas:** Taxas percebidas como menos competitivas frente às fintechs e ciclos de inovação mais lentos devido à estrutura corporativa (UFRJ, 2018).
+**Fraquezas:** Dependência de ingredientes específicos, necessidade de atualização tecnológica, desafios na gestão de franquias e fornecedores, e adaptação às novas demandas do consumidor.
 
-**Oportunidades:** Digitalização do varejo, expansão do crédito para PMEs e crescimento dos pagamentos por aproximação (NFC) (Blog Cielo, 2023).
+**Oportunidades:** Expansão em mercados emergentes, aquisições estratégicas, adoção de tecnologias avançadas e crescimento do mercado pet.
 
-**Ameaças:** Concorrência de Stone, PagSeguro e Mercado Pago, além da adoção crescente do Pix como substituto às maquininhas (Banco Central do Brasil, 2023; UFRJ, 2018).
+**Ameaças:** Concorrência intensa, mudanças nas preferências dos consumidores, regulamentações mais rígidas, flutuações nos custos de matérias-primas, pressões ambientais e sociais, e dependência de fornecedores e cadeia de suprimentos global.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
