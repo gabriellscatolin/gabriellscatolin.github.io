@@ -305,7 +305,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 | # | Personagem | Classificação | Ilustração |
 |:-:|:----------:|:-------------:|:----------:|
-| 1 | Alícia  | Trabalha no mercado | <img src="../gdd_images/Alicia.jpg" width="80"> |
+| 1 | Alícia  | Trabalha no mercado | <img src="../gdd_images/Alicia.jpg" width="90"> |
 | 2 | Eduardo | Trabalha no salão de beleza | <img src="../gdd_images/Eduardo.jpg" width="80"> |
 | 3 | Lucas | Trabalha no restaurante de comida japonesa | <img src="../gdd_images/LucasBorten.jpg" width="80"> |
 | 4 | Gabriel | Trabalha em escritório | <img src="../gdd_images/gabriel.jpg" width="80"> |
