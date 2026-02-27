@@ -65,9 +65,10 @@ Figura 5 - Cenários dos estabelecimentos internamente
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-&emsp; A Análise de 5 Forças de Porter é um framework utilizado para entender a competitividade que uma marca tem no mercado frente a agentes externos: a ameaça de novos entrantes no mercado, o poder de barganha dos seus fornecedores, o poder de barganha dos seus clientes, a ameaça de produtos substitutos e a rivalidade com seus concorrentes. [5](#ref5)
+&emsp; A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[5](#ref5)
 
-&emsp; Sob essa perspectiva, observa-se na figura 1 a análise feita pelo grupo de forma personalizada buscando entender as possíveis adversidades no mercado, mostrando preparo e cuidado ao entender as necessidades do parceiro.
+&emsp;   Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
+
 
 <div align="center">
 <sub>Figura 1 - Análise de 5 Forças de Porter - Cielo</sub>
@@ -75,79 +76,11 @@ Figura 5 - Cenários dos estabelecimentos internamente
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-**Ameaça de Novos Entrantes**
-
-A ameaça de novos entrantes no setor de pagamentos e adquirência em que a Cielo atua é considerada moderada a baixa, devido à presença de barreiras estruturais, regulatórias e competitivas. As principais barreiras incluem:
-
-Regulação e compliance:
- A entrada no mercado exige autorização do Banco Central do Brasil, além do cumprimento de normas rigorosas de segurança, governança e compliance, tornando o processo complexo, custoso e demorado.
-Requisitos de capital e tecnologia:
- São necessários investimentos elevados em infraestrutura tecnológica, segurança da informação, sistemas de processamento de pagamentos e mão de obra altamente especializada.
-Escala operacional:
- Operar de forma competitiva requer grande volume de transações para diluição de custos, o que dificulta a entrada de novos players sem escala consolidada.
-
-Impacto Potencial:
- Apesar das barreiras, fintechs e soluções digitais inovadoras exercem pressão competitiva ao oferecer serviços mais flexíveis, integrados e de menor custo.
-
-**Ameaça de Produtos ou Serviços Substitutos**
-
-A ameaça de produtos ou serviços substitutos para a Cielo é considerada alta, devido à existência de alternativas que podem reduzir a dependência dos comerciantes das maquininhas tradicionais. Os principais substitutos incluem:
-
-Substitutos diretos:
- Empresas consolidadas do setor de adquirência, como Stone, PagSeguro, Rede e Getnet, oferecem soluções similares de processamento de pagamentos, competindo diretamente com os serviços da Cielo.
-
-Alternativas às maquininhas tradicionais:
- O Pix permite pagamentos instantâneos sem a necessidade de maquininhas, reduzindo custos para os comerciantes e aumentando sua adoção.
- Além disso, transações via criptomoedas surgem como uma alternativa emergente, eliminando intermediários e, em alguns casos, dispensando o uso de adquirentes.
-
-Impacto do Nível de Ameaça:
-    A crescente adoção de meios de pagamento digitais e instantâneos pressiona o modelo tradicional de adquirência, podendo reduzir volumes de transações e margens.
-
-
-**Análise do Poder de Barganha dos Clientes**
-
-A base de clientes da Cielo é composta por pequenos e médios comerciantes, grandes redes varejistas e negócios digitais.
-
-Pequenos e Médios Comerciantes:
-  Possuem alto poder de barganha devido à baixa barreira de saída e à alta sensibilidade a preços, o que pressiona a redução de taxas.
-
-Grandes Varejistas:
-  Exercem forte pressão por meio do alto volume transacionado, exigindo condições personalizadas que impactam as margens da empresa.
-
-Negócios Digitais:
- Demandam integração tecnológica e segurança, exigindo investimentos contínuos em inovação.
-Impacto na Indústria: O elevado poder de barganha dos clientes gera uma compressão das margens de lucro. A Cielo mitiga esse cenário utilizando sua infraestrutura robusta e portfólio de serviços integrados para elevar o custo de troca e reter os clientes.
-
-
-**Análise do Poder de Barganha dos Fornecedores**
-
-Os principais fornecedores da Cielo são as bandeiras de cartão (Visa, Mastercard, Elo), fabricantes de terminais POS (maquininhas), provedores de infraestrutura de nuvem e desenvolvedores de software de segurança.
-
-Bandeiras e Tecnologia Crítica:
- Possuem alto poder de barganha por definirem padrões mundiais e oferecerem tecnologias de difícil substituição, o que torna a Cielo dependente de suas regras e sistemas.
-
-Fornecedores de Insumos Padronizados: 
- Apresentam baixo poder de barganha, pois a Cielo utiliza plataformas de gestão e compras em escala para forçar a competitividade entre diferentes empresas de serviços
-
-Gestão de Fornecedores:
- A Cielo aplica códigos de conduta e auditorias de conformidade para reduzir riscos e evitar a dependência excessiva de parceiros específicos.
-
-Impacto na Indústria: O poder de barganha é moderado a relevante. Enquanto as bandeiras limitam a flexibilidade de custos, a Cielo mitiga esse impacto através de processos estratégicos de sourcing e automação, garantindo que fornecedores de menor complexidade não comprometam sua margem operacional.
-
-**Rivalidade entre Concorrentes Existentes**
-
-A rivalidade no setor de meios de pagamento eletrônicos no Brasil é considerada alta, com grandes competidores como PagSeguro, Stone, Mercado Pago, Rede, SafraPay, InfinitePay, SumUp, C6 Pay e SuperGet. Os principais fatores que intensificam essa rivalidade enfrentada pela Cielo incluem:
-
-Baixa diferenciação dos produtos:
- As empresas oferecem soluções funcionalmente semelhantes, como maquininhas de cartão, pagamentos digitais e integrações para e-commerce, reduzindo a diferenciação percebida pelos clientes.
-
-Competição por preço e condições comerciais:
- A disputa ocorre principalmente em torno de taxas cobradas, prazos de recebimento e custos de equipamentos, pressionando margens e tornando a concorrência mais agressiva.
-
-Baixo custo de troca e baixa fidelização:
- A ausência de contratos de exclusividade permite que comerciantes utilizem múltiplas maquininhas simultaneamente, aumentando o poder de escolha dos clientes e dificultando a retenção.
-
-Impacto da Rivalidade : A elevada rivalidade limita a rentabilidade média do setor e exige investimentos contínuos em inovação, tecnologia e diferenciação. Como resposta, as empresas buscam ampliar seus portfólios com serviços financeiros integrados, como antecipação de recebíveis, crédito e soluções de gestão, com o objetivo de aumentar o valor percebido e fortalecer a fidelização dos clientes.
+A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
+  Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa por definirem padrões e tecnologias essenciais. Contudo, a escala e a estrutura da Cielo permitem negociar condições estratégicas e reduzir impactos sobre suas margens.
+  Por outro lado, o poder de barganha dos clientes é elevado. Pequenos e médios comerciantes são sensíveis a preço, enquanto grandes varejistas negociam condições personalizadas devido ao alto volume transacionado. O baixo custo de troca entre adquirentes intensifica a pressão sobre taxas e margens, exigindo estratégias de fidelização e diferenciação.
+  A ameaça de produtos substitutos é alta, principalmente com o avanço do Pix e de pagamentos digitais instantâneos, que reduzem a dependência das maquininhas tradicionais. Além disso, concorrentes como Stone, PagSeguro, Rede e Getnet oferecem soluções similares, ampliando a competição direta.
+  Por fim, a rivalidade entre concorrentes é intensa, marcada por baixa diferenciação entre serviços, competição agressiva por taxas e prazos e baixa fidelização dos clientes. Esse cenário limita a rentabilidade média do setor e exige investimentos contínuos em inovação e serviços financeiros integrados.
 
 
 ### 1.1.2. Análise SWOT (sprint 2)
@@ -264,7 +197,11 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional.
+O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
+Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais.
+A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
+
 
 ### Perfil Demográfico e Profissional
 **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
