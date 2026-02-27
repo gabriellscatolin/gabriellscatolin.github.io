@@ -286,10 +286,10 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
-|  1  | Lucas Silva| <img src="./../assets/gdd/spriteRafael.png">  |
-|  2  | Maya Sato | <img src="./../assets/gdd/spriteRafaela.png"> |
-|  3  | Dandara Souza | <img src="./../assets/gdd/spriteRafael.png">  |
-|  4  |João Santos | <img src="./../assets/gdd/spriteRafael.png">  |
+|  1  | Lucas Silva| <img src="../gdd_images/spriteLucas.png">  |
+|  2  | Maya Sato | <img src="../gdd_images/spriteMaya.png"> |
+|  3  | Dandara Souza | <img src="../gdd_images/spriteDandara.png">  |
+|  4  |João Santos | <img src="../gdd_images/spriteJoao.png">  |
 
 *Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
 
@@ -311,6 +311,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 | 5 | Nicolas | Trabalha no posto de gasolina | <img src="../gdd_images/Nicolas.jpg" width="80"> |
 | 6 | Rachel | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="80"> |
 | 7 | Sofia | Trabalha na padaria | <img src="../gdd_images/sofia.jpg" width="80"> |
+| 8 | Vanessa | Tutora do usúario/ jogador | <img src="../gdd_images/Vanessa.png" width="80"> |
 
 </div> 
 
