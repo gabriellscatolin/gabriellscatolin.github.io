@@ -92,7 +92,7 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 <div align="center">
   <sub>Figura 2 - Análise SWOT - Cielo</sub>
-  <img src="../gdd_images/matriz_swot.png">
+  <img src="../gdd_images/matriz_swot.jpeg">
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -255,9 +255,11 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <img src="../gdd_images/StardewValley.jpg">
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg">
+<img src="../gdd_images/PokemonFireRed.jpg" width= "1000">
   <sup>TechTudo (2016)</sup>
 </div>
+
+
 
 
 O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
