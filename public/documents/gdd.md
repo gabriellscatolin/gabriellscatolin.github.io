@@ -264,7 +264,7 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11] No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional.
+O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional.
 
 ### Perfil Demográfico e Profissional
 **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
@@ -273,7 +273,7 @@ O público-alvo é definido como o extrato demográfico e profissional para o qu
 
 **Faixa Etária Média:** 44 anos (Perfil de adultos com experiência prévia em vendas ou transição de carreira).
 
-**Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [1]
+**Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [1](#ref1)
 
 **Distribuição Geográfica e Escala**
   O projeto visa atender uma demanda anual de aproximadamente 3.000 novos profissionais, caracterizando-se por uma alta dispersão geográfica que justifica a digitalização do treinamento.
@@ -344,13 +344,19 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
- A concepção do elenco fundamenta-se na senioridade e capilaridade nacional dos gerentes de vendas da Cielo (Seção 1.3), espelhando a pluralidade demográfica reportada pelo IBGE (Censo 2022). O grupo, com idade média de 44 anos, reflete a maturidade exigida pelo cargo de gestão. A escolha de nomes e sobrenomes frequentes no registro civil brasileiro (Santos, Oliveira, Souza) âncora os avatares na realidade cotidiana, evitando o distanciamento causado por nomes estrangeiros ou genéricos.
+A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na capilaridade nacional dos gerentes de negócios da companhia. A escolha das personagens Dandara, Gabriel, João Vitor e Maya foi estruturada para transpor a barreira do entretenimento, atuando como um instrumento de equidade pedagógica. [14](#ref14)
 
-**Adequação ao Público-Alvo:** O jogo apresenta estrita consonância com o perfil dos colaboradores. Ao utilizar avatares que ocupam a mesma faixa geracional e profissional dos jogadores, estabelece-se o pertencimento. Dandara, Gabriel, João Vitor e Maya não são apenas figuras estéticas; eles representam a diversidade regional (SP, PE, RS, BA) em que a Cielo atua. Isso garante que o treinamento corporativo seja percebido como uma extensão do ambiente de trabalho real, aumentando o engajamento através da identificação.
+1. **Embasamento na Realidade Brasileira**
+  As decisões de design estão ancoradas nos dados do Censo Demográfico 2022 (IBGE), que reporta uma população majoritariamente feminina e negra (pretos e pardos somam 55,5% dos brasileiros). [16](#ref16) Ao definir a idade média das personagens em 44 anos, o projeto espelha a maturidade profissional exigida pelo cargo de gestão na Cielo, enquanto a seleção de sobrenomes como "Santos" e "Souza" reflete a herança do registro civil nacional, gerando uma ancoragem realista e cotidiana. [13](#ref13)
 
-**Justificativa e Equidade:** As escolhas de design promovem a equidade ao descentralizar a liderança de um único perfil fenotípico. A inclusão de Dandara Santos (mulher negra, 44 anos) e João Vitor (homem negro, 45 anos) em cargos de gerência valida a presença de grupos historicamente sub-representados em postos de decisão. O projeto assegura que a autoridade no jogo seja distribuída de forma equânime entre gêneros e raças, reforçando o compromisso da marca com uma cultura corporativa inclusiva.
+2. **Adequação ao Público-Alvo**
+  Conforme detalhado na Seção 1.3, o público-alvo é composto por adultos distribuídos por todo o território nacional. O jogo promove a representatividade ao apresentar avatares que ocupam a mesma faixa geracional e profissional dos usuários. Essa simetria entre jogador e personagem estabelece o pertencimento, transformando o treinamento corporativo em uma extensão do ambiente de trabalho real, o que potencializa o engajamento e a retenção do conteúdo.
 
-**Inovação na Representatividade:** A inovação deste projeto reside na desconstrução de estereótipos regionais e étnicos. Ao posicionar João Vitor, um homem negro, como representante de Pelotas (RS), e Maya Souza, uma mulher branca, representando Salvador (BA), o jogo desafia o viés inconsciente que tende a homogeneizar a população de certas regiões. Essa escolha demonstra criatividade ao celebrar a miscigenação real e a mobilidade profissional dentro do território brasileiro, oferecendo uma representação mais sofisticada e menos caricata do que a mídia tradicional costuma apresentar.
+3. **Justificativa de Equidade**
+  O projeto promove a equidade ao descentralizar a liderança de um único perfil hegemônico. A inclusão de Dandara Santos (mulher negra) e João Vitor (homem negro) em postos de gerência sênior atua na validação de grupos historicamente sub-representados em espaços de decisão. A autoridade dentro da narrativa do jogo é distribuída de forma equânime, reforçando o compromisso da Cielo com uma cultura inclusiva e o cumprimento de metas de ESG (Social). [12](#ref12)
+
+4. **Inovação e Criatividade**
+  A inovação reside na desconstrução de estereótipos regionais através da técnica de subversão de vieses inconscientes. [15] Ao posicionar João Vitor como representante de Pelotas (RS) e Maya Souza como representante de Salvador (BA), o jogo desafia a homogeneização geográfica. Essa solução criativa celebra a miscigenação e a mobilidade profissional real do Brasil, oferecendo uma representação sofisticada que evita caricaturas e estimula o pensamento crítico sobre diversidade no ambiente corporativo.
 
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
@@ -597,8 +603,10 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref10">[10]:</a> Corrales, J. A. (2019, maio 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content - BR; Rock Content. https://rockcontent.com/br/blog/missao-e-visao
 <br><a name="ref11">[11]:</a>Desidério, M. (2017, agosto 14). 5 dicas essenciais para definir o público-alvo do seu negócio. Exame. https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/ Acesso em: 26 fevereiro 2026.
 <br><a name="ref12">[12]:</a>Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae). (s.d.). ESG: o que é e qual é a importância? Saiba aqui! https://sebrae.com.br/sites/PortalSebrae/ufs/pe/artigos/esg-o-que-e-e-qual-e-a-importancia-saiba-aqui,4ef39fd767ede710VgnVCM100000d701210aRCRD Acesso em: 26 fevereiro 2026.
-
-
+<br><a name="ref13">[13]:</a>Souza, B. (2025, novembro 4). IBGE revela nomes e sobrenomes mais populares do Brasil; veja ranking. CNN Brasil. https://www.cnnbrasil.com.br/nacional/brasil/ibge-revela-nomes-e-sobrenomes-mais-populares-do-brasil-veja-ranking/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref14">[14]:</a>Instituto Claro. (2022, agosto 26). Construção de identidade: a importância da representatividade. Instituto Claro. https://www.institutoclaro.org.br/educacao/para-ensinar/planos-de-aula/construcao-de-identidade-a-importancia-da-representatividade/ Acesso em: 26 fevereiro 2026
+<br><a name="ref15">[15]:</a>Avelino, D. (2023, abril 20). Como os vieses inconscientes impactam a diversidade nas empresas. StartSe. https://www.startse.com/artigos/vies-inconsciente-nas-empresas/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref16">[16]:</a>nstituto Brasileiro de Geografia e Estatística (IBGE). (2023, dezembro 22). Censo 2022: pela primeira vez desde 1991 a maior parte da população do Brasil se declara parda. Agência IBGE Notícias. https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/38719-censo-2022-pela-primeira-vez-desde-1991-a-maior-parte-da-populacao-do-brasil-se-declara-parda Acesso em: 26 fevereiro 2026.
 
 
 
