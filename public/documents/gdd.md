@@ -67,9 +67,8 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-&emsp;A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[5](#ref5)
-
-&emsp;Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
+<br>&emsp;A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[5](#ref5)
+<br>&emsp;Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
 
 
 <div align="center">
@@ -78,16 +77,11 @@ Figura 6 - Página 1 do Diagrama de Cenas
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
-
-&emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa por definirem padrões e tecnologias essenciais. Contudo, a escala e a estrutura da Cielo permitem negociar condições estratégicas e reduzir impactos sobre suas margens. [18](#ref18)
-
-&emsp;Por outro lado, o poder de barganha dos clientes é elevado. Pequenos e médios comerciantes são sensíveis a preço, enquanto grandes varejistas negociam condições personalizadas devido ao alto volume transacionado. O baixo custo de troca entre adquirentes intensifica a pressão sobre taxas e margens, exigindo estratégias de fidelização e diferenciação.
-
-&emsp;A ameaça de produtos substitutos é alta, impulsionada por tecnologias que dispensam o uso do arranjo de cartões tradicionais, como o Pix, pagamentos via QR Code direto entre contas e o uso emergente de criptomoedas. Esses substitutos reduzem a dependência das maquininhas e alteram a dinâmica de receita da indústria.
-
-&emsp;Por fim, a rivalidade no setor é intensificada pela presença de players robustos como Stone, PagSeguro e Rede, que disputam agressivamente a mesma base de clientes por meio de guerra de taxas e antecipação de recebíveis. Esse cenário limita a rentabilidade média do setor e exige investimentos contínuos em inovação e serviços financeiros integrados. 
-
+<br>&emsp;No que se refere à ameaça de novos entrantes, ela é considerada alta no segmento de adquirência e, sobretudo, de subadquirência. O avanço tecnológico, a digitalização dos pagamentos e a relativa facilidade regulatória para determinados modelos de negócio reduzem barreiras de entrada, permitindo o surgimento constante de fintechs, gateways e plataformas digitais. Esse cenário pressiona empresas consolidadas. Entretanto, a Cielo mantém vantagens estruturais relevantes, como o forte suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em inovação, segurança e tecnologia. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
+<br>&emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa ao definirem padrões operacionais e tecnológicos indispensáveis ao funcionamento do sistema de pagamentos. Contudo, devido à sua escala, relevância de mercado e estrutura consolidada, a Cielo possui capacidade de negociação que mitiga parte desse poder e preserva sua competitividade.
+<br>&emsp;O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores demonstram alta sensibilidade a preço e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao volume transacionado. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas, exigindo estratégias de fidelização, oferta de serviços agregados e diferenciação por meio de soluções financeiras integradas.
+<br>&emsp;A ameaça de produtos substitutos também é alta. Soluções como Pix, transferências diretas via QR Code, carteiras digitais e novas infraestruturas de pagamento reduzem a dependência do arranjo tradicional de cartões e impactam diretamente as receitas provenientes das maquininhas. A adaptação estratégica a essas tecnologias torna-se, portanto, essencial para manutenção da relevância no mercado.
+<br>&emsp;Por fim, a rivalidade entre concorrentes existentes é intensa. A disputa ocorre principalmente entre adquirentes e subadquirentes como Stone, PagSeguro e Rede, que competem agressivamente por meio de diferenciação tecnológica, guerra de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis e crédito. Além disso, portais de pagamento e cooperativas ampliam a competição no ecossistema. Esse ambiente pressiona margens e exige inovação contínua, eficiência operacional e fortalecimento do relacionamento com clientes.
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
@@ -134,9 +128,7 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
- &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
-
- &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+ &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
@@ -205,11 +197,11 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-&emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. 
-
-&emsp;Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho. Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
-
-&emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
+<br>&emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
+<br>&emsp;O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+<br>&emsp;Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
+<br>&emsp;Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
+<br>&emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
 
 ### Perfil Demográfico e Profissional
 **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
@@ -240,7 +232,6 @@ A transição dos jogos físicos presenciais para o Mini Mundo Cielo representa 
 
 ### 2.2.1. Gênero do Jogo (sprint 2)
 &emsp;O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [20](#ref20) com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [4]
-
 &emsp;A experiência mergulha o jogador em uma jornada interativa onde a progressão é pautada por missões de campo e tomada de decisão em tempo real. Cada fase funciona como um laboratório seguro para testar habilidades de negociação, resolução de problemas e domínio técnico do portfólio de produtos, transformando o onboarding em um processo dinâmico e envolvente.
 ### 2.2.2. Plataforma do Jogo (sprint 2)
 
@@ -263,21 +254,17 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <sub>Figura 4 - Stardew Valley</sub><br/>
 <img src="../gdd_images/StardewValley.jpg">
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
-
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width="1000">
+<img src="../gdd_images/PokemonFireRed.jpg">
   <sup>TechTudo (2016)</sup>
 </div>
 
 
-
 O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
-
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
-&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases.
-
+&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases. 
 &emsp;Ressalta-se que essa estimativa será validada por meio de testes com o público-alvo, que permitirão avaliar o tempo real de conclusão, identificar possíveis ajustes de ritmo e refinar a duração total da experiência conforme o comportamento dos jogadores.
 
 # <a name="c3"></a>3. Game Design (sprints 2 e 3)
@@ -286,7 +273,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 &emsp;O jogador assume o papel de um novo gerente de vendas que inicia sua jornada profissional em uma empresa de tecnologia de pagamentos localizada no centro da cidade. Em seu primeiro dia, ele precisa explorar o ambiente, conhecer diferentes estabelecimentos e interagir com personagens que representam clientes reais do cotidiano comercial.
 
-&emsp;Ao longo da experiência, o jogador recebe missões que simulam situações de atendimento, negociação e resolução de problemas, enfrentando desafios progressivamente mais complexos. Cada interação contribui para o desenvolvimento de competências essenciais, como comunicação com clientes, identificação de necessidades e tomada de decisão em contextos de vendas.
+ &emsp;Ao longo da experiência, o jogador recebe missões que simulam situações de atendimento, negociação e resolução de problemas, enfrentando desafios progressivamente mais complexos. Cada interação contribui para o desenvolvimento de competências essenciais, como comunicação com clientes, identificação de necessidades e tomada de decisão em contextos de vendas.
 
  &emsp;A progressão narrativa acompanha a evolução profissional do personagem, que passa de iniciante a especialista, desbloqueando novas áreas da cidade, novos tipos de clientes e desafios mais estratégicos. Dessa forma, a narrativa funciona como um fio condutor para a aprendizagem, contextualizando as atividades do jogo em situações próximas da realidade do mercado.
 
@@ -295,23 +282,25 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 ### 3.2.1. Controláveis
 
 <div align="center">
-
-**tabela 2 - Personagens**
+<sub>Quadro 2 - Personagens</sub>
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
-|  1  | Lucas Silva| <img src="../gdd_images/lucasBoneco.jpg">  |
-|  2  | Maya Sato | <img src="../gdd_images/mayaBoneco.jpg"> |
-|  3  | Dandara Souza | <img src="../gdd_images/dandaraBoneco.jpg">  |
-|  4  |João Santos | <img src="../gdd_images/joãoBoneco.jpg">  |
+|  1  | Lucas Silva| <img src="../gdd_images/spriteLucas.png">  |
+|  2  | Maya Sato | <img src="../gdd_images/spriteMaya.png"> |
+|  3  | Dandara Souza | <img src="../gdd_images/spriteDandara.png">  |
+|  4  |João Santos | <img src="../gdd_images/spriteJoao.png">  |
 
+*Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
+
+*Caso não existam personagens (ex. jogo Tetris), mencione os motivos de não existirem e como o jogador pode interpretar tal fato.*
 
 ### 3.2.2. Non-Playable Characters (NPC)
 &emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
 
 <div align="center">
 
-**tabela 3 — Lista de NPCs**
+**Quadro 5 — Lista de NPCs**
 
 | # | Personagem | Classificação | Ilustração |
 |:-:|:----------:|:-------------:|:----------:|
@@ -322,6 +311,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 | 5 | Nicolas | Trabalha no posto de gasolina | <img src="../gdd_images/Nicolas.jpg" width="80"> |
 | 6 | Rachel | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="80"> |
 | 7 | Sofia | Trabalha na padaria | <img src="../gdd_images/sofia.jpg" width="80"> |
+| 8 | Vanessa | Tutora do usúario/ jogador | <img src="../gdd_images/Vanessa.png" width="80"> |
 
 </div> 
 
@@ -362,18 +352,9 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 &emsp; Traduzindo "concept art", chegamos a, literalmente, "arte de conceito". Nesse sentido, fazer uma concept art é criar ilustrações simples que conseguem passar a essência e identidade de algum projeto visual como, por exemplo, desenhos animados e jogos digitais.
 &emsp; Após a consolidação do enredo, iniciamos o desenho dos personagens e o level design de cada um dos módulos:
 
-<div align="center">
-<sub>Figura 7 - Primeiro conceito do jogo</sub>
-<img src="../gdd_images/Concept1.jpeg">
-<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
-</div>
+<img src="../assets/concept1.jpg">
 
-<div align="center">
-<sub>Figura 8- Definição da rota do jogo</sub>
-<img src="../gdd_images/rota.jpeg">
-<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
-</div>
-
+Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
@@ -511,11 +492,162 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
-&emsp;Na Sprint 2 foi desenvolvida a versão inicial do jogo, incluindo a criação da cutscene de introdução, organização das primeiras cenas e implementação das bases de movimentação do personagem. Também foram estruturados os primeiros assets e elementos visuais que compõem a ambientação do projeto.
+&emsp;No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
 
-&emsp;Em termos de código, foram implementados os sistemas iniciais de cena, carregamento de assets e controle de navegação, estabelecendo a base técnica necessária para a evolução do jogo. Foram realizados testes de funcionamento das interações básicas e da transição entre telas.
+&emsp;Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
 
-&emsp;Como principal dificuldade, destaca-se a organização da estrutura do projeto e a integração entre cenas e elementos visuais. Como próximos passos, pretende-se desenvolver o mapa principal do jogo, que ainda não foi implementado, permitindo a inserção dos NPCs, das missões e da progressão entre fases.
+&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. Apesar dos desafios, todas as dificuldades foram superadas e o trabalho foi concluído com sucesso.
+
+Figura 28 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
+
+```js
+this.CONFIG = {
+  PIXELATE_AMOUNT: 40,
+  PIXELATE_DURATION: 800,
+  BOTOES: [
+    { key: "botaoJogar",    x: "center", y: 600, scale: 0.5,  action: "startGame"    },
+    { key: "botaoConfig",   x: "center", y: 870, scale: 0.48, action: "openSettings" },
+    { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo"   }
+  ]
+};
+```
+
+&emsp;Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
+
+```js
+btn.on("pointerover", () => btn.setScale(botao.scale * 1.07));
+btn.on("pointerout",  () => btn.setScale(botao.scale));
+
+startGame() {
+  const pixelated = this.cameras.main.postFX.addPixelate(1);
+  this.add.tween({
+    targets: pixelated, amount: this.CONFIG.PIXELATE_AMOUNT,
+    duration: this.CONFIG.PIXELATE_DURATION, ease: "Sine.easeIn",
+    onComplete: () => { this.scene.start("ScenePersonagem"); }
+  });
+}
+```
+
+Figura 29 - Tela de seleção de personagens &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
+
+```js
+this.listaPersonagens = [
+  { id: "Gabriel", x: 300,  y: 700, escala: 0.42, prefixoArquivo: "HB" },
+  { id: "Maya",    x: 730,  y: 700, escala: 0.42, prefixoArquivo: "ML" },
+  { id: "Joao",    x: 1170, y: 700, escala: 0.42, prefixoArquivo: "HM" },
+  { id: "Dandara", x: 1600, y: 700, escala: 0.42, prefixoArquivo: "MM" }
+];
+
+// Ao clicar, realiza fade out e inicia SceneJogo com os dados do personagem
+this.scene.start("SceneJogo", { nomePasta: dados.id, prefixo: dados.prefixoArquivo });
+```
+
+&emsp;No arquivo `SceneJogo.js`, foram criadas as variáveis de estado que controlam todas as interações da cena, e os 16 frames do personagem (4 direções × 4 frames) são carregados dinamicamente no `preload()` com base no personagem recebido:
+
+```js
+this.podeMover       = false; // Bloqueado até fechar o tutorial
+this.dialogoNpcAberto = false;
+this.npcPartiu        = false;
+this.transicaoAtiva   = false;
+
+for (let i = 1; i <= 4; i++) {
+  this.load.image(`sprite_frente_${i}`,  `${caminhoBase}/${pre}_frente_${i}.png`);
+  this.load.image(`sprite_direita_${i}`, `${caminhoBase}/${pre}_direita_${i}.png`);
+  // ... demais direções
+}
+```
+
+&emsp;Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
+
+
+```js
+criarAnimacoes() {
+  ['frente', 'tras', 'direita', 'esquerda'].forEach(dir => {
+    this.anims.create({
+      key: `andar_${dir}`,
+      frames: [{ key: `sprite_${dir}_1` }, { key: `sprite_${dir}_2` },
+               { key: `sprite_${dir}_3` }, { key: `sprite_${dir}_4` }],
+      frameRate: 8,
+      repeat: -1
+    });
+  });
+}
+```
+
+&emsp;Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
+
+```js
+update() {
+  corpoFisico.setVelocity(0);
+  if (this.teclasControl.d.isDown) {
+    corpoFisico.setVelocityX(this.velocidadePersonagem);
+    this.personagemSprite.anims.play("andar_direita", true);
+    estaAndando = true;
+  }
+  // ... demais direções
+
+  if (!estaAndando) { this.personagemSprite.anims.pause(); }
+  else              { this.personagemSprite.anims.resume(); }
+
+  this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
+  this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+}
+```
+
+&emsp;Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
+
+```js
+// Colisão — impede o jogador de passar pelo NPC
+const limiteX = this.npcSprite.x - 60;
+if (this.personagemSprite.x > limiteX) this.personagemSprite.x = limiteX;
+
+// Proximidade e interação
+const distNpc = Phaser.Math.Distance.Between(/* player e npc */);
+this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
+
+if (distNpc < 150 && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  this.dialogoNpcAberto = true;
+  this.mostrarDialogoObjetivo(); // Abre diálogo com efeito typewriter
+}
+```
+
+Figura 30 - Cena de gameplay com o NPC Vanessa na ponte &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
+
+```js
+iniciarClockWipe() {
+  const maskGraphics = this.make.graphics();
+  this.cameras.main.setMask(maskGraphics.createGeometryMask());
+
+  this.tweens.add({
+    targets: { progress: 0 }, progress: 1, duration: 1000, ease: "Sine.easeInOut",
+    onUpdate: (tween) => {
+      const startAngle = -Math.PI / 2 + tween.getValue() * Math.PI * 2;
+      maskGraphics.clear();
+      maskGraphics.arc(cx, cy, raio, startAngle, -Math.PI / 2 + Math.PI * 2, false);
+      maskGraphics.fillPath();
+    },
+    onComplete: () => { this.scene.start("SceneCutscene"); }
+  });
+}
+```
+
+Dificuldades
+
+- Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações
+- Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X
+- Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento
+
+Próximos passos
+
+- Criar o mapa interno dos estabelecimentos para a fase seguinte
+- Adicionar os puzzles e desafios de vendas do jogo
+- Implementar mais NPCs com diálogos e interações variadas
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
@@ -615,6 +747,15 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
 <br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
+
+
+
+
+LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>
+SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>
+
+INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
+SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
 
 # <a name="c8"></a>Anexos
 
