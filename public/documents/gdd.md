@@ -256,7 +256,7 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <img src="../gdd_images/StardewValley.jpg">
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg">
+<img src="../gdd_images/PokemonFireRed.jpg" width="200">
   <sup>TechTudo (2016)</sup>
 </div>
 
@@ -287,10 +287,10 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
-|  1  | Lucas Silva| <img src="./../assets/gdd/spriteRafael.png">  |
-|  2  | Maya Sato | <img src="./../assets/gdd/spriteRafaela.png"> |
-|  3  | Dandara Souza | <img src="./../assets/gdd/spriteRafael.png">  |
-|  4  |João Santos | <img src="./../assets/gdd/spriteRafael.png">  |
+|  1  | Lucas Silva| <img src="../gdd_images/lucasBoneco.jpg">  |
+|  2  | Maya Sato | <img src="../gdd_images/mayaBoneco.jpg"> |
+|  3  | Dandara Souza | <img src="../gdd_images/dandaraBoneco.jpg">  |
+|  4  |João Santos | <img src="../gdd_images/joãoBoneco.jpg">  |
 
 *Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
 
@@ -352,9 +352,18 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 &emsp; Traduzindo "concept art", chegamos a, literalmente, "arte de conceito". Nesse sentido, fazer uma concept art é criar ilustrações simples que conseguem passar a essência e identidade de algum projeto visual como, por exemplo, desenhos animados e jogos digitais.
 &emsp; Após a consolidação do enredo, iniciamos o desenho dos personagens e o level design de cada um dos módulos:
 
-<img src="../assets/concept1.jpg">
+<div align="center">
+<sub>Figura 7 - Primeiro conceito do jogo</sub>
+<img src="../gdd_images/Concept1.jpeg">
+<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
+<div align="center">
+<sub>Figura 8- Definição da rota do jogo</sub>
+<img src="../gdd_images/rota.jpeg">
+<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
@@ -596,15 +605,6 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
 <br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
-
-
-
-
-LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>
-SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>
-
-INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
-SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
 
 # <a name="c8"></a>Anexos
 
