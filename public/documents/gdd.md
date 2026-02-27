@@ -78,10 +78,14 @@ Figura 6 - Página 1 do Diagrama de Cenas
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
+&emsp;A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
+
 &emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa por definirem padrões e tecnologias essenciais. Contudo, a escala e a estrutura da Cielo permitem negociar condições estratégicas e reduzir impactos sobre suas margens. [18](#ref18)
+
 &emsp;Por outro lado, o poder de barganha dos clientes é elevado. Pequenos e médios comerciantes são sensíveis a preço, enquanto grandes varejistas negociam condições personalizadas devido ao alto volume transacionado. O baixo custo de troca entre adquirentes intensifica a pressão sobre taxas e margens, exigindo estratégias de fidelização e diferenciação.
+
 &emsp;A ameaça de produtos substitutos é alta, impulsionada por tecnologias que dispensam o uso do arranjo de cartões tradicionais, como o Pix, pagamentos via QR Code direto entre contas e o uso emergente de criptomoedas. Esses substitutos reduzem a dependência das maquininhas e alteram a dinâmica de receita da indústria.
+
 &emsp;Por fim, a rivalidade no setor é intensificada pela presença de players robustos como Stone, PagSeguro e Rede, que disputam agressivamente a mesma base de clientes por meio de guerra de taxas e antecipação de recebíveis. Esse cenário limita a rentabilidade média do setor e exige investimentos contínuos em inovação e serviços financeiros integrados. 
 
 
@@ -130,7 +134,9 @@ A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é m
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
- &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+ &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
+
+ &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
@@ -257,14 +263,16 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <sub>Figura 4 - Stardew Valley</sub><br/>
 <img src="../gdd_images/StardewValley.jpg">
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
+
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width="600">
+<img src="../gdd_images/PokemonFireRed.jpg" width="800">
   <sup>TechTudo (2016)</sup>
 </div>
 
 
 
 O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
+
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
