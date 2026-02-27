@@ -298,19 +298,22 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 ### 3.2.2. Non-Playable Characters (NPC)
 &emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
-<div align="center">
-<sub>Quadro 5 - Lista de NPCs</sub>
-</div>
 
-| # | Personagens | Classificação | Ilustração | Descrição |
-|:-:|:----------:|:-------------:|:----------:|:---------:|
-| 1 | Alícia     | Trabalha no mercado | <img src="../gdd_images/Alicia.jpg" width="70"> | M |
-| 2 | Eduardo    | Trabalha no salão de beleza | <img src="../gdd_images/Eduardo.jpg" width="70"> |  |
-| 3 | Lucas      | Trabalha no restaurante de comida japonesa | <img src="../gdd_images/LucasBorten.jpg" width="70"> |  |
-| 4 | Gabriel    | Trabalha em escritório | <img src="../gdd_images/gabriel.jpg" width="70"> |  |
-| 5 | Nicolas    | Trabalha no posto de gasolina | <img src="../gdd_images/Nicolas.jpg" width="70"> |  |
-| 6 | Rachel     | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="70"> |  |
-| 7 | Sofia      | Trabalha na padaria | <img src="../gdd_images/sofia.jpg" width="70"> |  |     
+<div align="center">
+
+**Quadro 5 — Lista de NPCs**
+
+| # | Personagem | Classificação | Ilustração |
+|:-:|:----------:|:-------------:|:----------:|
+| 1 | Alícia  | Trabalha no mercado | <img src="../gdd_images/Alicia.jpg" width="80"> |
+| 2 | Eduardo | Trabalha no salão de beleza | <img src="../gdd_images/Eduardo.jpg" width="80"> |
+| 3 | Lucas | Trabalha no restaurante de comida japonesa | <img src="../gdd_images/LucasBorten.jpg" width="80"> |
+| 4 | Gabriel | Trabalha em escritório | <img src="../gdd_images/gabriel.jpg" width="80"> |
+| 5 | Nicolas | Trabalha no posto de gasolina | <img src="../gdd_images/Nicolas.jpg" width="80"> |
+| 6 | Rachel | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="80"> |
+| 7 | Sofia | Trabalha na padaria | <img src="../gdd_images/sofia.jpg" width="80"> |
+
+</div> 
 
 
 
