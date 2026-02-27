@@ -67,9 +67,8 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-&emsp;A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[5](#ref5)
-
-&emsp;Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
+<br>&emsp;A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[5](#ref5)
+<br>&emsp;Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
 
 
 <div align="center">
@@ -78,16 +77,11 @@ Figura 6 - Página 1 do Diagrama de Cenas
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
-&emsp;
-Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa por definirem padrões e tecnologias essenciais. Contudo, a escala e a estrutura da Cielo permitem negociar condições estratégicas e reduzir impactos sobre suas margens. [18](#ref18)
-&emsp;
-Por outro lado, o poder de barganha dos clientes é elevado. Pequenos e médios comerciantes são sensíveis a preço, enquanto grandes varejistas negociam condições personalizadas devido ao alto volume transacionado. O baixo custo de troca entre adquirentes intensifica a pressão sobre taxas e margens, exigindo estratégias de fidelização e diferenciação.
-&emsp;
-A ameaça de produtos substitutos é alta, impulsionada por tecnologias que dispensam o uso do arranjo de cartões tradicionais, como o Pix, pagamentos via QR Code direto entre contas e o uso emergente de criptomoedas. Esses substitutos reduzem a dependência das maquininhas e alteram a dinâmica de receita da indústria.
-&emsp;
-Por fim, a rivalidade no setor é intensificada pela presença de players robustos como Stone, PagSeguro e Rede, que disputam agressivamente a mesma base de clientes por meio de guerra de taxas e antecipação de recebíveis. Esse cenário limita a rentabilidade média do setor e exige investimentos contínuos em inovação e serviços financeiros integrados. 
-
+<br>&emsp;No que se refere à ameaça de novos entrantes, ela é considerada alta no segmento de adquirência e, sobretudo, de subadquirência. O avanço tecnológico, a digitalização dos pagamentos e a relativa facilidade regulatória para determinados modelos de negócio reduzem barreiras de entrada, permitindo o surgimento constante de fintechs, gateways e plataformas digitais. Esse cenário pressiona empresas consolidadas. Entretanto, a Cielo mantém vantagens estruturais relevantes, como o forte suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em inovação, segurança e tecnologia. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
+<br>&emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa ao definirem padrões operacionais e tecnológicos indispensáveis ao funcionamento do sistema de pagamentos. Contudo, devido à sua escala, relevância de mercado e estrutura consolidada, a Cielo possui capacidade de negociação que mitiga parte desse poder e preserva sua competitividade.
+<br>&emsp;O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores demonstram alta sensibilidade a preço e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao volume transacionado. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas, exigindo estratégias de fidelização, oferta de serviços agregados e diferenciação por meio de soluções financeiras integradas.
+<br>&emsp;A ameaça de produtos substitutos também é alta. Soluções como Pix, transferências diretas via QR Code, carteiras digitais e novas infraestruturas de pagamento reduzem a dependência do arranjo tradicional de cartões e impactam diretamente as receitas provenientes das maquininhas. A adaptação estratégica a essas tecnologias torna-se, portanto, essencial para manutenção da relevância no mercado.
+<br>&emsp;Por fim, a rivalidade entre concorrentes existentes é intensa. A disputa ocorre principalmente entre adquirentes e subadquirentes como Stone, PagSeguro e Rede, que competem agressivamente por meio de diferenciação tecnológica, guerra de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis e crédito. Além disso, portais de pagamento e cooperativas ampliam a competição no ecossistema. Esse ambiente pressiona margens e exige inovação contínua, eficiência operacional e fortalecimento do relacionamento com clientes.
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
@@ -203,15 +197,11 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-&emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. 
-&emsp;
-Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
-
-Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
-
-Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
-&emsp;
-A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
+<br>&emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
+<br>&emsp;O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+<br>&emsp;Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
+<br>&emsp;Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
+<br>&emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
 
 ### Perfil Demográfico e Profissional
 **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
