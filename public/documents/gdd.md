@@ -303,9 +303,9 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 | \#  |     Personagens      | Classificação |                           Ilustração                           |                                                                                                                                Descrição                                                                                                                                 |
 | :-: | :------------------: | :-----------: | :---: | :------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|  1  |   Alícia  |  Trabalha no mercado |      <img src="../gdd_images/Alicia.jpg" width:"50">   |                   M                        |
-|  2  | Eduardo |     Trabalha no salão de beleza    |<img src="../gdd_images/Eduardo.jpg" width:"100g"> |  |
-|  3  |  Lucas  |   Trabalha no restaurante de comida japonesa   | <img src="../gdd_images/LucasBorten.jpg"  width:"20">  |         
+|  1  |   Alícia  |  Trabalha no mercado |      <img src="../gdd_images/Alicia.jpg" width="50">   |                   M                        |
+|  2  | Eduardo |     Trabalha no salão de beleza    |<img src="../gdd_images/Eduardo.jpg" width="100"> |  |
+|  3  |  Lucas  |   Trabalha no restaurante de comida japonesa   | <img src="../gdd_images/LucasBorten.jpg"  width="20">  |         
 |  4  |   Gabriel|   Trabalha em escritório   |      <img src="../gdd_images/gabriel.jpg"style="width:200px">   |                                   |
 |  5 |    Nicolas  |  Trabalha no posto de gasolina  |      <img src="../gdd_images/Nicolas.jpg" style="width:10px">   |                  
 |  6  |    Rachel   |  Trabalha na farmácia   |     <img src="../gdd_images/Rachel.jpg" style="width:300px">   |              
