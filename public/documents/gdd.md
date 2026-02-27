@@ -307,7 +307,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 |:-:|:----------:|:-------------:|:----------:|
 | 1 | Alícia  | Trabalha no mercado | <img src="../gdd_images/Alicia.jpg" width="90"> |
 | 2 | Eduardo | Trabalha no salão de beleza | <img src="../gdd_images/Eduardo.jpg" width="80"> |
-| 3 | Lucas | Trabalha no restaurante de comida japonesa | <img src="../gdd_images/LucasBorten.jpg" width="80"> |
+| 3 | Lucas | Trabalha no restaurante de comida japonesa | <img src="../gdd_images/LucasBorten.jpg" width="90"> |
 | 4 | Gabriel | Trabalha em escritório | <img src="../gdd_images/gabriel.jpg" width="80"> |
 | 5 | Nicolas | Trabalha no posto de gasolina | <img src="../gdd_images/Nicolas.jpg" width="80"> |
 | 6 | Rachel | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="80"> |
@@ -341,13 +341,16 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 
 ### 3.3.3. Condições climáticas e temporais (sprints 2 e 3)
 
-*\<opcional\> Descreva diferentes condições de clima que podem afetar o mundo e as fases, se aplicável*
+&emsp; O jogo apresenta variações leves de condições temporais e ambientais com o objetivo de enriquecer a ambientação e a sensação de progressão ao longo da experiência. As fases podem ocorrer em diferentes períodos do dia, como manhã, tarde e noite, refletindo a rotina comercial dos estabelecimentos e contribuindo para a contextualização das interações com os NPCs.
 
-*Caso seja relevante, descreva como o tempo passa, se ele é um fator limitante ao jogo (ex. contagem de tempo para terminar uma fase)*
+&emsp; As condições climáticas possuem caráter principalmente estético, podendo incluir variações visuais como dias ensolarados ou nublados, sem impactar diretamente as mecânicas principais de gameplay. Essas mudanças auxiliam na imersão do jogador e na diferenciação visual entre fases e áreas do mapa.
+
+&emsp; O tempo não atua como um fator limitante rígido para a conclusão das atividades. Cada missão foi projetada para ser realizada no ritmo do jogador, embora algumas tarefas possam sugerir objetivos de duração estimada para fins de organização e acompanhamento do progresso.
 
 ### 3.3.4. Concept Art (sprint 2)
 
-*Inclua imagens de Concept Art do jogo que ainda não foram demonstradas em outras seções deste documento. Para cada imagem, coloque legendas, como no exemplo abaixo.*
+&emsp; Traduzindo "concept art", chegamos a, literalmente, "arte de conceito". Nesse sentido, fazer uma concept art é criar ilustrações simples que conseguem passar a essência e identidade de algum projeto visual como, por exemplo, desenhos animados e jogos digitais.
+&emsp; Após a consolidação do enredo, iniciamos o desenho dos personagens e o level design de cada um dos módulos:
 
 <img src="../assets/concept1.jpg">
 
@@ -489,7 +492,11 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
-*Descreva e ilustre aqui o desenvolvimento da versão básica do jogo, explicando brevemente o que foi entregue em termos de código e jogo. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e próximos passos.*
+&emsp;Na Sprint 2 foi desenvolvida a versão inicial do jogo, incluindo a criação da cutscene de introdução, organização das primeiras cenas e implementação das bases de movimentação do personagem. Também foram estruturados os primeiros assets e elementos visuais que compõem a ambientação do projeto.
+
+&emsp;Em termos de código, foram implementados os sistemas iniciais de cena, carregamento de assets e controle de navegação, estabelecendo a base técnica necessária para a evolução do jogo. Foram realizados testes de funcionamento das interações básicas e da transição entre telas.
+
+&emsp;Como principal dificuldade, destaca-se a organização da estrutura do projeto e a integração entre cenas e elementos visuais. Como próximos passos, pretende-se desenvolver o mapa principal do jogo, que ainda não foi implementado, permitindo a inserção dos NPCs, das missões e da progressão entre fases.
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
