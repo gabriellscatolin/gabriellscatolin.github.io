@@ -128,8 +128,7 @@ A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é m
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
- &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional.
- &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+ &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
@@ -198,11 +197,10 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
-Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
-Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais.
-A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
-
+O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. 
+ &emsp;Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho. Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais.
+ &emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
 
 ### Perfil Demográfico e Profissional
 **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
@@ -260,13 +258,13 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
   <sup>TechTudo (2016)</sup>
 </div>
 
+
 O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
-*Ex. O jogo pode ser concluído em 3 horas passando por todas as fases.*
-
-*Ex. cada partida dura até 15 minutos*
+&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases. 
+&emsp;Ressalta-se que essa estimativa será validada por meio de testes com o público-alvo, que permitirão avaliar o tempo real de conclusão, identificar possíveis ajustes de ritmo e refinar a duração total da experiência conforme o comportamento dos jogadores.
 
 # <a name="c3"></a>3. Game Design (sprints 2 e 3)
 
@@ -282,13 +280,35 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 ### 3.2.1. Controláveis
 
+<div align="center">
+<sub>Quadro 2 - Personagens</sub>
+
+| \#  |          Personagem           |                  Spritesheet                  |
+| :-: | :---------------------------: | :-------------------------------------------: |
+|  1  | Lucas Silva| <img src="./../assets/gdd/spriteRafael.png">  |
+|  2  | Maya Sato | <img src="./../assets/gdd/spriteRafaela.png"> |
+|  3  | Dandara Souza | <img src="./../assets/gdd/spriteRafael.png">  |
+|  4  |João Santos | <img src="./../assets/gdd/spriteRafael.png">  |
+
 *Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
 
 *Caso não existam personagens (ex. jogo Tetris), mencione os motivos de não existirem e como o jogador pode interpretar tal fato.*
 
 ### 3.2.2. Non-Playable Characters (NPC)
+&emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
+<div align="center">
+<sub>Quadro 5 - Lista de NPCs</sub>
 
-*\<opcional\> Se existirem coadjuvantes ou vilões, aqui é o local para descrevê-los e ilustrá-los. Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes. Caso não existam NPCs, remova esta seção.*
+| \#  |     Personagens      | Classificação |                           Ilustração                           |                                                                                                                                Descrição                                                                                                                                 |
+| :-: | :------------------: | :-----------: | :---: | :------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  1  |   Alícia  |  Trabalha no mercado |      <img src="../gdd_images/Alicia.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                          |
+|  2  | Eduardo |     Trabalha no salão de beleza    |<img src="../gdd_images/Eduardo.jpg" style="width:500px"> | Adalberto é um idoso amargurado que deseja destruir a tecnologia para sarar todas as relações familiares do planeta Terra. Seu objetivo principal, para cumprir seu propósito, é coletar 3 diários que contém todo o conhecimento sobre mercado financeiro e tecnologia. |
+|  3  |  Lucas  |   Trabalha no restaurante de comida japonesa   | <img src="../gdd_images/LucasBorten.jpg" style="width:500px">  |         Fernando é um analista que fica no banco mesmo quando a maioria dos funcionários do banco vão embora com medo de Adalberto, a mando de Andrey. Ele é especialista em conceitos de fundo de investimentos, auxiliando o jogador na resolução de puzzles.          |
+|  4  |   Gabriel|   Trabalha em escritório   |      <img src="../gdd_images/gabriel.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
+|  5 |    Nicolas  |  Trabalha no posto de gasolina  |      <img src="../gdd_images/Nicolas.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
+|  6  |    Rachel   |  Trabalha na farmácia    |     <img src="../gdd_images/Rachel.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
+|  7  |    Sofia   |   Trabalha na padaria    |      <img src="../gdd_images/sofia.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.         
+
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
