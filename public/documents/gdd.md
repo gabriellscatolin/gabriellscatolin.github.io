@@ -40,15 +40,17 @@ Cielitos
 
 ## Lista de figuras
 
-Figura 1 - Sprite sheet personagens jogáveis
+Figura 1 - Análise de 5 Forças de Porter - Cielo
 
-Figura 2 - Personagens jogáveis
+Figura 2 - Análise SWOT - Cielo
 
 Figura 3 - Personagens secundários
 
-Figura 4 - Foto perfil personagens secundários
+Figura 4 - Stardew Valley
 
-Figura 5 - Cenários dos estabelecimentos internamente
+Figura 5 - Pokemon FireRed
+
+Figura 6 - Página 1 do Diagrama de Cenas
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
@@ -307,7 +309,8 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 |  4  |   Gabriel|   Trabalha em escritório   |      <img src="../gdd_images/gabriel.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
 |  5 |    Nicolas  |  Trabalha no posto de gasolina  |      <img src="../gdd_images/Nicolas.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
 |  6  |    Rachel   |  Trabalha na farmácia    |     <img src="../gdd_images/Rachel.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   |
-|  7  |    Sofia   |   Trabalha na padaria    |      <img src="../gdd_images/sofia.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.         
+|  7  |    Sofia   |   Trabalha na padaria    |      <img src="../gdd_images/sofia.jpg" style="width:500px">   |                   Maísa é uma analista que fica em uma das ruas da cidade principal do jogo, direcionando o usuário a procurar funcionários espalhados que ficaram com as charadas de Andrey que, por sua vez, darão as coordenadas do segundo diário.                   
+
 
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
@@ -386,7 +389,7 @@ Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
 &emsp; O Gameflow é uma técnica que permite a análise visual completa da progressão de um jogo de forma não-linear, encadeando as diferentes telas e cenários, bem como as interações que o usuário deve fazer para transitar entre eles.[17](#ref17) Por ser conciso e bem abrangente, o Gameflow traz um entendimento geral do funcionamento do jogo de forma efetiva. Abaixo, um esquema que descreve o diagrama de cenas do Mini mundo cielo.
 
 <div align='center'>
-<sub>Figura 3 - Página 1 do Diagrama de Cenas</sub>
+<sub>Figura 6 - Página 1 do Diagrama de Cenas</sub>
 <img src='../gdd_images/diagrama_cenas.png'>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
