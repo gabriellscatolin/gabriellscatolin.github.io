@@ -511,11 +511,161 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
-&emsp;Na Sprint 2 foi desenvolvida a versão inicial do jogo, incluindo a criação da cutscene de introdução, organização das primeiras cenas e implementação das bases de movimentação do personagem. Também foram estruturados os primeiros assets e elementos visuais que compõem a ambientação do projeto.
+&emsp;No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
 
-&emsp;Em termos de código, foram implementados os sistemas iniciais de cena, carregamento de assets e controle de navegação, estabelecendo a base técnica necessária para a evolução do jogo. Foram realizados testes de funcionamento das interações básicas e da transição entre telas.
+&emsp;Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
 
-&emsp;Como principal dificuldade, destaca-se a organização da estrutura do projeto e a integração entre cenas e elementos visuais. Como próximos passos, pretende-se desenvolver o mapa principal do jogo, que ainda não foi implementado, permitindo a inserção dos NPCs, das missões e da progressão entre fases.
+&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. Apesar dos desafios, todas as dificuldades foram superadas e o trabalho foi concluído com sucesso.
+
+Figura 28 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
+
+```js
+this.CONFIG = {
+  PIXELATE_AMOUNT: 40,
+  PIXELATE_DURATION: 800,
+  BOTOES: [
+    { key: "botaoJogar",    x: "center", y: 600, scale: 0.5,  action: "startGame"    },
+    { key: "botaoConfig",   x: "center", y: 870, scale: 0.48, action: "openSettings" },
+    { key: "botaoCreditos", x: "center", y: 730, scale: 0.85, action: "fecharJogo"   }
+  ]
+};
+```
+
+&emsp;Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
+
+```js
+btn.on("pointerover", () => btn.setScale(botao.scale * 1.07));
+btn.on("pointerout",  () => btn.setScale(botao.scale));
+
+startGame() {
+  const pixelated = this.cameras.main.postFX.addPixelate(1);
+  this.add.tween({
+    targets: pixelated, amount: this.CONFIG.PIXELATE_AMOUNT,
+    duration: this.CONFIG.PIXELATE_DURATION, ease: "Sine.easeIn",
+    onComplete: () => { this.scene.start("ScenePersonagem"); }
+  });
+}
+```
+
+Figura 29 - Tela de seleção de personagens &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
+
+```js
+this.listaPersonagens = [
+  { id: "Gabriel", x: 300,  y: 700, escala: 0.42, prefixoArquivo: "HB" },
+  { id: "Maya",    x: 730,  y: 700, escala: 0.42, prefixoArquivo: "ML" },
+  { id: "Joao",    x: 1170, y: 700, escala: 0.42, prefixoArquivo: "HM" },
+  { id: "Dandara", x: 1600, y: 700, escala: 0.42, prefixoArquivo: "MM" }
+];
+
+// Ao clicar, realiza fade out e inicia SceneJogo com os dados do personagem
+this.scene.start("SceneJogo", { nomePasta: dados.id, prefixo: dados.prefixoArquivo });
+```
+
+&emsp;No arquivo `SceneJogo.js`, foram criadas as variáveis de estado que controlam todas as interações da cena, e os 16 frames do personagem (4 direções × 4 frames) são carregados dinamicamente no `preload()` com base no personagem recebido:
+
+```js
+this.podeMover       = false; // Bloqueado até fechar o tutorial
+this.dialogoNpcAberto = false;
+this.npcPartiu        = false;
+this.transicaoAtiva   = false;
+
+for (let i = 1; i <= 4; i++) {
+  this.load.image(`sprite_frente_${i}`,  `${caminhoBase}/${pre}_frente_${i}.png`);
+  this.load.image(`sprite_direita_${i}`, `${caminhoBase}/${pre}_direita_${i}.png`);
+  // ... demais direções
+}
+```
+
+&emsp;Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
+
+```js
+criarAnimacoes() {
+  ['frente', 'tras', 'direita', 'esquerda'].forEach(dir => {
+    this.anims.create({
+      key: `andar_${dir}`,
+      frames: [{ key: `sprite_${dir}_1` }, { key: `sprite_${dir}_2` },
+               { key: `sprite_${dir}_3` }, { key: `sprite_${dir}_4` }],
+      frameRate: 8,
+      repeat: -1
+    });
+  });
+}
+```
+
+&emsp;Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
+
+```js
+update() {
+  corpoFisico.setVelocity(0);
+  if (this.teclasControl.d.isDown) {
+    corpoFisico.setVelocityX(this.velocidadePersonagem);
+    this.personagemSprite.anims.play("andar_direita", true);
+    estaAndando = true;
+  }
+  // ... demais direções
+
+  if (!estaAndando) { this.personagemSprite.anims.pause(); }
+  else              { this.personagemSprite.anims.resume(); }
+
+  this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
+  this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+}
+```
+
+&emsp;Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
+
+```js
+// Colisão — impede o jogador de passar pelo NPC
+const limiteX = this.npcSprite.x - 60;
+if (this.personagemSprite.x > limiteX) this.personagemSprite.x = limiteX;
+
+// Proximidade e interação
+const distNpc = Phaser.Math.Distance.Between(/* player e npc */);
+this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
+
+if (distNpc < 150 && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  this.dialogoNpcAberto = true;
+  this.mostrarDialogoObjetivo(); // Abre diálogo com efeito typewriter
+}
+```
+
+Figura 30 - Cena de gameplay com o NPC Vanessa na ponte &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+&emsp;Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
+
+```js
+iniciarClockWipe() {
+  const maskGraphics = this.make.graphics();
+  this.cameras.main.setMask(maskGraphics.createGeometryMask());
+
+  this.tweens.add({
+    targets: { progress: 0 }, progress: 1, duration: 1000, ease: "Sine.easeInOut",
+    onUpdate: (tween) => {
+      const startAngle = -Math.PI / 2 + tween.getValue() * Math.PI * 2;
+      maskGraphics.clear();
+      maskGraphics.arc(cx, cy, raio, startAngle, -Math.PI / 2 + Math.PI * 2, false);
+      maskGraphics.fillPath();
+    },
+    onComplete: () => { this.scene.start("SceneCutscene"); }
+  });
+}
+```
+
+Dificuldades
+
+- Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações
+- Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X
+- Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento
+
+Próximos passos
+
+- Criar o mapa interno dos estabelecimentos para a fase seguinte
+- Adicionar os puzzles e desafios de vendas do jogo
+- Implementar mais NPCs com diálogos e interações variadas
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 

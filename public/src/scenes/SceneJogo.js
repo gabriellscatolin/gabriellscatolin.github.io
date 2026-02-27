@@ -240,25 +240,26 @@ export default class SceneJogo extends Phaser.Scene {
     const mensagem = "Atravesse a ponte e pegue o ônibus para a cidade. Me siga!";
 
     this.bannerFundo = this.add.image(cx, cy, "falaVanessa")
-      .setScale(1.5).setDepth(20).setScrollFactor(0);
+      .setDisplaySize(860, 333).setDepth(20).setScrollFactor(0);
 
-    const iW = this.bannerFundo.displayWidth;
-    const iH = this.bannerFundo.displayHeight;
+    const iW = this.bannerFundo.displayWidth;  // 860
+    const iH = this.bannerFundo.displayHeight; // 333
 
-    // Texto com efeito typewriter — parte superior do campo de fala
+    // Texto com efeito typewriter — centralizado na área de fala
     this.bannerTexto = this.add.text(
-      cx - iW * 0.15, cy - iH * 0.12,
+      800, cy - iH * 0.08,
       "",
-      { fontSize: "26px", color: "#1a1a1a", fontStyle: "bold",
-        wordWrap: { width: iW * 0.50, useAdvancedWrap: true }, align: "center" }
+      { fontSize: "26px", color: "#000000", fontStyle: "bold",
+        stroke: "#000000", strokeThickness: 1,
+        wordWrap: { width: iW * 0.48, useAdvancedWrap: true }, align: "center" }
     ).setOrigin(0.5, 0.5).setDepth(21).setScrollFactor(0);
 
-    // Botão "Vamos!" — aparece só depois que o texto terminar de ser escrito
+    // Botão "Vamos!" — abaixo do texto, relativo ao centro da imagem
     this.bannerBotaoVamos = this.add.text(
-      cx - iW * 0.15, 560,
+      800, cy + iH * 0.25,
       "  Vamos!  ",
-      { fontSize: "20px", color: "#ffffff", fontStyle: "bold",
-        backgroundColor: "#3a7bd5", padding: { x: 16, y: 9 },
+      { fontSize: "24px", color: "#ffffff", fontStyle: "bold",
+        backgroundColor: "#3a7bd5", padding: { x: 22, y: 12 },
         stroke: "#1a4fa0", strokeThickness: 2 }
     ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
       .setInteractive({ useHandCursor: true })
