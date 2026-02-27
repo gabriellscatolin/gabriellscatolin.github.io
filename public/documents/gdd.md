@@ -265,7 +265,7 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width="800">
+<img src="../gdd_images/PokemonFireRed.jpg" width="1000">
   <sup>TechTudo (2016)</sup>
 </div>
 
