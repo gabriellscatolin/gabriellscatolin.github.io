@@ -78,14 +78,10 @@ Figura 6 - Página 1 do Diagrama de Cenas
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
-
+A aplicação do modelo à Cielo demonstra que a ameaça de novos entrantes é moderada a baixa, devido às barreiras regulatórias impostas pelo Banco Central, à necessidade de elevados investimentos em tecnologia e segurança e à exigência de grande escala operacional. Ainda assim, fintechs e soluções digitais inovadoras ampliam a pressão competitiva ao oferecer serviços mais flexíveis e integrados.
 &emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa por definirem padrões e tecnologias essenciais. Contudo, a escala e a estrutura da Cielo permitem negociar condições estratégicas e reduzir impactos sobre suas margens. [18](#ref18)
-
 &emsp;Por outro lado, o poder de barganha dos clientes é elevado. Pequenos e médios comerciantes são sensíveis a preço, enquanto grandes varejistas negociam condições personalizadas devido ao alto volume transacionado. O baixo custo de troca entre adquirentes intensifica a pressão sobre taxas e margens, exigindo estratégias de fidelização e diferenciação.
-
 &emsp;A ameaça de produtos substitutos é alta, impulsionada por tecnologias que dispensam o uso do arranjo de cartões tradicionais, como o Pix, pagamentos via QR Code direto entre contas e o uso emergente de criptomoedas. Esses substitutos reduzem a dependência das maquininhas e alteram a dinâmica de receita da indústria.
-
 &emsp;Por fim, a rivalidade no setor é intensificada pela presença de players robustos como Stone, PagSeguro e Rede, que disputam agressivamente a mesma base de clientes por meio de guerra de taxas e antecipação de recebíveis. Esse cenário limita a rentabilidade média do setor e exige investimentos contínuos em inovação e serviços financeiros integrados. 
 
 
@@ -134,9 +130,7 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
- &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
-
- &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+ &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [1](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [5](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [6](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
@@ -206,9 +200,8 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
 &emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [11](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. 
-
-&emsp;Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho. Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
-
+&emsp;Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho. Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
 &emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
 
 ### Perfil Demográfico e Profissional
@@ -240,7 +233,6 @@ A transição dos jogos físicos presenciais para o Mini Mundo Cielo representa 
 
 ### 2.2.1. Gênero do Jogo (sprint 2)
 &emsp;O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [20](#ref20) com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [4]
-
 &emsp;A experiência mergulha o jogador em uma jornada interativa onde a progressão é pautada por missões de campo e tomada de decisão em tempo real. Cada fase funciona como um laboratório seguro para testar habilidades de negociação, resolução de problemas e domínio técnico do portfólio de produtos, transformando o onboarding em um processo dinâmico e envolvente.
 ### 2.2.2. Plataforma do Jogo (sprint 2)
 
@@ -263,21 +255,17 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 <sub>Figura 4 - Stardew Valley</sub><br/>
 <img src="../gdd_images/StardewValley.jpg">
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
-
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width="1000">
+<img src="../gdd_images/PokemonFireRed.jpg">
   <sup>TechTudo (2016)</sup>
 </div>
 
 
-
 O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
-
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
-&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases.
-
+&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases. 
 &emsp;Ressalta-se que essa estimativa será validada por meio de testes com o público-alvo, que permitirão avaliar o tempo real de conclusão, identificar possíveis ajustes de ritmo e refinar a duração total da experiência conforme o comportamento dos jogadores.
 
 # <a name="c3"></a>3. Game Design (sprints 2 e 3)
@@ -286,7 +274,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 &emsp;O jogador assume o papel de um novo gerente de vendas que inicia sua jornada profissional em uma empresa de tecnologia de pagamentos localizada no centro da cidade. Em seu primeiro dia, ele precisa explorar o ambiente, conhecer diferentes estabelecimentos e interagir com personagens que representam clientes reais do cotidiano comercial.
 
-&emsp;Ao longo da experiência, o jogador recebe missões que simulam situações de atendimento, negociação e resolução de problemas, enfrentando desafios progressivamente mais complexos. Cada interação contribui para o desenvolvimento de competências essenciais, como comunicação com clientes, identificação de necessidades e tomada de decisão em contextos de vendas.
+ &emsp;Ao longo da experiência, o jogador recebe missões que simulam situações de atendimento, negociação e resolução de problemas, enfrentando desafios progressivamente mais complexos. Cada interação contribui para o desenvolvimento de competências essenciais, como comunicação com clientes, identificação de necessidades e tomada de decisão em contextos de vendas.
 
  &emsp;A progressão narrativa acompanha a evolução profissional do personagem, que passa de iniciante a especialista, desbloqueando novas áreas da cidade, novos tipos de clientes e desafios mais estratégicos. Dessa forma, a narrativa funciona como um fio condutor para a aprendizagem, contextualizando as atividades do jogo em situações próximas da realidade do mercado.
 
@@ -295,23 +283,25 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 ### 3.2.1. Controláveis
 
 <div align="center">
-
-**tabela 2 - Personagens**
+<sub>Quadro 2 - Personagens</sub>
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
-|  1  | Lucas Silva| <img src="../gdd_images/lucasBoneco.jpg">  |
-|  2  | Maya Sato | <img src="../gdd_images/mayaBoneco.jpg"> |
-|  3  | Dandara Souza | <img src="../gdd_images/dandaraBoneco.jpg">  |
-|  4  |João Santos | <img src="../gdd_images/joãoBoneco.jpg">  |
+|  1  | Lucas Silva| <img src="./../assets/gdd/spriteRafael.png">  |
+|  2  | Maya Sato | <img src="./../assets/gdd/spriteRafaela.png"> |
+|  3  | Dandara Souza | <img src="./../assets/gdd/spriteRafael.png">  |
+|  4  |João Santos | <img src="./../assets/gdd/spriteRafael.png">  |
 
+*Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
+
+*Caso não existam personagens (ex. jogo Tetris), mencione os motivos de não existirem e como o jogador pode interpretar tal fato.*
 
 ### 3.2.2. Non-Playable Characters (NPC)
 &emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
 
 <div align="center">
 
-**tabela 3 — Lista de NPCs**
+**Quadro 5 — Lista de NPCs**
 
 | # | Personagem | Classificação | Ilustração |
 |:-:|:----------:|:-------------:|:----------:|
@@ -362,18 +352,9 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 &emsp; Traduzindo "concept art", chegamos a, literalmente, "arte de conceito". Nesse sentido, fazer uma concept art é criar ilustrações simples que conseguem passar a essência e identidade de algum projeto visual como, por exemplo, desenhos animados e jogos digitais.
 &emsp; Após a consolidação do enredo, iniciamos o desenho dos personagens e o level design de cada um dos módulos:
 
-<div align="center">
-<sub>Figura 7 - Primeiro conceito do jogo</sub>
-<img src="../gdd_images/Concept1.jpeg">
-<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
-</div>
+<img src="../assets/concept1.jpg">
 
-<div align="center">
-<sub>Figura 8- Definição da rota do jogo</sub>
-<img src="../gdd_images/rota.jpeg">
-<sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
-</div>
-
+Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
@@ -582,6 +563,7 @@ for (let i = 1; i <= 4; i++) {
 
 &emsp;Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
 
+
 ```js
 criarAnimacoes() {
   ['frente', 'tras', 'direita', 'esquerda'].forEach(dir => {
@@ -765,6 +747,15 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
 <br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
+
+
+
+
+LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>
+SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>
+
+INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
+SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
 
 # <a name="c8"></a>Anexos
 
