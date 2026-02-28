@@ -54,6 +54,10 @@ Figura 6 - Página 1 do Diagrama de Cenas
 
 Figura 7 - Fixa técnica dos personagens jogáveis
 
+Figura 8 - Concept Art - integração entre cenários
+
+Figura 9 - Concept Art - Cidades do jogo 
+
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
 ## 1.1. Plano Estratégico do Projeto
@@ -94,7 +98,7 @@ Figura 7 - Fixa técnica dos personagens jogáveis
 
 <div align="center">
   <sub>Figura 2 - Análise SWOT - Cielo</sub>
-  <img src="../gdd_images/matriz_swot.jpeg">
+  <img src="../gdd_images/swot.png">
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -374,12 +378,31 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 
 ### 3.3.4. Concept Art (sprint 2)
 
-&emsp; Traduzindo "concept art", chegamos a, literalmente, "arte de conceito". Nesse sentido, fazer uma concept art é criar ilustrações simples que conseguem passar a essência e identidade de algum projeto visual como, por exemplo, desenhos animados e jogos digitais.
-&emsp; Após a consolidação do enredo, iniciamos o desenho dos personagens e o level design de cada um dos módulos:
+&emsp;O termo concept art, traduzido como "arte de conceito", refere-se a ilustrações elaboradas com a finalidade de representar visualmente a identidade, a atmosfera e a direção estética de um projeto. No contexto do presente jogo, as concept arts desempenharam papel fundamental na consolidação do estilo visual, na definição da ambientação das cidades fictícias e no estabelecimento da personalidade dos personagens. Após a consolidação do enredo, procedeu-se ao desenvolvimento dos personagens e ao level design de cada módulo, buscando-se coerência entre narrativa, mecânica e estética.
 
-<img src="../assets/concept1.jpg">
+### Integração dos Cenários
+&emsp;Previamente à etapa de implementação final, foi elaborada uma arte conceitual representando a integração dos cenários do jogo. Tal ilustração demonstra a forma pela qual os ambientes se conectam visualmente dentro da proposta das duas cidades, apresentando a composição geral dos espaços urbanos. Essa produção funcionou como guia orientador para a construção dos mapas e do trajeto que o jogador passará.
 
-Figura 1: detalhe da cena da partida do herói para a missão, usando sua nave
+<div align="center">
+  <sub>Figura 8 - Concept Art - integração entre cenários</sub>
+  <img src="../gdd_images/conceptart1.jpeg">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+### Telas de Interface: Tela Inicial e Tela da Ponte
+Foram elaboradas concept arts para as telas de interface do jogo, a saber:
+- Tela Inicial: responsável por apresentar a identidade visual do jogo e proporcionar a primeira impressão ao jogador;
+- Tela da Ponte: corresponde à transição entre a cena incial e a primeira cidade.
+Ambas as telas foram concebidas de modo a manter coerência estética com os demais elementos do jogo, garantindo unidade visual e favorecendo a imersão do jogador.
+
+<div align="center">
+  <sub>Figura 9 - Concept Art - Cidades do jogo</sub>
+  <img src="../gdd_images/conceptart2.png">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram a base estrutural para a construção visual do mapa do jogo, orientando decisões de design, ambientação e identidade gráfica anteriormente à etapa de implementação definitiva.
+
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
