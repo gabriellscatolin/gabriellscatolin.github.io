@@ -52,6 +52,8 @@ Figura 5 - Pokemon FireRed
 
 Figura 6 - Página 1 do Diagrama de Cenas
 
+Figura 7 - Fixa técnica dos personagens jogáveis
+
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
 ## 1.1. Plano Estratégico do Projeto
@@ -288,14 +290,35 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
-|  1  | Lucas Silva| <img src="../gdd_images/spriteLucas.png">  |
-|  2  | Maya Sato | <img src="../gdd_images/spriteMaya.png"> |
-|  3  | Dandara Souza | <img src="../gdd_images/spriteDandara.png">  |
-|  4  |João Santos | <img src="../gdd_images/spriteJoao.png">  |
+|  1  | Gabriel Oliveira | <img src="../gdd_images/spriteLucas.png">  |
+|  2  | Maya Souza | <img src="../gdd_images/spriteMaya.png"> |
+|  3  | Dandara Santos | <img src="../gdd_images/spriteDandara.png">  |
+|  4  |João Victor | <img src="../gdd_images/spriteJoao.png">  |
+</div>
 
-*Descreva os personagens controláveis pelo jogador. Mencione nome, objetivos, características, habilidades, diferenciais etc. Utilize figuras (character art, sprite sheets etc.) para ilustrá-los. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
+## Personagens Controláveis
+&emsp;Os personagens controláveis representam os novos Gerentes de Negócios da Cielo em processo de onboarding. Embora possuam identidades visuais e histórias individuais distintas, todos os personagens compartilham a diversidade étnica e cultural brasileira, refletindo o compromisso do projeto com a representatividade. Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 frames, que estão organizados em quatro direções de movimentação com quatro frames de animação cada, o que permite movimentação fluida no mapa em formato top-down. As diferenças entre os personagens são de natureza narrativa e representativa, não havendo distinções de vantagem mecânica entre eles, o que assegura equidade na experiência de aprendizagem. A escolha do personagem pelo jogador impacta exclusivamente na identificação e na imersão visual, sem interferir no desempenho ou nas mecânicas de jogo.
 
-*Caso não existam personagens (ex. jogo Tetris), mencione os motivos de não existirem e como o jogador pode interpretar tal fato.*
+&emsp;Nota: Todos os personagens compartilham a mesma estrutura visual: uniforme azul com crachá institucional e dispositivo de pagamento portátil. As distinções entre eles são exclusivamente de ordem narrativa e representativa.
+
+### Gabriel Oliveira
+&emsp;Gabriel Oliveira é um personagem masculino de 38 anos, oriundo de Recife (PE). Seu perfil narrativo foi concebido para representar o modelo de gerente orientado à construção e à manutenção de relacionamentos com clientes. No contexto do jogo, sua atuação está associada à gestão de carteira e ao atendimento recorrente, com ênfase na fidelização. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+### Maya Souza
+&emsp;Maya Souza é uma personagem feminina de 42 anos, natural de Salvador (BA). Seu perfil narrativo representa o modelo de gerente com foco em desenvolvimento e crescimento de clientes. No âmbito do jogo, sua atuação está associada à expansão de negócios e ao cumprimento de metas de crescimento, com ênfase na ampliação de resultados da carteira sob sua responsabilidade. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+### Dandara Santos
+&emsp;Dandara Santos é uma personagem feminina de 40 anos, originária de São Paulo (SP). Seu perfil narrativo representa o modelo de gerente voltado à negociação e à construção de confiança com o cliente. No contexto do jogo, sua atuação está associada a negociações complexas e ao atendimento consultivo, com ênfase na condução estruturada de interações comerciais. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+### João Victor
+&emsp;João Victor é um personagem masculino de 45 anos, proveniente de Pelotas (RS). Seu perfil narrativo foi desenvolvido para representar o modelo de gerente voltado à conversão de novos clientes. No jogo, sua atuação está associada à aquisição de novos contratos, com ênfase na prospecção ativa e no fechamento inicial de vendas. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+
+#### Fichas técnicas visuais dos quatro personagens controláveis:
+
+<div align="center">
+  <sub>Figura 7 - Fixa técnica dos personagens jogáveis</sub>
+  <img src="../gdd_images/fixapersonagens.png">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+&emsp;Com isso, espera-se que o jogador se identifique com os personagens e se sinta representado ao longo da experiência. A diversidade narrativa, aliada à equidade mecânica, reforça a imersão e contribui para uma gameficação do onboarding mais envolvente e significativa.
 
 ### 3.2.2. Non-Playable Characters (NPC)
 &emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
