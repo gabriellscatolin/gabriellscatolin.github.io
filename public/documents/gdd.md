@@ -362,11 +362,16 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 
 ### 3.3.1. Locações Principais e/ou Mapas (sprints 2 e 3)
 
-*Descreva o ambiente do jogo, em que locais ele ocorre. Ilustre com imagens. Se houverem mapas, posicione-os aqui, descrevendo as áreas em acordo com o enredo. Se houverem fases, descreva-as também em acordo com o enredo (pode ser um jogo de uma fase só). Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.*
 
 ### 3.3.2. Navegação pelo mundo (sprints 2 e 3)
 
-*Descreva como os personagens se movem no mundo criado e as relações entre as locações – como as áreas/fases são acessadas ou desbloqueadas, o que é necessário para serem acessadas etc. Utilize listas ou tabelas para organizar esta seção.*
+&emsp;A dinâmica de movimentação dos personagens no mundo do jogo foi concebida para reforçar a sensação de progressão e descoberta gradual. O deslocamento ocorre livremente dentro das áreas já desbloqueadas, por meio de movimentação direcional no mapa urbano, permitindo ao jogador explorar ruas, aproximar-se de estabelecimentos e interagir com pontos específicos do cenário. Essa exploração não é apenas espacial, mas também estratégica, pois cada interação representa a possibilidade de iniciar um novo desafio de vendas, diretamente vinculado ao avanço narrativo e ao desenvolvimento do personagem.
+
+&emsp;O mundo é estruturado em duas cidades interdependentes, organizadas segundo uma lógica de progressão sequencial e condicionada ao desempenho. A Cidade 1 constitui o núcleo inicial da experiência, sendo parcialmente desbloqueada no início do jogo. Nela, os estabelecimentos funcionam como fases, cada qual com objetivos próprios, metas de vendas específicas e missões vinculadas à evolução do jogador. O primeiro local, a Padaria, encontra-se disponível desde o início, atuando como etapa introdutória. A partir dela, o acesso aos demais estabelecimentos ocorre de maneira progressiva: a Farmácia é liberada após o cumprimento da meta mínima de vendas da Padaria; o Posto de Gasolina torna-se acessível mediante desempenho satisfatório na Farmácia; posteriormente, o Restaurante Japonês e outros estabelecimentos complementares são desbloqueados conforme a conclusão sequencial das missões anteriores.
+
+&emsp;Essa estrutura estabelece uma relação de dependência direta entre as locações, na qual cada nova área somente pode ser acessada após o cumprimento integral dos objetivos da fase precedente. Caso o jogador não alcance os critérios estabelecidos, como metas mínimas de vendas ou indicadores de desempenho específicos, o desafio deverá ser repetido até que os requisitos sejam atingidos. A Cidade 2, por sua vez, permanece bloqueada no início do jogo e só é desbloqueada após a conclusão completa dos principais desafios da Cidade 1. Caracterizada por maior complexidade e novos níveis de dificuldade, ela representa a consolidação da progressão do jogador. Assim, o sistema de movimentação e desbloqueio articula exploração, desempenho e narrativa, garantindo uma progressão estruturada, coerente e orientada por metas claras.
+
+&emsp;Em síntese, o sistema de movimentação e desbloqueio estrutura a progressão do jogo de forma clara e estratégica, integrando exploração, desempenho e narrativa. Assim, cada nova área conquistada simboliza avanço espacial e o crescimento contínuo do personagem ao longo da experiência.
 
 ### 3.3.3. Condições climáticas e temporais (sprints 2 e 3)
 
