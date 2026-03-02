@@ -1,4 +1,6 @@
 // Cena principal do jogo com movimentação do personagem
+import { GameSettings, aplicarConfiguracoes, abrirPopupConfig as abrirPopupConfigModule } from "../settings.js";
+
 export default class SceneJogo extends Phaser.Scene {
   constructor() {
     super("SceneJogo");
@@ -121,6 +123,10 @@ export default class SceneJogo extends Phaser.Scene {
       fontSize: '22px', color: '#ffff00',
       backgroundColor: '#000000', padding: { x: 8, y: 6 }
     }).setDepth(999).setScrollFactor(0);
+
+    // Aplica configurações salvas (brilho, daltonismo, etc.)
+    this.sound.volume = GameSettings.volume;
+    aplicarConfiguracoes();
 
     this.executarTransicaoEntrada();
     this.mostrarTutorial();
@@ -407,6 +413,11 @@ export default class SceneJogo extends Phaser.Scene {
 
   // Transição clock wipe sentido horário antes de ir para a cutscene
   iniciarClockWipe() {
+    // Se animações desativadas (acessibilidade), pula direto para a cutscene
+    if (!GameSettings.animacoes) {
+      this.scene.start("SceneCutscene");
+      return;
+    }
     const cx = this.scale.width / 2;
     const cy = this.scale.height / 2;
     const raio = Math.hypot(this.scale.width, this.scale.height) / 2;
@@ -535,7 +546,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.podeMover = true; //Libera movimentação
   }
 
-  abrirPopupConfig() { //Abre o popup de configurações (igual à SceneInicial)
+  abrirPopupConfig() { //Abre o popup de configurações
     this.configAberta = true;
 
     // Esconde os elementos do menu de pausa
@@ -545,89 +556,41 @@ export default class SceneJogo extends Phaser.Scene {
     this.botaoConfigPausa.setVisible(false);
     this.botaoVoltarInicio.setVisible(false);
 
-    //Configurações do pop-up
-    this.caixaConfig = this.add.image(
-      this.scale.width / 2,
-      this.scale.height / 2,
-      "configFundo"
-    ).setScale(2.5).setDepth(101).setScrollFactor(0);
-
-    // Título do pop-up
-    this.textoConfig = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 2 - 150,
-      "CONFIGURAÇÕES",
-      { fontSize: "36px", color: "#ffffff" }
-    ).setOrigin(0.5).setDepth(102).setScrollFactor(0);
-
-    // Texto Volume
-    this.textVolume = this.add.text(
-      this.scale.width / 2 - 200,
-      this.scale.height / 2,
-      "VOLUME:",
-      { fontSize: "26px", color: "#ffffff" } //Detalhes da fonte do texto
-    ).setDepth(102).setScrollFactor(0);
-
-    // Botão de diminuir volume
-    this.botaoMenos = this.add.text(
-      this.scale.width / 2 - 20,
-      this.scale.height / 2,
-      "-",
-      { fontSize: "36px", color: "#ffffff" } //Fonte e cor dos textos
-    ).setDepth(102).setScrollFactor(0)
-      .setInteractive({ useHandCursor: true });
-
-    // Botão de aumentar volume
-    this.botaoMais = this.add.text(
-      this.scale.width / 2 + 40,
-      this.scale.height / 2,
-      "+",
-      { fontSize: "36px", color: "#ffffff" }
-    ).setDepth(102).setScrollFactor(0)
-      .setInteractive({ useHandCursor: true });
-
-    this.botaoMais.on("pointerdown", () => { //Aumenta o volume ao clicar
-      this.sound.volume = Phaser.Math.Clamp(this.sound.volume + 0.1, 0, 1);
-    });
-
-    this.botaoMenos.on("pointerdown", () => { //Diminui o volume ao clicar
-      this.sound.volume = Phaser.Math.Clamp(this.sound.volume - 0.1, 0, 1);
-    });
-
-    // Botão fechar
-    this.botaoFecharConfig = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 2 + 150,
-      "FECHAR",
-      { fontSize: "28px", color: "#ff5555" } //Cor do botão fechar
-    ).setOrigin(0.5).setDepth(102).setScrollFactor(0)
-      .setInteractive({ useHandCursor: true });
-
-    this.botaoFecharConfig.on("pointerdown", () => {
-      this.fecharPopupConfig(); //Fecha as configurações e volta ao menu de pausa
+    this._elementosConfig = abrirPopupConfigModule(this, {
+      depth: 102,
+      scrollFactor: 0,
+      onFechar: () => {
+        this._elementosConfig = null;
+        this.configAberta = false;
+        // Restaura o menu de pausa
+        this.caixaPausa.setVisible(true);
+        this.tituloPausa.setVisible(true);
+        this.botaoRetomar.setVisible(true);
+        this.botaoConfigPausa.setVisible(true);
+        this.botaoVoltarInicio.setVisible(true);
+      }
     });
   }
 
-  fecharPopupConfig() { //Fecha o popup de configurações e volta ao menu de pausa
-    this.caixaConfig.destroy();
-    this.textoConfig.destroy();
-    this.textVolume.destroy();
-    this.botaoMais.destroy();
-    this.botaoMenos.destroy();
-    this.botaoFecharConfig.destroy();
-    this.configAberta = false;
-
-    // Mostra novamente os elementos do menu de pausa
-    this.caixaPausa.setVisible(true);
-    this.tituloPausa.setVisible(true);
-    this.botaoRetomar.setVisible(true);
-    this.botaoConfigPausa.setVisible(true);
-    this.botaoVoltarInicio.setVisible(true);
+  fecharPopupConfig() { //Fecha o popup externamente se necessário
+    if (this._elementosConfig) {
+      this._elementosConfig.forEach(el => { if (el && el.active) el.destroy(); });
+      this._elementosConfig = null;
+      this.configAberta = false;
+      this.caixaPausa.setVisible(true);
+      this.tituloPausa.setVisible(true);
+      this.botaoRetomar.setVisible(true);
+      this.botaoConfigPausa.setVisible(true);
+      this.botaoVoltarInicio.setVisible(true);
+    }
   }
 
   voltarAoInicio() { //Volta para a cena inicial com fade out
+    if (!GameSettings.animacoes) {
+      this.scene.start("SceneInicial");
+      return;
+    }
     this.cameras.main.fadeOut(800, 0, 0, 0);
-
     this.cameras.main.once("camerafadeoutcomplete", () => {
       this.scene.start("SceneInicial");
     });
@@ -635,6 +598,7 @@ export default class SceneJogo extends Phaser.Scene {
 
   executarTransicaoEntrada() {
     // Efeito de fade in suave ao entrar na cena
+    if (!GameSettings.animacoes) return;
     this.cameras.main.fadeIn(800, 0, 0, 0);
   }
 }

@@ -1,4 +1,6 @@
 // Cena inicial do jogo com menu principal
+import { GameSettings, aplicarConfiguracoes, abrirPopupConfig } from "../settings.js";
+
 export default class SceneInicial extends Phaser.Scene {
   constructor() {
     super("SceneInicial");
@@ -38,6 +40,10 @@ export default class SceneInicial extends Phaser.Scene {
     // Fundo
     this.fundo = this.add.image(0, 0, "fundo").setOrigin(0, 0);
     this.redimensionarFundo();
+
+    // Aplica configurações salvas (brilho, daltonismo, etc.)
+    this.sound.volume = GameSettings.volume;
+    aplicarConfiguracoes();
 
     // Botões
     this.adicionarBotoes();
@@ -84,104 +90,41 @@ export default class SceneInicial extends Phaser.Scene {
   }
 
   startGame() {
-  // Transição com efeito de pixelado antes de iniciar o jogo
-  const cam = this.cameras.main;
-
-  const pixelated = cam.postFX.addPixelate(1);
-
-  this.add.tween({
-    targets: pixelated,
-    duration: this.CONFIG.PIXELATE_DURATION, //Duração do pixelado
-    amount: this.CONFIG.PIXELATE_AMOUNT,
-    ease: "Sine.easeIn",
-    onComplete: () => {
+    // Se animações desativadas (acessibilidade), pula a transição
+    if (!GameSettings.animacoes) {
       this.scene.start("ScenePersonagem");
+      return;
     }
-  });
-}
+    // Transição com efeito de pixelado antes de iniciar o jogo
+    const cam = this.cameras.main;
+    const pixelated = cam.postFX.addPixelate(1);
+    this.add.tween({
+      targets: pixelated,
+      duration: this.CONFIG.PIXELATE_DURATION,
+      amount: this.CONFIG.PIXELATE_AMOUNT,
+      ease: "Sine.easeIn",
+      onComplete: () => {
+        this.scene.start("ScenePersonagem");
+      }
+    });
+  }
 
   openSettings() {
-    this.abrirPopupConfig();  //Abre o pop-up de configurações
+    this.abrirPopupConfig();
   }
 
-  abrirPopupConfig(){ //Função para tornar o botão Configurações executavel
-    // Fundo escuro
-    this.fundoPopup = this.add.rectangle(
-      this.scale.width / 2,
-      this.scale.height / 2,
-      this.scale.width,
-      this.scale.height,
-      0x000000,
-      0.5
-    ).setDepth(100);
-   //Configurações do pop-up
-   this.caixaPopup = this.add.image(
-  this.scale.width / 2,  
-  this.scale.height / 2, 
-  "configFundo"
-).setScale(2.5).setDepth(101); 
-
-    // Título do pop-up
-    this.textoPopup = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 2 - 150,
-      "CONFIGURAÇÕES",              
-      { fontSize: "36px", color: "#ffffff" }
-    ).setOrigin(0.5).setDepth(102);
-
-     // Texto Volume
-    this.textVolume = this.add.text(
-      this.scale.width / 2 - 200,
-      this.scale.height / 2,
-      "VOLUME:",
-      { fontSize: "26px", color: "#ffffff" }  //Detalhes da fonte do texto
-    ).setDepth(102);
-
-     // Botão de diminuir volume
-    this.botaoMenos = this.add.text(  //Configurações do botão de diminuir volume
-      this.scale.width / 2 - 20,
-      this.scale.height / 2,
-      "-",
-      { fontSize: "36px", color: "#ffffff" } //Fonte e cor dos textos
-    ).setDepth(102).setInteractive({ useHandCursor: true });  //cria uma função interativa no phaser
-
-    // Botão de aumentar volume
-    this.botaoMais = this.add.text(
-      this.scale.width / 2 + 40,     //Escalas e tamanho do botão de aumentar volume
-      this.scale.height / 2,
-      "+",
-      { fontSize: "36px", color: "#ffffff" }
-    ).setDepth(102).setInteractive({ useHandCursor: true });
-
-    this.botaoMais.on("pointerdown", () => {      //configurações ao clicar no botão de aumentar volume
-      this.sound.volume = Phaser.Math.Clamp(this.sound.volume + 0.1, 0, 1);
-    });
-
-    this.botaoMenos.on("pointerdown", () => {   //configurações ao clicar no botão de diminuir volume
-      this.sound.volume = Phaser.Math.Clamp(this.sound.volume - 0.1, 0, 1);
-    });
-
-    // Botão fechar
-    this.botaoFechar = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 2 + 150,
-      "FECHAR",
-      { fontSize: "28px", color: "#ff5555" }   //Cor do botão fechar
-    ).setOrigin(0.5).setDepth(102).setInteractive({ useHandCursor: true });
-
-    this.botaoFechar.on("pointerdown", () => {
-      this.fecharPopupConfig();
+  abrirPopupConfig() {
+    this._elementosConfig = abrirPopupConfig(this, {
+      depth: 102,
+      onFechar: () => { this._elementosConfig = null; }
     });
   }
 
-  fecharPopupConfig() {   //Função para fechar o pop-up de configurações
-    this.fundoPopup.destroy();
-    this.caixaPopup.destroy();   //Destrói os elementos do pop-up para fechar
-    this.textoPopup.destroy();
-    this.textVolume.destroy();
-    this.botaoMais.destroy();
-    this.botaoMenos.destroy();
-    this.botaoFechar.destroy();
+  fecharPopupConfig() {
+    if (this._elementosConfig) {
+      this._elementosConfig.forEach(el => { if (el && el.active) el.destroy(); });
+      this._elementosConfig = null;
+    }
   }
 
   fecharJogo() {
