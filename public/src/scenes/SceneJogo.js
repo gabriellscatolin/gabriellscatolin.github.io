@@ -58,7 +58,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.fundoImage.displayHeight = this.scale.height;
 
     // Ônibus estático com só a traseira aparecendo na borda direita
-    this.onibusSprite = this.add.image(2100, 620, "onibus").setScale(0.9).setDepth(1);
+    this.onibusSprite = this.add.image(2100, 620, "onibus").setScale(0.9).setDepth(6);
 
     this.criarAnimacoes();
 
