@@ -13,7 +13,7 @@ export default class SceneJogo extends Phaser.Scene {
 
     // Seleciona um NPC aleatório que NÃO seja o personagem escolhido
     const todosPersonagens = [
-      { id: "Gabriel", prefixo: "HB" },
+      { id: "Pedro", prefixo: "HB" },
       { id: "Maya",    prefixo: "ML" },
       { id: "Joao",    prefixo: "HM" },
       { id: "Dandara", prefixo: "MM" }

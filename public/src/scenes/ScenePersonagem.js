@@ -4,7 +4,7 @@ export default class ScenePersonagem extends Phaser.Scene {
 
         // Lista de configuração dos personagens: define chaves, posições e prefixos dos arquivos
         this.listaPersonagens = [
-            { id: "Gabriel", x: 300,  y: 700, escala: 0.42, prefixoArquivo: "HB" },
+            { id: "Pedro", x: 300,  y: 700, escala: 0.42, prefixoArquivo: "HB" },
             { id: "Maya",    x: 730,  y: 700, escala: 0.42, prefixoArquivo: "ML" },
             { id: "Joao",    x: 1170, y: 700, escala: 0.42, prefixoArquivo: "HM" },
             { id: "Dandara", x: 1600, y: 700, escala: 0.42, prefixoArquivo: "MM" }
