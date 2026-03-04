@@ -544,7 +544,9 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 ## 3.6. Regras do jogo (sprint 3)
 
 As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
+
 3.6.1. Fluxo de Navegação e Menus
+
 Menu Inicial:
 Jogar: Gatilho para a cena de Seleção de Personagens.
 Créditos: Sobreposição ou transição para a lista de colaboradores.
@@ -553,16 +555,19 @@ Seleção de Personagens:
 Feedback Visual: O hover (passar o mouse) ativa uma animação de destaque e escala (+10%) no card do personagem.
 Informação: Exibição dinâmica de descrição e status de vida (HP/Resistência).
 Confirmação: O clique bloqueia a seleção e inicia o carregamento (loading) do Nível 1.
+
 3.6.2. Regras de Início (Prólogo)
 Interação com NPC (Vanessa):
 A proximidade habilita o prompt da tecla [E].
 Trava de Diálogo: O jogador perde o controle de movimentação até que todos os nós do diálogo sejam percorridos.
 Gatilho de Progressão: O fim do diálogo ativa o script de follow (Vanessa caminha até a ponte). A entrada no ônibus (trigger de área) dispara a cutscene de transição para o Banco.
+
 3.6.3. O Hub do Banco e Missões
 Gerente-Geral: Atua como o Quest Giver. O diálogo concede ao jogador a rota da missão.
 Logística de Venda:
 Objetivo Secundário: Otimização de Combustível. O jogador deve planejar a ordem de visita aos estabelecimentos.
 Parceiro (PJ): O personagem PJ deve estar dentro de um raio de distância específico para que as interações com clientes sejam habilitadas.
+
 3.6.4. Sistema de Negociação (Interação com Clientes)
 O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
 Estrutura da Resposta: Cada pergunta apresenta 3 níveis de eficácia:
