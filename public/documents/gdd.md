@@ -551,11 +551,219 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 
 ## 3.7. Mecânicas do jogo (sprint 3)
 
-*Descreva aqui as formas de controle e interação que o jogador tem sobre o jogo: quais os comandos disponíveis, quais combinações de comandos, e quais as ações consequentes desses comandos. Utilize listas ou tabelas para organizar esta seção.*
+CONTROLES E MECÂNICAS DE INTERAÇÃO
 
-*Ex. Em um jogo de plataforma 2D para desktop, o jogador pode usar as teclas WASD para mecânicas de andar, mirar para cima, agachar, e as teclas JKL para atacar, correr, arremesar etc.*
+VISÃO GERAL
 
-*Ex. Em um jogo de puzzle para celular, o jogador pode tocar e arrastar sobre uma peça para movê-la sobre o tabuleiro, ou fazer um toque simples para rotacioná-la*
+Esta seção descreve as mecânicas de controle e interação disponíveis ao jogador, detalhando:
+
+• Dispositivos de entrada utilizados
+• Comandos disponíveis
+• Estados do jogo afetados
+• Respostas sistêmicas decorrentes de cada comando
+
+Plataforma: Desktop
+Dispositivos de entrada: Teclado e Mouse
+Modelo de interação: Tempo real com eventos condicionais
+
+MECÂNICAS DE INTERFACE E NAVEGAÇÃO
+
+2.1 Tela Inicial
+
+Dispositivo: Mouse
+Modelo de interação: Clique pontual
+
+Elementos interativos:
+
+Botão Jogar
+Ação do jogador: Clique com o mouse
+Resultado sistêmico: Transição para a cena de seleção de personagem
+
+Botão Créditos
+Ação do jogador: Clique com o mouse
+Resultado sistêmico: Abertura da tela de créditos com links externos (LinkedIn dos desenvolvedores e opção de gerar certificado para LinkedIn)
+
+Botão Configurações
+Ação do jogador: Clique com o mouse
+Resultado sistêmico: Abertura de pop-up de configurações
+
+2.2 Seleção de Personagem
+
+Dispositivo: Mouse
+
+Interação:
+
+Quatro cartas de personagem disponíveis
+Ação do jogador: Clique em uma carta
+Restrição: Seleção única
+Resultado sistêmico: Personagem selecionado é carregado como avatar ativo na partida
+
+MECÂNICAS DE CONFIGURAÇÃO E ACESSIBILIDADE
+
+Interface em formato pop-up modal.
+
+3.1 Controle de Volume
+
+Dispositivo: Mouse
+
+Botão “+”
+Resultado: Incremento do volume global do jogo
+
+Botão “–”
+Resultado: Redução do volume global do jogo
+
+3.2 Controle de Brilho
+
+Dispositivo: Mouse
+
+Botão “+”
+Resultado: Aumento do brilho da tela
+
+Botão “–”
+Resultado: Redução do brilho da tela
+
+3.3 Modo Alto Contraste
+
+Dispositivo: Mouse
+
+Botão ON
+Estado visual: Verde
+Resultado: Ativação de contraste elevado para melhoria de legibilidade
+
+Botão OFF
+Estado visual: Vermelho
+Resultado: Retorno ao padrão visual original
+
+3.4 Modos para Daltonismo
+
+Dispositivo: Mouse
+
+Opções disponíveis:
+
+Normal
+Deuteranomalia
+Protanomalia
+Tritanomalia
+
+Resultado sistêmico: Ajuste da paleta de cores do jogo para adaptação visual conforme o perfil selecionado
+
+3.5 Fechar Configurações
+
+Dispositivo: Mouse
+
+Botão Fechar
+Resultado: Retorno à cena anterior sem reinicialização do estado do jogo
+
+MECÂNICAS DE MOVIMENTO E CONTROLE EM TEMPO REAL
+
+4.1 Movimentação do Personagem
+
+Dispositivo: Teclado
+Modelo: Movimento contínuo enquanto tecla estiver pressionada
+
+Tecla A
+Ação: Movimento horizontal para a esquerda
+
+Tecla D
+Ação: Movimento horizontal para a direita
+
+Tecla W
+Ação: Movimento vertical para cima
+
+Tecla S
+Ação: Movimento vertical para baixo
+
+Observação técnica: O deslocamento é contínuo e depende do tempo de pressão da tecla.
+
+4.2 Interação com NPC
+
+Pré-condição: Proximidade espacial com NPC
+
+Tecla E
+Resultado: Abertura de pop-up de diálogo
+
+No pop-up:
+
+Botão “Vamos!”
+Dispositivo: Mouse
+Resultado: NPC executa movimento programado para a direita
+
+4.3 Controle de Tela
+
+Tecla F
+Resultado: Alterna modo tela cheia
+
+Tecla ESC
+Primeiro acionamento: Sai do modo tela cheia (se ativo)
+Segundo acionamento: Pausa o jogo e abre menu principal
+
+4.4 Transição de Cena
+
+Condição: Personagem atinge limite direito da tela
+
+Resultado sistêmico:
+• Mudança automática de cena
+• Reprodução de vídeo (ambiente de ônibus)
+• Interação bloqueada, exceto comandos básicos de movimentação
+
+MECÂNICAS DE EXPLORAÇÃO NO MAPA
+
+Dispositivo: Teclado
+
+Movimentação via AWSD
+
+Sistema de progressão:
+
+• O mapa segue ordem lógica de estabelecimentos
+• Entrada condicionada ao posicionamento do jogador
+
+Condição de entrada:
+
+Quando o personagem está posicionado em frente ao estabelecimento
+Resultado: Acesso ao interior
+
+MECÂNICA DE DIÁLOGO E TOMADA DE DECISÃO
+
+Dentro dos estabelecimentos:
+
+Dispositivo: Mouse
+
+Cada fala do NPC apresenta três blocos de escolha
+
+Ação do jogador: Clique em uma das três opções
+
+Resultado sistêmico:
+• Progressão do diálogo
+• Impacto narrativo ou sistêmico conforme escolha
+
+Modelo de interação: Escolha discreta com consequências estruturadas
+
+MECÂNICA DE RANKING
+
+Acesso via botão dedicado
+
+Dispositivo: Mouse
+
+Resultado: Abertura da tela de ranking regional
+
+Funcionalidades:
+
+• Visualização de ranking por cidade
+• Exibição comparativa de Cielo Coins acumuladas
+• Scroll vertical para navegação
+• Botão Fechar para retorno ao mapa
+
+Modelo: Interface informacional não interativa com dados dinâmicos
+
+CLASSIFICAÇÃO DAS MECÂNICAS
+
+O jogo combina três tipos principais de mecânicas:
+
+• Mecânicas de Navegação e Interface
+• Mecânicas de Movimento em Tempo Real
+• Mecânicas de Escolha e Decisão
+
+Esse conjunto cria uma experiência híbrida de exploração, narrativa interativa e progressão baseada em desempenho.
 
 ## 3.8. Implementação Matemática de Animação/Movimento (sprint 4)
 
