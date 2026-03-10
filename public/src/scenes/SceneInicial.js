@@ -108,7 +108,7 @@ export default class SceneInicial extends Phaser.Scene {
       amount: this.CONFIG.PIXELATE_AMOUNT,
       ease: "Sine.easeIn",
       onComplete: () => {
-        this.scene.start("SceneEscritorio"); //Inicia a cena do jogo após a transição
+        this.scene.start("ScenePersonagem"); //Inicia a cena do jogo após a transição
       }
     });
   }
