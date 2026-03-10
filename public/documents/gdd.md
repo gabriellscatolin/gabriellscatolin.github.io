@@ -9,11 +9,10 @@
 ## Nome do Grupo:
 Cielitos
 #### Nomes dos integrantes do grupo
-- Ana Alícia Medina Santos da Rocha Nunes
-- Eduardo Melquiades Amaral 
-- Gabriel Thomas Correia Scatolin 
-- Lucas Komatsu Borten 
-- Matheus Correia
+- Alícia Medina 
+- Eduardo Melquiades 
+- Gabriel Scatolin 
+- Lucas Borten 
 - Nicolas Dely 
 - Rachel Silvestre
 - Sofia Brandão
@@ -160,19 +159,64 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
-*Posicione aqui o canvas de proposta de valor. Descreva os aspectos essenciais para a criação de valor da ideia do produto com o objetivo de ajudar a entender melhor a realidade do cliente e entregar uma solução que está alinhado com o que ele espera.*
+&emsp;A Proposta de Valor do Mini Mundo Cielo está estruturada em torno de dois perfis centrais: a **Cielo S.A.** (cliente contratante) e os **Gerentes de Negócios** (usuários finais do jogo).
+
+**Para a Cielo S.A.:**
+
+- **Ganhos gerados:** Padronização do treinamento de vendas em escala nacional; redução de custos operacionais com treinamentos presenciais; geração de métricas de desempenho individuais e coletivas; aceleração do onboarding de novos GNs.
+- **Dores aliviadas:** Disparidade no nível de conhecimento entre GNs de diferentes regiões do Brasil; dificuldade de avaliar a evolução dos profissionais em campo; alto custo logístico de treinamentos presenciais.
+- **Produto/Serviço:** Jogo educacional web-based, acessível sem instalação, que simula situações reais de venda do portfólio Cielo com feedback imediato e sistema de pontuação.
+
+**Para os Gerentes de Negócios (GNs):**
+
+- **Ganhos gerados:** Aprendizado prático e dinâmico das técnicas de venda; autonomia para treinar no próprio ritmo; feedback imediato sobre acertos e erros; experiência engajante que substitui materiais estáticos.
+- **Dores aliviadas:** Falta de acesso a treinamentos de qualidade em regiões remotas; desmotivação com métodos tradicionais (manuais, vídeos passivos); insegurança ao aplicar técnicas de venda com clientes reais.
+- **Produto/Serviço:** Personagem customizável, missões baseadas em situações reais, progresso visível com moedas e ranking, e narrativa que contextualiza o portfólio da Cielo.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
-*Descreva brevemente a solução desenvolvida para o parceiro de negócios. Descreva os aspectos essenciais para a criação de valor da ideia do produto com o objetivo de ajudar a entender melhor a realidade do cliente e entregar uma solução que está alinhado com o que ele espera. Observe a seção 2 e verifique que ali é possível trazer mais detalhes, portanto seja objetivo aqui. Atualize esta descrição até a entrega final, conforme desenvolvimento.*
+&emsp;O **Mini Mundo Cielo** é um jogo educacional do tipo Serious Game, desenvolvido para navegador web (desktop), que simula o cotidiano de um Gerente de Negócios da Cielo S.A. em campo. O jogador escolhe um personagem representativo da diversidade brasileira e percorre cidades em pixel art top-down, interagindo com NPCs que simulam clientes reais — desde donos de padaria até proprietários de postos de gasolina.
+
+&emsp;A solução é estruturada em duas cidades progressivas: a primeira introduz as mecânicas básicas e os estabelecimentos iniciais; a segunda apresenta contextos de venda mais complexos, desbloqueada apenas após o cumprimento de metas mínimas na cidade anterior. A progressão é medida por um sistema de moedas obtidas nas interações de negociação, onde o jogador deve selecionar a resposta mais adequada em diálogos com múltipla escolha que replicam as etapas de venda do portfólio Cielo.
+
+&emsp;O jogo é acessado diretamente pelo navegador, sem necessidade de instalação, garantindo acesso equitativo a todos os GNs independentemente de sua localização geográfica. A experiência é individual, com duração estimada de sessões de 15 minutos, totalizando aproximadamente 3 horas de conteúdo completo.
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-*Registre na matriz os riscos identificados no projeto, visando avaliar situações que possam representar ameaças e oportunidades, bem como os impactos relevantes sobre o projeto. Apresente os riscos, ressaltando, para cada um, impactos e probabilidades com plano de ação e respostas.*
+&emsp;A matriz de riscos abaixo identifica as principais ameaças ao projeto, classificadas por probabilidade e impacto, com o respectivo plano de resposta.
+
+<div align="center">
+<sub>Tabela 2 - Matriz de Riscos do Projeto</sub>
+
+| # | Risco | Probabilidade | Impacto | Classificação | Plano de Resposta |
+|---|-------|:---:|:---:|:---:|---|
+| R1 | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | Média | Alto | **Crítico** | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
+| R2 | Desengajamento dos usuários com o formato de Serious Game | Média | Alto | **Crítico** | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
+| R3 | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | Baixa | Alto | **Moderado** | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
+| R4 | Escopo técnico maior que a capacidade da equipe nas sprints definidas | Alta | Médio | **Moderado** | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
+| R5 | Baixa adesão dos GNs por dificuldade com ferramentas digitais | Média | Médio | **Moderado** | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| R6 | Perda de dados de progresso do jogador por falha técnica | Baixa | Baixo | **Baixo** | Implementar salvamento de estado da sessão; documentar este risco para versões futuras com backend. |
+
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-*Definição de metas SMART (específicas, mensuráveis, alcançáveis, relevantes e temporais) para seu projeto, com indicadores claros para mensuração*
+&emsp;As metas SMART abaixo foram definidas para orientar o desenvolvimento e a validação do Mini Mundo Cielo, garantindo que os objetivos sejam específicos, mensuráveis, alcançáveis, relevantes e temporais.
+
+<div align="center">
+<sub>Tabela 3 - Objetivos SMART do Projeto</sub>
+
+| # | Objetivo | Específico | Mensurável | Alcançável | Relevante | Temporal |
+|---|----------|-----------|-----------|-----------|----------|---------|
+| O1 | Entregar MVP funcional com Cidade 1 completa | Implementar mapa, 6 NPCs com diálogos e sistema de moedas | 100% dos requisitos da Cidade 1 implementados e testados | Escopo dimensionado para 5 sprints com equipe de 8 pessoas | Permite validar o core loop do jogo com o parceiro | Até o final da Sprint 4 |
+| O2 | Garantir compatibilidade multiplataforma | Jogo funcional em Chrome, Edge e Firefox | Taxa de erros < 5% em cada navegador testado | Uso do framework Phaser.js com suporte amplo a browsers | Garante acesso equitativo a GNs em diferentes ambientes corporativos | Até o final da Sprint 3 |
+| O3 | Validar o jogo com testes de jogabilidade | Realizar sessões de playtest com pelo menos 5 usuários externos | Coletar avaliação mínima de 7/10 de satisfação nos testes | Acessar usuários por meio da rede de contatos da equipe e da Inteli | Fundamenta decisões de melhoria com base em dados reais | Até o final da Sprint 5 |
+| O4 | Garantir acessibilidade básica | Implementar modo daltônico, controle de volume e brilho | Todas as opções de acessibilidade funcionais nas configurações | Recursos já planejados na mecânica de configurações | Atende a diversidade do público-alvo de 3.000 GNs anuais | Até o final da Sprint 4 |
+| O5 | Representar diversidade no elenco de personagens | Criar 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional | 100% dos personagens com fichas técnicas e sprites finalizados | Personagens já desenvolvidos em pixel art nas primeiras sprints | Reflete a diversidade real da base de vendedores da Cielo no Brasil | Até o final da Sprint 2 |
+
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
@@ -803,7 +847,69 @@ Esse conjunto cria uma experiência híbrida de exploração, narrativa interati
 
 ## 3.8. Implementação Matemática de Animação/Movimento (sprint 4)
 
-*Descreva aqui a função que implementa a movimentação/animação de personagens ou elementos gráficos no seu jogo. Sua função deve se basear em alguma formulação matemática (e.g. fórmula de aceleração). A explicação do funcionamento desta função deve conter notação matemática formal de fórmulas/equações. Se necessário, crie subseções para sua descrição.*
+&emsp;Esta seção descreve as formulações matemáticas utilizadas para a movimentação do personagem, detecção de proximidade com NPCs e a transição de cenas com efeito clock wipe.
+
+### 3.8.1. Movimentação do Personagem
+
+&emsp;O personagem se move com **velocidade constante** em quatro direções (cima, baixo, esquerda, direita). A posição do personagem a cada frame é atualizada pela equação cinemática de movimento uniforme:
+
+$$P_{n+1} = P_n + v \cdot \Delta t$$
+
+Onde:
+- $P_n$ = posição atual do personagem (em pixels)
+- $v$ = velocidade escalar constante (definida em `velocidadePersonagem`, em pixels por segundo)
+- $\Delta t$ = intervalo de tempo entre frames (gerenciado internamente pelo Phaser.js via `update()`)
+
+&emsp;Na implementação com Phaser.js, a velocidade é aplicada diretamente ao corpo físico do sprite, e o motor de física atualiza a posição automaticamente a cada frame:
+
+```js
+corpoFisico.setVelocityX(velocidadePersonagem);  // movimento horizontal
+corpoFisico.setVelocityY(-velocidadePersonagem); // movimento vertical (eixo Y invertido)
+```
+
+### 3.8.2. Limitação de Fronteiras (Clamping)
+
+&emsp;Para impedir que o personagem saia dos limites do mapa, aplica-se a função de clamping, que restringe a posição do personagem ao intervalo $[P_{min}, P_{max}]$:
+
+$$P_{clamped} = \max(P_{min},\; \min(P_{max},\; P))$$
+
+&emsp;Na implementação:
+
+```js
+this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
+this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
+```
+
+### 3.8.3. Detecção de Proximidade com NPCs
+
+&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. A distância euclidiana entre dois pontos no plano 2D é calculada por:
+
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+
+Onde $(x_1, y_1)$ é a posição do personagem e $(x_2, y_2)$ é a posição do NPC. Se $d < r_{interação}$ (definido como 150 pixels), o indicador de interação `[E]` é exibido e a tecla de ação fica disponível:
+
+```js
+const distNpc = Phaser.Math.Distance.Between(px, py, npcX, npcY);
+this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
+```
+
+### 3.8.4. Animação Clock Wipe (Transição de Cenas)
+
+&emsp;A transição entre cenas utiliza um efeito clock wipe, que anima uma máscara circular de forma progressiva. O ângulo inicial $\theta_0 = -\frac{\pi}{2}$ (topo do círculo) e avança em sentido horário até completar $2\pi$ radianos (volta completa):
+
+$$\theta(t) = -\frac{\pi}{2} + t \cdot 2\pi, \quad t \in [0, 1]$$
+
+&emsp;A cada frame da animação, um arco é desenhado do ângulo $\theta_0$ até $\theta(t)$, revelando progressivamente a nova cena por baixo da máscara:
+
+```js
+onUpdate: (tween) => {
+  const t = tween.getValue(); // progresso de 0 a 1
+  const startAngle = -Math.PI / 2 + t * Math.PI * 2;
+  maskGraphics.clear();
+  maskGraphics.arc(cx, cy, raio, startAngle, -Math.PI / 2 + Math.PI * 2, false);
+  maskGraphics.fillPath();
+}
+```
 
 # <a name="c4"></a>4. Desenvolvimento do Jogo
 
@@ -1106,15 +1212,70 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 
 ### 5.2.2 Melhorias
 
-*Descreva nesta seção um plano de melhorias sobre o jogo, com base nos resultados dos testes de jogabilidade*
+&emsp;Com base nos resultados do playtest realizado e nas observações da equipe durante o desenvolvimento, foram identificados os seguintes pontos de melhoria e respectivos planos de ação:
+
+<div align="center">
+<sub>Tabela 4 - Plano de Melhorias Pós-Playtest</sub>
+
+| # | Problema Identificado | Origem | Prioridade | Plano de Ação |
+|---|----------------------|--------|:---:|---------------|
+| M1 | Atraso na resposta do personagem aos comandos de movimento (input lag) | Feedback do testador João Jonas | Alta | Revisar a lógica da função `update()` para garantir que a aplicação de velocidade ocorra antes do cálculo de posição no mesmo frame; avaliar redução do `frameRate` de animação para eliminar sobrecarga. |
+| M2 | Mecânicas avançadas não exploradas espontaneamente pelo jogador | Observação durante o playtest | Média | Expandir o tutorial inicial para apresentar todos os controles disponíveis (E para interação, F para tela cheia, ESC para pausa) de forma gradual e contextualizada. |
+| M3 | Ausência de feedback visual ao completar uma missão com sucesso | Identificado pela equipe | Média | Implementar animação de celebração (ex: efeito de partículas ou tela de resultado) ao atingir o objetivo de moedas da missão. |
+| M4 | Dificuldade não percebida nos primeiros diálogos de negociação | Observação durante o playtest | Baixa | Rebalancear as respostas dos primeiros NPCs para que a diferença entre opções adequada/inadequada seja mais clara, servindo como tutorial implícito de negociação. |
+
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
 
 # <a name="c6"></a>6. Conclusões e trabalhos futuros (sprint 5)
 
-*Escreva de que formas a solução do jogo atingiu os objetivos descritos na seção 1 deste documento. Indique pontos fortes e pontos a melhorar de maneira geral.*
+## 6.1. Atingimento dos Objetivos
 
-*Relacione os pontos de melhorias evidenciados nos testes com plano de ações para serem implementadas no jogo. O grupo não precisa implementá-las, pode deixar registrado aqui o plano para futuros desenvolvimentos.*
+&emsp;O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
 
-*Relacione também quaisquer ideias que o grupo tenha para melhorias futuras*
+**Objetivos atingidos:**
+- Implementação completa do fluxo de jogo: menu inicial → seleção de personagem → gameplay → interação com NPC → transição de cena.
+- Desenvolvimento de 4 personagens jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
+- Criação de 8 NPCs secundários com identidades, estabelecimentos e contextos de venda distintos.
+- Sistema de movimentação funcional com WASD, colisão com obstáculos, limites de mapa e detecção de proximidade para interação.
+- Implementação de opções de acessibilidade (modo daltônico, controle de volume e brilho) nas configurações do jogo.
+- Identidade visual alinhada à marca Cielo, com uso de cores institucionais, logotipos e referências ao portfólio da empresa.
+- Sistema de diálogo com múltipla escolha e feedback imediato, replicando as etapas de negociação do processo de venda.
+
+**Objetivos parcialmente atingidos:**
+- A Cidade 2 foi planejada mas não completamente implementada no MVP, sendo identificada como prioridade para versões futuras.
+- O sistema de ranking regional foi arquitetado nas mecânicas, mas a integração com backend para persistência de dados não foi realizada neste ciclo.
+
+## 6.2. Pontos Fortes e Pontos de Melhoria
+
+**Pontos fortes:**
+- A escolha do Phaser.js como framework permitiu desenvolvimento ágil e compatibilidade nativa com navegadores modernos, sem necessidade de plugins ou instalação.
+- A estrutura modular do código (separação de cenas, assets e lógica) facilita a manutenção e a colaboração em equipe, além de simplificar a adição de novas funcionalidades.
+- O design dos personagens e do mundo em pixel art transmite uma estética coesa e acessível, compatível com o público-alvo sem exigir hardware de alto desempenho.
+- A representatividade étnica e regional nos personagens jogáveis e NPCs é um diferencial que reforça o senso de pertencimento dos GNs ao interagir com o jogo.
+- O sistema de transições animadas (pixelização e clock wipe) eleva a qualidade percebida do produto, conferindo ao jogo uma identidade visual distinta.
+
+**Pontos de melhoria:**
+- O input lag identificado no playtest indica necessidade de otimização da lógica de movimento no ciclo `update()`.
+- A curva de aprendizagem poderia ser mais suave com um tutorial mais completo que apresente gradualmente todos os controles disponíveis.
+- A ausência de feedback visual explícito ao completar missões reduz a sensação de recompensa do jogador.
+- A documentação de sprints 3, 4 e 5 no GDD poderia ser mais detalhada, com screenshots e descrições de cada funcionalidade implementada.
+
+## 6.3. Plano de Trabalhos Futuros
+
+&emsp;Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+
+| # | Melhoria | Descrição | Impacto Esperado |
+|---|----------|-----------|-----------------|
+| F1 | Implementação completa da Cidade 2 | Desenvolver a segunda cidade com estabelecimentos de maior complexidade e NPCs com missões avançadas de venda | Aumenta o tempo de jogo para ~3h e aprofunda o aprendizado do portfólio |
+| F2 | Backend e persistência de dados | Implementar servidor para salvar progresso do jogador, histórico de missões e pontuações | Permite ranking real entre GNs e geração de relatórios de desempenho para a Cielo |
+| F3 | Sistema de ranking regional | Exibir leaderboard por região do Brasil, incentivando competição saudável entre GNs | Aumenta engajamento e permite à Cielo identificar regiões com melhor performance |
+| F4 | Expansão do sistema de quizzes | Adicionar mais variações de perguntas por NPC e embaralhar opções de resposta a cada sessão | Evita memorização mecânica das respostas e garante aprendizado genuíno |
+| F5 | Otimização de performance | Refatorar o ciclo `update()` para reduzir input lag; implementar carregamento lazy de assets | Melhora a experiência de jogo, especialmente em computadores com hardware limitado |
+| F6 | Versão mobile | Adaptar controles para toque e redimensionar a interface para telas menores | Amplia o alcance do treinamento para GNs que utilizam tablets ou smartphones no campo |
+| F7 | Atualização dinâmica de conteúdo | Parametrizar diálogos e produtos em arquivos externos (JSON), permitindo atualização do portfólio Cielo sem refatoração de código | Garante relevância do conteúdo a longo prazo sem depender de intervenção técnica |
+
+&emsp;O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
 
 # <a name="c7"></a>7. Referências (sprint 5)
 
@@ -1155,13 +1316,40 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 
 
 
-LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>
-SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>
-
-INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
-SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
-
 # <a name="c8"></a>Anexos
 
-*Inclua aqui quaisquer complementos para seu projeto, como diagramas, imagens, tabelas etc. Organize em sub-tópicos utilizando headings menores (use ## ou ### para isso)*
+## 8.1. Diagrama de Cenas
+
+&emsp;O diagrama de cenas abaixo representa o fluxo completo de navegação entre as telas do Mini Mundo Cielo, desde o menu inicial até as transições entre as cidades do jogo.
+
+- **SceneInicial** → tela de menu principal com botões Jogar, Configurações e Créditos.
+- **ScenePersonagem** → tela de seleção dos 4 personagens jogáveis.
+- **SceneCutscene** → vídeo introdutório que contextualiza a narrativa do jogo.
+- **SceneJogo** → cena principal de gameplay (Cidade 1), com movimentação do personagem, interação com NPCs e sistema de missões.
+- **SceneCidade2** → cena da segunda cidade, desbloqueada após completar as missões da Cidade 1 com pontuação mínima.
+- **SceneFinal** → tela de encerramento com certificado de conclusão na sede da Cielo.
+
+## 8.2. Tabela de Requisitos x Funcionalidades Implementadas
+
+<div align="center">
+<sub>Tabela 5 - Rastreabilidade de Requisitos</sub>
+
+| Requisito | Descrição | Status |
+|-----------|-----------|:------:|
+| R1 | Tela inicial com opções Jogar, Créditos e Configurações | Implementado |
+| R2 | Controle do personagem via WASD | Implementado |
+| R3 | Jogo para plataforma web sem instalação | Implementado |
+| R4 | Mapa interativo com deslocamento do personagem | Implementado |
+| R5 | Interação com NPCs que simulam situações de venda | Implementado |
+| R6 | Aprendizado de técnicas de venda integrado à narrativa | Implementado |
+| R7 | Missões com sistema de moedas como recompensa | Implementado |
+| R8 | Identidade visual Cielo (cores, logotipos) | Implementado |
+| R9 | Quizzes e puzzles com registro de acertos e falhas | Parcial |
+| R10 | Instruções claras e progressivas (tutorial) | Implementado |
+| R11 | Missões inspiradas em situações reais da Cielo | Implementado |
+| R12 | Câmera no formato top-down | Implementado |
+| R13 | Etapas de venda seguindo passo a passo da Cielo | Implementado |
+
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
 =======;
