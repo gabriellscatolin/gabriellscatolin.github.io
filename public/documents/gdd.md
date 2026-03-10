@@ -37,25 +37,7 @@ Cielitos
 
 <br>
 
-## Lista de figuras
 
-Figura 1 - Análise de 5 Forças de Porter - Cielo
-
-Figura 2 - Análise SWOT - Cielo
-
-Figura 3 - Personagens secundários
-
-Figura 4 - Stardew Valley
-
-Figura 5 - Pokemon FireRed
-
-Figura 6 - Página 1 do Diagrama de Cenas
-
-Figura 7 - Fixa técnica dos personagens jogáveis
-
-Figura 8 - Concept Art - integração entre cenários
-
-Figura 9 - Concept Art - Cidades do jogo 
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
@@ -224,23 +206,41 @@ Os requisitos do projeto descrevem as funcionalidades e características necess�
 
 <div align="center">
 
-<sub>Tabela 1 - Requisitos do Projeto</sub>
+<sub>Tabela 1 - Requisitos Funcionais do Projeto</sub>
 
-\# | Requisito  
+\# | Requisitos Funcionais (RF)
 --- | ---
-1| O jogo deverá apresentar uma tela inicial contendo as opções “Jogar”, “Créditos” e “Configurações”.
-2| O controle do personagem deverá ser realizado por meio das teclas WASD para movimentação no ambiente do jogo.
-3| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
-4| O jogo deverá apresentar um mapa interativo que represente estabelecimentos do cotidiano dos usuários, possibilitando o acompanhamento do deslocamento e progresso do personagem.
-5| O jogador deverá interagir com NPCs que simulam situações de atendimento e venda, baseadas em contextos reais do parceiro.
-6| As mecânicas do jogo deverão possibilitar o aprendizado de conceitos de serviço e técnicas de venda utilizadas pelo parceiro, integradas à narrativa e às missões.
-7| O jogo deverá conter missões vinculadas ao ganho de moedas, utilizadas como sistema de progressão e recompensa.
-8| O jogo deverá utilizar referências visuais, cores e logotipos da Cielo, respeitando a identidade visual do parceiro.
-9| O jogo deverá incluir quizzes e puzzles ao longo da experiência para reforçar o aprendizado, permitindo o registro de métricas de acertos e falhas dos jogadores.
-10| O jogo deverá apresentar instruções claras e progressivas, possibilitando que o jogador compreenda as mecânicas e avance de forma intuitiva.
-11| As missões do jogo deverão ser inspiradas em missões reais já utilizadas pelo parceiro, e o trajeto do personagem deverá ser baseado nas rotas reais utilizadas pelos vendedores da Cielo.
-12| O jogo deverá contar com uma câmera de acompanhamento no formato side-scroller/top-down.
-13| As etapas de venda do parceiro deverão seguir o mesmo passo a passo ao longo do jogo durante as interações.
+RF01| O jogo deverá apresentar uma tela inicial contendo as opções “Jogar”, “Créditos” e “Configurações”.
+RF02| O jogo deverá permitir o controle do personagem por meio das teclas WASD para movimentação no ambiente.
+RF03| O jogo deverá permitir a interação com objetos e NPCs através do acionamento da tecla E.
+RF04| O jogo deverá apresentar uma tela de seleção de personagens antes do início da partida.
+RF05| O jogo deverá apresentar um mapa interativo que possibilite o acompanhamento do deslocamento e progresso do personagem.
+RF06| O jogo deverá contar com uma câmera de acompanhamento no formato side-scroller ou top-down.
+RF07| O jogo deverá permitir a interação com NPCs que simulam situações de atendimento e venda.
+RF08| O jogo deverá executar as etapas de venda seguindo o passo a passo padrão do parceiro durante as interações.
+RF09| O jogo deverá bloquear o controle de movimentação do jogador durante diálogos e eventos narrativos até o término da interação.
+RF10| O jogo deverá exibir janelas de pop-up para informações rápidas, feedbacks, quizzes e alertas.
+RF11| O jogo deverá incluir quizzes e puzzles que registrem métricas de acertos e falhas dos jogadores.
+RF12| O jogo deverá conter missões vinculadas ao ganho de moedas como sistema de progressão e recompensa.
+RF13| O jogo deverá ser estruturado em levels (níveis) com dificuldade e objetivos progressivos.
+RF14| O jogo deverá conter cutscenes para introduzir a narrativa e realizar transições entre missões.
+RF15| O jogo deverá apresentar um Menu de pausa com opções de retornar ao jogo, configurações e sair.
+RF16| O jogo deverá apresentar instruções claras e progressivas sobre suas mecânicas e objetivos.
+RF17| O jogo deverá apresentar uma cena final de encerramento após a conclusão de todos os níveis e metas.
+
+<sub>Tabela 2 - Requisitos Não Funcionais do Projeto</sub>
+
+\# |  Requisitos Não Funcionais (RNF)
+--- | ---
+Descrevem restrições técnicas, de design, acessibilidade e regras de negócio.
+RNF01| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
+RNF02| O jogo deverá utilizar a identidade visual (cores e logotipos) da Cielo.
+RNF03| O jogo deverá conter referências visuais, logotipos e cores dos bancos parceiros (Bradesco e Banco do Brasil), incluindo a representação de suas agências.
+RNF04| O jogo deverá integrar o aprendizado de técnicas de venda e serviços à narrativa e às missões de forma pedagógica.
+RNF05| O jogo deverá basear suas missões e rotas em trajetos e situações reais enfrentadas pelos vendedores da Cielo.
+RNF06| O jogo deverá permitir, através do menu de configurações, o ajuste de volume, brilho e a ativação de um modo de daltonismo.
+RNF07| O jogo deverá ser intuitivo, garantindo que o jogador compreenda a progressão sem auxílio externo.
+
 
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
