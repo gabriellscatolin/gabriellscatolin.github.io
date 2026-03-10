@@ -2,8 +2,7 @@ import SceneInicial from "./src/scenes/SceneInicial.js";
 import SceneJogo from "./src/scenes/SceneJogo.js";
 import ScenePersonagem from "./src/scenes/ScenePersonagem.js";
 import SceneCutscene from "./src/scenes/SceneCutscene.js";
-import SceneEscritorio from "./src/scenes/SceneEscritorio.js"; 
-import SceneCidade from "./src/scenes/SceneCidade.js"; 
+import SceneEscritorio from "./src/scenes/SceneEscritorio.js";  
 
 //Configuração do jogo phaser
 const config = {
