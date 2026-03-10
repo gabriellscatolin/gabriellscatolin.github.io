@@ -55,6 +55,7 @@ export default class SceneCutscene extends Phaser.Scene {
       this.clockWipe(true, () => {
         this.video.stop();    //Para o vídeo
         this.video.destroy(); //Fica na tela preta por enquanto
+        this.scene.start('SceneEscritorio');
       });
     });
   }
