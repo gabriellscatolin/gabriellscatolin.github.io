@@ -632,219 +632,200 @@ O sucesso da venda é baseado em um sistema de pontuação oculta derivado das e
 
 ## 3.7. Mecânicas do jogo (sprint 3)
 
-CONTROLES E MECÂNICAS DE INTERAÇÃO
 
-VISÃO GERAL
+**Controles e Mecânicas de Interação**
 
+**1. Visão Geral**
 Esta seção descreve as mecânicas de controle e interação disponíveis ao jogador, detalhando:
-
 • Dispositivos de entrada utilizados
 • Comandos disponíveis
 • Estados do jogo afetados
 • Respostas sistêmicas decorrentes de cada comando
-
 Plataforma: Desktop
 Dispositivos de entrada: Teclado e Mouse
 Modelo de interação: Tempo real com eventos condicionais
 
-MECÂNICAS DE INTERFACE E NAVEGAÇÃO
+**2. Mecânicas de Interface e Navegação**
 
-2.1 Tela Inicial
-
+*2.1 Tela Inicial*
 Dispositivo: Mouse
 Modelo de interação: Clique pontual
-
 Elementos interativos:
-
 Botão Jogar
 Ação do jogador: Clique com o mouse
 Resultado sistêmico: Transição para a cena de seleção de personagem
-
 Botão Créditos
 Ação do jogador: Clique com o mouse
 Resultado sistêmico: Abertura da tela de créditos com links externos (LinkedIn dos desenvolvedores e opção de gerar certificado para LinkedIn)
-
 Botão Configurações
 Ação do jogador: Clique com o mouse
 Resultado sistêmico: Abertura de pop-up de configurações
 
-2.2 Seleção de Personagem
-
+*2.2 Seleção de Personagem*
 Dispositivo: Mouse
-
 Interação:
-
 Quatro cartas de personagem disponíveis
 Ação do jogador: Clique em uma carta
 Restrição: Seleção única
 Resultado sistêmico: Personagem selecionado é carregado como avatar ativo na partida
 
-MECÂNICAS DE CONFIGURAÇÃO E ACESSIBILIDADE
-
+**3. Mecânicas de Configuração e Acessibilidade**
 Interface em formato pop-up modal.
 
-3.1 Controle de Volume
-
+*3.1 Controle de Volume*
 Dispositivo: Mouse
-
 Botão “+”
 Resultado: Incremento do volume global do jogo
-
 Botão “–”
 Resultado: Redução do volume global do jogo
 
-3.2 Controle de Brilho
-
+*3.2 Controle de Brilho*
 Dispositivo: Mouse
-
 Botão “+”
 Resultado: Aumento do brilho da tela
-
 Botão “–”
 Resultado: Redução do brilho da tela
 
-3.3 Modo Alto Contraste
-
+*3.3 Modo Alto Contraste*
 Dispositivo: Mouse
-
 Botão ON
 Estado visual: Verde
 Resultado: Ativação de contraste elevado para melhoria de legibilidade
-
 Botão OFF
 Estado visual: Vermelho
 Resultado: Retorno ao padrão visual original
 
-3.4 Modos para Daltonismo
-
+*3.4 Modos para Daltonismo*
 Dispositivo: Mouse
-
 Opções disponíveis:
-
 Normal
 Deuteranomalia
 Protanomalia
 Tritanomalia
-
 Resultado sistêmico: Ajuste da paleta de cores do jogo para adaptação visual conforme o perfil selecionado
 
-3.5 Fechar Configurações
-
+*3.5 Fechar Configurações*
 Dispositivo: Mouse
-
 Botão Fechar
 Resultado: Retorno à cena anterior sem reinicialização do estado do jogo
 
-MECÂNICAS DE MOVIMENTO E CONTROLE EM TEMPO REAL
 
-4.1 Movimentação do Personagem
+**4. Mecânicas de Movimento e Controle em Tempo Real**
 
+*4.1 Movimentação do Personagem*
 Dispositivo: Teclado
 Modelo: Movimento contínuo enquanto tecla estiver pressionada
-
 Tecla A
 Ação: Movimento horizontal para a esquerda
-
 Tecla D
 Ação: Movimento horizontal para a direita
-
 Tecla W
 Ação: Movimento vertical para cima
-
 Tecla S
 Ação: Movimento vertical para baixo
-
 Observação técnica: O deslocamento é contínuo e depende do tempo de pressão da tecla.
 
-4.2 Interação com NPC
-
+*4.2 Interação com NPC*
 Pré-condição: Proximidade espacial com NPC
-
 Tecla E
 Resultado: Abertura de pop-up de diálogo
-
 No pop-up:
-
 Botão “Vamos!”
 Dispositivo: Mouse
 Resultado: NPC executa movimento programado para a direita
 
-4.3 Controle de Tela
-
+*4.3 Controle de Tela*
 Tecla F
 Resultado: Alterna modo tela cheia
-
 Tecla ESC
 Primeiro acionamento: Sai do modo tela cheia (se ativo)
 Segundo acionamento: Pausa o jogo e abre menu principal
 
-4.4 Transição de Cena
-
+*4.4 Transição de Cena*
 Condição: Personagem atinge limite direito da tela
-
 Resultado sistêmico:
 • Mudança automática de cena
 • Reprodução de vídeo (ambiente de ônibus)
-• Interação bloqueada, exceto comandos básicos de movimentação
+• Interações do jogador ficam temporariamente desativadas durante a reprodução do vídeo.
 
-MECÂNICAS DE EXPLORAÇÃO NO MAPA
-
+**5. Mecânicas de Exploração no Mapa**
 Dispositivo: Teclado
-
-Movimentação via AWSD
-
+Movimentação via WASD
 Sistema de progressão:
-
 • O mapa segue ordem lógica de estabelecimentos
 • Entrada condicionada ao posicionamento do jogador
-
 Condição de entrada:
-
 Quando o personagem está posicionado em frente ao estabelecimento
 Resultado: Acesso ao interior
 
-MECÂNICA DE DIÁLOGO E TOMADA DE DECISÃO
+*5.1 Sistema de Progressão*
+Condição de ativação: 
+Conclusão da interação com cliente no estabelecimento atual.
+Ação do jogador:
+Finalizar a negociação com o cliente.
+Resultado sistêmico: 
+• Desbloqueio do próximo estabelecimento no mapa
+• Atualização da missão ativa
+• Continuidade da progressão do jogador
 
+**6. Mecânica de Diálogo e Tomada de Decisão**
 Dentro dos estabelecimentos:
-
 Dispositivo: Mouse
-
-Cada fala do NPC apresenta três blocos de escolha
-
-Ação do jogador: Clique em uma das três opções
-
+Interface: três opções de resposta apresentadas ao jogador
+Ação do jogador:
+Clique em uma das opções disponíveis
 Resultado sistêmico:
 • Progressão do diálogo
-• Impacto narrativo ou sistêmico conforme escolha
+• Impacto narrativo ou sistêmico conforme escolha realizada
 
-Modelo de interação: Escolha discreta com consequências estruturadas
+**7. Mecânica de Recompensa**
 
-MECÂNICA DE RANKING
+Essa mecânica define o sistema de pontuação e recompensas obtidas pelo jogador durante as interações com clientes.
+
+*7.1 Condição de ativação*
+Conclusão de uma negociação ou interação com cliente dentro de um estabelecimento.
+
+*7.2 Sistema de pontuação*
+Cada escolha realizada durante o diálogo possui um peso específico:
+\# | Tipo de resposta | Pontuação|
+--- | --- | --- |
+1 | Resposta adequada | Pontuação máxima 
+2 | Resposta intermediária |Pontuação parcial
+3 |Resposta inadequada|	Sem pontuação
+
+*7.3 Resultado sistêmico*
+• Atualização do total de Cielo Coins do jogador
+• Registro do desempenho da interação
+• Atualização do ranking do jogador
+
+*7.4 Feedback ao jogador*
+O sistema apresenta retorno visual indicando o resultado da escolha realizada.
+
+**8. Mecânica de Ranking**
 
 Acesso via botão dedicado
-
 Dispositivo: Mouse
-
 Resultado: Abertura da tela de ranking regional
-
 Funcionalidades:
-
 • Visualização de ranking por cidade
 • Exibição comparativa de Cielo Coins acumuladas
 • Scroll vertical para navegação
 • Botão Fechar para retorno ao mapa
-
 Modelo: Interface informacional não interativa com dados dinâmicos
 
-CLASSIFICAÇÃO DAS MECÂNICAS
+**9. Classificação das Mecânicas**
 
-O jogo combina três tipos principais de mecânicas:
+Categorias de Mecânicas Implementadas
 
-• Mecânicas de Navegação e Interface
-• Mecânicas de Movimento em Tempo Real
-• Mecânicas de Escolha e Decisão
+Mecânicas de Navegação e Interface
+Interação com menus, telas de configuração e navegação entre cenas.
 
-Esse conjunto cria uma experiência híbrida de exploração, narrativa interativa e progressão baseada em desempenho.
+Mecânicas de Movimento em Tempo Real
+Controle do personagem no mapa utilizando teclado (WASD) e interação contextual com NPCs.
+
+Mecânicas de Escolha e Decisão
+Sistema de diálogo com múltiplas opções que impactam a pontuação e progressão do jogador.
+
 
 ## 3.8. Implementação Matemática de Animação/Movimento (sprint 4)
 
