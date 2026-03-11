@@ -84,7 +84,7 @@ export default class SceneCutscene extends Phaser.Scene {
         maskGraphics.beginPath();
         maskGraphics.moveTo(cx, cy);
 
-        if (clockwise) {
+       if (clockwise) {
           // Sentido horário: área visível encolhe no sentido horário
           const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
           const endAngle = -Math.PI / 2 + Math.PI * 2;
