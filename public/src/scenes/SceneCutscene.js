@@ -3,12 +3,11 @@ export default class SceneCutscene extends Phaser.Scene {
   constructor() {
     super("SceneCutscene");
 
-// Configurações da cena (Partes fixas)
+// Configurações e assets da cutscene
     this.CONFIG = {
-      //Duração e easing da transição clock wipe
-      WIPE_DURATION: 1000, // Duração do wipe em milissegundos
-      WIPE_EASE: "Sine.easeInOut", // Tipo de easing da animação
-      TEMPO_CORTE: 7500, // Tempo em ms para iniciar o fade out (7.5 segundos)
+      WIPE_DURATION: 1000, 
+      WIPE_EASE: "Sine.easeInOut", 
+      TEMPO_CORTE: 7500, 
       ASSETS: {
         video: "src/assets/imagens/videosCutScene/videoCutSceneInicial.mp4" //Vídeo da cutscene inicial
       }
@@ -22,16 +21,16 @@ export default class SceneCutscene extends Phaser.Scene {
 
 //Configura os elementos visuais e reproduz o vídeo
   create() {
-    const cx = this.scale.width / 2;  //Centro horizontal da tela
-    const cy = this.scale.height / 2; //Centro vertical da tela
+    const cx = this.scale.width / 2;  
+    const cy = this.scale.height / 2; 
 
     // Reproduz o vídeo centralizado na tela, mantendo proporção original (sem zoom/esticar)
     this.video = this.add.video(cx, cy, "cutsceneInicial");
 
     //Calcula a escala pra cobrir a tela toda sem bordas pretas (cover)
     this.video.once("play", () => {
-      const videoWidth = this.video.width;   //Largura original do vídeo
-      const videoHeight = this.video.height; //Altura original do vídeo
+      const videoWidth = this.video.width;   
+      const videoHeight = this.video.height; 
       const escala = Math.max(this.scale.width / videoWidth, this.scale.height / videoHeight);
       this.video.setScale(escala);
 
@@ -41,7 +40,7 @@ export default class SceneCutscene extends Phaser.Scene {
 
     this.video.play();
 
-    // Tecla F para tela cheia
+    //Tecla F para tela cheia
     this.input.keyboard.on("keydown-F", () => {
       if (this.scale.isFullscreen) {
         this.scale.stopFullscreen();
@@ -63,9 +62,9 @@ export default class SceneCutscene extends Phaser.Scene {
   // Transição clock wipe reutilizável
   // clockwise = true: sentido horário | false: sentido anti-horário
   clockWipe(clockwise, onComplete) {
-    const cx = this.scale.width / 2;  //Centro horizontal da tela
-    const cy = this.scale.height / 2; //Centro vertical da tela
-    const raio = Math.hypot(this.scale.width, this.scale.height) / 2; //Raio que cobre toda a tela
+    const cx = this.scale.width / 2;  
+    const cy = this.scale.height / 2; 
+    const raio = Math.hypot(this.scale.width, this.scale.height) / 2; 
 
     //Cria o Graphics para usar como máscara na câmera
     const maskGraphics = this.make.graphics();
