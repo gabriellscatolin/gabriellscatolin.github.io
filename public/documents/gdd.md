@@ -968,7 +968,29 @@ Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de in
 
 &emsp;Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
 
-&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. Apesar dos desafios, todas as dificuldades foram superadas e o trabalho foi concluído com sucesso.
+&emsp;Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+
+1.Implementação da cutscene inicial que introduz o contexto do jogo.
+
+2.Criação da tela inicial (menu principal).
+
+3.Desenvolvimento da tela de seleção de personagem.
+
+4.Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade.
+
+5.Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste)
+
+&emsp;Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
+
+1.Implementação da cena do mapa da cidade.
+
+2.Desenvolvimento da cena da agência bancária.
+
+3.Implementação da cena do escritório.
+
+4.Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
+
+&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
 
 Figura 28 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
 
@@ -1001,6 +1023,15 @@ startGame() {
   });
 }
 ```
+Algumas cenas de telas do jogo:
+
+<sub>Tela Inicial </sub>
+
+<img src="../gdd_images/telaInicial.jpg" width= "800">
+
+
+
+
 
 Figura 29 - Tela de seleção de personagens &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
 
@@ -1108,6 +1139,7 @@ iniciarClockWipe() {
   });
 }
 ```
+
 
 Dificuldades
 
