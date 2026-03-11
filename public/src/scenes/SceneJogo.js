@@ -74,13 +74,14 @@ export default class SceneJogo extends Phaser.Scene {
       d: Phaser.Input.Keyboard.KeyCodes.D
     });
 
+    // Variáveis de controle de estado
     this.velocidadePersonagem = 300;
-    this.podeMover = false; //Bloqueado até fechar o tutorial
-    this.menuPausaAberto = false; //Controle do menu de pausa
-    this.configAberta = false; //Controle do popup de configurações
-    this.transicaoAtiva = false; //Controle para não disparar a transição mais de uma vez
-    this.dialogoNpcAberto = false; //Controle do diálogo do NPC
-    this.npcPartiu = false; //Torna true quando NPC começa a caminhar para fora
+    this.podeMover = false; 
+    this.menuPausaAberto = false; 
+    this.configAberta = false; 
+    this.transicaoAtiva = false; 
+    this.dialogoNpcAberto = false; 
+    this.npcPartiu = false; 
 
     // NPC parado no início da ponte
     this.npcSprite = this.add.sprite(430, 615, 'npc_frente').setScale(0.15).setDepth(5);
@@ -269,7 +270,7 @@ export default class SceneJogo extends Phaser.Scene {
         stroke: "#1a4fa0", strokeThickness: 2 }
     ).setOrigin(0.5).setDepth(22).setScrollFactor(0)
       .setInteractive({ useHandCursor: true })
-      .setVisible(false); // escondido até o texto terminar
+      .setVisible(false); 
 
     this.bannerBotaoVamos.on("pointerover", () =>
       this.bannerBotaoVamos.setStyle({ backgroundColor: "#1a55b8", color: "#ffffff" })
@@ -289,7 +290,7 @@ export default class SceneJogo extends Phaser.Scene {
       callback: () => {
         charIndex++;
         this.bannerTexto.setText(mensagem.substring(0, charIndex));
-        // Mostra o botão e habilita Enter assim que o último caractere for escrito
+      // Quando o texto terminar de aparecer, mostra o botão "Vamos!"
         if (charIndex >= mensagem.length) {
           this.bannerBotaoVamos.setVisible(true);
           this.input.keyboard.once("keydown-ENTER", () => {
@@ -318,8 +319,9 @@ export default class SceneJogo extends Phaser.Scene {
 
     this.npcSprite.anims.play('npc_andar_direita');
 
-    const distancia = this.scale.width + 100 - this.npcSprite.x; // pixels até sair pela direita
-    const duracao = (distancia / 200) * 1000; // velocidade de 200px/s em ms
+    // Calcula a duração da caminhada com base na distância para a borda direita (1920px) e uma velocidade de 200px/s
+    const distancia = this.scale.width + 100 - this.npcSprite.x; 
+    const duracao = (distancia / 200) * 1000; 
 
     this.tweens.add({
       targets: this.npcSprite,
@@ -546,7 +548,7 @@ export default class SceneJogo extends Phaser.Scene {
     this.podeMover = true; //Libera movimentação
   }
 
-  abrirPopupConfig() { //Abre o popup de configurações
+  abrirPopupConfig() { 
     this.configAberta = true;
 
     // Esconde os elementos do menu de pausa
