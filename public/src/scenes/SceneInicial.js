@@ -93,7 +93,7 @@ export default class SceneInicial extends Phaser.Scene {
     this.fundo.displayHeight = altura;
   }
 
-  iniciarJogo() {
+  startGame() {
     // Se animações desativadas (acessibilidade), pula a transição
     if (!GameSettings.animacoes) {
       this.scene.start("ScenePersonagem");
@@ -113,7 +113,7 @@ export default class SceneInicial extends Phaser.Scene {
     });
   }
 
-  abrirConfiguracoes() {
+ openSettings() {
     this.abrirPopupConfig();
   }
 
