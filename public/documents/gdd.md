@@ -554,21 +554,15 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 2 | tema de combate | cena de combate com inimigos comuns | Hans Zimmer
 3 | ... 
 
-## 3.4. Inventário e Bestiário (sprint 3)
-
-### 3.4.1. Inventário
-
-*\<opcional\> Caso seu jogo utilize itens ou poderes para os personagens obterem, descreva-os aqui, indicando títulos, imagens, meios de obtenção e funções no jogo. Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
-
-*Exemplo de tabela*
-\# | item | descrição | como obter | efeito sonoro
---- | --- | --- | --- | --- | 
-| CieloCoin | Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
+## 3.4. Inventário  (sprint 3)
 
 
-### 3.4.2. Bestiário
+\# | item | | descrição | como obter | função | efeito sonoro
+--- | --- | --- | --- | --- | --- | ---
+| CieloCoin | |Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
 
-*\<opcional\> Caso seu jogo tenha inimigos, descreva-os aqui, indicando nomes, imagens, momentos de aparição, funções e impactos no jogo. Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
+
+
 
 *Exemplo de tabela*
 \# | inimigo |  | ocorrências | função | impacto | efeito sonoro
