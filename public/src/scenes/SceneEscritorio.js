@@ -12,9 +12,6 @@ export default class SceneEscritorio extends Phaser.Scene {
     const nomePasta = this.registry.get('nomePasta');
     const prefixo = this.registry.get('prefixo');
 
-    console.log('nomePasta:', nomePasta);
-    console.log('prefixo:', prefixo);
-
     this.load.tilemapTiledJSON(
       'escritorio',
       'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj'
@@ -48,9 +45,6 @@ export default class SceneEscritorio extends Phaser.Scene {
     // ✅ Spawn na porta corretamente
     const spawnLayer = map.getObjectLayer('spawn');
     const portaSpawn = spawnLayer?.objects?.find(obj => obj.name === 'portaSpawn');
-
-    console.log('spawnLayer:', spawnLayer);
-    console.log('portaSpawn:', portaSpawn);
 
     const spawnX = portaSpawn?.x ?? 500;
     const spawnY = portaSpawn?.y ?? 700;

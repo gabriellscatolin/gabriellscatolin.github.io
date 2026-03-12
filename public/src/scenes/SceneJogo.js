@@ -11,6 +11,10 @@ export default class SceneJogo extends Phaser.Scene {
     this.nomePastaEscolhida = data.nomePasta || "Gabriel";
     this.prefixoEscolhido = data.prefixo || "HB";
 
+    // Salva no registry para que cenas futuras (SceneCidade, SceneEscritorio, etc.) possam acessar
+    this.registry.set('nomePasta', this.nomePastaEscolhida);
+    this.registry.set('prefixo', this.prefixoEscolhido);
+
     // Seleciona um NPC aleatório que NÃO seja o personagem escolhido
     const todosPersonagens = [
       { id: "Pedro", prefixo: "HB" },

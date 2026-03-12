@@ -14,9 +14,6 @@ export default class SceneFarmacia extends Phaser.Scene {
   const nomePasta = this.registry.get('nomePasta');  // Recupera os dados do personagem escolhido (nome da pasta e prefixo do arquivo) usando o registry
   const prefixo = this.registry.get('prefixo');
 
-  console.log(nomePasta);
-  console.log(prefixo);
-
   this.load.tilemapTiledJSON(
     'farmacia',
     './src/assets/imagens/mapsjson/tileMaps/farmacia.tmj'
@@ -66,10 +63,7 @@ export default class SceneFarmacia extends Phaser.Scene {
   borda.setCollisionByExclusion([-1]);
 
   const spawnLayer = map.getObjectLayer('spawn');
-  console.log('spawnLayer:', spawnLayer);
-
   const portaSpawn = spawnLayer?.objects?.find(obj => obj.name === 'portaSpawn');
-  console.log('portaSpawn:', portaSpawn);
 
   this.player = this.physics.add.sprite(500, 700, 'playerEscolhido');
   this.player.setScale(1);
