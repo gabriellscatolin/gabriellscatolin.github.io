@@ -522,8 +522,9 @@ Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cie
 
 <div align="center">
   <sub>Figura 8 - Concept Art - integração entre cenários</sub>
-  <img src="../gdd_images/conceptart1.jpeg">
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+  <img src="../gdd_images/conceptart1.jpeg" width="80%">
+
+  <sup> Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Telas de Interface: Tela Inicial e Tela da Ponte
@@ -534,7 +535,8 @@ Ambas as telas foram concebidas de modo a manter coerência estética com os dem
 
 <div align="center">
   <sub>Figura 9 - Concept Art - Cidades do jogo</sub>
-  <img src="../gdd_images/conceptart2.png">
+  <img src="../gdd_images/conceptart2.png"width="80%">
+  
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
