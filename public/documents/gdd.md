@@ -64,11 +64,11 @@ Cielitos
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-<br>&emsp;No que se refere à ameaça de novos entrantes, ela é considerada alta no segmento de adquirência e, sobretudo, de subadquirência. O avanço tecnológico, a digitalização dos pagamentos e a relativa facilidade regulatória para determinados modelos de negócio reduzem barreiras de entrada, permitindo o surgimento constante de fintechs, gateways e plataformas digitais. Esse cenário pressiona empresas consolidadas. Entretanto, a Cielo mantém vantagens estruturais relevantes, como o forte suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em inovação, segurança e tecnologia. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
-<br>&emsp;Em relação ao poder de barganha dos fornecedores, observa-se um nível moderado. As bandeiras de cartão e provedores de tecnologia exercem influência significativa ao definirem padrões operacionais e tecnológicos indispensáveis ao funcionamento do sistema de pagamentos. Contudo, devido à sua escala, relevância de mercado e estrutura consolidada, a Cielo possui capacidade de negociação que mitiga parte desse poder e preserva sua competitividade.
-<br>&emsp;O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores demonstram alta sensibilidade a preço e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao volume transacionado. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas, exigindo estratégias de fidelização, oferta de serviços agregados e diferenciação por meio de soluções financeiras integradas.
-<br>&emsp;A ameaça de produtos substitutos também é alta. Soluções como Pix, transferências diretas via QR Code, carteiras digitais e novas infraestruturas de pagamento reduzem a dependência do arranjo tradicional de cartões e impactam diretamente as receitas provenientes das maquininhas. A adaptação estratégica a essas tecnologias torna-se, portanto, essencial para manutenção da relevância no mercado.
-<br>&emsp;Por fim, a rivalidade entre concorrentes existentes é intensa. A disputa ocorre principalmente entre adquirentes e subadquirentes como Stone, PagSeguro e Rede, que competem agressivamente por meio de diferenciação tecnológica, guerra de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis e crédito. Além disso, portais de pagamento e cooperativas ampliam a competição no ecossistema. Esse ambiente pressiona margens e exige inovação contínua, eficiência operacional e fortalecimento do relacionamento com clientes.
+<br>&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
+<br>&emsp;O poder de barganha dos fornecedores é considerado moderado. No setor de adquirência, fornecedores estratégicos incluem bandeiras de cartão como Visa, Mastercard e Elo, além de provedores de tecnologia responsáveis pelos terminais de pagamento e infraestrutura digital, como Ingenico e serviços de computação em nuvem. Esses fornecedores exercem influência relevante ao estabelecer padrões tecnológicos e operacionais essenciais para o funcionamento do sistema de pagamentos. Contudo, devido à sua escala e posição consolidada no mercado brasileiro, a Cielo possui maior capacidade de negociação em comparação a empresas menores, o que reduz parcialmente o poder desses fornecedores.
+<br>&emsp;O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores apresentam alta sensibilidade a preços e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao elevado volume de transações processadas. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas. Para mitigar esse poder, a Cielo investe em estratégias de fidelização por meio da oferta de serviços agregados, como soluções de gestão de vendas, antecipação de recebíveis, integração com plataformas de e-commerce e ferramentas de análise de dados para comerciantes.
+<br>&emsp;A ameaça de produtos substitutos é considerada alta. Soluções como Pix, transferências via QR Code e carteiras digitais reduzem a dependência do arranjo tradicional de cartões. O crescimento do Pix é um exemplo claro dessa transformação: o sistema movimentou R$ 84,9 trilhões em cinco anos [\[21\]](#ref21), valor equivalente a mais de sete vezes o PIB brasileiro no período (Times Brasil, 2025). Esse avanço demonstra a rápida adoção de alternativas de pagamento que podem reduzir a relevância de modelos tradicionais baseados em maquininhas. Nesse contexto, a adaptação estratégica das adquirentes torna-se essencial para manter competitividade no mercado.
+<br>&emsp;Por fim, A rivalidade entre concorrentes existentes é intensa no setor de adquirência. Empresas como Stone, PagSeguro e Rede competem agressivamente por meio de diferenciação tecnológica, redução de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis, crédito para lojistas e soluções de gestão empresarial. Além disso, fintechs e plataformas digitais ampliam a competição no ecossistema de pagamentos. Esse ambiente competitivo pressiona margens e exige inovação constante, eficiência operacional e fortalecimento do relacionamento com clientes.
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
@@ -106,12 +106,12 @@ Cielitos
 
 2. **Novos Modelos de Negócio (Logística):** O aumento do serviço de entregas (delivery) gera demanda por soluções de pagamento móveis e integradas a aplicativos. 
 
-3. **Data Intelligence:** Utilizar o volume massivo de dados transacionados (7% do PIB) para oferecer serviços de consultoria e análise de crédito para lojistas. 
+3. **Data Intelligence:** Utilizar o grande volume de dados gerados pelo sistema de pagamentos brasileiro, responsável por bilhões de transações anuais, para oferecer serviços de análise de crédito e inteligência para lojistas.[\[21\]](#ref21)
 
 ### Ameaças (Threats)
 1. **Hipercompetitividade (Guerra de Taxas):** A entrada agressiva de players como Stone, PagSeguro e fintechs força a compressão das margens de lucro. 
 
-2. **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em cartões trazem riscos financeiros e de reputação para a marca. [\[14\]](#ref14)
+2. **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em transações eletrônicas representam riscos relevantes para instituições financeiras e empresas de pagamentos, podendo gerar impactos financeiros e danos reputacionais (Banco Central do Brasil, 2024). [\[22\]](#ref22)
 
 3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
@@ -131,9 +131,9 @@ Missão, Visão e Valores são os três pilares fundamentais que definem a ident
 
 Equidade e Acessibilidade: Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
 
-Inovação e Gamificação: Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.
+Inovação e Gamificação: Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.[\[23\]](#ref23)
 
-Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[2\]](#ref2)
+Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[24\]](#ref24)
 
 Foco na Experiência (UX/Gamer): Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
 
@@ -580,51 +580,71 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 <img src='../gdd_images/diagrama_cenas.png'>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
+3.6. Regras do jogo (sprint 3)
 
-## 3.6. Regras do jogo (sprint 3)
 
-As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
+&emsp;As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
 
-**Fluxo de Navegação e Menus**
+#### Fluxo de Navegação e Menus
 
-**Menu Inicial:**
+##### Menu Inicial:
+
 - Jogar: Gatilho para a cena de Seleção de Personagens.
-- Créditos: Sobreposição ou transição para a lista de colaboradores.
-- Configurações: Acesso a sub-menu de ajustes globais (Volume: 0-100%, Brilho, Filtro de Daltonismo: On/Off).
 
-**Seleção de Personagens:**
+- Créditos: Sobreposição ou transição para a lista de colaboradores.
+
+- Configurações: Acesso a sub-menu de ajustes globais (Volume: 0–100%, Brilho, Filtro de Daltonismo: On/Off).
+
+##### Seleção de Personagens:
+
 - Feedback Visual: O hover (passar o mouse) ativa uma animação de destaque e escala (+10%) no card do personagem.
-- Informação: Exibição dinâmica de descrição e status de vida (HP/Resistência).
+
+- Informação: Exibição dinâmica de descrição e status de vida (HP/Resistência). A Resistência indica quantos erros de diálogo o jogador pode cometer durante as negociações.
+
 - Confirmação: O clique bloqueia a seleção e inicia o carregamento (loading) do Nível 1.
 
-**Regras de Início (Prólogo)**
+#### Regras de Início (Prólogo)
 
-**Interação com NPC (Vanessa):**
+##### Interação com NPC (Vanessa):
 
-- A proximidade habilita o prompt da tecla [E].
+A proximidade habilita o prompt da tecla [E].
+
 - Trava de Diálogo: O jogador perde o controle de movimentação até que todos os nós do diálogo sejam percorridos.
+
 - Gatilho de Progressão: O fim do diálogo ativa o script de follow (Vanessa caminha até a ponte). A entrada no ônibus (trigger de área) dispara a cutscene de transição para o Banco.
 
-**O Hub do Banco e Missões**
+##### O Hub do Banco e Missões
 
 - Gerente-Geral: Atua como o Quest Giver. O diálogo concede ao jogador a rota da missão.
-- Logística de Venda:
- - Objetivo Secundário: Otimização de Combustível. O jogador deve planejar a ordem de visita aos estabelecimentos.
-  - Parceiro (PJ): O personagem PJ deve estar dentro de um raio de distância específico para que as interações com clientes sejam habilitadas.
 
-**Sistema de Negociação (Interação com Clientes)**
+##### Logística de Venda:
 
-O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
+&emsp;Objetivo Secundário: Otimização da rota de visita aos estabelecimentos, incentivando o jogador a planejar a ordem das interações.
+
+- Parceiro (PJ): O personagem PJ deve estar dentro de um raio de distância específico para que as interações com clientes sejam habilitadas. Caso o parceiro esteja fora desse raio, o diálogo com o cliente não pode ser iniciado.
+
+##### Sistema de Negociação (Interação com Clientes)
+
+&emsp;O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
 
 - Estrutura da Resposta: Cada pergunta apresenta 3 níveis de eficácia:
-  - Adequada (+2 Cielo Coins): Resposta ideal, alinhada aos valores Cielo.
-  - Intermediária (+1 Cielo Coins): Resposta neutra, mantém a negociação ativa.
-  - Inadequada (0 Cielo Coins): Resposta errada, reduz a probabilidade de fechamento.
-- Cálculo de Feedback: Ao final da árvore de diálogo, o sistema soma os pontos.
-  - Sucesso: Soma ≥ Limiar estipulado (Venda Concluída).
-  - Falha: Soma < Limiar estipulado (Venda Perdida).
--Resultado: Exibição de interface de feedback com o resumo da performance e impacto na progressão.
 
+- Adequada (+2 Cielo Coins): Resposta ideal, alinhada aos valores Cielo.
+
+- Intermediária (+1 Cielo Coins): Resposta neutra, mantém a negociação ativa.
+
+- Inadequada (0 Cielo Coins): Resposta errada, reduz a probabilidade de fechamento e diminui a barra de Resistência do personagem.
+
+##### Cálculo de Feedback: 
+&emsp;Ao final da árvore de diálogo, o sistema soma os pontos obtidos durante a interação.
+
+- Sucesso: Soma ≥ Limiar estipulado (Venda Concluída).
+
+- Falha: Soma < Limiar estipulado (Venda Perdida).
+
+Consequências da Falha: Quando a negociação falha, o cliente encerra a conversa e o estabelecimento fica temporariamente indisponível para nova tentativa. Caso todos os estabelecimentos da rota estejam indisponíveis, o jogador pode retornar ao Gerente-Geral para reiniciar a missão.
+
+Resultado: Exibição de interface de feedback com o resumo da performance e impacto na progressão.
 ## 3.7. Mecânicas do jogo (sprint 3)
 
 
@@ -948,7 +968,11 @@ Sprites dos personagens secundários:
 </div>
 
 ## 3. Estrutura dos cenários iniciais:
-Foram desenvolvidos cenários iniciais em pixel art utilizando ferramentas de inteligência artificial. Esses cenários representam os primeiros ambientes que o jogador irá explorar.
+&emsp;Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
+
+&emsp;Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
+
+&emsp;Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
 
 <sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
 
@@ -1023,6 +1047,28 @@ Algumas cenas de telas do jogo:
 <sub>Tela Inicial </sub>
 
 <img src="../gdd_images/telaInicial.jpg" width= "800">
+
+<sub>Tela de Configurações </sub>
+
+<img src="../gdd_images/telaConfig.jpg" width= "800">
+
+<sub>Tela de seleção de personagens </sub>
+
+<img src="../gdd_images/telaSeleçao.jpg" width= "800">
+
+<sub>Tela de tutorial </sub>
+
+<img src="../gdd_images/telaTutorial.jpg" width= "800">
+
+<sub>Tela da ponte </sub>
+
+<img src="../gdd_images/telaPonte.jpg" width= "800">
+
+<sub>Tela da Cutscene </sub>
+
+<img src="../gdd_images/telaCutScene.jpg" width= "800">
+
+
 
 
 
@@ -1337,8 +1383,7 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 <br><a name="ref1">[1]:</a>
 CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
 <br><a name="ref2">[2]:</a> 
-Cielo. (2022). Relatório anual integrado 2022. Recuperado em 26 fev. 2026, de
-https://www.cielo.com.br/docs/sustentabilidade/2022/pt-br/Relatorio-Anual-Integrado-2022.pdf
+Cielo S.A. (2025). Integrated annual report 2024. https://www.cielo.com.br/docs/sustentabilidade/2024/eng/Integrated_Annual_Report_2024.pdf?srsltid=AfmBOopjbujbqFTNRcEC8_5eRj9k4r1myFfLZ4ijzCengVUfgUoG7B5-&utm_source=
 <br><a name="ref3">[3]:</a>
 VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
 <br><a name="ref4">[4]:</a>
@@ -1363,6 +1408,13 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
 <br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
+<br><a name="ref21">[21]:</a> Times Brasil. (2025, novembro 16). Em cinco anos, Pix soma R$ 84,9 trilhões e supera sete vezes o PIB do Brasil, mostra estudo. https://timesbrasil.com.br/brasil/economia-brasileira/em-cinco-anos-pix-soma-r-849-trilhoes-e-supera-sete-vezes-o-pib-do-brasil-mostra-estudo/?utm_source=chatgpt.com
+
+<br><a name="ref22">[22]:</a> Banco Central do Brasil. (2025). Relatório integrado 2024. https://www.bcb.gov.br/content/publicacoes/rig/RIG_2024.pdf
+
+<br><a name="ref23">[23]:</a>Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011). From game design elements to gamefulness: Defining gamification. Proceedings of the 15th International Academic MindTrek Conference.
+
+<br><a name="ref24">[24]:</a> Garvin, D. A. (1993). Building a learning organization. Harvard Business Review, 71(4), 78–91.
 
 
 
