@@ -10,8 +10,8 @@ export default class SceneFarmacia extends Phaser.Scene {
   }
 
   preload() {
-
-  const nomePasta = this.registry.get('nomePasta');  // Recupera os dados do personagem escolhido (nome da pasta e prefixo do arquivo) usando o registry
+  // Carrega o mapa, tilesets e a imagem do personagem escolhido usando os dados do registry
+  const nomePasta = this.registry.get('nomePasta');  
   const prefixo = this.registry.get('prefixo');
 
   this.load.tilemapTiledJSON(
@@ -37,6 +37,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
 }
 
+// Configura o mapa, personagem, controles e câmera
   create() {
   const map = this.make.tilemap({ key: 'farmacia' });
   const tiles = map.addTilesetImage('farmacia', 'farmacia_roombuilder', 'farmacia_tiles');
@@ -58,6 +59,7 @@ export default class SceneFarmacia extends Phaser.Scene {
   const cadeiraderodas = map.createLayer('cadeira', tiles, 0, 0); 
   const plantas = map.createLayer('plantas', tiles, 0, 0); 
 
+  // Configura as camadas de colisão
   objcomcolis.setCollisionByExclusion([-1]);
   obcomcolis2.setCollisionByExclusion([-1]);
   borda.setCollisionByExclusion([-1]);
@@ -69,12 +71,14 @@ export default class SceneFarmacia extends Phaser.Scene {
   this.player.setScale(1);
   this.player.setCollideWorldBounds(true);
 
+  // Ajusta o corpo de colisão para ser um pouco menor que o sprite, para evitar ficar preso em cantos
   this.physics.add.collider(this.player, objcomcolis);
   this.physics.add.collider(this.player, obcomcolis2);
   this.physics.add.collider(this.player, borda);
 
   this.cursors = this.input.keyboard.createCursorKeys();
 
+  // Configura a câmera para seguir o personagem e limitar aos limites do mapa
   this.cameras.main.startFollow(this.player);
   this.cameras.main.setZoom(2.5);
   this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);

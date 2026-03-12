@@ -30,13 +30,14 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  // Configura o mapa, personagem, controles e câmera
   create() {
-    const MAPA_X       = 720;   // conteúdo visual começa aqui
-    const MAPA_Y       = 100;   // conteúdo visual começa aqui
-    const MAPA_LARGURA = 2432;  // 3152 - 720
-    const MAPA_ALTURA  = 1760;  // 1860 - 100
+    const MAPA_X       = 720;  
+    const MAPA_Y       = 100;   
+    const MAPA_LARGURA = 2432;  
+    const MAPA_ALTURA  = 1760;  
 
-    // --- TILEMAP ---
+    // --- MAPA ---
     const mapa = this.make.tilemap({ key: 'mapaGeral' });
 
     const tileset1 = mapa.addTilesetImage('ME_Top_1',    'tilesMapaTopo');
@@ -72,7 +73,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
     }
 
-    // --- ANIMAÇÕES ---
+    // Animações do personagem (4 direções, 4 frames cada)
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
       // Evita recriar se já existir (ao voltar para a cena)
@@ -152,6 +153,7 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  // Lógica de movimento do personagem e animações
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;

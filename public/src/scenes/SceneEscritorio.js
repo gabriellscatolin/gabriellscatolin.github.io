@@ -3,6 +3,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     super({ key: 'SceneEscritorio' });
   }
 
+  // Recebe os dados do personagem escolhido na cena anterior
   init(data) {
     this.nomePastaEscolhida = data.nomePasta || "Pedro";
     this.prefixoEscolhido = data.prefixo || "HB";
@@ -28,6 +29,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     );
   }
 
+  // Configura o mapa, personagem, controles e câmera
   create() {
     const map = this.make.tilemap({ key: 'escritorio' });
     const tiles = map.addTilesetImage('escritorio', 'escritorio_tiles');
@@ -42,18 +44,18 @@ export default class SceneEscritorio extends Phaser.Scene {
     obcomcolis2.setCollisionByExclusion([-1]);
     borda.setCollisionByExclusion([-1]);
 
-    // ✅ Spawn na porta corretamente
+    // Camada de objetos sem colisão (decoração) acima do personagem
     const spawnLayer = map.getObjectLayer('spawn');
     const portaSpawn = spawnLayer?.objects?.find(obj => obj.name === 'portaSpawn');
 
     const spawnX = portaSpawn?.x ?? 500;
     const spawnY = portaSpawn?.y ?? 700;
 
-    // ✅ Cria o player na posição do spawn
+   // Cria o personagem no ponto de spawn definido no Tiled
     this.player = this.physics.add.sprite(spawnX, spawnY, 'playerEscolhido');
     this.player.setCollideWorldBounds(true);
 
-    // ✅ Ajusta o tamanho do sprite automaticamente para caber no tile
+    // Ajusta escala do personagem para caber melhor no mapa
     const tileSize = map.tileWidth; // pega o tamanho do tile do próprio mapa
     const spriteWidth = this.player.width;
     const spriteHeight = this.player.height;
@@ -63,7 +65,7 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.player.setScale(scale);
 
-    // ✅ Ajusta hitbox para ser menor que o sprite visualmente
+   // Ajusta o corpo de colisão para ser um pouco menor que o sprite, para evitar ficar preso em cantos
     const bodyWidth = spriteWidth * scale * 0.5;
     const bodyHeight = spriteHeight * scale * 0.5;
     this.player.body.setSize(
@@ -77,13 +79,14 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    // ✅ Câmera configurada para 1024x768
+  // Configura a câmera para seguir o personagem e limitar aos limites do mapa
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setZoom(2);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 
+  // Lógica de movimento do personagem e animações
   update() {
     const speed = 150;
 

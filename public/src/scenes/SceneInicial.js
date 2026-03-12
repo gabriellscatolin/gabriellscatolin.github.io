@@ -6,7 +6,7 @@ export default class SceneInicial extends Phaser.Scene {
     super("SceneInicial");
 
 // Configurações da cena (Partes fixas)
-    this.CONFIG = {
+    this.Config = {
       //Efeito de pixelado ao trocar de cena
       FADE_DURATION: 1000, // Duração do fade
       PIXELATE_AMOUNT: 40, // Pixelização máxima
@@ -31,13 +31,13 @@ export default class SceneInicial extends Phaser.Scene {
 
 // Carrega os assets
   preload() {
-    this.load.image("fundo", this.CONFIG.ASSETS.fundo);
-    this.load.image("botaoJogar", this.CONFIG.ASSETS.botaoJogar);
-    this.load.image("botaoConfig", this.CONFIG.ASSETS.botaoConfig);
-    this.load.image("botaoCreditos", this.CONFIG.ASSETS.botaoCreditos);
-    this.load.image("configFundo", this.CONFIG.ASSETS.configFundo);
-    this.load.image("imagemCreditos", this.CONFIG.ASSETS.imagemCreditos);
-    this.load.image("logoCielo",      this.CONFIG.ASSETS.logoCielo);
+    this.load.image("fundo", this.Config.ASSETS.fundo);
+    this.load.image("botaoJogar", this.Config.ASSETS.botaoJogar);
+    this.load.image("botaoConfig", this.Config.ASSETS.botaoConfig);
+    this.load.image("botaoCreditos", this.Config.ASSETS.botaoCreditos);
+    this.load.image("configFundo", this.Config.ASSETS.configFundo);
+    this.load.image("imagemCreditos", this.Config.ASSETS.imagemCreditos);
+    this.load.image("logoCielo",      this.Config.ASSETS.logoCielo);
   }
 //Configura os elementos visuais e interativos das cenas
   create() {
@@ -65,7 +65,7 @@ export default class SceneInicial extends Phaser.Scene {
   } //Redimensionar fundo de tela
 
   adicionarBotoes() {
-    this.CONFIG.BOTOES.forEach(botao => {
+    this.Config.BOTOES.forEach(botao => {
       let x = botao.x === "center" ? this.scale.width / 2 : botao.x;//Centralizar os botões horizontalmente, ou usar a posição definida
       let y = botao.y;
 
@@ -93,7 +93,7 @@ export default class SceneInicial extends Phaser.Scene {
     this.fundo.displayHeight = altura;
   }
 
-  startGame() {
+  iniciarJogo() {
     // Se animações desativadas (acessibilidade), pula a transição
     if (!GameSettings.animacoes) {
       this.scene.start("ScenePersonagem");
@@ -104,8 +104,8 @@ export default class SceneInicial extends Phaser.Scene {
     const pixelated = cam.postFX.addPixelate(1);
     this.add.tween({
       targets: pixelated,
-      duration: this.CONFIG.PIXELATE_DURATION,
-      amount: this.CONFIG.PIXELATE_AMOUNT,
+      duration: this.Config.PIXELATE_DURATION,
+      amount: this.Config.PIXELATE_AMOUNT,
       ease: "Sine.easeIn",
       onComplete: () => {
         this.scene.start("ScenePersonagem"); //Inicia a cena do jogo após a transição
@@ -113,7 +113,7 @@ export default class SceneInicial extends Phaser.Scene {
     });
   }
 
-  openSettings() {
+  abrirConfiguracoes() {
     this.abrirPopupConfig();
   }
 
