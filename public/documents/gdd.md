@@ -561,11 +561,10 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 *\<opcional\> Caso seu jogo utilize itens ou poderes para os personagens obterem, descreva-os aqui, indicando títulos, imagens, meios de obtenção e funções no jogo. Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.* 
 
 *Exemplo de tabela*
-\# | item |  | como obter | função | efeito sonoro
---- | --- | --- | --- | --- | ---
-1 | moeda | <img src="../assets/coin.png"> | há muitas espalhadas em todas as fases | acumula dinheiro para comprar outros itens | som de moeda
-2 | madeira | <img src="../assets/wood.png"> | há muitas espalhadas em todas as fases | acumula madeira para construir casas | som de madeiras
-3 | ... 
+\# | item | descrição | como obter | efeito sonoro
+--- | --- | --- | --- | --- | 
+| CieloCoin | Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
+
 
 ### 3.4.2. Bestiário
 
