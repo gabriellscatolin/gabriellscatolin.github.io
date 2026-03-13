@@ -559,7 +559,7 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 
 \# | item | | descrição | como obter | função | efeito sonoro
 --- | --- | --- | --- | --- | --- | ---
-| CieloCoin |<img src="../gdd_images/cieloCoin.png" width="40">|Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
+| CieloCoin |<img src="../gdd_images/cieloCoin.png" width="300">|Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
 
 
 
