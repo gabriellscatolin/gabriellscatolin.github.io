@@ -233,7 +233,7 @@ RF17| O jogo deverá apresentar uma cena final de encerramento após a conclusã
 
 \# |  Requisitos Não Funcionais (RNF)
 --- | ---
-Descrevem restrições técnicas, de design, acessibilidade e regras de negócio.
+
 RNF01| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
 RNF02| O jogo deverá utilizar a identidade visual (cores e logotipos) da Cielo.
 RNF03| O jogo deverá conter referências visuais, logotipos e cores dos bancos parceiros (Bradesco e Banco do Brasil), incluindo a representação de suas agências.
@@ -562,14 +562,6 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 | CieloCoin |<img src="../gdd_images/cieloCoin.png" width="40"> |Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
 
 
-
-
-*Exemplo de tabela*
-\# | inimigo |  | ocorrências | função | impacto | efeito sonoro
---- | --- | --- | --- | --- | --- | ---
-1 | robô terrestre | <img src="../assets/inimigo2.PNG"> |  a partir da fase 1 | ataca o personagem vindo pelo chão em sua direção, com velocidade constante, atirando parafusos | se encostar no inimigo ou no parafuso arremessado, o personagem perde 1 ponto de vida | sons de tiros e engrenagens girando
-2 | robô voador | <img src="../assets/inimigo1.PNG"> | a partir da fase 2 | ataca o personagem vindo pelo ar, fazendo movimento em 'V' quando se aproxima | se encostar, o personagem perde 3 pontos de vida | som de hélice
-3 | ... 
 
 ## 3.5. Gameflow (Diagrama de cenas) (sprint 2)
 
