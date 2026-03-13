@@ -33,6 +33,9 @@ export default class SceneEscritorio extends Phaser.Scene {
     const mapa  = this.make.tilemap({ key: 'escritorio' });
     const tiles = mapa.addTilesetImage('escritorio', 'escritorio_tiles');
 
+    // Fundo sólido para cobrir qualquer área vazia fora dos tiles
+    this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888).setOrigin(0, 0);
+
     mapa.createLayer('chao',    tiles, 0, 0);
     mapa.createLayer('semcolis', tiles, 0, 0);
 
@@ -92,7 +95,7 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     // --- CÂMERA ---
     this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(3);
+    this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
