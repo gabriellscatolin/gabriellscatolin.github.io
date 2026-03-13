@@ -580,7 +580,8 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 <img src='../gdd_images/diagrama_cenas.png'>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
-3.6. Regras do jogo (sprint 3)
+
+### 3.6. Regras do jogo (sprint 3)
 
 
 &emsp;As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
