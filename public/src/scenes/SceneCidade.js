@@ -4,8 +4,8 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   init(dados) {
-    this.nomePastaEscolhida = dados.nomePasta || "Pedro";
-    this.prefixoEscolhido   = dados.prefixo   || "HB";
+    this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
+    this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
   }
 
   preload() {
@@ -131,12 +131,30 @@ export default class SceneCidade extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // --- CÂMERA ---
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
+
+    // --- ZONA DE INTERAÇÃO: Agência 01 ---
+    // Coordenadas aproximadas da entrada do prédio (ajuste se necessário)
+    this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
+
+    // Prompt [E] em coordenadas de mundo, acima da entrada da Agência
+    this.labelE = this.add.text(993, 838, '[E] Entrar', {
+      fontSize: '6px',
+      color: '#ffffff',
+      backgroundColor: '#000000cc',
+      padding: { x: 2, y: 1 },
+      resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    this.transicionando   = false;
+    this.dentroZonaAgencia = false;
+
 
     // Direção atual para saber qual frame idle mostrar ao parar
     this.direcaoAtual = 'frente';
@@ -190,6 +208,26 @@ export default class SceneCidade extends Phaser.Scene {
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
+    }
+
+    // --- INTERAÇÃO: Agência 01 ---
+    const dentroZona = Phaser.Geom.Rectangle.Contains(this.zonaAgencia, personagem.x, personagem.y);
+
+    if (dentroZona !== this.dentroZonaAgencia) {
+      this.dentroZonaAgencia = dentroZona;
+      this.labelE.setVisible(dentroZona);
+    }
+
+    if (dentroZona && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.transicionando = true;
+      this.labelE.setVisible(false);
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.start('SceneEscritorio', {
+          nomePasta: this.nomePastaEscolhida,
+          prefixo:   this.prefixoEscolhido
+        });
+      });
     }
   }
 }
