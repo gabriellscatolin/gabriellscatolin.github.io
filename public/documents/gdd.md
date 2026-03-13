@@ -409,33 +409,33 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
 ### 3.3.1. Locações Principais e/ou Mapas (sprints 2 e 3)
-&emsp;O Mini Mundo Cielo é estruturado como uma cidade interativa em perspectiva top-down, que simula a rotina operacional de um Gerente de Negócios (GN) da Cielo. O mapa principal funciona como um hub de navegação central, possibilitando o acesso a estabelecimentos que representam segmentos estratégicos do portfólio da empresa, incluindo Cielo Tap, LIO, e-commerce e antecipação de recebíveis. A estética adotada é pixel art 2D, em conformidade com a proposta de Serious Game e com a identidade visual da marca.
+&emsp;Os estabelecimentos representam os ambientes de missão do Mini Mundo Cielo. Cada local simula um tipo de cliente do cotidiano comercial e apresenta desafios específicos relacionados à abordagem, negociação e fechamento de vendas.
+Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a tecla de interação para iniciar diálogos e responder perguntas estratégicas em formato de quiz. As respostas geram recompensas em CieloCoins, que determinam o progresso dentro da missão. A dificuldade e a quantidade de moedas necessárias aumentam progressivamente ao longo das fases.
 
-### Mapa Geral Inicial — Cidade 1
-&emsp;A Cidade 1 constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas: 
-- introduzir os controles básicos do personagem; 
-- instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
-- permitir o deslocamento entre os estabelecimentos disponíveis; 
-- desbloquear áreas progressivamente, conforme a conclusão das missões; 
-- representar simbolicamente a evolução profissional do jogador ao longo da experiência.
+### Mapa Geral 
+ &emsp;A Cidade 1 constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
+  - introduzir os controles básicos do personagem; 
+  - instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
+  - permitir o deslocamento entre os estabelecimentos disponíveis; 
+  - desbloquear áreas progressivamente, conforme a conclusão das missões;
+  - representar simbolicamente a evolução profissional do jogador ao longo da experiência. 
+   
+&emsp;O mapa é delimitado por barreiras invisíveis e elementos urbanos, garantindo o controle narrativo do ambiente. Novos estabelecimentos tornam-se acessíveis à medida que as missões anteriores são concluídas, promovendo uma progressão estruturada e coerente com os objetivos de aprendizagem. 
 
-&emsp;O mapa é delimitado por barreiras invisíveis e elementos urbanos, garantindo o controle narrativo do ambiente. Novos estabelecimentos tornam-se acessíveis à medida que as missões anteriores são concluídas, promovendo uma progressão estruturada e coerente com os objetivos de aprendizagem.
-(FOTO DO MAPA 1)
+### Bancos (Agência 1, Agência 2 e Agência 3)
 
-### Mapa Geral Secundário — Cidade 2
-&emsp;A Cidade 2 representa uma etapa avançada da jornada do jogador, caracterizada por maior complexidade técnica e pela introdução de novos segmentos comerciais. Em contraste com a Cidade 1, esse ambiente apresenta estabelecimentos distintos, ampliando os cenários de atuação do GN e exigindo maior domínio do portfólio, capacidade argumentativa e autonomia nas negociações. A transição entre as duas cidades simboliza a progressão profissional do jogador, refletindo o desenvolvimento gradual das competências trabalhadas ao longo do jogo.
-(FOTO DO MAPA 2)
+&emsp;As agências bancárias representam o ponto inicial de organização das atividades do DDN dentro de cada capítulo do jogo. Nesse ambiente, o jogador realiza o check-in no aplicativo Salesforce e interage com o Gerente Geral (GG) e o Gerente PJ, responsáveis por apresentar as missões e orientar as visitas comerciais que deverão ser realizadas nos estabelecimentos da região. Durante as interações, o jogador responde perguntas em formato de quiz, recebendo CieloCoins de acordo com suas decisões. Os objetivos pedagógicos desta missão incluem:
 
-## Estabelecimentos
-&emsp;Os estabelecimentos constituem os ambientes de missão do Mini Mundo Cielo. Cada locação representa um segmento comercial específico e é habitada por um NPC com perfil, demandas e objeções próprias. A seguir, descrevem-se os estabelecimentos presentes na Cidade 1 em ordem de missões:
+ - compreender o fluxo de trabalho inicial do DDN dentro da agência;
 
-### Bancos (Banco Bradesco - cidade 1 e Banco do Brasil- cidade 2)
-Os bancos parceiros representam o ponto inicial de organização das atividades do Gerente de Negócios dentro de cada cidade. É nesse ambiente que o jogador recebe as missões que deverão ser realizadas nos estabelecimentos locais. A escolha dessa locação se justifica pelo papel estratégico dos bancos como parceiros institucionais da Cielo, reforçando a integração entre adquirente e sistema financeiro. Os bancos tem a função de disponibilizar as missões da cidade, apresentar os objetivos de cada visita comercial e contextualizar o cenário e perfil dos clientes a serem atendidos. As funções pedagógicas envolvem: 
-- Compreender a relação entre Cielo e instituições financeiras
-- Desenvolver planejamento de visitas comerciais
-- Preparar o jogador para a execução das negociações
+ - desenvolver abordagem profissional com diferentes perfis de gestores;
 
-Ao todo, o jogo será composto por dois bancos, um para cada cidade focando em apresentar as missões referentes aquele cenário. 
+ - compreender o planejamento das visitas comerciais;
+
+ - praticar tomada de decisão em interações estratégicas.
+
+&emsp;A exigência de pontuação aumenta ao longo dos capítulos. Na Agência 1 o jogador precisa atingir 150 CieloCoins, enquanto na Agência 2 a exigência sobe para 400 CieloCoins, representando maior domínio das estratégias de abordagem e negociação. Na Agência 3, além da maior pontuação exigida (500 CieloCoins), o jogador enfrenta um novo desafio: o PJ se recusa a acompanhá-lo na visita comercial, exigindo maior autonomia na tomada de decisão.
+
 
 ### Padaria
 &emsp;A padaria representa um comércio de bairro com fluxo constante de clientes e operações de baixo a médio ticket médio. A proprietária, Sofia, manifesta preocupações relacionadas a taxas, agilidade no atendimento e controle do caixa. A missão estrutura-se por meio de diálogo interativo, no qual o jogador deve identificar e apresentar as soluções mais adequadas do portfólio da Cielo. Os objetivos pedagógicos desta fase contemplam: 
@@ -443,7 +443,6 @@ Ao todo, o jogo será composto por dois bancos, um para cada cidade focando em a
 - comunicar as taxas de forma clara e transparente; 
 - fortalecer o relacionamento com pequenos empreendedores.
 
-(Inserir Figura. Representação visual interna e externa da Padaria.)
 
 ### Farmácia
 &emsp;A farmácia simboliza estabelecimentos com alta demanda transacional e sensibilidade a questões de segurança e estabilidade operacional. A NPC Rachel questiona a confiabilidade e a segurança do sistema. Os objetivos pedagógicos desta missão incluem: 
@@ -453,9 +452,16 @@ Ao todo, o jogo será composto por dois bancos, um para cada cidade focando em a
 
  &emsp;O foco central desta fase é o desenvolvimento da autoridade técnica e da confiança junto ao cliente.
 
-(Inserir Figura. Representação visual interna e externa da Farmácia.)
 
-### Escritório 
+### Escritório
+&emsp;O escritório representa um ambiente corporativo no qual o DDN interage com o responsável pelo estabelecimento, o NPC Gabriel. Nesse cenário, o jogador precisa conduzir uma negociação mais estruturada, considerando as necessidades específicas do negócio e demonstrando domínio das soluções da Cielo. Durante a interação, o jogador deve responder às perguntas do sistema de quiz, simulando etapas reais do processo comercial, desde a abordagem inicial até o fechamento da venda. Os objetivos pedagógicos desta missão incluem:
+- desenvolver uma abordagem profissional em ambientes corporativos;
+- trabalhar a argumentação estratégica durante a negociação;
+- identificar as necessidades específicas de clientes empresariais;
+- consolidar o processo de apresentação e fechamento de vendas.
+
+&emsp;O foco central desta fase é fortalecer a capacidade de negociação em contextos mais formais e estratégicos, exigindo do jogador maior preparo na comunicação e na apresentação das soluções da Cielo.
+
 
 ### Salão de Beleza
 &emsp;O salão de beleza representa negócios do setor de serviços com recorrência de clientes. O NPC Eduardo manifesta preocupações relacionadas ao fluxo de caixa e à antecipação de recebíveis. Os objetivos pedagógicos desta fase compreendem: 
@@ -466,34 +472,60 @@ Ao todo, o jogo será composto por dois bancos, um para cada cidade focando em a
 
 &emsp;Nesta fase, o jogador expande sua atuação para um perfil consultivo, diferenciando-se da abordagem meramente transacional das etapas anteriores.
 
-(Inserir Figura Representação visual interna e externa do Salão de Beleza.)
+&emsp;A partir do Capítulo 2, o nível de dificuldade aumenta significativamente. Nesta fase o jogador precisa atingir 400 CieloCoins para convencer o cliente e concluir a negociação.
 
-### Posto de Gasolina
-&emsp;O posto de gasolina representa operações de alto volume financeiro, com demandas por soluções integradas e fluidez no atendimento. O NPC Nicolas exige soluções que reduzam filas e otimizem processos. Os objetivos pedagógicos desta etapa envolvem: 
-- consolidar os conteúdos trabalhados nas fases anteriores; 
-- demonstrar soluções integradas do portfólio; 
-- conduzir o processo de fechamento de venda; 
-- aplicar argumentação estratégica em contexto de alta complexidade. 
 
-&emsp;Esta missão funciona como uma avaliação prática das competências desenvolvidas ao longo da jornada.
+### Metrô (Minigame)
 
-(Inserir Figura. Representação visual interna e externa do Posto de Gasolina.)
+&emsp;O metrô introduz uma dinâmica diferente das demais fases do jogo. Nesse ambiente ocorre um mini game de coleta de moedas, no qual o personagem se movimenta automaticamente enquanto o jogador controla os deslocamentos laterais para evitar obstáculos e coletar CieloCoins. Os objetivos desta fase incluem:
+
+ - introduzir dinamismo à experiência de jogo;
+
+ - incentivar a exploração do mapa;
+
+ - oferecer recompensas adicionais em CieloCoins;
+
+ - criar uma pausa entre as missões de negociação.
+
+&emsp; As moedas coletadas durante o mini game são somadas ao total do jogador, funcionando como bônus dentro da progressão do jogo.
+
 
 ### Restaurante de Comida Japonesa
-&emsp;O restaurante simboliza estabelecimentos com alto fluxo de clientes e demanda por soluções ágeis e integradas. O NPC Lucas apresenta exigências que requerem do jogador domínio técnico mais aprofundado do portfólio da Cielo, bem como maior complexidade argumentativa em relação às missões anteriores.
+&emsp; O restaurante simboliza estabelecimentos com alto fluxo de clientes e demanda por soluções ágeis e integradas de pagamento. O NPC Lucas apresenta objeções que exigem maior domínio técnico do portfólio da Cielo e maior complexidade argumentativa durante a negociação. Os objetivos pedagógicos desta missão incluem:
 
-(Inserir Figura. Representação visual interna e externa do Restaurante de Comida Japonesa.)
+ - aprofundar o domínio das estratégias de venda;
+
+ - lidar com objeções mais complexas;
+
+ - aplicar argumentação comercial estruturada;
+
+ - conduzir negociações em ambientes de maior movimentação.
+
+
 
 ### Mercado
-&emsp;O mercado representa o segmento de pequenos e médios varejistas. A NPC Alícia apresenta objeções relacionadas a taxas e à concorrência, situação que estrutura o conflito central da missão. A interação ocorre por meio de diálogo interativo com elementos de quiz, com ênfase no desenvolvimento da argumentação comercial do jogador.
+&emsp;O mercado representa estabelecimentos varejistas com grande volume de vendas e operações mais complexas. A NPC Alicia responsável apresenta objeções relacionadas a taxas e concorrência, exigindo do jogador maior domínio argumentativo e capacidade de negociação. Os objetivos pedagógicos desta missão incluem:
 
-(Inserir Figura. Representação visual interna e externa do Mercado Varejista.)
+- consolidar as competências de abordagem e negociação;
 
-### Sede da Cielo (Cena Final)
-A sede da Cielo representa o ambiente de encerramento da jornada do jogador dentro do Mini Mundo Cielo. Após concluir todas as missões e desafios propostos ao longo das cidades, o jogador retorna à sede da empresa, onde recebe sua certificação simbólica de conclusão do jogo, representando sua evolução como Gerente de Negócios. A fução narrativa dessa cena é representar o reconhecimento profissional do jogador, validar a evolução de competências adquiridas e, por fim, encerrar a experiência com sentimento de conquista e progressão. Dessa forma as função pedagógica dessa cena são:
-Reforçar os conhecimentos aplicados durante a jornada
-- valorizar a aprendizagem baseada em prática e tomada de decisão;
-- estimular a percepção de crescimento profissional dentro do contexto da Cielo.
+- trabalhar argumentação comercial em cenários competitivos;
+
+- aplicar estratégias de fechamento de vendas;
+
+- desenvolver tomada de decisão estratégica.
+ 
+### Posto de Gasolina
+&emsp; O posto de gasolina representa o desafio final do Mini Mundo Cielo. O estabelecimento possui alto volume de transações e exige soluções integradas que garantam fluidez no atendimento e eficiência operacional. Durante a negociação, o jogador precisa demonstrar domínio completo das estratégias de venda desenvolvidas ao longo do jogo para o NPC Nicolas. Os objetivos pedagógicos desta missão incluem:
+
+- aplicar todas as competências desenvolvidas nas fases anteriores;
+
+- conduzir negociações em cenários de alta complexidade;
+
+- apresentar soluções integradas do portfólio da Cielo;
+
+- realizar o fechamento estratégico da venda.
+
+ &emsp;Esta é a fase mais difícil do jogo. O jogador precisa atingir 750 CieloCoins para convencer o cliente e concluir a missão. Diferentemente das fases anteriores, respostas erradas passam a resultar em perda de pontos, aumentando o nível de desafio.
 
 ### Síntese das Locações
 Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cielo, articulando de forma integrada os elementos narrativos, as mecânicas de jogo e os objetivos pedagógicos. A progressão entre os ambientes é concebida de maneira gradual e aplicada, promovendo o desenvolvimento contínuo das competências profissionais do jogador ao longo de toda a jornada.
