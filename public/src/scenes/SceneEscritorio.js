@@ -3,105 +3,140 @@ export default class SceneEscritorio extends Phaser.Scene {
     super({ key: 'SceneEscritorio' });
   }
 
-  // Recebe os dados do personagem escolhido na cena anterior
-  init(data) {
-    this.nomePastaEscolhida = data.nomePasta || "Pedro";
-    this.prefixoEscolhido = data.prefixo || "HB";
+  init(dados) {
+    this.nomePastaEscolhida = dados.nomePasta || "Pedro";
+    this.prefixoEscolhido   = dados.prefixo   || "HB";
   }
 
   preload() {
-    const nomePasta = this.registry.get('nomePasta');
-    const prefixo = this.registry.get('prefixo');
+    const nomePasta = this.nomePastaEscolhida;
+    const prefixo   = this.prefixoEscolhido;
 
-    this.load.tilemapTiledJSON(
-      'escritorio',
-      'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj'
-    );
+    this.load.on('loaderror', (arquivo) => {
+      console.error('[SceneEscritorio] Erro ao carregar:', arquivo.key, arquivo.src);
+    });
 
-    this.load.image(
-      'escritorio_tiles',
-      'src/assets/imagens/mapsjson/tileSets/escritorio.png'
-    );
+    this.load.tilemapTiledJSON('escritorio', 'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj');
+    this.load.image('escritorio_tiles', 'src/assets/imagens/mapsjson/tileSets/escritorio.png');
 
-    this.load.image(
-      'playerEscolhido',
-      `src/assets/imagens/imagensPersonagens/${nomePasta}/${prefixo}.png`
-    );
+    // Carrega os 16 frames de animação do personagem escolhido
+    const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
+    for (let i = 1; i <= 4; i++) {
+      this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
+      this.load.image(`esp_tras_${i}`,     `${caminhoBase}/${prefixo}_tras_${i}.png`);
+      this.load.image(`esp_direita_${i}`,  `${caminhoBase}/${prefixo}_direita_${i}.png`);
+      this.load.image(`esp_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+    }
   }
 
-  // Configura o mapa, personagem, controles e câmera
   create() {
-    const map = this.make.tilemap({ key: 'escritorio' });
-    const tiles = map.addTilesetImage('escritorio', 'escritorio_tiles');
+    const mapa  = this.make.tilemap({ key: 'escritorio' });
+    const tiles = mapa.addTilesetImage('escritorio', 'escritorio_tiles');
 
-    map.createLayer('chao', tiles, 0, 0);
-    map.createLayer('semcolis', tiles, 0, 0);
-    const objcomcolis = map.createLayer('objcomcolis', tiles, 0, 0);
-    const obcomcolis2 = map.createLayer('obcomcolis2', tiles, 0, 0);
-    const borda = map.createLayer('borda', tiles, 0, 0);
+    mapa.createLayer('chao',    tiles, 0, 0);
+    mapa.createLayer('semcolis', tiles, 0, 0);
+
+    const objcomcolis = mapa.createLayer('objcomcolis', tiles, 0, 0);
+    const obcomcolis2 = mapa.createLayer('obcomcolis2', tiles, 0, 0);
+    const borda       = mapa.createLayer('borda',       tiles, 0, 0);
 
     objcomcolis.setCollisionByExclusion([-1]);
     obcomcolis2.setCollisionByExclusion([-1]);
     borda.setCollisionByExclusion([-1]);
 
-    // Camada de objetos sem colisão (decoração) acima do personagem
-    const spawnLayer = map.getObjectLayer('spawn');
-    const portaSpawn = spawnLayer?.objects?.find(obj => obj.name === 'portaSpawn');
+    // --- ANIMAÇÕES ---
+    const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
+    direcoes.forEach(dir => {
+      if (!this.anims.exists(`esp_andar_${dir}`)) {
+        this.anims.create({
+          key: `esp_andar_${dir}`,
+          frames: [
+            { key: `esp_${dir}_1` },
+            { key: `esp_${dir}_2` },
+            { key: `esp_${dir}_3` },
+            { key: `esp_${dir}_4` }
+          ],
+          frameRate: 8,
+          repeat: -1
+        });
+      }
+    });
 
-    const spawnX = portaSpawn?.x ?? 500;
-    const spawnY = portaSpawn?.y ?? 700;
+    // --- PERSONAGEM ---
+    // Sem object layer de spawn no mapa — usa posição segura no hall de entrada
+    const spawnX = 342;
+    const spawnY = 308;
 
-   // Cria o personagem no ponto de spawn definido no Tiled
-    this.player = this.physics.add.sprite(spawnX, spawnY, 'playerEscolhido');
-    this.player.setCollideWorldBounds(true);
+    this.personagem = this.physics.add.sprite(spawnX, spawnY, 'esp_frente_1');
+    this.personagem.setCollideWorldBounds(true);
 
-    // Ajusta escala do personagem para caber melhor no mapa
-    const tileSize = map.tileWidth; // pega o tamanho do tile do próprio mapa
-    const spriteWidth = this.player.width;
-    const spriteHeight = this.player.height;
-    const scaleX = (tileSize * 0.9) / spriteWidth;
-    const scaleY = (tileSize * 0.9) / spriteHeight;
-    const scale = Math.min(scaleX, scaleY); // mantém proporção
+    const tamTile      = mapa.tileWidth || 16;
+    const larguraSprite = this.personagem.width;
+    const alturaSprite  = this.personagem.height;
+    const escala = Math.min((tamTile * 1.5) / larguraSprite, (tamTile * 1.5) / alturaSprite);
+    this.personagem.setScale(Math.max(escala, 0.05));
+    this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
 
-    this.player.setScale(scale);
+    this.physics.add.collider(this.personagem, objcomcolis);
+    this.physics.add.collider(this.personagem, obcomcolis2);
+    this.physics.add.collider(this.personagem, borda);
 
-   // Ajusta o corpo de colisão para ser um pouco menor que o sprite, para evitar ficar preso em cantos
-    const bodyWidth = spriteWidth * scale * 0.5;
-    const bodyHeight = spriteHeight * scale * 0.5;
-    this.player.body.setSize(
-      spriteWidth * 0.5,
-      spriteHeight * 0.5
-    );
+    // --- CONTROLES ---
+    this.teclas = this.input.keyboard.createCursorKeys();
+    this.wasd = this.input.keyboard.addKeys({
+      cima:     Phaser.Input.Keyboard.KeyCodes.W,
+      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+      esquerda: Phaser.Input.Keyboard.KeyCodes.A,
+      direita:  Phaser.Input.Keyboard.KeyCodes.D
+    });
 
-    this.physics.add.collider(this.player, objcomcolis);
-    this.physics.add.collider(this.player, obcomcolis2);
-    this.physics.add.collider(this.player, borda);
+    // --- CÂMERA ---
+    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.setZoom(3);
+    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.direcaoAtual = 'frente';
 
-  // Configura a câmera para seguir o personagem e limitar aos limites do mapa
-    this.cameras.main.startFollow(this.player);
-    this.cameras.main.setZoom(2);
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 
-  // Lógica de movimento do personagem e animações
   update() {
-    const speed = 150;
+    const velocidade = 150;
+    const { teclas, wasd, personagem } = this;
 
-    this.player.setVelocity(0);
+    personagem.setVelocity(0);
 
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(speed);
+    let movendo = false;
+
+    if (teclas.left.isDown || wasd.esquerda.isDown) {
+      personagem.setVelocityX(-velocidade);
+      personagem.anims.play('esp_andar_esquerda', true);
+      this.direcaoAtual = 'esquerda';
+      movendo = true;
+    } else if (teclas.right.isDown || wasd.direita.isDown) {
+      personagem.setVelocityX(velocidade);
+      personagem.anims.play('esp_andar_direita', true);
+      this.direcaoAtual = 'direita';
+      movendo = true;
     }
 
-    if (this.cursors.up.isDown) {
-      this.player.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.setVelocityY(speed);
+    if (teclas.up.isDown || wasd.cima.isDown) {
+      personagem.setVelocityY(-velocidade);
+      if (!movendo) personagem.anims.play('esp_andar_tras', true);
+      this.direcaoAtual = 'tras';
+      movendo = true;
+    } else if (teclas.down.isDown || wasd.baixo.isDown) {
+      personagem.setVelocityY(velocidade);
+      if (!movendo) personagem.anims.play('esp_andar_frente', true);
+      this.direcaoAtual = 'frente';
+      movendo = true;
     }
+
+    if (!movendo) {
+      personagem.anims.stop();
+      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+    }
+
   }
 }
