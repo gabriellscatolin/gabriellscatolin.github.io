@@ -413,7 +413,7 @@ A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na ca
 Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a tecla de interação para iniciar diálogos e responder perguntas estratégicas em formato de quiz. As respostas geram recompensas em CieloCoins, que determinam o progresso dentro da missão. A dificuldade e a quantidade de moedas necessárias aumentam progressivamente ao longo das fases.
 
 ### Mapa Geral 
- &emsp;A Cidade 1 constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
+ &emsp;A Cidade constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
   - introduzir os controles básicos do personagem; 
   - instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
   - permitir o deslocamento entre os estabelecimentos disponíveis; 
@@ -463,8 +463,8 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 &emsp;O foco central desta fase é fortalecer a capacidade de negociação em contextos mais formais e estratégicos, exigindo do jogador maior preparo na comunicação e na apresentação das soluções da Cielo.
 
 
-### Salão de Beleza
-&emsp;O salão de beleza representa negócios do setor de serviços com recorrência de clientes. O NPC Eduardo manifesta preocupações relacionadas ao fluxo de caixa e à antecipação de recebíveis. Os objetivos pedagógicos desta fase compreendem: 
+### Loja de roupas 
+&emsp;A loja de roupas representa negócios do setor de serviços com recorrência de clientes. O NPC Eduardo manifesta preocupações relacionadas ao fluxo de caixa e à antecipação de recebíveis. Os objetivos pedagógicos desta fase compreendem: 
 - compreender o funcionamento da antecipação de recebíveis; 
 - explicar conceitos de gestão financeira de forma acessível;
 - adotar postura consultiva junto ao cliente; 
@@ -500,8 +500,6 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  - aplicar argumentação comercial estruturada;
 
  - conduzir negociações em ambientes de maior movimentação.
-
-
 
 ### Mercado
 &emsp;O mercado representa estabelecimentos varejistas com grande volume de vendas e operações mais complexas. A NPC Alicia responsável apresenta objeções relacionadas a taxas e concorrência, exigindo do jogador maior domínio argumentativo e capacidade de negociação. Os objetivos pedagógicos desta missão incluem:
