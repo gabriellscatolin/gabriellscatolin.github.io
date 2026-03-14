@@ -419,6 +419,12 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
   - permitir o deslocamento entre os estabelecimentos disponíveis; 
   - desbloquear áreas progressivamente, conforme a conclusão das missões;
   - representar simbolicamente a evolução profissional do jogador ao longo da experiência. 
+
+<div align="center">
+  <sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
+  <img src="../gdd_images/visãoMapa.jpg">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
    
 &emsp;O mapa é delimitado por barreiras invisíveis e elementos urbanos, garantindo o controle narrativo do ambiente. Novos estabelecimentos tornam-se acessíveis à medida que as missões anteriores são concluídas, promovendo uma progressão estruturada e coerente com os objetivos de aprendizagem. 
 
@@ -434,6 +440,12 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  - praticar tomada de decisão em interações estratégicas.
 
+ <div align="center">
+  <sub>Figura 11 - Agência - Mini Mundo Cielo</sub>
+  <img src="../gdd_images/interiorAgencia.jpg">
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 &emsp;A exigência de pontuação aumenta ao longo dos capítulos. Na Agência 1 o jogador precisa atingir 150 CieloCoins, enquanto na Agência 2 a exigência sobe para 400 CieloCoins, representando maior domínio das estratégias de abordagem e negociação. Na Agência 3, além da maior pontuação exigida (500 CieloCoins), o jogador enfrenta um novo desafio: o PJ se recusa a acompanhá-lo na visita comercial, exigindo maior autonomia na tomada de decisão.
 
 
@@ -443,12 +455,29 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - comunicar as taxas de forma clara e transparente; 
 - fortalecer o relacionamento com pequenos empreendedores.
 
+ <div align="center">
+
+  <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorPadaria.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Farmácia
 &emsp;A farmácia simboliza estabelecimentos com alta demanda transacional e sensibilidade a questões de segurança e estabilidade operacional. A NPC Rachel questiona a confiabilidade e a segurança do sistema. Os objetivos pedagógicos desta missão incluem: 
 - argumentar sobre segurança transacional; 
 - diferenciar as soluções da Cielo em relação à concorrência;
 - reforçar a credibilidade institucional da empresa.
+
+ <div align="center">
+
+  <sub>Figura 13 - Farmácia - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorFarmacia.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
  &emsp;O foco central desta fase é o desenvolvimento da autoridade técnica e da confiança junto ao cliente.
 
@@ -460,6 +489,14 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - identificar as necessidades específicas de clientes empresariais;
 - consolidar o processo de apresentação e fechamento de vendas.
 
+ <div align="center">
+  <sub>Figura 14 - Escritório - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorEscritorio.png">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 &emsp;O foco central desta fase é fortalecer a capacidade de negociação em contextos mais formais e estratégicos, exigindo do jogador maior preparo na comunicação e na apresentação das soluções da Cielo.
 
 
@@ -469,6 +506,14 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - explicar conceitos de gestão financeira de forma acessível;
 - adotar postura consultiva junto ao cliente; 
 - personalizar soluções conforme o perfil do estabelecimento.
+
+ <div align="center">
+  <sub>Figura 15 - Loja de roupas - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorCabelereiro.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 &emsp;Nesta fase, o jogador expande sua atuação para um perfil consultivo, diferenciando-se da abordagem meramente transacional das etapas anteriores.
 
@@ -487,6 +532,15 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  - criar uma pausa entre as missões de negociação.
 
+  <div align="center">
+
+  <sub>Figura 16 - Metrô - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorMetro.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 &emsp; As moedas coletadas durante o mini game são somadas ao total do jogador, funcionando como bônus dentro da progressão do jogo.
 
 
@@ -501,6 +555,15 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  - conduzir negociações em ambientes de maior movimentação.
 
+  <div align="center">
+
+  <sub>Figura 17 - Restaurante - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorRestaurante.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 ### Mercado
 &emsp;O mercado representa estabelecimentos varejistas com grande volume de vendas e operações mais complexas. A NPC Alicia responsável apresenta objeções relacionadas a taxas e concorrência, exigindo do jogador maior domínio argumentativo e capacidade de negociação. Os objetivos pedagógicos desta missão incluem:
 
@@ -511,6 +574,15 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - aplicar estratégias de fechamento de vendas;
 
 - desenvolver tomada de decisão estratégica.
+
+ <div align="center">
+
+  <sub>Figura 18 - Mercado - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorMercado.png">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
  
 ### Posto de Gasolina
 &emsp; O posto de gasolina representa o desafio final do Mini Mundo Cielo. O estabelecimento possui alto volume de transações e exige soluções integradas que garantam fluidez no atendimento e eficiência operacional. Durante a negociação, o jogador precisa demonstrar domínio completo das estratégias de venda desenvolvidas ao longo do jogo para o NPC Nicolas. Os objetivos pedagógicos desta missão incluem:
@@ -522,6 +594,15 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - apresentar soluções integradas do portfólio da Cielo;
 
 - realizar o fechamento estratégico da venda.
+
+ <div align="center">
+
+  <sub>Figura 19 - Posto de gasolina - Mini Mundo Cielo</sub>
+
+  <img src="../gdd_images/interiorPostodeGasolina.jpg">
+
+  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
  &emsp;Esta é a fase mais difícil do jogo. O jogador precisa atingir 750 CieloCoins para convencer o cliente e concluir a missão. Diferentemente das fases anteriores, respostas erradas passam a resultar em perda de pontos, aumentando o nível de desafio.
 
@@ -1387,7 +1468,7 @@ const mapa = this.make.tilemap({ key: 'mapaGeral' });
 Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
 
 <div align="center">
-<sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
+<sub>Figura 20 - Mapa geral - Mini Mundo Cielo</sub>
 <img src="../gdd_images/visãoMapa.jpg">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -1463,7 +1544,7 @@ this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 ```
 
 <div align="center">
-<sub>Figura 11 - Personagem no mapa geral - Mini Mundo Cielo</sub>
+<sub>Figura 21 - Personagem no mapa geral - Mini Mundo Cielo</sub>
 <img src="../gdd_images/personagemMapa.jpg">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -1498,7 +1579,7 @@ this.scene.start('SceneEscritorio');
 Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
 
 <div align="center">
-<sub>Figura 12 - Mapa geral - Mini Mundo Cielo</sub>
+<sub>Figura 22 - Mapa geral - Mini Mundo Cielo</sub>
 <img src="../gdd_images/interacaoEstabelecimento.jpg">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -1532,7 +1613,7 @@ Após a criação no Tiled, os mapas foram exportados no formato JSON, tornando 
 Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
 
 <div align="center">
-<sub>Figura 13 e 14 - Estabelecimentos internos - Mini Mundo Cielo</sub>
+<sub>Figura 23 e 24 - Estabelecimentos internos - Mini Mundo Cielo</sub>
 <img src="../gdd_images/MapasCenarios.png">
 <img src="../gdd_images/MapasCenarios2.png">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
