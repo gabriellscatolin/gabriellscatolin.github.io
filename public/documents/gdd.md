@@ -1388,7 +1388,11 @@ const mapa = this.make.tilemap({ key: 'mapaGeral' });
 
 Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
 
-Imagem do mapa
+<div align="center">
+<sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
+<img src="../gdd_images/visãoMapa.jpg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ###Organização das camadas do mapa:
 
@@ -1460,7 +1464,11 @@ Também foram definidos limites para a câmera, impedindo que o jogador visualiz
 this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 ```
 
-imagem personagemmapa
+<div align="center">
+<sub>Figura 11 - Personagem no mapa geral - Mini Mundo Cielo</sub>
+<img src="../gdd_images/personagemMapa.jpg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Sistema de interação com estabelecimentos:
 
@@ -1491,7 +1499,11 @@ this.scene.start('SceneEscritorio');
 
 Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
 
-imagem interacaopersonagem
+<div align="center">
+<sub>Figura 12 - Mapa geral - Mini Mundo Cielo</sub>
+<img src="../gdd_images/interacaoEstabelecimento.jpg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Desenvolvimento dos cenários internos:
 
@@ -1499,28 +1511,21 @@ Além da implementação do mapa principal da cidade, também foi iniciado o des
 
 Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
 
-agência bancária
+- agência bancária
 
+- padaria
 
-padaria
+- farmácia
 
+- loja de roupa
 
-restaurante
+- estação de metrô
 
+- restaurante
 
-cabeleireiro
+- supermercado
 
-
-farmácia
-
-
-posto de gasolina
-
-
-estação de metrô
-
-
-supermercado
+- posto de gasolina
 
 
 Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
@@ -1528,7 +1533,12 @@ Após a criação no Tiled, os mapas foram exportados no formato JSON, tornando 
 
 Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
 
-imagens de todos os estabelecimentos
+<div align="center">
+<sub>Figura 13 e 14 - Estabelecimentos internos - Mini Mundo Cielo</sub>
+<img src="../gdd_images/MapasCenarios.png">
+<img src="../gdd_images/MapasCenarios2.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Dificuldades:
 
