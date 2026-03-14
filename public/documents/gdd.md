@@ -1341,7 +1341,229 @@ Próximos passos
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
-*Descreva e ilustre aqui o desenvolvimento da versão intermediária do jogo, explicando brevemente o que foi entregue em termos de código e jogo. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e próximos passos.*
+Durante a terceira sprint do projeto, o foco do desenvolvimento foi expandir o ambiente jogável do jogo, implementando o mapa principal da cidade e iniciando a criação dos cenários internos dos estabelecimentos presentes no jogo. Essa etapa teve como objetivo transformar o jogo em um ambiente explorável mais amplo, permitindo ao jogador navegar por um cenário urbano e iniciar a interação com diferentes locais da narrativa.
+
+A partir da estrutura desenvolvida nas sprints anteriores, foi criada a cena SceneCidade.js, responsável por gerenciar o mapa urbano, a movimentação do personagem nesse ambiente, o sistema de colisões com elementos do cenário e as zonas de interação que permitem acessar determinados estabelecimentos.
+
+Além disso, também foi iniciado o desenvolvimento dos ambientes internos dos estabelecimentos do jogo utilizando o software Tiled, permitindo estruturar os cenários que serão utilizados nas próximas etapas da narrativa.
+
+Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+
+- Implementação do mapa principal da cidade utilizando o sistema de Tilemaps do Phaser.js.
+
+- Integração dos tilesets gráficos responsáveis pela composição visual do cenário urbano.
+
+- Desenvolvimento do sistema de colisão entre o personagem e objetos do ambiente, como prédios, veículos e obstáculos.
+
+- Implementação da câmera dinâmica, que acompanha o personagem durante a movimentação pelo mapa.
+
+- Criação do sistema de interação com estabelecimentos, permitindo acessar ambientes internos.
+
+- Desenvolvimento dos cenários internos de diversos estabelecimentos utilizando o editor de mapas Tiled.
+
+- Exportação desses cenários para o projeto no formato JSON, preparando sua futura integração ao jogo.
+
+### Implementação do mapa da cidade:
+
+Para a construção do cenário urbano do jogo foi utilizado o software Tiled, um editor amplamente utilizado no desenvolvimento de jogos 2D para criação de mapas baseados em tiles.
+
+O mapa da cidade foi projetado no Tiled e posteriormente exportado no formato JSON, permitindo sua integração com o motor de jogos Phaser.js. O carregamento desse mapa ocorre dentro do método `preload()` da cena responsável pelo ambiente urbano.
+
+```js
+this.load.tilemapTiledJSON('mapaGeral', 'src/assets/imagens/mapsjson/tileMaps/mapaMiniMundoVF.tmj?v=5');
+```
+
+Além do arquivo de mapa, também foram carregados os tilesets, que são os conjuntos de imagens utilizados para compor visualmente o cenário.
+
+```js
+this.load.image('tilesMapaTopo', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png?v=1');
+this.load.image('tilesMapaBase', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1');
+```
+
+Após o carregamento desses recursos, o mapa é instanciado na cena utilizando o método `make.tilemap()`, permitindo acessar suas camadas e estruturas internas.
+
+```js
+const mapa = this.make.tilemap({ key: 'mapaGeral' });
+```
+
+Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
+
+Imagem do mapa
+
+###Organização das camadas do mapa:
+
+O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
+
+Para evitar repetição de código durante a criação das camadas, foi implementada uma função auxiliar responsável por instanciá-las no Phaser.
+
+```js
+_criarCamada(mapa, nome, tilesets) {
+  const camada = mapa.createLayer(nome, tilesets, 0, 0);
+  return camada;
+}
+```
+
+As camadas do mapa foram divididas em três categorias principais:
+
+- Camadas de chão e elementos decorativos, responsáveis apenas pela composição visual do cenário;
+
+- Camadas de objetos com colisão, que impedem a movimentação do personagem;
+
+- Camadas de elementos posicionados acima do personagem, utilizadas para criar sensação de profundidade no cenário.
+
+
+Para as camadas que devem bloquear o movimento do jogador, foi utilizado o método `setCollisionByExclusion()`.
+
+```js
+caminhoInferior.setCollisionByExclusion([-1]);
+carrosVeiculos.setCollisionByExclusion([-1]);
+estabelecimentos.setCollisionByExclusion([-1]);
+```
+
+Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
+
+Movimentação do personagem no mapa
+O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
+
+```js
+this.personagem = this.physics.add.sprite(spawnX, spawnY, 'sprite_frente_1');
+this.personagem.setCollideWorldBounds(true);
+```
+
+O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
+
+```js
+this.teclas = this.input.keyboard.createCursorKeys();
+```
+
+Durante o loop de atualização do jogo `(update())`, o sistema verifica quais teclas estão pressionadas e aplica velocidade ao personagem, além de reproduzir a animação correspondente à direção do movimento.
+
+Quando o jogador interrompe o movimento, a animação é pausada e o sprite retorna ao primeiro frame da direção atual, representando o estado de repouso do personagem.
+
+### Sistema de câmera dinâmica:
+
+Para melhorar a experiência de navegação pelo cenário, foi implementado um sistema de câmera que acompanha automaticamente o personagem durante sua movimentação.
+
+```js
+this.cameras.main.startFollow(this.personagem);
+```
+
+Além disso, foi aplicado um nível de zoom específico para melhorar a visualização do cenário.
+
+```js
+this.cameras.main.setZoom(4);
+```
+
+Também foram definidos limites para a câmera, impedindo que o jogador visualize áreas externas ao mapa.
+
+```js
+this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
+```
+
+imagem personagemmapa
+
+### Sistema de interação com estabelecimentos:
+
+Uma das principais funcionalidades desenvolvidas nesta sprint foi o sistema de interação que permite ao jogador acessar determinados estabelecimentos presentes no mapa da cidade.
+Para isso, foi criada uma zona de interação utilizando um retângulo geométrico que representa a área próxima à entrada de um prédio.
+
+```js
+this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
+```
+
+Quando o personagem entra nessa área, um indicador visual é exibido informando que a tecla E pode ser pressionada para entrar no local.
+
+```JS
+this.labelE = this.add.text(993, 838, '[E] Entrar');
+``` 
+
+Caso o jogador pressione a tecla correspondente, é iniciada uma transição de cena utilizando um efeito de fade-out da câmera.
+
+```JS
+this.cameras.main.fadeOut(800, 0, 0, 0);
+```
+
+Após a conclusão da animação, o jogo inicia a cena interna do estabelecimento.
+
+```JS
+this.scene.start('SceneEscritorio');
+```
+
+Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
+
+imagem interacaopersonagem
+
+### Desenvolvimento dos cenários internos:
+
+Além da implementação do mapa principal da cidade, também foi iniciado o desenvolvimento dos cenários internos dos estabelecimentos presentes no jogo. Esses ambientes foram projetados utilizando o software Tiled, seguindo o mesmo padrão estrutural utilizado na construção do mapa externo.
+
+Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
+
+agência bancária
+
+
+padaria
+
+
+restaurante
+
+
+cabeleireiro
+
+
+farmácia
+
+
+posto de gasolina
+
+
+estação de metrô
+
+
+supermercado
+
+
+Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
+Após a criação no Tiled, os mapas foram exportados no formato JSON, tornando possível sua integração com o motor Phaser.js por meio do sistema de carregamento de tilemaps.
+
+Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
+
+imagens de todos os estabelecimentos
+
+### Dificuldades:
+
+Durante o desenvolvimento desta sprint, algumas dificuldades técnicas foram encontradas, principalmente relacionadas à integração do mapa com o sistema de movimentação do personagem e com os elementos interativos do cenário.
+
+Entre os principais desafios estão:
+
+- Integrar corretamente o mapa criado no editor Tiled ao motor Phaser.js.
+
+- Configurar o sistema de colisão em múltiplas camadas do mapa, sem interferir nos elementos decorativos.
+
+- Ajustar a escala do personagem para manter proporção adequada em relação ao tamanho dos tiles do cenário.
+
+- Implementar um sistema confiável de detecção de proximidade para interação com estabelecimentos.
+
+- Organizar a estrutura dos mapas internos dos estabelecimentos para futura integração ao sistema de navegação do jogo.
+
+
+### Próximos passos:
+
+Nas próximas sprints, o desenvolvimento será direcionado para ampliar as interações dentro do jogo e finalizar a integração dos cenários internos ao mapa da cidade.
+Entre os próximos objetivos estão:
+
+- Integrar todos os estabelecimentos internos ao mapa da cidade.
+
+- Implementar NPCs adicionais com diálogos e objetivos específicos.
+
+- Implementar novas interações com NPCs dentro dos estabelecimentos.
+
+- Desenvolver os desafios e puzzles relacionados à temática do jogo.
+
+- Adicionar novas mecânicas de gameplay ligadas ao sistema de progressão do jogador.
+
+- Realizar ajustes visuais e melhorias na navegação pelo mapa.
+
 
 ## 4.4. Desenvolvimento final do MVP (sprint 4)
 
