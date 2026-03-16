@@ -142,8 +142,9 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
-&emsp;A Proposta de Valor do Mini Mundo Cielo está estruturada em torno de dois perfis centrais: a **Cielo S.A.** (cliente contratante) e os **Gerentes de Negócios** (usuários finais do jogo).
+&emsp;A proposta de valor do Mini Mundo Cielo está estruturada em torno de dois perfis centrais: a **Cielo S.A.** (cliente contratante) e os **Gerentes de Negócios** (usuários finais do jogo). O Mini Mundo Cielo é um jogo de simulação de vendas desenvolvido para apoiar o treinamento desses profissionais. [\[29\]](#ref29)
 
+&emsp;Por meio de uma experiência gamificada, o jogador explora diferentes estabelecimentos comerciais e pratica abordagens de venda utilizando soluções do portfólio da empresa. Dessa forma, o jogo transforma o treinamento comercial em uma experiência interativa e prática, permitindo que os profissionais desenvolvam habilidades de argumentação, identificação de oportunidades e tomada de decisão em um ambiente seguro, com feedback imediato. [\[30\]](#ref30)
 **Para a Cielo S.A.:**
 
 - **Ganhos gerados:** Padronização do treinamento de vendas em escala nacional; redução de custos operacionais com treinamentos presenciais; geração de métricas de desempenho individuais e coletivas; aceleração do onboarding de novos GNs.
