@@ -102,6 +102,10 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.direcaoAtual = 'frente';
 
+    this.debugTxt = this.add.text(0, 0, '', {
+      fontSize: '4px', color: '#ffff00',
+      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(999);
   }
 
   update() {
@@ -141,5 +145,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }
