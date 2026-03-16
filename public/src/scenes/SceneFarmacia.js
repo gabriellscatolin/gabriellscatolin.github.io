@@ -1,104 +1,196 @@
 export default class SceneFarmacia extends Phaser.Scene {
   constructor() {
-    super({ key: 'SceneEscritorio' }); // Chave única para identificar a cena
+    super({ key: 'SceneFarmacia' });
   }
 
-  init(data) {  // Recebe os dados passados pela cena anterior (ScenePersonagem)
-  this.nomePastaEscolhida = data.nomePasta || "Pedro";
-  this.prefixoEscolhido = data.prefixo || "HB";
-
+  init(dados) {
+    this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
+    this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
   }
 
   preload() {
-  // Carrega o mapa, tilesets e a imagem do personagem escolhido usando os dados do registry
-  const nomePasta = this.registry.get('nomePasta');  
-  const prefixo = this.registry.get('prefixo');
+    const nomePasta = this.nomePastaEscolhida;
+    const prefixo   = this.prefixoEscolhido;
 
-  this.load.tilemapTiledJSON(
-    'farmacia',
-    './src/assets/imagens/mapsjson/tileMaps/farmacia.tmj'
-  ); 
+    this.load.on('loaderror', (arquivo) => {
+      console.error('[SceneFarmacia] Erro ao carregar:', arquivo.key, arquivo.src);
+    });
 
-  this.load.image(
-    'farmacia_roombuilder',
-    './src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png'
-  );
+    this.load.tilemapTiledJSON('farmacia', 'src/assets/imagens/mapsjson/tileMaps/farmacia.tmj?v=1');
+    this.load.image('farm_int_p1',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png');
+    this.load.image('farm_int_p2',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part2.png');
+    this.load.image('farm_int_p3',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part3.png');
+    this.load.image('farm_roombuilder', 'src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png');
 
-  this.load.image(
-    'farmacia_tiles', 
-    'public/src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png'
+    const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
+    for (let i = 1; i <= 4; i++) {
+      this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
+      this.load.image(`farm_tras_${i}`,     `${caminhoBase}/${prefixo}_tras_${i}.png`);
+      this.load.image(`farm_direita_${i}`,  `${caminhoBase}/${prefixo}_direita_${i}.png`);
+      this.load.image(`farm_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+    }
+  }
 
-  ); 
-
-  this.load.image(
-    'playerEscolhido',
-    `src/assets/imagens/imagensPersonagens/${nomePasta}/${prefixo}.png` // Carrega a imagem do personagem escolhido usando os dados do registry
-  );
-
-}
-
-// Configura o mapa, personagem, controles e câmera
   create() {
-  const map = this.make.tilemap({ key: 'farmacia' });
-  const tiles = map.addTilesetImage('farmacia', 'farmacia_roombuilder', 'farmacia_tiles');
+    const mapa  = this.make.tilemap({ key: 'farmacia' });
+    const tsP1   = mapa.addTilesetImage('Interior_P1',  'farm_int_p1');
+    const tsP2   = mapa.addTilesetImage('Interior_P2',  'farm_int_p2');
+    const tsP3   = mapa.addTilesetImage('Interior_P3',  'farm_int_p3');
+    const tsRoom = mapa.addTilesetImage('roombuilder',  'farm_roombuilder');
+    const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
 
-  map.createLayer('chao', tiles, 0, 0);
-  map.createLayer('parede-c', tiles, 0, 0);
-  map.createLayer('parede-n', tiles, 0, 0); 
+    // Fundo para cobrir qualquer área vazia
+    this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
 
-  const armario0 = map.createLayer('armario0-n', tiles, 0, 0);
-  const decoracao = map.createLayer('decoracao-n', tiles, 0, 0);
-  const janela = map.createLayer('janela-n', tiles, 0, 0);
-  const objetosn = map.createLayer('objetos-n', tiles, 0, 0); 
-  const armariosn = map.createLayer('armarios-n', tiles, 0, 0);
-  const armario3c = map.createLayer('armario3-c', tiles, 0, 0);
-  const armario2c = map.createLayer('armario2-c', tiles, 0, 0);
-  const armarioc = map.createLayer('armario-c', tiles, 0, 0);
-  const armario0c = map.createLayer('armario0-c', tiles, 0, 0);
-  const objetosc = map.createLayer('objetos-c', tiles, 0, 0);
-  const cadeiraderodas = map.createLayer('cadeira', tiles, 0, 0); 
-  const plantas = map.createLayer('plantas', tiles, 0, 0); 
+    // Camadas sem colisão
+    mapa.createLayer('Chão',           tilesets, 0, 0);
+    mapa.createLayer('Parede - N',     tilesets, 0, 0);
+    mapa.createLayer('Armario 0 - N',  tilesets, 0, 0);
+    mapa.createLayer('Decoração - N',  tilesets, 0, 0);
+    mapa.createLayer('Janela - N',     tilesets, 0, 0);
+    mapa.createLayer('Objetos - N',    tilesets, 0, 0);
+    mapa.createLayer('Armarios - N',   tilesets, 0, 0);
 
-  // Configura as camadas de colisão
-  objcomcolis.setCollisionByExclusion([-1]);
-  obcomcolis2.setCollisionByExclusion([-1]);
-  borda.setCollisionByExclusion([-1]);
+    // Camadas com colisão
+    const paredeC   = mapa.createLayer('Parede - C',          tilesets, 0, 0);
+    const arm3C     = mapa.createLayer('Armario 3 - C',       tilesets, 0, 0);
+    const arm2C     = mapa.createLayer('Armario 2 - C',       tilesets, 0, 0);
+    const armC      = mapa.createLayer('Armario - C',         tilesets, 0, 0);
+    const arm0C     = mapa.createLayer('Armario 0 - C',       tilesets, 0, 0);
+    const objC      = mapa.createLayer('Objetos - C',         tilesets, 0, 0);
+    const cadeiraC  = mapa.createLayer('Cadeira de rodas - C', tilesets, 0, 0);
+    const plantasC  = mapa.createLayer('Plantas - C',         tilesets, 0, 0);
 
-  const spawnLayer = map.getObjectLayer('spawn');
-  const portaSpawn = spawnLayer?.objects?.find(obj => obj.name === 'portaSpawn');
+    [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
+      .filter(Boolean)
+      .forEach(c => c.setCollisionByExclusion([-1]));
 
-  this.player = this.physics.add.sprite(500, 700, 'playerEscolhido');
-  this.player.setScale(1);
-  this.player.setCollideWorldBounds(true);
+    // Animações
+    const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
+    direcoes.forEach(dir => {
+      if (!this.anims.exists(`farm_andar_${dir}`)) {
+        this.anims.create({
+          key: `farm_andar_${dir}`,
+          frames: [
+            { key: `farm_${dir}_1` },
+            { key: `farm_${dir}_2` },
+            { key: `farm_${dir}_3` },
+            { key: `farm_${dir}_4` }
+          ],
+          frameRate: 8,
+          repeat: -1
+        });
+      }
+    });
 
-  // Ajusta o corpo de colisão para ser um pouco menor que o sprite, para evitar ficar preso em cantos
-  this.physics.add.collider(this.player, objcomcolis);
-  this.physics.add.collider(this.player, obcomcolis2);
-  this.physics.add.collider(this.player, borda);
+    // Personagem — spawn próximo à entrada (bottom-center do mapa)
+    const spawnX = mapa.widthInPixels  / 2;
+    const spawnY = mapa.heightInPixels - 24;
 
-  this.cursors = this.input.keyboard.createCursorKeys();
+    this.personagem = this.physics.add.sprite(spawnX, spawnY, 'farm_frente_1');
+    this.personagem.setCollideWorldBounds(true);
 
-  // Configura a câmera para seguir o personagem e limitar aos limites do mapa
-  this.cameras.main.startFollow(this.player);
-  this.cameras.main.setZoom(2.5);
-  this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-  this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    // Sprites são 1024×1024px. Com zoom=7, escala 0.019 → ~1.3 tiles de altura na tela
+    this.personagem.setScale(0.028);
+    this.personagem.body.setSize(this.personagem.width * 0.35, this.personagem.height * 0.35);
+
+    [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
+      .filter(Boolean)
+      .forEach(c => this.physics.add.collider(this.personagem, c));
+
+    // Controles
+    this.teclas = this.input.keyboard.createCursorKeys();
+    this.wasd = this.input.keyboard.addKeys({
+      cima:     Phaser.Input.Keyboard.KeyCodes.W,
+      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+      esquerda: Phaser.Input.Keyboard.KeyCodes.A,
+      direita:  Phaser.Input.Keyboard.KeyCodes.D
+    });
+
+    // Câmera
+    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.setZoom(7);
+    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.cameras.main.fadeIn(600, 0, 0, 0);
+
+    // Zona de saída
+    this.zonaSaida = new Phaser.Geom.Rectangle(118, 215, 60, 40);
+    this.labelSair = this.add.text(148, 232, '[E] Sair', {
+      fontSize: '3px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    this.transicionando    = false;
+    this.dentroZonaSaida   = false;
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
+    this.direcaoAtual = 'frente';
+
+    this.debugTxt = this.add.text(0, 0, '', {
+      fontSize: '3px', color: '#ffff00',
+      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(999);
+  }
+
+  update() {
+    const velocidade = 100;
+    const { teclas, wasd, personagem } = this;
+
+    personagem.setVelocity(0);
+    let movendo = false;
+
+    if (teclas.left.isDown || wasd.esquerda.isDown) {
+      personagem.setVelocityX(-velocidade);
+      personagem.anims.play('farm_andar_esquerda', true);
+      this.direcaoAtual = 'esquerda';
+      movendo = true;
+    } else if (teclas.right.isDown || wasd.direita.isDown) {
+      personagem.setVelocityX(velocidade);
+      personagem.anims.play('farm_andar_direita', true);
+      this.direcaoAtual = 'direita';
+      movendo = true;
+    }
+
+    if (teclas.up.isDown || wasd.cima.isDown) {
+      personagem.setVelocityY(-velocidade);
+      if (!movendo) personagem.anims.play('farm_andar_tras', true);
+      this.direcaoAtual = 'tras';
+      movendo = true;
+    } else if (teclas.down.isDown || wasd.baixo.isDown) {
+      personagem.setVelocityY(velocidade);
+      if (!movendo) personagem.anims.play('farm_andar_frente', true);
+      this.direcaoAtual = 'frente';
+      movendo = true;
+    }
+
+    if (!movendo) {
+      personagem.anims.stop();
+      personagem.setTexture(`farm_${this.direcaoAtual}_1`);
+    }
+
+    // Zona de saída
+    const dentroSaida = Phaser.Geom.Rectangle.Contains(this.zonaSaida, personagem.x, personagem.y);
+    if (dentroSaida !== this.dentroZonaSaida) {
+      this.dentroZonaSaida = dentroSaida;
+      this.labelSair.setVisible(dentroSaida);
+    }
+
+    if (dentroSaida && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.transicionando = true;
+      this.labelSair.setVisible(false);
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.start('SceneCidade', {
+          nomePasta: this.nomePastaEscolhida,
+          prefixo:   this.prefixoEscolhido,
+          spawnX:    1121,
+          spawnY:    1261
+        });
+      });
+    }
+
+    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
+  }
 }
-
- update() {
-  const speed = 150;
-
-  this.player.setVelocity(0);
-
-  if (this.cursors.left.isDown) {
-    this.player.setVelocityX(-speed);
-  } else if (this.cursors.right.isDown) {
-    this.player.setVelocityX(speed);
-  }
-
-  if (this.cursors.up.isDown) {
-    this.player.setVelocityY(-speed);
-  } else if (this.cursors.down.isDown) {
-    this.player.setVelocityY(speed);
-  }
- }}

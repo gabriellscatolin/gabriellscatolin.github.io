@@ -6,6 +6,8 @@ export default class SceneCidade extends Phaser.Scene {
   init(dados) {
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
+    this.spawnXCustom = dados.spawnX || null;
+    this.spawnYCustom = dados.spawnY || null;
   }
 
   preload() {
@@ -94,8 +96,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     // --- PERSONAGEM ---
     // Spawn no caminho de terra à esquerda do mapa (conteúdo real começa em px 784)
-    const spawnX = 840;
-    const spawnY = 900;
+    const spawnX = this.spawnXCustom || 840;
+    const spawnY = this.spawnYCustom || 900;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'sprite_frente_1');
     this.personagem.setCollideWorldBounds(true);
@@ -103,7 +105,7 @@ export default class SceneCidade extends Phaser.Scene {
     const tamTile      = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
-    const escala = Math.min((tamTile * 1.5) / larguraSprite, (tamTile * 1.5) / alturaSprite);
+    const escala = Math.min((tamTile * 1.1) / larguraSprite, (tamTile * 1.1) / alturaSprite);
     this.personagem.setScale(Math.max(escala, 0.05));
     this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
 
@@ -143,20 +145,28 @@ export default class SceneCidade extends Phaser.Scene {
     // Coordenadas aproximadas da entrada do prédio (ajuste se necessário)
     this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
 
-    // Prompt [E] em coordenadas de mundo, acima da entrada da Agência
     this.labelE = this.add.text(993, 838, '[E] Entrar', {
-      fontSize: '6px',
-      color: '#ffffff',
-      backgroundColor: '#000000cc',
-      padding: { x: 2, y: 1 },
-      resolution: 4
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    this.transicionando   = false;
-    this.dentroZonaAgencia = false;
+    // Zona de interação: Farmácia
+    this.zonaFarmacia = new Phaser.Geom.Rectangle(1081, 1181, 80, 80);
 
+    this.labelFarmacia = this.add.text(1121, 1179, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    // Direção atual para saber qual frame idle mostrar ao parar
+    this.transicionando    = false;
+    this.dentroZonaAgencia  = false;
+    this.dentroZonaFarmacia = false;
+
+    this.debugTxt = this.add.text(0, 0, '', {
+      fontSize: '4px', color: '#ffff00',
+      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(999);
+
     this.direcaoAtual = 'frente';
   }
 
@@ -211,23 +221,44 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     // --- INTERAÇÃO: Agência 01 ---
-    const dentroZona = Phaser.Geom.Rectangle.Contains(this.zonaAgencia, personagem.x, personagem.y);
-
-    if (dentroZona !== this.dentroZonaAgencia) {
-      this.dentroZonaAgencia = dentroZona;
-      this.labelE.setVisible(dentroZona);
+    const dentroAgencia = Phaser.Geom.Rectangle.Contains(this.zonaAgencia, personagem.x, personagem.y);
+    if (dentroAgencia !== this.dentroZonaAgencia) {
+      this.dentroZonaAgencia = dentroAgencia;
+      this.labelE.setVisible(dentroAgencia);
     }
 
-    if (dentroZona && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.transicionando = true;
-      this.labelE.setVisible(false);
-      this.cameras.main.fadeOut(800, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.start('SceneEscritorio', {
-          nomePasta: this.nomePastaEscolhida,
-          prefixo:   this.prefixoEscolhido
+    // --- INTERAÇÃO: Farmácia ---
+    const dentroFarmacia = Phaser.Geom.Rectangle.Contains(this.zonaFarmacia, personagem.x, personagem.y);
+    if (dentroFarmacia !== this.dentroZonaFarmacia) {
+      this.dentroZonaFarmacia = dentroFarmacia;
+      this.labelFarmacia.setVisible(dentroFarmacia);
+    }
+
+    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
+
+    if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      if (dentroAgencia) {
+        this.transicionando = true;
+        this.labelE.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneEscritorio', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
         });
-      });
+      } else if (dentroFarmacia) {
+        this.transicionando = true;
+        this.labelFarmacia.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneFarmacia', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      }
     }
   }
 }

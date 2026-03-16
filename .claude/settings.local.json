@@ -3,7 +3,9 @@
     "allow": [
       "Bash(node -e \":*)",
       "Bash(node:*)",
-      "Bash(npm install sharp --save-dev)"
+      "Bash(npm install sharp --save-dev)",
+      "Bash(npm list:*)",
+      "Bash(npm init:*)"
     ]
   }
 }
