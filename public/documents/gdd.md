@@ -159,11 +159,13 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
-&emsp;O **Mini Mundo Cielo** é um jogo educacional do tipo Serious Game, desenvolvido para navegador web (desktop), que simula o cotidiano de um Gerente de Negócios da Cielo S.A. em campo. O jogador escolhe um personagem representativo da diversidade brasileira e percorre cidades em pixel art top-down, interagindo com NPCs que simulam clientes reais — desde donos de padaria até proprietários de postos de gasolina.
+&emsp;O time Comercial da Cielo realiza o atendimento aos clientes no modelo porta a porta, visitando estabelecimentos comerciais para oferecer máquinas de pagamento e serviços de valor agregado. Atualmente, a empresa possui aproximadamente 3.500 profissionais distribuídos por todo o Brasil, o que gera um desafio crítico no processo de treinamento. Equipes localizadas fora dos grandes centros urbanos muitas vezes enfrentam barreiras de acesso às oportunidades de capacitação presencial. Segundo Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes corporações frequentemente resulta em falta de equidade no aprendizado e disparidades no nível de conhecimento sobre produtos e estratégias de abordagem ao cliente.
 
-&emsp;A solução é estruturada em duas cidades progressivas: a primeira introduz as mecânicas básicas e os estabelecimentos iniciais; a segunda apresenta contextos de venda mais complexos, desbloqueada apenas após o cumprimento de metas mínimas na cidade anterior. A progressão é medida por um sistema de moedas obtidas nas interações de negociação, onde o jogador deve selecionar a resposta mais adequada em diálogos com múltipla escolha que replicam as etapas de venda do portfólio Cielo.
+&emsp;Para enfrentar esse desafio, foi desenvolvido o Mini Mundo Cielo, um Serious Game (jogo sério) acessado via navegador web que virtualiza a gamificação dos treinamentos de vendas. A solução fundamenta-se nos princípios de Kapp (2012) [\[26\]](#ref26), que define o uso de mecânicas de jogos para facilitar a aprendizagem e a resolução de problemas em contextos não recreativos. O jogo simula o cotidiano de um Gerente de Negócios, permitindo que o jogador explore uma cidade em pixel art e interaja com NPCs que representam clientes. Através de diálogos de múltipla escolha, o colaborador pratica a superação de objeções e o letramento de produtos em um ambiente controlado e imersivo.
 
-&emsp;O jogo é acessado diretamente pelo navegador, sem necessidade de instalação, garantindo acesso equitativo a todos os GNs independentemente de sua localização geográfica. A experiência é individual, com duração estimada de sessões de 15 minutos, totalizando aproximadamente 3 horas de conteúdo completo.
+&emsp;A solução foi projetada como uma ferramenta digital de treinamento assíncrono. Como o jogo é executado diretamente no navegador, ele elimina a necessidade de instalações complexas, permitindo que colaboradores de diferentes regiões participem da mesma experiência de aprendizagem. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a aplicação de elementos de game design em processos de negócios permite que a prática de situações reais ocorra de forma segura, permitindo o erro como parte do processo educativo sem riscos financeiros ou de imagem à empresa.
+
+&emsp;Com a implementação da solução, espera-se promover maior equidade no acesso aos treinamentos, garantindo que o conteúdo seja padronizado para todo o território nacional. A utilização de jogos educativos tende a tornar o processo de capacitação mais dinâmico e interativo, o que, conforme apontado por Gee (2017) [\[28\]](#ref28), é fundamental para o desenvolvimento de literacia digital e retenção de conhecimentos complexos. Como resultado, espera-se maior satisfação dos colaboradores, melhor compreensão do portfólio da Cielo e um impacto positivo direto no desempenho das vendas.
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
@@ -1474,7 +1476,7 @@ Essa abordagem permite organizar o cenário em diferentes camadas e facilita a i
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-###Organização das camadas do mapa:
+### Organização das camadas do mapa:
 
 O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
 
@@ -1506,7 +1508,8 @@ estabelecimentos.setCollisionByExclusion([-1]);
 
 Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
 
-Movimentação do personagem no mapa
+### Movimentação do personagem no mapa:
+
 O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
 
 ```js
@@ -1591,21 +1594,21 @@ Além da implementação do mapa principal da cidade, também foi iniciado o des
 
 Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
 
-- agência bancária
+- Agência bancária
 
-- padaria
+- Padaria
 
-- farmácia
+- Farmácia
 
-- loja de roupa
+- Loja de roupa
 
-- estação de metrô
+- Estação de metrô
 
-- restaurante
+- Restaurante
 
-- supermercado
+- Supermercado
 
-- posto de gasolina
+- Posto de gasolina
 
 
 Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
@@ -1873,7 +1876,13 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 
 <br><a name="ref24">[24]:</a> Garvin, D. A. (1993). Building a learning organization. Harvard Business Review, 71(4), 78–91.
 
+<br><a name="ref25">[25]:</a> Armstrong, M. B., & Landers, R. N. (2018). Gamification of employee training and development: Gamification of employee training. International Journal of Training and Development, 22(2). https://doi.org/10.1111/ijtd.12124.
 
+<br><a name="ref26">[26]:</a> Kapp, K. M. (2012). The gamification of learning and instruction: Game-based methods and strategies for training and education. Pfeiffer. https://www.wiley.com/en-us/The+Gamification+of+Learning+and+Instruction:+Game-based+Methods+and+Strategies+for+Training+and+Education-p-9781118096345.
+
+<br><a name="ref27">[27]:</a> Werbach, K., & Hunter, D. (2012). For the win: How game thinking can revolutionize your business. Wharton Digital Press. https://mackinstitute.wharton.upenn.edu/2012/for-the-win-how-game-thinking-can-revolutionize-your-business/.
+
+<br><a name="ref28">[28]:</a> Gee, J. P. (2017). Teaching, learning, literacy in our high-risk high-tech world: A framework for becoming human. Teachers College Press. https://www.tcpress.com/teaching-learning-literacy-in-our-high-risk-high-tech-world-9780807758601.
 
 
 # <a name="c8"></a>Anexos

@@ -1,4 +1,4 @@
-export default class SceneRestaurante extends Phaser.Scene {
+﻿export default class SceneRestaurante extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneRestaurante' });
   }
@@ -31,30 +31,30 @@ export default class SceneRestaurante extends Phaser.Scene {
   }
 
   create() {
-    const mapa  = this.make.tilemap({ key: 'restaurante' });
-    const tsRoom    = mapa.addTilesetImage('Room_Builder_16x16', 'rest_room_builder');
-    const tsInter   = mapa.addTilesetImage('Interiors_16x16',    'rest_interiors');
-    const tsModern  = mapa.addTilesetImage('Modern_Exteriors_Complete_Tileset', 'rest_modern');
-    const tilesets = [tsRoom, tsInter, tsModern].filter(Boolean);
+    const mapa   = this.make.tilemap({ key: 'restaurante' });
+    const tsRoom = mapa.addTilesetImage('Room_Builder_16x16', 'rest_room_builder');
+    const tsInt  = mapa.addTilesetImage('Interiors_16x16', 'rest_interiors');
+    const tsMod  = mapa.addTilesetImage('Modern_Exteriors_Complete_Tileset', 'rest_modern');
+    const tilesets = [tsRoom, tsInt, tsMod].filter(Boolean);
 
     // Fundo para cobrir qualquer area vazia
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
 
     // Camadas sem colisao
-    mapa.createLayer('N- Ch�o',              tilesets, 0, 0);
-    mapa.createLayer('N - ParedesSemColid',  tilesets, 0, 0);
-    mapa.createLayer('N -Plantas',           tilesets, 0, 0);
-    mapa.createLayer('N - LinhasParede',     tilesets, 0, 0);
-    mapa.createLayer('N - OjetosCosinha',    tilesets, 0, 0);
-    mapa.createLayer('PLAYER',               tilesets, 0, 0);
+    mapa.createLayer('N- Chão',             tilesets, 0, 0);
+    mapa.createLayer('N - ParedesSemColid', tilesets, 0, 0);
+    mapa.createLayer('N -Plantas',          tilesets, 0, 0);
+    mapa.createLayer('N - LinhasParede',    tilesets, 0, 0);
+    mapa.createLayer('N - OjetosCosinha',   tilesets, 0, 0);
+    mapa.createLayer('PLAYER',              tilesets, 0, 0);
 
     // Camadas com colisao
-    const paredeC    = mapa.createLayer('C - ParedesComColid',   tilesets, 0, 0);
-    const objetosC   = mapa.createLayer('C- ObjetsColid',        tilesets, 0, 0);
-    const rodape0C   = mapa.createLayer('C - Rodapeda parede_0', tilesets, 0, 0);
-    const rodapeC    = mapa.createLayer('C - Rodapeda parede',   tilesets, 0, 0);
+    const paredeC  = mapa.createLayer('C - ParedesComColid',   tilesets, 0, 0);
+    const objC     = mapa.createLayer('C- ObjetsColid',        tilesets, 0, 0);
+    const rodape0C = mapa.createLayer('C - Rodapeda parede_0', tilesets, 0, 0);
+    const rodapeC  = mapa.createLayer('C - Rodapeda parede',   tilesets, 0, 0);
 
-    [paredeC, objetosC, rodape0C, rodapeC]
+    [paredeC, objC, rodape0C, rodapeC]
       .filter(Boolean)
       .forEach(c => c.setCollisionByExclusion([-1]));
 
@@ -76,17 +76,18 @@ export default class SceneRestaurante extends Phaser.Scene {
       }
     });
 
-    // Personagem - spawn proximo a entrada
+    // Personagem - spawn proximo a entrada (bottom-center do mapa)
     const spawnX = mapa.widthInPixels  / 2;
     const spawnY = mapa.heightInPixels - 24;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'rest_frente_1');
     this.personagem.setCollideWorldBounds(true);
 
+    // Sprites sao 1024x1024px. Com zoom=7, escala 0.028
     this.personagem.setScale(0.028);
     this.personagem.body.setSize(this.personagem.width * 0.35, this.personagem.height * 0.35);
 
-    [paredeC, objetosC, rodape0C, rodapeC]
+    [paredeC, objC, rodape0C, rodapeC]
       .filter(Boolean)
       .forEach(c => this.physics.add.collider(this.personagem, c));
 
@@ -113,8 +114,8 @@ export default class SceneRestaurante extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    this.transicionando    = false;
-    this.dentroZonaSaida   = false;
+    this.transicionando  = false;
+    this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = 'frente';
