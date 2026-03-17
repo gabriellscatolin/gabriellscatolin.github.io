@@ -2061,11 +2061,29 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"Modern_Exteriors_Complete_Tileset.tsx"
-        }, 
+         "name":"ME_Complete",
+         "tilewidth":16,
+         "tileheight":16,
+         "spacing":0,
+         "margin":0,
+         "columns":176,
+         "tilecount":90464,
+         "image":"../tileSets/Modern_Exteriors_Complete_Tileset.png",
+         "imagewidth":2816,
+         "imageheight":8224
+        },
         {
          "firstgid":90465,
-         "source":"Interiors_16x16.tsx"
+         "name":"Interior_P1",
+         "tilewidth":16,
+         "tileheight":16,
+         "spacing":0,
+         "margin":0,
+         "columns":16,
+         "tilecount":17024,
+         "image":"../tileSets/Interiors_16x16.png",
+         "imagewidth":256,
+         "imageheight":17024
         }],
  "tilewidth":16,
  "type":"map",

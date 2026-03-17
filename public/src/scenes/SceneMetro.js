@@ -17,7 +17,8 @@ export default class SceneMetro extends Phaser.Scene {
     });
 
     this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj');
-    this.load.image('farm_int_p1',    'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png');
+    this.load.image('metro_tiles_exterior', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png');
+    this.load.image('metro_tiles_interior', 'src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png');
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -30,9 +31,10 @@ export default class SceneMetro extends Phaser.Scene {
   create() {
     // FILTRO PARA FUNDO DO MAPA 
     const mapa  = this.make.tilemap({ key: 'metro' });
-    const tsP1   = mapa.addTilesetImage('Interior_P1',  'farm_int_p1');
+    const tsExterior = mapa.addTilesetImage('ME_Complete',  'metro_tiles_exterior');
+    const tsInterior = mapa.addTilesetImage('Interior_P1',   'metro_tiles_interior');
    
-    const tilesets = [tsP1].filter(Boolean);
+    const tilesets = [tsExterior, tsInterior].filter(Boolean);
 
     // Fundo para cobrir qualquer área vazia
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
