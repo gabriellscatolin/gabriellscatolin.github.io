@@ -158,9 +158,18 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
+    // Zona de interação: Restaurante
+    this.zonaRestaurante = new Phaser.Geom.Rectangle(2666, 306, 80, 80);
+
+    this.labelRestaurante = this.add.text(2706, 304, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
     this.transicionando    = false;
     this.dentroZonaAgencia  = false;
     this.dentroZonaFarmacia = false;
+    this.dentroZonaRestaurante = false;
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
@@ -234,6 +243,13 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelFarmacia.setVisible(dentroFarmacia);
     }
 
+    // --- Interação: Restaurante ---
+    const dentroRestaurante = Phaser.Geom.Rectangle.Contains(this.zonaRestaurante, personagem.x, personagem.y);
+    if (dentroRestaurante !== this.dentroZonaRestaurante) {
+      this.dentroZonaRestaurante = dentroRestaurante;
+      this.labelRestaurante.setVisible(dentroRestaurante);
+    }
+
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
 
@@ -254,6 +270,16 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneFarmacia', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      } else if (dentroRestaurante) {
+        this.transicionando = true;
+        this.labelRestaurante.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneRestaurante', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });
