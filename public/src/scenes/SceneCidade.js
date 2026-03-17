@@ -166,10 +166,19 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
+    // Zona de interação: Metro
+    this.zonaMetro = new Phaser.Geom.Rectangle(3040, 1128, 80, 80);
+
+    this.labelMetro = this.add.text(3080, 1168, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
+
     this.transicionando    = false;
     this.dentroZonaAgencia  = false;
     this.dentroZonaFarmacia = false;
     this.dentroZonaRestaurante = false;
+    this.dentroZonaMetro = false;
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
@@ -250,6 +259,13 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelRestaurante.setVisible(dentroRestaurante);
     }
 
+    // --- Interação: Metro ---
+    const dentroMetro = Phaser.Geom.Rectangle.Contains(this.zonaMetro, personagem.x, personagem.y);
+    if (dentroMetro !== this.dentroZonaMetro) {
+      this.dentroZonaMetro = dentroMetro;
+      this.labelMetro.setVisible(dentroMetro);
+    }
+
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
 
@@ -280,6 +296,16 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneRestaurante', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      } else if (dentroMetro) {
+        this.transicionando = true;
+        this.labelMetro.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneMetro', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });
