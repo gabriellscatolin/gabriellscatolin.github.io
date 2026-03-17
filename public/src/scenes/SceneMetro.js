@@ -1,4 +1,4 @@
-export default class SceneMetro extends Phaser.Scene {
+﻿export default class SceneMetro extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMetro' });
   }
@@ -16,9 +16,16 @@ export default class SceneMetro extends Phaser.Scene {
       console.error('[SceneMetro] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
-    this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj');
-    this.load.image('metro_tiles_exterior', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png');
-    this.load.image('metro_tiles_interior', 'src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png');
+    this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj?v=2');
+    this.load.image('metro_mod_s1', 'src/assets/imagens/mapsjson/tileSets/Modern_S1_4096.png');
+    this.load.image('metro_mod_s2', 'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
+    this.load.image('metro_mod_s3', 'src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png');
+    this.load.image('metro_int_s1', 'src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png');
+    this.load.image('metro_int_s2', 'src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png');
+    this.load.image('metro_int_s3', 'src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png');
+    this.load.image('metro_int_s4', 'src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png');
+    this.load.image('metro_int_s5', 'src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png');
+
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -28,36 +35,163 @@ export default class SceneMetro extends Phaser.Scene {
     }
   }
 
-  create() {
-    // FILTRO PARA FUNDO DO MAPA 
-    const mapa  = this.make.tilemap({ key: 'metro' });
-    const tsExterior = mapa.addTilesetImage('ME_Complete',  'metro_tiles_exterior');
-    const tsInterior = mapa.addTilesetImage('Interior_P1',   'metro_tiles_interior');
-   
-    const tilesets = [tsExterior, tsInterior].filter(Boolean);
+  prepararTilesetsMetro() {
+    const cacheMapa = this.cache.tilemap.get('metro');
+    const dadosMapa = cacheMapa && cacheMapa.data;
+    if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
 
-    // Fundo para cobrir qualquer área vazia
-    this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
+    // Evita aplicar o split mais de uma vez.
+    if (dadosMapa.tilesets.some(ts => ts.name === 'ME_Complete_S1')) return;
+
+    const novosTilesets = [];
+
+    dadosMapa.tilesets.forEach(ts => {
+      if (ts.name === 'ME_Complete') {
+        const base = ts.firstgid;
+        const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 176 };
+
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base,
+          name: 'ME_Complete_S1',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S1_4096.png',
+          imagewidth: 2816,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 45056,
+          name: 'ME_Complete_S2',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S2_4096.png',
+          imagewidth: 2816,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 90112,
+          name: 'ME_Complete_S3',
+          tilecount: 352,
+          image: '../tileSets/Modern_S3_32.png',
+          imagewidth: 2816,
+          imageheight: 32
+        });
+        return;
+      }
+
+      if (ts.name === 'Interior_P1') {
+        const base = ts.firstgid;
+        const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 16 };
+
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base,
+          name: 'Interior_P1_S1',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S1_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 4096,
+          name: 'Interior_P1_S2',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S2_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 8192,
+          name: 'Interior_P1_S3',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S3_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 12288,
+          name: 'Interior_P1_S4',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S4_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 16384,
+          name: 'Interior_P1_S5',
+          tilecount: 640,
+          image: '../tileSets/Interiors_S5_640.png',
+          imagewidth: 256,
+          imageheight: 640
+        });
+        return;
+      }
+
+      novosTilesets.push(ts);
+    });
+
+    dadosMapa.tilesets = novosTilesets;
+  }
+
+  create() {
+    this.prepararTilesetsMetro();
+
+    const mapa = this.make.tilemap({ key: 'metro' });
+    const tsExt1 = mapa.addTilesetImage('ME_Complete_S1', 'metro_mod_s1', 16, 16, 0, 0);
+    const tsExt2 = mapa.addTilesetImage('ME_Complete_S2', 'metro_mod_s2', 16, 16, 0, 0);
+    const tsExt3 = mapa.addTilesetImage('ME_Complete_S3', 'metro_mod_s3', 16, 16, 0, 0);
+    const tsInt1 = mapa.addTilesetImage('Interior_P1_S1', 'metro_int_s1', 16, 16, 0, 0);
+    const tsInt2 = mapa.addTilesetImage('Interior_P1_S2', 'metro_int_s2', 16, 16, 0, 0);
+    const tsInt3 = mapa.addTilesetImage('Interior_P1_S3', 'metro_int_s3', 16, 16, 0, 0);
+    const tsInt4 = mapa.addTilesetImage('Interior_P1_S4', 'metro_int_s4', 16, 16, 0, 0);
+    const tsInt5 = mapa.addTilesetImage('Interior_P1_S5', 'metro_int_s5', 16, 16, 0, 0);
+    const tilesets = [tsExt1, tsExt2, tsExt3, tsInt1, tsInt2, tsInt3, tsInt4, tsInt5].filter(Boolean);
 
     // Camadas sem colisão
-    mapa.createLayer('N - ch\u00e3o',           tilesets, 0, 0);
-    mapa.createLayer('N- Trilho',     tilesets, 0, 0);
-    mapa.createLayer('N - ObjetSemColid_embaixo',  tilesets, 0, 0);
-    mapa.createLayer('PLAYER',  tilesets, 0, 0);
-    mapa.createLayer('N - Vag\u00e3o',     tilesets, 0, 0);
-    mapa.createLayer('N - Parede sem Colid',    tilesets, 0, 0);
-    mapa.createLayer('N - Pixos',   tilesets, 0, 0);
-    mapa.createLayer('N- Pixos2',   tilesets, 0, 0);
-    mapa.createLayer('N - Pixos 3',   tilesets, 0, 0);
-    mapa.createLayer('N - ObjetSemColid_cima',   tilesets, 0, 0);
-    mapa.createLayer('N - ObjetSemColid_cima_2',   tilesets, 0, 0);
-    mapa.createLayer('N- ObjetSemColid_cima_3',   tilesets, 0, 0);
+    const chaoN      = mapa.createLayer('N - chão',                   tilesets, 0, 0);
+    const trilhoN    = mapa.createLayer('N- Trilho',                  tilesets, 0, 0);
+    const objBaixoN  = mapa.createLayer('N - ObjetSemColid_embaixo',  tilesets, 0, 0);
+    const playerN    = mapa.createLayer('PLAYER',                     tilesets, 0, 0);
+    const vagaoN     = mapa.createLayer('N - Vagão',                  tilesets, 0, 0);
+    const paredeN    = mapa.createLayer('N - Parede sem Colid',       tilesets, 0, 0);
+    const pisosN     = mapa.createLayer('N - Pixos',                  tilesets, 0, 0);
+    const pisos2N    = mapa.createLayer('N- Pixos2',                  tilesets, 0, 0);
+    const pisos3N    = mapa.createLayer('N - Pixos 3',                tilesets, 0, 0);
+    const objCimaN   = mapa.createLayer('N - ObjetSemColid_cima',     tilesets, 0, 0);
+    const objCima2N  = mapa.createLayer('N - ObjetSemColid_cima_2',   tilesets, 0, 0);
+    const objCima3N  = mapa.createLayer('N- ObjetSemColid_cima_3',    tilesets, 0, 0);
 
     // Camadas com colisão
-    const paredeC   = mapa.createLayer('C - Parede',          tilesets, 0, 0);
-    const arm3C     = mapa.createLayer('C - ch\u00e3o com colid',       tilesets, 0, 0);
-    const arm2C     = mapa.createLayer('C - ObjetComColid',       tilesets, 0, 0);
-    const armC      = mapa.createLayer('C - Vag\u00e3o',         tilesets, 0, 0);
+    const paredeC = mapa.createLayer('C - Parede',             tilesets, 0, 0);
+    const arm3C   = mapa.createLayer('C - chão com colid',     tilesets, 0, 0);
+    const arm2C   = mapa.createLayer('C - ObjetComColid',      tilesets, 0, 0);
+    const armC    = mapa.createLayer('C - Vagão',              tilesets, 0, 0);
+
+    const camadasMapa = [
+      chaoN, trilhoN, objBaixoN, playerN, vagaoN, paredeN,
+      pisosN, pisos2N, pisos3N, objCimaN, objCima2N, objCima3N,
+      paredeC, arm3C, arm2C, armC
+    ].filter(Boolean);
+
+    const boundsIniciais = { x: Infinity, y: Infinity, right: -Infinity, bottom: -Infinity };
+    const boundsMapa = camadasMapa.reduce((acc, camada) => {
+      const b = camada.getBounds();
+      acc.x = Math.min(acc.x, b.x);
+      acc.y = Math.min(acc.y, b.y);
+      acc.right = Math.max(acc.right, b.right);
+      acc.bottom = Math.max(acc.bottom, b.bottom);
+      return acc;
+    }, boundsIniciais);
+    const larguraMapa = boundsMapa.right - boundsMapa.x;
+    const alturaMapa = boundsMapa.bottom - boundsMapa.y;
+
+    // Fundo para cobrir qualquer área vazia
+    this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555).setOrigin(0, 0);
 
     [paredeC, arm3C, arm2C, armC]
       .filter(Boolean)
@@ -82,13 +216,12 @@ export default class SceneMetro extends Phaser.Scene {
     });
 
     // Personagem — spawn próximo à entrada (bottom-center do mapa)
-    const spawnX = mapa.widthInPixels  / 2;
-    const spawnY = mapa.heightInPixels - 24;
+    const spawnX = boundsMapa.x + (larguraMapa / 2);
+    const spawnY = boundsMapa.bottom - 24;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'farm_frente_1');
     this.personagem.setCollideWorldBounds(true);
 
-    // Sprites são 1024×1024px. Com zoom=7, escala 0.019 → ~1.3 tiles de altura na tela
     this.personagem.setScale(0.028);
     this.personagem.body.setSize(this.personagem.width * 0.35, this.personagem.height * 0.35);
 
@@ -105,16 +238,11 @@ export default class SceneMetro extends Phaser.Scene {
       direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
 
-    // Câmera
-    // Para maps "infinite" o Phaser às vezes calcula width/height como 0,
-    // então garantimos valores a partir das propriedades do mapa.
-    const mapaWidth  = mapa.widthInPixels  || (mapa.width  * mapa.tileWidth);
-    const mapaHeight = mapa.heightInPixels || (mapa.height * mapa.tileHeight);
-
-    this.cameras.main.startFollow(this.personagem, true, 0.15, 0.15);
+    // Câmera (mesmo padrão da SceneFarmacia)
+    this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
-    this.cameras.main.setBounds(0, 0, mapaWidth, mapaHeight);
-    this.physics.world.setBounds(0, 0, mapaWidth, mapaHeight);
+    this.cameras.main.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
+    this.physics.world.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Zona de saída
@@ -124,8 +252,8 @@ export default class SceneMetro extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    this.transicionando    = false;
-    this.dentroZonaSaida   = false;
+    this.transicionando  = false;
+    this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = 'frente';
@@ -172,7 +300,6 @@ export default class SceneMetro extends Phaser.Scene {
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
-    // Zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(this.zonaSaida, personagem.x, personagem.y);
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
