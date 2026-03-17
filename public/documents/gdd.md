@@ -142,6 +142,10 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
+<div align="center">
+<sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
+<img src="../gdd_images/CPV.png"> 
+
 &emsp; A Proposta de Valor do *Mini Mundo Cielo* foi definida com base na lógica do Value Proposition Canvas, ferramenta que orienta o desenvolvimento da solução a partir das necessidades do usuário que interage diretamente com o produto. Nesse caso, o cliente analisado no Canvas é o *Gerente de Negócios (GN/DDN)*, profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e apresentar soluções do portfólio da Cielo em situações reais de venda.[\[29\]](#ref29)
 
 Embora o usuário direto da solução seja o GN/DDN, a *Cielo S.A.* também se beneficia de forma estratégica da proposta, pois o desenvolvimento das competências comerciais desses profissionais impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas de venda em diferentes regiões do país. Dessa forma, o Mini Mundo Cielo articula dois níveis de valor: no nível individual, oferece ao profissional uma experiência prática e acessível de treinamento; no nível organizacional, contribui para um processo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
@@ -169,6 +173,7 @@ Um dos principais diferenciais da proposta é o fato de o Mini Mundo Cielo ser u
 Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de apoio ao treinamento, mas se posiciona como um ambiente de simulação de vendas, no qual o aprendizado ocorre por meio da prática e da tomada de decisão. Ao conectar conteúdo, contexto e interação, o jogo contribui para tornar o processo de capacitação mais próximo da realidade profissional, mais engajador para o usuário e mais estratégico para a organização.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
+
 
 &emsp;O time Comercial da Cielo realiza o atendimento aos clientes no modelo porta a porta, visitando estabelecimentos comerciais para oferecer máquinas de pagamento e serviços de valor agregado. Atualmente, a empresa possui aproximadamente 3.500 profissionais distribuídos por todo o Brasil, o que gera um desafio crítico no processo de treinamento. Equipes localizadas fora dos grandes centros urbanos muitas vezes enfrentam barreiras de acesso às oportunidades de capacitação presencial. Segundo Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes corporações frequentemente resulta em falta de equidade no aprendizado e disparidades no nível de conhecimento sobre produtos e estratégias de abordagem ao cliente.
 
@@ -246,7 +251,8 @@ RF17| O jogo deverá apresentar uma cena final de encerramento após a conclusã
 <sub>Tabela 2 - Requisitos Não Funcionais do Projeto</sub>
 
 \# |  Requisitos Não Funcionais (RNF)
---- |---|
+--- | ---
+
 RNF01| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
 RNF02| O jogo deverá utilizar a identidade visual (cores e logotipos) da Cielo.
 RNF03| O jogo deverá conter referências visuais, logotipos e cores dos bancos parceiros (Bradesco e Banco do Brasil), incluindo a representação de suas agências.
