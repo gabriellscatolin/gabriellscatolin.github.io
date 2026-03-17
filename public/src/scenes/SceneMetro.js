@@ -106,10 +106,15 @@ export default class SceneMetro extends Phaser.Scene {
     });
 
     // Câmera
-    this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(7);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    // Para maps "infinite" o Phaser às vezes calcula width/height como 0,
+    // então garantimos valores a partir das propriedades do mapa.
+    const mapaWidth  = mapa.widthInPixels  || (mapa.width  * mapa.tileWidth);
+    const mapaHeight = mapa.heightInPixels || (mapa.height * mapa.tileHeight);
+
+    this.cameras.main.startFollow(this.personagem, true, 0.15, 0.15);
+    this.cameras.main.setZoom(4);
+    this.cameras.main.setBounds(0, 0, mapaWidth, mapaHeight);
+    this.physics.world.setBounds(0, 0, mapaWidth, mapaHeight);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Zona de saída
