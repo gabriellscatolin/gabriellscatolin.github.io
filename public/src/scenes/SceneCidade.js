@@ -159,12 +159,12 @@ export default class SceneCidade extends Phaser.Scene {
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
     // Zona de interação: Restaurante
-    this.zonaRestaurante = new Phaser.Geom.Rectangle(2666, 306, 80, 80);
+    this.zonaRestaurante = new Phaser.Geom.Rectangle(2622, 250, 80, 80);
 
-    this.labelRestaurante = this.add.text(2706, 304, '[E] Entrar', {
+    this.labelRestaurante = this.add.text(2662, 290, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
-    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+    }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
     this.transicionando    = false;
     this.dentroZonaAgencia  = false;
