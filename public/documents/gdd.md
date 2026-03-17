@@ -175,17 +175,17 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
 
-&emsp;O time Comercial da Cielo realiza o atendimento aos clientes no modelo porta a porta, visitando estabelecimentos comerciais para oferecer máquinas de pagamento e serviços de valor agregado. Atualmente, a empresa possui aproximadamente 3.500 profissionais distribuídos por todo o Brasil, o que gera um desafio crítico no processo de treinamento. Equipes localizadas fora dos grandes centros urbanos muitas vezes enfrentam barreiras de acesso às oportunidades de capacitação presencial. Segundo Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes corporações frequentemente resulta em falta de equidade no aprendizado e disparidades no nível de conhecimento sobre produtos e estratégias de abordagem ao cliente.
+&emsp; O time Comercial da Cielo realiza o atendimento aos clientes no modelo porta a porta, visitando estabelecimentos comerciais para oferecer máquinas de pagamento e serviços de valor agregado. Atualmente, a empresa possui aproximadamente 3.500 profissionais distribuídos por todo o Brasil, o que gera um desafio crítico no processo de treinamento. Equipes localizadas fora dos grandes centros urbanos muitas vezes enfrentam barreiras de acesso às oportunidades de capacitação presencial. Segundo Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes corporações frequentemente resulta em falta de equidade no aprendizado e disparidades no nível de conhecimento sobre produtos e estratégias de abordagem ao cliente.
 
-&emsp;Para enfrentar esse desafio, foi desenvolvido o Mini Mundo Cielo, um Serious Game (jogo sério) acessado via navegador web que virtualiza a gamificação dos treinamentos de vendas. A solução fundamenta-se nos princípios de Kapp (2012) [\[26\]](#ref26), que define o uso de mecânicas de jogos para facilitar a aprendizagem e a resolução de problemas em contextos não recreativos. O jogo simula o cotidiano de um Gerente de Negócios, permitindo que o jogador explore uma cidade em pixel art e interaja com NPCs que representam clientes. Através de diálogos de múltipla escolha, o colaborador pratica a superação de objeções e o letramento de produtos em um ambiente controlado e imersivo.
+&emsp; Para enfrentar esse desafio, foi desenvolvido o Mini Mundo Cielo, um Serious Game (jogo sério) acessado via navegador web que virtualiza a gamificação dos treinamentos de vendas. A solução fundamenta-se nos princípios de Kapp (2012) [\[26\]](#ref26), que define o uso de mecânicas de jogos para facilitar a aprendizagem e a resolução de problemas em contextos não recreativos. O jogo simula o cotidiano de um Gerente de Negócios, permitindo que o jogador explore uma cidade em pixel art e interaja com NPCs que representam clientes. Através de diálogos de múltipla escolha, o colaborador pratica a superação de objeções e o letramento de produtos em um ambiente controlado e imersivo.
 
-&emsp;A solução foi projetada como uma ferramenta digital de treinamento assíncrono. Como o jogo é executado diretamente no navegador, ele elimina a necessidade de instalações complexas, permitindo que colaboradores de diferentes regiões participem da mesma experiência de aprendizagem. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a aplicação de elementos de game design em processos de negócios permite que a prática de situações reais ocorra de forma segura, permitindo o erro como parte do processo educativo sem riscos financeiros ou de imagem à empresa.
+&emsp; A solução foi projetada como uma ferramenta digital de treinamento assíncrono. Como o jogo é executado diretamente no navegador, ele elimina a necessidade de instalações complexas, permitindo que colaboradores de diferentes regiões participem da mesma experiência de aprendizagem. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a aplicação de elementos de game design em processos de negócios permite que a prática de situações reais ocorra de forma segura, permitindo o erro como parte do processo educativo sem riscos financeiros ou de imagem à empresa.
 
-&emsp;Com a implementação da solução, espera-se promover maior equidade no acesso aos treinamentos, garantindo que o conteúdo seja padronizado para todo o território nacional. A utilização de jogos educativos tende a tornar o processo de capacitação mais dinâmico e interativo, o que, conforme apontado por Gee (2017) [\[28\]](#ref28), é fundamental para o desenvolvimento de literacia digital e retenção de conhecimentos complexos. Como resultado, espera-se maior satisfação dos colaboradores, melhor compreensão do portfólio da Cielo e um impacto positivo direto no desempenho das vendas.
+&emsp; Com a implementação da solução, espera-se promover maior equidade no acesso aos treinamentos, garantindo que o conteúdo seja padronizado para todo o território nacional. A utilização de jogos educativos tende a tornar o processo de capacitação mais dinâmico e interativo, o que, conforme apontado por Gee (2017) [\[28\]](#ref28), é fundamental para o desenvolvimento de literacia digital e retenção de conhecimentos complexos. Como resultado, espera-se maior satisfação dos colaboradores, melhor compreensão do portfólio da Cielo e um impacto positivo direto no desempenho das vendas.
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-&emsp;A matriz de riscos abaixo identifica as principais ameaças ao projeto, classificadas por probabilidade e impacto, com o respectivo plano de resposta.
+&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre a viabilidade técnica e o engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um Serious Game não depende apenas da ausência de bugs, mas da capacidade de manter o "fluxo" de aprendizagem sem interrupções técnicas. A Tabela 1 detalha as ameaças mapeadas para esta etapa, utilizando a estrutura de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza a inspeção e adaptação contínua através de ciclos incrementais (sprints).
 
 <div align="center">
 <sub>Tabela 2 - Matriz de Riscos do Projeto</sub>
@@ -202,9 +202,11 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
+&emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, transformando incertezas em ações preventivas concretas. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
+
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-&emsp;O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
+&emsp; O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
 
 <div align="center">
 <sub>Tabela 3 - Objetivos SMART do Projeto</sub>
@@ -220,7 +222,7 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp;A definição desses objetivos evidencia um planejamento estruturado e orientado por resultados, permitindo o acompanhamento contínuo do progresso e a identificação de melhorias ao longo do desenvolvimento. A utilização do modelo SMART (Doran, 1981) [\[29\]](#ref29), aliada às práticas do Project Management Institute (2021) [\[30\]](#ref30), fortalece o alinhamento entre planejamento e execução, contribuindo para maior eficiência do projeto e aumentando a probabilidade de sucesso do Mini Mundo Cielo.
+&emsp; A definição desses objetivos evidencia um planejamento estruturado e orientado por resultados, permitindo o acompanhamento contínuo do progresso e a identificação de melhorias ao longo do desenvolvimento. A utilização do modelo SMART (Doran, 1981) [\[29\]](#ref29), aliada às práticas do Project Management Institute (2021) [\[30\]](#ref30), fortalece o alinhamento entre planejamento e execução, contribuindo para maior eficiência do projeto e aumentando a probabilidade de sucesso do Mini Mundo Cielo.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
@@ -1906,6 +1908,7 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 
 <br><a name="ref30">[30]:</a> Project Management Institute. (2021). A guide to the Project Management Body of Knowledge (PMBOK® Guide) (7th ed.). https://www.pmi.org/standards/pmbok.
 
+<br><a name="ref31">[31]:</a> Schwaber, K., & Sutherland, J. (2020). The Scrum Guide: The definitive guide to Scrum: The rules of the game. https://scrumguides.org/scrum-guide.html.
 
 # <a name="c8"></a>Anexos
 
