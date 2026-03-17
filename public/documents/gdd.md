@@ -204,7 +204,7 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-&emsp;As metas SMART abaixo foram definidas para orientar o desenvolvimento e a validação do Mini Mundo Cielo, garantindo que os objetivos sejam específicos, mensuráveis, alcançáveis, relevantes e temporais.
+&emsp;O modelo SMART, proposto por George T. Doran, é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute.
 
 <div align="center">
 <sub>Tabela 3 - Objetivos SMART do Projeto</sub>
@@ -219,6 +219,8 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
+
+&emsp;A partir dos objetivos apresentados, observa-se que o projeto está estruturado com metas claras, mensuráveis e alinhadas às necessidades do parceiro e do público-alvo. A definição desses critérios permite um acompanhamento mais preciso do progresso e contribui para a redução de riscos ao longo do desenvolvimento. Dessa forma, a utilização do modelo SMART, aliada às práticas recomendadas pelo Project Management Institute, fortalece o alinhamento entre planejamento e execução, garantindo maior eficiência no desenvolvimento e aumentando as chances de sucesso do Mini Mundo Cielo.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
