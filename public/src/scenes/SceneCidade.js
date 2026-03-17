@@ -97,7 +97,6 @@ export default class SceneCidade extends Phaser.Scene {
     const tamTile       = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
- 
     const escala = Math.min((tamTile * 0.6) / larguraSprite, (tamTile * 0.6) / alturaSprite);
     this.personagem.setScale(Math.max(escala, 0.03));
     this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
@@ -132,7 +131,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
-    // --- ZONA: Agência 01 ---
+    // --- ZONA: Agência ---
     this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
     this.labelE = this.add.text(993, 838, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
@@ -153,21 +152,13 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
-<<<<<<< Updated upstream
-    // Zona de interação: Metro
+    // --- ZONA: Metrô ---
     this.zonaMetro = new Phaser.Geom.Rectangle(3040, 1128, 80, 80);
-
     this.labelMetro = this.add.text(3080, 1168, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
-    this.transicionando    = false;
-    this.dentroZonaAgencia  = false;
-    this.dentroZonaFarmacia = false;
-    this.dentroZonaRestaurante = false;
-    this.dentroZonaMetro = false;
-=======
     // --- ZONA: Supermercado ---
     this.zonaSupermercado = new Phaser.Geom.Rectangle(2891, 319, 80, 60);
     this.labelSupermercado = this.add.text(2931, 317, '[E] Entrar', {
@@ -179,8 +170,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaAgencia      = false;
     this.dentroZonaFarmacia     = false;
     this.dentroZonaRestaurante  = false;
+    this.dentroZonaMetro        = false;
     this.dentroZonaSupermercado = false;
->>>>>>> Stashed changes
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
@@ -256,18 +247,16 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelRestaurante.setVisible(dentroRestaurante);
     }
 
-<<<<<<< Updated upstream
-    // --- Interação: Metro ---
     const dentroMetro = Phaser.Geom.Rectangle.Contains(this.zonaMetro, personagem.x, personagem.y);
     if (dentroMetro !== this.dentroZonaMetro) {
       this.dentroZonaMetro = dentroMetro;
       this.labelMetro.setVisible(dentroMetro);
-=======
+    }
+
     const dentroSupermercado = Phaser.Geom.Rectangle.Contains(this.zonaSupermercado, personagem.x, personagem.y);
     if (dentroSupermercado !== this.dentroZonaSupermercado) {
       this.dentroZonaSupermercado = dentroSupermercado;
       this.labelSupermercado.setVisible(dentroSupermercado);
->>>>>>> Stashed changes
     }
 
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
@@ -304,21 +293,22 @@ export default class SceneCidade extends Phaser.Scene {
             prefixo:   this.prefixoEscolhido
           });
         });
-<<<<<<< Updated upstream
       } else if (dentroMetro) {
         this.transicionando = true;
         this.labelMetro.setVisible(false);
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneMetro', {
-=======
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
       } else if (dentroSupermercado) {
         this.transicionando = true;
         this.labelSupermercado.setVisible(false);
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneSupermercado', {
->>>>>>> Stashed changes
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });

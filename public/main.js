@@ -27,11 +27,8 @@ const config = {
       debug: false   //Desativa linhas de depuração
     }
   },
-<<<<<<< Updated upstream
-  scene: [SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro]
-=======
- scene: [SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado] //Lista de cenas do jogo
->>>>>>> Stashed changes
+
+  scene: [SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado, SceneMetro]
 };
 
 new Phaser.Game(config); //Cria o jogo
