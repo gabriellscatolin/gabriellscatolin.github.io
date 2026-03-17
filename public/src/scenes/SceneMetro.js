@@ -16,10 +16,8 @@ export default class SceneMetro extends Phaser.Scene {
       console.error('[SceneMetro] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
-    this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj?v=1');
+    this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj');
     this.load.image('farm_int_p1',    'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png');
-
-
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);

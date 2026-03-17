@@ -26,7 +26,7 @@ const config = {
       debug: false   //Desativa linhas de depuração
     }
   },
- scene: [SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro]
+  scene: [SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro]
 };
 
 new Phaser.Game(config); //Cria o jogo
