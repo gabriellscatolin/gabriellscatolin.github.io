@@ -255,8 +255,7 @@ RF17| O jogo deverá apresentar uma cena final de encerramento após a conclusã
 <sub>Tabela 2 - Requisitos Não Funcionais do Projeto</sub>
 
 \# |  Requisitos Não Funcionais (RNF)
---- | ---
-
+--- |---|
 RNF01| O jogo deverá ser desenvolvido para a plataforma web, permitindo acesso via navegador sem necessidade de instalação.
 RNF02| O jogo deverá utilizar a identidade visual (cores e logotipos) da Cielo.
 RNF03| O jogo deverá conter referências visuais, logotipos e cores dos bancos parceiros (Bradesco e Banco do Brasil), incluindo a representação de suas agências.
