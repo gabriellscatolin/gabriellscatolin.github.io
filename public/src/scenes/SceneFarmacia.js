@@ -3,7 +3,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     super({ key: 'SceneFarmacia' });
   }
 
-  init(dados) {
+  init(dados) { // Recebe dados da cena anterior (SceneCidade)
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
   }
@@ -31,7 +31,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
   }
 
-  create() {
+  create() { // Configura o mapa, personagem, controles, câmera, etc.
     const mapa  = this.make.tilemap({ key: 'farmacia' });
     const tsP1   = mapa.addTilesetImage('Interior_P1',  'farm_int_p1');
     const tsP2   = mapa.addTilesetImage('Interior_P2',  'farm_int_p2');
@@ -39,7 +39,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     const tsRoom = mapa.addTilesetImage('roombuilder',  'farm_roombuilder');
     const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
 
-    // Fundo para cobrir qualquer área vazia
+    // Fundo sólido para cobrir qualquer área vazia fora dos tiles
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
 
     // Camadas sem colisão
@@ -61,14 +61,15 @@ export default class SceneFarmacia extends Phaser.Scene {
     const cadeiraC  = mapa.createLayer('Cadeira de rodas - C', tilesets, 0, 0);
     const plantasC  = mapa.createLayer('Plantas - C',         tilesets, 0, 0);
 
+    // Define colisão para as camadas relevantes
     [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
-      .filter(Boolean)
+      .filter(Boolean)  // Garante que a camada existe antes de tentar configurar colisão
       .forEach(c => c.setCollisionByExclusion([-1]));
 
     // Animações
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
-      if (!this.anims.exists(`farm_andar_${dir}`)) {
+      if (!this.anims.exists(`farm_andar_${dir}`)) { // Evita recriar animação se já existir (útil para hot reload)
         this.anims.create({
           key: `farm_andar_${dir}`,
           frames: [
@@ -127,12 +128,14 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     this.direcaoAtual = 'frente';
 
+    // Debug: exibe coordenadas do personagem
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '3px', color: '#ffff00',
       backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(999);
   }
 
+  
   update() {
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
@@ -152,6 +155,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimentos verticais têm prioridade menor para evitar animação diagonal
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play('farm_andar_tras', true);
@@ -164,6 +168,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       movendo = true;
     }
 
+    // Se não estiver se movendo, exibe frame parado de acordo com a última direção
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
@@ -175,7 +180,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
-
+    // Transição para cena da cidade
     if (dentroSaida && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
@@ -190,6 +195,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       });
     }
 
+    // Atualiza posição do texto de debug
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
   }
