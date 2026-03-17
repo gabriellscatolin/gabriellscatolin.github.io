@@ -204,15 +204,15 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-&emsp;O modelo SMART, proposto por George T. Doran, é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute.
+&emsp;O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
 
 <div align="center">
 <sub>Tabela 3 - Objetivos SMART do Projeto</sub>
 
 | # | Objetivo | Específico | Mensurável | Alcançável | Relevante | Temporal |
 |---|----------|-----------|-----------|-----------|----------|---------|
-| O1 | Entregar MVP funcional com Cidade 1 completa | Implementar mapa, 6 NPCs com diálogos e sistema de moedas | 100% dos requisitos da Cidade 1 implementados e testados | Escopo dimensionado para 5 sprints com equipe de 8 pessoas | Permite validar o core loop do jogo com o parceiro | Até o final da Sprint 4 |
-| O2 | Garantir compatibilidade multiplataforma | Jogo funcional em Chrome, Edge e Firefox | Taxa de erros < 5% em cada navegador testado | Uso do framework Phaser.js com suporte amplo a browsers | Garante acesso equitativo a GNs em diferentes ambientes corporativos | Até o final da Sprint 3 |
+| O1 | Entregar MVP funcional com Cidade 1 completa | Implementar mapa, cenas de estabelecimentos internas, 7 NPCs com diálogos e sistema de moedas | 100% dos requisitos da Cidade 1 implementados e testados | Escopo dimensionado para 5 sprints com equipe de 8 pessoas | Permite validar o core loop do jogo com o parceiro | Até o final da Sprint 4 |
+| O2 | Melhorar navegação no mapa | Ajustar colisões e movimentação | ≤ 2 erros de colisão por mapa | Baseado no tiled map já desenvolvido | GGarante jogabilidade fluida | Até o final da Sprint 5 |
 | O3 | Validar o jogo com testes de jogabilidade | Realizar sessões de playtest com pelo menos 5 usuários externos | Coletar avaliação mínima de 7/10 de satisfação nos testes | Acessar usuários por meio da rede de contatos da equipe e da Inteli | Fundamenta decisões de melhoria com base em dados reais | Até o final da Sprint 5 |
 | O4 | Garantir acessibilidade básica | Implementar modo daltônico, controle de volume e brilho | Todas as opções de acessibilidade funcionais nas configurações | Recursos já planejados na mecânica de configurações | Atende a diversidade do público-alvo de 3.000 GNs anuais | Até o final da Sprint 4 |
 | O5 | Representar diversidade no elenco de personagens | Criar 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional | 100% dos personagens com fichas técnicas e sprites finalizados | Personagens já desenvolvidos em pixel art nas primeiras sprints | Reflete a diversidade real da base de vendedores da Cielo no Brasil | Até o final da Sprint 2 |
@@ -220,7 +220,7 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp;A partir dos objetivos apresentados, observa-se que o projeto está estruturado com metas claras, mensuráveis e alinhadas às necessidades do parceiro e do público-alvo. A definição desses critérios permite um acompanhamento mais preciso do progresso e contribui para a redução de riscos ao longo do desenvolvimento. Dessa forma, a utilização do modelo SMART, aliada às práticas recomendadas pelo Project Management Institute, fortalece o alinhamento entre planejamento e execução, garantindo maior eficiência no desenvolvimento e aumentando as chances de sucesso do Mini Mundo Cielo.
+&emsp;A definição desses objetivos evidencia um planejamento estruturado e orientado por resultados, permitindo o acompanhamento contínuo do progresso e a identificação de melhorias ao longo do desenvolvimento. A utilização do modelo SMART (Doran, 1981) [\[29\]](#ref29), aliada às práticas do Project Management Institute (2021) [\[30\]](#ref30), fortalece o alinhamento entre planejamento e execução, contribuindo para maior eficiência do projeto e aumentando a probabilidade de sucesso do Mini Mundo Cielo.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
@@ -1901,6 +1901,10 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref27">[27]:</a> Werbach, K., & Hunter, D. (2012). For the win: How game thinking can revolutionize your business. Wharton Digital Press. https://mackinstitute.wharton.upenn.edu/2012/for-the-win-how-game-thinking-can-revolutionize-your-business/.
 
 <br><a name="ref28">[28]:</a> Gee, J. P. (2017). Teaching, learning, literacy in our high-risk high-tech world: A framework for becoming human. Teachers College Press. https://www.tcpress.com/teaching-learning-literacy-in-our-high-risk-high-tech-world-9780807758601.
+
+<br><a name="ref29">[29]:</a> Doran, G. T. (1981). There's a S.M.A.R.T. way to write management's goals and objectives. Management Review, 70(11), 35–36. https://www.eval.fr/wp-content/uploads/2020/01/S.M.A.R.T-Way-Management-Review-eval.fr_.pdf.
+
+<br><a name="ref30">[30]:</a> Project Management Institute. (2021). A guide to the Project Management Body of Knowledge (PMBOK® Guide) (7th ed.). https://www.pmi.org/standards/pmbok.
 
 
 # <a name="c8"></a>Anexos
