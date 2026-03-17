@@ -20,11 +20,14 @@
 
     this.load.tilemapTiledJSON('restaurante', 'src/assets/imagens/mapsjson/tileMaps/restauranteJapones.tmj?v=1');
     this.load.image('rest_room_builder', 'src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png');
-    this.load.image('rest_int_p1',       'src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png');
-    this.load.image('rest_int_p2',       'src/assets/imagens/mapsjson/tileSets/Interiors_Part2.png');
-    this.load.image('rest_int_p3',       'src/assets/imagens/mapsjson/tileSets/Interiors_Part3.png');
-    this.load.image('rest_mod_top',      'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png');
-    this.load.image('rest_mod_bottom',   'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png');
+    this.load.image('rest_int_s1',       'src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png');
+    this.load.image('rest_int_s2',       'src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png');
+    this.load.image('rest_int_s3',       'src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png');
+    this.load.image('rest_int_s4',       'src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png');
+    this.load.image('rest_int_s5',       'src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png');
+    this.load.image('rest_mod_s1',       'src/assets/imagens/mapsjson/tileSets/Modern_S1_4096.png');
+    this.load.image('rest_mod_s2',       'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
+    this.load.image('rest_mod_s3',       'src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png');
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -41,7 +44,7 @@
     if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
 
     // Evita aplicar o split mais de uma vez.
-    if (dadosMapa.tilesets.some(ts => ts.name === 'Interiors_16x16_P1')) return;
+    if (dadosMapa.tilesets.some(ts => ts.name === 'Interiors_16x16_S1')) return;
 
     const novosTilesets = [];
 
@@ -59,27 +62,45 @@
         novosTilesets.push({
           ...comuns,
           firstgid: base,
-          name: 'Interiors_16x16_P1',
-          tilecount: 8192,
-          image: '../tileSets/Interiors_Part1.png',
+          name: 'Interiors_16x16_S1',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S1_4096.png',
           imagewidth: 256,
-          imageheight: 8192
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 4096,
+          name: 'Interiors_16x16_S2',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S2_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
         });
         novosTilesets.push({
           ...comuns,
           firstgid: base + 8192,
-          name: 'Interiors_16x16_P2',
-          tilecount: 8192,
-          image: '../tileSets/Interiors_Part2.png',
+          name: 'Interiors_16x16_S3',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S3_4096.png',
           imagewidth: 256,
-          imageheight: 8192
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 12288,
+          name: 'Interiors_16x16_S4',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S4_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
         });
         novosTilesets.push({
           ...comuns,
           firstgid: base + 16384,
-          name: 'Interiors_16x16_P3',
+          name: 'Interiors_16x16_S5',
           tilecount: 640,
-          image: '../tileSets/Interiors_Part3.png',
+          image: '../tileSets/Interiors_S5_640.png',
           imagewidth: 256,
           imageheight: 640
         });
@@ -99,20 +120,29 @@
         novosTilesets.push({
           ...comuns,
           firstgid: base,
-          name: 'Modern_Exteriors_Top',
-          tilecount: 45232,
-          image: '../tileSets/Modern_Exteriors_Top.png',
+          name: 'Modern_Exteriors_S1',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S1_4096.png',
           imagewidth: 2816,
-          imageheight: 4112
+          imageheight: 4096
         });
         novosTilesets.push({
           ...comuns,
-          firstgid: base + 45232,
-          name: 'Modern_Exteriors_Bottom',
-          tilecount: 45232,
-          image: '../tileSets/Modern_Exteriors_Bottom.png',
+          firstgid: base + 45056,
+          name: 'Modern_Exteriors_S2',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S2_4096.png',
           imagewidth: 2816,
-          imageheight: 4112
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 90112,
+          name: 'Modern_Exteriors_S3',
+          tilecount: 352,
+          image: '../tileSets/Modern_S3_32.png',
+          imagewidth: 2816,
+          imageheight: 32
         });
         return;
       }
@@ -123,31 +153,55 @@
     dadosMapa.tilesets = novosTilesets;
   }
 
+  descerTilesForaDoLimite(camada, deslocamentoTiles = 4) {
+    if (!camada) return;
+
+    const mover = [];
+    camada.forEachTile(tile => {
+      if (!tile || tile.index < 0) return;
+      if (tile.y < 0) {
+        mover.push({ x: tile.x, y: tile.y, index: tile.index });
+      }
+    });
+
+    mover.forEach(t => {
+      const destinoY = t.y + deslocamentoTiles;
+      camada.removeTileAt(t.x, t.y);
+      // Sempre recoloca no destino; se ja houver tile, sobrescreve para nao "sumir".
+      camada.putTileAt(t.index, t.x, destinoY, true);
+    });
+  }
+
   create() {
     this.prepararTilesetsRestaurante();
 
     const mapa   = this.make.tilemap({ key: 'restaurante' });
     const tsRoom = mapa.addTilesetImage('Room_Builder_16x16', 'rest_room_builder', 16, 16, 0, 0);
-    const tsInt1 = mapa.addTilesetImage('Interiors_16x16_P1', 'rest_int_p1', 16, 16, 0, 0);
-    const tsInt2 = mapa.addTilesetImage('Interiors_16x16_P2', 'rest_int_p2', 16, 16, 0, 0);
-    const tsInt3 = mapa.addTilesetImage('Interiors_16x16_P3', 'rest_int_p3', 16, 16, 0, 0);
-    const tsModT = mapa.addTilesetImage('Modern_Exteriors_Top', 'rest_mod_top', 16, 16, 0, 0);
-    const tsModB = mapa.addTilesetImage('Modern_Exteriors_Bottom', 'rest_mod_bottom', 16, 16, 0, 0);
-    const tilesets = [tsRoom, tsInt1, tsInt2, tsInt3, tsModT, tsModB].filter(Boolean);
+    const tsInt1 = mapa.addTilesetImage('Interiors_16x16_S1', 'rest_int_s1', 16, 16, 0, 0);
+    const tsInt2 = mapa.addTilesetImage('Interiors_16x16_S2', 'rest_int_s2', 16, 16, 0, 0);
+    const tsInt3 = mapa.addTilesetImage('Interiors_16x16_S3', 'rest_int_s3', 16, 16, 0, 0);
+    const tsInt4 = mapa.addTilesetImage('Interiors_16x16_S4', 'rest_int_s4', 16, 16, 0, 0);
+    const tsInt5 = mapa.addTilesetImage('Interiors_16x16_S5', 'rest_int_s5', 16, 16, 0, 0);
+    const tsMod1 = mapa.addTilesetImage('Modern_Exteriors_S1', 'rest_mod_s1', 16, 16, 0, 0);
+    const tsMod2 = mapa.addTilesetImage('Modern_Exteriors_S2', 'rest_mod_s2', 16, 16, 0, 0);
+    const tsMod3 = mapa.addTilesetImage('Modern_Exteriors_S3', 'rest_mod_s3', 16, 16, 0, 0);
+    const tilesets = [tsRoom, tsInt1, tsInt2, tsInt3, tsInt4, tsInt5, tsMod1, tsMod2, tsMod3].filter(Boolean);
 
-    // Camadas sem colisao
-    const chaoN         = mapa.createLayer('N- Chão',             tilesets, 0, 0);
-    const paredeSemC    = mapa.createLayer('N - ParedesSemColid', tilesets, 0, 0);
-    const plantasN      = mapa.createLayer('N -Plantas',          tilesets, 0, 0);
-    const linhasParedeN = mapa.createLayer('N - LinhasParede',    tilesets, 0, 0);
-    const cozinhaN      = mapa.createLayer('N - OjetosCosinha',   tilesets, 0, 0);
-    const playerN       = mapa.createLayer('PLAYER',              tilesets, 0, 0);
-
-    // Camadas com colisao
+    // Camadas na mesma ordem do Tiled (importante para alinhamento visual)
+    const chaoN          = mapa.createLayer('N- Chão',               tilesets, 0, 0);
+    const paredeSemC     = mapa.createLayer('N - ParedesSemColid',   tilesets, 0, 0);
     const paredeC        = mapa.createLayer('C - ParedesComColid',   tilesets, 0, 0);
+    const plantasN       = mapa.createLayer('N -Plantas',            tilesets, 0, 0);
     const objC           = mapa.createLayer('C- ObjetsColid',        tilesets, 0, 0);
+    const linhasParedeN  = mapa.createLayer('N - LinhasParede',      tilesets, 0, 0);
+    const cozinhaN       = mapa.createLayer('N - OjetosCosinha',     tilesets, 0, 0);
+    const playerN        = mapa.createLayer('PLAYER',                tilesets, 0, 0);
     const rodape0C       = mapa.createLayer('C - Rodapeda parede_0', tilesets, 0, 0);
     const rodapeC        = mapa.createLayer('C - Rodapeda parede',   tilesets, 0, 0);
+
+    // Ajuste fino para detalhes visuais que ficam acima dos limites do estabelecimento.
+    this.descerTilesForaDoLimite(plantasN, 4);
+    this.descerTilesForaDoLimite(cozinhaN, 4);
 
     const camadasMapa = [chaoN, paredeSemC, plantasN, linhasParedeN, cozinhaN, playerN, paredeC, objC, rodape0C, rodapeC]
       .filter(Boolean);
@@ -165,8 +219,55 @@
     const larguraMapa = boundsMapa.right - boundsMapa.x;
     const alturaMapa = boundsMapa.bottom - boundsMapa.y;
 
+    // Bounds do estabelecimento baseado na layer base (chao), que define o limite real do cenario.
+    const camadasEstruturais = [chaoN].filter(Boolean);
+    const conteudoInicial = { x: Infinity, y: Infinity, right: -Infinity, bottom: -Infinity };
+    const boundsConteudo = camadasEstruturais.reduce((acc, camada) => {
+      camada.forEachTile(tile => {
+        if (!tile || tile.index < 0) return;
+        const left = camada.x + tile.pixelX;
+        const top = camada.y + tile.pixelY;
+        acc.x = Math.min(acc.x, left);
+        acc.y = Math.min(acc.y, top);
+        acc.right = Math.max(acc.right, left + tile.width);
+        acc.bottom = Math.max(acc.bottom, top + tile.height);
+      });
+      return acc;
+    }, conteudoInicial);
+
+    const encontrouConteudo = Number.isFinite(boundsConteudo.x) && Number.isFinite(boundsConteudo.y);
+    const limiteX = encontrouConteudo ? boundsConteudo.x : boundsMapa.x;
+    const limiteY = encontrouConteudo ? boundsConteudo.y : boundsMapa.y;
+    const limiteRight = encontrouConteudo ? boundsConteudo.right : boundsMapa.right;
+    const limiteBottom = encontrouConteudo ? boundsConteudo.bottom : boundsMapa.bottom;
+    const margem = 0;
+    const boundsEstabelecimento = new Phaser.Geom.Rectangle(
+      limiteX - margem,
+      limiteY - margem,
+      (limiteRight - limiteX) + (margem * 2),
+      (limiteBottom - limiteY) + (margem * 2)
+    );
+
+    // Mascara visual para esconder tiles fora dos limites do estabelecimento.
+    const mascaraGrafica = this.make.graphics({ x: 0, y: 0, add: false });
+    mascaraGrafica.fillStyle(0xffffff, 1);
+    mascaraGrafica.fillRect(
+      boundsEstabelecimento.x,
+      boundsEstabelecimento.y,
+      boundsEstabelecimento.width,
+      boundsEstabelecimento.height
+    );
+    const mascaraEstabelecimento = mascaraGrafica.createGeometryMask();
+    camadasMapa.forEach(camada => camada.setMask(mascaraEstabelecimento));
+
     // Fundo para cobrir qualquer area vazia
-    this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555)
+    this.add.rectangle(
+      boundsEstabelecimento.x - 200,
+      boundsEstabelecimento.y - 200,
+      boundsEstabelecimento.width + 400,
+      boundsEstabelecimento.height + 400,
+      0x555555
+    )
       .setOrigin(0, 0)
       .setDepth(-10);
 
@@ -208,7 +309,14 @@
       .forEach(c => this.physics.add.collider(this.personagem, c));
 
     // Barreira horizontal para limitar acesso na secao Y=452
-    this.barreiraY = this.add.rectangle(boundsMapa.x + (larguraMapa / 2), 452, larguraMapa, 2, 0xff0000, 0);
+    this.barreiraY = this.add.rectangle(
+      boundsEstabelecimento.x + (boundsEstabelecimento.width / 2),
+      452,
+      boundsEstabelecimento.width,
+      2,
+      0xff0000,
+      0
+    );
     this.physics.add.existing(this.barreiraY, true);
     this.physics.add.collider(this.personagem, this.barreiraY);
 
@@ -224,8 +332,18 @@
     // Camera
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(6);
-    this.cameras.main.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
-    this.physics.world.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
+    this.cameras.main.setBounds(
+      boundsEstabelecimento.x,
+      boundsEstabelecimento.y,
+      boundsEstabelecimento.width,
+      boundsEstabelecimento.height
+    );
+    this.physics.world.setBounds(
+      boundsEstabelecimento.x,
+      boundsEstabelecimento.y,
+      boundsEstabelecimento.width,
+      boundsEstabelecimento.height
+    );
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Zona de saida compativel com o ponto de entrada/spawn
