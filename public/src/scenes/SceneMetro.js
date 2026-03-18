@@ -6,6 +6,8 @@
   init(dados) {
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   preload() {
@@ -138,6 +140,40 @@
     dadosMapa.tilesets = novosTilesets;
   }
 
+  obterSpawnMetroPadrao() {
+    const spawnFallback = { x: 273, y: 250 };
+    const cacheMapa = this.cache.tilemap.get('metro');
+    const dadosMapa = cacheMapa && cacheMapa.data;
+
+    if (!dadosMapa || !Array.isArray(dadosMapa.layers)) return spawnFallback;
+
+    const layerPlayer = dadosMapa.layers.find(l => l.name === 'PLAYER');
+    if (!layerPlayer || !Array.isArray(layerPlayer.chunks)) return spawnFallback;
+
+    const tileW = dadosMapa.tilewidth || 16;
+    const tileH = dadosMapa.tileheight || 16;
+
+    for (const chunk of layerPlayer.chunks) {
+      if (!Array.isArray(chunk.data)) continue;
+
+      for (let i = 0; i < chunk.data.length; i++) {
+        if ((chunk.data[i] | 0) <= 0) continue;
+
+        const localX = i % chunk.width;
+        const localY = Math.floor(i / chunk.width);
+        const tileX = chunk.x + localX;
+        const tileY = chunk.y + localY;
+
+        return {
+          x: tileX * tileW + tileW / 2,
+          y: tileY * tileH + tileH / 2
+        };
+      }
+    }
+
+    return spawnFallback;
+  }
+
   create() {
     this.prepararTilesetsMetro();
 
@@ -187,11 +223,22 @@
       acc.bottom = Math.max(acc.bottom, b.bottom);
       return acc;
     }, boundsIniciais);
+
+    if (!Number.isFinite(boundsMapa.x) || !Number.isFinite(boundsMapa.y) ||
+        !Number.isFinite(boundsMapa.right) || !Number.isFinite(boundsMapa.bottom)) {
+      boundsMapa.x = 0;
+      boundsMapa.y = 0;
+      boundsMapa.right = mapa.widthInPixels;
+      boundsMapa.bottom = mapa.heightInPixels;
+    }
+
     const larguraMapa = boundsMapa.right - boundsMapa.x;
     const alturaMapa = boundsMapa.bottom - boundsMapa.y;
 
     // Fundo para cobrir qualquer área vazia
-    this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555).setOrigin(0, 0);
+    this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555)
+      .setOrigin(0, 0)
+      .setDepth(-10);
 
     [paredeC, arm3C, arm2C, armC]
       .filter(Boolean)
@@ -215,9 +262,10 @@
       }
     });
 
-    // Personagem — spawn próximo à entrada (bottom-center do mapa)
-    const spawnX = boundsMapa.x + (larguraMapa / 2);
-    const spawnY = boundsMapa.bottom - 24;
+    // Personagem — usa spawn predefinido no mapa (camada PLAYER) com fallback da cena
+    const spawnPadrao = this.obterSpawnMetroPadrao();
+    const spawnX = this.spawnXCustom ?? spawnPadrao.x;
+    const spawnY = this.spawnYCustom ?? spawnPadrao.y;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'farm_frente_1');
     this.personagem.setCollideWorldBounds(true);
@@ -245,12 +293,12 @@
     this.physics.world.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    // Zona de saída
-    this.zonaSaida = new Phaser.Geom.Rectangle(118, 215, 60, 40);
-    this.labelSair = this.add.text(148, 232, '[E] Sair', {
+    // Zona de saída (alinhada com o ponto de entrada na estação)
+    this.zonaSaida = new Phaser.Geom.Rectangle(spawnX - 30, spawnY - 18, 60, 36);
+    this.labelSair = this.add.text(spawnX, spawnY - 2, '[E] Sair', {
       fontSize: '3px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
-    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+    }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
     this.transicionando  = false;
     this.dentroZonaSaida = false;
@@ -314,8 +362,8 @@
         this.scene.start('SceneCidade', {
           nomePasta: this.nomePastaEscolhida,
           prefixo:   this.prefixoEscolhido,
-          spawnX:    1121,
-          spawnY:    1261
+          spawnX:    3080,
+          spawnY:    1168
         });
       });
     }

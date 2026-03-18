@@ -300,7 +300,9 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneMetro', {
             nomePasta: this.nomePastaEscolhida,
-            prefixo:   this.prefixoEscolhido
+            prefixo:   this.prefixoEscolhido,
+            spawnX:    273,
+            spawnY:    250
           });
         });
       } else if (dentroSupermercado) {
