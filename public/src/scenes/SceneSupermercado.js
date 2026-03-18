@@ -3,7 +3,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     super({ key: "SceneSupermercado" });
   }
 
-  init(dados) {
+  init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
@@ -241,11 +241,11 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    // saída apenas na porta
-    this.zonasSaida = this._criarZonasSaida(mapa);
+    // saída APENAS pela porta (x=129, y=200)
+    this.zonasSaida = this._criarZonasSaida();
 
     this.labelSair = this.add
-      .text(0, 0, "[E] Sair", {
+      .text(0, 0, "[Saída]", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -258,7 +258,6 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
-    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente";
 
@@ -401,39 +400,9 @@ export default class SceneSupermercado extends Phaser.Scene {
     });
   }
 
-  _criarZonasSaida(mapa) {
-    const zonas = [];
-    const nomes = new Set([
-      "Saida",
-      "Saídas",
-      "Saidas",
-      "PortaSaida",
-      "PortaSaída",
-      "saida",
-      "saidas",
-    ]);
-
-    const camadaObj = (mapa.objects || []).find((o) => nomes.has(o.name));
-    if (camadaObj?.objects?.length) {
-      camadaObj.objects.forEach((obj) => {
-        const w = obj.width || 24;
-        const h = obj.height || 14;
-        const x = obj.x || 0;
-        const y = obj.gid ? (obj.y || 0) - h : (obj.y || 0);
-        zonas.push(new Phaser.Geom.Rectangle(x, y, w, h));
-      });
-    }
-
-    // fallback pequeno no centro inferior
-    if (!zonas.length) {
-      const portaW = 24;
-      const portaH = 14;
-      const portaX = Math.round(mapa.widthInPixels / 2 - portaW / 2);
-      const portaY = mapa.heightInPixels - portaH - 2;
-      zonas.push(new Phaser.Geom.Rectangle(portaX, portaY, portaW, portaH));
-    }
-
-    return zonas;
+  _criarZonasSaida() {
+    // ÚNICA saída permitida: porta em x=129, y=200
+    return [{ x: 129, y: 200, raio: 14 }];
   }
 
   update() {
@@ -472,9 +441,16 @@ export default class SceneSupermercado extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
-    );
+    // detecção por aproximação da porta (apenas x=129,y=200)
+    const dentroSaida = (this.zonasSaida || []).some((z) => {
+      const d = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        z.x,
+        z.y,
+      );
+      return d <= z.raio;
+    });
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
@@ -485,11 +461,8 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
     }
 
-    // sai SOMENTE dentro da porta e com E
-    const sairComE =
-      dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE);
-
-    if (!this.transicionando && sairComE) {
+    // sai automaticamente ao se aproximar da porta
+    if (!this.transicionando && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
