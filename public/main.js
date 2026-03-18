@@ -29,11 +29,7 @@ const config = {
     }
   },
 
-<<<<<<< Updated upstream
-  scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado]
-=======
   scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado,]
->>>>>>> Stashed changes
 };
 
 new Phaser.Game(config); //Cria o jogo
