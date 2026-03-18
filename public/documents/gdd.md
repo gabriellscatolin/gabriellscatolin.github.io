@@ -145,6 +145,7 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 <div align="center">
 <sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
 <img src="../gdd_images/CPV.png"width="80%"> 
+</div>
 
 &emsp; A Proposta de Valor do *Mini Mundo Cielo* foi definida com base na lógica do Value Proposition Canvas, ferramenta que orienta o desenvolvimento da solução a partir das necessidades do usuário que interage diretamente com o produto. Nesse caso, o cliente analisado no Canvas é o *Gerente de Negócios (GN/DDN)*, profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e apresentar soluções do portfólio da Cielo em situações reais de venda.[\[29\]](#ref29)
 
