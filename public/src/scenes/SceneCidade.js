@@ -138,6 +138,13 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
+     // --- ZONA: Padaria ---
+    this.zonaPadaria = new Phaser.Geom.Rectangle(1470, 890, 100, 80);
+    this.labelPadaria = this.add.text(1484, 840, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
     // --- ZONA: Farmácia ---
     this.zonaFarmacia = new Phaser.Geom.Rectangle(1081, 1181, 80, 80);
     this.labelFarmacia = this.add.text(1121, 1179, '[E] Entrar', {
@@ -172,6 +179,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaRestaurante  = false;
     this.dentroZonaMetro        = false;
     this.dentroZonaSupermercado = false;
+    this.dentroZonaPadaria      = false;
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
@@ -235,6 +243,12 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelE.setVisible(dentroAgencia);
     }
 
+    const dentroPadaria = Phaser.Geom.Rectangle.Contains(this.zonaPadaria, personagem.x, personagem.y);
+    if (dentroPadaria !== this.dentroZonaPadaria) {
+      this.dentroZonaPadaria = dentroPadaria;
+      this.labelPadaria.setVisible(dentroPadaria);
+    }
+
     const dentroFarmacia = Phaser.Geom.Rectangle.Contains(this.zonaFarmacia, personagem.x, personagem.y);
     if (dentroFarmacia !== this.dentroZonaFarmacia) {
       this.dentroZonaFarmacia = dentroFarmacia;
@@ -269,6 +283,16 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneEscritorio', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      } else if (dentroPadaria) {
+        this.transicionando = true;
+        this.labelPadaria.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('ScenePadaria', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });

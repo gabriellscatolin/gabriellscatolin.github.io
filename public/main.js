@@ -8,6 +8,7 @@ import SceneFarmacia from "./src/scenes/SceneFarmacia.js";
 import SceneRestaurante from "./src/scenes/SceneRestaurante.js";
 import SceneMetro from "./src/scenes/SceneMetro.js";
 import SceneSupermercado from "./src/scenes/Scenesupermercado.js";
+import ScenePadaria from "./src/scenes/ScenePadaria.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -28,7 +29,11 @@ const config = {
     }
   },
 
+<<<<<<< Updated upstream
   scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado]
+=======
+  scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado,]
+>>>>>>> Stashed changes
 };
 
 new Phaser.Game(config); //Cria o jogo
