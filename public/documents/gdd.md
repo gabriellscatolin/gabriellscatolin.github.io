@@ -57,7 +57,7 @@ Cielitos
 
 <div align="center">
 <sub>Figura 1 - Análise de 5 Forças de Porter - Cielo</sub>
-<img src="../gdd_images/forças_porter.jpeg">
+<img src="../gdd_images/forças_porter.jpeg" width= 90%>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -323,10 +323,11 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 
 <div align="center">
 <sub>Figura 4 - Stardew Valley</sub><br/>
-<img src="../gdd_images/StardewValley.jpg"width= 94%>
+<img src="../gdd_images/StardewValley.jpg"width= 87%>
+
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width= "95%">
+<img src="../gdd_images/PokemonFireRed.jpg" width= "87%">
   <sup>TechTudo (2016)</sup>
 </div>
 
@@ -386,7 +387,8 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 <div align="center">
   <sub>Figura 7 - Fixa técnica dos personagens jogáveis</sub>
-  <img src="../gdd_images/fixapersonagens.png" width= 95%>
+  <img src="../gdd_images/fixapersonagens.png" width= 88%>
+
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -442,7 +444,8 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
 <div align="center">
   <sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/visãoMapa.jpg" width= 95%>
+  <img src="../gdd_images/visãoMapa.jpg" width= 88%>
+
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
    
@@ -462,7 +465,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  <div align="center">
   <sub>Figura 11 - Agência - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/interiorAgencia.jpg" width = 95%>             
+  <img src="../gdd_images/interiorAgencia.jpg" width = 85%>             
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -479,7 +482,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
  <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorPadaria.jpg">
+  <img src="../gdd_images/interiorPadaria.jpg" width= 85%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -494,7 +497,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 13 - Farmácia - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/InteriorFarmacia.jpg">
+  <img src="../gdd_images/InteriorFarmacia.jpg" width= 88%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -512,7 +515,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
   <sub>Figura 14 - Escritório - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorEscritorio.png">
+  <img src="../gdd_images/interiorEscritorio.png" width=88%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -530,7 +533,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
   <sub>Figura 15 - Loja de roupas - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorCabelereiro.jpg" width= 97%>
+  <img src="../gdd_images/interiorCabelereiro.jpg" width= 88%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -556,7 +559,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 16 - Metrô - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMetro.jpg" width= 95%>
+  <img src="../gdd_images/interiorMetro.jpg" width= 88%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -599,7 +602,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 18 - Mercado - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMercado.png" width= 95%>
+  <img src="../gdd_images/interiorMercado.png" width= 88%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -619,7 +622,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 19 - Posto de gasolina - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 95%>
+  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 85%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
