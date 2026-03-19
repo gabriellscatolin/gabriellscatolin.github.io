@@ -173,20 +173,28 @@ export default class SceneCidade extends Phaser.Scene {
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
     // --- ZONA: Supermercado ---
-    this.zonaSupermercado = new Phaser.Geom.Rectangle(2891, 319, 80, 60);
-    this.labelSupermercado = this.add.text(2931, 317, '[E] Entrar', {
+    this.zonaSupermercado = new Phaser.Geom.Rectangle(2760, 1320, 80, 60);
+    this.labelSupermercado = this.add.text(2760, 1320, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    this.transicionando         = false;
-    this.dentroZonaAgencia      = false;
-    this.dentroZonaFarmacia     = false;
-    this.dentroZonaRestaurante  = false;
-    this.dentroZonaMetro        = false;
-    this.dentroZonaCabeleleiro  = false;
-    this.dentroZonaSupermercado = false;
-    this.dentroZonaPadaria      = false;
+    // --- ZONA: Posto de Gasolina ---
+    this.zonaPostoDeGasolina = new Phaser.Geom.Rectangle(2891, 319, 80, 60);
+    this.labelPostoDeGasolina = this.add.text(2931, 317, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    this.transicionando                 = false;
+    this.dentroZonaAgencia              = false;
+    this.dentroZonaFarmacia             = false;
+    this.dentroZonaRestaurante          = false;
+    this.dentroZonaMetro                = false;
+    this.dentroZonaCabeleleiro          = false;
+    this.dentroZonaSupermercado         = false;
+    this.dentroZonaPadaria              = false;
+    this.dentroZonaPostoDeGasolina      = false;
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
@@ -286,6 +294,12 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelSupermercado.setVisible(dentroSupermercado);
     }
 
+    const dentroPostoDeGasolina = Phaser.Geom.Rectangle.Contains(this.zonaPostoDeGasolina, personagem.x, personagem.y);
+    if (dentroPostoDeGasolina !== this.dentroZonaPostoDeGasolina) {
+      this.dentroZonaPostoDeGasolina = dentroPostoDeGasolina;
+      this.labelPostoDeGasolina.setVisible(dentroPostoDeGasolina);
+    }
+
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
 
@@ -358,6 +372,16 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneSupermercado', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      } else if (dentroPostoDeGasolina) {
+        this.transicionando = true;
+        this.labelPostoDeGasolina.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('ScenePostoDeGasolina', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });

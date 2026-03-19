@@ -30,7 +30,7 @@ const config = {
     }
   },
 
-  scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado, SceneCabeleleiro,]
+  scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneCidade, SceneEscritorio, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado, SceneCabeleleiro,]
 };
 
 new Phaser.Game(config); //Cria o jogo
