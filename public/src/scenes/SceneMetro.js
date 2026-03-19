@@ -286,7 +286,7 @@
       direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
 
-    // Câmera (mesmo padrão da SceneFarmacia)
+    // Câmera 
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
@@ -362,8 +362,8 @@
         this.scene.start('SceneCidade', {
           nomePasta: this.nomePastaEscolhida,
           prefixo:   this.prefixoEscolhido,
-          spawnX:    3080,
-          spawnY:    1168
+          spawnX:    2632,
+          spawnY:    471
         });
       });
     }

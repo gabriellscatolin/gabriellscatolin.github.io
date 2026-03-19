@@ -166,6 +166,12 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
+    this.zonaCabeleleiro = new Phaser.Geom.Rectangle(2208, 1530, 80, 80);
+    this.labelCabeleleiro = this.add.text(2248, 1568, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
     // --- ZONA: Supermercado ---
     this.zonaSupermercado = new Phaser.Geom.Rectangle(2891, 319, 80, 60);
     this.labelSupermercado = this.add.text(2931, 317, '[E] Entrar', {
@@ -178,6 +184,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaFarmacia     = false;
     this.dentroZonaRestaurante  = false;
     this.dentroZonaMetro        = false;
+    this.dentroZonaCabeleleiro  = false;
     this.dentroZonaSupermercado = false;
     this.dentroZonaPadaria      = false;
 
@@ -267,6 +274,12 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelMetro.setVisible(dentroMetro);
     }
 
+    const dentroCabeleleiro = Phaser.Geom.Rectangle.Contains(this.zonaCabeleleiro, personagem.x, personagem.y);
+    if (dentroCabeleleiro !== this.dentroZonaCabeleleiro) {
+      this.dentroZonaCabeleleiro = dentroCabeleleiro;
+      this.labelCabeleleiro.setVisible(dentroCabeleleiro);
+    }
+
     const dentroSupermercado = Phaser.Geom.Rectangle.Contains(this.zonaSupermercado, personagem.x, personagem.y);
     if (dentroSupermercado !== this.dentroZonaSupermercado) {
       this.dentroZonaSupermercado = dentroSupermercado;
@@ -327,6 +340,16 @@ export default class SceneCidade extends Phaser.Scene {
             prefixo:   this.prefixoEscolhido,
             spawnX:    273,
             spawnY:    250
+          });
+        });
+      } else if (dentroCabeleleiro) {
+        this.transicionando = true;
+        this.labelCabeleleiro.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneCabeleleiro', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
           });
         });
       } else if (dentroSupermercado) {
