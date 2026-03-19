@@ -17,6 +17,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     });
 
     this.load.tilemapTiledJSON('farmacia', 'src/assets/imagens/mapsjson/tileMaps/farmacia.tmj?v=1');
+    this.load.image('npc_farmacia', 'src/assets/imagens/imagensPersonagens/npcFarmacia/npcFarmacia.png');
     this.load.image('farm_int_p1',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png');
     this.load.image('farm_int_p2',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part2.png');
     this.load.image('farm_int_p3',    'src/assets/imagens/mapsjson/tileSets/Interiors_Part3.png');
@@ -122,6 +123,20 @@ export default class SceneFarmacia extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
+    // NPC da farmácia — escala ajustada para ter a mesma altura do personagem
+    this.npcFarmacia = this.add.image(79, 141, 'npc_farmacia').setDepth(5);
+    const alturaAlvo = this.personagem.displayHeight;
+    this.npcFarmacia.setDisplaySize(
+      (this.npcFarmacia.width / this.npcFarmacia.height) * alturaAlvo,
+      alturaAlvo
+    );
+
+    this.labelNpc = this.add.text(79, 163, '[E] Falar', {
+      fontSize: '3px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    this.perto_npc       = false;
     this.transicionando    = false;
     this.dentroZonaSaida   = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -174,11 +189,24 @@ export default class SceneFarmacia extends Phaser.Scene {
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
+    // Proximidade do NPC
+    const distNpc = Phaser.Math.Distance.Between(personagem.x, personagem.y, 79, 141);
+    const pertoNpc = distNpc < 30;
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      console.log('[SceneFarmacia] Interagiu com o NPC da farmácia');
+      // TODO: abrir diálogo do NPC
+    }
+
     // Zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(this.zonaSaida, personagem.x, personagem.y);
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
+      if (dentroSaida) this.labelNpc.setVisible(false);
     }
     // Transição para cena da cidade
     if (dentroSaida && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
