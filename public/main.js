@@ -7,8 +7,11 @@ import SceneCidade from "./src/scenes/SceneCidade.js";
 import SceneFarmacia from "./src/scenes/SceneFarmacia.js";
 import SceneRestaurante from "./src/scenes/SceneRestaurante.js";
 import SceneMetro from "./src/scenes/SceneMetro.js";
-import SceneSupermercado from "./src/scenes/Scenesupermercado.js";
-import ScenePadaria from "./src/scenes/ScenePadaria.js";
+import SceneSupermercado from "./src/scenes/SceneSupermercado.js";
+import SceneCabeleleiro from "./src/scenes/SceneCabeleleiro.js";
+import ScenePadaria from "./src/scenes/ScenePadaria.js"; 
+import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
+import SceneAgencia01   from "./src/scenes/sceneAgencia01.js";  
 
 //Configuração do jogo phaser
 const config = {
@@ -29,7 +32,8 @@ const config = {
     }
   },
 
-  scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneEscritorio, SceneCidade, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado,]
+scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneCidade, SceneEscritorio, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado, SceneCabeleleiro, ScenePostoDeGasolina, SceneAgencia01]
+
 };
 
 new Phaser.Game(config); //Cria o jogo

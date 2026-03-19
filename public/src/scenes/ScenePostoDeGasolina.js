@@ -1,6 +1,6 @@
-export default class ScenePadaria extends Phaser.Scene {
+export default class ScenePostoDeGasolina extends Phaser.Scene {
   constructor() {
-    super({ key: 'ScenePadaria' });
+    super({ key: 'ScenePostoDeGasolina' });
   }
 
   init(dados) {
@@ -10,15 +10,15 @@ export default class ScenePadaria extends Phaser.Scene {
 
   preload() {
     const nomePasta = this.nomePastaEscolhida;
-    const prefixo = this.prefixoEscolhido;
+    const prefixo   = this.prefixoEscolhido;
 
     this.load.maxParallelDownloads = 2;
 
     this.load.on("loaderror", (arquivo) => {
-      console.error("[ScenePadaria] Erro ao carregar:", arquivo.key, arquivo.src);
+      console.error("[ScenePostoGasolina] Erro ao carregar:", arquivo.key, arquivo.src);
     });
 
-    this.load.tilemapTiledJSON("padaria", "src/assets/imagens/mapsjson/tileMaps/padaria.tmj");
+    this.load.tilemapTiledJSON("posto", "src/assets/imagens/mapsjson/tileMaps/postoGasolina.tmj");
 
     this.load.image("super_interiors",   "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png");
     this.load.image("super_roombuilder", "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png");
@@ -34,8 +34,12 @@ export default class ScenePadaria extends Phaser.Scene {
   }
 
   create() {
-    const mapa = this.make.tilemap({ key: "padaria" });
-    this.mapa = mapa;
+    const mapa = this.make.tilemap({ key: "posto" });
+    this.mapa  = mapa;
+
+    // Mapa infinite com startx:-16 starty:-16 — chunks comecam 16 tiles antes da origem
+    const offsetX = 16 * (mapa.tileWidth  || 16); // 256px
+    const offsetY = 16 * (mapa.tileHeight || 16); // 256px
 
     this._otimizarTilesetsPorUso(mapa);
 
@@ -54,106 +58,98 @@ export default class ScenePadaria extends Phaser.Scene {
 
     const tilesets = [tsInteriors, tsRoomBuilder, tsExteriors].filter(Boolean);
 
+    // Fundo escuro atras do mapa
     this.add
-      .rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888)
+      .rectangle(-256, -256, mapa.widthInPixels + 512, mapa.heightInPixels + 512, 0x222222)
       .setOrigin(0, 0);
 
-    // Sem colisão
-    this._criarCamada(mapa, "Chão",              tilesets);
-    this._criarCamada(mapa, "ParedeSemColisão1", tilesets);
-    this._criarCamada(mapa, "ParedeSemColisão2", tilesets);
-    this._criarCamada(mapa, "ObjSemColisao1",    tilesets);
-    this._criarCamada(mapa, "ObjSemColisao2",    tilesets);
-    this._criarCamada(mapa, "Itens",             tilesets);
-    this._criarCamada(mapa, "Itens2",            tilesets);
-    this._criarCamada(mapa, "Vidro",             tilesets);
+    // -----------------------------------------------------------------
+    // Ordem de renderizacao (baixo -> cima):
+    //   1. N- Chao                      sem colisao
+    //   2. N - ParedeSemColid           sem colisao
+    //   3. N - ObjetosSemColid_embaixo  sem colisao, atras do player
+    //   4. C- ParedeComColid            COM colisao
+    //   5. C - Objetos com Colid        COM colisao
+    //   6. N - ObjetosSemColid_emcima   sem colisao, na frente do player (depth 10)
+    //   7. N - ProdutosSemColid         sem colisao, na frente do player (depth 10)
+    // -----------------------------------------------------------------
 
-    // Com colisão
-    const paredeC = this._criarCamada(mapa, "ParedeComColisão", tilesets);
-    const objC    = this._criarCamada(mapa, "ObjComColisao",    tilesets);
-    const bordaC  = this._criarCamada(mapa, "Bordas",           tilesets);
+    this._criarCamada(mapa, "N- Ch\u00e3o",                   tilesets, offsetX, offsetY);
+    this._criarCamada(mapa, "N - ParedeSemColid",             tilesets, offsetX, offsetY);
+    this._criarCamada(mapa, "N - ObjetosSemColid_embaixo",    tilesets, offsetX, offsetY);
 
-    // ✅ FIX: removido objC2 que nunca foi declarado
-    [paredeC, objC, bordaC]
+    const paredeC = this._criarCamada(mapa, "C- ParedeComColid",     tilesets, offsetX, offsetY);
+    const objC    = this._criarCamada(mapa, "C - Objetos com Colid", tilesets, offsetX, offsetY);
+
+    [paredeC, objC]
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
 
-    const direcoes = ["frente", "tras", "direita", "esquerda"];
-    direcoes.forEach((dir) => {
+    const emCima   = this._criarCamada(mapa, "N - ObjetosSemColid_emcima", tilesets, offsetX, offsetY);
+    const produtos = this._criarCamada(mapa, "N - ProdutosSemColid",       tilesets, offsetX, offsetY);
+
+    if (emCima)   emCima.setDepth(10);
+    if (produtos) produtos.setDepth(10);
+
+    // --- Animacoes do personagem ---
+    ["frente", "tras", "direita", "esquerda"].forEach((dir) => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
         this.anims.create({
           key: `esp_andar_${dir}`,
-          frames: [
-            { key: `esp_${dir}_1` },
-            { key: `esp_${dir}_2` },
-            { key: `esp_${dir}_3` },
-            { key: `esp_${dir}_4` },
-          ],
+          frames: [1, 2, 3, 4].map((i) => ({ key: `esp_${dir}_${i}` })),
           frameRate: 8,
           repeat: -1,
         });
       }
     });
 
-    const spawnX = 124;
-    const spawnY = 183;
+    // --- Personagem ---
+    // Spawn no centro da area com conteudo (offset + meio do mapa)
+    const spawnX = offsetX + (mapa.width  * mapa.tileWidth)  / 2;
+    const spawnY = offsetY + (mapa.height * mapa.tileHeight) / 2;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
+    this.personagem.setDepth(5);
 
-    const pontosColisao = [
-      { x: 100, y: 56, w: 16, h: 16 },
-      { x: 91,  y: 59, w: 16, h: 16 },
-      { x: 65,  y: 84, w: 16, h: 16 },
-      { x: 45,  y: 84, w: 16, h: 16 },
-      { x: 25,  y: 84, w: 16, h: 16 },
-    ];
+    // Tamanho: 1 tile largura (16px) x 2 tiles altura (32px)
+    const tamTile = mapa.tileWidth || 16;
+    this.personagem.setDisplaySize(tamTile, tamTile * 2);
 
-    this.colisoesExtras = [];
-    pontosColisao.forEach(({ x, y, w, h }) => {
-      const zona = this.add.zone(x, y, w, h).setOrigin(0, 0);
-      this.physics.add.existing(zona, true);
-      this.physics.add.collider(this.personagem, zona);
-      this.colisoesExtras.push(zona);
-    });
-
-    // Personagem ocupa 2 tiles de altura (32px) e 1 tile de largura (16px)
-    const tamTile    = mapa.tileHeight || 16;
-    const alturaAlvo = tamTile * 2; // 32px
-    const larguraAlvo = tamTile;    // 16px
-    const escalaX = larguraAlvo / this.personagem.width;
-    const escalaY = alturaAlvo  / this.personagem.height;
-    this.personagem.setScale(escalaX, escalaY);
-    // Hitbox na metade inferior (pés), para colisão com o chão
-    const hbW = 12, hbH = 10;
-    this.personagem.body.setSize(hbW / escalaX, hbH / escalaY);
+    // Hitbox nos pes
+    const sx  = this.personagem.scaleX;
+    const sy  = this.personagem.scaleY;
+    const hbW = 10 / sx;
+    const hbH =  8 / sy;
+    this.personagem.body.setSize(hbW, hbH);
     this.personagem.body.setOffset(
-      (this.personagem.width  - hbW / escalaX) / 2,
-       this.personagem.height - hbH / escalaY,
+      (this.personagem.width  - hbW) / 2,
+       this.personagem.height - hbH,
     );
 
-    // ✅ FIX: removido objC2 que nunca foi declarado
-    [paredeC, objC, bordaC]
+    [paredeC, objC]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // --- Controles ---
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys({
+    this.wasd   = this.input.keyboard.addKeys({
       cima:     Phaser.Input.Keyboard.KeyCodes.W,
       baixo:    Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita:  Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(4);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.cameras.main.centerOn(mapa.widthInPixels / 2, mapa.heightInPixels / 2);
+    // --- Camera ---
+    const cam = this.cameras.main;
+    cam.setZoom(4);
+    cam.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.cameras.main.fadeIn(600, 0, 0, 0);
+    cam.startFollow(this.personagem, true, 0.1, 0.1);
+    cam.fadeIn(600, 0, 0, 0);
 
-    this.zonasSaida = this._criarZonasSaida(mapa);
-    console.log('[ScenePadaria] Zonas de saída:', this.zonasSaida);
+    // --- Zona de saida ---
+    this.zonasSaida = this._criarZonasSaida(offsetX, offsetY);
 
     this.labelSair = this.add
       .text(0, 0, "[E] Sair", {
@@ -169,9 +165,8 @@ export default class ScenePadaria extends Phaser.Scene {
 
     this.transicionando  = false;
     this.dentroZonaSaida = false;
-    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-
-    this.direcaoAtual = "frente";
+    this.teclaE          = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.direcaoAtual    = "frente";
 
     this.debugTxt = this.add
       .text(0, 0, "", {
@@ -182,27 +177,52 @@ export default class ScenePadaria extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    console.log("[ScenePostoGasolina] widthInPixels:", mapa.widthInPixels, "heightInPixels:", mapa.heightInPixels);
+    console.log("[ScenePostoGasolina] offsetX:", offsetX, "offsetY:", offsetY);
+    console.log("[ScenePostoGasolina] Spawn: x =", spawnX, "y =", spawnY);
   }
 
-  _criarCamada(mapa, nome, tilesets) {
+  _criarCamada(mapa, nome, tilesets, offsetX = 0, offsetY = 0) {
     try {
       const existe = mapa.layers.some((l) => l.name === nome);
       if (!existe) {
-        console.warn(`[ScenePadaria] ⚠️ Camada ausente no TMJ: "${nome}"`);
-        console.log("[ScenePadaria] Camadas disponíveis:", mapa.layers.map((l) => l.name));
+        console.warn(`[ScenePostoGasolina] AUSENTE no TMJ: "${nome}"`);
+        console.log("[ScenePostoGasolina] Camadas disponiveis:", mapa.layers.map((l) => l.name));
         return null;
       }
-      const camada = mapa.createLayer(nome, tilesets, 0, 0);
+      const camada = mapa.createLayer(nome, tilesets, offsetX, offsetY);
       if (!camada) {
-        console.error(`[ScenePadaria] ❌ Falha ao criar camada: "${nome}"`);
+        console.error(`[ScenePostoGasolina] FALHA ao criar: "${nome}"`);
         return null;
       }
-      console.log(`[ScenePadaria] ✅ Camada criada: "${nome}"`);
+      console.log(`[ScenePostoGasolina] OK: "${nome}"`);
       return camada;
     } catch (erro) {
-      console.error(`[ScenePadaria] ❌ Erro ao criar camada "${nome}":`, erro.message);
+      console.error(`[ScenePostoGasolina] ERRO "${nome}":`, erro.message);
       return null;
     }
+  }
+
+  // Zona de saida manual — ajuste portaTileX/portaTileY conforme
+  // a posicao real da porta no seu mapa (use o debugTxt x/y para descobrir)
+  _criarZonasSaida(offsetX, offsetY) {
+    const tileW = this.mapa.tileWidth  || 16;
+    const tileH = this.mapa.tileHeight || 16;
+
+    // Porta inferior do posto — ajuste estes valores se necessario
+    const portaTileX = 4;
+    const portaTileY = 11;
+
+    const zona = new Phaser.Geom.Rectangle(
+      offsetX + portaTileX * tileW,
+      offsetY + portaTileY * tileH,
+      tileW * 2,
+      tileH,
+    );
+
+    console.log("[ScenePostoGasolina] Zona de saida:", zona);
+    return [zona];
   }
 
   _keyTileset(tmjName, fallbackKey) {
@@ -217,7 +237,7 @@ export default class ScenePadaria extends Phaser.Scene {
         const row = data[y] || [];
         for (let x = 0; x < row.length; x++) {
           const cell = row[x];
-          const gid = typeof cell === "number" ? cell : (cell?.index || 0);
+          const gid  = typeof cell === "number" ? cell : (cell?.index || 0);
           if (gid > 0) usados.add(gid);
         }
       }
@@ -233,7 +253,7 @@ export default class ScenePadaria extends Phaser.Scene {
     ];
 
     this._tilesetKeys = {};
-    const usados = this._coletarGidsUsados(mapa);
+    const usados            = this._coletarGidsUsados(mapa);
     const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
       (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
     );
@@ -248,9 +268,9 @@ export default class ScenePadaria extends Phaser.Scene {
       const source = this.textures.get(def.baseKey).getSourceImage();
       if (!source?.width || !source?.height) return;
 
-      const idx = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
+      const idx      = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
       const startGid = ts.firstgid || 1;
-      const endGid =
+      const endGid   =
         idx < tilesetsOrdenados.length - 1
           ? tilesetsOrdenados[idx + 1].firstgid - 1
           : Number.MAX_SAFE_INTEGER;
@@ -273,10 +293,10 @@ export default class ScenePadaria extends Phaser.Scene {
         ts.columns ||
         Math.max(1, Math.floor((source.width - margin * 2 + spacing) / (tileW + spacing)));
 
-      const tilesNecessarios = maiorGidUsado - startGid + 1;
+      const tilesNecessarios  = maiorGidUsado - startGid + 1;
       const linhasNecessarias = Math.max(1, Math.ceil(tilesNecessarios / columns));
 
-      const cropWCalc = margin + columns * (tileW + spacing) - spacing + margin;
+      const cropWCalc = margin + columns           * (tileW + spacing) - spacing + margin;
       const cropHCalc = margin + linhasNecessarias * (tileH + spacing) - spacing + margin;
 
       const cropW = Math.min(source.width,  Math.max(tileW, cropWCalc));
@@ -288,7 +308,7 @@ export default class ScenePadaria extends Phaser.Scene {
       if (this.textures.exists(cutKey)) this.textures.remove(cutKey);
 
       const canvasTex = this.textures.createCanvas(cutKey, cropW, cropH);
-      const ctx = canvasTex.getContext();
+      const ctx       = canvasTex.getContext();
       ctx.clearRect(0, 0, cropW, cropH);
       ctx.drawImage(source, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
       canvasTex.refresh();
@@ -297,31 +317,8 @@ export default class ScenePadaria extends Phaser.Scene {
     });
   }
 
-  _criarZonasSaida(mapa) {
-    const zonas = [];
-    const nomes = new Set(["Saida", "Saídas", "Saidas", "PortaSaida", "PortaSaída", "saida", "saidas"]);
-
-    const camadaObj = (mapa.objects || []).find((o) => nomes.has(o.name));
-    if (camadaObj?.objects?.length) {
-      camadaObj.objects.forEach((obj) => {
-        const w = obj.width  || 24;
-        const h = obj.height || 14;
-        const x = obj.x || 0;
-        const y = obj.gid ? (obj.y || 0) - h : (obj.y || 0);
-        zonas.push(new Phaser.Geom.Rectangle(x, y, w, h));
-      });
-    }
-
-    if (!zonas.length) {
-      zonas.push(new Phaser.Geom.Rectangle(112, 176, 24, 14));
-      console.warn('[ScenePadaria] Zona de saída não encontrada no mapa, usando fallback manual.');
-    }
-
-    return zonas;
-  }
-
   update() {
-    const velocidade = 150;
+    const velocidade = 80;
     const { teclas, wasd, personagem } = this;
 
     personagem.setVelocity(0);
@@ -369,9 +366,7 @@ export default class ScenePadaria extends Phaser.Scene {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
     }
 
-    const sairComE = dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE);
-
-    if (!this.transicionando && sairComE) {
+    if (!this.transicionando && dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -379,7 +374,7 @@ export default class ScenePadaria extends Phaser.Scene {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo:   this.prefixoEscolhido,
-          spawnX:    76,
+          spawnX:    76,   // ajuste para o ponto de retorno correto na SceneCidade
           spawnY:    232,
         });
       });
