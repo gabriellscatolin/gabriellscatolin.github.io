@@ -144,6 +144,7 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 <div align="center">
 <sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
 <img src="../gdd_images/CPV.png"width="80%"> 
+
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -469,7 +470,8 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  <div align="center">
   <sub>Figura 11 - Agência - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/interiorAgencia.jpg" width = 70%>             
+
+  <img src="../gdd_images/interiorAgencia.jpg" width = 60%>             
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -486,7 +488,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
  <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorPadaria.jpg" width= 70%>
+  <img src="../gdd_images/interiorPadaria.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -501,7 +503,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 13 - Farmácia - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/InteriorFarmacia.jpg" width= 70%>
+  <img src="../gdd_images/InteriorFarmacia.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -519,7 +521,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
   <sub>Figura 14 - Escritório - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorEscritorio.png" width=70%>
+  <img src="../gdd_images/interiorEscritorio.png" width=60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -537,7 +539,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
   <sub>Figura 15 - Loja de roupas - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorCabelereiro.jpg" width= 70%>
+  <img src="../gdd_images/interiorCabelereiro.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -563,7 +565,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 16 - Metrô - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMetro.jpg" width= 70%>
+  <img src="../gdd_images/interiorMetro.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -586,7 +588,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 17 - Restaurante - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorRestaurante.jpg" width= 80%>
+  <img src="../gdd_images/interiorRestaurante.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -606,7 +608,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 18 - Mercado - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMercado.png" width= 70%>
+  <img src="../gdd_images/interiorMercado.png" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -626,7 +628,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 19 - Posto de gasolina - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 70%>
+  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 60%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -668,7 +670,7 @@ Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cie
 
 <div align="center">
   <sub>Figura 8 - Concept Art - integração entre cenários</sub>
-  <img src="../gdd_images/conceptart1.jpeg" width="80%">
+  <img src="../gdd_images/conceptart1.jpeg" width="60%">
 
   <sup> Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -681,7 +683,7 @@ Ambas as telas foram concebidas de modo a manter coerência estética com os dem
 
 <div align="center">
   <sub>Figura 9 - Concept Art - Cidades do jogo</sub>
-  <img src="../gdd_images/conceptart2.png"width="80%">
+  <img src="../gdd_images/conceptart2.png"width="60%">
   
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
