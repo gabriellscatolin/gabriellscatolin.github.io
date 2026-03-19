@@ -86,7 +86,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
-    this._criarCamada(mapa, "N - Chão", tilesets);
+    this._criarCamada(mapa, "N - ChÃ£o", tilesets);
     this._criarCamada(mapa, "N - ParedeSemColid", tilesets);
     this._criarCamada(mapa, "N - ObjetsoSemColid_0", tilesets);
     this._criarCamada(mapa, "PLAYER", tilesets);
@@ -151,6 +151,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(5);
@@ -159,10 +160,9 @@ export default class SceneCabeleleiro extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    this.zonasSaida = this._criarZonasSaida();
-
+    this.zonaSaida = new Phaser.Geom.Rectangle(44, 54, 60, 36);
     this.labelSair = this.add
-      .text(0, 0, "[Saída]", {
+      .text(74, 72, "[E] Sair", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -170,7 +170,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(20)
-      .setOrigin(0.5, 1)
+      .setOrigin(0.5, 0.5)
       .setVisible(false);
 
     this.transicionando = false;
@@ -193,7 +193,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
       if (!camada) {
-        console.warn("[SceneCabeleleiro] Camada não encontrada:", nome);
+        console.warn("[SceneCabeleleiro] Camada nÃ£o encontrada:", nome);
       }
       return camada;
     } catch (erro) {
@@ -220,7 +220,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
         const row = data[y] || [];
         for (let x = 0; x < row.length; x++) {
           const cell = row[x];
-          const gid = typeof cell === "number" ? cell : (cell?.index || 0);
+          const gid = typeof cell === "number" ? cell : cell?.index || 0;
           if (gid > 0) usados.add(gid);
         }
       }
@@ -276,7 +276,9 @@ export default class SceneCabeleleiro extends Phaser.Scene {
         ts.columns ||
         Math.max(
           1,
-          Math.floor((source.width - margin * 2 + spacing) / (tileW + spacing)),
+          Math.floor(
+            (source.width - margin * 2 + spacing) / (tileW + spacing),
+          ),
         );
 
       const tilesNecessarios = maiorGidUsado - startGid + 1;
@@ -305,10 +307,6 @@ export default class SceneCabeleleiro extends Phaser.Scene {
 
       this._tilesetKeys[def.tmjName] = cutKey;
     });
-  }
-
-  _criarZonasSaida() {
-    return [{ x: 124, y: 198, raio: 14 }];
   }
 
   update() {
@@ -347,26 +345,22 @@ export default class SceneCabeleleiro extends Phaser.Scene {
       personagem.setTexture(`cab_${this.direcaoAtual}_1`);
     }
 
-    const dentroSaida = (this.zonasSaida || []).some((z) => {
-      const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
-        z.x,
-        z.y,
-      );
-      return d <= z.raio;
-    });
+    const dentroSaida = Phaser.Geom.Rectangle.Contains(
+      this.zonaSaida,
+      personagem.x,
+      personagem.y,
+    );
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
 
-    if (dentroSaida) {
-      this.labelSair.setPosition(personagem.x, personagem.y - 10);
-    }
-
-    if (!this.transicionando && dentroSaida) {
+    if (
+      dentroSaida &&
+      !this.transicionando &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
