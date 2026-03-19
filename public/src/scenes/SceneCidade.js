@@ -132,8 +132,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
     // --- ZONA: Agência ---
-    this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
-    this.labelE = this.add.text(993, 838, '[E] Entrar', {
+    this.zonaAgencia = new Phaser.Geom.Rectangle(1745, 1256, 90, 80);
+    this.labelE = this.add.text(1788, 1254, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
@@ -296,7 +296,7 @@ export default class SceneCidade extends Phaser.Scene {
         this.labelE.setVisible(false);
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
-          this.scene.start('SceneEscritorio', {
+          this.scene.start('SceneAg', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });
