@@ -1,10 +1,7 @@
-<<<<<<< HEAD:documents/gdd.md
-<img src="../assets/logointeli.png">
 
 
 # GDD - Game Design Document - Módulo 1 - Inteli
 
-**_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final_**
 
 ## Nome do Grupo:
 Cielitos
@@ -326,10 +323,10 @@ Mini Mundo Cielo é projetado para um jogador (single player), permitindo experi
 
 <div align="center">
 <sub>Figura 4 - Stardew Valley</sub><br/>
-<img src="../gdd_images/StardewValley.jpg">
+<img src="../gdd_images/StardewValley.jpg"width= 94%>
 <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 <sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width= "1000">
+<img src="../gdd_images/PokemonFireRed.jpg" width= "95%">
   <sup>TechTudo (2016)</sup>
 </div>
 
@@ -389,7 +386,7 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 
 <div align="center">
   <sub>Figura 7 - Fixa técnica dos personagens jogáveis</sub>
-  <img src="../gdd_images/fixapersonagens.png">
+  <img src="../gdd_images/fixapersonagens.png" width= 95%>
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -445,7 +442,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
 <div align="center">
   <sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/visãoMapa.jpg">
+  <img src="../gdd_images/visãoMapa.jpg" width= 95%>
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
    
@@ -465,7 +462,8 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
  <div align="center">
   <sub>Figura 11 - Agência - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/interiorAgencia.jpg">
+  <img src="../gdd_images/interiorAgencia.jpg" width = 95%>             
+
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -479,8 +477,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 - fortalecer o relacionamento com pequenos empreendedores.
 
  <div align="center">
-
-  <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
+ <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
 
   <img src="../gdd_images/interiorPadaria.jpg">
 
@@ -497,7 +494,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 13 - Farmácia - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorFarmacia.jpg">
+  <img src="../gdd_images/InteriorFarmacia.jpg">
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -533,7 +530,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
  <div align="center">
   <sub>Figura 15 - Loja de roupas - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorCabelereiro.jpg">
+  <img src="../gdd_images/interiorCabelereiro.jpg" width= 97%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -559,7 +556,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 16 - Metrô - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMetro.jpg">
+  <img src="../gdd_images/interiorMetro.jpg" width= 95%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -602,7 +599,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 18 - Mercado - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorMercado.png">
+  <img src="../gdd_images/interiorMercado.png" width= 95%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -622,7 +619,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
   <sub>Figura 19 - Posto de gasolina - Mini Mundo Cielo</sub>
 
-  <img src="../gdd_images/interiorPostodeGasolina.jpg">
+  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 95%>
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
@@ -1183,7 +1180,7 @@ Sprites dos personagens jogáveis:
 
 <sub>Figura 2 - Personagens jogáveis</sub>
 
-<img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png">
+<img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
 
 <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
@@ -1199,7 +1196,7 @@ Sprites dos personagens secundários:
 	
 <sub>Figura 3 - Personagens secundários </sub>
 
-<img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png">
+<img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png" width= 95%>
 </div>
 
 <div align="center">
@@ -1208,7 +1205,7 @@ Sprites dos personagens secundários:
 	
 <sub>Figura 4 - Foto perfil personagens secundários </sub>
 
-<img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png">
+<img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
 
 <div align="center">
 <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
@@ -1492,7 +1489,7 @@ Essa abordagem permite organizar o cenário em diferentes camadas e facilita a i
 
 <div align="center">
 <sub>Figura 20 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/visãoMapa.jpg">
+<img src="../gdd_images/visãoMapa.jpg"width= 97%>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -1569,7 +1566,7 @@ this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
 <div align="center">
 <sub>Figura 21 - Personagem no mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/personagemMapa.jpg">
+<img src="../gdd_images/personagemMapa.jpg"width= 97%>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
@@ -1604,7 +1601,7 @@ Esse sistema estabelece a base para a navegação entre o mapa da cidade e os di
 
 <div align="center">
 <sub>Figura 22 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/interacaoEstabelecimento.jpg">
+<img src="../gdd_images/interacaoEstabelecimento.jpg" width= 97%>
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
