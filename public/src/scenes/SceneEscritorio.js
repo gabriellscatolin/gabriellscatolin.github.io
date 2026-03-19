@@ -4,6 +4,7 @@ export default class SceneEscritorio extends Phaser.Scene {
   }
 
   init(dados) {
+    // Dados do personagem definidos na transição da cidade
     this.nomePastaEscolhida = dados.nomePasta || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || "HB";
   }
@@ -16,6 +17,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       console.error('[SceneEscritorio] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
+    // Mapa e tileset do escritório
     this.load.tilemapTiledJSON('escritorio', 'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj');
     this.load.image('escritorio_tiles', 'src/assets/imagens/mapsjson/tileSets/escritorio.png');
 
@@ -30,15 +32,18 @@ export default class SceneEscritorio extends Phaser.Scene {
   }
 
   create() {
+    // Criação do mapa e camadas principais
     const mapa  = this.make.tilemap({ key: 'escritorio' });
     const tiles = mapa.addTilesetImage('escritorio', 'escritorio_tiles');
 
     // Fundo sólido para cobrir qualquer área vazia fora dos tiles
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888).setOrigin(0, 0);
 
+    // Camadas sem colisão
     mapa.createLayer('chao',    tiles, 0, 0);
     mapa.createLayer('semcolis', tiles, 0, 0);
 
+    // Camadas com colisão
     const objcomcolis = mapa.createLayer('objcomcolis', tiles, 0, 0);
     const obcomcolis2 = mapa.createLayer('obcomcolis2', tiles, 0, 0);
     const borda       = mapa.createLayer('borda',       tiles, 0, 0);
@@ -66,7 +71,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     });
 
     // --- PERSONAGEM ---
-    // Sem object layer de spawn no mapa — usa posição segura no hall de entrada
+    // Sem object layer de spawn no mapa, usa posição fixa no hall de entrada
     const spawnX = 342;
     const spawnY = 308;
 
@@ -76,9 +81,9 @@ export default class SceneEscritorio extends Phaser.Scene {
     const tamTile      = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
-    const escala = Math.min((tamTile * 1.5) / larguraSprite, (tamTile * 1.5) / alturaSprite);
-    this.personagem.setScale(Math.max(escala, 0.05));
-    this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
+    const escala = Math.min((tamTile * 0.4) / larguraSprite, (tamTile * 0.4) / alturaSprite);
+    this.personagem.setScale(Math.max(escala, 0.04));
+    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     this.physics.add.collider(this.personagem, objcomcolis);
     this.physics.add.collider(this.personagem, obcomcolis2);
@@ -102,6 +107,12 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.direcaoAtual = 'frente';
 
+    // --- SAÍDA AUTOMÁTICA ---
+    // Ao entrar no raio da porta, retorna para a cidade sem precisar apertar tecla
+    this.zonasSaida = [{ x: 342, y: 280, raio: 25 }];
+    this.dentroZonaSaida = false;
+    this.transicionando = false;
+
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
       backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
@@ -109,6 +120,7 @@ export default class SceneEscritorio extends Phaser.Scene {
   }
 
   update() {
+    // Movimentação base do personagem
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
@@ -143,6 +155,30 @@ export default class SceneEscritorio extends Phaser.Scene {
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+    }
+
+    // --- SAÍDA AUTOMÁTICA ---
+    const dentroSaida = (this.zonasSaida || []).some((z) => {
+      const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
+      return d <= z.raio;
+    });
+
+    if (dentroSaida !== this.dentroZonaSaida) {
+      this.dentroZonaSaida = dentroSaida;
+    }
+
+    // Transição automática para a cidade ao se aproximar da saída
+    if (!this.transicionando && dentroSaida) {
+      this.transicionando = true;
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.start('SceneCidade', {
+          nomePasta: this.nomePastaEscolhida,
+          prefixo: this.prefixoEscolhido,
+          spawnX: 1741,
+          spawnY: 1256
+        });
+      });
     }
 
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);

@@ -4,6 +4,7 @@ export default class SceneAgencia extends Phaser.Scene {
   }
 
   init(dados = {}) {
+    // Dados do personagem definidos pela cena anterior
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
@@ -24,6 +25,7 @@ export default class SceneAgencia extends Phaser.Scene {
       );
     });
 
+    // Mapa e tilesets da agência
     this.load.tilemapTiledJSON(
       "agencia",
       "src/assets/imagens/mapsjson/tileMaps/Agência01.tmj",
@@ -53,6 +55,7 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
+    // Sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -148,7 +151,7 @@ export default class SceneAgencia extends Phaser.Scene {
 
     // ── PERSONAGEM ────────────────────────────────────────────────────────────
     const spawnX = 158;
-    const spawnY = 213;
+    const spawnY = 185;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
@@ -181,6 +184,12 @@ export default class SceneAgencia extends Phaser.Scene {
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     this.direcaoAtual = "frente";
+
+    // ── SAÍDA AUTOMÁTICA ──────────────────────────────────────────────────────
+    // Ao entrar no raio da saída, retorna automaticamente para a cidade
+    this.zonasSaida = [{ x: 158, y: 232, raio: 25 }];
+    this.dentroZonaSaida = false;
+    this.transicionando = false;
 
     // ── DEBUG ─────────────────────────────────────────────────────────────────
     this.debugTxt = this.add
@@ -243,6 +252,30 @@ export default class SceneAgencia extends Phaser.Scene {
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+    }
+
+    // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────
+    const dentroSaida = (this.zonasSaida || []).some((z) => {
+      const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
+      return d <= z.raio;
+    });
+
+    if (dentroSaida !== this.dentroZonaSaida) {
+      this.dentroZonaSaida = dentroSaida;
+    }
+
+    // Transição automática para a cidade ao se aproximar da saída
+    if (!this.transicionando && dentroSaida) {
+      this.transicionando = true;
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.start('SceneCidade', {
+          nomePasta: this.nomePastaEscolhida,
+          prefixo: this.prefixoEscolhido,
+          spawnX: 976,
+          spawnY: 856
+        });
+      });
     }
 
     // ── Debug ─────────────────────────────────────────────────────────────

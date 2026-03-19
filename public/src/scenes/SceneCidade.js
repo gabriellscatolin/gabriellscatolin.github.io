@@ -4,8 +4,11 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   init(dados) {
+    // Dados do personagem vindos da cena anterior
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
+
+    // Spawn opcional para retorno de cenas internas
     this.spawnXCustom = dados.spawnX || null;
     this.spawnYCustom = dados.spawnY || null;
   }
@@ -18,10 +21,12 @@ export default class SceneCidade extends Phaser.Scene {
       console.error('[SceneCidade] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
+    // Mapa principal da cidade e tilesets base
     this.load.tilemapTiledJSON('mapaGeral', 'src/assets/imagens/mapsjson/tileMaps/mapaMiniMundoVF.tmj?v=5');
     this.load.image('tilesMapaTopo', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png?v=1');
     this.load.image('tilesMapaBase', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1');
 
+    // Sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`sprite_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -32,6 +37,7 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   create() {
+    // Área jogável total da cidade (limites de câmera e física)
     const MAPA_X       = 720;
     const MAPA_Y       = 100;
     const MAPA_LARGURA = 2432;
@@ -48,6 +54,7 @@ export default class SceneCidade extends Phaser.Scene {
     let caminhoInferior, carrosVeiculos, objetosInferior2, estabelecimentos;
 
     if (tilesets.length > 0) {
+      // Camadas visuais sem colisão
       this._criarCamada(mapa, 'objetosSemColid_em_cima_2',     tilesets);
       this._criarCamada(mapa, 'contorno_preto_do_mapa',        tilesets);
       this._criarCamada(mapa, 'chao_inferior_de_areia',        tilesets);
@@ -59,6 +66,7 @@ export default class SceneCidade extends Phaser.Scene {
       this._criarCamada(mapa, 'n_objetosSemColi_em_baixo_2',   tilesets);
       this._criarCamada(mapa, 'n_linhas da rua',               tilesets);
 
+      // Camadas com colisão
       caminhoInferior  = this._criarCamada(mapa, 'c_objetosComColid_em_baixo',   tilesets);
       carrosVeiculos   = this._criarCamada(mapa, 'c_carros e Veículos',          tilesets);
       objetosInferior2 = this._criarCamada(mapa, 'c_objetosComColid_em_baixo_2', tilesets);
@@ -107,6 +115,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (estabelecimentos) this.physics.add.collider(this.personagem, estabelecimentos);
 
     if (tilesets.length > 0) {
+      // Decoração acima do personagem
       const decSup1 = this._criarCamada(mapa, 'n_estabelecimento_Sem_colid', tilesets);
       const decSup2 = this._criarCamada(mapa, 'n_objetosSemColid_em_cima',   tilesets);
       const decSup3 = this._criarCamada(mapa, 'n_objetosSemColid_em_cima_2', tilesets);
@@ -132,13 +141,20 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
     // --- ZONA: Agência ---
-    this.zonaAgencia = new Phaser.Geom.Rectangle(1745, 1256, 90, 80);
-    this.labelE = this.add.text(1788, 1254, '[E] Entrar', {
+    this.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
+    this.labelE = this.add.text(976, 856, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-     // --- ZONA: Padaria ---
+    // --- ZONA: Escritório ---
+    this.zonaEscritorio = new Phaser.Geom.Rectangle(1741, 1256, 90, 80);
+    this.labelEscritorio = this.add.text(1741, 1256, '[E] Entrar', {
+      fontSize: '6px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    // --- ZONA: Padaria ---
     this.zonaPadaria = new Phaser.Geom.Rectangle(1470, 890, 100, 80);
     this.labelPadaria = this.add.text(1484, 840, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
@@ -166,6 +182,7 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
+    // --- ZONA: Cabeleleiro ---
     this.zonaCabeleleiro = new Phaser.Geom.Rectangle(2208, 1530, 80, 80);
     this.labelCabeleleiro = this.add.text(2248, 1568, '[E] Entrar', {
       fontSize: '6px', color: '#ffffff',
@@ -179,9 +196,10 @@ export default class SceneCidade extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 2, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-
+  // Estados de controle para evitar múltiplas transições simultâneas
     this.transicionando                 = false;
     this.dentroZonaAgencia              = false;
+    this.dentroZonaEscritorio           = false;
     this.dentroZonaFarmacia             = false;
     this.dentroZonaRestaurante          = false;
     this.dentroZonaMetro                = false;
@@ -209,6 +227,7 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   update() {
+    // Movimentação base do personagem
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
@@ -244,11 +263,17 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
-    // --- INTERAÇÕES ---
+    // --- INTERAÇÕES DAS ZONAS ---
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(this.zonaAgencia, personagem.x, personagem.y);
     if (dentroAgencia !== this.dentroZonaAgencia) {
       this.dentroZonaAgencia = dentroAgencia;
       this.labelE.setVisible(dentroAgencia);
+    }
+
+    const dentroEscritorio = Phaser.Geom.Rectangle.Contains(this.zonaEscritorio, personagem.x, personagem.y);
+    if (dentroEscritorio !== this.dentroZonaEscritorio) {
+      this.dentroZonaEscritorio = dentroEscritorio;
+      this.labelEscritorio.setVisible(dentroEscritorio);
     }
 
     const dentroPadaria = Phaser.Geom.Rectangle.Contains(this.zonaPadaria, personagem.x, personagem.y);
@@ -290,6 +315,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
 
+    // Transição ao pressionar E dentro de cada zona
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
         this.transicionando = true;
@@ -297,6 +323,16 @@ export default class SceneCidade extends Phaser.Scene {
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.start('SceneAg', {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo:   this.prefixoEscolhido
+          });
+        });
+      } else if (dentroEscritorio) {
+        this.transicionando = true;
+        this.labelEscritorio.setVisible(false);
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.start('SceneEscritorio', {
             nomePasta: this.nomePastaEscolhida,
             prefixo:   this.prefixoEscolhido
           });
