@@ -23,7 +23,7 @@ export default class SceneSupermercado extends Phaser.Scene {
         arquivo.src,
       );
     });
-     //____________________________________________________________________________________________
+    //____________________________________________________________________________________________
 
     //_________________________________Carrega os recursos do mapa_________________________________
     this.load.tilemapTiledJSON(
@@ -66,9 +66,9 @@ export default class SceneSupermercado extends Phaser.Scene {
       "super_char01",
       "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
     );
-  //___________________________________________________________________________________________________
+    //___________________________________________________________________________________________________
 
-  //_________________________________Carrega os recursos do personagem_________________________________
+    //_________________________________Carrega os recursos do personagem_________________________________
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -89,9 +89,9 @@ export default class SceneSupermercado extends Phaser.Scene {
       );
     }
   }
-//___________________________________________________________________________________________________
+  //___________________________________________________________________________________________________
 
-//__________________________Cria a cena, o mapa, o personagem e as interações________________________
+  //__________________________Cria a cena, o mapa, o personagem e as interações________________________
 
   create() {
     const mapa = this.make.tilemap({ key: "supermercado" });
@@ -138,7 +138,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     //____________________________________________________________________________________________
 
     //_________________________________Cria as camadas do mapa_________________________________
-  
+
     const tilesets = [
       tsInteriors,
       tsRoomBuilder,
@@ -177,7 +177,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     [paredeC, objC, objC2, bordaC]
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
-//____________________________________________________________________________________________
+    //____________________________________________________________________________________________
 
     //_________________________________Cria as animações do personagem_________________________________
     const direcoes = ["frente", "tras", "direita", "esquerda"];
@@ -237,7 +237,7 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     // Colisões com camadas do mapa
     [paredeC, objC, objC2, bordaC]
-      .filter(Boolean) 
+      .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -247,9 +247,9 @@ export default class SceneSupermercado extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
-//____________________________________________________________________________________________________________
+    //____________________________________________________________________________________________________________
 
-//_________________________________Configura a câmera para seguir o personagem_________________________________
+    //_________________________________Configura a câmera para seguir o personagem_________________________________
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
@@ -257,7 +257,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-  //Definição da zona de saída (apenas para a porta em x=129, y=200)
+    //Definição da zona de saída (apenas para a porta em x=129, y=200)
     this.zonasSaida = this._criarZonasSaida();
 
     this.labelSair = this.add
@@ -272,7 +272,6 @@ export default class SceneSupermercado extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-  
     this.transicionando = false;
     this.dentroZonaSaida = false;
 
@@ -288,9 +287,9 @@ export default class SceneSupermercado extends Phaser.Scene {
       })
       .setDepth(999);
   }
-//____________________________________________________________________________________________________________
+  //____________________________________________________________________________________________________________
 
-//__________________________Funções auxiliares para otimização e criação de camadas e zonas__________________________
+  //__________________________Funções auxiliares para otimização e criação de camadas e zonas__________________________
   _criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
@@ -308,7 +307,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       return null;
     }
   }
- // Retorna a chave otimizada do tileset ou a chave original se não houver otimização
+  // Retorna a chave otimizada do tileset ou a chave original se não houver otimização
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
   }
@@ -323,7 +322,7 @@ export default class SceneSupermercado extends Phaser.Scene {
         const row = data[y] || [];
         for (let x = 0; x < row.length; x++) {
           const cell = row[x];
-          const gid = typeof cell === "number" ? cell : (cell?.index || 0);
+          const gid = typeof cell === "number" ? cell : cell?.index || 0;
           if (gid > 0) usados.add(gid);
         }
       }
@@ -425,7 +424,7 @@ export default class SceneSupermercado extends Phaser.Scene {
 
   //Define as zonas de saída do mapa
   _criarZonasSaida() {
-  // ÚNICA saída permitida: porta em x=129, y=200
+    // ÚNICA saída permitida: porta em x=129, y=200
     return [{ x: 129, y: 200, raio: 14 }];
   }
 
