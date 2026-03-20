@@ -30,7 +30,6 @@ export default class SceneSupermercado extends Phaser.Scene {
       "supermercado",
       "src/assets/imagens/mapsjson/tileMaps/supermercado.tmj",
     );
-
     this.load.image(
       "super_interiors",
       "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png",
@@ -469,7 +468,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // detecção por aproximação da porta (apenas x=129,y=200)
+    // Detecção por aproximação da porta (apenas x=129,y=200)
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
         personagem.x,
@@ -489,7 +488,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
     }
 
-    // sai automaticamente ao se aproximar da porta
+    // Sai automaticamente ao se aproximar da porta
     if (!this.transicionando && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
