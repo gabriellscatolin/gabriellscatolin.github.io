@@ -33,12 +33,16 @@ export default class SceneFarmacia extends Phaser.Scene {
   }
 
   create() { // Configura o mapa, personagem, controles, câmera, etc.
-    const mapa  = this.make.tilemap({ key: 'farmacia' });
-    const tsP1   = mapa.addTilesetImage('Interior_P1',  'farm_int_p1');
-    const tsP2   = mapa.addTilesetImage('Interior_P2',  'farm_int_p2');
-    const tsP3   = mapa.addTilesetImage('Interior_P3',  'farm_int_p3');
-    const tsRoom = mapa.addTilesetImage('roombuilder',  'farm_roombuilder');
-    const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
+    const mapa = this.make.tilemap({ key: 'farmacia' });
+    this.mapa = mapa;
+    this._otimizarTilesetsPorUso(mapa);
+
+const tsP1 = mapa.addTilesetImage('Interior_P1', this._keyTileset('Interior_P1', 'farm_int_p1'));
+const tsP2 = mapa.addTilesetImage('Interior_P2', this._keyTileset('Interior_P2', 'farm_int_p2'));
+const tsP3 = mapa.addTilesetImage('Interior_P3', this._keyTileset('Interior_P3', 'farm_int_p3'));
+const tsRoom = mapa.addTilesetImage('roombuilder', this._keyTileset('roombuilder', 'farm_roombuilder'));
+
+  const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
 
     // Fundo sólido para cobrir qualquer área vazia fora dos tiles
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555).setOrigin(0, 0);
@@ -112,6 +116,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     // Câmera
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(7);
+    this.cameras.main.roundPixels = true;
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
@@ -148,6 +153,105 @@ export default class SceneFarmacia extends Phaser.Scene {
       fontSize: '3px', color: '#ffff00',
       backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(999);
+
+  }
+
+    _keyTileset(tmjName, fallbackKey) {
+    return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
+  }
+
+  _coletarGidsUsados(mapa) {
+    const usados = new Set();
+
+    (mapa.layers || []).forEach((layer) => {
+      const data = layer.data || [];
+      for (let y = 0; y < data.length; y++) {
+        const row = data[y] || [];
+        for (let x = 0; x < row.length; x++) {
+          const cell = row[x];
+          const gid = typeof cell === "number" ? cell : (cell?.index || 0);
+          if (gid > 0) usados.add(gid);
+        }
+      }
+    });
+
+    return usados;
+  }
+
+  _otimizarTilesetsPorUso(mapa) {
+    const defs = [
+      { tmjName: "Interior_P1", baseKey: "farm_int_p1" },
+      { tmjName: "Interior_P2", baseKey: "farm_int_p2" },
+      { tmjName: "Interior_P3", baseKey: "farm_int_p3" },
+      { tmjName: "roombuilder", baseKey: "farm_roombuilder" },
+    ];
+
+    this._tilesetKeys = {};
+    const usados = this._coletarGidsUsados(mapa);
+    const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
+      (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
+    );
+
+    defs.forEach((def) => {
+      this._tilesetKeys[def.tmjName] = def.baseKey;
+
+      if (!this.textures.exists(def.baseKey)) return;
+      const ts = tilesetsOrdenados.find((t) => t.name === def.tmjName);
+      if (!ts) return;
+
+      const source = this.textures.get(def.baseKey).getSourceImage();
+      if (!source?.width || !source?.height) return;
+
+      const idx = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
+      const startGid = ts.firstgid || 1;
+      const endGid =
+        idx < tilesetsOrdenados.length - 1
+          ? tilesetsOrdenados[idx + 1].firstgid - 1
+          : Number.MAX_SAFE_INTEGER;
+
+      let maiorGidUsado = 0;
+      usados.forEach((gid) => {
+        if (gid >= startGid && gid <= endGid && gid > maiorGidUsado) {
+          maiorGidUsado = gid;
+        }
+      });
+
+      if (!maiorGidUsado) return;
+
+      const tileW = ts.tilewidth || 16;
+      const tileH = ts.tileheight || 16;
+      const margin = ts.margin || 0;
+      const spacing = ts.spacing || 0;
+
+      const columns =
+        ts.columns ||
+        Math.max(
+          1,
+          Math.floor((source.width - margin * 2 + spacing) / (tileW + spacing)),
+        );
+
+      const tilesNecessarios = maiorGidUsado - startGid + 1;
+      const linhasNecessarias = Math.max(1, Math.ceil(tilesNecessarios / columns));
+
+      const cropWCalc = margin + columns * (tileW + spacing) - spacing + margin;
+      const cropHCalc = margin + linhasNecessarias * (tileH + spacing) - spacing + margin;
+
+      const cropW = Math.min(source.width, Math.max(tileW, cropWCalc));
+      const cropH = Math.min(source.height, Math.max(tileH, cropHCalc));
+
+      if (cropW >= source.width && cropH >= source.height) return;
+
+      const cutKey = `${def.baseKey}_cut`;
+      if (this.textures.exists(cutKey)) this.textures.remove(cutKey);
+
+      const canvasTex = this.textures.createCanvas(cutKey, cropW, cropH);
+      const ctx = canvasTex.getContext();
+      ctx.clearRect(0, 0, cropW, cropH);
+      ctx.drawImage(source, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
+      canvasTex.refresh();
+
+      this._tilesetKeys[def.tmjName] = cutKey;
+    });
   }
 
   

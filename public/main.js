@@ -17,6 +17,8 @@ import SceneAgencia01   from "./src/scenes/sceneAgencia01.js";
 const config = {
   type: Phaser.AUTO,  //Phaser escolhe entreWebGL ou Canvas para renderizar
   pixelArt: true,    //Garantir bordas nítidas para os gráficos pixelados
+  roundPixels:true,
+  antialias:false, 
   width: 1920,  // Define a eesolução base: 1920x1080
   height: 1080,  //Resolução full HD
   backgroundColor: "#000000",  //Define o fundo como preto
