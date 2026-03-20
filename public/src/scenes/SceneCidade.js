@@ -220,6 +220,66 @@ export default class SceneCidade extends Phaser.Scene {
     }).setDepth(999);
 
     this.direcaoAtual = 'frente';
+
+    // -------------------------------------------------------
+    // MINIMAPA — câmera secundária no canto superior esquerdo
+    // -------------------------------------------------------
+    const MM_X = 10, MM_Y = 10;
+    // Tilemap real: 208×128 tiles × 16px = 3328×2048px
+    const TM_W = 3328, TM_H = 2048;
+    const MM_W = 335;
+    const MM_H = Math.round(MM_W * TM_H / TM_W); // ≈ 206 — proporção exata do tilemap
+
+    // Dot do personagem (espaço-mundo — raio grande para ficar visível no zoom 0.077)
+    this.minimapPlayerDot = this.add.graphics();
+    this.minimapPlayerDot.fillStyle(0x00ff44, 1);
+    this.minimapPlayerDot.fillCircle(0, 0, 55); // ~4px no minimapa
+    this.minimapPlayerDot.setDepth(52);
+
+    // Dot do destino — Farmácia, centro da zona (1121, 1221)
+    this.minimapDestDot = this.add.graphics();
+    this.minimapDestDot.fillStyle(0xff2222, 1);
+    this.minimapDestDot.fillCircle(0, 0, 55);
+    this.minimapDestDot.setPosition(1121, 1221);
+    this.minimapDestDot.setDepth(51);
+
+    // Animação piscante no dot do destino
+    this.tweens.add({
+      targets: this.minimapDestDot,
+      alpha: { from: 1, to: 0.1 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1
+    });
+
+    // Câmera de borda branca (apenas background, ignora todos os objetos do jogo)
+    this.borderCam = this.cameras.add(MM_X - 2, MM_Y - 2, MM_W + 4, MM_H + 4);
+    this.borderCam.setBackgroundColor(0x222222);
+    this.borderCam.ignore(this.children.list); // ignora tudo — só a cor de fundo aparece
+
+    // Zoom para mostrar o tilemap inteiro (sem sobra de fundo)
+    const zoomFit = Math.min(MM_W / TM_W, MM_H / TM_H);
+    // Centro do tilemap completo (scrollX/Y = centro em coords de mundo no Phaser 3)
+    const mmScrollX = TM_W / 2;
+    const mmScrollY = TM_H / 2;
+
+    // Câmera do minimapa (mundo em escala reduzida)
+    this.miniMapCam = this.cameras.add(MM_X, MM_Y, MM_W, MM_H);
+    this.miniMapCam.setZoom(zoomFit);
+    this.miniMapCam.scrollX = mmScrollX;
+    this.miniMapCam.scrollY = mmScrollY;
+    this.miniMapCam.setBackgroundColor(0x000000);
+
+    // Câmera principal NÃO mostra os dots do minimapa
+    this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
+
+    // Minimapa NÃO mostra labels de interação nem debug
+    this.miniMapCam.ignore([
+      this.labelE, this.labelEscritorio, this.labelPadaria,
+      this.labelFarmacia, this.labelRestaurante, this.labelMetro,
+      this.labelCabeleleiro, this.labelSupermercado, this.labelPostoDeGasolina,
+      this.debugTxt
+    ]);
   }
 
   _criarCamada(mapa, nome, tilesets) {
@@ -327,6 +387,9 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
+
+    // Atualiza dot do personagem no minimapa
+    this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
 
     // Transição ao pressionar E dentro de cada zona
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
