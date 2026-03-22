@@ -4,38 +4,53 @@ import ScenePersonagem from "./src/scenes/ScenePersonagem.js";
 import SceneCutscene from "./src/scenes/SceneCutscene.js";
 import SceneEscritorio from "./src/scenes/SceneEscritorio.js";
 import SceneCidade from "./src/scenes/SceneCidade.js";
+import SceneChuva from "./src/scenes/SceneChuva.js"; // CHUVA — nova cena
 import SceneFarmacia from "./src/scenes/SceneFarmacia.js";
 import SceneRestaurante from "./src/scenes/SceneRestaurante.js";
 import SceneMetro from "./src/scenes/SceneMetro.js";
 import SceneSupermercado from "./src/scenes/SceneSupermercado.js";
 import SceneCabeleleiro from "./src/scenes/SceneCabeleleiro.js";
-import ScenePadaria from "./src/scenes/ScenePadaria.js"; 
+import ScenePadaria from "./src/scenes/ScenePadaria.js";
 import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
-import SceneAgencia01   from "./src/scenes/sceneAgencia01.js";  
+import SceneAgencia01 from "./src/scenes/sceneAgencia01.js";
 
 //Configuração do jogo phaser
 const config = {
-  type: Phaser.AUTO,  //Phaser escolhe entreWebGL ou Canvas para renderizar
-  pixelArt: true,    //Garantir bordas nítidas para os gráficos pixelados
-  roundPixels:true,
-  antialias:false, 
-  width: 1920,  // Define a eesolução base: 1920x1080
-  height: 1080,  //Resolução full HD
-  backgroundColor: "#000000",  //Define o fundo como preto
+  type: Phaser.AUTO, //Phaser escolhe entre WebGL ou Canvas para renderizar
+  pixelArt: true, //Garantir bordas nítidas para os gráficos pixelados
+  roundPixels: true,
+  antialias: false,
+  width: 1920, // Resolução base: 1920x1080
+  height: 1080, // Resolução full HD
+  backgroundColor: "#000000", // Fundo preto
   scale: {
-    mode: Phaser.Scale.FIT, //Ajusta para caber na tela
-    autoCenter: Phaser.Scale.CENTER  //Centraliza o jogo
+    mode: Phaser.Scale.FIT, // Ajusta para caber na tela
+    autoCenter: Phaser.Scale.CENTER, // Centraliza o jogo
   },
   physics: {
-    default: "arcade",  //Usa o sistema de física arcade (Jogos 2D)
+    default: "arcade", // Sistema de física arcade (jogos 2D)
     arcade: {
-      gravity: { y: 0 }, //jogo sem quedas então desativa a gravidade vertical
-      debug: false   //Desativa linhas de depuração
-    }
+      gravity: { y: 0 }, // Sem gravidade vertical
+      debug: false,
+    },
   },
-
-
-scene: [ SceneInicial, SceneJogo, ScenePersonagem, SceneCutscene, SceneCidade, SceneEscritorio, ScenePadaria, SceneFarmacia, SceneRestaurante, SceneMetro, SceneSupermercado, SceneCabeleleiro, ScenePostoDeGasolina, SceneAgencia01]
+  scene: [
+    SceneInicial,
+    ScenePersonagem,
+    SceneCutscene,
+    SceneCidade,
+    SceneChuva, 
+    SceneJogo,
+    SceneEscritorio,
+    ScenePadaria,
+    SceneFarmacia,
+    SceneRestaurante,
+    SceneMetro,
+    SceneSupermercado,
+    SceneCabeleleiro,
+    ScenePostoDeGasolina,
+    SceneAgencia01,
+  ],
 };
 
-new Phaser.Game(config); //Cria o jogo
+new Phaser.Game(config); //
