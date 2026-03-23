@@ -327,6 +327,19 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.zonaAgencia02 = new Phaser.Geom.Rectangle(1806, 1590, 80, 60);
+    this.labelAgencia02 = this.add
+      .text(1806, 1590, "[E] Entrar", {
+        fontSize: "6px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     // Flags de estado — evitam transições duplicadas
     this.transicionando = false;
     this.dentroZonaAgencia = false;
@@ -338,6 +351,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaSupermercado = false;
     this.dentroZonaPadaria = false;
     this.dentroZonaPostoDegasolina = false;
+    this.dentroAgencia02 = false; 
 
     // Texto de debug — coordenadas do personagem em tempo real
     this.debugTxt = this.add
@@ -405,6 +419,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelLojaDeRoupas,
       this.labelSupermercado,
       this.labelPostoDeGasolina,
+      this.labelAgencia02, 
       this.debugTxt,
     ]);
 
@@ -567,6 +582,16 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelPostoDeGasolina.setVisible(dentroPostoDeGasolina);
     }
 
+    const dentroAgencia02 = Phaser.Geom.Rectangle.Contains(
+      this.zonaAgencia02,
+      personagem.x,
+      personagem.y,
+    );
+    if (dentroAgencia02 !== this.dentroAgencia02) {
+      this.dentroZonaAgencia02 = dentroAgencia02;
+      this.labelAgencia02.setVisible(dentroAgencia02);
+    }
+
     // ── Debug e minimapa ─────────────────────────────────────────────
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
@@ -676,6 +701,17 @@ export default class SceneCidade extends Phaser.Scene {
           this.scene.start("ScenePostoDeGasolina", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
+          });
+        });
+      } else if (dentroAgencia02) {
+        this.transicionando = true;
+        this.labelPostoDeGasolina.setVisible(false);
+        this.scene.stop("SceneChuva");
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.start("SceneAgencia02", {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo: this.prefixoEscolhido, 
           });
         });
       }
