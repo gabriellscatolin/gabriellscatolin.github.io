@@ -288,8 +288,8 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setVisible(false);
 
-    this.zonaCabeleleiro = new Phaser.Geom.Rectangle(2208, 1530, 80, 80);
-    this.labelCabeleleiro = this.add
+    this.zonaLojaDeRoupas = new Phaser.Geom.Rectangle(2208, 1530, 80, 80);
+    this.labelLojaDeRoupas = this.add
       .text(2248, 1568, "[E] Entrar", {
         fontSize: "6px",
         color: "#ffffff",
@@ -334,7 +334,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaFarmacia = false;
     this.dentroZonaRestaurante = false;
     this.dentroZonaMetro = false;
-    this.dentroZonaCabeleleiro = false;
+    this.dentroZonaLojaDeRoupas = false;
     this.dentroZonaSupermercado = false;
     this.dentroZonaPadaria = false;
     this.dentroZonaPostoDegasolina = false;
@@ -402,7 +402,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelFarmacia,
       this.labelRestaurante,
       this.labelMetro,
-      this.labelCabeleleiro,
+      this.labelLojaDeRoupas,
       this.labelSupermercado,
       this.labelPostoDeGasolina,
       this.debugTxt,
@@ -537,14 +537,14 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelMetro.setVisible(dentroMetro);
     }
 
-    const dentroCabeleleiro = Phaser.Geom.Rectangle.Contains(
-      this.zonaCabeleleiro,
+    const dentroLojaDeRoupas = Phaser.Geom.Rectangle.Contains(
+      this.zonaLojaDeRoupas,
       personagem.x,
       personagem.y,
     );
-    if (dentroCabeleleiro !== this.dentroZonaCabeleleiro) {
-      this.dentroZonaCabeleleiro = dentroCabeleleiro;
-      this.labelCabeleleiro.setVisible(dentroCabeleleiro);
+    if (dentroLojaDeRoupas !== this.dentroZonaLojaDeRoupas) {
+      this.dentroZonaLojaDeRoupas = dentroLojaDeRoupas;
+      this.labelLojaDeRoupas.setVisible(dentroLojaDeRoupas);
     }
 
     const dentroSupermercado = Phaser.Geom.Rectangle.Contains(
@@ -645,13 +645,13 @@ export default class SceneCidade extends Phaser.Scene {
             spawnY: 250,
           });
         });
-      } else if (dentroCabeleleiro) {
+      } else if (dentroLojaDeRoupas) {
         this.transicionando = true;
-        this.labelCabeleleiro.setVisible(false);
+        this.labelLojaDeRoupas.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
-          this.scene.start("SceneCabeleleiro", {
+          this.scene.start("SceneLojaDeRoupas", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
           });

@@ -9,7 +9,7 @@ import SceneFarmacia from "./src/scenes/SceneFarmacia.js";
 import SceneRestaurante from "./src/scenes/SceneRestaurante.js";
 import SceneMetro from "./src/scenes/SceneMetro.js";
 import SceneSupermercado from "./src/scenes/SceneSupermercado.js";
-import SceneCabeleleiro from "./src/scenes/SceneCabeleleiro.js";
+import SceneLojaDeRoupas from "./src/scenes/SceneLojaDeRoupas.js";
 import ScenePadaria from "./src/scenes/ScenePadaria.js";
 import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
 import SceneAgencia01 from "./src/scenes/sceneAgencia01.js";
@@ -47,7 +47,7 @@ const config = {
     SceneRestaurante,
     SceneMetro,
     SceneSupermercado,
-    SceneCabeleleiro,
+    SceneLojaDeRoupas,
     ScenePostoDeGasolina,
     SceneAgencia01,
   ],

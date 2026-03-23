@@ -1,6 +1,6 @@
-export default class SceneCabeleleiro extends Phaser.Scene {
+export default class SceneLojaDeRoupas extends Phaser.Scene {
   constructor() {
-    super({ key: 'SceneCabeleleiro' });
+    super({ key: 'SceneLojaDeRoupas' });
   }
 
   init(dados) {
@@ -16,7 +16,7 @@ export default class SceneCabeleleiro extends Phaser.Scene {
     this.load.maxParallelDownloads = 2;
 
     this.load.on('loaderror', (arquivo) => {
-      console.error('[SceneCabeleleiro] Erro ao carregar:', arquivo.key, arquivo.src);
+      console.error('[SceneLojaDeRoupas] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
     // Mapa e tilesets do salao
