@@ -4,10 +4,9 @@
   }
 
   init(dados) {
+    // Dados do personagem definidos na transicao da cidade
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
-    this.spawnXCustom = dados.spawnX ?? null;
-    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   preload() {
@@ -18,6 +17,7 @@
       console.error('[SceneMetro] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
+    // Mapa e tilesets do metro
     this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj?v=2');
     this.load.image('metro_mod_s1', 'src/assets/imagens/mapsjson/tileSets/Modern_S1_4096.png');
     this.load.image('metro_mod_s2', 'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
@@ -28,6 +28,7 @@
     this.load.image('metro_int_s4', 'src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png');
     this.load.image('metro_int_s5', 'src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png');
 
+    // Carrega os 16 frames de animacao do personagem escolhido
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -38,16 +39,17 @@
   }
 
   prepararTilesetsMetro() {
+    // Divide os tilesets muito grandes em partes menores para o mapa conseguir usar tudo.
     const cacheMapa = this.cache.tilemap.get('metro');
     const dadosMapa = cacheMapa && cacheMapa.data;
     if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
 
-    // Evita aplicar o split mais de uma vez.
-    if (dadosMapa.tilesets.some(ts => ts.name === 'ME_Complete_S1')) return;
+    // Evita aplicar a separacao mais de uma vez.
+    if (dadosMapa.tilesets.some((ts) => ts.name === 'ME_Complete_S1')) return;
 
     const novosTilesets = [];
 
-    dadosMapa.tilesets.forEach(ts => {
+    dadosMapa.tilesets.forEach((ts) => {
       if (ts.name === 'ME_Complete') {
         const base = ts.firstgid;
         const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 176 };
@@ -140,44 +142,11 @@
     dadosMapa.tilesets = novosTilesets;
   }
 
-  obterSpawnMetroPadrao() {
-    const spawnFallback = { x: 273, y: 250 };
-    const cacheMapa = this.cache.tilemap.get('metro');
-    const dadosMapa = cacheMapa && cacheMapa.data;
-
-    if (!dadosMapa || !Array.isArray(dadosMapa.layers)) return spawnFallback;
-
-    const layerPlayer = dadosMapa.layers.find(l => l.name === 'PLAYER');
-    if (!layerPlayer || !Array.isArray(layerPlayer.chunks)) return spawnFallback;
-
-    const tileW = dadosMapa.tilewidth || 16;
-    const tileH = dadosMapa.tileheight || 16;
-
-    for (const chunk of layerPlayer.chunks) {
-      if (!Array.isArray(chunk.data)) continue;
-
-      for (let i = 0; i < chunk.data.length; i++) {
-        if ((chunk.data[i] | 0) <= 0) continue;
-
-        const localX = i % chunk.width;
-        const localY = Math.floor(i / chunk.width);
-        const tileX = chunk.x + localX;
-        const tileY = chunk.y + localY;
-
-        return {
-          x: tileX * tileW + tileW / 2,
-          y: tileY * tileH + tileH / 2
-        };
-      }
-    }
-
-    return spawnFallback;
-  }
-
   create() {
+    // Criacao do mapa e camadas principais
     this.prepararTilesetsMetro();
 
-    const mapa = this.make.tilemap({ key: 'metro' });
+    const mapa   = this.make.tilemap({ key: 'metro' });
     const tsExt1 = mapa.addTilesetImage('ME_Complete_S1', 'metro_mod_s1', 16, 16, 0, 0);
     const tsExt2 = mapa.addTilesetImage('ME_Complete_S2', 'metro_mod_s2', 16, 16, 0, 0);
     const tsExt3 = mapa.addTilesetImage('ME_Complete_S3', 'metro_mod_s3', 16, 16, 0, 0);
@@ -186,34 +155,35 @@
     const tsInt3 = mapa.addTilesetImage('Interior_P1_S3', 'metro_int_s3', 16, 16, 0, 0);
     const tsInt4 = mapa.addTilesetImage('Interior_P1_S4', 'metro_int_s4', 16, 16, 0, 0);
     const tsInt5 = mapa.addTilesetImage('Interior_P1_S5', 'metro_int_s5', 16, 16, 0, 0);
-    const tilesets = [tsExt1, tsExt2, tsExt3, tsInt1, tsInt2, tsInt3, tsInt4, tsInt5].filter(Boolean);
+    const tiles  = [tsExt1, tsExt2, tsExt3, tsInt1, tsInt2, tsInt3, tsInt4, tsInt5].filter(Boolean);
 
-    // Camadas sem colisão
-    const chaoN      = mapa.createLayer('N - chão',                   tilesets, 0, 0);
-    const trilhoN    = mapa.createLayer('N- Trilho',                  tilesets, 0, 0);
-    const objBaixoN  = mapa.createLayer('N - ObjetSemColid_embaixo',  tilesets, 0, 0);
-    const playerN    = mapa.createLayer('PLAYER',                     tilesets, 0, 0);
-    const vagaoN     = mapa.createLayer('N - Vagão',                  tilesets, 0, 0);
-    const paredeN    = mapa.createLayer('N - Parede sem Colid',       tilesets, 0, 0);
-    const pisosN     = mapa.createLayer('N - Pixos',                  tilesets, 0, 0);
-    const pisos2N    = mapa.createLayer('N- Pixos2',                  tilesets, 0, 0);
-    const pisos3N    = mapa.createLayer('N - Pixos 3',                tilesets, 0, 0);
-    const objCimaN   = mapa.createLayer('N - ObjetSemColid_cima',     tilesets, 0, 0);
-    const objCima2N  = mapa.createLayer('N - ObjetSemColid_cima_2',   tilesets, 0, 0);
-    const objCima3N  = mapa.createLayer('N- ObjetSemColid_cima_3',    tilesets, 0, 0);
+    // Camadas sem colisao
+    const chaoN     = mapa.createLayer('N - chão',                  tiles, 0, 0);
+    const trilhoN   = mapa.createLayer('N- Trilho',                 tiles, 0, 0);
+    const objBaixoN = mapa.createLayer('N - ObjetSemColid_embaixo', tiles, 0, 0);
+    const playerN   = mapa.createLayer('PLAYER',                    tiles, 0, 0);
+    const vagaoN    = mapa.createLayer('N - Vagão',                 tiles, 0, 0);
+    const paredeN   = mapa.createLayer('N - Parede sem Colid',      tiles, 0, 0);
+    const pisosN    = mapa.createLayer('N - Pixos',                 tiles, 0, 0);
+    const pisos2N   = mapa.createLayer('N- Pixos2',                 tiles, 0, 0);
+    const pisos3N   = mapa.createLayer('N - Pixos 3',               tiles, 0, 0);
+    const objCimaN  = mapa.createLayer('N - ObjetSemColid_cima',    tiles, 0, 0);
+    const objCima2N = mapa.createLayer('N - ObjetSemColid_cima_2',  tiles, 0, 0);
+    const objCima3N = mapa.createLayer('N- ObjetSemColid_cima_3',   tiles, 0, 0);
 
-    // Camadas com colisão
-    const paredeC = mapa.createLayer('C - Parede',             tilesets, 0, 0);
-    const arm3C   = mapa.createLayer('C - chão com colid',     tilesets, 0, 0);
-    const arm2C   = mapa.createLayer('C - ObjetComColid',      tilesets, 0, 0);
-    const armC    = mapa.createLayer('C - Vagão',              tilesets, 0, 0);
+    // Camadas com colisao
+    const paredeC = mapa.createLayer('C - Parede',         tiles, 0, 0);
+    const chaoC   = mapa.createLayer('C - chão com colid', tiles, 0, 0);
+    const objC    = mapa.createLayer('C - ObjetComColid',  tiles, 0, 0);
+    const vagaoC  = mapa.createLayer('C - Vagão',          tiles, 0, 0);
 
     const camadasMapa = [
       chaoN, trilhoN, objBaixoN, playerN, vagaoN, paredeN,
       pisosN, pisos2N, pisos3N, objCimaN, objCima2N, objCima3N,
-      paredeC, arm3C, arm2C, armC
+      paredeC, chaoC, objC, vagaoC
     ].filter(Boolean);
 
+    // Calcula o limite real do mapa usando as bounds das layers.
     const boundsIniciais = { x: Infinity, y: Infinity, right: -Infinity, bottom: -Infinity };
     const boundsMapa = camadasMapa.reduce((acc, camada) => {
       const b = camada.getBounds();
@@ -233,18 +203,19 @@
     }
 
     const larguraMapa = boundsMapa.right - boundsMapa.x;
-    const alturaMapa = boundsMapa.bottom - boundsMapa.y;
+    const alturaMapa  = boundsMapa.bottom - boundsMapa.y;
 
-    // Fundo para cobrir qualquer área vazia
+    // Fundo solido para cobrir qualquer area vazia fora dos tiles
     this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555)
       .setOrigin(0, 0)
       .setDepth(-10);
 
-    [paredeC, arm3C, arm2C, armC]
-      .filter(Boolean)
-      .forEach(c => c.setCollisionByExclusion([-1]));
+    paredeC.setCollisionByExclusion([-1]);
+    chaoC.setCollisionByExclusion([-1]);
+    objC.setCollisionByExclusion([-1]);
+    vagaoC.setCollisionByExclusion([-1]);
 
-    // Animações
+    // --- ANIMAÇÕES ---
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
       if (!this.anims.exists(`farm_andar_${dir}`)) {
@@ -262,10 +233,10 @@
       }
     });
 
-    // Personagem — usa spawn predefinido no mapa (camada PLAYER) com fallback da cena
-    const spawnPadrao = this.obterSpawnMetroPadrao();
-    const spawnX = this.spawnXCustom ?? spawnPadrao.x;
-    const spawnY = this.spawnYCustom ?? spawnPadrao.y;
+    // --- PERSONAGEM ---
+    // Sem object layer de spawn no mapa, usa posicao fixa na entrada da estacao
+    const spawnX = 273;
+    const spawnY = 250;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'farm_frente_1');
     this.personagem.setCollideWorldBounds(true);
@@ -273,11 +244,12 @@
     this.personagem.setScale(0.028);
     this.personagem.body.setSize(this.personagem.width * 0.35, this.personagem.height * 0.35);
 
-    [paredeC, arm3C, arm2C, armC]
-      .filter(Boolean)
-      .forEach(c => this.physics.add.collider(this.personagem, c));
+    this.physics.add.collider(this.personagem, paredeC);
+    this.physics.add.collider(this.personagem, chaoC);
+    this.physics.add.collider(this.personagem, objC);
+    this.physics.add.collider(this.personagem, vagaoC);
 
-    // Controles
+    // --- CONTROLES ---
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima:     Phaser.Input.Keyboard.KeyCodes.W,
@@ -285,26 +257,27 @@
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    // Câmera 
+    // --- CÂMERA ---
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
     this.physics.world.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    // Zona de saída (alinhada com o ponto de entrada na estação)
+    this.direcaoAtual = 'frente';
+
+    // --- SAÍDA COM TECLA ---
+    // Ao entrar na area de entrada da estacao, mostra o aviso e retorna para a cidade ao apertar E
     this.zonaSaida = new Phaser.Geom.Rectangle(spawnX - 30, spawnY - 18, 60, 36);
     this.labelSair = this.add.text(spawnX, spawnY - 2, '[E] Sair', {
       fontSize: '3px', color: '#ffffff',
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
-    this.transicionando  = false;
+    this.transicionando = false;
     this.dentroZonaSaida = false;
-    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-
-    this.direcaoAtual = 'frente';
 
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '3px', color: '#ffff00',
@@ -313,10 +286,12 @@
   }
 
   update() {
+    // Movimentacao base do personagem
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
 
     personagem.setVelocity(0);
+
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
@@ -348,12 +323,14 @@
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
+    // --- SAÍDA COM TECLA ---
     const dentroSaida = Phaser.Geom.Rectangle.Contains(this.zonaSaida, personagem.x, personagem.y);
+
     if (dentroSaida !== this.dentroZonaSaida) {
-      this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
 
+    // Transicao para a cidade ao se aproximar da saida e apertar E
     if (dentroSaida && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
