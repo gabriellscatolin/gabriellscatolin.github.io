@@ -1097,8 +1097,6 @@ Sistema de diálogo com múltiplas opções que impactam a pontuação e progres
 
 ## 3.8. Implementação Matemática de Animação/Movimento (sprint 4)
 
-&emsp;Esta seção descreve as formulações matemáticas utilizadas para a movimentação do personagem, detecção de proximidade com NPCs e a transição de cenas com efeito clock wipe.
-
 ### 3.8.1. Movimentação do Personagem
 
 &emsp;O personagem se move com **velocidade constante** em quatro direções (cima, baixo, esquerda, direita). A posição do personagem a cada frame é atualizada pela equação cinemática de movimento uniforme:

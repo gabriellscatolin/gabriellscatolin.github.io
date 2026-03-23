@@ -17,8 +17,8 @@ export default class SceneChuva extends Phaser.Scene {
     this._gotas = [];
     this._chuvaAtiva = false;
 
-    // Cria 300 slots vazios
-    for (let i = 0; i < 300; i++) {
+    // Cria mais slots para suportar chuva intensa
+    for (let i = 0; i < 800; i++) {
       this._gotas.push({
         ativo: false,
         xi: 0,
@@ -166,12 +166,14 @@ export default class SceneChuva extends Phaser.Scene {
       console.log("[SceneChuva] chuva encerrada");
     }
 
-    // ── Cria novas gotas a cada 40ms enquanto chuva ativa ───────────
+    // ── Cria novas gotas a cada 20ms enquanto chuva ativa ───────────
     if (this._chuvaAtiva) {
       this._tempoCriacao += delta;
-      if (this._tempoCriacao >= 40) {
+      if (this._tempoCriacao >= 20) {
         this._tempoCriacao = 0;
-        // Lança 2 gotas por vez para densidade maior
+        // Lança 4 gotas por vez para densidade mais forte
+        this._lancarGota();
+        this._lancarGota();
         this._lancarGota();
         this._lancarGota();
       }
