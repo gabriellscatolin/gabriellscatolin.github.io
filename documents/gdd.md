@@ -1143,21 +1143,52 @@ this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
 
 ### 3.8.4. Animação Clock Wipe (Transição de Cenas)
 
-&emsp;A transição entre cenas utiliza um efeito clock wipe, que anima uma máscara circular de forma progressiva. O ângulo inicial $\theta_0 = -\frac{\pi}{2}$ (topo do círculo) e avança em sentido horário até completar $2\pi$ radianos (volta completa):
+&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela, simulando o fechamento de um círculo no sentido horário ou anti-horário.
+&emsp;Matematicamente, esse efeito é controlado por um parâmetro de progresso contínuo: $t \in [0,1]$, onde $t = 0$ representa o início (tela totalmente visível) e $t = 1$ o final (tela completamente encoberta).
+&emsp;O ângulo inicial da animação é dado por $\theta_0 = -\frac{\pi}{2}$ (topo do círculo) e avança até completar $2\pi$ radianos (uma volta completa), sendo modelado por:
 
-$$\theta(t) = -\frac{\pi}{2} + t \cdot 2\pi, \quad t \in [0, 1]$$
+\[
+\theta(t) = -\frac{\pi}{2} + t \cdot 2\pi
+\]
 
-&emsp;A cada frame da animação, um arco é desenhado do ângulo $\theta_0$ até $\theta(t)$, revelando progressivamente a nova cena por baixo da máscara:
-
-```js
-onUpdate: (tween) => {
-  const t = tween.getValue(); // progresso de 0 a 1
-  const startAngle = -Math.PI / 2 + t * Math.PI * 2;
-  maskGraphics.clear();
-  maskGraphics.arc(cx, cy, raio, startAngle, -Math.PI / 2 + Math.PI * 2, false);
-  maskGraphics.fillPath();
-}
+&emsp;Essa equação é aplicada diretamente no cálculo do arco da máscara a cada frame da animação:
 ```
+const progress = tween.getValue();
+const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
+````
+**Sentidos da animação:**
+
+1) Sentido Horário (clockwise)
+ No sentido horário, o arco visível da máscara é definido entre um ângulo inicial variável e um ângulo final fixo:
+
+Ângulo inicial: $\theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi$
+Ângulo final: $\theta_{final} = -\frac{\pi}{2} + 2\pi$
+if (clockwise) {
+  const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
+  const endAngle = -Math.PI / 2 + Math.PI * 2;
+  maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
+}
+
+ À medida que $t$ aumenta, o arco diminui, produzindo o efeito de fechamento da tela no sentido horário.
+
+Sentido Anti-horário (counterclockwise)
+
+ No sentido anti-horário, o comportamento é invertido, com o ângulo final variando ao longo do tempo:
+
+Ângulo inicial: $\theta_{inicial} = -\frac{\pi}{2}$
+Ângulo final: $\theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi$
+else {
+  const startAngle = -Math.PI / 2;
+  const endAngle = -Math.PI / 2 + (1 - progress) * Math.PI * 2;
+  maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
+}
+
+ Esse comportamento gera o fechamento da cena no sentido oposto.
+
+
+
+
+###3.8.5 Animação de chuva na SceneCidade###
 
 # <a name="c4"></a>4. Desenvolvimento do Jogo
 
