@@ -18,7 +18,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     });
 
     // Mapa e tilesets do posto de gasolina
-    this.load.tilemapTiledJSON('posto', 'src/assets/imagens/mapsjson/tileMaps/postoGasolina.tmj');
+    this.load.tilemapTiledJSON('posto', 'src/assets/imagens/mapsjson/tileMaps/postoDeGasolina.tmj');
     this.load.image('posto_roombuilder', 'src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png');
     this.load.image('posto_int_s1', 'src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png');
     this.load.image('posto_int_s2', 'src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png');
