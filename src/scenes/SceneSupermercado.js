@@ -69,6 +69,12 @@ export default class SceneSupermercado extends Phaser.Scene {
       "super_char01",
       "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
     );
+
+    // Sprite do NPC do supermercado
+    this.load.image(
+      "npc_supermercado",
+      "src/assets/imagens/imagensPersonagens/NPC/npcMercado.png",
+    );
     //___________________________________________________________________________________________________
 
     //_________________________________Carrega os recursos do personagem_________________________________
@@ -246,6 +252,55 @@ export default class SceneSupermercado extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // NPC do supermercado
+    this.npcSupermercado = this.physics.add
+      .staticImage(53, 157, "npc_supermercado")
+      .setDepth(5);
+    const alturaAlvoNpc = this.personagem.displayHeight;
+    this.npcSupermercado.setDisplaySize(
+      (this.npcSupermercado.width / this.npcSupermercado.height) *
+        (alturaAlvoNpc * 1.2),
+      alturaAlvoNpc * 1.2,
+    );
+    this.npcSupermercado.refreshBody();
+    this.physics.add.collider(this.personagem, this.npcSupermercado);
+
+    this.labelNpc = this.add
+      .text(this.npcSupermercado.x, this.npcSupermercado.y, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y - this.npcSupermercado.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // Controles de movimento (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -281,6 +336,9 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente"; // Guarda a direção inicial do personagem
 
@@ -477,6 +535,41 @@ export default class SceneSupermercado extends Phaser.Scene {
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+    }
+
+    // Interação com NPC por proximidade (ponto solicitado)
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      88,
+      179,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y + 2,
+      );
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y - this.npcSupermercado.displayHeight * 0.5,
+      );
     }
 
     // Detecção por aproximação da porta

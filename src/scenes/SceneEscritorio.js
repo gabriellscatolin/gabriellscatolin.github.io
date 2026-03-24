@@ -140,6 +140,30 @@ export default class SceneEscritorio extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcEscritorio.x,
+        this.npcEscritorio.y - this.npcEscritorio.displayHeight * 0.5,
+        '!',
+        {
+          fontSize: '24px',
+          color: '#ffeb3b',
+          stroke: '#000000',
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     console.log('[SceneEscritorio] NPC criado em:', this.npcEscritorio.x, this.npcEscritorio.y);
     console.log('[SceneEscritorio] Label NPC criado:', !!this.labelNpc);
 
@@ -178,6 +202,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
+    this.falouComNpc = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Texto de debug com coordenadas do personagem
@@ -246,7 +271,21 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.perto_npc = pertoNpc;
     this.labelNpc.setVisible(pertoNpc);
 
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcEscritorio.x, this.npcEscritorio.y + 2);
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcEscritorio.x,
+        this.npcEscritorio.y - this.npcEscritorio.displayHeight * 0.5,
+      );
+    }
+
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log('[SceneEscritorio] Interagiu com o NPC do escritório');
     }
 

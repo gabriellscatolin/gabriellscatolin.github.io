@@ -196,6 +196,30 @@ export default class SceneAgencia extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // ── CONTROLES ─────────────────────────────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -220,6 +244,7 @@ export default class SceneAgencia extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
+    this.falouComNpc = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // ── DEBUG ─────────────────────────────────────────────────────────────────
@@ -297,7 +322,21 @@ export default class SceneAgencia extends Phaser.Scene {
     this.perto_npc = pertoNpc;
     this.labelNpc.setVisible(pertoNpc);
 
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+      );
+    }
+
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneAgencia] Interagiu com o NPC da agência");
     }
 

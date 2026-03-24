@@ -185,8 +185,33 @@ export default class SceneFarmacia extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcFarmacia.x,
+        this.npcFarmacia.y - this.npcFarmacia.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // Estados de controle de interação e transição
     this.perto_npc = false;
+    this.falouComNpc = false;
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -364,8 +389,22 @@ export default class SceneFarmacia extends Phaser.Scene {
       this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
     }
 
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcFarmacia.x, this.npcFarmacia.y + 2);
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcFarmacia.x,
+        this.npcFarmacia.y - this.npcFarmacia.displayHeight * 0.5,
+      );
+    }
+
     // Interação com NPC ao pressionar E
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
     }
 
