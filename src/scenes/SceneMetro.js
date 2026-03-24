@@ -3,32 +3,37 @@
     super({ key: 'SceneMetro' });
   }
 
+  // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
-    // Dados do personagem definidos na transicao da cidade
     this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
   }
 
+  // Carrega mapa, tilesets grandes e sprites do personagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo   = this.prefixoEscolhido;
 
+    // Loga erros de carregamento
     this.load.on('loaderror', (arquivo) => {
       console.error('[SceneMetro] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
-    // Mapa e tilesets do metro
+    // Tilemap da estação de metrô
     this.load.tilemapTiledJSON('metro', 'src/assets/imagens/mapsjson/tileMaps/metro.tmj?v=2');
+
+    // Tilesets divididos (versões grandes quebradas em partes)
     this.load.image('metro_mod_s1', 'src/assets/imagens/mapsjson/tileSets/Modern_S1_4096.png');
     this.load.image('metro_mod_s2', 'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
     this.load.image('metro_mod_s3', 'src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png');
+
     this.load.image('metro_int_s1', 'src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png');
     this.load.image('metro_int_s2', 'src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png');
     this.load.image('metro_int_s3', 'src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png');
     this.load.image('metro_int_s4', 'src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png');
     this.load.image('metro_int_s5', 'src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png');
 
-    // Carrega os 16 frames de animacao do personagem escolhido
+    // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`farm_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -38,101 +43,39 @@
     }
   }
 
+  // Ajusta dinamicamente os tilesets muito grandes, dividindo em partes menores
   prepararTilesetsMetro() {
-    // Divide os tilesets muito grandes em partes menores para o mapa conseguir usar tudo.
     const cacheMapa = this.cache.tilemap.get('metro');
     const dadosMapa = cacheMapa && cacheMapa.data;
     if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
 
-    // Evita aplicar a separacao mais de uma vez.
+    // Evita recriar os tilesets caso já estejam processados
     if (dadosMapa.tilesets.some((ts) => ts.name === 'ME_Complete_S1')) return;
 
     const novosTilesets = [];
 
     dadosMapa.tilesets.forEach((ts) => {
+      // Divide tileset externo grande em 3 partes
       if (ts.name === 'ME_Complete') {
         const base = ts.firstgid;
         const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 176 };
 
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base,
-          name: 'ME_Complete_S1',
-          tilecount: 45056,
-          image: '../tileSets/Modern_S1_4096.png',
-          imagewidth: 2816,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 45056,
-          name: 'ME_Complete_S2',
-          tilecount: 45056,
-          image: '../tileSets/Modern_S2_4096.png',
-          imagewidth: 2816,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 90112,
-          name: 'ME_Complete_S3',
-          tilecount: 352,
-          image: '../tileSets/Modern_S3_32.png',
-          imagewidth: 2816,
-          imageheight: 32
-        });
+        novosTilesets.push({ ...comuns, firstgid: base, name: 'ME_Complete_S1', tilecount: 45056, image: '../tileSets/Modern_S1_4096.png', imagewidth: 2816, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 45056, name: 'ME_Complete_S2', tilecount: 45056, image: '../tileSets/Modern_S2_4096.png', imagewidth: 2816, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 90112, name: 'ME_Complete_S3', tilecount: 352, image: '../tileSets/Modern_S3_32.png', imagewidth: 2816, imageheight: 32 });
         return;
       }
 
+      // Divide tileset interno em várias partes menores
       if (ts.name === 'Interior_P1') {
         const base = ts.firstgid;
         const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 16 };
 
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base,
-          name: 'Interior_P1_S1',
-          tilecount: 4096,
-          image: '../tileSets/Interiors_S1_4096.png',
-          imagewidth: 256,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 4096,
-          name: 'Interior_P1_S2',
-          tilecount: 4096,
-          image: '../tileSets/Interiors_S2_4096.png',
-          imagewidth: 256,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 8192,
-          name: 'Interior_P1_S3',
-          tilecount: 4096,
-          image: '../tileSets/Interiors_S3_4096.png',
-          imagewidth: 256,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 12288,
-          name: 'Interior_P1_S4',
-          tilecount: 4096,
-          image: '../tileSets/Interiors_S4_4096.png',
-          imagewidth: 256,
-          imageheight: 4096
-        });
-        novosTilesets.push({
-          ...comuns,
-          firstgid: base + 16384,
-          name: 'Interior_P1_S5',
-          tilecount: 640,
-          image: '../tileSets/Interiors_S5_640.png',
-          imagewidth: 256,
-          imageheight: 640
-        });
+        novosTilesets.push({ ...comuns, firstgid: base, name: 'Interior_P1_S1', tilecount: 4096, image: '../tileSets/Interiors_S1_4096.png', imagewidth: 256, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 4096, name: 'Interior_P1_S2', tilecount: 4096, image: '../tileSets/Interiors_S2_4096.png', imagewidth: 256, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 8192, name: 'Interior_P1_S3', tilecount: 4096, image: '../tileSets/Interiors_S3_4096.png', imagewidth: 256, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 12288, name: 'Interior_P1_S4', tilecount: 4096, image: '../tileSets/Interiors_S4_4096.png', imagewidth: 256, imageheight: 4096 });
+        novosTilesets.push({ ...comuns, firstgid: base + 16384, name: 'Interior_P1_S5', tilecount: 640, image: '../tileSets/Interiors_S5_640.png', imagewidth: 256, imageheight: 640 });
         return;
       }
 
@@ -143,79 +86,43 @@
   }
 
   create() {
-    // Criacao do mapa e camadas principais
+    // Prepara tilesets antes de criar o mapa
     this.prepararTilesetsMetro();
 
-    const mapa   = this.make.tilemap({ key: 'metro' });
-    const tsExt1 = mapa.addTilesetImage('ME_Complete_S1', 'metro_mod_s1', 16, 16, 0, 0);
-    const tsExt2 = mapa.addTilesetImage('ME_Complete_S2', 'metro_mod_s2', 16, 16, 0, 0);
-    const tsExt3 = mapa.addTilesetImage('ME_Complete_S3', 'metro_mod_s3', 16, 16, 0, 0);
-    const tsInt1 = mapa.addTilesetImage('Interior_P1_S1', 'metro_int_s1', 16, 16, 0, 0);
-    const tsInt2 = mapa.addTilesetImage('Interior_P1_S2', 'metro_int_s2', 16, 16, 0, 0);
-    const tsInt3 = mapa.addTilesetImage('Interior_P1_S3', 'metro_int_s3', 16, 16, 0, 0);
-    const tsInt4 = mapa.addTilesetImage('Interior_P1_S4', 'metro_int_s4', 16, 16, 0, 0);
-    const tsInt5 = mapa.addTilesetImage('Interior_P1_S5', 'metro_int_s5', 16, 16, 0, 0);
-    const tiles  = [tsExt1, tsExt2, tsExt3, tsInt1, tsInt2, tsInt3, tsInt4, tsInt5].filter(Boolean);
+    const mapa = this.make.tilemap({ key: 'metro' });
 
-    // Camadas sem colisao
-    const chaoN     = mapa.createLayer('N - chão',                  tiles, 0, 0);
-    const trilhoN   = mapa.createLayer('N- Trilho',                 tiles, 0, 0);
-    const objBaixoN = mapa.createLayer('N - ObjetSemColid_embaixo', tiles, 0, 0);
-    const playerN   = mapa.createLayer('PLAYER',                    tiles, 0, 0);
-    const vagaoN    = mapa.createLayer('N - Vagão',                 tiles, 0, 0);
-    const paredeN   = mapa.createLayer('N - Parede sem Colid',      tiles, 0, 0);
-    const pisosN    = mapa.createLayer('N - Pixos',                 tiles, 0, 0);
-    const pisos2N   = mapa.createLayer('N- Pixos2',                 tiles, 0, 0);
-    const pisos3N   = mapa.createLayer('N - Pixos 3',               tiles, 0, 0);
-    const objCimaN  = mapa.createLayer('N - ObjetSemColid_cima',    tiles, 0, 0);
-    const objCima2N = mapa.createLayer('N - ObjetSemColid_cima_2',  tiles, 0, 0);
-    const objCima3N = mapa.createLayer('N- ObjetSemColid_cima_3',   tiles, 0, 0);
-
-    // Camadas com colisao
-    const paredeC = mapa.createLayer('C - Parede',         tiles, 0, 0);
-    const chaoC   = mapa.createLayer('C - chão com colid', tiles, 0, 0);
-    const objC    = mapa.createLayer('C - ObjetComColid',  tiles, 0, 0);
-    const vagaoC  = mapa.createLayer('C - Vagão',          tiles, 0, 0);
-
-    const camadasMapa = [
-      chaoN, trilhoN, objBaixoN, playerN, vagaoN, paredeN,
-      pisosN, pisos2N, pisos3N, objCimaN, objCima2N, objCima3N,
-      paredeC, chaoC, objC, vagaoC
+    // Associa os tilesets já divididos
+    const tiles = [
+      mapa.addTilesetImage('ME_Complete_S1', 'metro_mod_s1'),
+      mapa.addTilesetImage('ME_Complete_S2', 'metro_mod_s2'),
+      mapa.addTilesetImage('ME_Complete_S3', 'metro_mod_s3'),
+      mapa.addTilesetImage('Interior_P1_S1', 'metro_int_s1'),
+      mapa.addTilesetImage('Interior_P1_S2', 'metro_int_s2'),
+      mapa.addTilesetImage('Interior_P1_S3', 'metro_int_s3'),
+      mapa.addTilesetImage('Interior_P1_S4', 'metro_int_s4'),
+      mapa.addTilesetImage('Interior_P1_S5', 'metro_int_s5')
     ].filter(Boolean);
 
-    // Calcula o limite real do mapa usando as bounds das layers.
-    const boundsIniciais = { x: Infinity, y: Infinity, right: -Infinity, bottom: -Infinity };
-    const boundsMapa = camadasMapa.reduce((acc, camada) => {
-      const b = camada.getBounds();
-      acc.x = Math.min(acc.x, b.x);
-      acc.y = Math.min(acc.y, b.y);
-      acc.right = Math.max(acc.right, b.right);
-      acc.bottom = Math.max(acc.bottom, b.bottom);
-      return acc;
-    }, boundsIniciais);
+    // Cria camadas do mapa (visuais e de colisão)
+    const chaoN = mapa.createLayer('N - chão', tiles, 0, 0);
+    const paredeC = mapa.createLayer('C - Parede', tiles, 0, 0);
+    const objC = mapa.createLayer('C - ObjetComColid', tiles, 0, 0);
+    const vagaoC = mapa.createLayer('C - Vagão', tiles, 0, 0);
 
-    if (!Number.isFinite(boundsMapa.x) || !Number.isFinite(boundsMapa.y) ||
-        !Number.isFinite(boundsMapa.right) || !Number.isFinite(boundsMapa.bottom)) {
-      boundsMapa.x = 0;
-      boundsMapa.y = 0;
-      boundsMapa.right = mapa.widthInPixels;
-      boundsMapa.bottom = mapa.heightInPixels;
-    }
-
-    const larguraMapa = boundsMapa.right - boundsMapa.x;
-    const alturaMapa  = boundsMapa.bottom - boundsMapa.y;
-
-    // Fundo solido para cobrir qualquer area vazia fora dos tiles
-    this.add.rectangle(boundsMapa.x - 200, boundsMapa.y - 200, larguraMapa + 400, alturaMapa + 400, 0x555555)
-      .setOrigin(0, 0)
-      .setDepth(-10);
-
+    // Ativa colisão nas camadas sólidas
     paredeC.setCollisionByExclusion([-1]);
-    chaoC.setCollisionByExclusion([-1]);
     objC.setCollisionByExclusion([-1]);
     vagaoC.setCollisionByExclusion([-1]);
 
-    // --- ANIMAÇÕES ---
+    // Calcula limites reais do mapa dinamicamente
+    const bounds = chaoN.getBounds();
+
+    // Fundo neutro
+    this.add.rectangle(bounds.x - 200, bounds.y - 200, bounds.width + 400, bounds.height + 400, 0x555555)
+      .setOrigin(0, 0)
+      .setDepth(-10);
+
+    // Animações do personagem
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
       if (!this.anims.exists(`farm_andar_${dir}`)) {
@@ -233,8 +140,7 @@
       }
     });
 
-    // --- PERSONAGEM ---
-    // Sem object layer de spawn no mapa, usa posicao fixa na entrada da estacao
+    // Personagem
     const spawnX = 273;
     const spawnY = 250;
 
@@ -245,53 +151,55 @@
     this.personagem.body.setSize(this.personagem.width * 0.35, this.personagem.height * 0.35);
 
     this.physics.add.collider(this.personagem, paredeC);
-    this.physics.add.collider(this.personagem, chaoC);
     this.physics.add.collider(this.personagem, objC);
     this.physics.add.collider(this.personagem, vagaoC);
 
-    // --- CONTROLES ---
+    // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
-      cima:     Phaser.Input.Keyboard.KeyCodes.W,
-      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+      cima: Phaser.Input.Keyboard.KeyCodes.W,
+      baixo: Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita:  Phaser.Input.Keyboard.KeyCodes.D
+      direita: Phaser.Input.Keyboard.KeyCodes.D
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    // --- CÂMERA ---
+    // Câmera segue o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
-    this.cameras.main.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
-    this.physics.world.setBounds(boundsMapa.x, boundsMapa.y, larguraMapa, alturaMapa);
+    this.cameras.main.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
+    this.physics.world.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     this.direcaoAtual = 'frente';
 
-    // --- SAÍDA COM TECLA ---
-    // Ao entrar na area de entrada da estacao, mostra o aviso e retorna para a cidade ao apertar E
+    // Zona de saída (entrada da estação)
     this.zonaSaida = new Phaser.Geom.Rectangle(spawnX - 30, spawnY - 18, 60, 36);
     this.labelSair = this.add.text(spawnX, spawnY - 2, '[E] Sair', {
-      fontSize: '3px', color: '#ffffff',
-      backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
+      fontSize: '3px',
+      color: '#ffffff',
+      backgroundColor: '#000000cc',
+      padding: { x: 1, y: 1 },
+      resolution: 4
     }).setDepth(20).setOrigin(0.5, 0.5).setVisible(false);
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
 
     this.debugTxt = this.add.text(0, 0, '', {
-      fontSize: '3px', color: '#ffff00',
-      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+      fontSize: '3px',
+      color: '#ffff00',
+      backgroundColor: '#000000',
+      padding: { x: 1, y: 1 },
+      resolution: 4
     }).setDepth(999);
   }
 
   update() {
-    // Movimentacao base do personagem
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
 
     personagem.setVelocity(0);
-
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
@@ -323,17 +231,19 @@
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
-    // --- SAÍDA COM TECLA ---
+    // Verifica entrada na zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(this.zonaSaida, personagem.x, personagem.y);
 
     if (dentroSaida !== this.dentroZonaSaida) {
+      this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
 
-    // Transicao para a cidade ao se aproximar da saida e apertar E
+    // Transição para a cidade ao pressionar E
     if (dentroSaida && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
+
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once('camerafadeoutcomplete', () => {
         this.scene.start('SceneCidade', {

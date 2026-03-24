@@ -1,23 +1,21 @@
-// ═══════════════════════════════════════════════════════════════════
-//  SceneChuva — cena paralela dedicada à animação cinemática da chuva
-// ═══════════════════════════════════════════════════════════════════
+// Cena paralela responsável pela animação cinemática da chuva
 export default class SceneChuva extends Phaser.Scene {
   constructor() {
     super({ key: "SceneChuva" });
   }
 
   create() {
+    // Mantém o fundo transparente para a chuva aparecer sobre outras cenas
     this.cameras.main.setBackgroundColor("rgba(0,0,0,0)");
 
-    const gW = this.scale.width; // 1920
-    const gH = this.scale.height; // 1080
+    const gW = this.scale.width;
+    const gH = this.scale.height;
 
-    // ── Pool de gotas ────────────────────────────────────────────────
-    // Cada gota é um objeto com estado cinemático completo.
+    // Pool de gotas reutilizáveis para evitar criar objetos o tempo todo
     this._gotas = [];
     this._chuvaAtiva = false;
 
-    // Cria mais slots para suportar chuva intensa
+    // Cria várias gotas com valores iniciais zerados/inativos
     for (let i = 0; i < 800; i++) {
       this._gotas.push({
         ativo: false,
@@ -39,21 +37,20 @@ export default class SceneChuva extends Phaser.Scene {
       });
     }
 
-    // Graphics único — redesenhado a cada frame no update()
+    // Um único Graphics é redesenhado a cada frame
     this._gfx = this.add.graphics();
     this._gfx.setDepth(99);
 
-    // Começa após 30s, dura 50s
+    // Controla início, duração e criação das gotas ao longo do tempo
     this._tempoDecorrido = 0;
     this._chuvaIniciada = false;
     this._chuvaEncerrada = false;
-    this._tempoCriacao = 0; // controla intervalo entre novas gotas
+    this._tempoCriacao = 0;
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  animacaoCinematica — avança UM frame da gota usando cinemática
-  // ═══════════════════════════════════════════════════════════════════
+  // Atualiza a posição da gota com MU no eixo X e MUV no eixo Y
   animacaoCinematica(g) {
+    // Quando o tempo total termina, a gota chega ao destino e é desativada
     if (g.t >= g.T) {
       g.x = g.xf;
       g.y = g.yf;
@@ -63,17 +60,17 @@ export default class SceneChuva extends Phaser.Scene {
 
     var t = g.t;
 
-    // MU — eixo X: posição linear
+    // No eixo X, a gota se move com velocidade constante
     var x_atual = g.xi + g.vx * t;
 
-    // MUV — eixo Y: velocidade e posição quadrática
+    // No eixo Y, a gota acelera para simular a queda
     var vy_atual = g.ay * t;
     var y_atual = g.yi + 0.5 * g.ay * t * t;
 
     g.x = x_atual;
     g.y = y_atual;
 
-    // Só imprime a cada 10 frames para não travar o console
+    // Mostra dados no console periodicamente para depuração
     if (g.frame % 10 === 0) {
       console.log(
         "[MU  | X] frame:" +
@@ -107,21 +104,20 @@ export default class SceneChuva extends Phaser.Scene {
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────
-  //  _lançarGota — inicializa uma gota livre do pool
-  // ─────────────────────────────────────────────────────────────────
+  // Ativa uma gota livre do pool e define seus parâmetros de movimento
   _lancarGota() {
     const g = this._gotas.find((s) => !s.ativo);
     if (!g) return;
 
     const gW = this.scale.width;
     const gH = this.scale.height;
-    const T = 1.2 + Math.random() * 0.6; // 1.2s a 1.8s
+    const T = 1.2 + Math.random() * 0.6;
 
-    g.comp = Phaser.Math.Between(18, 32); // comprimento maior = mais visível
+    // Define posição inicial, duração e comprimento visual da gota
+    g.comp = Phaser.Math.Between(18, 32);
     g.xi = Phaser.Math.Between(0, gW);
     g.yi = -g.comp;
-    g.xf = g.xi + 2 * T; // vento leve: 2 px/s (MU)
+    g.xf = g.xi + 2 * T;
     g.yf = gH + g.comp;
     g.T = T;
     g.t = 0;
@@ -129,7 +125,7 @@ export default class SceneChuva extends Phaser.Scene {
     g.x = g.xi;
     g.y = g.yi;
 
-    // Pré-calcula vx (MU) e ay (MUV) — usados em todo frame
+    // Pré-calcula os valores usados na equação cinemática
     g.vx = (g.xf - g.xi) / g.T;
     g.ay = (2 * (g.yf - g.yi)) / (g.T * g.T);
     g.vy = 0;
@@ -137,17 +133,15 @@ export default class SceneChuva extends Phaser.Scene {
     g.ativo = true;
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  UPDATE — loop principal: avança cinemática e redesenha todas gotas
-  // ═══════════════════════════════════════════════════════════════════
+  // Atualiza o tempo da chuva, cria novas gotas e redesenha as ativas
   update(time, delta) {
-    // delta = ms desde o último frame (ex: ~16.67ms a 60fps)
-    const dt = delta / 1000; // converte para segundos
+    // Converte o delta de milissegundos para segundos
+    const dt = delta / 1000;
 
-    // ── Controle de tempo da chuva ───────────────────────────────────
+    // Acumula o tempo total da cena
     this._tempoDecorrido += dt;
 
-    // Inicia chuva após 30s
+    // Inicia a chuva após 30 segundos
     if (!this._chuvaIniciada && this._tempoDecorrido >= 30) {
       this._chuvaIniciada = true;
       this._chuvaAtiva = true;
@@ -155,7 +149,7 @@ export default class SceneChuva extends Phaser.Scene {
       console.log("[SceneChuva] chuva iniciada");
     }
 
-    // Para a chuva após 80s (30s de espera + 50s de chuva)
+    // Encerra a chuva após 50 segundos de duração
     if (
       this._chuvaIniciada &&
       !this._chuvaEncerrada &&
@@ -166,12 +160,13 @@ export default class SceneChuva extends Phaser.Scene {
       console.log("[SceneChuva] chuva encerrada");
     }
 
-    // ── Cria novas gotas a cada 20ms enquanto chuva ativa ───────────
+    // Enquanto a chuva estiver ativa, cria novas gotas em intervalos curtos
     if (this._chuvaAtiva) {
       this._tempoCriacao += delta;
       if (this._tempoCriacao >= 20) {
         this._tempoCriacao = 0;
-        // Lança 4 gotas por vez para densidade mais forte
+
+        // Lança várias gotas por vez para aumentar a densidade visual
         this._lancarGota();
         this._lancarGota();
         this._lancarGota();
@@ -179,7 +174,7 @@ export default class SceneChuva extends Phaser.Scene {
       }
     }
 
-    // ── Avança cinemática de cada gota ativa ────────────────────────
+    // Limpa o desenho anterior para redesenhar as gotas na posição atual
     this._gfx.clear();
     let temAtiva = false;
 
@@ -189,21 +184,21 @@ export default class SceneChuva extends Phaser.Scene {
 
       temAtiva = true;
 
-      // Avança o tempo da gota pelo dt real do Phaser
+      // Avança o tempo individual da gota
       g.t += dt;
       g.frame += 1;
 
-      // Chama a função cinemática para calcular nova posição
+      // Recalcula a posição atual da gota
       this.animacaoCinematica(g);
 
-      // ── Desenha a gota ───────────────────────────────────────────
+      // Desenha a parte superior mais suave da gota
       this._gfx.lineStyle(2, 0x88ccee, 0.35);
       this._gfx.beginPath();
       this._gfx.moveTo(g.x, g.y - g.comp);
       this._gfx.lineTo(g.x, g.y - g.comp * 0.55);
       this._gfx.strokePath();
 
-      // Parte inferior (mais opaca e brilhante)
+      // Desenha a parte inferior mais visível para reforçar o brilho
       this._gfx.lineStyle(2, 0xbbddff, 0.85);
       this._gfx.beginPath();
       this._gfx.moveTo(g.x, g.y - g.comp * 0.55);
