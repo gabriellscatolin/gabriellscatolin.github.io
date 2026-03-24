@@ -3,6 +3,7 @@ export default class SceneCidade extends Phaser.Scene {
     super({ key: "SceneCidade" });
   }
 
+  // Recebe os dados do personagem e uma possível posição personalizada de spawn
   init(dados) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -12,10 +13,12 @@ export default class SceneCidade extends Phaser.Scene {
     this.spawnYCustom = dados.spawnY || null;
   }
 
+  // Carrega o tilemap, os tilesets e os sprites do personagem
   preload() {
     const nomePasta = this.registry.get("nomePasta") || "Pedro";
     const prefixo = this.registry.get("prefixo") || "HB";
 
+    // Exibe no console qualquer falha no carregamento de assets
     this.load.on("loaderror", (arquivo) => {
       console.error("[SceneCidade] Erro ao carregar:", arquivo.key, arquivo.src);
     });
@@ -27,6 +30,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.load.image("tilesMapaTopo", "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png?v=1");
     this.load.image("tilesMapaBase", "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1");
 
+    // Carrega os frames do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`sprite_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -36,12 +40,15 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  // Monta o mapa, o personagem, as zonas de interação, o minimapa e a chuva
   create() {
+    // Define os limites da área jogável
     const MAPA_X = 720;
     const MAPA_Y = 100;
     const MAPA_LARGURA = 2432;
     const MAPA_ALTURA = 1760;
 
+    // Cria o tilemap e associa os tilesets usados na cidade
     const mapa = this.make.tilemap({ key: "mapaGeral" });
     const tileset1 = mapa.addTilesetImage("ME_Top_1", "tilesMapaTopo");
     const tileset2 = mapa.addTilesetImage("ME_Bottom_1", "tilesMapaBase");
@@ -52,6 +59,7 @@ export default class SceneCidade extends Phaser.Scene {
     let caminhoInferior, carrosVeiculos, objetosInferior2, estabelecimentos;
 
     if (tilesets.length > 0) {
+      // Cria as camadas visuais que não têm colisão
       this._criarCamada(mapa, "objetosSemColid_em_cima_2", tilesets);
       this._criarCamada(mapa, "contorno_preto_do_mapa", tilesets);
       this._criarCamada(mapa, "chao_inferior_de_areia", tilesets);
@@ -63,10 +71,23 @@ export default class SceneCidade extends Phaser.Scene {
       this._criarCamada(mapa, "n_objetosSemColi_em_baixo_2", tilesets);
       this._criarCamada(mapa, "n_linhas da rua", tilesets);
 
-      caminhoInferior  = this._criarCamada(mapa, "c_objetosComColid_em_baixo", tilesets);
-      carrosVeiculos   = this._criarCamada(mapa, "c_carros e Veículos", tilesets);
-      objetosInferior2 = this._criarCamada(mapa, "c_objetosComColid_em_baixo_2", tilesets);
-      estabelecimentos = this._criarCamada(mapa, "c_estabelecimentos_Com_Colid", tilesets);
+      // Cria as camadas sólidas que bloqueiam o personagem
+      caminhoInferior = this._criarCamada(
+        mapa,
+        "c_objetosComColid_em_baixo",
+        tilesets,
+      );
+      carrosVeiculos = this._criarCamada(mapa, "c_carros e Veículos", tilesets);
+      objetosInferior2 = this._criarCamada(
+        mapa,
+        "c_objetosComColid_em_baixo_2",
+        tilesets,
+      );
+      estabelecimentos = this._criarCamada(
+        mapa,
+        "c_estabelecimentos_Com_Colid",
+        tilesets,
+      );
 
       if (caminhoInferior)  caminhoInferior.setCollisionByExclusion([-1]);
       if (carrosVeiculos)   carrosVeiculos.setCollisionByExclusion([-1]);
@@ -74,6 +95,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
     }
 
+    // Cria as animações de caminhada do personagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`andar_${dir}`)) {
@@ -89,11 +111,18 @@ export default class SceneCidade extends Phaser.Scene {
       }
     });
 
+    // Usa o spawn recebido da cena anterior ou o ponto padrão da cidade
     const spawnX = this.spawnXCustom || 840;
     const spawnY = this.spawnYCustom || 900;
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "sprite_frente_1");
+
+    this.personagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "sprite_frente_1",
+    );
     this.personagem.setCollideWorldBounds(true);
 
+    // Ajusta escala e hitbox para encaixar melhor no mapa
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
@@ -101,20 +130,38 @@ export default class SceneCidade extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.03));
     this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
 
-    if (caminhoInferior)  this.physics.add.collider(this.personagem, caminhoInferior);
-    if (carrosVeiculos)   this.physics.add.collider(this.personagem, carrosVeiculos);
-    if (objetosInferior2) this.physics.add.collider(this.personagem, objetosInferior2);
-    if (estabelecimentos) this.physics.add.collider(this.personagem, estabelecimentos);
+    if (caminhoInferior)
+      this.physics.add.collider(this.personagem, caminhoInferior);
+    if (carrosVeiculos)
+      this.physics.add.collider(this.personagem, carrosVeiculos);
+    if (objetosInferior2)
+      this.physics.add.collider(this.personagem, objetosInferior2);
+    if (estabelecimentos)
+      this.physics.add.collider(this.personagem, estabelecimentos);
 
     if (tilesets.length > 0) {
-      const decSup1 = this._criarCamada(mapa, "n_estabelecimento_Sem_colid", tilesets);
-      const decSup2 = this._criarCamada(mapa, "n_objetosSemColid_em_cima", tilesets);
-      const decSup3 = this._criarCamada(mapa, "n_objetosSemColid_em_cima_2", tilesets);
+      // Camadas decorativas acima do personagem para dar profundidade visual
+      const decSup1 = this._criarCamada(
+        mapa,
+        "n_estabelecimento_Sem_colid",
+        tilesets,
+      );
+      const decSup2 = this._criarCamada(
+        mapa,
+        "n_objetosSemColid_em_cima",
+        tilesets,
+      );
+      const decSup3 = this._criarCamada(
+        mapa,
+        "n_objetosSemColid_em_cima_2",
+        tilesets,
+      );
       if (decSup1) decSup1.setDepth(10);
       if (decSup2) decSup2.setDepth(11);
       if (decSup3) decSup3.setDepth(12);
     }
 
+    // Configura os controles de movimento e interação
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -124,12 +171,13 @@ export default class SceneCidade extends Phaser.Scene {
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
+    // Configura a câmera principal para seguir o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
-    // ── Zonas de interação ───────────────────────────────────────────
+    // Cria as zonas invisíveis de interação dos estabelecimentos
     this.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
     this.labelE = this.add.text(976, 856, "[E] Entrar", {
       fontSize: "6px", color: "#ffffff", backgroundColor: "#000000cc", padding: { x: 2, y: 1 }, resolution: 4,
@@ -180,35 +228,37 @@ export default class SceneCidade extends Phaser.Scene {
       fontSize: "6px", color: "#ffffff", backgroundColor: "#000000cc", padding: { x: 2, y: 1 }, resolution: 4,
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
-    // TODO: ajuste x/y para a posição real da Agência 03 no mapa
-    this.zonaAgencia03 = new Phaser.Geom.Rectangle(2420, 750, 120, 100);
-    this.labelAgencia03 = this.add.text(2480, 750, "[E] Entrar", {
-      fontSize: "6px", color: "#ffffff", backgroundColor: "#000000cc", padding: { x: 2, y: 1 }, resolution: 4,
-    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+    // Flags de estado evitam transições duplicadas
+    this.transicionando = false;
+    this.dentroZonaAgencia = false;
+    this.dentroZonaEscritorio = false;
+    this.dentroZonaFarmacia = false;
+    this.dentroZonaRestaurante = false;
+    this.dentroZonaMetro = false;
+    this.dentroZonaLojaDeRoupas = false;
+    this.dentroZonaSupermercado = false;
+    this.dentroZonaPadaria = false;
+    this.dentroZonaPostoDegasolina = false;
+    this.dentroAgencia02 = false; 
 
-    // ── Flags de estado ──────────────────────────────────────────────
-    this.transicionando            = false;
-    this.dentroZonaAgencia         = false;
-    this.dentroZonaEscritorio      = false;
-    this.dentroZonaFarmacia        = false;
-    this.dentroZonaRestaurante     = false;
-    this.dentroZonaMetro           = false;
-    this.dentroZonaLojaDeRoupas    = false;
-    this.dentroZonaSupermercado    = false;
-    this.dentroZonaPadaria         = false;
-    this.dentroZonaPostoDeGasolina = false;
-    this.dentroZonaAgencia02       = false;
-    this.dentroZonaAgencia03       = false;
-
-    this.debugTxt = this.add.text(0, 0, "", {
-      fontSize: "4px", color: "#ffff00", backgroundColor: "#000000", padding: { x: 1, y: 1 }, resolution: 4,
-    }).setDepth(999);
+    // Texto de debug com as coordenadas do personagem
+    this.debugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "4px",
+        color: "#ffff00",
+        backgroundColor: "#000000",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(999);
 
     this.direcaoAtual = "frente";
 
-    // ── Minimapa ─────────────────────────────────────────────────────
-    const MM_X = 10, MM_Y = 10;
-    const TM_W = 3328, TM_H = 2048;
+    // Configura o minimapa com a posição do jogador e o destino atual
+    const MM_X = 10,
+      MM_Y = 10;
+    const TM_W = 3328,
+      TM_H = 2048;
     const MM_W = 335;
     const MM_H = Math.round((MM_W * TM_H) / TM_W);
 
@@ -223,16 +273,19 @@ export default class SceneCidade extends Phaser.Scene {
     this.minimapDestDot.setPosition(1121, 1221);
     this.minimapDestDot.setDepth(51);
 
+    // Faz o destino piscar para chamar atenção do jogador
     this.tweens.add({
       targets: this.minimapDestDot,
       alpha: { from: 1, to: 0.1 },
       duration: 450, yoyo: true, repeat: -1,
     });
 
+    // Câmera de borda do minimapa
     this.borderCam = this.cameras.add(MM_X - 2, MM_Y - 2, MM_W + 4, MM_H + 4);
     this.borderCam.setBackgroundColor(0x222222);
     this.borderCam.ignore(this.children.list);
 
+    // Câmera do minimapa com zoom ajustado para mostrar o mapa inteiro
     const zoomFit = Math.min(MM_W / TM_W, MM_H / TM_H);
     this.miniMapCam = this.cameras.add(MM_X, MM_Y, MM_W, MM_H);
     this.miniMapCam.setZoom(zoomFit);
@@ -240,17 +293,27 @@ export default class SceneCidade extends Phaser.Scene {
     this.miniMapCam.scrollY = TM_H / 2;
     this.miniMapCam.setBackgroundColor(0x000000);
 
+    // Esconde elementos de interface da câmera principal ou do minimapa
     this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
     this.miniMapCam.ignore([
-      this.labelE, this.labelEscritorio, this.labelPadaria, this.labelFarmacia,
-      this.labelRestaurante, this.labelMetro, this.labelLojaDeRoupas,
-      this.labelSupermercado, this.labelPostoDeGasolina,
-      this.labelAgencia02, this.labelAgencia03, this.debugTxt,
+      this.labelE,
+      this.labelEscritorio,
+      this.labelPadaria,
+      this.labelFarmacia,
+      this.labelRestaurante,
+      this.labelMetro,
+      this.labelLojaDeRoupas,
+      this.labelSupermercado,
+      this.labelPostoDeGasolina,
+      this.labelAgencia02, 
+      this.debugTxt,
     ]);
 
+    // Lança a cena da chuva em paralelo sobre a cidade
     this.scene.launch("SceneChuva");
   }
 
+  // Cria camadas do tilemap com tratamento de erro
   _criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
@@ -262,13 +325,16 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  // Atualiza movimento, zonas de interação, minimapa e transições
   update() {
+    // Zera a velocidade a cada frame para parada imediata ao soltar a tecla
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
     personagem.setVelocity(0);
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("andar_esquerda", true);
@@ -281,6 +347,7 @@ export default class SceneCidade extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("andar_tras", true);
@@ -293,14 +360,22 @@ export default class SceneCidade extends Phaser.Scene {
       movendo = true;
     }
 
+    // Se estiver parado, mantém o sprite na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
-    // ── Detecção de zonas ────────────────────────────────────────────
-    const dentroAgencia = Phaser.Geom.Rectangle.Contains(this.zonaAgencia, personagem.x, personagem.y);
-    if (dentroAgencia !== this.dentroZonaAgencia) { this.dentroZonaAgencia = dentroAgencia; this.labelE.setVisible(dentroAgencia); }
+    // Verifica se o personagem entrou em alguma zona de interação
+    const dentroAgencia = Phaser.Geom.Rectangle.Contains(
+      this.zonaAgencia,
+      personagem.x,
+      personagem.y,
+    );
+    if (dentroAgencia !== this.dentroZonaAgencia) {
+      this.dentroZonaAgencia = dentroAgencia;
+      this.labelE.setVisible(dentroAgencia);
+    }
 
     const dentroEscritorio = Phaser.Geom.Rectangle.Contains(this.zonaEscritorio, personagem.x, personagem.y);
     if (dentroEscritorio !== this.dentroZonaEscritorio) { this.dentroZonaEscritorio = dentroEscritorio; this.labelEscritorio.setVisible(dentroEscritorio); }
@@ -332,15 +407,19 @@ export default class SceneCidade extends Phaser.Scene {
     const dentroAgencia03 = Phaser.Geom.Rectangle.Contains(this.zonaAgencia03, personagem.x, personagem.y);
     if (dentroAgencia03 !== this.dentroZonaAgencia03) { this.dentroZonaAgencia03 = dentroAgencia03; this.labelAgencia03.setVisible(dentroAgencia03); }
 
-    // ── Debug e minimapa ─────────────────────────────────────────────
-    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    // Atualiza debug e posição do jogador no minimapa
+    this.debugTxt.setText(
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+    );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
 
-    // ── Transições (tecla E) ─────────────────────────────────────────
+    // A tecla E ativa a transição apenas se o personagem estiver dentro de uma zona
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
-        this.transicionando = true; this.labelE.setVisible(false); this.scene.stop("SceneChuva");
+        this.transicionando = true;
+        this.labelE.setVisible(false);
+        this.scene.stop("SceneChuva"); // Para a chuva ao sair da cidade
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
           this.scene.start("SceneAg", { nomePasta: this.nomePastaEscolhida, prefixo: this.prefixoEscolhido });
@@ -397,13 +476,10 @@ export default class SceneCidade extends Phaser.Scene {
         this.transicionando = true; this.labelAgencia02.setVisible(false); this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
-          this.scene.start("SceneAgencia02", { nomePasta: this.nomePastaEscolhida, prefixo: this.prefixoEscolhido });
-        });
-      } else if (dentroAgencia03) {
-        this.transicionando = true; this.labelAgencia03.setVisible(false); this.scene.stop("SceneChuva");
-        this.cameras.main.fadeOut(800, 0, 0, 0);
-        this.cameras.main.once("camerafadeoutcomplete", () => {
-          this.scene.start("SceneAgencia03", { nomePasta: this.nomePastaEscolhida, prefixo: this.prefixoEscolhido });
+          this.scene.start("SceneAgencia02", {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo: this.prefixoEscolhido, 
+          });
         });
       }
     }

@@ -3,27 +3,35 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     super({ key: 'ScenePostoDeGasolina' });
   }
 
+  // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
-    this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
-    this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
+    this.nomePastaEscolhida = dados.nomePasta || "Pedro";
+    this.prefixoEscolhido   = dados.prefixo   || "HB";
   }
 
+  // Carrega mapa, tilesets e sprites do personagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo   = this.prefixoEscolhido;
 
-    this.load.maxParallelDownloads = 2;
-
-    this.load.on("loaderror", (arquivo) => {
-      console.error("[ScenePostoDeGasolina] Erro ao carregar:", arquivo.key, arquivo.src);
+    // Loga erros de carregamento para facilitar debug
+    this.load.on('loaderror', (arquivo) => {
+      console.error('[ScenePostoDeGasolina] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
-    this.load.tilemapTiledJSON("posto", "src/assets/imagens/mapsjson/tileMaps/postoGasolina.tmj");
+    // Mapa e tilesets do posto de gasolina
+    this.load.tilemapTiledJSON('posto', 'src/assets/imagens/mapsjson/tileMaps/postoDeGasolina.tmj');
+    this.load.image('posto_roombuilder', 'src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png');
+    this.load.image('posto_int_s1', 'src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png');
+    this.load.image('posto_int_s2', 'src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png');
+    this.load.image('posto_int_s3', 'src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png');
+    this.load.image('posto_int_s4', 'src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png');
+    this.load.image('posto_int_s5', 'src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png');
+    this.load.image('posto_mod_s1', 'src/assets/imagens/mapsjson/tileSets/Modern_S1_4096.png');
+    this.load.image('posto_mod_s2', 'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
+    this.load.image('posto_mod_s3', 'src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png');
 
-    this.load.image("super_interiors",   "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png");
-    this.load.image("super_roombuilder", "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png");
-    this.load.image("super_exteriors",   "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png");
-
+    // Carrega os frames do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -33,502 +41,433 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     }
   }
 
+  // Monta o mapa, o personagem, as colisões e a saída da cena
   create() {
-    const mapa = this.make.tilemap({ key: "posto" });
-    this.mapa  = mapa;
+    // Prepara os tilesets antes de criar o mapa
+    this.prepararTilesetsPosto();
 
-    const tileW = mapa.tileWidth  || 16;
-    const tileH = mapa.tileHeight || 16;
+    const mapa = this.make.tilemap({ key: 'posto' });
+    this.mapa = mapa;
 
-    // ---------------------------------------------------------------
-    // DIAGNÓSTICO: loga nomes reais dos tilesets e camadas do TMJ
-    // ---------------------------------------------------------------
-    console.log("=== [ScenePostoDeGasolina] DIAGNÓSTICO ===");
-    console.log("tileW:", tileW, "| tileH:", tileH);
-    console.log("Largura (tiles):", mapa.width, "| Altura (tiles):", mapa.height);
-    console.log(
-      "TILESETS no TMJ:",
-      (mapa.tilesets || []).map((t) => `"${t.name}" (firstgid:${t.firstgid})`)
-    );
-    console.log(
-      "CAMADAS no TMJ:",
-      (mapa.layers || []).map((l) => `"${l.name}"`)
-    );
-    console.log("==========================================");
+    const roomBuilder = mapa.addTilesetImage('Room_Builder_16x16', 'posto_roombuilder', 16, 16, 0, 0);
+    const intS1 = mapa.addTilesetImage('Interiors_16x16_S1', 'posto_int_s1', 16, 16, 0, 0);
+    const intS2 = mapa.addTilesetImage('Interiors_16x16_S2', 'posto_int_s2', 16, 16, 0, 0);
+    const intS3 = mapa.addTilesetImage('Interiors_16x16_S3', 'posto_int_s3', 16, 16, 0, 0);
+    const intS4 = mapa.addTilesetImage('Interiors_16x16_S4', 'posto_int_s4', 16, 16, 0, 0);
+    const intS5 = mapa.addTilesetImage('Interiors_16x16_S5', 'posto_int_s5', 16, 16, 0, 0);
+    const modS1 = mapa.addTilesetImage('Modern_Exteriors_S1', 'posto_mod_s1', 16, 16, 0, 0);
+    const modS2 = mapa.addTilesetImage('Modern_Exteriors_S2', 'posto_mod_s2', 16, 16, 0, 0);
+    const modS3 = mapa.addTilesetImage('Modern_Exteriors_S3', 'posto_mod_s3', 16, 16, 0, 0);
+    const tiles = [roomBuilder, intS1, intS2, intS3, intS4, intS5, modS1, modS2, modS3].filter(Boolean);
 
-    // ---------------------------------------------------------------
-    // OFFSET: lido diretamente dos dados crus do TMJ para ser preciso.
-    // Em mapas infinite o Tiled salva startx/starty negativos nos chunks.
-    // O layer[0].x/y em Phaser já converte: se startx=-16, layer.x = -256.
-    // Precisamos do valor absoluto para compensar o deslocamento negativo.
-    // ---------------------------------------------------------------
-    let offsetX = 0;
-    let offsetY = 0;
+    // Calcula a área útil do mapa e do chão
+    const areaMapa = this._calcularAreaCamada(mapa);
+    const areaChao = this._calcularAreaCamada(mapa, 'N- Ch\u00e3o');
+    this.origemMapaX = areaChao.x;
+    this.origemMapaY = areaChao.y;
+    this.larguraMapa = areaChao.largura;
+    this.alturaMapa  = areaChao.altura;
 
-    if (mapa.layers.length > 0) {
-      // mapa.layers[0].x é o x em pixels da primeira camada
-      const layerX = mapa.layers[0].x || 0;
-      const layerY = mapa.layers[0].y || 0;
+    // Fundo neutro para evitar áreas vazias fora do mapa
+    this.add.rectangle(
+      areaMapa.x - 100,
+      areaMapa.y - 100,
+      areaMapa.largura + 200,
+      areaMapa.altura + 200,
+      0x888888,
+    ).setOrigin(0, 0);
 
-      // Se negativo, usamos o abs para "puxar" o mapa de volta à origem
-      offsetX = layerX < 0 ? Math.abs(layerX) : 0;
-      offsetY = layerY < 0 ? Math.abs(layerY) : 0;
-    }
+    // Camadas visuais sem colisão
+    this.criarCamada(mapa, 'N- Ch\u00e3o', tiles);
+    this.criarCamada(mapa, 'N - ParedeSemColid', tiles);
+    this.criarCamada(mapa, 'N - ObjetosSemColid_embaixo', tiles);
+    this.criarCamada(mapa, 'PLAYER', tiles);
 
-    // Fallback: se não achou nos layers, tenta ler do dado cru do cache
-    if (offsetX === 0 && offsetY === 0) {
-      try {
-        const dadosCru = this.cache.tilemap.get("posto")?.data;
-        if (dadosCru) {
-          // Infinite maps: pega startx/starty do primeiro chunk da primeira layer com chunks
-          const primeiraLayerComChunk = (dadosCru.layers || []).find(
-            (l) => Array.isArray(l.chunks) && l.chunks.length > 0
-          );
-          if (primeiraLayerComChunk) {
-            const startx = primeiraLayerComChunk.startx || 0;
-            const starty = primeiraLayerComChunk.starty || 0;
-            offsetX = startx < 0 ? Math.abs(startx) * tileW : 0;
-            offsetY = starty < 0 ? Math.abs(starty) * tileH : 0;
-            console.log(
-              "[ScenePostoDeGasolina] Offset lido dos chunks crus — startx:",
-              startx, "starty:", starty
-            );
-          }
-        }
-      } catch (e) {
-        console.warn("[ScenePostoDeGasolina] Não foi possível ler dado cru do cache:", e.message);
-      }
-    }
+    // Camadas sólidas que bloqueiam o personagem
+    const parede = this.criarCamada(mapa, 'C- ParedeComColid', tiles);
+    const objetos = this.criarCamada(mapa, 'C - Objetos com Colid', tiles);
 
-    console.log("[ScenePostoDeGasolina] offsetX:", offsetX, "| offsetY:", offsetY);
+    if (parede) parede.setCollisionByExclusion([-1]);
+    if (objetos) objetos.setCollisionByExclusion([-1]);
 
-    // ---------------------------------------------------------------
-    // TILESETS: _otimizarTilesetsPorUso descobre os nomes reais e,
-    // se possível, cria texturas cortadas para economizar memória.
-    // ---------------------------------------------------------------
-    this._otimizarTilesetsPorUso(mapa);
-
-    // Nomes que DEVEM bater com o campo "name" dentro do TMJ/TSX.
-    // Se o diagnóstico acima mostrar nomes diferentes, ajuste aqui.
-    const NOME_INTERIORS   = "Interiors_16x16";
-    const NOME_ROOMBUILDER = "Room_Builder_16x16";
-    const NOME_EXTERIORS   = "Modern_Exteriors_Complete_Tileset";
-
-    // Verifica se os nomes existem de fato no TMJ e avisa se não
-    [NOME_INTERIORS, NOME_ROOMBUILDER, NOME_EXTERIORS].forEach((nome) => {
-      const existe = (mapa.tilesets || []).some((t) => t.name === nome);
-      if (!existe) {
-        console.warn(
-          `[ScenePostoDeGasolina] TILESET NÃO ENCONTRADO no TMJ: "${nome}".`,
-          `Nomes disponíveis:`, (mapa.tilesets || []).map((t) => t.name)
-        );
-      }
-    });
-
-    const tsInteriors = mapa.addTilesetImage(
-      NOME_INTERIORS,
-      this._keyTileset(NOME_INTERIORS, "super_interiors")
-    );
-    const tsRoomBuilder = mapa.addTilesetImage(
-      NOME_ROOMBUILDER,
-      this._keyTileset(NOME_ROOMBUILDER, "super_roombuilder")
-    );
-    const tsExteriors = mapa.addTilesetImage(
-      NOME_EXTERIORS,
-      this._keyTileset(NOME_EXTERIORS, "super_exteriors")
-    );
-
-    const tilesets = [tsInteriors, tsRoomBuilder, tsExteriors].filter(Boolean);
-
-    console.log(
-      "[ScenePostoDeGasolina] Tilesets criados:",
-      tilesets.length,
-      "| interiors:", !!tsInteriors,
-      "| roombuilder:", !!tsRoomBuilder,
-      "| exteriors:", !!tsExteriors
-    );
-
-    if (tilesets.length === 0) {
-      console.error(
-        "[ScenePostoDeGasolina] NENHUM tileset carregado! " +
-        "Verifique os nomes acima e corrija as constantes NOME_* no código."
-      );
-    }
-
-    // Fundo escuro (evita buracos pretos entre tiles)
-    this.add.rectangle(0, 0, 8000, 8000, 0x222222).setOrigin(0, 0).setPosition(-1000, -1000);
-
-    // ---------------------------------------------------------------
-    // CAMADAS: nomes lidos do TMJ (veja o diagnóstico no console).
-    // Se o TMJ usar nomes diferentes dos abaixo, edite as constantes.
-    // ---------------------------------------------------------------
-    const CAMADAS = {
-      chao:              "N- Ch\u00e3o",               // "N- Chão"
-      paredeSemColid:    "N - ParedeSemColid",
-      objetosBaixo:      "N - ObjetosSemColid_embaixo",
-      paredeComColid:    "C- ParedeComColid",
-      objetosComColid:   "C - Objetos com Colid",
-      objetosCima:       "N - ObjetosSemColid_emcima",
-      produtos:          "N - ProdutosSemColid",
-    };
-
-    // Sem colisão — abaixo do player
-    this._criarCamada(mapa, CAMADAS.chao,           tilesets, offsetX, offsetY);
-    this._criarCamada(mapa, CAMADAS.paredeSemColid, tilesets, offsetX, offsetY);
-    this._criarCamada(mapa, CAMADAS.objetosBaixo,   tilesets, offsetX, offsetY);
-
-    // Com colisão
-    const paredeC = this._criarCamada(mapa, CAMADAS.paredeComColid,  tilesets, offsetX, offsetY);
-    const objC    = this._criarCamada(mapa, CAMADAS.objetosComColid, tilesets, offsetX, offsetY);
-
-    [paredeC, objC]
-      .filter(Boolean)
-      .forEach((c) => c.setCollisionByExclusion([-1]));
-
-    // Sem colisão — acima do player (depth 10)
-    const emCima   = this._criarCamada(mapa, CAMADAS.objetosCima, tilesets, offsetX, offsetY);
-    const produtos = this._criarCamada(mapa, CAMADAS.produtos,    tilesets, offsetX, offsetY);
-    if (emCima)   emCima.setDepth(10);
+    // Camadas acima do personagem para dar profundidade visual
+    const objetosCima = this.criarCamada(mapa, 'N - ObjetosSemColid_emcima', tiles);
+    const produtos = this.criarCamada(mapa, 'N - ProdutosSemColid', tiles);
+    if (objetosCima) objetosCima.setDepth(10);
     if (produtos) produtos.setDepth(10);
 
-    // --- Animações ---
-    ["frente", "tras", "direita", "esquerda"].forEach((dir) => {
+    // Cria as animações de movimento do personagem
+    const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
+    direcoes.forEach(dir => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
         this.anims.create({
           key: `esp_andar_${dir}`,
-          frames: [1, 2, 3, 4].map((i) => ({ key: `esp_${dir}_${i}` })),
+          frames: [
+            { key: `esp_${dir}_1` },
+            { key: `esp_${dir}_2` },
+            { key: `esp_${dir}_3` },
+            { key: `esp_${dir}_4` }
+          ],
           frameRate: 8,
-          repeat: -1,
+          repeat: -1
         });
       }
     });
 
-    // --- Personagem ---
-    // Spawn no centro da área de conteúdo do mapa
-    const spawnX = offsetX + Math.floor(mapa.width  / 2) * tileW;
-    const spawnY = offsetY + Math.floor(mapa.height / 2) * tileH;
+    // Usa um spawn fixo calculado dentro da área útil do posto
+    const spawnX = this.origemMapaX + this.larguraMapa * 0.5;
+    const spawnY = this.origemMapaY + this.alturaMapa * 0.7;
 
-    console.log("[ScenePostoDeGasolina] Spawn:", spawnX, spawnY);
-
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
+    this.personagem = this.physics.add.sprite(spawnX, spawnY, 'esp_frente_1');
     this.personagem.setCollideWorldBounds(true);
-    this.personagem.setDepth(5);
-    this.personagem.setDisplaySize(tileW, tileH * 2);
 
-    // Hitbox nos pés
-    const sx  = this.personagem.scaleX;
-    const sy  = this.personagem.scaleY;
-    const hbW = 10 / sx;
-    const hbH =  8 / sy;
-    this.personagem.body.setSize(hbW, hbH);
-    this.personagem.body.setOffset(
-      (this.personagem.width  - hbW) / 2,
-       this.personagem.height - hbH,
-    );
+    // Ajusta escala e hitbox para encaixar melhor no cenário
+    const tamTile       = mapa.tileWidth || 16;
+    const larguraSprite = this.personagem.width;
+    const alturaSprite  = this.personagem.height;
+    const escala = Math.min((tamTile * 0.4) / larguraSprite, (tamTile * 0.4) / alturaSprite);
+    this.personagem.setScale(Math.max(escala, 0.04));
+    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    [paredeC, objC]
-      .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+    if (parede) this.physics.add.collider(this.personagem, parede);
+    if (objetos) this.physics.add.collider(this.personagem, objetos);
 
-    // --- Controles ---
+    // Controles de movimento e interação
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd   = this.input.keyboard.addKeys({
+    this.wasd = this.input.keyboard.addKeys({
       cima:     Phaser.Input.Keyboard.KeyCodes.W,
       baixo:    Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita:  Phaser.Input.Keyboard.KeyCodes.D,
+      direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    // --- Câmera ---
-    const totalW = offsetX + mapa.width  * tileW + offsetX;
-    const totalH = offsetY + mapa.height * tileH + offsetY;
+    // Configura a câmera para seguir o personagem
+    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.setZoom(6.5);
+    this.cameras.main.setBounds(this.origemMapaX, this.origemMapaY, this.larguraMapa, this.alturaMapa);
+    this.physics.world.setBounds(this.origemMapaX, this.origemMapaY, this.larguraMapa, this.alturaMapa);
+    this.cameras.main.centerOn(spawnX, spawnY);
+    this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    console.log("[ScenePostoDeGasolina] Bounds mundo:", totalW, "x", totalH);
+    this.direcaoAtual = 'frente';
 
-    const cam = this.cameras.main;
-    cam.setZoom(4);
-    cam.setBounds(0, 0, totalW, totalH);
-    this.physics.world.setBounds(0, 0, totalW, totalH);
-    cam.startFollow(this.personagem, true, 0.1, 0.1);
-    cam.fadeIn(600, 0, 0, 0);
-
-    // --- Zona de saída ---
-    this.zonasSaida = this._criarZonasSaida(offsetX, offsetY, tileW, tileH);
-
-    this.labelSair = this.add
-      .text(0, 0, "[E] Sair", {
-        fontSize: "3px",
-        color: "#ffffff",
-        backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(20)
-      .setOrigin(0.5, 1)
-      .setVisible(false);
-
-    this.transicionando  = false;
+    // Define a zona de saída próxima à porta
+    this.zonasSaida = [{ x: this.origemMapaX + 48, y: this.origemMapaY + 160, raio: 24 }];
     this.dentroZonaSaida = false;
-    this.direcaoAtual    = "frente";
+    this.transicionando = false;
 
-    // Debug: mostra posição do personagem + tile atual
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
+    this.labelSair = this.add.text(this.origemMapaX + 48, this.origemMapaY + 160, '[E] Sair', {
+      fontSize: '3px', color: '#ffffff',
+      backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    // Texto de debug com as coordenadas atuais
+    this.debugTxt = this.add.text(0, 0, '', {
+      fontSize: '4px', color: '#ffff00',
+      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+    }).setDepth(999);
   }
 
-  // ---------------------------------------------------------------
-  // Cria uma camada com verificação robusta de nome.
-  // Faz trim e comparação case-insensitive como fallback.
-  // ---------------------------------------------------------------
-  _criarCamada(mapa, nome, tilesets, offsetX = 0, offsetY = 0) {
+  // Cria uma camada do tilemap com tratamento de erro
+  criarCamada(mapa, nome, tilesets) {
     try {
-      // Busca exata primeiro
-      let nomeReal = nome;
-      let existe = mapa.layers.some((l) => l.name === nome);
-
-      // Fallback: trim + case-insensitive
-      if (!existe) {
-        const encontrado = mapa.layers.find(
-          (l) => l.name.trim().toLowerCase() === nome.trim().toLowerCase()
-        );
-        if (encontrado) {
-          console.warn(
-            `[ScenePostoDeGasolina] Camada "${nome}" encontrada com nome diferente: "${encontrado.name}". ` +
-            `Usando o nome real do TMJ.`
-          );
-          nomeReal = encontrado.name;
-          existe   = true;
-        }
-      }
-
-      if (!existe) {
-        console.warn(
-          `[ScenePostoDeGasolina] CAMADA AUSENTE no TMJ: "${nome}". ` +
-          `Disponíveis: ${mapa.layers.map((l) => `"${l.name}"`).join(", ")}`
-        );
-        return null;
-      }
-
-      const camada = mapa.createLayer(nomeReal, tilesets, offsetX, offsetY);
+      const camada = mapa.createLayer(nome, tilesets, 0, 0);
       if (!camada) {
-        console.error(`[ScenePostoDeGasolina] FALHA ao criar camada: "${nomeReal}"`);
-        return null;
+        console.warn('[ScenePostoDeGasolina] Camada nao encontrada:', nome);
       }
-
-      console.log(`[ScenePostoDeGasolina] Camada OK: "${nomeReal}"`);
       return camada;
     } catch (erro) {
-      console.error(`[ScenePostoDeGasolina] ERRO na camada "${nome}":`, erro.message);
+      console.error('[ScenePostoDeGasolina] Erro ao criar camada:', nome, erro.message);
       return null;
     }
   }
 
-  _criarZonasSaida(offsetX, offsetY, tileW, tileH) {
-    // Ajuste portaTileX e portaTileY conforme o debugTxt.
-    // Dica: ande até a porta, anote x/y do debugTxt e calcule:
-    //   portaTileX = (x - offsetX) / tileW
-    //   portaTileY = (y - offsetY) / tileH
-    const portaTileX = 4;
-    const portaTileY = 11;
+  // Calcula a área ocupada pelos tiles válidos de uma camada
+  calcularAreaCamada(layer, tileW, tileH) {
+    let minX = Number.POSITIVE_INFINITY;
+    let minY = Number.POSITIVE_INFINITY;
+    let maxX = Number.NEGATIVE_INFINITY;
+    let maxY = Number.NEGATIVE_INFINITY;
 
-    const zona = new Phaser.Geom.Rectangle(
-      offsetX + portaTileX * tileW,
-      offsetY + portaTileY * tileH,
-      tileW * 2,
-      tileH,
-    );
-    console.log("[ScenePostoDeGasolina] Zona de saída:", zona);
-    return [zona];
+    this.percorrerTilesDaCamada(layer, ({ gid, tileX, tileY }) => {
+      if (gid <= 0) return;
+
+      minX = Math.min(minX, tileX);
+      minY = Math.min(minY, tileY);
+      maxX = Math.max(maxX, tileX);
+      maxY = Math.max(maxY, tileY);
+    });
+
+    if (!Number.isFinite(minX) || !Number.isFinite(minY)) return null;
+
+    return {
+      x: minX * tileW,
+      y: minY * tileH,
+      largura: (maxX - minX + 1) * tileW,
+      altura: (maxY - minY + 1) * tileH,
+    };
   }
 
-  _keyTileset(tmjName, fallbackKey) {
-    return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
-  }
+  // Calcula a área total de uma camada específica ou do mapa inteiro
+  _calcularAreaCamada(mapa, nomeCamada = null) {
+    const tileW = mapa.tileWidth || 16;
+    const tileH = mapa.tileHeight || 16;
+    let areaEncontrada = null;
 
-  _coletarGidsUsados(mapa) {
-    const usados = new Set();
     (mapa.layers || []).forEach((layer) => {
-      const data = layer.data || [];
-      for (let y = 0; y < data.length; y++) {
-        const row = data[y] || [];
+      if (nomeCamada && layer.name !== nomeCamada) return;
+      const areaLayer = this.calcularAreaCamada(layer, tileW, tileH);
+      if (!areaLayer) return;
+
+      if (!areaEncontrada) {
+        areaEncontrada = { ...areaLayer };
+        return;
+      }
+
+      const rightAtual = areaEncontrada.x + areaEncontrada.largura;
+      const bottomAtual = areaEncontrada.y + areaEncontrada.altura;
+      const rightNovo = areaLayer.x + areaLayer.largura;
+      const bottomNovo = areaLayer.y + areaLayer.altura;
+
+      areaEncontrada.x = Math.min(areaEncontrada.x, areaLayer.x);
+      areaEncontrada.y = Math.min(areaEncontrada.y, areaLayer.y);
+      areaEncontrada.largura = Math.max(rightAtual, rightNovo) - areaEncontrada.x;
+      areaEncontrada.altura = Math.max(bottomAtual, bottomNovo) - areaEncontrada.y;
+    });
+
+    if (!areaEncontrada) {
+      return {
+        x: 0,
+        y: 0,
+        largura: mapa.widthInPixels || 320,
+        altura: mapa.heightInPixels || 320,
+      };
+    }
+
+    return areaEncontrada;
+  }
+
+  // Divide tilesets grandes em partes menores para o mapa conseguir usar tudo
+  prepararTilesetsPosto() {
+    const cacheMapa = this.cache.tilemap.get('posto');
+    const dadosMapa = cacheMapa && cacheMapa.data;
+    if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
+
+    // Evita aplicar a separação mais de uma vez
+    if (dadosMapa.tilesets.some((ts) => ts.name === 'Interiors_16x16_S1')) return;
+
+    const novosTilesets = [];
+
+    dadosMapa.tilesets.forEach((ts) => {
+      if (ts.name === 'Interiors_16x16') {
+        const base = ts.firstgid;
+        const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 16 };
+
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base,
+          name: 'Interiors_16x16_S1',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S1_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 4096,
+          name: 'Interiors_16x16_S2',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S2_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 8192,
+          name: 'Interiors_16x16_S3',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S3_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 12288,
+          name: 'Interiors_16x16_S4',
+          tilecount: 4096,
+          image: '../tileSets/Interiors_S4_4096.png',
+          imagewidth: 256,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 16384,
+          name: 'Interiors_16x16_S5',
+          tilecount: 640,
+          image: '../tileSets/Interiors_S5_640.png',
+          imagewidth: 256,
+          imageheight: 640
+        });
+        return;
+      }
+
+      if (ts.name === 'Modern_Exteriors_Complete_Tileset') {
+        const base = ts.firstgid;
+        const comuns = { tilewidth: 16, tileheight: 16, spacing: 0, margin: 0, columns: 176 };
+
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base,
+          name: 'Modern_Exteriors_S1',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S1_4096.png',
+          imagewidth: 2816,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 45056,
+          name: 'Modern_Exteriors_S2',
+          tilecount: 45056,
+          image: '../tileSets/Modern_S2_4096.png',
+          imagewidth: 2816,
+          imageheight: 4096
+        });
+        novosTilesets.push({
+          ...comuns,
+          firstgid: base + 90112,
+          name: 'Modern_Exteriors_S3',
+          tilecount: 352,
+          image: '../tileSets/Modern_S3_32.png',
+          imagewidth: 2816,
+          imageheight: 32
+        });
+        return;
+      }
+
+      novosTilesets.push(ts);
+    });
+
+    dadosMapa.tilesets = novosTilesets;
+  }
+
+  // Percorre os tiles da camada independentemente do formato dos dados
+  percorrerTilesDaCamada(layer, callback) {
+    const visitarGrade = (grade, offsetX = 0, offsetY = 0) => {
+      for (let y = 0; y < grade.length; y++) {
+        const row = grade[y] || [];
         for (let x = 0; x < row.length; x++) {
           const cell = row[x];
-          const gid  = typeof cell === "number" ? cell : (cell?.index || 0);
-          if (gid > 0) usados.add(gid);
+          const gid = typeof cell === 'number' ? cell : cell?.index || 0;
+          const tileX = typeof cell === 'number' ? x + offsetX : (cell?.x ?? x + offsetX);
+          const tileY = typeof cell === 'number' ? y + offsetY : (cell?.y ?? y + offsetY);
+
+          callback({ gid, tileX, tileY, cell });
         }
       }
-    });
-    return usados;
-  }
+    };
 
-  _otimizarTilesetsPorUso(mapa) {
-    const defs = [
-      { tmjName: "Interiors_16x16",                   baseKey: "super_interiors"   },
-      { tmjName: "Room_Builder_16x16",                baseKey: "super_roombuilder" },
-      { tmjName: "Modern_Exteriors_Complete_Tileset", baseKey: "super_exteriors"   },
-    ];
+    if (Array.isArray(layer.data) && layer.data.length > 0) {
+      visitarGrade(layer.data);
+      return;
+    }
 
-    this._tilesetKeys = {};
-    const usados            = this._coletarGidsUsados(mapa);
-    const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
-      (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
-    );
+    if (Array.isArray(layer.chunks) && layer.chunks.length > 0) {
+      layer.chunks.forEach((chunk) => {
+        const data = chunk.data || [];
 
-    // Atualiza defs com o nome real encontrado no TMJ (case-insensitive)
-    defs.forEach((def) => {
-      const encontrado = tilesetsOrdenados.find(
-        (t) => t.name.trim().toLowerCase() === def.tmjName.trim().toLowerCase()
-      );
-      if (encontrado && encontrado.name !== def.tmjName) {
-        console.warn(
-          `[ScenePostoDeGasolina] Tileset "${def.tmjName}" encontrado como "${encontrado.name}" no TMJ.`
-        );
-        def.tmjNameReal = encontrado.name;
-      } else {
-        def.tmjNameReal = def.tmjName;
-      }
-    });
+        if (Array.isArray(data[0])) {
+          visitarGrade(data, chunk.x || 0, chunk.y || 0);
+          return;
+        }
 
-    defs.forEach((def) => {
-      this._tilesetKeys[def.tmjName]     = def.baseKey;
-      this._tilesetKeys[def.tmjNameReal] = def.baseKey; // garante o nome real também
-
-      if (!this.textures.exists(def.baseKey)) return;
-      const ts = tilesetsOrdenados.find((t) => t.name === def.tmjNameReal);
-      if (!ts) return;
-
-      const source = this.textures.get(def.baseKey).getSourceImage();
-      if (!source?.width || !source?.height) return;
-
-      const idx      = tilesetsOrdenados.findIndex((t) => t.name === def.tmjNameReal);
-      const startGid = ts.firstgid || 1;
-      const endGid   =
-        idx < tilesetsOrdenados.length - 1
-          ? tilesetsOrdenados[idx + 1].firstgid - 1
-          : Number.MAX_SAFE_INTEGER;
-
-      let maiorGidUsado = 0;
-      usados.forEach((gid) => {
-        if (gid >= startGid && gid <= endGid && gid > maiorGidUsado) {
-          maiorGidUsado = gid;
+        const largura = chunk.width || 0;
+        const altura = chunk.height || 0;
+        for (let y = 0; y < altura; y++) {
+          for (let x = 0; x < largura; x++) {
+            const gid = data[y * largura + x] || 0;
+            callback({
+              gid,
+              tileX: (chunk.x || 0) + x,
+              tileY: (chunk.y || 0) + y,
+              cell: gid,
+            });
+          }
         }
       });
-
-      if (!maiorGidUsado) return;
-
-      const tsW     = ts.tilewidth  || 16;
-      const tsH     = ts.tileheight || 16;
-      const margin  = ts.margin     || 0;
-      const spacing = ts.spacing    || 0;
-
-      const columns =
-        ts.columns ||
-        Math.max(1, Math.floor((source.width - margin * 2 + spacing) / (tsW + spacing)));
-
-      const tilesNecessarios  = maiorGidUsado - startGid + 1;
-      const linhasNecessarias = Math.max(1, Math.ceil(tilesNecessarios / columns));
-
-      const cropWCalc = margin + columns           * (tsW + spacing) - spacing + margin;
-      const cropHCalc = margin + linhasNecessarias * (tsH + spacing) - spacing + margin;
-
-      const cropW = Math.min(source.width,  Math.max(tsW, cropWCalc));
-      const cropH = Math.min(source.height, Math.max(tsH, cropHCalc));
-
-      if (cropW >= source.width && cropH >= source.height) return;
-
-      const cutKey = `${def.baseKey}_cut`;
-      if (this.textures.exists(cutKey)) this.textures.remove(cutKey);
-
-      const canvasTex = this.textures.createCanvas(cutKey, cropW, cropH);
-      const ctx       = canvasTex.getContext();
-      ctx.clearRect(0, 0, cropW, cropH);
-      ctx.drawImage(source, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
-      canvasTex.refresh();
-
-      this._tilesetKeys[def.tmjName]     = cutKey;
-      this._tilesetKeys[def.tmjNameReal] = cutKey;
-    });
+    }
   }
 
+  // Atualiza movimento, saída da cena e texto de debug
   update() {
-    const velocidade = 80;
+    const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
     personagem.setVelocity(0);
+
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
-      this.direcaoAtual = "esquerda";
+      personagem.anims.play('esp_andar_esquerda', true);
+      this.direcaoAtual = 'esquerda';
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
       personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
-      this.direcaoAtual = "direita";
+      personagem.anims.play('esp_andar_direita', true);
+      this.direcaoAtual = 'direita';
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
-      this.direcaoAtual = "tras";
+      if (!movendo) personagem.anims.play('esp_andar_tras', true);
+      this.direcaoAtual = 'tras';
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
       personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
-      this.direcaoAtual = "frente";
+      if (!movendo) personagem.anims.play('esp_andar_frente', true);
+      this.direcaoAtual = 'frente';
       movendo = true;
     }
 
+    // Se estiver parado, mantém o sprite na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
-    );
+    // Verifica se o personagem entrou na zona de saída
+    const dentroSaida = (this.zonasSaida || []).some((z) => {
+      const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
+      return d <= z.raio;
+    });
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
 
-    if (dentroSaida) {
-      this.labelSair.setPosition(personagem.x, personagem.y - 10);
-    }
-
+    // Transição para a cidade ao se aproximar da saída e apertar E
     if (!this.transicionando && dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
-      this.cameras.main.once("camerafadeoutcomplete", () => {
-        this.scene.start("SceneCidade", {
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.start('SceneCidade', {
           nomePasta: this.nomePastaEscolhida,
-          prefixo:   this.prefixoEscolhido,
-          spawnX:    2931,
-          spawnY:    350,
+          prefixo: this.prefixoEscolhido,
+          spawnX: 2751,
+          spawnY: 1332
         });
       });
     }
 
-    // Debug: posição em pixels e em tiles (útil para calibrar a zona de saída)
-    const tileW = this.mapa?.tileWidth  || 16;
-    const tileH = this.mapa?.tileHeight || 16;
-    const tileX = Math.floor(personagem.x / tileW);
-    const tileY = Math.floor(personagem.y / tileH);
-    this.debugTxt.setText(
-      `px(${Math.round(personagem.x)}, ${Math.round(personagem.y)})  tile(${tileX}, ${tileY})`
-    );
-    this.debugTxt.setPosition(personagem.x - 20, personagem.y - 16);
+    // Atualiza o texto de debug com as coordenadas atuais
+    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

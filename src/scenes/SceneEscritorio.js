@@ -3,25 +3,27 @@ export default class SceneEscritorio extends Phaser.Scene {
     super({ key: 'SceneEscritorio' });
   }
 
+  // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
-    // Dados do personagem definidos na transição da cidade
     this.nomePastaEscolhida = dados.nomePasta || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || "HB";
   }
 
+  // Carrega mapa, tileset e sprites do personagem escolhido
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo   = this.prefixoEscolhido;
 
+    // Loga erros de carregamento para facilitar debug
     this.load.on('loaderror', (arquivo) => {
       console.error('[SceneEscritorio] Erro ao carregar:', arquivo.key, arquivo.src);
     });
 
-    // Mapa e tileset do escritório
+    // Tilemap do escritório
     this.load.tilemapTiledJSON('escritorio', 'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj');
     this.load.image('escritorio_tiles', 'src/assets/imagens/mapsjson/tileSets/escritorio.png');
 
-    // Carrega os 16 frames de animação do personagem escolhido
+    // Carrega os frames de animação do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -31,19 +33,20 @@ export default class SceneEscritorio extends Phaser.Scene {
     }
   }
 
+  // Monta o mapa, personagem, colisões, câmera e saída automática
   create() {
-    // Criação do mapa e camadas principais
+    // Cria o tilemap e associa o tileset
     const mapa  = this.make.tilemap({ key: 'escritorio' });
     const tiles = mapa.addTilesetImage('escritorio', 'escritorio_tiles');
 
-    // Fundo sólido para cobrir qualquer área vazia fora dos tiles
+    // Fundo neutro para evitar áreas vazias fora do mapa
     this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888).setOrigin(0, 0);
 
-    // Camadas sem colisão
-    mapa.createLayer('chao',    tiles, 0, 0);
+    // Camadas visuais sem colisão
+    mapa.createLayer('chao', tiles, 0, 0);
     mapa.createLayer('semcolis', tiles, 0, 0);
 
-    // Camadas com colisão
+    // Camadas com colisão (bloqueiam o personagem)
     const objcomcolis = mapa.createLayer('objcomcolis', tiles, 0, 0);
     const obcomcolis2 = mapa.createLayer('obcomcolis2', tiles, 0, 0);
     const borda       = mapa.createLayer('borda',       tiles, 0, 0);
@@ -52,7 +55,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     obcomcolis2.setCollisionByExclusion([-1]);
     borda.setCollisionByExclusion([-1]);
 
-    // --- ANIMAÇÕES ---
+    // Cria as animações de movimento do personagem
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
@@ -70,26 +73,28 @@ export default class SceneEscritorio extends Phaser.Scene {
       }
     });
 
-    // --- PERSONAGEM ---
-    // Sem object layer de spawn no mapa, usa posição fixa no hall de entrada
+    // Define posição inicial fixa dentro do escritório
     const spawnX = 342;
     const spawnY = 308;
 
+    // Cria o personagem com física
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'esp_frente_1');
     this.personagem.setCollideWorldBounds(true);
 
-    const tamTile      = mapa.tileWidth || 16;
+    // Ajusta escala e hitbox para melhor encaixe no tilemap
+    const tamTile       = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
     const escala = Math.min((tamTile * 0.4) / larguraSprite, (tamTile * 0.4) / alturaSprite);
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
+    // Aplica colisões com as camadas sólidas
     this.physics.add.collider(this.personagem, objcomcolis);
     this.physics.add.collider(this.personagem, obcomcolis2);
     this.physics.add.collider(this.personagem, borda);
 
-    // --- CONTROLES ---
+    // Controles de movimento (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima:     Phaser.Input.Keyboard.KeyCodes.W,
@@ -98,7 +103,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       direita:  Phaser.Input.Keyboard.KeyCodes.D
     });
 
-    // --- CÂMERA ---
+    // Configura a câmera para seguir o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
@@ -107,27 +112,32 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.direcaoAtual = 'frente';
 
-    // --- SAÍDA AUTOMÁTICA ---
-    // Ao entrar no raio da porta, retorna para a cidade sem precisar apertar tecla
+    // Define zona de saída automática próxima à porta
     this.zonasSaida = [{ x: 342, y: 280, raio: 25 }];
     this.dentroZonaSaida = false;
     this.transicionando = false;
 
+    // Texto de debug com coordenadas do personagem
     this.debugTxt = this.add.text(0, 0, '', {
-      fontSize: '4px', color: '#ffff00',
-      backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
+      fontSize: '4px',
+      color: '#ffff00',
+      backgroundColor: '#000000',
+      padding: { x: 1, y: 1 },
+      resolution: 4
     }).setDepth(999);
   }
 
+  // Atualiza movimento, animações e verifica saída automática
   update() {
-    // Movimentação base do personagem
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
+    // Zera a velocidade a cada frame para controle preciso
     personagem.setVelocity(0);
 
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play('esp_andar_esquerda', true);
@@ -140,6 +150,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play('esp_andar_tras', true);
@@ -152,12 +163,13 @@ export default class SceneEscritorio extends Phaser.Scene {
       movendo = true;
     }
 
+    // Mantém sprite parado na última direção quando não há movimento
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // --- SAÍDA AUTOMÁTICA ---
+    // Verifica se o personagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
       return d <= z.raio;
@@ -167,7 +179,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       this.dentroZonaSaida = dentroSaida;
     }
 
-    // Transição automática para a cidade ao se aproximar da saída
+    // Ao entrar na zona, inicia automaticamente a transição para a cidade
     if (!this.transicionando && dentroSaida) {
       this.transicionando = true;
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -181,6 +193,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       });
     }
 
+    // Atualiza debug com posição atual do personagem
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }

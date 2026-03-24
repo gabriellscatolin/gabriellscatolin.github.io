@@ -2,20 +2,23 @@ export default class SceneSupermercado extends Phaser.Scene {
   constructor() {
     super({ key: "SceneSupermercado" });
   }
-  //Registra os dados do personagem para uso na cena
+
+  // Registra os dados do personagem para uso na cena
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
   }
-  //Carrega os recursos necessários para a cena
+
+  // Carrega os recursos necessários para a cena
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
     this.load.maxParallelDownloads = 2;
 
+    // Loga erros de carregamento para facilitar debug
     this.load.on("loaderror", (arquivo) => {
       console.error(
         "[SceneSupermercado] Erro ao carregar:",
@@ -97,6 +100,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "supermercado" });
     this.mapa = mapa;
 
+    // Otimiza os tilesets antes de montar o cenário
     this._otimizarTilesetsPorUso(mapa);
 
     const tsInteriors = mapa.addTilesetImage(
@@ -151,7 +155,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       tsChar01,
     ].filter(Boolean);
 
-    this.add // fundo cinza para evitar bordas pretas em telas maiores que o mapa
+    this.add // Fundo cinza para evitar bordas pretas fora do mapa
       .rectangle(
         0,
         0,
@@ -161,6 +165,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
+    // Camadas visuais sem colisão
     this._criarCamada(mapa, "Chão", tilesets);
     this._criarCamada(mapa, "ParedeSemColisão", tilesets);
     this._criarCamada(mapa, "ObjSemColisão", tilesets);
@@ -169,6 +174,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this._criarCamada(mapa, "Vidro", tilesets);
     this._criarCamada(mapa, "Player", tilesets);
 
+    // Camadas sólidas que bloqueiam o personagem
     const paredeC = this._criarCamada(mapa, "ParedeComColisão", tilesets);
     const objC = this._criarCamada(mapa, "ObjComColisão", tilesets);
     const objC2 = this._criarCamada(mapa, "ObjComColisão2", tilesets);
@@ -197,7 +203,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       }
     });
 
-    // Spawn solicitado
+    // Posição inicial do personagem na cena
     const spawnX = 124;
     const spawnY = 183;
     //________________________________________________________________________________________________
@@ -206,7 +212,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
-    // Colisões extras devido a bugs do Tiled (tiles de 16x16 com colisão de 8x8)
+    // Colisões extras para corrigir limitações do Tiled em alguns pontos do mapa
     const pontosColisao = [
       { x: 100, y: 56, w: 16, h: 16 },
       { x: 91, y: 59, w: 16, h: 16 },
@@ -235,11 +241,12 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    // Colisões com camadas do mapa
+    // Colisões com as camadas sólidas do mapa
     [paredeC, objC, objC2, bordaC]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // Controles de movimento (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -257,7 +264,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    //Definição da zona de saída (apenas para a porta em x=129, y=200)
+    // Define a zona de saída da cena
     this.zonasSaida = this._criarZonasSaida();
 
     this.labelSair = this.add
@@ -275,8 +282,9 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
 
-    this.direcaoAtual = "frente"; // para definir a direção inicial do personagem
+    this.direcaoAtual = "frente"; // Guarda a direção inicial do personagem
 
+    // Debug com as coordenadas atuais do personagem
     this.debugTxt = this.add
       .text(0, 0, "", {
         fontSize: "4px",
@@ -307,12 +315,13 @@ export default class SceneSupermercado extends Phaser.Scene {
       return null;
     }
   }
-  // Retorna a chave otimizada do tileset ou a chave original se não houver otimização
+
+  // Retorna a chave otimizada do tileset ou a chave original se não houver recorte
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
   }
 
-  // Coleta os GIDs usados no mapa para otimizar os tilesets posteriormente
+  // Coleta os GIDs realmente usados no mapa
   _coletarGidsUsados(mapa) {
     const usados = new Set();
 
@@ -331,7 +340,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     return usados;
   }
 
-  // Otimiza os tilesets cortando as partes não usadas, com base nos GIDs coletados. Isso reduz o uso de memória e melhora a performance.
+  // Recorta os tilesets para manter apenas as partes realmente usadas
   _otimizarTilesetsPorUso(mapa) {
     const defs = [
       { tmjName: "Interiors_16x16", baseKey: "super_interiors" },
@@ -348,14 +357,14 @@ export default class SceneSupermercado extends Phaser.Scene {
       { tmjName: "Premade_Character_01", baseKey: "super_char01" },
     ];
 
-    // Cria um mapa de chaves para os tilesets, inicialmente apontando para as chaves originais
+    // Cria um mapa de chaves apontando inicialmente para as texturas originais
     this._tilesetKeys = {};
     const usados = this._coletarGidsUsados(mapa);
     const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
       (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
     );
 
-    // Corta a imagem do tileset para conter apenas os tiles necessários, criando uma nova textura otimizada. Isso reduz o uso de memória e melhora a performance.
+    // Cria versões menores dos tilesets com base no último tile usado
     defs.forEach((def) => {
       this._tilesetKeys[def.tmjName] = def.baseKey;
 
@@ -422,9 +431,9 @@ export default class SceneSupermercado extends Phaser.Scene {
     });
   }
 
-  //Define as zonas de saída do mapa
+  // Define as zonas de saída do mapa
   _criarZonasSaida() {
-    // ÚNICA saída permitida: porta em x=129, y=200
+    // Única saída permitida: porta em x=129, y=200
     return [{ x: 129, y: 200, raio: 14 }];
   }
 
@@ -438,6 +447,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     personagem.setVelocity(0);
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("esp_andar_esquerda", true);
@@ -450,6 +460,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("esp_andar_tras", true);
@@ -462,12 +473,13 @@ export default class SceneSupermercado extends Phaser.Scene {
       movendo = true;
     }
 
+    // Mantém o sprite parado na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // Detecção por aproximação da porta (apenas x=129,y=200)
+    // Detecção por aproximação da porta
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
         personagem.x,
@@ -504,7 +516,7 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     //_______________________________________________________________________________________________
 
-    //Debug para mostrar as coordenadas do personagem (pode ser removido depois)
+    // Debug para mostrar as coordenadas do personagem
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
