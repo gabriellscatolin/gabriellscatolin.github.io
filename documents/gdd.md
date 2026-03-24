@@ -1099,96 +1099,336 @@ Sistema de diálogo com múltiplas opções que impactam a pontuação e progres
 
 ### 3.8.1. Movimentação do Personagem
 
-&emsp;O personagem se move com **velocidade constante** em quatro direções (cima, baixo, esquerda, direita). A posição do personagem a cada frame é atualizada pela equação cinemática de movimento uniforme:
+&emsp;O personagem se move com velocidade constante em quatro direções (cima, baixo, esquerda, direita), caracterizando um movimento uniforme em cada eixo do plano cartesiano.
+&emsp;A atualização da posição pode ser descrita pela equação vetorial do movimento uniforme:
 
-$$P_{n+1} = P_n + v \cdot \Delta t$$
+$$
+\vec{P}_{n+1} = \vec{P}_n + \vec{v} \cdot \Delta t
+$$
+
+&emsp;De forma equivalente, separando por eixos:
+
+$$
+x_{n+1} = x_n + v_x \cdot \Delta t
+$$
+
+$$
+y_{n+1} = y_n + v_y \cdot \Delta t
+$$
 
 Onde:
-- $P_n$ = posição atual do personagem (em pixels)
-- $v$ = velocidade escalar constante (definida em `velocidadePersonagem`, em pixels por segundo)
-- $\Delta t$ = intervalo de tempo entre frames (gerenciado internamente pelo Phaser.js via `update()`)
+- $(x_n, y_n)$ = posição atual do personagem (em pixels)
+- $v_x$, $v_y$ = componentes da velocidade nos eixos horizontal e vertical
+- $\Delta t$ = intervalo de tempo entre frames
 
-&emsp;Na implementação com Phaser.js, a velocidade é aplicada diretamente ao corpo físico do sprite, e o motor de física atualiza a posição automaticamente a cada frame:
+&emsp;No sistema de coordenadas do Phaser, o eixo Y é invertido (valores positivos apontam para baixo), o que explica o uso de velocidade negativa para movimento para cima.
 
-```js
-corpoFisico.setVelocityX(velocidadePersonagem);  // movimento horizontal
-corpoFisico.setVelocityY(-velocidadePersonagem); // movimento vertical (eixo Y invertido)
+#### Implementação
+
+```javascript
+personagem.setVelocity(0);
+
+if (teclas.left.isDown) {
+  personagem.setVelocityX(-velocidade);
+} else if (teclas.right.isDown) {
+  personagem.setVelocityX(velocidade);
+}
+
+if (teclas.up.isDown) {
+  personagem.setVelocityY(-velocidade);
+} else if (teclas.down.isDown) {
+  personagem.setVelocityY(velocidade);
+}
 ```
+#### Interpretação
 
-### 3.8.2. Limitação de Fronteiras (Clamping)
-
-&emsp;Para impedir que o personagem saia dos limites do mapa, aplica-se a função de clamping, que restringe a posição do personagem ao intervalo $[P_{min}, P_{max}]$:
-
-$$P_{clamped} = \max(P_{min},\; \min(P_{max},\; P))$$
-
-&emsp;Na implementação:
-
-```js
-this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
-this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
-```
+&emsp;A cada frame, o motor de física do Phaser atualiza automaticamente a posição do personagem com base nas velocidades definidas, garantindo um movimento uniforme (sem aceleração) em cada eixo.
+&emsp;Assim, o personagem percorre distâncias proporcionais ao tempo, mantendo velocidade constante enquanto uma tecla de direção estiver pressionada.
 
 ### 3.8.3. Detecção de Proximidade com NPCs
 
-&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. A distância euclidiana entre dois pontos no plano 2D é calculada por:
+&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. Para isso, utiliza-se a distância euclidiana entre dois pontos no plano cartesiano 2D.
 
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+$$
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$
 
-Onde $(x_1, y_1)$ é a posição do personagem e $(x_2, y_2)$ é a posição do NPC. Se $d < r_{interação}$ (definido como 150 pixels), o indicador de interação `[E]` é exibido e a tecla de ação fica disponível:
+&emsp;Onde:
+- $(x_1, y_1)$ representa a posição do personagem  
+- $(x_2, y_2)$ representa a posição do NPC  
 
-```js
-const distNpc = Phaser.Math.Distance.Between(px, py, npcX, npcY);
-this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
+&emsp;No sistema implementado, considera-se que o personagem está próximo do NPC quando:
+
+$$
+d < 30
+$$
+
+&emsp;Esse valor define o raio de interação em pixels. Quando essa condição é satisfeita, o indicador `[E]` é exibido na tela, permitindo a interação.
+
+#### Implementação em Código
+
+```javascript
+const distNpc = Phaser.Math.Distance.Between(
+  personagem.x,
+  personagem.y,
+  79,
+  141
+);
+
+const pertoNpc = distNpc < 30;
 ```
+#### Controle de Interface
+
+```javascript
+if (pertoNpc !== this.perto_npc) {
+  this.perto_npc = pertoNpc;
+  this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+}
+```
+
+#### Interação com o NPC
+
+```javascript
+if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
+}
+```
+
+#### Interpretação Matemática
+
+&emsp;A equação da distância euclidiana define uma região circular de raio $r = 30$ centrada no NPC. Sempre que o personagem entra nessa região, considera-se que ele está suficientemente próximo para interagir.
+
+&emsp;Geometricamente, isso corresponde ao conjunto de pontos que satisfazem:
+
+$$
+(x - x_{npc})^2 + (y - y_{npc})^2 < r^2
+$$
+
+#### Conclusão
+
+&emsp;A implementação utiliza uma função matemática clássica da geometria analítica para detectar proximidade entre dois elementos no plano. O comportamento observado no jogo é consistente com o modelo teórico, garantindo uma interação precisa e eficiente com os NPCs.
 
 ### 3.8.4. Animação Clock Wipe (Transição de Cenas)
 
-&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela, simulando o fechamento de um círculo no sentido horário ou anti-horário.
-&emsp;Matematicamente, esse efeito é controlado por um parâmetro de progresso contínuo: $t \in [0,1]$, onde $t = 0$ representa o início (tela totalmente visível) e $t = 1$ o final (tela completamente encoberta).
-&emsp;O ângulo inicial da animação é dado por $\theta_0 = -\frac{\pi}{2}$ (topo do círculo) e avança até completar $2\pi$ radianos (uma volta completa), sendo modelado por:
+&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela.
 
-\[
+&emsp;O progresso da animação é dado por $t \in [0,1]$, onde $t = 0$ representa o início e $t = 1$ o final da transição.
+
+&emsp;O ângulo inicial é dado por $\theta_0 = -\frac{\pi}{2}$ e evolui até completar $2\pi$ radianos:
+
+$$
 \theta(t) = -\frac{\pi}{2} + t \cdot 2\pi
-\]
+$$
 
-&emsp;Essa equação é aplicada diretamente no cálculo do arco da máscara a cada frame da animação:
-```
+&emsp;Aplicação no código:
+
+```javascript
 const progress = tween.getValue();
 const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
-````
-**Sentidos da animação:**
+```
 
-1) Sentido Horário (clockwise)
- No sentido horário, o arco visível da máscara é definido entre um ângulo inicial variável e um ângulo final fixo:
+#### Sentidos da animação
 
-Ângulo inicial: $\theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi$
-Ângulo final: $\theta_{final} = -\frac{\pi}{2} + 2\pi$
+##### 1) Sentido horário (clockwise)
+
+&emsp;Ângulo inicial:
+
+$$
+\theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi
+$$
+
+&emsp;Ângulo final:
+
+$$
+\theta_{final} = -\frac{\pi}{2} + 2\pi
+$$
+
+```javascript
 if (clockwise) {
   const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
   const endAngle = -Math.PI / 2 + Math.PI * 2;
   maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
 }
+```
 
- À medida que $t$ aumenta, o arco diminui, produzindo o efeito de fechamento da tela no sentido horário.
+##### 2) Sentido anti-horário (counterclockwise)
 
-Sentido Anti-horário (counterclockwise)
+&emsp;Ângulo inicial:
 
- No sentido anti-horário, o comportamento é invertido, com o ângulo final variando ao longo do tempo:
+$$
+\theta_{inicial} = -\frac{\pi}{2}
+$$
 
-Ângulo inicial: $\theta_{inicial} = -\frac{\pi}{2}$
-Ângulo final: $\theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi$
+&emsp;Ângulo final:
+
+$$
+\theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi
+$$
+
+```javascript
 else {
   const startAngle = -Math.PI / 2;
   const endAngle = -Math.PI / 2 + (1 - progress) * Math.PI * 2;
   maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
 }
+```
 
- Esse comportamento gera o fechamento da cena no sentido oposto.
+#### Cálculo do raio da máscara
+
+$$
+r = \frac{\sqrt{w^2 + h^2}}{2}
+$$
+
+```javascript
+const raio = Math.hypot(this.scale.width, this.scale.height) / 2;
+```
+
+#### Interpolação temporal (Easing)
+
+$$
+t' = \frac{1 - \cos(\pi t)}{2}
+$$
+
+```javascript
+this.tweens.add({
+  targets: { progress: 0 },
+  progress: 1,
+  duration: this.CONFIG.WIPE_DURATION,
+  ease: this.CONFIG.WIPE_EASE,
+});
+```
+
+&emsp;Essa interpolação torna a animação mais fluida, reduzindo a velocidade no início e no fim.
+ 
+### 3.8.5. Animação Cinemática da Chuva (MU + MUV)
+
+&emsp;A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
+
+&emsp;Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.
+
+&emsp;A função responsável pela animação é:
+
+- Arquivo: `src/scenes/SceneChuva.js`  
+- Função: `animacaoCinematica(g)`  
+- Linha aproximada: 60  
+
+#### Parâmetros do Modelo
+
+| Parâmetro            | Símbolo | Descrição |
+|---------------------|--------|-----------|
+| Posição inicial X   | xi     | Coordenada horizontal inicial da gota (pixels), gerada aleatoriamente. |
+| Posição inicial Y   | yi     | Coordenada vertical inicial (negativa), acima da tela. |
+| Posição final X     | xf     | Coordenada final no eixo X, definida por deslocamento horizontal. |
+| Posição final Y     | yf     | Coordenada final no eixo Y (abaixo da tela). |
+| Tempo total         | T      | Duração total da animação da gota (1,2 s a 1,8 s). |
+| Tempo corrente      | t      | Tempo acumulado da animação: $t \in [0, T]$. |
+| Elemento gráfico    | g      | Objeto que representa a gota e armazena seu estado. |
+
+#### Modelagem Matemática
+
+&emsp;O movimento da gota é descrito pelo vetor posição:
+
+$$
+\vec{r}(t) = (x(t), y(t))
+$$
+
+##### Eixo X — Movimento Uniforme (MU)
+
+$$
+v_x = \frac{x_f - x_i}{T}
+$$
+
+$$
+x(t) = x_i + v_x \cdot t
+$$
+
+&emsp;A velocidade horizontal é constante, representando o efeito do vento.
+
+##### Eixo Y — Movimento Uniformemente Variado (MUV)
+
+$$
+a_y = \frac{2(y_f - y_i)}{T^2}
+$$
+
+$$
+v_y(t) = a_y \cdot t
+$$
+
+$$
+y(t) = y_i + \frac{1}{2} a_y \cdot t^2
+$$
+
+&emsp;A gota parte do repouso vertical ($v_0 = 0$) e acelera continuamente, simulando a gravidade.
+
+#### Implementação da Função
+
+```javascript
+animacaoCinematica(g) {
+
+  if (g.t >= g.T) {
+    g.x = g.xf;
+    g.y = g.yf;
+    g.ativo = false;
+    return;
+  }
+
+  var t = g.t;
+
+  // MU — eixo X
+  var x_atual = g.xi + g.vx * t;
+
+  // MUV — eixo Y
+  var vy_atual = g.ay * t;
+  var y_atual = g.yi + 0.5 * g.ay * t * t;
+
+  g.x = x_atual;
+  g.y = y_atual;
+
+  if (g.frame % 10 === 0) {
+    console.log("[MU  | X] vx:" + g.vx + " x:" + x_atual);
+    console.log("[MUV | Y] ay:" + g.ay + " vy:" + vy_atual + " y:" + y_atual);
+  }
+}
+```
+
+#### Pré-cálculo dos Parâmetros
+
+```javascript
+g.vx = (g.xf - g.xi) / g.T;
+g.ay = (2 * (g.yf - g.yi)) / (g.T * g.T);
+```
+
+#### Atualização Temporal
+
+```javascript
+g.t += delta / 1000;
+```
+
+&emsp;O uso do delta garante que a animação seja independente da taxa de frames.
+
+#### Interpretação Física
+
+- Eixo X → velocidade constante → Movimento Uniforme  
+- Eixo Y → aceleração constante → Movimento Uniformemente Variado  
+- Movimento resultante → trajetória parabólica  
+
+$$
+\vec{r}(t) = (x_i + v_x t)\hat{x} + \left(y_i + \frac{1}{2} a_y t^2\right)\hat{y}
+$$
+
+#### Validação (Console)
+
+&emsp;Os logs confirmam o comportamento esperado:
+
+- $v_x$ constante → MU validado  
+- $v_y$ crescente → MUV validado  
+- $y(t)$ cresce quadraticamente → queda acelerada  
 
 
+#### Conclusão
 
+&emsp;A implementação atende todos os requisitos propostos, utilizando apenas operações matemáticas básicas e modelagem física coerente. O comportamento visual da chuva reproduz corretamente um movimento bidimensional com MU no eixo X e MUV no eixo Y.
 
-###3.8.5 Animação de chuva na SceneCidade###
 
 # <a name="c4"></a>4. Desenvolvimento do Jogo
 
