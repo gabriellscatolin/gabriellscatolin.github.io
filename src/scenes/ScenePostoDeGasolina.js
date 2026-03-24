@@ -3,16 +3,18 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     super({ key: 'ScenePostoDeGasolina' });
   }
 
+  // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
-    // Dados do personagem definidos na transição da cidade
     this.nomePastaEscolhida = dados.nomePasta || "Pedro";
     this.prefixoEscolhido   = dados.prefixo   || "HB";
   }
 
+  // Carrega mapa, tilesets e sprites do personagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo   = this.prefixoEscolhido;
 
+    // Loga erros de carregamento para facilitar debug
     this.load.on('loaderror', (arquivo) => {
       console.error('[ScenePostoDeGasolina] Erro ao carregar:', arquivo.key, arquivo.src);
     });
@@ -29,7 +31,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     this.load.image('posto_mod_s2', 'src/assets/imagens/mapsjson/tileSets/Modern_S2_4096.png');
     this.load.image('posto_mod_s3', 'src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png');
 
-    // Carrega os 16 frames de animacao do personagem escolhido
+    // Carrega os frames do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
@@ -39,8 +41,9 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     }
   }
 
+  // Monta o mapa, o personagem, as colisões e a saída da cena
   create() {
-    // Criação do mapa e camadas principais
+    // Prepara os tilesets antes de criar o mapa
     this.prepararTilesetsPosto();
 
     const mapa = this.make.tilemap({ key: 'posto' });
@@ -57,6 +60,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     const modS3 = mapa.addTilesetImage('Modern_Exteriors_S3', 'posto_mod_s3', 16, 16, 0, 0);
     const tiles = [roomBuilder, intS1, intS2, intS3, intS4, intS5, modS1, modS2, modS3].filter(Boolean);
 
+    // Calcula a área útil do mapa e do chão
     const areaMapa = this._calcularAreaCamada(mapa);
     const areaChao = this._calcularAreaCamada(mapa, 'N- Ch\u00e3o');
     this.origemMapaX = areaChao.x;
@@ -64,7 +68,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     this.larguraMapa = areaChao.largura;
     this.alturaMapa  = areaChao.altura;
 
-    // Fundo sólido para cobrir qualquer area vazia fora dos tiles
+    // Fundo neutro para evitar áreas vazias fora do mapa
     this.add.rectangle(
       areaMapa.x - 100,
       areaMapa.y - 100,
@@ -73,26 +77,26 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       0x888888,
     ).setOrigin(0, 0);
 
-    // Camadas sem colisão
+    // Camadas visuais sem colisão
     this.criarCamada(mapa, 'N- Ch\u00e3o', tiles);
     this.criarCamada(mapa, 'N - ParedeSemColid', tiles);
     this.criarCamada(mapa, 'N - ObjetosSemColid_embaixo', tiles);
     this.criarCamada(mapa, 'PLAYER', tiles);
 
-    // Camadas com colisão
+    // Camadas sólidas que bloqueiam o personagem
     const parede = this.criarCamada(mapa, 'C- ParedeComColid', tiles);
     const objetos = this.criarCamada(mapa, 'C - Objetos com Colid', tiles);
 
     if (parede) parede.setCollisionByExclusion([-1]);
     if (objetos) objetos.setCollisionByExclusion([-1]);
 
-    // Camadas sem colisão acima do personagem
+    // Camadas acima do personagem para dar profundidade visual
     const objetosCima = this.criarCamada(mapa, 'N - ObjetosSemColid_emcima', tiles);
     const produtos = this.criarCamada(mapa, 'N - ProdutosSemColid', tiles);
     if (objetosCima) objetosCima.setDepth(10);
     if (produtos) produtos.setDepth(10);
 
-    // --- ANIMAÇÕES ---
+    // Cria as animações de movimento do personagem
     const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
     direcoes.forEach(dir => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
@@ -110,14 +114,14 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       }
     });
 
-    // --- PERSONAGEM ---
-    // Sem object layer de spawn no mapa, usa posicao fixa na entrada do posto
+    // Usa um spawn fixo calculado dentro da área útil do posto
     const spawnX = this.origemMapaX + this.larguraMapa * 0.5;
     const spawnY = this.origemMapaY + this.alturaMapa * 0.7;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, 'esp_frente_1');
     this.personagem.setCollideWorldBounds(true);
 
+    // Ajusta escala e hitbox para encaixar melhor no cenário
     const tamTile       = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
     const alturaSprite  = this.personagem.height;
@@ -128,7 +132,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     if (parede) this.physics.add.collider(this.personagem, parede);
     if (objetos) this.physics.add.collider(this.personagem, objetos);
 
-    // --- CONTROLES ---
+    // Controles de movimento e interação
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima:     Phaser.Input.Keyboard.KeyCodes.W,
@@ -138,7 +142,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    // --- CÂMERA ---
+    // Configura a câmera para seguir o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(6.5);
     this.cameras.main.setBounds(this.origemMapaX, this.origemMapaY, this.larguraMapa, this.alturaMapa);
@@ -148,8 +152,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
     this.direcaoAtual = 'frente';
 
-    // --- SAÍDA COM TECLA ---
-    // Ao entrar no raio da porta, mostra o aviso e retorna para a cidade ao apertar E
+    // Define a zona de saída próxima à porta
     this.zonasSaida = [{ x: this.origemMapaX + 48, y: this.origemMapaY + 160, raio: 24 }];
     this.dentroZonaSaida = false;
     this.transicionando = false;
@@ -159,12 +162,14 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       backgroundColor: '#000000cc', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
 
+    // Texto de debug com as coordenadas atuais
     this.debugTxt = this.add.text(0, 0, '', {
       fontSize: '4px', color: '#ffff00',
       backgroundColor: '#000000', padding: { x: 1, y: 1 }, resolution: 4
     }).setDepth(999);
   }
 
+  // Cria uma camada do tilemap com tratamento de erro
   criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
@@ -178,6 +183,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     }
   }
 
+  // Calcula a área ocupada pelos tiles válidos de uma camada
   calcularAreaCamada(layer, tileW, tileH) {
     let minX = Number.POSITIVE_INFINITY;
     let minY = Number.POSITIVE_INFINITY;
@@ -203,6 +209,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     };
   }
 
+  // Calcula a área total de uma camada específica ou do mapa inteiro
   _calcularAreaCamada(mapa, nomeCamada = null) {
     const tileW = mapa.tileWidth || 16;
     const tileH = mapa.tileHeight || 16;
@@ -241,11 +248,13 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     return areaEncontrada;
   }
 
+  // Divide tilesets grandes em partes menores para o mapa conseguir usar tudo
   prepararTilesetsPosto() {
     const cacheMapa = this.cache.tilemap.get('posto');
     const dadosMapa = cacheMapa && cacheMapa.data;
     if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
 
+    // Evita aplicar a separação mais de uma vez
     if (dadosMapa.tilesets.some((ts) => ts.name === 'Interiors_16x16_S1')) return;
 
     const novosTilesets = [];
@@ -343,6 +352,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     dadosMapa.tilesets = novosTilesets;
   }
 
+  // Percorre os tiles da camada independentemente do formato dos dados
   percorrerTilesDaCamada(layer, callback) {
     const visitarGrade = (grade, offsetX = 0, offsetY = 0) => {
       for (let y = 0; y < grade.length; y++) {
@@ -389,8 +399,8 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     }
   }
 
+  // Atualiza movimento, saída da cena e texto de debug
   update() {
-    // Movimentação base do personagem
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
@@ -398,6 +408,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play('esp_andar_esquerda', true);
@@ -410,6 +421,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play('esp_andar_tras', true);
@@ -422,12 +434,13 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       movendo = true;
     }
 
+    // Se estiver parado, mantém o sprite na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // --- SAÍDA COM TECLA ---
+    // Verifica se o personagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
       return d <= z.raio;
@@ -438,8 +451,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       this.labelSair.setVisible(dentroSaida);
     }
 
-    // Transição para a cidade ao se aproximar da saída
-    //  e apertar E
+    // Transição para a cidade ao se aproximar da saída e apertar E
     if (!this.transicionando && dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
@@ -454,6 +466,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       });
     }
 
+    // Atualiza o texto de debug com as coordenadas atuais
     this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
