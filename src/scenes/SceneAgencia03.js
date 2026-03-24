@@ -75,6 +75,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     this._otimizarTilesetsPorUso(mapa);
 
+    const OX = 32 * 16; // 512
+    const OY = 16 * 16; // 256
+
     // O tilemap da agência declara os tilesets nesta ordem:
     //   firstgid:    1 → Room_Builder_16x16
     //   firstgid: 8589 → Interiors_16x16
@@ -102,22 +105,23 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     // ── Camadas sem colisão (ordem de profundidade / render) ──────────────────
     // Nomes extraídos do TMJ fornecido
-    this._criarCamada(mapa, "N - Chao",                   tilesets);
-    this._criarCamada(mapa, "N - Tapete",                 tilesets);
-    this._criarCamada(mapa, "N - PardeSemColid",          tilesets);
-    this._criarCamada(mapa, "N - Linha",                  tilesets);
-    this._criarCamada(mapa, "N - Escada",                 tilesets);
-    this._criarCamada(mapa, "N - ObjetSemColid_baixo",    tilesets);
-    this._criarCamada(mapa, "N - ObjetSemColid_cima",     tilesets);
-    this._criarCamada(mapa, "PLAYER",                     tilesets); // camada de referência de spawn
+    this._criarCamada(mapa, "N - Chao",                   tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Tapete",                 tilesets, OX, OY);
+    this._criarCamada(mapa, "N - PardeSemColid",          tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Linha",                  tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Escada",                 tilesets, OX, OY);
+    this._criarCamada(mapa, "N - ObjetSemColid_baixo",    tilesets, OX, OY);
+    this._criarCamada(mapa, "N - ObjetSemColid_cima",     tilesets, OX, OY);
+    this._criarCamada(mapa, "PLAYER",                     tilesets, OX, OY);
+
 
     // ── Camadas COM colisão ───────────────────────────────────────────────────
     // O TMJ usa "C - ParedeComColid" e "C - LinhaDaParede" no lugar de
     // ParedeComColisão / Bordas. "C - Escada" também tem colisão no mapa.
-    const paredeC  = this._criarCamada(mapa, "C - ParedeComColid",  tilesets);
-    const linhaC   = this._criarCamada(mapa, "C - LinhaDaParede",   tilesets);
-    const escadaC  = this._criarCamada(mapa, "C - Escada",          tilesets);
-    const objetC   = this._criarCamada(mapa, "C - ObjetComColid_cima", tilesets);
+    const paredeC = this._criarCamada(mapa, "C - ParedeComColid",     tilesets, OX, OY);
+    const linhaC  = this._criarCamada(mapa, "C - LinhaDaParede",      tilesets, OX, OY);
+    const escadaC = this._criarCamada(mapa, "C - Escada",             tilesets, OX, OY);
+    const objetC  = this._criarCamada(mapa, "C - ObjetComColid_cima", tilesets, OX, OY);
 
     [paredeC, linhaC, escadaC, objetC]
       .filter(Boolean)
@@ -176,11 +180,11 @@ export default class SceneAgencia03 extends Phaser.Scene {
     });
 
     // ── Câmera ────────────────────────────────────────────────────────────────
-    this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(5);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.cameras.main.fadeIn(600, 0, 0, 0);
+    const larguraReal = mapa.widthInPixels  + OX;
+    const alturaReal  = mapa.heightInPixels + OY;
+    this.cameras.main.setBounds(0, 0, larguraReal, alturaReal);
+    this.physics.world.setBounds(0, 0, larguraReal, alturaReal);
+   
 
     // ── Zona de saída ─────────────────────────────────────────────────────────
     // TODO: ajuste x/y/raio depois de testar no jogo e localizar a porta real
@@ -216,23 +220,17 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
   // ── Funções auxiliares ────────────────────────────────────────────────────
 
-  _criarCamada(mapa, nome, tilesets) {
-    try {
-      const camada = mapa.createLayer(nome, tilesets, 0, 0);
-      if (!camada) {
-        console.warn("[SceneAgencia03] Camada não encontrada:", nome);
-      }
-      return camada;
-    } catch (erro) {
-      console.error(
-        "[SceneAgencia03] Erro ao criar camada",
-        nome,
-        ":",
-        erro.message,
-      );
-      return null;
-    }
+  _criarCamada(mapa, nome, tilesets, ox = 0, oy = 0) {
+  try {
+    const camada = mapa.createLayer(nome, tilesets, ox, oy);
+    if (!camada) console.warn("[SceneAgencia03] Camada não encontrada:", nome);
+    return camada;
+  } catch (erro) {
+    console.error("[SceneAgencia03] Erro ao criar camada", nome, ":", erro.message);
+    return null;
   }
+}
+  
 
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
