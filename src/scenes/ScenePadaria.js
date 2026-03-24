@@ -1,12 +1,14 @@
 export default class ScenePadaria extends Phaser.Scene {
   constructor() {
-    super({ key: 'ScenePadaria' });
+    super({ key: "ScenePadaria" });
   }
 
   // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
-    this.nomePastaEscolhida = dados.nomePasta || this.registry.get('nomePasta') || "Pedro";
-    this.prefixoEscolhido   = dados.prefixo   || this.registry.get('prefixo')   || "HB";
+    this.nomePastaEscolhida =
+      dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
+    this.prefixoEscolhido =
+      dados.prefixo || this.registry.get("prefixo") || "HB";
   }
 
   // Carrega mapa, tilesets e sprites do personagem
@@ -18,23 +20,51 @@ export default class ScenePadaria extends Phaser.Scene {
 
     // Loga erros de carregamento para facilitar debug
     this.load.on("loaderror", (arquivo) => {
-      console.error("[ScenePadaria] Erro ao carregar:", arquivo.key, arquivo.src);
+      console.error(
+        "[ScenePadaria] Erro ao carregar:",
+        arquivo.key,
+        arquivo.src,
+      );
     });
 
     // Tilemap e tilesets do ambiente
-    this.load.tilemapTiledJSON("padaria", "src/assets/imagens/mapsjson/tileMaps/padaria.tmj");
+    this.load.tilemapTiledJSON(
+      "padaria",
+      "src/assets/imagens/mapsjson/tileMaps/padaria.tmj",
+    );
 
-    this.load.image("super_interiors",   "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png");
-    this.load.image("super_roombuilder", "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png");
-    this.load.image("super_exteriors",   "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png");
+    this.load.image(
+      "super_interiors",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png",
+    );
+    this.load.image(
+      "super_roombuilder",
+      "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
+    );
+    this.load.image(
+      "super_exteriors",
+      "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png",
+    );
 
     // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
-      this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
-      this.load.image(`esp_tras_${i}`,     `${caminhoBase}/${prefixo}_tras_${i}.png`);
-      this.load.image(`esp_direita_${i}`,  `${caminhoBase}/${prefixo}_direita_${i}.png`);
-      this.load.image(`esp_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+      this.load.image(
+        `esp_frente_${i}`,
+        `${caminhoBase}/${prefixo}_frente_${i}.png`,
+      );
+      this.load.image(
+        `esp_tras_${i}`,
+        `${caminhoBase}/${prefixo}_tras_${i}.png`,
+      );
+      this.load.image(
+        `esp_direita_${i}`,
+        `${caminhoBase}/${prefixo}_direita_${i}.png`,
+      );
+      this.load.image(
+        `esp_esquerda_${i}`,
+        `${caminhoBase}/${prefixo}_esquerda_${i}.png`,
+      );
     }
   }
 
@@ -46,31 +76,46 @@ export default class ScenePadaria extends Phaser.Scene {
     // Otimiza tilesets para melhorar performance
     this._otimizarTilesetsPorUso(mapa);
 
-    const tsInteriors = mapa.addTilesetImage("Interiors_16x16", this._keyTileset("Interiors_16x16", "super_interiors"));
-    const tsRoomBuilder = mapa.addTilesetImage("Room_Builder_16x16", this._keyTileset("Room_Builder_16x16", "super_roombuilder"));
-    const tsExteriors = mapa.addTilesetImage("Modern_Exteriors_Complete_Tileset", this._keyTileset("Modern_Exteriors_Complete_Tileset", "super_exteriors"));
+    const tsInteriors = mapa.addTilesetImage(
+      "Interiors_16x16",
+      this._keyTileset("Interiors_16x16", "super_interiors"),
+    );
+    const tsRoomBuilder = mapa.addTilesetImage(
+      "Room_Builder_16x16",
+      this._keyTileset("Room_Builder_16x16", "super_roombuilder"),
+    );
+    const tsExteriors = mapa.addTilesetImage(
+      "Modern_Exteriors_Complete_Tileset",
+      this._keyTileset("Modern_Exteriors_Complete_Tileset", "super_exteriors"),
+    );
 
     const tilesets = [tsInteriors, tsRoomBuilder, tsExteriors].filter(Boolean);
 
     // Fundo neutro para evitar áreas vazias fora do mapa
     this.add
-      .rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888)
+      .rectangle(
+        0,
+        0,
+        mapa.widthInPixels + 200,
+        mapa.heightInPixels + 200,
+        0x888888,
+      )
       .setOrigin(0, 0);
 
     // Camadas visuais (sem colisão)
-    this._criarCamada(mapa, "Chão",              tilesets);
+    this._criarCamada(mapa, "Chão", tilesets);
     this._criarCamada(mapa, "ParedeSemColisão1", tilesets);
     this._criarCamada(mapa, "ParedeSemColisão2", tilesets);
-    this._criarCamada(mapa, "ObjSemColisao1",    tilesets);
-    this._criarCamada(mapa, "ObjSemColisao2",    tilesets);
-    this._criarCamada(mapa, "Itens",             tilesets);
-    this._criarCamada(mapa, "Itens2",            tilesets);
-    this._criarCamada(mapa, "Vidro",             tilesets);
+    this._criarCamada(mapa, "ObjSemColisao1", tilesets);
+    this._criarCamada(mapa, "ObjSemColisao2", tilesets);
+    this._criarCamada(mapa, "Itens", tilesets);
+    this._criarCamada(mapa, "Itens2", tilesets);
+    this._criarCamada(mapa, "Vidro", tilesets);
 
     // Camadas sólidas (com colisão)
     const paredeC = this._criarCamada(mapa, "ParedeComColisão", tilesets);
-    const objC    = this._criarCamada(mapa, "ObjComColisao",    tilesets);
-    const bordaC  = this._criarCamada(mapa, "Bordas",           tilesets);
+    const objC = this._criarCamada(mapa, "ObjComColisao", tilesets);
+    const bordaC = this._criarCamada(mapa, "Bordas", tilesets);
 
     [paredeC, objC, bordaC]
       .filter(Boolean)
@@ -104,10 +149,10 @@ export default class ScenePadaria extends Phaser.Scene {
     // Colisões extras com zonas invisíveis (objetos específicos)
     const pontosColisao = [
       { x: 100, y: 56, w: 16, h: 16 },
-      { x: 91,  y: 59, w: 16, h: 16 },
-      { x: 65,  y: 84, w: 16, h: 16 },
-      { x: 45,  y: 84, w: 16, h: 16 },
-      { x: 25,  y: 84, w: 16, h: 16 },
+      { x: 91, y: 59, w: 16, h: 16 },
+      { x: 65, y: 84, w: 16, h: 16 },
+      { x: 45, y: 84, w: 16, h: 16 },
+      { x: 25, y: 84, w: 16, h: 16 },
     ];
 
     this.colisoesExtras = [];
@@ -127,7 +172,7 @@ export default class ScenePadaria extends Phaser.Scene {
     this.personagem.body.setSize(12 / escalaX, 10 / escalaY);
     this.personagem.body.setOffset(
       (this.personagem.width - 12 / escalaX) / 2,
-      this.personagem.height - 10 / escalaY
+      this.personagem.height - 10 / escalaY,
     );
 
     // Colisão com camadas do mapa
@@ -154,28 +199,34 @@ export default class ScenePadaria extends Phaser.Scene {
     // Zonas de saída (detectadas no mapa ou fallback)
     this.zonasSaida = this._criarZonasSaida(mapa);
 
-    this.labelSair = this.add.text(0, 0, "[E] Sair", {
-      fontSize: "3px",
-      color: "#ffffff",
-      backgroundColor: "#000000cc",
-      padding: { x: 1, y: 1 },
-      resolution: 4,
-    }).setDepth(20).setOrigin(0.5, 1).setVisible(false);
+    this.labelSair = this.add
+      .text(0, 0, "[E] Sair", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
 
-    this.transicionando  = false;
+    this.transicionando = false;
     this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente";
 
     // Debug de posição
-    this.debugTxt = this.add.text(0, 0, "", {
-      fontSize: "4px",
-      color: "#ffff00",
-      backgroundColor: "#000000",
-      padding: { x: 1, y: 1 },
-      resolution: 4,
-    }).setDepth(999);
+    this.debugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "4px",
+        color: "#ffff00",
+        backgroundColor: "#000000",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(999);
   }
 
   // Cria camada com verificação de existência no mapa
@@ -228,7 +279,7 @@ export default class ScenePadaria extends Phaser.Scene {
 
     // Verifica se o personagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y)
+      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -241,7 +292,11 @@ export default class ScenePadaria extends Phaser.Scene {
     }
 
     // Transição para a cidade ao pressionar E
-    if (!this.transicionando && dentroSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      !this.transicionando &&
+      dentroSaida &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
 
@@ -249,15 +304,17 @@ export default class ScenePadaria extends Phaser.Scene {
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
-          prefixo:   this.prefixoEscolhido,
-          spawnX:    76,
-          spawnY:    232,
+          prefixo: this.prefixoEscolhido,
+          spawnX: 76,
+          spawnY: 232,
         });
       });
     }
 
     // Debug de coordenadas
-    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setText(
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+    );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

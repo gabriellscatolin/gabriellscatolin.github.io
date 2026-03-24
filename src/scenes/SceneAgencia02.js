@@ -179,10 +179,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this._criarCamada(mapa, "N - ObjetSemColid_cima", tilesets);
     this._criarCamada(mapa, "PLAYER", tilesets);
 
-    const objCbaixo = this._criarCamada(mapa, "C - ObjetComColid_baixo", tilesets);
+    const objCbaixo = this._criarCamada(
+      mapa,
+      "C - ObjetComColid_baixo",
+      tilesets,
+    );
     const parC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
     const estante = this._criarCamada(mapa, "C - Estante", tilesets);
-    const linhasparede = this._criarCamada(mapa, "C - LinhasDeParede", tilesets);
+    const linhasparede = this._criarCamada(
+      mapa,
+      "C - LinhasDeParede",
+      tilesets,
+    );
     const mesinha = this._criarCamada(mapa, "C- Mesinha", tilesets);
     const objC = this._criarCamada(mapa, "C - ObjetComColid", tilesets);
     const cabine = this._criarCamada(mapa, "C- Cabine", tilesets);
@@ -405,7 +413,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
         }
       }
 
-      const chunks = Array.isArray(layer?.chunks) ? layer.chunks : layer?.data || [];
+      const chunks = Array.isArray(layer?.chunks)
+        ? layer.chunks
+        : layer?.data || [];
       chunks.forEach((chunk) => {
         if (
           typeof chunk?.x !== "number" ||
@@ -579,7 +589,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     // Verifica se o personagem entrou na área de saída
     const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y)
+      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
     );
 
     // Mostra ou esconde a label conforme a proximidade da saída

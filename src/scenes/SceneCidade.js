@@ -19,7 +19,11 @@ export default class SceneCidade extends Phaser.Scene {
     const prefixo = this.registry.get("prefixo") || "HB";
 
     this.load.on("loaderror", (arquivo) => {
-      console.error("[SceneCidade] Erro ao carregar:", arquivo.key, arquivo.src);
+      console.error(
+        "[SceneCidade] Erro ao carregar:",
+        arquivo.key,
+        arquivo.src,
+      );
     });
 
     this.load.tilemapTiledJSON(
@@ -147,10 +151,14 @@ export default class SceneCidade extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.03));
     this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
 
-    if (caminhoInferior) this.physics.add.collider(this.personagem, caminhoInferior);
-    if (carrosVeiculos) this.physics.add.collider(this.personagem, carrosVeiculos);
-    if (objetosInferior2) this.physics.add.collider(this.personagem, objetosInferior2);
-    if (estabelecimentos) this.physics.add.collider(this.personagem, estabelecimentos);
+    if (caminhoInferior)
+      this.physics.add.collider(this.personagem, caminhoInferior);
+    if (carrosVeiculos)
+      this.physics.add.collider(this.personagem, carrosVeiculos);
+    if (objetosInferior2)
+      this.physics.add.collider(this.personagem, objetosInferior2);
+    if (estabelecimentos)
+      this.physics.add.collider(this.personagem, estabelecimentos);
 
     if (tilesets.length > 0) {
       const decSup1 = this._criarCamada(

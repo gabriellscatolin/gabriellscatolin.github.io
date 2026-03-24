@@ -38,18 +38,42 @@ export default class SceneFarmacia extends Phaser.Scene {
     );
 
     // Tilesets do interior
-    this.load.image("farm_int_p1", "src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png");
-    this.load.image("farm_int_p2", "src/assets/imagens/mapsjson/tileSets/Interiors_Part2.png");
-    this.load.image("farm_int_p3", "src/assets/imagens/mapsjson/tileSets/Interiors_Part3.png");
-    this.load.image("farm_roombuilder", "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png");
+    this.load.image(
+      "farm_int_p1",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png",
+    );
+    this.load.image(
+      "farm_int_p2",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_Part2.png",
+    );
+    this.load.image(
+      "farm_int_p3",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_Part3.png",
+    );
+    this.load.image(
+      "farm_roombuilder",
+      "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
+    );
 
     // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
-      this.load.image(`farm_frente_${i}`, `${caminhoBase}/${prefixo}_frente_${i}.png`);
-      this.load.image(`farm_tras_${i}`, `${caminhoBase}/${prefixo}_tras_${i}.png`);
-      this.load.image(`farm_direita_${i}`, `${caminhoBase}/${prefixo}_direita_${i}.png`);
-      this.load.image(`farm_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+      this.load.image(
+        `farm_frente_${i}`,
+        `${caminhoBase}/${prefixo}_frente_${i}.png`,
+      );
+      this.load.image(
+        `farm_tras_${i}`,
+        `${caminhoBase}/${prefixo}_tras_${i}.png`,
+      );
+      this.load.image(
+        `farm_direita_${i}`,
+        `${caminhoBase}/${prefixo}_direita_${i}.png`,
+      );
+      this.load.image(
+        `farm_esquerda_${i}`,
+        `${caminhoBase}/${prefixo}_esquerda_${i}.png`,
+      );
     }
   }
 
@@ -61,16 +85,34 @@ export default class SceneFarmacia extends Phaser.Scene {
     // Otimiza tilesets para reduzir uso de memória
     this._otimizarTilesetsPorUso(mapa);
 
-    const tsP1 = mapa.addTilesetImage("Interior_P1", this._keyTileset("Interior_P1", "farm_int_p1"));
-    const tsP2 = mapa.addTilesetImage("Interior_P2", this._keyTileset("Interior_P2", "farm_int_p2"));
-    const tsP3 = mapa.addTilesetImage("Interior_P3", this._keyTileset("Interior_P3", "farm_int_p3"));
-    const tsRoom = mapa.addTilesetImage("roombuilder", this._keyTileset("roombuilder", "farm_roombuilder"));
+    const tsP1 = mapa.addTilesetImage(
+      "Interior_P1",
+      this._keyTileset("Interior_P1", "farm_int_p1"),
+    );
+    const tsP2 = mapa.addTilesetImage(
+      "Interior_P2",
+      this._keyTileset("Interior_P2", "farm_int_p2"),
+    );
+    const tsP3 = mapa.addTilesetImage(
+      "Interior_P3",
+      this._keyTileset("Interior_P3", "farm_int_p3"),
+    );
+    const tsRoom = mapa.addTilesetImage(
+      "roombuilder",
+      this._keyTileset("roombuilder", "farm_roombuilder"),
+    );
 
     const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
 
     // Fundo neutro para evitar bordas fora do mapa
     this.add
-      .rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x555555)
+      .rectangle(
+        0,
+        0,
+        mapa.widthInPixels + 200,
+        mapa.heightInPixels + 200,
+        0x555555,
+      )
       .setOrigin(0, 0);
 
     // Camadas visuais sem colisão

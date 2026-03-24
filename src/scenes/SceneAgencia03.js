@@ -105,23 +105,40 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     // ── Camadas sem colisão (ordem de profundidade / render) ──────────────────
     // Nomes extraídos do TMJ fornecido
-    this._criarCamada(mapa, "N - Chao",                   tilesets, OX, OY);
-    this._criarCamada(mapa, "N - Tapete",                 tilesets, OX, OY);
-    this._criarCamada(mapa, "N - PardeSemColid",          tilesets, OX, OY);
-    this._criarCamada(mapa, "N - Linha",                  tilesets, OX, OY);
-    this._criarCamada(mapa, "N - Escada",                 tilesets, OX, OY);
-    this._criarCamada(mapa, "N - ObjetSemColid_baixo",    tilesets, OX, OY);
-    this._criarCamada(mapa, "N - ObjetSemColid_cima",     tilesets, OX, OY);
-    this._criarCamada(mapa, "PLAYER",                     tilesets, OX, OY);
-
+    this._criarCamada(mapa, "N - Chao", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Tapete", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - PardeSemColid", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Linha", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - Escada", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - ObjetSemColid_baixo", tilesets, OX, OY);
+    this._criarCamada(mapa, "N - ObjetSemColid_cima", tilesets, OX, OY);
+    this._criarCamada(mapa, "PLAYER", tilesets, OX, OY);
 
     // ── Camadas COM colisão ───────────────────────────────────────────────────
     // O TMJ usa "C - ParedeComColid" e "C - LinhaDaParede" no lugar de
     // ParedeComColisão / Bordas. "C - Escada" também tem colisão no mapa.
-    const paredeC = this._criarCamada(mapa, "C - ParedeComColid",     tilesets, OX, OY);
-    const linhaC  = this._criarCamada(mapa, "C - LinhaDaParede",      tilesets, OX, OY);
-    const escadaC = this._criarCamada(mapa, "C - Escada",             tilesets, OX, OY);
-    const objetC  = this._criarCamada(mapa, "C - ObjetComColid_cima", tilesets, OX, OY);
+    const paredeC = this._criarCamada(
+      mapa,
+      "C - ParedeComColid",
+      tilesets,
+      OX,
+      OY,
+    );
+    const linhaC = this._criarCamada(
+      mapa,
+      "C - LinhaDaParede",
+      tilesets,
+      OX,
+      OY,
+    );
+    const escadaC = this._criarCamada(mapa, "C - Escada", tilesets, OX, OY);
+    const objetC = this._criarCamada(
+      mapa,
+      "C - ObjetComColid_cima",
+      tilesets,
+      OX,
+      OY,
+    );
 
     [paredeC, linhaC, escadaC, objetC]
       .filter(Boolean)
@@ -147,16 +164,16 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     // ── Spawn do personagem ───────────────────────────────────────────────────
     // Usa a posição passada por outra cena; caso contrário, usa o centro do mapa
-    const spawnX = this.spawnXInicial ?? mapa.widthInPixels  / 2;
+    const spawnX = this.spawnXInicial ?? mapa.widthInPixels / 2;
     const spawnY = this.spawnYInicial ?? mapa.heightInPixels / 2;
 
     // ── Personagem e física ───────────────────────────────────────────────────
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
-    const tamTile     = mapa.tileWidth || 16;
+    const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
-    const alturaSprite  = this.personagem.height;
+    const alturaSprite = this.personagem.height;
 
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
@@ -172,19 +189,18 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     // ── Controles ─────────────────────────────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd   = this.input.keyboard.addKeys({
-      cima:     Phaser.Input.Keyboard.KeyCodes.W,
-      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+    this.wasd = this.input.keyboard.addKeys({
+      cima: Phaser.Input.Keyboard.KeyCodes.W,
+      baixo: Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita:  Phaser.Input.Keyboard.KeyCodes.D,
+      direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
     // ── Câmera ────────────────────────────────────────────────────────────────
-    const larguraReal = mapa.widthInPixels  + OX;
-    const alturaReal  = mapa.heightInPixels + OY;
+    const larguraReal = mapa.widthInPixels + OX;
+    const alturaReal = mapa.heightInPixels + OY;
     this.cameras.main.setBounds(0, 0, larguraReal, alturaReal);
     this.physics.world.setBounds(0, 0, larguraReal, alturaReal);
-   
 
     // ── Zona de saída ─────────────────────────────────────────────────────────
     // TODO: ajuste x/y/raio depois de testar no jogo e localizar a porta real
@@ -202,9 +218,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    this.transicionando  = false;
+    this.transicionando = false;
     this.dentroZonaSaida = false;
-    this.direcaoAtual    = "frente";
+    this.direcaoAtual = "frente";
 
     // ── Debug de coordenadas ──────────────────────────────────────────────────
     this.debugTxt = this.add
@@ -221,16 +237,21 @@ export default class SceneAgencia03 extends Phaser.Scene {
   // ── Funções auxiliares ────────────────────────────────────────────────────
 
   _criarCamada(mapa, nome, tilesets, ox = 0, oy = 0) {
-  try {
-    const camada = mapa.createLayer(nome, tilesets, ox, oy);
-    if (!camada) console.warn("[SceneAgencia03] Camada não encontrada:", nome);
-    return camada;
-  } catch (erro) {
-    console.error("[SceneAgencia03] Erro ao criar camada", nome, ":", erro.message);
-    return null;
+    try {
+      const camada = mapa.createLayer(nome, tilesets, ox, oy);
+      if (!camada)
+        console.warn("[SceneAgencia03] Camada não encontrada:", nome);
+      return camada;
+    } catch (erro) {
+      console.error(
+        "[SceneAgencia03] Erro ao criar camada",
+        nome,
+        ":",
+        erro.message,
+      );
+      return null;
+    }
   }
-}
-  
 
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
@@ -244,7 +265,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
         const row = data[y] || [];
         for (let x = 0; x < row.length; x++) {
           const cell = row[x];
-          const gid  = typeof cell === "number" ? cell : cell?.index || 0;
+          const gid = typeof cell === "number" ? cell : cell?.index || 0;
           if (gid > 0) usados.add(gid);
         }
       }
@@ -256,7 +277,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     // Apenas os dois tilesets usados pelo mapa da agência
     const defs = [
       { tmjName: "Room_Builder_16x16", baseKey: "agencia_roombuilder" },
-      { tmjName: "Interiors_16x16",    baseKey: "agencia_interiors"   },
+      { tmjName: "Interiors_16x16", baseKey: "agencia_interiors" },
     ];
 
     this._tilesetKeys = {};
@@ -275,9 +296,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
       const source = this.textures.get(def.baseKey).getSourceImage();
       if (!source?.width || !source?.height) return;
 
-      const idx      = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
+      const idx = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
       const startGid = ts.firstgid || 1;
-      const endGid   =
+      const endGid =
         idx < tilesetsOrdenados.length - 1
           ? tilesetsOrdenados[idx + 1].firstgid - 1
           : Number.MAX_SAFE_INTEGER;
@@ -291,18 +312,16 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
       if (!maiorGidUsado) return;
 
-      const tileW   = ts.tilewidth  || 16;
-      const tileH   = ts.tileheight || 16;
-      const margin  = ts.margin     || 0;
-      const spacing = ts.spacing    || 0;
+      const tileW = ts.tilewidth || 16;
+      const tileH = ts.tileheight || 16;
+      const margin = ts.margin || 0;
+      const spacing = ts.spacing || 0;
 
       const columns =
         ts.columns ||
         Math.max(
           1,
-          Math.floor(
-            (source.width - margin * 2 + spacing) / (tileW + spacing),
-          ),
+          Math.floor((source.width - margin * 2 + spacing) / (tileW + spacing)),
         );
 
       const tilesNecessarios = maiorGidUsado - startGid + 1;
@@ -311,12 +330,11 @@ export default class SceneAgencia03 extends Phaser.Scene {
         Math.ceil(tilesNecessarios / columns),
       );
 
-      const cropWCalc =
-        margin + columns * (tileW + spacing) - spacing + margin;
+      const cropWCalc = margin + columns * (tileW + spacing) - spacing + margin;
       const cropHCalc =
         margin + linhasNecessarias * (tileH + spacing) - spacing + margin;
 
-      const cropW = Math.min(source.width,  Math.max(tileW, cropWCalc));
+      const cropW = Math.min(source.width, Math.max(tileW, cropWCalc));
       const cropH = Math.min(source.height, Math.max(tileH, cropHCalc));
 
       if (cropW >= source.width && cropH >= source.height) return;
@@ -325,7 +343,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
       if (this.textures.exists(cutKey)) this.textures.remove(cutKey);
 
       const canvasTex = this.textures.createCanvas(cutKey, cropW, cropH);
-      const ctx       = canvasTex.getContext();
+      const ctx = canvasTex.getContext();
       ctx.clearRect(0, 0, cropW, cropH);
       ctx.drawImage(source, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
       canvasTex.refresh();
@@ -409,9 +427,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.scene.start(zonaSaidaAtual.destino || "SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
-          prefixo:   this.prefixoEscolhido,
-          spawnX:    zonaSaidaAtual.spawnX ?? 0,
-          spawnY:    zonaSaidaAtual.spawnY ?? 0,
+          prefixo: this.prefixoEscolhido,
+          spawnX: zonaSaidaAtual.spawnX ?? 0,
+          spawnY: zonaSaidaAtual.spawnY ?? 0,
         });
       });
     }

@@ -1,61 +1,91 @@
 export default class SceneEscritorio extends Phaser.Scene {
   constructor() {
-    super({ key: 'SceneEscritorio' });
+    super({ key: "SceneEscritorio" });
   }
 
   // Recebe os dados do personagem vindos da cena anterior
   init(dados) {
     this.nomePastaEscolhida = dados.nomePasta || "Pedro";
-    this.prefixoEscolhido   = dados.prefixo   || "HB";
+    this.prefixoEscolhido = dados.prefixo || "HB";
   }
 
   // Carrega mapa, tileset e sprites do personagem escolhido
   preload() {
     const nomePasta = this.nomePastaEscolhida;
-    const prefixo   = this.prefixoEscolhido;
+    const prefixo = this.prefixoEscolhido;
 
     // Loga erros de carregamento para facilitar debug
-    this.load.on('loaderror', (arquivo) => {
-      console.error('[SceneEscritorio] Erro ao carregar:', arquivo.key, arquivo.src);
+    this.load.on("loaderror", (arquivo) => {
+      console.error(
+        "[SceneEscritorio] Erro ao carregar:",
+        arquivo.key,
+        arquivo.src,
+      );
     });
 
     // Tilemap do escritório
-    this.load.tilemapTiledJSON('escritorio', 'src/assets/imagens/mapsjson/tileMaps/escritorio.tmj');
-    this.load.image('escritorio_tiles', 'src/assets/imagens/mapsjson/tileSets/escritorio.png');
+    this.load.tilemapTiledJSON(
+      "escritorio",
+      "src/assets/imagens/mapsjson/tileMaps/escritorio.tmj",
+    );
+    this.load.image(
+      "escritorio_tiles",
+      "src/assets/imagens/mapsjson/tileSets/escritorio.png",
+    );
 
     // Sprite do NPC do escritório
     this.load.image(
-      'npc_escritorio',
-      'src/assets/imagens/imagensPersonagens/NPC/npcEscritorio.png',
+      "npc_escritorio",
+      "src/assets/imagens/imagensPersonagens/NPC/npcEscritorio.png",
     );
 
     // Carrega os frames de animação do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
-      this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
-      this.load.image(`esp_tras_${i}`,     `${caminhoBase}/${prefixo}_tras_${i}.png`);
-      this.load.image(`esp_direita_${i}`,  `${caminhoBase}/${prefixo}_direita_${i}.png`);
-      this.load.image(`esp_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+      this.load.image(
+        `esp_frente_${i}`,
+        `${caminhoBase}/${prefixo}_frente_${i}.png`,
+      );
+      this.load.image(
+        `esp_tras_${i}`,
+        `${caminhoBase}/${prefixo}_tras_${i}.png`,
+      );
+      this.load.image(
+        `esp_direita_${i}`,
+        `${caminhoBase}/${prefixo}_direita_${i}.png`,
+      );
+      this.load.image(
+        `esp_esquerda_${i}`,
+        `${caminhoBase}/${prefixo}_esquerda_${i}.png`,
+      );
     }
   }
 
   // Monta o mapa, personagem, colisões, câmera e saída com tecla E
   create() {
     // Cria o tilemap e associa o tileset
-    const mapa  = this.make.tilemap({ key: 'escritorio' });
-    const tiles = mapa.addTilesetImage('escritorio', 'escritorio_tiles');
+    const mapa = this.make.tilemap({ key: "escritorio" });
+    const tiles = mapa.addTilesetImage("escritorio", "escritorio_tiles");
 
     // Fundo neutro para evitar áreas vazias fora do mapa
-    this.add.rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888).setOrigin(0, 0);
+    this.add
+      .rectangle(
+        0,
+        0,
+        mapa.widthInPixels + 200,
+        mapa.heightInPixels + 200,
+        0x888888,
+      )
+      .setOrigin(0, 0);
 
     // Camadas visuais sem colisão
-    mapa.createLayer('chao', tiles, 0, 0);
-    mapa.createLayer('semcolis', tiles, 0, 0);
+    mapa.createLayer("chao", tiles, 0, 0);
+    mapa.createLayer("semcolis", tiles, 0, 0);
 
     // Camadas com colisão (bloqueiam o personagem)
-    const objcomcolis = mapa.createLayer('objcomcolis', tiles, 0, 0);
-    const obcomcolis2 = mapa.createLayer('obcomcolis2', tiles, 0, 0);
-    const borda       = mapa.createLayer('borda',       tiles, 0, 0);
+    const objcomcolis = mapa.createLayer("objcomcolis", tiles, 0, 0);
+    const obcomcolis2 = mapa.createLayer("obcomcolis2", tiles, 0, 0);
+    const borda = mapa.createLayer("borda", tiles, 0, 0);
 
     objcomcolis.setCollisionByExclusion([-1]);
     obcomcolis2.setCollisionByExclusion([-1]);
@@ -79,8 +109,8 @@ export default class SceneEscritorio extends Phaser.Scene {
     });
 
     // Cria as animações de movimento do personagem
-    const direcoes = ['frente', 'tras', 'direita', 'esquerda'];
-    direcoes.forEach(dir => {
+    const direcoes = ["frente", "tras", "direita", "esquerda"];
+    direcoes.forEach((dir) => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
         this.anims.create({
           key: `esp_andar_${dir}`,
@@ -88,10 +118,10 @@ export default class SceneEscritorio extends Phaser.Scene {
             { key: `esp_${dir}_1` },
             { key: `esp_${dir}_2` },
             { key: `esp_${dir}_3` },
-            { key: `esp_${dir}_4` }
+            { key: `esp_${dir}_4` },
           ],
           frameRate: 8,
-          repeat: -1
+          repeat: -1,
         });
       }
     });
@@ -101,14 +131,17 @@ export default class SceneEscritorio extends Phaser.Scene {
     const spawnY = 392;
 
     // Cria o personagem com física
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, 'esp_frente_1');
+    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
     // Ajusta escala e hitbox para melhor encaixe no tilemap
-    const tamTile       = mapa.tileWidth || 16;
+    const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
-    const alturaSprite  = this.personagem.height;
-    const escala = Math.min((tamTile * 0.4) / larguraSprite, (tamTile * 0.4) / alturaSprite);
+    const alturaSprite = this.personagem.height;
+    const escala = Math.min(
+      (tamTile * 0.4) / larguraSprite,
+      (tamTile * 0.4) / alturaSprite,
+    );
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
@@ -118,10 +151,13 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.physics.add.collider(this.personagem, borda);
 
     // NPC do escritório
-    this.npcEscritorio = this.physics.add.staticImage(338, 258, 'npc_escritorio').setDepth(5);
+    this.npcEscritorio = this.physics.add
+      .staticImage(338, 258, "npc_escritorio")
+      .setDepth(5);
     const alturaAlvoNpc = this.personagem.displayHeight;
     this.npcEscritorio.setDisplaySize(
-      (this.npcEscritorio.width / this.npcEscritorio.height) * (alturaAlvoNpc * 1.2),
+      (this.npcEscritorio.width / this.npcEscritorio.height) *
+        (alturaAlvoNpc * 1.2),
       alturaAlvoNpc * 1.2,
     );
     this.npcEscritorio.refreshBody();
@@ -129,10 +165,10 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.npcEscritorio);
 
     this.labelNpc = this.add
-      .text(338, 277, '[E] Falar', {
-        fontSize: '3px',
-        color: '#ffffff',
-        backgroundColor: '#000000cc',
+      .text(338, 277, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
         padding: { x: 1, y: 1 },
         resolution: 4,
       })
@@ -144,11 +180,11 @@ export default class SceneEscritorio extends Phaser.Scene {
       .text(
         this.npcEscritorio.x,
         this.npcEscritorio.y - this.npcEscritorio.displayHeight * 0.5,
-        '!',
+        "!",
         {
-          fontSize: '24px',
-          color: '#ffeb3b',
-          stroke: '#000000',
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
           strokeThickness: 2,
           resolution: 4,
         },
@@ -164,16 +200,20 @@ export default class SceneEscritorio extends Phaser.Scene {
       repeat: -1,
     });
 
-    console.log('[SceneEscritorio] NPC criado em:', this.npcEscritorio.x, this.npcEscritorio.y);
-    console.log('[SceneEscritorio] Label NPC criado:', !!this.labelNpc);
+    console.log(
+      "[SceneEscritorio] NPC criado em:",
+      this.npcEscritorio.x,
+      this.npcEscritorio.y,
+    );
+    console.log("[SceneEscritorio] Label NPC criado:", !!this.labelNpc);
 
     // Controles de movimento (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
-      cima:     Phaser.Input.Keyboard.KeyCodes.W,
-      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+      cima: Phaser.Input.Keyboard.KeyCodes.W,
+      baixo: Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita:  Phaser.Input.Keyboard.KeyCodes.D
+      direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
     // Configura a câmera para seguir o personagem
@@ -183,15 +223,15 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    this.direcaoAtual = 'frente';
+    this.direcaoAtual = "frente";
 
     // Define zona de saída próxima à porta
     this.zonaSaida = new Phaser.Geom.Rectangle(310, 372, 60, 40);
     this.labelSair = this.add
-      .text(340, 392, '[E] Sair', {
-        fontSize: '3px',
-        color: '#ffffff',
-        backgroundColor: '#000000cc',
+      .text(340, 392, "[E] Sair", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
         padding: { x: 1, y: 1 },
         resolution: 4,
       })
@@ -206,13 +246,15 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Texto de debug com coordenadas do personagem
-    this.debugTxt = this.add.text(0, 0, '', {
-      fontSize: '4px',
-      color: '#ffff00',
-      backgroundColor: '#000000',
-      padding: { x: 1, y: 1 },
-      resolution: 4
-    }).setDepth(999);
+    this.debugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "4px",
+        color: "#ffff00",
+        backgroundColor: "#000000",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(999);
   }
 
   // Atualiza movimento, animações, interação com NPC e saída por tecla E
@@ -228,26 +270,26 @@ export default class SceneEscritorio extends Phaser.Scene {
     // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
-      personagem.anims.play('esp_andar_esquerda', true);
-      this.direcaoAtual = 'esquerda';
+      personagem.anims.play("esp_andar_esquerda", true);
+      this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
       personagem.setVelocityX(velocidade);
-      personagem.anims.play('esp_andar_direita', true);
-      this.direcaoAtual = 'direita';
+      personagem.anims.play("esp_andar_direita", true);
+      this.direcaoAtual = "direita";
       movendo = true;
     }
 
     // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play('esp_andar_tras', true);
-      this.direcaoAtual = 'tras';
+      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
       personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play('esp_andar_frente', true);
-      this.direcaoAtual = 'frente';
+      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      this.direcaoAtual = "frente";
       movendo = true;
     }
 
@@ -266,7 +308,9 @@ export default class SceneEscritorio extends Phaser.Scene {
     );
     const pertoNpc = distNpc < 50;
 
-    console.log(`[Debug] Dist NPC: ${distNpc.toFixed(0)}px, Perto: ${pertoNpc}, Label visível: ${this.labelNpc ? this.labelNpc.visible : 'null'}`);
+    console.log(
+      `[Debug] Dist NPC: ${distNpc.toFixed(0)}px, Perto: ${pertoNpc}, Label visível: ${this.labelNpc ? this.labelNpc.visible : "null"}`,
+    );
 
     this.perto_npc = pertoNpc;
     this.labelNpc.setVisible(pertoNpc);
@@ -286,7 +330,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      console.log('[SceneEscritorio] Interagiu com o NPC do escritório');
+      console.log("[SceneEscritorio] Interagiu com o NPC do escritório");
     }
 
     // Verifica se o personagem entrou na zona de saída
@@ -311,18 +355,20 @@ export default class SceneEscritorio extends Phaser.Scene {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.start('SceneCidade', {
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 1741,
-          spawnY: 1256
+          spawnY: 1256,
         });
       });
     }
 
     // Atualiza debug com posição atual do personagem
-    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setText(
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+    );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }
