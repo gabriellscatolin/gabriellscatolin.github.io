@@ -9,6 +9,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   // Carrega os assets do mapa e do personagem
@@ -95,6 +97,14 @@ export default class SceneAgencia02 extends Phaser.Scene {
   create() {
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
+    const mapaBruto = this.cache.tilemap.get("agencia02")?.data;
+    const limitesMapa = this._calcularLimitesMapa(mapaBruto || mapa);
+    const limitesCena = {
+      x: limitesMapa.x + 77,
+      y: limitesMapa.y,
+      width: limitesMapa.width,
+      height: Math.max(limitesMapa.height, mapa.heightInPixels) + 70,
+    };
 
     // Otimiza os tilesets antes de montar as camadas
     this._otimizarTilesetsPorUso(mapa);
@@ -152,10 +162,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     // Adiciona um fundo neutro para evitar bordas pretas fora do mapa
     this.add
       .rectangle(
-        0,
-        0,
-        mapa.widthInPixels + 200,
-        mapa.heightInPixels + 200,
+        limitesCena.x - 100,
+        limitesCena.y - 100,
+        limitesCena.width + 200,
+        limitesCena.height + 200,
         0x888888,
       )
       .setOrigin(0, 0);
@@ -201,8 +211,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
     });
 
     // Define o ponto inicial do personagem na cena
-    const spawnX = 1806;
-    const spawnY = 1580;
+    const spawnX = this.spawnXCustom ?? 500;
+    const spawnY = this.spawnYCustom ?? 500;
 
     // Cria o personagem com física e limita seu movimento ao mapa
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
@@ -233,17 +243,27 @@ export default class SceneAgencia02 extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Configura a câmera para acompanhar o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(5);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.cameras.main.centerOn(mapa.widthInPixels / 2, mapa.heightInPixels / 2);
-    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.cameras.main.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
+    this.physics.world.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Cria a zona de saída e o aviso visual exibido ao se aproximar dela
-    this.zonasSaida = this._criarZonasSaida();
+    this.zonasSaida = this._criarZonasSaida(spawnX, spawnY);
 
     this.labelSair = this.add
       .text(0, 0, "[Saída]", {
@@ -316,6 +336,72 @@ export default class SceneAgencia02 extends Phaser.Scene {
     });
 
     return usados;
+  }
+
+  // Calcula os limites reais do mapa infinito
+  _calcularLimitesMapa(mapa) {
+    const tileW = mapa.tileWidth || 16;
+    const tileH = mapa.tileHeight || 16;
+    let minX = 0;
+    let minY = 0;
+    let maxX = mapa.width || 0;
+    let maxY = mapa.height || 0;
+    let encontrouChunk = false;
+
+    (mapa.layers || []).forEach((layer) => {
+      if (
+        typeof layer?.startx === "number" &&
+        typeof layer?.starty === "number" &&
+        typeof layer?.width === "number" &&
+        typeof layer?.height === "number"
+      ) {
+        if (!encontrouChunk) {
+          minX = layer.startx;
+          minY = layer.starty;
+          maxX = layer.startx + layer.width;
+          maxY = layer.starty + layer.height;
+          encontrouChunk = true;
+        } else {
+          minX = Math.min(minX, layer.startx);
+          minY = Math.min(minY, layer.starty);
+          maxX = Math.max(maxX, layer.startx + layer.width);
+          maxY = Math.max(maxY, layer.starty + layer.height);
+        }
+      }
+
+      const chunks = Array.isArray(layer?.chunks) ? layer.chunks : layer?.data || [];
+      chunks.forEach((chunk) => {
+        if (
+          typeof chunk?.x !== "number" ||
+          typeof chunk?.y !== "number" ||
+          typeof chunk?.width !== "number" ||
+          typeof chunk?.height !== "number"
+        ) {
+          return;
+        }
+
+        if (!encontrouChunk) {
+          minX = chunk.x;
+          minY = chunk.y;
+          maxX = chunk.x + chunk.width;
+          maxY = chunk.y + chunk.height;
+          encontrouChunk = true;
+          return;
+        }
+
+        minX = Math.min(minX, chunk.x);
+        minY = Math.min(minY, chunk.y);
+        maxX = Math.max(maxX, chunk.x + chunk.width);
+        maxY = Math.max(maxY, chunk.y + chunk.height);
+      });
+    });
+
+    return {
+      x: minX * tileW,
+      y: minY * tileH,
+      width: (Math.max(maxX, mapa.width || 0) - minX) * tileW,
+      height: (Math.max(maxY, mapa.height || 0) - minY) * tileH,
+    };
   }
 
   // Cria versões menores dos tilesets usando apenas os tiles necessários
@@ -411,8 +497,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
   }
 
   // Define a posição da única saída válida da cena
-  _criarZonasSaida() {
-    return [{ x: 129, y: 200, raio: 14 }];
+  _criarZonasSaida(spawnX, spawnY) {
+    return [new Phaser.Geom.Rectangle(spawnX - 60, spawnY - 60, 120, 120)];
   }
 
   // Atualiza movimentação, animação, saída e debug a cada frame
@@ -456,15 +542,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Verifica se o personagem entrou na área de saída
-    const dentroSaida = (this.zonasSaida || []).some((z) => {
-      const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
-        z.x,
-        z.y,
-      );
-      return d <= z.raio;
-    });
+    const dentroSaida = (this.zonasSaida || []).some((z) =>
+      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y)
+    );
 
     // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -477,7 +557,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Ao entrar na zona, inicia automaticamente a transição para a cidade
-    if (!this.transicionando && dentroSaida) {
+    if (
+      !this.transicionando &&
+      dentroSaida &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
