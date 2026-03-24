@@ -192,6 +192,42 @@ export default class SceneAgencia02 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
 
+    // Remove colisão numa faixa ao redor de x=376, y=312
+    const tileW = mapa.tileWidth || 16;
+    const tileH = mapa.tileHeight || 16;
+    const colInicio1 = Math.floor(360 / tileW);
+    const colFim1 = Math.ceil(392 / tileW);
+    const linInicio1 = Math.floor(296 / tileH);
+    const linFim1 = Math.ceil(328 / tileH);
+
+    [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
+      .filter(Boolean)
+      .forEach((camada) => {
+        for (let col = colInicio1; col <= colFim1; col++) {
+          for (let lin = linInicio1; lin <= linFim1; lin++) {
+            const tile = camada.getTileAt(col, lin);
+            if (tile) tile.setCollision(false, false, false, false);
+          }
+        }
+      });
+
+    // Remove colisão numa faixa ao redor de x=162, y=232
+    const colInicio2 = Math.floor(146 / tileW);
+    const colFim2 = Math.ceil(178 / tileW);
+    const linInicio2 = Math.floor(216 / tileH);
+    const linFim2 = Math.ceil(248 / tileH);
+
+    [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
+      .filter(Boolean)
+      .forEach((camada) => {
+        for (let col = colInicio2; col <= colFim2; col++) {
+          for (let lin = linInicio2; lin <= linFim2; lin++) {
+            const tile = camada.getTileAt(col, lin);
+            if (tile) tile.setCollision(false, false, false, false);
+          }
+        }
+      });
+
     // Cria as animações de movimento do personagem, uma para cada direção
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {

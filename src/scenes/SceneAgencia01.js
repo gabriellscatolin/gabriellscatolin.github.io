@@ -55,6 +55,12 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
+    // Sprite do NPC da agência
+    this.load.image(
+      "npc_agencia",
+      "src/assets/imagens/imagensPersonagens/NPC/npcAgencia01.png",
+    );
+
     // Sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -167,6 +173,29 @@ export default class SceneAgencia extends Phaser.Scene {
 
     camadasColisao.forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // ── NPC ───────────────────────────────────────────────────────────────────
+    this.npcAgencia = this.physics.add.staticImage(65, 57, "npc_agencia").setDepth(5);
+    const alturaAlvo = this.personagem.displayHeight;
+    this.npcAgencia.setDisplaySize(
+      (this.npcAgencia.width / this.npcAgencia.height) * (alturaAlvo * 1.2),
+      alturaAlvo * 1.2,
+    );
+    this.npcAgencia.refreshBody();
+
+    this.physics.add.collider(this.personagem, this.npcAgencia);
+
+    this.labelNpc = this.add
+      .text(65, 76, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     // ── CONTROLES ─────────────────────────────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -190,6 +219,8 @@ export default class SceneAgencia extends Phaser.Scene {
     this.zonasSaida = [{ x: 158, y: 232, raio: 25 }];
     this.dentroZonaSaida = false;
     this.transicionando = false;
+    this.perto_npc = false;
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // ── DEBUG ─────────────────────────────────────────────────────────────────
     this.debugTxt = this.add
@@ -252,6 +283,22 @@ export default class SceneAgencia extends Phaser.Scene {
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+    }
+
+    // ── INTERAÇÃO COM NPC ───────────────────────────────────────────────────
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      this.npcAgencia.x,
+      this.npcAgencia.y,
+    );
+    const pertoNpc = distNpc < 30;
+
+    this.perto_npc = pertoNpc;
+    this.labelNpc.setVisible(pertoNpc);
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      console.log("[SceneAgencia] Interagiu com o NPC da agência");
     }
 
     // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────
