@@ -1,3 +1,5 @@
+import { abrirPopupConfig as abrirPopupConfigModule } from "../settings.js";
+
 export default class SceneCidade extends Phaser.Scene {
   constructor() {
     super({ key: "SceneCidade" });
@@ -51,6 +53,10 @@ export default class SceneCidade extends Phaser.Scene {
     this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
     this.load.image("cieloCoinsHud", "src/assets/imagens/HUD/cieloCoinHUD.png");
     this.load.image("botaoMapaHud", "src/assets/imagens/HUD/botaoMapa.png");
+    this.load.image(
+      "botaoConfiguracaoHud",
+      "src/assets/imagens/HUD/botaoConfiguracao.png",
+    );
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -641,8 +647,8 @@ export default class SceneCidade extends Phaser.Scene {
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
     this.hudBotao1Glow = this.add
-      .rectangle(0, 0, 1, 1, 0x66ffd9, 0.18)
-      .setStrokeStyle(2, 0xb8fff0, 0.95)
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.18)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(207)
       .setVisible(false);
     this.hudBotao1OffsetX = 4;
@@ -679,16 +685,80 @@ export default class SceneCidade extends Phaser.Scene {
     });
 
     this.hudBotao1Area.on("pointerdown", () => {
-      if (!this.hudNoCentro || this.hudAnimando) return;
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) return;
       this.registry.events.emit("hud-maquininha-botao", "botao_1");
+      if (this.scene.isActive("SceneChuva")) {
+        this.scene.stop("SceneChuva");
+      }
       this.scene.start("SceneMapainterativo");
       console.log("[HUD] Botao maquininha clicado: botao_1");
+    });
+
+    this.hudBotaoConfigArea = this.add
+      .image(0, 0, "botaoConfiguracaoHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoConfigGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.28)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoConfigOffsetX = -22;
+    this.hudBotaoConfigOffsetY = 14;
+    this.hudBotaoConfigLargura = 250;
+    this.hudBotaoConfigAltura = 56;
+    this.hudBotaoConfigHover = false;
+
+    this.hudBotaoConfigArea.on("pointerover", () => {
+      if (
+        !this.hudNoCentro ||
+        this.hudAnimando ||
+        !this.hudBotaoConfigGlow
+      ) {
+        return;
+      }
+
+      this.hudBotaoConfigHover = true;
+      this.hudBotaoConfigGlow.setVisible(true);
+      this.hudBotaoConfigGlow.alpha = 0.28;
+
+      if (this.hudBotaoConfigGlowTween) this.hudBotaoConfigGlowTween.stop();
+      this.hudBotaoConfigGlowTween = this.tweens.add({
+        targets: this.hudBotaoConfigGlow,
+        alpha: { from: 0.28, to: 0.66 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoConfigArea.on("pointerout", () => {
+      this.hudBotaoConfigHover = false;
+      if (this.hudBotaoConfigGlowTween) {
+        this.hudBotaoConfigGlowTween.stop();
+        this.hudBotaoConfigGlowTween = null;
+      }
+      if (this.hudBotaoConfigGlow) this.hudBotaoConfigGlow.setVisible(false);
+    });
+
+    this.hudBotaoConfigArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando) return;
+      if (this._elementosConfig) return;
+      this.registry.events.emit("hud-maquininha-botao", "botao_config");
+      this.abrirPopupConfig();
+      console.log("[HUD] Botao maquininha clicado: botao_config");
     });
 
     this.miniMapCam.ignore(this.hudBotao1Area);
     this.borderCam.ignore(this.hudBotao1Area);
     this.miniMapCam.ignore(this.hudBotao1Glow);
     this.borderCam.ignore(this.hudBotao1Glow);
+    this.miniMapCam.ignore(this.hudBotaoConfigArea);
+    this.borderCam.ignore(this.hudBotaoConfigArea);
+    this.miniMapCam.ignore(this.hudBotaoConfigGlow);
+    this.borderCam.ignore(this.hudBotaoConfigGlow);
 
     this._atualizarHudCidade();
   }
@@ -749,6 +819,7 @@ export default class SceneCidade extends Phaser.Scene {
         .setPosition(centerX + closeOffsetX, centerY - closeOffsetY - 1)
         .setVisible(true);
       this._atualizarBotao1Hud(centerX, centerY, true);
+      this._atualizarBotaoConfigHud(centerX, centerY, true);
       this._atualizarHudDebugCoords();
       return;
     }
@@ -761,6 +832,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (this.hudDebugTxt) this.hudDebugTxt.setVisible(false);
     if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
     this._atualizarBotao1Hud(hudX, hudY, false);
+    this._atualizarBotaoConfigHud(hudX, hudY, false);
   }
 
   _atualizarBotao1Hud(centerX, centerY, visivel) {
@@ -794,6 +866,40 @@ export default class SceneCidade extends Phaser.Scene {
         this.hudBotao1GlowTween = null;
       }
       if (this.hudBotao1Glow) this.hudBotao1Glow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoConfigHud(centerX, centerY, visivel) {
+    if (!this.hudBotaoConfigArea) return;
+
+    const largura = this.hudBotaoConfigLargura * this.hudUiScale;
+    const altura = this.hudBotaoConfigAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoConfigOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoConfigOffsetY * this.hudUiScale;
+
+    this.hudBotaoConfigArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoConfigGlow) {
+      this.hudBotaoConfigGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoConfigHover);
+    }
+
+    if (this.hudBotaoConfigArea.input) {
+      this.hudBotaoConfigArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoConfigHover = false;
+      if (this.hudBotaoConfigGlowTween) {
+        this.hudBotaoConfigGlowTween.stop();
+        this.hudBotaoConfigGlowTween = null;
+      }
+      if (this.hudBotaoConfigGlow) this.hudBotaoConfigGlow.setVisible(false);
     }
   }
 
@@ -927,7 +1033,43 @@ export default class SceneCidade extends Phaser.Scene {
         this.missaoCidadeTimer.remove();
         this.missaoCidadeTimer = null;
       }
+      this.fecharPopupConfig();
     });
+  }
+
+  abrirPopupConfig() {
+    if (this._elementosConfig) return;
+
+    this._elementosConfig = abrirPopupConfigModule(this, {
+      depth: 300,
+      scrollFactor: 0,
+      onFechar: () => {
+        this._elementosConfig = null;
+      },
+    });
+
+    const escalaPopup = 0.35;
+    const centroX = this.scale.width / 2;
+    const centroY = this.scale.height / 2;
+
+    this._elementosConfig.forEach((el) => {
+      if (el && el.active && typeof el.setScale === "function") {
+        const novoX = centroX + (el.x - centroX) * escalaPopup;
+        const novoY = centroY + (el.y - centroY) * escalaPopup;
+        if (typeof el.setPosition === "function") {
+          el.setPosition(novoX, novoY);
+        }
+        el.setScale(escalaPopup);
+      }
+    });
+  }
+
+  fecharPopupConfig() {
+    if (!this._elementosConfig) return;
+    this._elementosConfig.forEach((el) => {
+      if (el && el.active) el.destroy();
+    });
+    this._elementosConfig = null;
   }
 
   _textoMissaoCidadePorId(id) {
