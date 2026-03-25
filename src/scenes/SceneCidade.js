@@ -821,7 +821,7 @@ export default class SceneCidade extends Phaser.Scene {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
             spawnX: 165,
-            spawnY: 207,
+            spawnY: 185,
           });
         });
       } else if (dentroEscritorio) {

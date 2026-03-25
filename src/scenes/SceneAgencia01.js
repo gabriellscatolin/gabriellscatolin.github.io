@@ -92,8 +92,8 @@ export default class SceneAgencia extends Phaser.Scene {
 
     const spawnX = this.spawnXCustom ?? 297;
     const spawnY = this.spawnYCustom ?? 395;
-    const saidaX = spawnX;
-    const saidaY = spawnY;
+    const saidaX = 165;
+    const saidaY = 255;
 
     // Garante que câmera e mundo incluam a posição pedida, mesmo fora do tamanho base do mapa.
     const limiteLargura = Math.max(mapa.widthInPixels, spawnX + 64);
@@ -285,11 +285,10 @@ export default class SceneAgencia extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // ── SAÍDA COM TECLA E ─────────────────────────────────────────────────────
-    // A saída fica no mesmo ponto do spawn
+    // ── ZONA DE SAÍDA ─────────────────────────────────────────────────────────
     this.zonasSaida = [{ x: saidaX, y: saidaY, raio: 25 }];
     this.labelSair = this.add
-      .text(saidaX, saidaY, "[E] Sair", {
+      .text(saidaX, saidaY, "[Saída]", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -417,7 +416,6 @@ export default class SceneAgencia extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
@@ -429,12 +427,8 @@ export default class SceneAgencia extends Phaser.Scene {
       );
     }
 
-    // Transição para a cidade ao pressionar E na saída
-    if (
-      dentroSaida &&
-      !this.transicionando &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    // Transição automática para a cidade ao entrar na zona de saída
+    if (dentroSaida && !this.transicionando) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
