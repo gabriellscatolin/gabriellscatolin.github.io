@@ -11,6 +11,16 @@ export default class SceneCidade extends Phaser.Scene {
       dados.prefixo || this.registry.get("prefixo") || "HB";
     this.spawnXCustom = dados.spawnX || null;
     this.spawnYCustom = dados.spawnY || null;
+    this.missaoCidadeIdCustom = Number.isFinite(Number(dados.missaoCidadeId))
+      ? Math.floor(Number(dados.missaoCidadeId))
+      : null;
+    this.missaoCidadeTextoCustom =
+      typeof dados.missaoCidadeTexto === "string"
+        ? dados.missaoCidadeTexto.trim()
+        : "";
+    this.ocultarSetaAgencia01 =
+      Boolean(dados.ocultarSetaAgencia01) ||
+      Boolean(this.registry.get("ocultarSetaAgencia01"));
   }
 
   // Carrega mapa, tilesets e sprites
@@ -386,14 +396,18 @@ export default class SceneCidade extends Phaser.Scene {
       .setDepth(19);
     this.setaGuiaAgencia.setStrokeStyle(2, 0x000000, 0.5);
 
-    this.tweens.add({
-      targets: this.setaGuiaAgencia,
-      y: 809,
-      alpha: { from: 1, to: 0.45 },
-      duration: 500,
-      yoyo: true,
-      repeat: -1,
-    });
+    if (this.ocultarSetaAgencia01) {
+      this.setaGuiaAgencia.setVisible(false);
+    } else {
+      this.tweens.add({
+        targets: this.setaGuiaAgencia,
+        y: 809,
+        alpha: { from: 1, to: 0.45 },
+        duration: 500,
+        yoyo: true,
+        repeat: -1,
+      });
+    }
 
     this.tweens.add({
       targets: this.minimapDestDot,
@@ -433,6 +447,7 @@ export default class SceneCidade extends Phaser.Scene {
     // HUD da maquininha e das moedas
     this._criarHudCidade();
     this._criarHudCoins();
+    this._criarPopupMissaoCidade();
 
     // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");
@@ -661,6 +676,165 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  _criarPopupMissaoCidade() {
+    if (
+      typeof this.registry.get("missaoCidadeId") === "undefined" &&
+      !Number.isFinite(this.missaoCidadeIdCustom)
+    ) {
+      this.registry.set("missaoCidadeId", 1);
+    }
+
+    if (Number.isFinite(this.missaoCidadeIdCustom)) {
+      this.registry.set("missaoCidadeId", this.missaoCidadeIdCustom);
+    }
+
+    if (this.missaoCidadeTextoCustom) {
+      this.registry.set("missaoCidadeTexto", this.missaoCidadeTextoCustom);
+    }
+
+    this.popupMissaoUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoOffsetTopo = 92 * this.popupMissaoUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoCidadeBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setScale(this.popupMissaoUiScale);
+
+    this.missaoCidadeTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoUiScale);
+
+    this.miniMapCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
+    this.borderCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
+
+    this._atualizarPopupMissaoCidade(true);
+
+    this._onMissaoCidadeMudou = () => this._atualizarPopupMissaoCidade(true);
+    this.registry.events.on(
+      "changedata-missaoCidadeId",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-missaoCidadeTexto",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoCidadeId",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-missaoCidadeTexto",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      if (this.missaoCidadeTimer) {
+        this.missaoCidadeTimer.remove();
+        this.missaoCidadeTimer = null;
+      }
+    });
+  }
+
+  _textoMissaoCidadePorId(id) {
+    const missoes = {
+      1: "Missão: Vá até a Agência e fale com o gerente",
+      2: "Missao: Fale com o atendente para iniciar o atendimento.",
+      3: "Missao: Va para a Padaria e converse com o comerciante.",
+      4: "Missao: Confira seu saldo de Cielo Coins na cidade.",
+    };
+
+    return (
+      missoes[id] || "Missao: Explore a cidade e conclua seu proximo objetivo."
+    );
+  }
+
+  _resolverTextoMissaoCidade() {
+    const textoCustom = this.registry.get("missaoCidadeTexto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    const idBruto = this.registry.get("missaoCidadeId");
+    const id = Number.isFinite(Number(idBruto))
+      ? Math.floor(Number(idBruto))
+      : 1;
+
+    return this._textoMissaoCidadePorId(id);
+  }
+
+  _medirLarguraPopupMissaoCidade(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoCidade(animarTexto) {
+    if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
+
+    const texto = this._resolverTextoMissaoCidade();
+    if (!texto) return;
+
+    const larguraFinal = this._medirLarguraPopupMissaoCidade(texto);
+    this.missaoCidadeBg.setSize(larguraFinal, this.missaoCidadeBg.height);
+
+    if (this.missaoCidadeMensagemAtual === texto && !animarTexto) return;
+    this.missaoCidadeMensagemAtual = texto;
+
+    if (this.missaoCidadeTimer) {
+      this.missaoCidadeTimer.remove();
+      this.missaoCidadeTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoCidadeTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoCidadeTexto.setText("");
+    this.missaoCidadeTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoCidadeTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoCidade() {
+    if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
+    this.missaoCidadeBg.setX(popupX);
+    this.missaoCidadeBg.setY(popupY);
+    this.missaoCidadeTexto.setX(popupX);
+    this.missaoCidadeTexto.setY(popupY);
+  }
+
   // Atualiza movimento, zonas e transições
   update() {
     const velocidade = 150;
@@ -807,6 +981,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();
     this._atualizarHudCoins();
+    this._reposicionarPopupMissaoCidade();
 
     // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
@@ -814,6 +989,7 @@ export default class SceneCidade extends Phaser.Scene {
         this.transicionando = true;
         this.labelE.setVisible(false);
         if (this.setaGuiaAgencia) this.setaGuiaAgencia.setVisible(false);
+        this.registry.set("ocultarSetaAgencia01", true);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
