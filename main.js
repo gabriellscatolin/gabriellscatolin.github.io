@@ -37,7 +37,11 @@ const config = {
     },
   },
   scene: [
+<<<<<<< Updated upstream
     SceneAgencia03,
+=======
+    SceneRestaurante,
+>>>>>>> Stashed changes
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
@@ -47,7 +51,7 @@ const config = {
     SceneEscritorio,
     ScenePadaria,
     SceneFarmacia,
-    SceneRestaurante,
+    
     SceneMetro,
     SceneSupermercado,
     SceneLojaDeRoupas,

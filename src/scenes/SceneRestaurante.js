@@ -72,6 +72,11 @@ export default class SceneRestaurante extends Phaser.Scene {
       "rest_mod_s3",
       "src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png",
     );
+    this.load.image(
+      "npc_restaurante",
+      "src/assets/imagens/imagensPersonagens/NPC/npcRestaurante.png",
+    );
+
 
     // Sprites do personagem
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
@@ -292,6 +297,50 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.physics.add.collider(this.personagem, paredeC);
     this.physics.add.collider(this.personagem, objC);
 
+    // NPC do restaurante
+    this.npcRestaurante = this.physics.add.staticImage(200, 168, "npc_restaurante");
+    this.npcRestaurante.setScale(0.07);
+    this.npcRestaurante.refreshBody();
+    this.npcRestaurante.setDepth(5);
+    this.physics.add.collider(this.personagem, this.npcRestaurante);
+
+    this.labelNpc = this.add
+      .text(this.npcRestaurante.x, this.npcRestaurante.y, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+      this.exclamacaoNpc = this.add
+      .text(
+        this.npcRestaurante.x,
+        this.npcRestaurante.y - this.npcRestaurante.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+      this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+
     // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -330,6 +379,9 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.perto_npc = false;
+    this.falouComNpc = false; 
+
 
     // Debug
     this.debugTxt = this.add
@@ -376,6 +428,38 @@ export default class SceneRestaurante extends Phaser.Scene {
       personagem.setTexture(`rest_${this.direcaoAtual}_1`);
     }
 
+    // Interação com NPC por proximidade (ponto solicitado)
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      101,
+      165,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcRestaurante.x, this.npcRestaurante.y + 2);
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneRestaurante] Interagiu com o NPC do Restaurante");
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcRestaurante.x,
+        this.npcRestaurante.y - this.npcRestaurante.displayHeight * 0.5,
+      );
+    }
+
     // Detecção da zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(
       this.zonaSaida,
@@ -411,6 +495,6 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
-    this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
+    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }
