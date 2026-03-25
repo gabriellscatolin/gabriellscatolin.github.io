@@ -207,6 +207,7 @@
     this.prepararTilesetsMetro();
 
     const mapa = this.make.tilemap({ key: "metro" });
+    this.mapa = mapa;
 
     // Associa os tilesets já divididos
     const tiles = [
@@ -220,16 +221,27 @@
       mapa.addTilesetImage("Interior_P1_S5", "metro_int_s5"),
     ].filter(Boolean);
 
-    // Cria camadas do mapa (visuais e de colisão)
-    const chaoN = mapa.createLayer("N - chão", tiles, 0, 0);
-    const paredeC = mapa.createLayer("C - Parede", tiles, 0, 0);
-    const objC = mapa.createLayer("C - ObjetComColid", tiles, 0, 0);
-    const vagaoC = mapa.createLayer("C - Vagão", tiles, 0, 0);
+    // Cria camada com verificação de existência no mapa
+    const criarCamada = (nome) => {
+      const existe = mapa.layers.some((layer) => layer.name === nome);
+      return existe ? mapa.createLayer(nome, tiles, 0, 0) : null;
+    };
+
+    // Camadas base do mapa (visuais e de colisão)
+    const chaoN = criarCamada("N - chão");
+    const chaoC = criarCamada("C - chão com colid");
+    criarCamada("N- Trilho");
+    criarCamada("N - ObjetSemColid_embaixo");
+    const objC = criarCamada("C - ObjetComColid");
+    const vagaoC = criarCamada("C - Vagão");
+    criarCamada("N - Vagão");
+    criarCamada("N - Parede sem Colid");
+    const paredeC = criarCamada("C - Parede");
 
     // Ativa colisão nas camadas sólidas
-    paredeC.setCollisionByExclusion([-1]);
-    objC.setCollisionByExclusion([-1]);
-    vagaoC.setCollisionByExclusion([-1]);
+    [chaoC, paredeC, objC, vagaoC]
+      .filter(Boolean)
+      .forEach((camada) => camada.setCollisionByExclusion([-1]));
 
     // Calcula limites reais do mapa dinamicamente
     const bounds = chaoN.getBounds();
@@ -277,9 +289,17 @@
       this.personagem.height * 0.35,
     );
 
-    this.physics.add.collider(this.personagem, paredeC);
-    this.physics.add.collider(this.personagem, objC);
-    this.physics.add.collider(this.personagem, vagaoC);
+    [paredeC, chaoC, objC, vagaoC]
+      .filter(Boolean)
+      .forEach((camada) => this.physics.add.collider(this.personagem, camada));
+
+    // Camadas que devem ficar acima do personagem
+    criarCamada("N - Pixos");
+    criarCamada("N- Pixos2");
+    criarCamada("N - Pixos 3");
+    criarCamada("N - ObjetSemColid_cima");
+    criarCamada("N - ObjetSemColid_cima_2");
+    criarCamada("N- ObjetSemColid_cima_3");
 
     // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -311,14 +331,16 @@
     this.direcaoAtual = "frente";
 
     // Zona de saída (entrada da estação)
+    const saidaX = 256;
+    const saidaY = 145;
     this.zonaSaida = new Phaser.Geom.Rectangle(
-      spawnX - 30,
-      spawnY - 18,
+      saidaX - 30,
+      saidaY - 18,
       60,
       36,
     );
     this.labelSair = this.add
-      .text(spawnX, spawnY - 2, "[E] Sair", {
+      .text(saidaX, saidaY, "[E] Sair", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",

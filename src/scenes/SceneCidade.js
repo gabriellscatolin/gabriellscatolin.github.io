@@ -396,6 +396,31 @@ export default class SceneCidade extends Phaser.Scene {
     this.direcaoAtual = "frente";
 
     // Minimapa com câmera separada
+    // Sequencia das setas
+    this.sequenciaSetas = [
+      "agencia1",
+      "padaria",
+      "farmacia",
+      "escritorio",
+      "agencia2",
+      "cabeleireiro",
+      "metro",
+      "restaurante",
+      "supermercado",
+      "agencia3",
+      "posto",
+      "agencia3",
+    ];
+
+    const etapaSalva = Number(this.registry.get("sequenciaSetaCidade"));
+    if (Number.isInteger(etapaSalva) && etapaSalva >= 0) {
+      this.indiceSetaAtual = etapaSalva;
+    } else if (this.ocultarSetaAgencia01) {
+      this.indiceSetaAtual = 1;
+    } else {
+      this.indiceSetaAtual = 0;
+    }
+
     const MM_X = 10;
     const MM_Y = 10;
     const TM_W = 3328;
@@ -420,18 +445,169 @@ export default class SceneCidade extends Phaser.Scene {
       .setDepth(19);
     this.setaGuiaAgencia.setStrokeStyle(2, 0x000000, 0.5);
 
-    if (this.ocultarSetaAgencia01) {
-      this.setaGuiaAgencia.setVisible(false);
-    } else {
-      this.tweens.add({
-        targets: this.setaGuiaAgencia,
-        y: 809,
-        alpha: { from: 1, to: 0.45 },
-        duration: 500,
-        yoyo: true,
-        repeat: -1,
-      });
-    }
+    this.tweens.add({
+      targets: this.setaGuiaAgencia,
+      y: 809,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Padaria
+    this.setaGuiaPadaria = this.add
+      .triangle(1483, 840, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaPadaria.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaPadaria,
+      y: 834,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Farmácia
+    this.setaGuiaFarmacia = this.add
+      .triangle(1118, 1211, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaFarmacia.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaFarmacia,
+      y: 1205,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Escritório Particular
+    this.setaGuiaEscritorio = this.add
+      .triangle(1754, 1256, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaEscritorio.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaEscritorio,
+      y: 1250,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Agência 02
+    this.setaGuiaAgencia02 = this.add
+      .triangle(1803, 1568, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia02.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaAgencia02,
+      y: 1562,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Loja de Roupa
+    this.setaGuiaCabeleireiro = this.add
+      .triangle(2267, 1570, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaCabeleireiro.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaCabeleireiro,
+      y: 1564,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Metrô
+    this.setaGuiaMetro = this.add
+      .triangle(3070, 1180, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaMetro.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaMetro,
+      y: 1174,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Restaurante
+    this.setaGuiaRestaurante = this.add
+      .triangle(2676, 290, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaRestaurante.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaRestaurante,
+      y: 284,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Supermercado
+    this.setaGuiaSupermercado = this.add
+      .triangle(2936, 356, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaSupermercado.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaSupermercado,
+      y: 350,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Agência 03
+    this.setaGuiaAgencia03 = this.add
+      .triangle(2486, 792, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia03.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaAgencia03,
+      y: 786,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Posto de Gasolina
+    this.setaGuiaPostoDeGasolina = this.add
+      .triangle(2774, 1310, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaPostoDeGasolina.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaPostoDeGasolina,
+      y: 1304,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.setasGuia = {
+      agencia1: this.setaGuiaAgencia,
+      padaria: this.setaGuiaPadaria,
+      farmacia: this.setaGuiaFarmacia,
+      escritorio: this.setaGuiaEscritorio,
+      agencia2: this.setaGuiaAgencia02,
+      cabeleireiro: this.setaGuiaCabeleireiro,
+      metro: this.setaGuiaMetro,
+      restaurante: this.setaGuiaRestaurante,
+      supermercado: this.setaGuiaSupermercado,
+      agencia3: this.setaGuiaAgencia03,
+      posto: this.setaGuiaPostoDeGasolina,
+    };
+    this._atualizarSetaAtual();
 
     this.tweens.add({
       targets: this.minimapDestDot,
@@ -455,6 +631,16 @@ export default class SceneCidade extends Phaser.Scene {
     this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
     this.miniMapCam.ignore([
       this.setaGuiaAgencia,
+      this.setaGuiaPadaria,
+      this.setaGuiaFarmacia,
+      this.setaGuiaEscritorio,
+      this.setaGuiaAgencia02,
+      this.setaGuiaCabeleireiro,
+      this.setaGuiaMetro,
+      this.setaGuiaRestaurante,
+      this.setaGuiaSupermercado,
+      this.setaGuiaAgencia03,
+      this.setaGuiaPostoDeGasolina,
       this.labelE,
       this.labelEscritorio,
       this.labelPadaria,
@@ -1366,6 +1552,27 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   // Atualiza movimento, zonas e transições
+  _atualizarSetaAtual() {
+    if (!this.setasGuia) return;
+
+    Object.values(this.setasGuia).forEach((seta) => {
+      if (seta) seta.setVisible(false);
+    });
+
+    const nomeSetaAtual = this.sequenciaSetas[this.indiceSetaAtual];
+    const setaAtual = this.setasGuia[nomeSetaAtual];
+    if (setaAtual) setaAtual.setVisible(true);
+  }
+
+  _avancarSequenciaSetas(localAtual) {
+    const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
+    if (localAtual !== localEsperado) return;
+
+    this.indiceSetaAtual += 1;
+    this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
+    this.registry.set("ocultarSetaAgencia01", this.indiceSetaAtual > 0);
+  }
+
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
@@ -1541,6 +1748,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("agencia1");
         this.labelE.setVisible(false);
         if (this.setaGuiaAgencia) this.setaGuiaAgencia.setVisible(false);
         this.registry.set("ocultarSetaAgencia01", true);
@@ -1556,6 +1764,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroEscritorio) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("escritorio");
         this.labelEscritorio.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1567,6 +1776,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroPadaria) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("padaria");
         this.labelPadaria.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1578,6 +1788,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroFarmacia) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("farmacia");
         this.labelFarmacia.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1589,6 +1800,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroRestaurante) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("restaurante");
         this.labelRestaurante.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1600,6 +1812,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroMetro) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("metro");
         this.labelMetro.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1613,6 +1826,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroLojaDeRoupas) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("cabeleireiro");
         this.labelLojaDeRoupas.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1624,6 +1838,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroSupermercado) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("supermercado");
         this.labelSupermercado.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1635,6 +1850,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroPostoDeGasolina) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("posto");
         this.labelPostoDeGasolina.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1646,6 +1862,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroAgencia02) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("agencia2");
         this.labelAgencia02.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -1657,6 +1874,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroAgencia03) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("agencia3");
         this.labelAgencia03.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
