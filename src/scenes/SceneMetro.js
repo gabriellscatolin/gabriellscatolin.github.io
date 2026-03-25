@@ -331,8 +331,8 @@
     this.direcaoAtual = "frente";
 
     // Zona de saída (entrada da estação)
-    const saidaX = 256;
-    const saidaY = 145;
+    const saidaX = 295;
+    const saidaY = 165;
     this.zonaSaida = new Phaser.Geom.Rectangle(
       saidaX - 30,
       saidaY - 18,

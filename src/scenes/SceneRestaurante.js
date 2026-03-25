@@ -372,6 +372,8 @@ export default class SceneRestaurante extends Phaser.Scene {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
       })
       .setDepth(20)
       .setOrigin(0.5, 1)
@@ -389,6 +391,8 @@ export default class SceneRestaurante extends Phaser.Scene {
         fontSize: "3px",
         color: "#ffff00",
         backgroundColor: "#000000",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
       })
       .setDepth(999);
   }
