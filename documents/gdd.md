@@ -1328,7 +1328,12 @@ this.tweens.add({
 
 &emsp;A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
 
-&emsp;Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.
+&emsp;Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[33\]](#ref33)
+
+<div align="center">
+<sub>Figura 28 - Relação matemática com a chuva do jogo</sub><br/>
+<img src="../gdd_images/gifGDDMat.gif" width="80%">
+</div>
 
 &emsp;A função responsável pela animação é:
 
@@ -2156,7 +2161,6 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 # <a name="c7"></a>7. Referências (sprint 5)
 
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
-
 ## 7. Referências
 
 <br><a name="ref1">[1]:</a>
@@ -2210,6 +2214,8 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref31">[31]:</a> Schwaber, K., & Sutherland, J. (2020). The Scrum Guide: The definitive guide to Scrum: The rules of the game. https://scrumguides.org/scrum-guide.html.
 
 <br><a name="ref32">[32]:</a> Meneguette, L. C. (2016). A afinação do mundo virtual: identidade sonora em jogos digitais. Pontifícia Universidade Católica de São Paulo (PUCSP). https://repositorio.pucsp.br/handle/handle/19060
+
+<br><a name="ref33">[33]:</a> Halliday, D., Resnick, R., & Walker, J. (2016). Fundamentos de física (10ª ed.). LTC.
 
 # <a name="c8"></a>Anexos
 
