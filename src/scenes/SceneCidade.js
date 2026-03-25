@@ -662,12 +662,12 @@ export default class SceneCidade extends Phaser.Scene {
 
       this.hudBotao1Hover = true;
       this.hudBotao1Glow.setVisible(true);
-      this.hudBotao1Glow.alpha = 0.14;
+      this.hudBotao1Glow.alpha = 0.22;
 
       if (this.hudBotao1GlowTween) this.hudBotao1GlowTween.stop();
       this.hudBotao1GlowTween = this.tweens.add({
         targets: this.hudBotao1Glow,
-        alpha: { from: 0.14, to: 0.42 },
+        alpha: { from: 0.22, to: 0.65 },
         duration: 260,
         yoyo: true,
         repeat: -1,
