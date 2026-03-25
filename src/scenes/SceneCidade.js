@@ -39,6 +39,7 @@ export default class SceneCidade extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1",
     );
     this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
+    this.load.image("cieloCoinsHud", "src/assets/imagens/HUD/cieloCoinHUD.png");
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -413,8 +414,9 @@ export default class SceneCidade extends Phaser.Scene {
       this.debugTxt,
     ]);
 
-    // HUD da maquininha
+    // HUD da maquininha e das moedas
     this._criarHudCidade();
+    this._criarHudCoins();
 
     // Cena de chuva roda em paralelo
     this.scene.launch("SceneChuva");
@@ -557,6 +559,41 @@ export default class SceneCidade extends Phaser.Scene {
     this._atualizarHudCidade();
   }
 
+  _criarHudCoins() {
+    // Saldo de moedas (valor global no registry)
+    if (typeof this.registry.get("cieloCoins") === "undefined") {
+      this.registry.set("cieloCoins", 0);
+    }
+
+    this.hudCoinsUiScale = 1 / this.cameras.main.zoom;
+    this.hudCoinsValorAtual = -1;
+    this.hudCoinsScale = 0.42 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetRight = 90 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetTop = 6 * this.hudCoinsUiScale;
+
+    this.hudCoinsBg = this.add
+      .image(0, 0, "cieloCoinsHud")
+      .setOrigin(1, 0)
+      .setScale(this.hudCoinsScale)
+      .setDepth(230);
+
+    const coinFont = Math.max(5, Math.round(14 * this.hudCoinsUiScale));
+    this.hudCoinsTxt = this.add
+      .text(0, 0, "", {
+        fontSize: `${coinFont}px`,
+        color: "#ffffff",
+        fontStyle: "bold",
+      })
+      .setOrigin(0, 0.5)
+      .setDepth(231);
+
+    // HUD de moedas também fica fora do minimapa
+    this.miniMapCam.ignore([this.hudCoinsBg, this.hudCoinsTxt]);
+    this.borderCam.ignore([this.hudCoinsBg, this.hudCoinsTxt]);
+
+    this._atualizarHudCoins();
+  }
+
   _atualizarHudCidade() {
     if (!this.hudIcon) return;
 
@@ -585,6 +622,27 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudIcon.setPosition(hudX, hudY);
     this.hudCloseBg.setVisible(false);
     this.hudCloseTxt.setVisible(false);
+  }
+
+  _atualizarHudCoins() {
+    if (!this.hudCoinsBg || !this.hudCoinsTxt) return;
+
+    const cam = this.cameras.main;
+    const posX = cam.worldView.right - this.hudCoinsOffsetRight;
+    const posY = cam.worldView.top + this.hudCoinsOffsetTop;
+
+    this.hudCoinsBg.setPosition(posX, posY);
+
+    const txtX = posX + 8 * this.hudCoinsUiScale;
+    const txtY = posY + this.hudCoinsBg.displayHeight * 0.5;
+    this.hudCoinsTxt.setPosition(txtX, txtY);
+
+    const bruto = Number(this.registry.get("cieloCoins") ?? 0);
+    const saldo = Number.isFinite(bruto) ? Math.max(0, Math.floor(bruto)) : 0;
+    if (saldo !== this.hudCoinsValorAtual) {
+      this.hudCoinsValorAtual = saldo;
+      this.hudCoinsTxt.setText(`${saldo}`);
+    }
   }
 
   // Atualiza movimento, zonas e transições
@@ -732,6 +790,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();
+    this._atualizarHudCoins();
 
     // Tecla E para transição de cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {

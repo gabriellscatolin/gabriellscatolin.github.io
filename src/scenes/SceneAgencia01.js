@@ -114,13 +114,7 @@ export default class SceneAgencia extends Phaser.Scene {
     ].filter(Boolean);
 
     this.add
-      .rectangle(
-        0,
-        0,
-        limiteLargura + 200,
-        limiteAltura + 200,
-        0x888888,
-      )
+      .rectangle(0, 0, limiteLargura + 200, limiteAltura + 200, 0x888888)
       .setOrigin(0, 0);
 
     // ── CAMADAS SEM COLISÃO ───────────────────────────────────────────────────
