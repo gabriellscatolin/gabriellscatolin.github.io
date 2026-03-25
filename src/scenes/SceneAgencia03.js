@@ -36,14 +36,34 @@ export default class SceneAgencia03 extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileMaps/agencia03.tmj",
     );
 
-    // O tilemap da agência usa apenas dois tilesets (Room_Builder + Interiors)
+    // O tilemap da agência usa Room_Builder + interiores fatiados (S1..S5)
     this.load.image(
       "agencia_roombuilder",
       "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
     );
     this.load.image(
-      "agencia_interiors",
-      "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png",
+      "agencia_interiors_s1",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png",
+    );
+    this.load.image(
+      "agencia_interiors_s2",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png",
+    );
+    this.load.image(
+      "agencia_interiors_s3",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png",
+    );
+    this.load.image(
+      "agencia_interiors_s4",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png",
+    );
+    this.load.image(
+      "agencia_interiors_s5",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
+    );
+    this.load.image(
+      "npc_agencia03",
+      "src/assets/imagens/imagensPersonagens/NPC/npcAgencia03.png",
     );
 
     // ── Spritesheet do personagem ─────────────────────────────────────────────
@@ -72,25 +92,46 @@ export default class SceneAgencia03 extends Phaser.Scene {
   create() {
     const mapa = this.make.tilemap({ key: "agencia03" });
     this.mapa = mapa;
+    this._camadasCriadas = [];
 
     this._otimizarTilesetsPorUso(mapa);
 
     const OX = 32 * 16; // 512
     const OY = 16 * 16; // 256
 
-    // O tilemap da agência declara os tilesets nesta ordem:
-    //   firstgid:    1 → Room_Builder_16x16
-    //   firstgid: 8589 → Interiors_16x16
     const tsRoomBuilder = mapa.addTilesetImage(
       "Room_Builder_16x16",
       this._keyTileset("Room_Builder_16x16", "agencia_roombuilder"),
     );
-    const tsInteriors = mapa.addTilesetImage(
-      "Interiors_16x16",
-      this._keyTileset("Interiors_16x16", "agencia_interiors"),
+    const tsInteriorS1 = mapa.addTilesetImage(
+      "interior_s1",
+      this._keyTileset("interior_s1", "agencia_interiors_s1"),
+    );
+    const tsInteriorS2 = mapa.addTilesetImage(
+      "interior_s2",
+      this._keyTileset("interior_s2", "agencia_interiors_s2"),
+    );
+    const tsInteriorS3 = mapa.addTilesetImage(
+      "interior_s3",
+      this._keyTileset("interior_s3", "agencia_interiors_s3"),
+    );
+    const tsInteriorS4 = mapa.addTilesetImage(
+      "interior_s4",
+      this._keyTileset("interior_s4", "agencia_interiors_s4"),
+    );
+    const tsInteriorS5 = mapa.addTilesetImage(
+      "interior_s5",
+      this._keyTileset("interior_s5", "agencia_interiors_s5"),
     );
 
-    const tilesets = [tsRoomBuilder, tsInteriors].filter(Boolean);
+    const tilesets = [
+      tsRoomBuilder,
+      tsInteriorS1,
+      tsInteriorS2,
+      tsInteriorS3,
+      tsInteriorS4,
+      tsInteriorS5,
+    ].filter(Boolean);
 
     // Fundo neutro para evitar bordas pretas em telas maiores que o mapa
     this.add
@@ -162,10 +203,27 @@ export default class SceneAgencia03 extends Phaser.Scene {
       }
     });
 
+    const limitesCena = this._calcularLimitesCena(mapa, OX, OY);
+
     // ── Spawn do personagem ───────────────────────────────────────────────────
-    // Usa a posição passada por outra cena; caso contrário, usa o centro do mapa
-    const spawnX = this.spawnXInicial ?? mapa.widthInPixels / 2;
-    const spawnY = this.spawnYInicial ?? mapa.heightInPixels / 2;
+    // Usa a posição passada por outra cena; caso contrário, usa o centro visual
+    // do mapa já compensado pelo offset aplicado nas camadas (OX/OY).
+    const temSpawnCustom =
+      Number.isFinite(this.spawnXInicial) && Number.isFinite(this.spawnYInicial);
+
+    const SPAWN_PADRAO_X = 955;
+    const SPAWN_PADRAO_Y = 518;
+
+    const spawnX = temSpawnCustom
+      ? this.spawnXInicial < limitesCena.x
+        ? this.spawnXInicial + OX
+        : this.spawnXInicial
+      : SPAWN_PADRAO_X;
+    const spawnY = temSpawnCustom
+      ? this.spawnYInicial < limitesCena.y
+        ? this.spawnYInicial + OY
+        : this.spawnYInicial
+      : SPAWN_PADRAO_Y;
 
     // ── Personagem e física ───────────────────────────────────────────────────
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
@@ -187,6 +245,51 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // ── NPC ───────────────────────────────────────────────────────────────────
+    this.npcAgencia = this.physics.add
+      .staticImage(775, 372, "npc_agencia03")
+      .setDepth(5);
+
+    this.npcAgencia.setScale(0.09);
+    this.npcAgencia.refreshBody();
+    this.physics.add.collider(this.personagem, this.npcAgencia);
+
+    this.labelNpc = this.add
+      .text(this.npcAgencia.x, this.npcAgencia.y, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // ── Controles ─────────────────────────────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -195,12 +298,24 @@ export default class SceneAgencia03 extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // ── Câmera ────────────────────────────────────────────────────────────────
-    const larguraReal = mapa.widthInPixels + OX;
-    const alturaReal = mapa.heightInPixels + OY;
-    this.cameras.main.setBounds(0, 0, larguraReal, alturaReal);
-    this.physics.world.setBounds(0, 0, larguraReal, alturaReal);
+    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.setZoom(5);
+    this.cameras.main.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
+    this.physics.world.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
+    this.cameras.main.centerOn(spawnX, spawnY);
 
     // ── Zona de saída ─────────────────────────────────────────────────────────
     // TODO: ajuste x/y/raio depois de testar no jogo e localizar a porta real
@@ -221,6 +336,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.direcaoAtual = "frente";
+    this.perto_npc = false;
+    this.falouComNpc = false;
 
     // ── Debug de coordenadas ──────────────────────────────────────────────────
     this.debugTxt = this.add
@@ -241,6 +358,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
       const camada = mapa.createLayer(nome, tilesets, ox, oy);
       if (!camada)
         console.warn("[SceneAgencia03] Camada não encontrada:", nome);
+      if (camada && this._camadasCriadas) this._camadasCriadas.push(camada);
       return camada;
     } catch (erro) {
       console.error(
@@ -255,6 +373,40 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
+  }
+
+  _calcularLimitesCena(mapa, ox, oy) {
+    const fallback = {
+      x: ox,
+      y: oy,
+      width: Math.max(1, mapa.widthInPixels),
+      height: Math.max(1, mapa.heightInPixels),
+    };
+
+    const camadas = (this._camadasCriadas || []).filter(Boolean);
+    if (!camadas.length) return fallback;
+
+    let minX = Number.POSITIVE_INFINITY;
+    let minY = Number.POSITIVE_INFINITY;
+    let maxX = Number.NEGATIVE_INFINITY;
+    let maxY = Number.NEGATIVE_INFINITY;
+
+    camadas.forEach((camada) => {
+      const b = camada.getBounds();
+      minX = Math.min(minX, b.x);
+      minY = Math.min(minY, b.y);
+      maxX = Math.max(maxX, b.right);
+      maxY = Math.max(maxY, b.bottom);
+    });
+
+    if (!Number.isFinite(minX) || !Number.isFinite(minY)) return fallback;
+
+    return {
+      x: minX,
+      y: minY,
+      width: Math.max(1, maxX - minX),
+      height: Math.max(1, maxY - minY),
+    };
   }
 
   _coletarGidsUsados(mapa) {
@@ -274,10 +426,14 @@ export default class SceneAgencia03 extends Phaser.Scene {
   }
 
   _otimizarTilesetsPorUso(mapa) {
-    // Apenas os dois tilesets usados pelo mapa da agência
+    // Tilesets usados pelo mapa da agência
     const defs = [
       { tmjName: "Room_Builder_16x16", baseKey: "agencia_roombuilder" },
-      { tmjName: "Interiors_16x16", baseKey: "agencia_interiors" },
+      { tmjName: "interior_s1", baseKey: "agencia_interiors_s1" },
+      { tmjName: "interior_s2", baseKey: "agencia_interiors_s2" },
+      { tmjName: "interior_s3", baseKey: "agencia_interiors_s3" },
+      { tmjName: "interior_s4", baseKey: "agencia_interiors_s4" },
+      { tmjName: "interior_s5", baseKey: "agencia_interiors_s5" },
     ];
 
     this._tilesetKeys = {};
@@ -355,7 +511,14 @@ export default class SceneAgencia03 extends Phaser.Scene {
   // TODO: ajuste x/y/raio ao localizar a porta real no mapa da agência
   _criarZonasSaida() {
     return [
-      { x: 0, y: 0, raio: 14, destino: "SceneCidade", spawnX: 0, spawnY: 0 },
+      {
+        x: 955,
+        y: 558,
+        raio: 14,
+        destino: "SceneCidade",
+        spawnX: 2486,
+        spawnY: 792,
+      },
     ];
   }
 
@@ -397,6 +560,38 @@ export default class SceneAgencia03 extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // ── Interação com NPC ───────────────────────────────────────────────────
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      this.npcAgencia.x,
+      this.npcAgencia.y,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneAgencia03] Interagiu com o NPC da agência 03");
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+      );
+    }
+
     // ── Detecção da zona de saída ─────────────────────────────────────────────
     const zonaSaidaAtual = (this.zonasSaida || []).find((z) => {
       const d = Phaser.Math.Distance.Between(
@@ -417,6 +612,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     if (dentroSaida) {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
+      this.labelNpc.setVisible(false);
     }
 
     // Transição automática ao entrar na zona de saída

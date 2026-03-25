@@ -347,6 +347,19 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.zonaAgencia03 = new Phaser.Geom.Rectangle(2486, 792, 80, 60);
+    this.labelAgencia03 = this.add
+      .text(2486, 792, "[E] Entrar", {
+        fontSize: "6px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     this.transicionando = false;
     this.dentroZonaAgencia = false;
     this.dentroZonaEscritorio = false;
@@ -358,6 +371,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaPadaria = false;
     this.dentroZonaPostoDeGasolina = false;
     this.dentroZonaAgencia02 = false;
+    this.dentroZonaAgencia03 = false;
 
     this.debugTxt = this.add
       .text(0, 0, "", {
@@ -441,6 +455,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelSupermercado,
       this.labelPostoDeGasolina,
       this.labelAgencia02,
+      this.labelAgencia03,
       this.debugTxt,
     ]);
 
@@ -974,6 +989,16 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelAgencia02.setVisible(dentroAgencia02);
     }
 
+    const dentroAgencia03 = Phaser.Geom.Rectangle.Contains(
+      this.zonaAgencia03,
+      personagem.x,
+      personagem.y,
+    );
+    if (dentroAgencia03 !== this.dentroZonaAgencia03) {
+      this.dentroZonaAgencia03 = dentroAgencia03;
+      this.labelAgencia03.setVisible(dentroAgencia03);
+    }
+
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
@@ -1099,6 +1124,19 @@ export default class SceneCidade extends Phaser.Scene {
           this.scene.start("SceneAgencia02", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
+          });
+        });
+      } else if (dentroAgencia03) {
+        this.transicionando = true;
+        this.labelAgencia03.setVisible(false);
+        this.scene.stop("SceneChuva");
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.start("SceneAgencia03", {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo: this.prefixoEscolhido,
+            spawnX: 955,
+            spawnY: 518,
           });
         });
       }
