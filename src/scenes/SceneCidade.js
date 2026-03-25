@@ -38,6 +38,7 @@ export default class SceneCidade extends Phaser.Scene {
       "tilesMapaBase",
       "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1",
     );
+    this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -62,11 +63,13 @@ export default class SceneCidade extends Phaser.Scene {
 
   // Monta mapa, personagem e interfaces
   create() {
+    // Área jogável usada por câmera e física
     const MAPA_X = 720;
     const MAPA_Y = 100;
     const MAPA_LARGURA = 2432;
     const MAPA_ALTURA = 1760;
 
+    // Mapa principal + tilesets exportados do Tiled
     const mapa = this.make.tilemap({ key: "mapaGeral" });
     const tileset1 = mapa.addTilesetImage("ME_Top_1", "tilesMapaTopo");
     const tileset2 = mapa.addTilesetImage("ME_Bottom_1", "tilesMapaBase");
@@ -80,6 +83,7 @@ export default class SceneCidade extends Phaser.Scene {
     let estabelecimentos;
 
     if (tilesets.length > 0) {
+      // Camadas visuais de base
       this._criarCamada(mapa, "objetosSemColid_em_cima_2", tilesets);
       this._criarCamada(mapa, "contorno_preto_do_mapa", tilesets);
       this._criarCamada(mapa, "chao_inferior_de_areia", tilesets);
@@ -91,6 +95,7 @@ export default class SceneCidade extends Phaser.Scene {
       this._criarCamada(mapa, "n_objetosSemColi_em_baixo_2", tilesets);
       this._criarCamada(mapa, "n_linhas da rua", tilesets);
 
+      // Camadas com colisão
       caminhoInferior = this._criarCamada(
         mapa,
         "c_objetosComColid_em_baixo",
@@ -114,6 +119,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
     }
 
+    // Cria animações de caminhada só uma vez
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`andar_${dir}`)) {
@@ -134,6 +140,7 @@ export default class SceneCidade extends Phaser.Scene {
     const spawnX = this.spawnXCustom || 840;
     const spawnY = this.spawnYCustom || 900;
 
+    // Jogador
     this.personagem = this.physics.add.sprite(
       spawnX,
       spawnY,
@@ -160,6 +167,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (estabelecimentos)
       this.physics.add.collider(this.personagem, estabelecimentos);
 
+    // Camadas acima do personagem para efeito de profundidade
     if (tilesets.length > 0) {
       const decSup1 = this._criarCamada(
         mapa,
@@ -191,11 +199,13 @@ export default class SceneCidade extends Phaser.Scene {
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
+    // Câmera principal seguindo o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
+    // Zonas interativas e labels de entrada
     this.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
     this.labelE = this.add
       .text(976, 856, "[E] Entrar", {
@@ -350,6 +360,7 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
+    // Minimap com câmera separada
     const MM_X = 10;
     const MM_Y = 10;
     const TM_W = 3328;
@@ -402,6 +413,10 @@ export default class SceneCidade extends Phaser.Scene {
       this.debugTxt,
     ]);
 
+    // HUD da maquininha
+    this._criarHudCidade();
+
+    // Cena de chuva roda em paralelo
     this.scene.launch("SceneChuva");
   }
 
@@ -422,11 +437,162 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
+  _criarHudCidade() {
+    // Estado inicial: maquininha no canto, compacta
+    this.hudMargemDireita = 34;
+    this.hudMargemBaixo = 44;
+    this.hudUiScale = 1 / this.cameras.main.zoom;
+    this.hudNoCentro = false;
+    this.hudAnimando = false;
+    this.hudIconBaseScale = 0.45 * this.hudUiScale;
+    this.hudIconZoomScale = 1.25 * this.hudUiScale;
+
+    this.hudIcon = this.add
+      .image(0, 0, "maquininhaCielo")
+      .setScale(this.hudIconBaseScale)
+      .setOrigin(0.5)
+      .setDepth(200)
+      .setInteractive({ useHandCursor: true });
+
+    const closeRadius = 12 * this.hudUiScale;
+    this.hudCloseBg = this.add
+      .circle(0, 0, closeRadius, 0xcf1f1f, 0.95)
+      .setStrokeStyle(Math.max(1, Math.round(2 * this.hudUiScale)), 0x7a0000, 1)
+      .setDepth(210)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+
+    const closeFont = Math.max(8, Math.round(14 * this.hudUiScale));
+    this.hudCloseTxt = this.add
+      .text(0, 0, "X", {
+        fontSize: `${closeFont}px`,
+        color: "#ffecec",
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5)
+      .setDepth(211)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+
+    // HUD não aparece no minimapa
+    this.miniMapCam.ignore(this.hudIcon);
+    this.borderCam.ignore(this.hudIcon);
+    this.miniMapCam.ignore([this.hudCloseBg, this.hudCloseTxt]);
+    this.borderCam.ignore([this.hudCloseBg, this.hudCloseTxt]);
+
+    this.hudIcon.on("pointerover", () => {
+      if (!this.hudNoCentro && !this.hudAnimando) {
+        this.hudIcon.setScale(0.5 * this.hudUiScale);
+      }
+    });
+    this.hudIcon.on("pointerout", () => {
+      if (!this.hudNoCentro && !this.hudAnimando) {
+        this.hudIcon.setScale(this.hudIconBaseScale);
+      }
+    });
+
+    this.hudIcon.on("pointerdown", () => {
+      if (this.hudAnimando) return;
+
+      if (!this.hudNoCentro) {
+        // Primeiro clique: vai para o centro e aumenta
+        this.hudAnimando = true;
+        const cam = this.cameras.main;
+
+        this.tweens.add({
+          targets: this.hudIcon,
+          x: cam.worldView.centerX,
+          y: cam.worldView.centerY,
+          scale: this.hudIconZoomScale,
+          duration: 260,
+          ease: "Quad.Out",
+          onComplete: () => {
+            this.hudNoCentro = true;
+            this.hudAnimando = false;
+          },
+        });
+        return;
+      }
+
+      // Clique no centro: feedback rápido
+      this.tweens.add({
+        targets: this.hudIcon,
+        scale: this.hudIconZoomScale * 1.08,
+        duration: 90,
+        yoyo: true,
+        ease: "Sine.Out",
+      });
+      console.log("[HUD] Maquininha clicada no centro");
+    });
+
+    const fecharHud = () => {
+      if (!this.hudNoCentro || this.hudAnimando) return;
+
+      // Retorna para o canto
+      this.hudAnimando = true;
+      this.hudCloseBg.setVisible(false);
+      this.hudCloseTxt.setVisible(false);
+
+      const cam = this.cameras.main;
+      const alvoX = cam.worldView.right - this.hudMargemDireita;
+      const alvoY = cam.worldView.bottom - this.hudMargemBaixo;
+
+      this.tweens.add({
+        targets: this.hudIcon,
+        x: alvoX,
+        y: alvoY,
+        scale: this.hudIconBaseScale,
+        duration: 240,
+        ease: "Quad.InOut",
+        onComplete: () => {
+          this.hudNoCentro = false;
+          this.hudAnimando = false;
+        },
+      });
+    };
+
+    this.hudCloseBg.on("pointerdown", fecharHud);
+    this.hudCloseTxt.on("pointerdown", fecharHud);
+
+    this._atualizarHudCidade();
+  }
+
+  _atualizarHudCidade() {
+    if (!this.hudIcon) return;
+
+    const cam = this.cameras.main;
+    if (this.hudAnimando) return;
+
+    if (this.hudNoCentro) {
+      // Enquanto estiver aberta, acompanha o centro da câmera
+      const centerX = cam.worldView.centerX;
+      const centerY = cam.worldView.centerY;
+      this.hudIcon.setPosition(centerX, centerY);
+
+      const closeOffsetX = 112 * this.hudUiScale;
+      const closeOffsetY = 292 * this.hudUiScale;
+      this.hudCloseBg
+        .setPosition(centerX + closeOffsetX, centerY - closeOffsetY)
+        .setVisible(true);
+      this.hudCloseTxt
+        .setPosition(centerX + closeOffsetX, centerY - closeOffsetY - 1)
+        .setVisible(true);
+      return;
+    }
+
+    const hudX = cam.worldView.right - this.hudMargemDireita;
+    const hudY = cam.worldView.bottom - this.hudMargemBaixo;
+    this.hudIcon.setPosition(hudX, hudY);
+    this.hudCloseBg.setVisible(false);
+    this.hudCloseTxt.setVisible(false);
+  }
+
   // Atualiza movimento, zonas e transições
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
+    // Movimento do jogador
     personagem.setVelocity(0);
     let movendo = false;
 
@@ -459,6 +625,7 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
+    // Mostra/oculta labels quando entra nas zonas
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia,
       personagem.x,
@@ -564,7 +731,9 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
+    this._atualizarHudCidade();
 
+    // Tecla E para transição de cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
         this.transicionando = true;
