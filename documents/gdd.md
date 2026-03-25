@@ -192,17 +192,17 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <div align="center">
 <sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
 
-| # | Classificação | Categoria | Risco / Oportunidade | Probabilidade (%) | Impacto | Responsável | Plano de Resposta |
+| # | Ameaça / Oportunidade  | Categoria | Descrição | Probabilidade (%) | Impacto | Responsável | Plano de Resposta |
 |---|---|---|---|:---:|:---:|---|---|
-| R1 | Ameaça | Tecnologia | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | 60% | Alto | Alicia | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
-| R2 | Ameaça | Usuário / Engajamento | Desengajamento dos usuários com o formato de Serious Game | 55% | Alto | Eduardo | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
-| R3 | Ameaça | Produto / Conteúdo | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | 30% | Alto | Sofia | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
-| R4 | Ameaça | Gestão de Projeto | Escopo técnico maior que a capacidade da equipe nas sprints definidas | 65% | Médio | Gabriel | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
-| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 50% | Médio | Rachel | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
-| O1 | Oportunidade | Produto / Qualidade | Feedback positivo de usuários durante testes de jogabilidade | 60% | Alto | Eduardo | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
-| O2 | Oportunidade | Estratégia / Treinamento | Padronização nacional do treinamento da Cielo | 75% | Alto | Lucas | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos. |
-| O3 | Oportunidade | Engajamento do Usuário | Alta adesão dos GNs ao formato gamificado | 55% | Alto | Rachel | Reforçar elementos de gamificação como ranking, CieloCoins, progressão, feedback imediato. |
-| O4 | Oportunidade | Financeiro / Operacional | Redução de custos operacionais de treinamento | 65% | Alto | Gabriel | Priorizar um MVP funcional que substitua parte dos treinamentos presenciais. |
+| R1 | Ameaça | Tecnologia | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | 30% | Baixo | Alicia | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
+| R2 | Ameaça | Usuário / Engajamento | Desengajamento dos usuários com o formato de Serious Game | 50% | Alto | Eduardo | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
+| R3 | Ameaça | Produto / Conteúdo | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | 30% | Moderado | Sofia | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
+| R4 | Ameaça | Gestão de Projeto | Escopo técnico maior que a capacidade da equipe nas sprints definidas | 50% | Moderado | Gabriel | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
+| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 70% | Alto | Rachel | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| O1 | Oportunidade | Produto / Qualidade | Feedback positivo de usuários durante testes de jogabilidade | 70% | Alto | Eduardo | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
+| O2 | Oportunidade | Estratégia / Treinamento | Padronização nacional do treinamento da Cielo | 90% | Alto | Lucas | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos. |
+| O3 | Oportunidade | Engajamento do Usuário | Alta adesão dos GNs ao formato gamificado | 50% | Moderado | Rachel | Reforçar elementos de gamificação como ranking, CieloCoins, progressão, feedback imediato. |
+| O4 | Oportunidade | Financeiro / Operacional | Redução de custos operacionais de treinamento | 30% | Baixo | Gabriel | Priorizar um MVP funcional que substitua parte dos treinamentos presenciais. |
 | O5 | Oportunidade | Tecnologia / Dados | Implementação de sistema robusto de salvamento e gestão de progresso do jogador | 20% | Baixo | Nicolas | Implementar salvamento de estado da sessão e estruturar base para futuras integrações com backend, aumentando a confiabilidade e escalabilidade do sistema. |
 
 <sub>Fonte: Autoria Própria (2026)</sub>
@@ -1991,38 +1991,6 @@ Entre os próximos objetivos estão:
 
 *Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
 
-| # | Pré-condição | Descrição do teste | Pós-condição | Requisitos relacionados
-|---|---|---|---|---| 
-| 1 | O jogo foi iniciado no navegador e está em processo de carregamento inicial. | Aguardar a abertura completa do jogo e verificar se a tela inicial é exibida corretamente. | A tela inicial é carregada sem erros visuais ou travamentos. | RF01, RNF01 |
-| 2 | A tela inicial foi carregada com sucesso. | Verificar se o fundo da tela inicial está visível, dimensionado corretamente e posicionado de forma adequada. | O fundo é exibido corretamente na tela inicial. |RF01 |
-| 3 | A tela inicial está visível e interativa. | Verificar se os botões principais da tela inicial estão visíveis, identificáveis e clicáveis. | Os botões da tela inicial estão funcionando corretamente. |RF01 |
-| 4 | A tela inicial está carregada e os botões estão visíveis. | Passar o cursor do mouse sobre os botões da tela inicial e observar se há animação visual de destaque. | As animações dos botões são executadas corretamente ao passar o mouse. |RF01|
-| 5 | O jogador está na tela inicial. | Clicar no botão **Jogar** e verificar se ocorre a transição para a tela de seleção de personagens. | A transição para a tela de seleção de personagens ocorre corretamente. |RF01, RF04 |
-| 6 | A tela de seleção de personagens foi carregada. | Verificar se os personagens são exibidos corretamente na tela de seleção. | Os personagens são carregados corretamente e ficam visíveis para seleção. | RF04 |
-| 7 | A tela de seleção de personagens está aberta. | Passar o cursor do mouse sobre os personagens e observar se ocorre o destaque visual previsto. | O efeito de hover é aplicado corretamente aos personagens. | RF04 |
-| 8 | A tela de seleção de personagens está aberta e interativa. | Selecionar um personagem com um clique e verificar se o carregamento do mundo é iniciado com o personagem escolhido. | O mundo do jogo é carregado com o personagem selecionado. |RF04|
-| 9 | O mundo do jogo foi carregado com o personagem selecionado. | Utilizar as teclas **W, A, S e D** para movimentar o personagem em diferentes direções. | O personagem se movimenta corretamente conforme os comandos do jogador. |RF02|
-| 10 | O personagem está posicionado em uma área com obstáculos no cenário. | Tentar movimentar o personagem em direção a barreiras ou objetos com colisão. | O personagem não atravessa os obstáculos do cenário. |RF02|
-| 11 | O mundo do jogo foi iniciado após a seleção do personagem. | Observar a interface logo após o início da fase e verificar se o tutorial é exibido. | O tutorial aparece corretamente ao jogador. |RF16|
-| 12 | A tela inicial foi carregada com sucesso. | Clicar no botão **Créditos** e verificar se a listagem de colaboradores é exibida corretamente. | A tela ou sobreposição de créditos é aberta corretamente. |RF01 |
-| 13 | A tela de créditos está aberta. | Fechar a tela de créditos e verificar se o jogo retorna ao menu inicial sem falhas. | O jogador retorna corretamente à tela inicial. |RF01|
-| 14 | A tela inicial foi carregada com sucesso. | Clicar no botão **Configurações** e verificar se o submenu de ajustes globais é aberto. | O menu de configurações é exibido corretamente. |RF01, RNF06| 
-| 15 | O menu de configurações está aberto. | Alterar o volume para diferentes valores dentro do intervalo permitido e verificar se o ajuste é aceito pelo sistema. | O controle de volume responde corretamente às alterações realizadas. | RNF06 |
-| 16 | O menu de configurações está aberto. | Alterar a configuração de brilho e observar se há mudança perceptível na apresentação visual. | O brilho é ajustado corretamente de acordo com a configuração escolhida. |RNF06 |
-| 17 | O menu de configurações está aberto. | Ativar e desativar o filtro de daltonismo, verificando se a mudança visual é aplicada ao jogo. | O filtro de daltonismo é ativado e desativado corretamente. |RNF06| 
-| 18 | O jogador se encontra no prólogo, em uma área próxima à NPC Vanessa. | Aproximar o personagem da NPC e verificar se o prompt de interação com a tecla **E** é exibido. | O prompt de interação aparece corretamente quando o jogador se aproxima da NPC. |RF03, RF07 |
-| 19 | O jogador está próximo da NPC Vanessa e o prompt de interação está visível. | Pressionar a tecla **E** para iniciar o diálogo com a NPC. | O diálogo com a NPC é iniciado corretamente. |RF03, RF07 |
-| 20 | O diálogo com a NPC Vanessa foi iniciado. | Tentar movimentar o personagem durante o diálogo e verificar se o controle do jogador permanece bloqueado até o fim da interação. | O jogador não consegue se mover durante o diálogo, e o bloqueio funciona corretamente. |RF09|
-| 21 | O jogador concluiu o diálogo do prólogo com a NPC Vanessa e o gatilho de progressão foi ativado. | Deslocar o personagem até a área de entrada do ônibus e verificar se a cutscene é iniciada corretamente. | A cutscene do ônibus é iniciada ao entrar na área de gatilho. |RF14|
-| 22 | A cutscene do ônibus foi iniciada. | Acompanhar a execução completa da cutscene e verificar se a transição para o banco ocorre corretamente ao final. | A transição para o hub do banco é concluída corretamente após a cutscene. | RF14|
-| 23 | O jogador concluiu o prólogo e está no hub principal do banco. | Aproximar o personagem do Gerente-Geral e iniciar a interação. | O diálogo com o Gerente-Geral é iniciado corretamente. | RF07|
-| 24 | O diálogo com o Gerente-Geral foi iniciado. | Percorrer todas as falas do NPC até o encerramento do diálogo. | A missão principal é atribuída corretamente ao jogador. | RF12 |
-| 25 | O jogador recebeu uma missão do Gerente-Geral. | Verificar se a interface exibe de forma clara o objetivo atual da missão. | O objetivo da missão aparece corretamente na interface. | RF16 |
-| 26 | O jogador está com uma missão ativa. | Deslocar-se até o primeiro estabelecimento indicado pela rota da missão. | O sistema reconhece corretamente a chegada ao local da missão. |RF12 |
-| 27 | O jogador está acompanhado do personagem PJ. | Aproximar-se de um cliente com o PJ dentro da distância exigida para interação. | A interação com o cliente é habilitada corretamente. |RF07|
-| 28 | O jogador está próximo de um cliente, mas o PJ está fora do raio exigido. | Tentar iniciar a interação com o cliente. | A interação permanece bloqueada até que o PJ esteja dentro da distância necessária. | RF07 |
-| 29 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta classificada como adequada durante a interação. | O sistema registra corretamente a pontuação máxima prevista para a resposta. | RF08, RF11 |
-| 30 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta classificada como intermediária durante a interação. | O sistema registra corretamente a pontuação intermediária prevista para a resposta. | RF08, RF11 |
 | # | Pré-condição | Descrição do teste | Pós-condição | Requisitos Relacionados |
 |---|---|---|---|---|
 | 1 | O jogo foi iniciado no navegador e está em processo de carregamento inicial. | Aguardar a abertura completa do jogo e verificar se a tela inicial é exibida corretamente. | A tela inicial é carregada sem erros visuais ou travamentos. | RF01, RNF01 |
