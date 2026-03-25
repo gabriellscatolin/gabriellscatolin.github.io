@@ -30,6 +30,11 @@ export default class SceneFarmacia extends Phaser.Scene {
       "farmacia",
       "src/assets/imagens/mapsjson/tileMaps/farmacia.tmj?v=1",
     );
+    
+    //Carrega o áudio
+     this.load.audio(
+      "trilhaSceneFarmacia", 'src/assets/audios/trilhaScenefarmacia.mp3'
+    );
 
     // Sprite do NPC da farmácia
     this.load.image(
@@ -81,6 +86,10 @@ export default class SceneFarmacia extends Phaser.Scene {
   create() {
     const mapa = this.make.tilemap({ key: "farmacia" });
     this.mapa = mapa;
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneFarmacia', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Otimiza tilesets para reduzir uso de memória
     this._otimizarTilesetsPorUso(mapa);
@@ -270,6 +279,11 @@ export default class SceneFarmacia extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+     });
   }
 
   // Retorna tileset otimizado ou fallback

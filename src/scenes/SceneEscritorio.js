@@ -9,7 +9,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.prefixoEscolhido = dados.prefixo || "HB";
   }
 
-  // Carrega mapa, tileset e sprites do personagem escolhido
+  // Carrega mapa,áudios, tileset e sprites do personagem escolhido
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -31,6 +31,11 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.load.image(
       "escritorio_tiles",
       "src/assets/imagens/mapsjson/tileSets/escritorio.png",
+    );
+
+    //Carrega o áudio
+    this.load.audio(
+      "trilhaSceneEscritorio", 'src/assets/audios/trilhaSceneEscritorio.mp3'
     );
 
     // Sprite do NPC do escritório
@@ -61,8 +66,13 @@ export default class SceneEscritorio extends Phaser.Scene {
     }
   }
 
-  // Monta o mapa, personagem, colisões, câmera e saída com tecla E
+  // Monta o mapa, personagem, áudios, colisões, câmera e saída com tecla E
   create() {
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneEscritorio', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // Cria o tilemap e associa o tileset
     const mapa = this.make.tilemap({ key: "escritorio" });
     const tiles = mapa.addTilesetImage("escritorio", "escritorio_tiles");
@@ -256,6 +266,11 @@ export default class SceneEscritorio extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+      // Pausa a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+     });
   }
 
   // Atualiza movimento, animações, interação com NPC e saída por tecla E

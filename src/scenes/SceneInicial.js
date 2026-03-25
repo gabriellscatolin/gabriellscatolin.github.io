@@ -52,7 +52,7 @@ export default class SceneInicial extends Phaser.Scene {
     };
   }
 
-  // Carrega os assets
+  // Carrega os assets e audios
   preload() {
     this.load.image("fundo", this.Config.ASSETS.fundo);
     this.load.image("botaoJogar", this.Config.ASSETS.botaoJogar);
@@ -61,12 +61,17 @@ export default class SceneInicial extends Phaser.Scene {
     this.load.image("configFundo", this.Config.ASSETS.configFundo);
     this.load.image("imagemCreditos", this.Config.ASSETS.imagemCreditos);
     this.load.image("logoCielo", this.Config.ASSETS.logoCielo);
+    this.load.audio("trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3');
   }
-  //Configura os elementos visuais e interativos das cenas
+  //Configura os elementos visuais, interativos e sonoros das cenas
   create() {
     // Fundo
     this.fundo = this.add.image(0, 0, "fundo").setOrigin(0, 0);
     this.redimensionarFundo();
+
+    // Adiciona audios a cena
+    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Aplica configurações salvas (brilho, daltonismo, etc.)
     this.sound.volume = GameSettings.volume;
@@ -81,6 +86,11 @@ export default class SceneInicial extends Phaser.Scene {
       } else {
         this.scale.startFullscreen();
       }
+    });
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
     });
 
     // Resize

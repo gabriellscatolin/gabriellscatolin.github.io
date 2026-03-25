@@ -25,7 +25,7 @@ export default class SceneCidade extends Phaser.Scene {
       Boolean(this.registry.get("ocultarSetaAgencia01"));
   }
 
-  // Carrega mapa, tilesets e sprites
+  // Carrega mapa, tilesets, sprites e audios
   preload() {
     const nomePasta = this.registry.get("nomePasta") || "Pedro";
     const prefixo = this.registry.get("prefixo") || "HB";
@@ -37,6 +37,10 @@ export default class SceneCidade extends Phaser.Scene {
         arquivo.src,
       );
     });
+
+    this.load.audio(
+      "trilhaSceneCidade", 'src/assets/audios/trilhaSceneCidade.mp3'
+    );
 
     this.load.tilemapTiledJSON(
       "mapaGeral",
@@ -88,6 +92,10 @@ export default class SceneCidade extends Phaser.Scene {
     const MAPA_Y = 100;
     const MAPA_LARGURA = 2432;
     const MAPA_ALTURA = 1760;
+
+    // Adiciona audios a cena
+    this.musica = this.sound.add('trilhaSceneCidade', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Mapa principal e tilesets exportados do Tiled
     const mapa = this.make.tilemap({ key: "mapaGeral" });
@@ -662,6 +670,11 @@ export default class SceneCidade extends Phaser.Scene {
 
     // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   // Cria camada do tilemap com segurança
