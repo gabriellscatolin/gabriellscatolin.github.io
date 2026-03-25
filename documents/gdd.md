@@ -188,18 +188,21 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
 &emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre a viabilidade técnica e o engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um Serious Game não depende apenas da ausência de bugs, mas da capacidade de manter o "fluxo" de aprendizagem sem interrupções técnicas. A Tabela 1 detalha as ameaças mapeadas para esta etapa, utilizando a estrutura de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza a inspeção e adaptação contínua através de ciclos incrementais (sprints).
-
 <div align="center">
-<sub>Tabela 2 - Matriz de Riscos do Projeto</sub>
+<sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
 
-| # | Risco | Probabilidade | Impacto | Classificação | Plano de Resposta |
-|---|-------|:---:|:---:|:---:|---|
-| R1 | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | Média | Alto | **Crítico** | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
-| R2 | Desengajamento dos usuários com o formato de Serious Game | Média | Alto | **Crítico** | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
-| R3 | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | Baixa | Alto | **Moderado** | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
-| R4 | Escopo técnico maior que a capacidade da equipe nas sprints definidas | Alta | Médio | **Moderado** | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
-| R5 | Baixa adesão dos GNs por dificuldade com ferramentas digitais | Média | Médio | **Moderado** | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
-| R6 | Perda de dados de progresso do jogador por falha técnica | Baixa | Baixo | **Baixo** | Implementar salvamento de estado da sessão; documentar este risco para versões futuras com backend. |
+| # | Tipo | Ameça / Oportunidade | Probabilidade | Impacto | Classificação | Plano de Resposta |
+|---|---|---|:---:|:---:|:---:|---|
+| A1 | Ameaça | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | Média | Alto | **Crítico** | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
+| A2 | Ameaça | Desengajamento dos usuários com o formato de Serious Game | Média | Alto | **Crítico** | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
+| A3 | Ameaça | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | Baixa | Alto | **Moderado** | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
+| A4 | Ameaça | Escopo técnico maior que a capacidade da equipe nas sprints definidas | Alta | Médio | **Moderado** | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
+| A5 | Ameaça | Baixa adesão dos GNs por dificuldade com ferramentas digitais | Média | Médio | **Moderado** | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| A6 | Ameaça | Perda de dados de progresso do jogador por falha técnica | Baixa | Baixo | **Baixo** | Implementar salvamento de estado da sessão; documentar este risco para versões futuras com backend. |
+| O1 | Oportunidade | Feedback positivo de usuários durante testes de jogabilidade | Média | Alto | **Oportunidade Relevante** | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
+| O2 | Oportunidade | Padronização nacional do treinamento da Cielo | Alta | Alto | **Estratégica** | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos para permitir uso em todo o país. |
+| O3 | Oportunidade | Alta adesão dos GNs ao formato gamificado | Média | Alto | **Estratégica** | Reforçar elementos de gamificação como ranking, CieloCoins, progressão e feedback imediato para estimular engajamento e retenção de conteúdo. |
+| O4 | Oportunidade | Redução de custos operacionais de treinamento | Média | Alto | **Estratégica** | Priorizar um MVP funcional que já substitua parte dos treinamentos presenciais, reduzindo custos logísticos e ampliando escala de capacitação. |
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
@@ -224,7 +227,18 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp; A definição desses objetivos evidencia um planejamento estruturado e orientado por resultados, permitindo o acompanhamento contínuo do progresso e a identificação de melhorias ao longo do desenvolvimento. A utilização do modelo SMART (Doran, 1981) [\[29\]](#ref29), aliada às práticas do Project Management Institute (2021) [\[30\]](#ref30), fortalece o alinhamento entre planejamento e execução, contribuindo para maior eficiência do projeto e aumentando a probabilidade de sucesso do Mini Mundo Cielo.
+&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
+
+<div align="center"> <sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
+
+Objetivo	Meta (SMART)	Indicador (KPI)
+Desenvolver o núcleo jogável do Mini Mundo Cielo	Entregar um MVP funcional da Cidade 1 contendo mapa completo, NPCs e sistema de moedas até o final da Sprint 4	Percentual de funcionalidades implementadas da Cidade 1 (%)
+Melhorar a experiência de navegação no mapa	Reduzir erros de colisão e movimentação para no máximo 2 por mapa até a Sprint 5	Número de bugs de colisão registrados nos testes
+Validar a experiência de jogabilidade	Realizar testes com pelo menos 5 usuários externos e atingir nota média mínima de 7/10 até a Sprint 5	Média de satisfação dos usuários nos playtests
+Garantir acessibilidade básica no jogo	Implementar modo daltônico, controle de volume e brilho no menu de configurações até a Sprint 4	Número de funcionalidades de acessibilidade implementadas
+Representar diversidade entre personagens	Desenvolver 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional até a Sprint 2	Percentual de personagens finalizados (%)
+
+</div>
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
