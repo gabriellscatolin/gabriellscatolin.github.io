@@ -15,6 +15,7 @@ import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
 import SceneAgencia01 from "./src/scenes/SceneAgencia01.js";
 import SceneAgencia02 from "./src/scenes/SceneAgencia02.js"; 
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
+import SceneMapaInterativo from "./src/scenes/SceneMapaInterativo.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -38,14 +39,18 @@ const config = {
   },
   scene: [
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     SceneAgencia03,
 =======
     SceneRestaurante,
 >>>>>>> Stashed changes
+=======
+    SceneCidade,
+    SceneMapaInterativo,
+>>>>>>> Stashed changes
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
-    SceneCidade,
     SceneChuva, 
     SceneJogo,
     SceneEscritorio,

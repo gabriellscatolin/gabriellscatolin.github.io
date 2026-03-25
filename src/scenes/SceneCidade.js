@@ -50,6 +50,7 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
     this.load.image("cieloCoinsHud", "src/assets/imagens/HUD/cieloCoinHUD.png");
+    this.load.image("botaoMapaHud", "src/assets/imagens/HUD/botaoMapa.png");
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -602,6 +603,93 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCloseBg.on("pointerdown", fecharHud);
     this.hudCloseTxt.on("pointerdown", fecharHud);
 
+    this.hudDebugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "16px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#ffffff",
+        backgroundColor: "#000000ee",
+        padding: { x: 8, y: 6 },
+      })
+      .setDepth(1000)
+      .setScrollFactor(0)
+      .setVisible(false);
+
+    this.hudDebugMarker = this.add
+      .text(0, 0, "+", {
+        fontSize: "18px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#00ff66",
+        stroke: "#000000",
+        strokeThickness: 3,
+      })
+      .setDepth(1001)
+      .setOrigin(0.5)
+      .setVisible(false);
+
+    this.miniMapCam.ignore(this.hudDebugTxt);
+    this.borderCam.ignore(this.hudDebugTxt);
+    this.miniMapCam.ignore(this.hudDebugMarker);
+    this.borderCam.ignore(this.hudDebugMarker);
+    this._hudDebugWorldPoint = new Phaser.Math.Vector2();
+
+    this.hudBotao1Area = this.add
+      .image(0, 0, "botaoMapaHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotao1Glow = this.add
+      .rectangle(0, 0, 1, 1, 0x66ffd9, 0.18)
+      .setStrokeStyle(2, 0xb8fff0, 0.95)
+      .setDepth(207)
+      .setVisible(false);
+    this.hudBotao1OffsetX = 4;
+    this.hudBotao1OffsetY = -121;
+    this.hudBotao1Largura = 314;
+    this.hudBotao1Altura = 56;
+    this.hudBotao1Hover = false;
+
+    this.hudBotao1Area.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotao1Glow) return;
+
+      this.hudBotao1Hover = true;
+      this.hudBotao1Glow.setVisible(true);
+      this.hudBotao1Glow.alpha = 0.14;
+
+      if (this.hudBotao1GlowTween) this.hudBotao1GlowTween.stop();
+      this.hudBotao1GlowTween = this.tweens.add({
+        targets: this.hudBotao1Glow,
+        alpha: { from: 0.14, to: 0.42 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotao1Area.on("pointerout", () => {
+      this.hudBotao1Hover = false;
+      if (this.hudBotao1GlowTween) {
+        this.hudBotao1GlowTween.stop();
+        this.hudBotao1GlowTween = null;
+      }
+      if (this.hudBotao1Glow) this.hudBotao1Glow.setVisible(false);
+    });
+
+    this.hudBotao1Area.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando) return;
+      this.registry.events.emit("hud-maquininha-botao", "botao_1");
+      this.scene.start("SceneMapainterativo");
+      console.log("[HUD] Botao maquininha clicado: botao_1");
+    });
+
+    this.miniMapCam.ignore(this.hudBotao1Area);
+    this.borderCam.ignore(this.hudBotao1Area);
+    this.miniMapCam.ignore(this.hudBotao1Glow);
+    this.borderCam.ignore(this.hudBotao1Glow);
+
     this._atualizarHudCidade();
   }
 
@@ -660,6 +748,8 @@ export default class SceneCidade extends Phaser.Scene {
       this.hudCloseTxt
         .setPosition(centerX + closeOffsetX, centerY - closeOffsetY - 1)
         .setVisible(true);
+      this._atualizarBotao1Hud(centerX, centerY, true);
+      this._atualizarHudDebugCoords();
       return;
     }
 
@@ -668,6 +758,80 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudIcon.setPosition(hudX, hudY);
     this.hudCloseBg.setVisible(false);
     this.hudCloseTxt.setVisible(false);
+    if (this.hudDebugTxt) this.hudDebugTxt.setVisible(false);
+    if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+    this._atualizarBotao1Hud(hudX, hudY, false);
+  }
+
+  _atualizarBotao1Hud(centerX, centerY, visivel) {
+    if (!this.hudBotao1Area) return;
+
+    const largura = this.hudBotao1Largura * this.hudUiScale;
+    const altura = this.hudBotao1Altura * this.hudUiScale;
+    const posX = centerX + this.hudBotao1OffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotao1OffsetY * this.hudUiScale;
+
+    this.hudBotao1Area
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotao1Glow) {
+      this.hudBotao1Glow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotao1Hover);
+    }
+
+    if (this.hudBotao1Area.input) {
+      this.hudBotao1Area.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotao1Hover = false;
+      if (this.hudBotao1GlowTween) {
+        this.hudBotao1GlowTween.stop();
+        this.hudBotao1GlowTween = null;
+      }
+      if (this.hudBotao1Glow) this.hudBotao1Glow.setVisible(false);
+    }
+  }
+
+  _atualizarHudDebugCoords() {
+    if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
+    if (!this.hudNoCentro || this.hudAnimando) {
+      this.hudDebugTxt.setVisible(false);
+      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+      return;
+    }
+
+    const pointer = this.input.activePointer;
+    if (!pointer) {
+      this.hudDebugTxt.setVisible(false);
+      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+      return;
+    }
+
+    pointer.positionToCamera(this.cameras.main, this._hudDebugWorldPoint);
+
+    const localX =
+      (this._hudDebugWorldPoint.x - this.hudIcon.x) / this.hudUiScale;
+    const localY =
+      (this._hudDebugWorldPoint.y - this.hudIcon.y) / this.hudUiScale;
+
+    this.hudDebugLocalX = Math.round(localX);
+    this.hudDebugLocalY = Math.round(localY);
+
+    this.hudDebugTxt
+      .setText(`HUD local\nX: ${this.hudDebugLocalX}  Y: ${this.hudDebugLocalY}`)
+      .setPosition(14, 140)
+      .setVisible(true);
+
+    if (this.hudDebugMarker) {
+      this.hudDebugMarker
+        .setPosition(this._hudDebugWorldPoint.x, this._hudDebugWorldPoint.y)
+        .setVisible(true);
+    }
   }
 
   _atualizarHudCoins() {
@@ -999,12 +1163,18 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelAgencia03.setVisible(dentroAgencia03);
     }
 
+    const hudLocalInfo =
+      this.hudNoCentro && Number.isFinite(this.hudDebugLocalX)
+        ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
+        : "";
+
     this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}${hudLocalInfo}`,
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();
+    this._atualizarHudDebugCoords();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();
 
