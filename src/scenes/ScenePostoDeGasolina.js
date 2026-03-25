@@ -23,7 +23,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       );
     });
 
-    // Mapa e tilesets do posto de gasolina
+    // Carrega o mapa, tilesets e áudios do posto de gasolina
     this.load.tilemapTiledJSON(
       "posto",
       "src/assets/imagens/mapsjson/tileMaps/postoDeGasolina.tmj",
@@ -65,6 +65,10 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png",
     );
 
+     this.load.audio(
+      "trilhaScenePostoDeGasolina", 'src/assets/audios/trilhaScenePostoDeGasolina.mp3'
+    );
+
     // Carrega os frames do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -89,6 +93,11 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
   // Monta o mapa, o personagem, as colisões e a saída da cena
   create() {
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaScenePostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // Prepara os tilesets antes de criar o mapa
     this.prepararTilesetsPosto();
 
@@ -325,6 +334,11 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+      });
   }
 
   // Cria uma camada do tilemap com tratamento de erro

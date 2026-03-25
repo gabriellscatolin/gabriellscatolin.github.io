@@ -12,13 +12,16 @@ export default class ScenePersonagem extends Phaser.Scene {
   }
 
   preload() {
-    // Carregamento dos recursos visuais da interface de seleção
+    // Carregamento dos recursos visuais e sonoros da interface de seleção
     this.load.image(
       "fundoSelecaoImage",
       "src/assets/imagens/imagensMapa/fundoSelecaoPersonagem.png",
     );
     this.load.setPath(
       "src/assets/imagens/imagensPersonagens/selecaoPersonagens/",
+    );
+     this.load.audio(
+      "trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3'
     );
 
     // Loop para carregar dinamicamente as imagens de visualização de cada personagem
@@ -41,6 +44,15 @@ export default class ScenePersonagem extends Phaser.Scene {
       } else {
         this.scale.startFullscreen();
       }
+    });
+
+    // Adiciona audios a cena
+    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica.play();
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
     });
   }
 
