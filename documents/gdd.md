@@ -188,21 +188,22 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
 &emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre a viabilidade técnica e o engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um Serious Game não depende apenas da ausência de bugs, mas da capacidade de manter o "fluxo" de aprendizagem sem interrupções técnicas. A Tabela 1 detalha as ameaças mapeadas para esta etapa, utilizando a estrutura de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza a inspeção e adaptação contínua através de ciclos incrementais (sprints).
+
 <div align="center">
 <sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
 
-| # | Tipo | Ameça / Oportunidade | Probabilidade | Impacto | Classificação | Plano de Resposta |
-|---|---|---|:---:|:---:|:---:|---|
-| A1 | Ameaça | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | Média | Alto | **Crítico** | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
-| A2 | Ameaça | Desengajamento dos usuários com o formato de Serious Game | Média | Alto | **Crítico** | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
-| A3 | Ameaça | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | Baixa | Alto | **Moderado** | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
-| A4 | Ameaça | Escopo técnico maior que a capacidade da equipe nas sprints definidas | Alta | Médio | **Moderado** | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
-| A5 | Ameaça | Baixa adesão dos GNs por dificuldade com ferramentas digitais | Média | Médio | **Moderado** | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
-| A6 | Ameaça | Perda de dados de progresso do jogador por falha técnica | Baixa | Baixo | **Baixo** | Implementar salvamento de estado da sessão; documentar este risco para versões futuras com backend. |
-| O1 | Oportunidade | Feedback positivo de usuários durante testes de jogabilidade | Média | Alto | **Oportunidade Relevante** | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
-| O2 | Oportunidade | Padronização nacional do treinamento da Cielo | Alta | Alto | **Estratégica** | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos para permitir uso em todo o país. |
-| O3 | Oportunidade | Alta adesão dos GNs ao formato gamificado | Média | Alto | **Estratégica** | Reforçar elementos de gamificação como ranking, CieloCoins, progressão e feedback imediato para estimular engajamento e retenção de conteúdo. |
-| O4 | Oportunidade | Redução de custos operacionais de treinamento | Média | Alto | **Estratégica** | Priorizar um MVP funcional que já substitua parte dos treinamentos presenciais, reduzindo custos logísticos e ampliando escala de capacitação. |
+| # | Classificação | Categoria | Risco / Oportunidade | Probabilidade (%) | Impacto | Responsável | Plano de Resposta |
+|---|---|---|---|:---:|:---:|---|---|
+| R1 | Ameaça | Tecnologia | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | 60% | Alto | Alicia | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
+| R2 | Ameaça | Usuário / Engajamento | Desengajamento dos usuários com o formato de Serious Game | 55% | Alto | Eduardo | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
+| R3 | Ameaça | Produto / Conteúdo | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | 30% | Alto | Sofia | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
+| R4 | Ameaça | Gestão de Projeto | Escopo técnico maior que a capacidade da equipe nas sprints definidas | 65% | Médio | Gabriel | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
+| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 50% | Médio | Rachel | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| O1 | Oportunidade | Produto / Qualidade | Feedback positivo de usuários durante testes de jogabilidade | 60% | Alto | Eduardo | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
+| O2 | Oportunidade | Estratégia / Treinamento | Padronização nacional do treinamento da Cielo | 75% | Alto | Lucas | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos. |
+| O3 | Oportunidade | Engajamento do Usuário | Alta adesão dos GNs ao formato gamificado | 55% | Alto | Rachel | Reforçar elementos de gamificação como ranking, CieloCoins, progressão, feedback imediato. |
+| O4 | Oportunidade | Financeiro / Operacional | Redução de custos operacionais de treinamento | 65% | Alto | Gabriel | Priorizar um MVP funcional que substitua parte dos treinamentos presenciais. |
+| O5 | Oportunidade | Tecnologia / Dados | Implementação de sistema robusto de salvamento e gestão de progresso do jogador | 20% | Baixo | Nicolas | Implementar salvamento de estado da sessão e estruturar base para futuras integrações com backend, aumentando a confiabilidade e escalabilidade do sistema. |
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
