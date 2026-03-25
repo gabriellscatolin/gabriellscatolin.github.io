@@ -37,11 +37,11 @@ const config = {
     },
   },
   scene: [
+     SceneCidade,
     ScenePostoDeGasolina,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
-    SceneCidade,
     SceneChuva, 
     SceneJogo,
     SceneEscritorio,
@@ -57,4 +57,14 @@ const config = {
   ],
 };
 
-new Phaser.Game(config); //
+const game = new Phaser.Game(config);
+
+window.addEventListener("keydown", (event) => {
+  if (event.repeat || event.key.toLowerCase() !== "f") return;
+
+  if (game.scale.isFullscreen) {
+    game.scale.stopFullscreen();
+  } else {
+    game.scale.startFullscreen();
+  }
+});
