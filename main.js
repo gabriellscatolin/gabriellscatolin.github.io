@@ -37,11 +37,10 @@ const config = {
     },
   },
   scene: [
-     SceneCidade,
-    ScenePostoDeGasolina,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
+    SceneCidade,
     SceneChuva, 
     SceneJogo,
     SceneEscritorio,
@@ -51,20 +50,11 @@ const config = {
     SceneMetro,
     SceneSupermercado,
     SceneLojaDeRoupas,
+    ScenePostoDeGasolina,
     SceneAgencia01,
     SceneAgencia02,
     SceneAgencia03,
   ],
 };
 
-const game = new Phaser.Game(config);
-
-window.addEventListener("keydown", (event) => {
-  if (event.repeat || event.key.toLowerCase() !== "f") return;
-
-  if (game.scale.isFullscreen) {
-    game.scale.stopFullscreen();
-  } else {
-    game.scale.startFullscreen();
-  }
-});
+new Phaser.Game(config); //

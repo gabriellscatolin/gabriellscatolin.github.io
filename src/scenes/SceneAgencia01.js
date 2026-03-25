@@ -9,6 +9,8 @@ export default class SceneAgencia extends Phaser.Scene {
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   preload() {
@@ -88,10 +90,10 @@ export default class SceneAgencia extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "agencia" });
     this.mapa = mapa;
 
-    const spawnX = 297;
-    const spawnY = 395;
-    const saidaX = 297;
-    const saidaY = 395;
+    const spawnX = this.spawnXCustom ?? 297;
+    const spawnY = this.spawnYCustom ?? 395;
+    const saidaX = spawnX;
+    const saidaY = spawnY;
 
     // Garante que câmera e mundo incluam a posição pedida, mesmo fora do tamanho base do mapa.
     const limiteLargura = Math.max(mapa.widthInPixels, spawnX + 64);

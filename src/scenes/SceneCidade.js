@@ -3,7 +3,7 @@ export default class SceneCidade extends Phaser.Scene {
     super({ key: "SceneCidade" });
   }
 
-  // Recebe dados do personagem e do spawn
+  // Recebe dados do personagem e do ponto de spawn
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -70,7 +70,7 @@ export default class SceneCidade extends Phaser.Scene {
     const MAPA_LARGURA = 2432;
     const MAPA_ALTURA = 1760;
 
-    // Mapa principal + tilesets exportados do Tiled
+    // Mapa principal e tilesets exportados do Tiled
     const mapa = this.make.tilemap({ key: "mapaGeral" });
     const tileset1 = mapa.addTilesetImage("ME_Top_1", "tilesMapaTopo");
     const tileset2 = mapa.addTilesetImage("ME_Bottom_1", "tilesMapaBase");
@@ -120,7 +120,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
     }
 
-    // Cria animações de caminhada só uma vez
+    // Cria as animações de caminhada apenas uma vez
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`andar_${dir}`)) {
@@ -361,7 +361,7 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Minimap com câmera separada
+    // Minimapa com câmera separada
     const MM_X = 10;
     const MM_Y = 10;
     const TM_W = 3328;
@@ -377,8 +377,23 @@ export default class SceneCidade extends Phaser.Scene {
     this.minimapDestDot = this.add.graphics();
     this.minimapDestDot.fillStyle(0xff2222, 1);
     this.minimapDestDot.fillCircle(0, 0, 55);
-    this.minimapDestDot.setPosition(1121, 1221);
+    this.minimapDestDot.setPosition(987, 881);
     this.minimapDestDot.setDepth(51);
+
+    // Seta guia no chão para entrada da Agência 01
+    this.setaGuiaAgencia = this.add
+      .triangle(997, 815, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia.setStrokeStyle(2, 0x000000, 0.5);
+
+    this.tweens.add({
+      targets: this.setaGuiaAgencia,
+      y: 809,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
 
     this.tweens.add({
       targets: this.minimapDestDot,
@@ -401,6 +416,7 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
     this.miniMapCam.ignore([
+      this.setaGuiaAgencia,
       this.labelE,
       this.labelEscritorio,
       this.labelPadaria,
@@ -418,7 +434,7 @@ export default class SceneCidade extends Phaser.Scene {
     this._criarHudCidade();
     this._criarHudCoins();
 
-    // Cena de chuva roda em paralelo
+    // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");
   }
 
@@ -440,7 +456,7 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _criarHudCidade() {
-    // Estado inicial: maquininha no canto, compacta
+    // Estado inicial da maquininha (canto e compacta)
     this.hudMargemDireita = 34;
     this.hudMargemBaixo = 44;
     this.hudUiScale = 1 / this.cameras.main.zoom;
@@ -476,7 +492,7 @@ export default class SceneCidade extends Phaser.Scene {
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
 
-    // HUD não aparece no minimapa
+    // A HUD não aparece no minimapa
     this.miniMapCam.ignore(this.hudIcon);
     this.borderCam.ignore(this.hudIcon);
     this.miniMapCam.ignore([this.hudCloseBg, this.hudCloseTxt]);
@@ -683,7 +699,7 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
-    // Mostra/oculta labels quando entra nas zonas
+    // Mostra ou oculta labels ao entrar nas zonas
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia,
       personagem.x,
@@ -792,17 +808,20 @@ export default class SceneCidade extends Phaser.Scene {
     this._atualizarHudCidade();
     this._atualizarHudCoins();
 
-    // Tecla E para transição de cenas
+    // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
         this.transicionando = true;
         this.labelE.setVisible(false);
+        if (this.setaGuiaAgencia) this.setaGuiaAgencia.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
           this.scene.start("SceneAg", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
+            spawnX: 165,
+            spawnY: 207,
           });
         });
       } else if (dentroEscritorio) {
