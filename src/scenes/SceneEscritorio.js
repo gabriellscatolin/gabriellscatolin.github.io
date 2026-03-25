@@ -244,6 +244,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.perto_npc = false;
     this.falouComNpc = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // Texto de debug com coordenadas do personagem
     this.debugTxt = this.add
@@ -261,6 +262,14 @@ export default class SceneEscritorio extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
 
     // Zera a velocidade a cada frame para controle preciso
     personagem.setVelocity(0);

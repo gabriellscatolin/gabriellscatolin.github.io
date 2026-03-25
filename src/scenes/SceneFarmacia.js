@@ -34,7 +34,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     // Sprite do NPC da farmácia
     this.load.image(
       "npc_farmacia",
-      "src/assets/imagens/imagensPersonagens/npcFarmacia/npcFarmacia.png",
+      "src/assets/imagens/imagensPersonagens/NPC/npcFarmacia.png",
     );
 
     // Tilesets do interior

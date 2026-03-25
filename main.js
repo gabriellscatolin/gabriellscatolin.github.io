@@ -15,7 +15,6 @@ import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
 import SceneAgencia01 from "./src/scenes/SceneAgencia01.js";
 import SceneAgencia02 from "./src/scenes/SceneAgencia02.js"; 
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
-import SceneMapaInterativo from "./src/scenes/SceneMapaInterativo.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -38,11 +37,10 @@ const config = {
     },
   },
   scene: [
-    SceneCidade,
-    SceneMapaInterativo,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
+    SceneCidade,
     SceneChuva, 
     SceneJogo,
     SceneEscritorio,
@@ -55,7 +53,7 @@ const config = {
     ScenePostoDeGasolina,
     SceneAgencia01,
     SceneAgencia02,
-    
+    SceneAgencia03,
   ],
 };
 

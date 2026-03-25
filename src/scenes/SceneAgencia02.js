@@ -288,6 +288,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // Configura a câmera para acompanhar o personagem
     this.cameras.main.startFollow(this.personagem);
@@ -551,6 +552,14 @@ export default class SceneAgencia02 extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
 
     personagem.setVelocity(0);
     let movendo = false;
