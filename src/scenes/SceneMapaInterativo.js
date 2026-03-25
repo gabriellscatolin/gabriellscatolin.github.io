@@ -23,7 +23,14 @@ export default class SceneMapaInterativo extends Phaser.Scene {
 			.setOrigin(0.5);
 
 		this.input.keyboard?.once("keydown-ESC", () => {
-			this.scene.start("SceneCidade");
+			const retornoX = Number(this.registry.get("cidadeRetornoX"));
+			const retornoY = Number(this.registry.get("cidadeRetornoY"));
+
+			const dadosRetorno = {};
+			if (Number.isFinite(retornoX)) dadosRetorno.spawnX = retornoX;
+			if (Number.isFinite(retornoY)) dadosRetorno.spawnY = retornoY;
+
+			this.scene.start("SceneCidade", dadosRetorno);
 		});
 	}
 }

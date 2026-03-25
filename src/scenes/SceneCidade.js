@@ -57,6 +57,8 @@ export default class SceneCidade extends Phaser.Scene {
       "botaoConfiguracaoHud",
       "src/assets/imagens/HUD/botaoConfiguracao.png",
     );
+    this.load.image("botaoRankingHud", "src/assets/imagens/HUD/botaoRanking.png");
+    this.load.image("botaoMissaoHud", "src/assets/imagens/HUD/botaoMissao.png");
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -641,6 +643,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.borderCam.ignore(this.hudDebugMarker);
     this._hudDebugWorldPoint = new Phaser.Math.Vector2();
 
+    // Botao: mapa interativo
     this.hudBotao1Area = this.add
       .image(0, 0, "botaoMapaHud")
       .setDepth(206)
@@ -651,14 +654,16 @@ export default class SceneCidade extends Phaser.Scene {
       .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(207)
       .setVisible(false);
-    this.hudBotao1OffsetX = 4;
+    this.hudBotao1OffsetX = 1;
     this.hudBotao1OffsetY = -121;
     this.hudBotao1Largura = 314;
     this.hudBotao1Altura = 56;
     this.hudBotao1Hover = false;
 
     this.hudBotao1Area.on("pointerover", () => {
-      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotao1Glow) return;
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotao1Glow) {
+        return;
+      }
 
       this.hudBotao1Hover = true;
       this.hudBotao1Glow.setVisible(true);
@@ -685,7 +690,16 @@ export default class SceneCidade extends Phaser.Scene {
     });
 
     this.hudBotao1Area.on("pointerdown", () => {
-      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) return;
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+
+      // Guarda a posicao atual para retornar ao mesmo ponto apos fechar o mapa.
+      if (this.personagem) {
+        this.registry.set("cidadeRetornoX", this.personagem.x);
+        this.registry.set("cidadeRetornoY", this.personagem.y);
+      }
+
       this.registry.events.emit("hud-maquininha-botao", "botao_1");
       if (this.scene.isActive("SceneChuva")) {
         this.scene.stop("SceneChuva");
@@ -694,6 +708,7 @@ export default class SceneCidade extends Phaser.Scene {
       console.log("[HUD] Botao maquininha clicado: botao_1");
     });
 
+    // Botao: configuracoes
     this.hudBotaoConfigArea = this.add
       .image(0, 0, "botaoConfiguracaoHud")
       .setDepth(206)
@@ -751,6 +766,114 @@ export default class SceneCidade extends Phaser.Scene {
       console.log("[HUD] Botao maquininha clicado: botao_config");
     });
 
+    // Botao: ranking
+    this.hudBotaoRankingArea = this.add
+      .image(0, 0, "botaoRankingHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoRankingGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoRankingOffsetX = -54;
+    this.hudBotaoRankingOffsetY = -52;
+    this.hudBotaoRankingLargura = 198;
+    this.hudBotaoRankingAltura = 52;
+    this.hudBotaoRankingHover = false;
+
+    this.hudBotaoRankingArea.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotaoRankingGlow) {
+        return;
+      }
+
+      this.hudBotaoRankingHover = true;
+      this.hudBotaoRankingGlow.setVisible(true);
+      this.hudBotaoRankingGlow.alpha = 0.24;
+
+      if (this.hudBotaoRankingGlowTween) this.hudBotaoRankingGlowTween.stop();
+      this.hudBotaoRankingGlowTween = this.tweens.add({
+        targets: this.hudBotaoRankingGlow,
+        alpha: { from: 0.24, to: 0.62 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoRankingArea.on("pointerout", () => {
+      this.hudBotaoRankingHover = false;
+      if (this.hudBotaoRankingGlowTween) {
+        this.hudBotaoRankingGlowTween.stop();
+        this.hudBotaoRankingGlowTween = null;
+      }
+      if (this.hudBotaoRankingGlow) this.hudBotaoRankingGlow.setVisible(false);
+    });
+
+    this.hudBotaoRankingArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+      this.registry.events.emit("hud-maquininha-botao", "botao_ranking");
+      console.log("[HUD] Botao maquininha clicado: botao_ranking");
+    });
+
+    // Botao: missao
+    this.hudBotaoMissaoArea = this.add
+      .image(0, 0, "botaoMissaoHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoMissaoGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoMissaoOffsetX = -49;
+    this.hudBotaoMissaoOffsetY = 78;
+    this.hudBotaoMissaoLargura = 196;
+    this.hudBotaoMissaoAltura = 52;
+    this.hudBotaoMissaoHover = false;
+
+    this.hudBotaoMissaoArea.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotaoMissaoGlow) {
+        return;
+      }
+
+      this.hudBotaoMissaoHover = true;
+      this.hudBotaoMissaoGlow.setVisible(true);
+      this.hudBotaoMissaoGlow.alpha = 0.24;
+
+      if (this.hudBotaoMissaoGlowTween) this.hudBotaoMissaoGlowTween.stop();
+      this.hudBotaoMissaoGlowTween = this.tweens.add({
+        targets: this.hudBotaoMissaoGlow,
+        alpha: { from: 0.24, to: 0.62 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoMissaoArea.on("pointerout", () => {
+      this.hudBotaoMissaoHover = false;
+      if (this.hudBotaoMissaoGlowTween) {
+        this.hudBotaoMissaoGlowTween.stop();
+        this.hudBotaoMissaoGlowTween = null;
+      }
+      if (this.hudBotaoMissaoGlow) this.hudBotaoMissaoGlow.setVisible(false);
+    });
+
+    this.hudBotaoMissaoArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+      this.registry.events.emit("hud-maquininha-botao", "botao_missao");
+      console.log("[HUD] Botao maquininha clicado: botao_missao");
+    });
+
     this.miniMapCam.ignore(this.hudBotao1Area);
     this.borderCam.ignore(this.hudBotao1Area);
     this.miniMapCam.ignore(this.hudBotao1Glow);
@@ -759,6 +882,14 @@ export default class SceneCidade extends Phaser.Scene {
     this.borderCam.ignore(this.hudBotaoConfigArea);
     this.miniMapCam.ignore(this.hudBotaoConfigGlow);
     this.borderCam.ignore(this.hudBotaoConfigGlow);
+    this.miniMapCam.ignore(this.hudBotaoRankingArea);
+    this.borderCam.ignore(this.hudBotaoRankingArea);
+    this.miniMapCam.ignore(this.hudBotaoRankingGlow);
+    this.borderCam.ignore(this.hudBotaoRankingGlow);
+    this.miniMapCam.ignore(this.hudBotaoMissaoArea);
+    this.borderCam.ignore(this.hudBotaoMissaoArea);
+    this.miniMapCam.ignore(this.hudBotaoMissaoGlow);
+    this.borderCam.ignore(this.hudBotaoMissaoGlow);
 
     this._atualizarHudCidade();
   }
@@ -820,6 +951,8 @@ export default class SceneCidade extends Phaser.Scene {
         .setVisible(true);
       this._atualizarBotao1Hud(centerX, centerY, true);
       this._atualizarBotaoConfigHud(centerX, centerY, true);
+      this._atualizarBotaoRankingHud(centerX, centerY, true);
+      this._atualizarBotaoMissaoHud(centerX, centerY, true);
       this._atualizarHudDebugCoords();
       return;
     }
@@ -833,9 +966,12 @@ export default class SceneCidade extends Phaser.Scene {
     if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
     this._atualizarBotao1Hud(hudX, hudY, false);
     this._atualizarBotaoConfigHud(hudX, hudY, false);
+    this._atualizarBotaoRankingHud(hudX, hudY, false);
+    this._atualizarBotaoMissaoHud(hudX, hudY, false);
   }
 
   _atualizarBotao1Hud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de mapa.
     if (!this.hudBotao1Area) return;
 
     const largura = this.hudBotao1Largura * this.hudUiScale;
@@ -870,6 +1006,7 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _atualizarBotaoConfigHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de configuracoes.
     if (!this.hudBotaoConfigArea) return;
 
     const largura = this.hudBotaoConfigLargura * this.hudUiScale;
@@ -900,6 +1037,76 @@ export default class SceneCidade extends Phaser.Scene {
         this.hudBotaoConfigGlowTween = null;
       }
       if (this.hudBotaoConfigGlow) this.hudBotaoConfigGlow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoRankingHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de ranking.
+    if (!this.hudBotaoRankingArea) return;
+
+    const largura = this.hudBotaoRankingLargura * this.hudUiScale;
+    const altura = this.hudBotaoRankingAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoRankingOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoRankingOffsetY * this.hudUiScale;
+
+    this.hudBotaoRankingArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoRankingGlow) {
+      this.hudBotaoRankingGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoRankingHover);
+    }
+
+    if (this.hudBotaoRankingArea.input) {
+      this.hudBotaoRankingArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoRankingHover = false;
+      if (this.hudBotaoRankingGlowTween) {
+        this.hudBotaoRankingGlowTween.stop();
+        this.hudBotaoRankingGlowTween = null;
+      }
+      if (this.hudBotaoRankingGlow) this.hudBotaoRankingGlow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoMissaoHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de missao.
+    if (!this.hudBotaoMissaoArea) return;
+
+    const largura = this.hudBotaoMissaoLargura * this.hudUiScale;
+    const altura = this.hudBotaoMissaoAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoMissaoOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoMissaoOffsetY * this.hudUiScale;
+
+    this.hudBotaoMissaoArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoMissaoGlow) {
+      this.hudBotaoMissaoGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoMissaoHover);
+    }
+
+    if (this.hudBotaoMissaoArea.input) {
+      this.hudBotaoMissaoArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoMissaoHover = false;
+      if (this.hudBotaoMissaoGlowTween) {
+        this.hudBotaoMissaoGlowTween.stop();
+        this.hudBotaoMissaoGlowTween = null;
+      }
+      if (this.hudBotaoMissaoGlow) this.hudBotaoMissaoGlow.setVisible(false);
     }
   }
 
@@ -1048,6 +1255,7 @@ export default class SceneCidade extends Phaser.Scene {
       },
     });
 
+    // Reducao visual do popup mantendo proporcoes e centro da tela.
     const escalaPopup = 0.35;
     const centroX = this.scale.width / 2;
     const centroY = this.scale.height / 2;
