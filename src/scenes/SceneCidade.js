@@ -233,7 +233,7 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    this.zonaPadaria = new Phaser.Geom.Rectangle(1470, 890, 100, 80);
+    this.zonaPadaria = new Phaser.Geom.Rectangle(1425, 818, 100, 80);
     this.labelPadaria = this.add
       .text(1484, 840, "[E] Entrar", {
         fontSize: "6px",

@@ -37,6 +37,7 @@ const config = {
     },
   },
   scene: [
+    ScenePadaria,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
@@ -44,7 +45,6 @@ const config = {
     SceneChuva, 
     SceneJogo,
     SceneEscritorio,
-    ScenePadaria,
     SceneFarmacia,
     SceneRestaurante,
     SceneMetro,

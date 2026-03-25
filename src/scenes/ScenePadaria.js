@@ -45,6 +45,10 @@ export default class ScenePadaria extends Phaser.Scene {
       "super_exteriors",
       "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png",
     );
+    this.load.image(
+      "npc_padaria",
+      "src/assets/imagens/imagensPersonagens/NPC/npcPadaria.png",
+    );
 
     // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
@@ -140,8 +144,8 @@ export default class ScenePadaria extends Phaser.Scene {
     });
 
     // Posição inicial dentro da padaria
-    const spawnX = 124;
-    const spawnY = 183;
+    const spawnX = 83;
+    const spawnY = 215;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
@@ -165,20 +169,68 @@ export default class ScenePadaria extends Phaser.Scene {
 
     // Ajusta escala e hitbox (colisão mais precisa nos pés)
     const tamTile = mapa.tileHeight || 16;
-    const escalaX = tamTile / this.personagem.width;
-    const escalaY = (tamTile * 2) / this.personagem.height;
-    this.personagem.setScale(escalaX, escalaY);
+    const escala = Math.min(
+      (tamTile * 0.6) / this.personagem.width,
+      (tamTile * 0.6) / this.personagem.height,
+    );
+    this.personagem.setScale(Math.max(escala, 0.03));
 
-    this.personagem.body.setSize(12 / escalaX, 10 / escalaY);
+    this.personagem.body.setSize(
+      this.personagem.width * 0.45,
+      this.personagem.height * 0.35,
+    );
     this.personagem.body.setOffset(
-      (this.personagem.width - 12 / escalaX) / 2,
-      this.personagem.height - 10 / escalaY,
+      this.personagem.width * 0.275,
+      this.personagem.height * 0.65,
     );
 
     // Colisão com camadas do mapa
     [paredeC, objC, bordaC]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
+
+    // NPC da padaria
+    this.npcPadaria = this.physics.add.staticImage(125, 168, "npc_padaria");
+    this.npcPadaria.setScale(0.07);
+    this.npcPadaria.refreshBody();
+    this.npcPadaria.setDepth(5);
+    this.physics.add.collider(this.personagem, this.npcPadaria);
+
+    this.labelNpc = this.add
+      .text(this.npcPadaria.x, this.npcPadaria.y, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcPadaria.x,
+        this.npcPadaria.y - this.npcPadaria.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
 
     // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -191,13 +243,13 @@ export default class ScenePadaria extends Phaser.Scene {
 
     // Câmera segue o personagem
     this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(4);
+    this.cameras.main.setZoom(6);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Zonas de saída (detectadas no mapa ou fallback)
-    this.zonasSaida = this._criarZonasSaida(mapa);
+    this.zonasSaida = this._criarZonasSaida(spawnX, spawnY);
 
     this.labelSair = this.add
       .text(0, 0, "[E] Sair", {
@@ -213,6 +265,9 @@ export default class ScenePadaria extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.podeSairPadaria = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente";
@@ -238,6 +293,120 @@ export default class ScenePadaria extends Phaser.Scene {
     } catch {
       return null;
     }
+  }
+
+  // Retorna a chave otimizada do tileset ou a original
+  _keyTileset(tmjName, fallbackKey) {
+    return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
+  }
+
+  // Coleta GIDs realmente usados no mapa
+  _coletarGidsUsados(mapa) {
+    const usados = new Set();
+
+    (mapa.layers || []).forEach((layer) => {
+      const data = layer.data || [];
+      for (let y = 0; y < data.length; y++) {
+        const row = data[y] || [];
+        for (let x = 0; x < row.length; x++) {
+          const cell = row[x];
+          const gid = typeof cell === "number" ? cell : cell?.index || 0;
+          if (gid > 0) usados.add(gid);
+        }
+      }
+    });
+
+    return usados;
+  }
+
+  // Recorta tilesets para usar apenas área necessária
+  _otimizarTilesetsPorUso(mapa) {
+    const defs = [
+      { tmjName: "Interiors_16x16", baseKey: "super_interiors" },
+      { tmjName: "Room_Builder_16x16", baseKey: "super_roombuilder" },
+      {
+        tmjName: "Modern_Exteriors_Complete_Tileset",
+        baseKey: "super_exteriors",
+      },
+    ];
+
+    this._tilesetKeys = {};
+    const usados = this._coletarGidsUsados(mapa);
+    const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
+      (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
+    );
+
+    defs.forEach((def) => {
+      this._tilesetKeys[def.tmjName] = def.baseKey;
+
+      if (!this.textures.exists(def.baseKey)) return;
+      const ts = tilesetsOrdenados.find((t) => t.name === def.tmjName);
+      if (!ts) return;
+
+      const source = this.textures.get(def.baseKey).getSourceImage();
+      if (!source?.width || !source?.height) return;
+
+      const idx = tilesetsOrdenados.findIndex((t) => t.name === def.tmjName);
+      const startGid = ts.firstgid || 1;
+      const endGid =
+        idx < tilesetsOrdenados.length - 1
+          ? tilesetsOrdenados[idx + 1].firstgid - 1
+          : Number.MAX_SAFE_INTEGER;
+
+      let maiorGidUsado = 0;
+      usados.forEach((gid) => {
+        if (gid >= startGid && gid <= endGid && gid > maiorGidUsado) {
+          maiorGidUsado = gid;
+        }
+      });
+
+      if (!maiorGidUsado) return;
+
+      const tileW = ts.tilewidth || 16;
+      const tileH = ts.tileheight || 16;
+      const margin = ts.margin || 0;
+      const spacing = ts.spacing || 0;
+
+      const columns =
+        ts.columns ||
+        Math.max(
+          1,
+          Math.floor((source.width - margin * 2 + spacing) / (tileW + spacing)),
+        );
+
+      const tilesNecessarios = maiorGidUsado - startGid + 1;
+      const linhasNecessarias = Math.max(
+        1,
+        Math.ceil(tilesNecessarios / columns),
+      );
+
+      const cropWCalc = margin + columns * (tileW + spacing) - spacing + margin;
+      const cropHCalc =
+        margin + linhasNecessarias * (tileH + spacing) - spacing + margin;
+
+      const cropW = Math.min(source.width, Math.max(tileW, cropWCalc));
+      const cropH = Math.min(source.height, Math.max(tileH, cropHCalc));
+
+      if (cropW <= 0 || cropH <= 0) return;
+      if (cropW >= source.width && cropH >= source.height) return;
+
+      const cutKey = `${def.baseKey}_cut`;
+      if (this.textures.exists(cutKey)) this.textures.remove(cutKey);
+
+      const canvasTex = this.textures.createCanvas(cutKey, cropW, cropH);
+      if (!canvasTex) return;
+      const ctx = canvasTex.getContext();
+      ctx.clearRect(0, 0, cropW, cropH);
+      ctx.drawImage(source, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
+      canvasTex.refresh();
+
+      this._tilesetKeys[def.tmjName] = cutKey;
+    });
+  }
+
+  // Define zona de saída mais restrita e um pouco abaixo do spawn
+  _criarZonasSaida(spawnX, spawnY) {
+    return [new Phaser.Geom.Rectangle(spawnX - 7, spawnY + 8, 14, 14)];
   }
 
   // Atualiza movimento e saída da cena
@@ -277,6 +446,38 @@ export default class ScenePadaria extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // Interação com NPC por proximidade (ponto solicitado)
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      101,
+      165,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcPadaria.x, this.npcPadaria.y + 2);
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[ScenePadaria] Interagiu com o NPC da padaria");
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcPadaria.x,
+        this.npcPadaria.y - this.npcPadaria.displayHeight * 0.5,
+      );
+    }
+
     // Verifica se o personagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) =>
       Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
@@ -291,12 +492,13 @@ export default class ScenePadaria extends Phaser.Scene {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
     }
 
-    // Transição para a cidade ao pressionar E
-    if (
-      !this.transicionando &&
-      dentroSaida &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    // Evita saída imediata ao entrar na cena: precisa sair da zona uma vez
+    if (!this.podeSairPadaria && !dentroSaida) {
+      this.podeSairPadaria = true;
+    }
+
+    // Transição automática para a cidade ao entrar na zona de saída
+    if (!this.transicionando && this.podeSairPadaria && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
 
@@ -305,8 +507,8 @@ export default class ScenePadaria extends Phaser.Scene {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
-          spawnX: 76,
-          spawnY: 232,
+          spawnX: 1470,
+          spawnY: 890,
         });
       });
     }
