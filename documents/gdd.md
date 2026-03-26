@@ -228,18 +228,23 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
+&emsp;Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
-<div align="center"> <sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
+<div align="center">
+<sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
 
-Objetivo	Meta (SMART)	Indicador (KPI)
-Desenvolver o núcleo jogável do Mini Mundo Cielo	Entregar um MVP funcional da Cidade 1 contendo mapa completo, NPCs e sistema de moedas até o final da Sprint 4	Percentual de funcionalidades implementadas da Cidade 1 (%)
-Melhorar a experiência de navegação no mapa	Reduzir erros de colisão e movimentação para no máximo 2 por mapa até a Sprint 5	Número de bugs de colisão registrados nos testes
-Validar a experiência de jogabilidade	Realizar testes com pelo menos 5 usuários externos e atingir nota média mínima de 7/10 até a Sprint 5	Média de satisfação dos usuários nos playtests
-Garantir acessibilidade básica no jogo	Implementar modo daltônico, controle de volume e brilho no menu de configurações até a Sprint 4	Número de funcionalidades de acessibilidade implementadas
-Representar diversidade entre personagens	Desenvolver 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional até a Sprint 2	Percentual de personagens finalizados (%)
+| Objetivo | Meta (SMART) | Indicador (KPI) |
+|----------|--------------|----------------|
+| Desenvolver o núcleo jogável do Mini Mundo Cielo | Entregar um MVP funcional da Cidade 1 contendo mapa completo, NPCs e sistema de moedas até o final da Sprint 4 | Percentual de funcionalidades implementadas da Cidade 1 (%) |
+| Melhorar a experiência de navegação no mapa | Reduzir erros de colisão e movimentação para no máximo 2 por mapa até a Sprint 5 | Número de bugs de colisão registrados nos testes |
+| Validar a experiência de jogabilidade | Realizar testes com pelo menos 5 usuários externos e atingir nota média mínima de 7/10 até a Sprint 5 | Média de satisfação dos usuários nos playtests |
+| Garantir acessibilidade básica no jogo | Implementar modo daltônico, controle de volume e brilho no menu de configurações até a Sprint 4 | Número de funcionalidades de acessibilidade implementadas |
+| Representar diversidade entre personagens | Desenvolver 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional até a Sprint 2 | Percentual de personagens finalizados (%) |
 
+<sub>Fonte: Autoria Própria (2026)</sub>
 </div>
+
+&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
