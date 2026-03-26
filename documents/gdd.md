@@ -1332,7 +1332,7 @@ this.tweens.add({
 
 <div align="center">
 <sub>Figura 28 - Relação matemática com a chuva do jogo</sub><br/>
-<img src="../gdd_images/gifGDDMat.gif" width="80%">
+<img src="../gdd_images/gifGDDMat.gif" width="20%">
 </div>
 
 &emsp;A função responsável pela animação é:
