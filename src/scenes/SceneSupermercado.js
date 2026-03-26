@@ -2,20 +2,28 @@ export default class SceneSupermercado extends Phaser.Scene {
   constructor() {
     super({ key: "SceneSupermercado" });
   }
-  //Registra os dados do personagem para uso na cena
+
+  // Registra os dados do personagem para uso na cena
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
   }
-  //Carrega os recursos necessários para a cena
+
+  // Carrega os recursos necessários para a cena
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
     this.load.maxParallelDownloads = 2;
 
+    // Carrega áudios da cena
+    this.load.audio(
+      "trilhaSceneMercado", 'src/assets/audios/trilhaSceneMercado.mp3'
+    );
+
+    // Loga erros de carregamento para facilitar debug
     this.load.on("loaderror", (arquivo) => {
       console.error(
         "[SceneSupermercado] Erro ao carregar:",
@@ -66,6 +74,12 @@ export default class SceneSupermercado extends Phaser.Scene {
       "super_char01",
       "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
     );
+
+    // Sprite do NPC do supermercado
+    this.load.image(
+      "npc_supermercado",
+      "src/assets/imagens/imagensPersonagens/NPC/npcMercado.png",
+    );
     //___________________________________________________________________________________________________
 
     //_________________________________Carrega os recursos do personagem_________________________________
@@ -91,12 +105,17 @@ export default class SceneSupermercado extends Phaser.Scene {
   }
   //___________________________________________________________________________________________________
 
-  //__________________________Cria a cena, o mapa, o personagem e as interações________________________
+  //__________________________Cria a cena, o mapa, o áudio e o personagem e as interações________________________
 
   create() {
     const mapa = this.make.tilemap({ key: "supermercado" });
     this.mapa = mapa;
 
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneMercado', { loop: true, volume: 0.5});
+    this.musica.play();
+
+    // Otimiza os tilesets antes de montar o cenário
     this._otimizarTilesetsPorUso(mapa);
 
     const tsInteriors = mapa.addTilesetImage(
@@ -151,7 +170,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       tsChar01,
     ].filter(Boolean);
 
-    this.add // fundo cinza para evitar bordas pretas em telas maiores que o mapa
+    this.add // Fundo cinza para evitar bordas pretas fora do mapa
       .rectangle(
         0,
         0,
@@ -161,6 +180,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
+    // Camadas visuais sem colisão
     this._criarCamada(mapa, "Chão", tilesets);
     this._criarCamada(mapa, "ParedeSemColisão", tilesets);
     this._criarCamada(mapa, "ObjSemColisão", tilesets);
@@ -169,6 +189,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this._criarCamada(mapa, "Vidro", tilesets);
     this._criarCamada(mapa, "Player", tilesets);
 
+    // Camadas sólidas que bloqueiam o personagem
     const paredeC = this._criarCamada(mapa, "ParedeComColisão", tilesets);
     const objC = this._criarCamada(mapa, "ObjComColisão", tilesets);
     const objC2 = this._criarCamada(mapa, "ObjComColisão2", tilesets);
@@ -197,7 +218,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       }
     });
 
-    // Spawn solicitado
+    // Posição inicial do personagem na cena
     const spawnX = 124;
     const spawnY = 183;
     //________________________________________________________________________________________________
@@ -206,7 +227,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
-    // Colisões extras devido a bugs do Tiled (tiles de 16x16 com colisão de 8x8)
+    // Colisões extras para corrigir limitações do Tiled em alguns pontos do mapa
     const pontosColisao = [
       { x: 100, y: 56, w: 16, h: 16 },
       { x: 91, y: 59, w: 16, h: 16 },
@@ -235,11 +256,61 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    // Colisões com camadas do mapa
+    // Colisões com as camadas sólidas do mapa
     [paredeC, objC, objC2, bordaC]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // NPC do supermercado
+    this.npcSupermercado = this.physics.add
+      .staticImage(53, 157, "npc_supermercado")
+      .setDepth(5);
+    const alturaAlvoNpc = this.personagem.displayHeight;
+    this.npcSupermercado.setDisplaySize(
+      (this.npcSupermercado.width / this.npcSupermercado.height) *
+        (alturaAlvoNpc * 1.2),
+      alturaAlvoNpc * 1.2,
+    );
+    this.npcSupermercado.refreshBody();
+    this.physics.add.collider(this.personagem, this.npcSupermercado);
+
+    this.labelNpc = this.add
+      .text(this.npcSupermercado.x, this.npcSupermercado.y, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y - this.npcSupermercado.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Controles de movimento (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -257,7 +328,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    //Definição da zona de saída (apenas para a porta em x=129, y=200)
+    // Define a zona de saída da cena
     this.zonasSaida = this._criarZonasSaida();
 
     this.labelSair = this.add
@@ -274,9 +345,14 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    this.direcaoAtual = "frente"; // para definir a direção inicial do personagem
+    this.direcaoAtual = "frente"; // Guarda a direção inicial do personagem
 
+    // Debug com as coordenadas atuais do personagem
     this.debugTxt = this.add
       .text(0, 0, "", {
         fontSize: "4px",
@@ -286,6 +362,11 @@ export default class SceneSupermercado extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+      });
   }
   //____________________________________________________________________________________________________________
 
@@ -307,12 +388,13 @@ export default class SceneSupermercado extends Phaser.Scene {
       return null;
     }
   }
-  // Retorna a chave otimizada do tileset ou a chave original se não houver otimização
+
+  // Retorna a chave otimizada do tileset ou a chave original se não houver recorte
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
   }
 
-  // Coleta os GIDs usados no mapa para otimizar os tilesets posteriormente
+  // Coleta os GIDs realmente usados no mapa
   _coletarGidsUsados(mapa) {
     const usados = new Set();
 
@@ -331,7 +413,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     return usados;
   }
 
-  // Otimiza os tilesets cortando as partes não usadas, com base nos GIDs coletados. Isso reduz o uso de memória e melhora a performance.
+  // Recorta os tilesets para manter apenas as partes realmente usadas
   _otimizarTilesetsPorUso(mapa) {
     const defs = [
       { tmjName: "Interiors_16x16", baseKey: "super_interiors" },
@@ -348,14 +430,14 @@ export default class SceneSupermercado extends Phaser.Scene {
       { tmjName: "Premade_Character_01", baseKey: "super_char01" },
     ];
 
-    // Cria um mapa de chaves para os tilesets, inicialmente apontando para as chaves originais
+    // Cria um mapa de chaves apontando inicialmente para as texturas originais
     this._tilesetKeys = {};
     const usados = this._coletarGidsUsados(mapa);
     const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
       (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
     );
 
-    // Corta a imagem do tileset para conter apenas os tiles necessários, criando uma nova textura otimizada. Isso reduz o uso de memória e melhora a performance.
+    // Cria versões menores dos tilesets com base no último tile usado
     defs.forEach((def) => {
       this._tilesetKeys[def.tmjName] = def.baseKey;
 
@@ -422,9 +504,9 @@ export default class SceneSupermercado extends Phaser.Scene {
     });
   }
 
-  //Define as zonas de saída do mapa
+  // Define as zonas de saída do mapa
   _criarZonasSaida() {
-    // ÚNICA saída permitida: porta em x=129, y=200
+    // Única saída permitida: porta em x=129, y=200
     return [{ x: 129, y: 200, raio: 14 }];
   }
 
@@ -435,9 +517,18 @@ export default class SceneSupermercado extends Phaser.Scene {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
+
     personagem.setVelocity(0);
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("esp_andar_esquerda", true);
@@ -450,6 +541,7 @@ export default class SceneSupermercado extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("esp_andar_tras", true);
@@ -462,12 +554,48 @@ export default class SceneSupermercado extends Phaser.Scene {
       movendo = true;
     }
 
+    // Mantém o sprite parado na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // Detecção por aproximação da porta (apenas x=129,y=200)
+    // Interação com NPC por proximidade (ponto solicitado)
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      88,
+      179,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y + 2,
+      );
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y - this.npcSupermercado.displayHeight * 0.5,
+      );
+    }
+
+    // Detecção por aproximação da porta
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
         personagem.x,
@@ -504,7 +632,7 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     //_______________________________________________________________________________________________
 
-    //Debug para mostrar as coordenadas do personagem (pode ser removido depois)
+    // Debug para mostrar as coordenadas do personagem
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );

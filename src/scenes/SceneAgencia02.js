@@ -2,20 +2,25 @@ export default class SceneAgencia02 extends Phaser.Scene {
   constructor() {
     super({ key: "SceneAgencia02" });
   }
-  //Registra os dados do personagem para uso na cena
+
+  // Recupera os dados do personagem escolhidos anteriormente
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
-  //Carrega os recursos necessários para a cena
+
+  // Carrega os assets do mapa e do personagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
     this.load.maxParallelDownloads = 2;
 
+    // Loga erros de carregamento para facilitar depuração
     this.load.on("loaderror", (arquivo) => {
       console.error(
         "[SceneAgencia02] Erro ao carregar:",
@@ -23,9 +28,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
         arquivo.src,
       );
     });
-    //____________________________________________________________________________________________
 
-    //_________________________________Carrega os recursos do mapa_________________________________
+    // Carrega o mapa e os tilesets usados na agência
     this.load.tilemapTiledJSON(
       "agencia02",
       "src/assets/imagens/mapsjson/tileMaps/agencia02.tmj",
@@ -66,9 +70,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
       "super_char01",
       "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
     );
-    //___________________________________________________________________________________________________
 
-    //_________________________________Carrega os recursos do personagem_________________________________
+    // Carrega os sprites do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -89,14 +92,21 @@ export default class SceneAgencia02 extends Phaser.Scene {
       );
     }
   }
-  //___________________________________________________________________________________________________
 
-  //__________________________Cria a cena, o mapa, o personagem e as interações________________________
-
+  // Monta a cena, cria o mapa, o personagem e as interações principais
   create() {
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
+    const mapaBruto = this.cache.tilemap.get("agencia02")?.data;
+    const limitesMapa = this._calcularLimitesMapa(mapaBruto || mapa);
+    const limitesCena = {
+      x: limitesMapa.x + 77,
+      y: limitesMapa.y,
+      width: limitesMapa.width,
+      height: Math.max(limitesMapa.height, mapa.heightInPixels) + 70,
+    };
 
+    // Otimiza os tilesets antes de montar as camadas
     this._otimizarTilesetsPorUso(mapa);
 
     const tsInteriors = mapa.addTilesetImage(
@@ -135,10 +145,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
       "Premade_Character_01",
       this._keyTileset("Premade_Character_01", "super_char01"),
     );
-    //____________________________________________________________________________________________
 
-    //_________________________________Cria as camadas do mapa_________________________________
-
+    // Agrupa apenas os tilesets que foram carregados corretamente
     const tilesets = [
       tsInteriors,
       tsRoomBuilder,
@@ -151,16 +159,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
       tsChar01,
     ].filter(Boolean);
 
-    this.add // fundo cinza para evitar bordas pretas em telas maiores que o mapa
+    // Adiciona um fundo neutro para evitar bordas pretas fora do mapa
+    this.add
       .rectangle(
-        0,
-        0,
-        mapa.widthInPixels + 200,
-        mapa.heightInPixels + 200,
+        limitesCena.x - 100,
+        limitesCena.y - 100,
+        limitesCena.width + 200,
+        limitesCena.height + 200,
         0x888888,
       )
       .setOrigin(0, 0);
 
+    // Cria as camadas visuais e de colisão do mapa
     this._criarCamada(mapa, "N - Chao", tilesets);
     this._criarCamada(mapa, "N - Tapetes", tilesets);
     this._criarCamada(mapa, "N- ObjetSemColid_baixo", tilesets);
@@ -169,20 +179,64 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this._criarCamada(mapa, "N - ObjetSemColid_cima", tilesets);
     this._criarCamada(mapa, "PLAYER", tilesets);
 
-    const objCbaixo = this._criarCamada(mapa, "C - ObjetComColid_baixo", tilesets);
+    const objCbaixo = this._criarCamada(
+      mapa,
+      "C - ObjetComColid_baixo",
+      tilesets,
+    );
     const parC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
     const estante = this._criarCamada(mapa, "C - Estante", tilesets);
-    const linhasparede = this._criarCamada(mapa, "C - LinhasDeParede", tilesets);
+    const linhasparede = this._criarCamada(
+      mapa,
+      "C - LinhasDeParede",
+      tilesets,
+    );
     const mesinha = this._criarCamada(mapa, "C- Mesinha", tilesets);
     const objC = this._criarCamada(mapa, "C - ObjetComColid", tilesets);
     const cabine = this._criarCamada(mapa, "C- Cabine", tilesets);
 
+    // Ativa colisão em todas as camadas sólidas
     [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
-    //____________________________________________________________________________________________
 
-    //_________________________________Cria as animações do personagem_________________________________
+    // Remove colisão numa faixa ao redor de x=376, y=312
+    const tileW = mapa.tileWidth || 16;
+    const tileH = mapa.tileHeight || 16;
+    const colInicio1 = Math.floor(360 / tileW);
+    const colFim1 = Math.ceil(392 / tileW);
+    const linInicio1 = Math.floor(296 / tileH);
+    const linFim1 = Math.ceil(328 / tileH);
+
+    [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
+      .filter(Boolean)
+      .forEach((camada) => {
+        for (let col = colInicio1; col <= colFim1; col++) {
+          for (let lin = linInicio1; lin <= linFim1; lin++) {
+            const tile = camada.getTileAt(col, lin);
+            if (tile) tile.setCollision(false, false, false, false);
+          }
+        }
+      });
+
+    // Remove colisão numa faixa ao redor de x=162, y=232
+    const colInicio2 = Math.floor(146 / tileW);
+    const colFim2 = Math.ceil(178 / tileW);
+    const linInicio2 = Math.floor(216 / tileH);
+    const linFim2 = Math.ceil(248 / tileH);
+
+    [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
+      .filter(Boolean)
+      .forEach((camada) => {
+        for (let col = colInicio2; col <= colFim2; col++) {
+          for (let lin = linInicio2; lin <= linFim2; lin++) {
+            const tile = camada.getTileAt(col, lin);
+            if (tile) tile.setCollision(false, false, false, false);
+          }
+        }
+      });
+
+    // Cria as animações de movimento do personagem, uma para cada direção
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
@@ -200,12 +254,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
       }
     });
 
-    // Spawn solicitado
-    const spawnX = 1806;
-    const spawnY = 1580;
-    //________________________________________________________________________________________________
+    // Define o ponto inicial do personagem na cena
+    const spawnX = this.spawnXCustom ?? 500;
+    const spawnY = this.spawnYCustom ?? 500;
 
-    //_________________________________Cria o personagem e as colisões_________________________________
+    // Cria o personagem com física e limita seu movimento ao mapa
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
@@ -213,7 +266,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     const larguraSprite = this.personagem.width;
     const alturaSprite = this.personagem.height;
 
-    // Ajusta escala e hitbox do personagem para melhor encaixe no mapa
+    // Ajusta escala e hitbox para encaixar melhor no cenário
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
@@ -221,11 +274,12 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    // Colisões com camadas do mapa
+    // Cria colisões entre o personagem e os elementos sólidos do mapa
     [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    // Habilita movimentação pelas setas e também por WASD
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -233,18 +287,28 @@ export default class SceneAgencia02 extends Phaser.Scene {
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
-    //____________________________________________________________________________________________________________
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    //_________________________________Configura a câmera para seguir o personagem_________________________________
+    // Configura a câmera para acompanhar o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(5);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.cameras.main.centerOn(mapa.widthInPixels / 2, mapa.heightInPixels / 2);
-    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.cameras.main.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
+    this.physics.world.setBounds(
+      limitesCena.x,
+      limitesCena.y,
+      limitesCena.width,
+      limitesCena.height,
+    );
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    //Definição da zona de saída (apenas para a porta em x=129, y=200)
-    this.zonasSaida = this._criarZonasSaida();
+    // Cria a zona de saída e o aviso visual exibido ao se aproximar dela
+    this.zonasSaida = this._criarZonasSaida(spawnX, spawnY);
 
     this.labelSair = this.add
       .text(0, 0, "[Saída]", {
@@ -261,8 +325,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
 
-    this.direcaoAtual = "frente"; // para definir a direção inicial do personagem
+    // Guarda a última direção para manter o sprite parado corretamente
+    this.direcaoAtual = "frente";
 
+    // Texto de debug para mostrar coordenadas do personagem
     this.debugTxt = this.add
       .text(0, 0, "", {
         fontSize: "4px",
@@ -273,9 +339,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
       })
       .setDepth(999);
   }
-  //____________________________________________________________________________________________________________
 
-  //__________________________Funções auxiliares para otimização e criação de camadas e zonas__________________________
+  // Cria uma camada do tilemap com tratamento de erro
   _criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
@@ -293,12 +358,13 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return null;
     }
   }
-  // Retorna a chave otimizada do tileset ou a chave original se não houver otimização
+
+  // Retorna a key otimizada do tileset, se ela existir
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
   }
 
-  // Coleta os GIDs usados no mapa para otimizar os tilesets posteriormente
+  // Percorre o mapa para descobrir quais tiles realmente são usados
   _coletarGidsUsados(mapa) {
     const usados = new Set();
 
@@ -317,7 +383,75 @@ export default class SceneAgencia02 extends Phaser.Scene {
     return usados;
   }
 
-  // Otimiza os tilesets cortando as partes não usadas, com base nos GIDs coletados. Isso reduz o uso de memória e melhora a performance.
+  // Calcula os limites reais do mapa infinito
+  _calcularLimitesMapa(mapa) {
+    const tileW = mapa.tileWidth || 16;
+    const tileH = mapa.tileHeight || 16;
+    let minX = 0;
+    let minY = 0;
+    let maxX = mapa.width || 0;
+    let maxY = mapa.height || 0;
+    let encontrouChunk = false;
+
+    (mapa.layers || []).forEach((layer) => {
+      if (
+        typeof layer?.startx === "number" &&
+        typeof layer?.starty === "number" &&
+        typeof layer?.width === "number" &&
+        typeof layer?.height === "number"
+      ) {
+        if (!encontrouChunk) {
+          minX = layer.startx;
+          minY = layer.starty;
+          maxX = layer.startx + layer.width;
+          maxY = layer.starty + layer.height;
+          encontrouChunk = true;
+        } else {
+          minX = Math.min(minX, layer.startx);
+          minY = Math.min(minY, layer.starty);
+          maxX = Math.max(maxX, layer.startx + layer.width);
+          maxY = Math.max(maxY, layer.starty + layer.height);
+        }
+      }
+
+      const chunks = Array.isArray(layer?.chunks)
+        ? layer.chunks
+        : layer?.data || [];
+      chunks.forEach((chunk) => {
+        if (
+          typeof chunk?.x !== "number" ||
+          typeof chunk?.y !== "number" ||
+          typeof chunk?.width !== "number" ||
+          typeof chunk?.height !== "number"
+        ) {
+          return;
+        }
+
+        if (!encontrouChunk) {
+          minX = chunk.x;
+          minY = chunk.y;
+          maxX = chunk.x + chunk.width;
+          maxY = chunk.y + chunk.height;
+          encontrouChunk = true;
+          return;
+        }
+
+        minX = Math.min(minX, chunk.x);
+        minY = Math.min(minY, chunk.y);
+        maxX = Math.max(maxX, chunk.x + chunk.width);
+        maxY = Math.max(maxY, chunk.y + chunk.height);
+      });
+    });
+
+    return {
+      x: minX * tileW,
+      y: minY * tileH,
+      width: (Math.max(maxX, mapa.width || 0) - minX) * tileW,
+      height: (Math.max(maxY, mapa.height || 0) - minY) * tileH,
+    };
+  }
+
+  // Cria versões menores dos tilesets usando apenas os tiles necessários
   _otimizarTilesetsPorUso(mapa) {
     const defs = [
       { tmjName: "Interiors_16x16", baseKey: "super_interiors" },
@@ -334,14 +468,14 @@ export default class SceneAgencia02 extends Phaser.Scene {
       { tmjName: "Premade_Character_01", baseKey: "super_char01" },
     ];
 
-    // Cria um mapa de chaves para os tilesets, inicialmente apontando para as chaves originais
+    // Inicia o mapeamento dos tilesets com as texturas originais
     this._tilesetKeys = {};
     const usados = this._coletarGidsUsados(mapa);
     const tilesetsOrdenados = [...(mapa.tilesets || [])].sort(
       (a, b) => (a.firstgid || 0) - (b.firstgid || 0),
     );
 
-    // Corta a imagem do tileset para conter apenas os tiles necessários, criando uma nova textura otimizada. Isso reduz o uso de memória e melhora a performance.
+    // Recorta cada tileset até o último tile realmente usado no mapa
     defs.forEach((def) => {
       this._tilesetKeys[def.tmjName] = def.baseKey;
 
@@ -393,6 +527,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       const cropW = Math.min(source.width, Math.max(tileW, cropWCalc));
       const cropH = Math.min(source.height, Math.max(tileH, cropHCalc));
 
+      // Se o tileset inteiro já está sendo usado, não precisa recortar
       if (cropW >= source.width && cropH >= source.height) return;
 
       const cutKey = `${def.baseKey}_cut`;
@@ -408,22 +543,28 @@ export default class SceneAgencia02 extends Phaser.Scene {
     });
   }
 
-  //Define as zonas de saída do mapa
-  _criarZonasSaida() {
-    // ÚNICA saída permitida: porta em x=129, y=200
-    return [{ x: 129, y: 200, raio: 14 }];
+  // Define a posição da única saída válida da cena
+  _criarZonasSaida(spawnX, spawnY) {
+    return [new Phaser.Geom.Rectangle(spawnX - 60, spawnY - 60, 120, 120)];
   }
 
-  //____________________________________________________________________________________________________________
-
-  //__________________________Lógica de movimentação do personagem______________________________________________
+  // Atualiza movimentação, animação, saída e debug a cada frame
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
+
     personagem.setVelocity(0);
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("esp_andar_esquerda", true);
@@ -436,6 +577,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       movendo = true;
     }
 
+    // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("esp_andar_tras", true);
@@ -448,22 +590,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
       movendo = true;
     }
 
+    // Se estiver parado, mantém o sprite na última direção usada
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // Detecção por aproximação da porta (apenas x=129,y=200)
-    const dentroSaida = (this.zonasSaida || []).some((z) => {
-      const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
-        z.x,
-        z.y,
-      );
-      return d <= z.raio;
-    });
+    // Verifica se o personagem entrou na área de saída
+    const dentroSaida = (this.zonasSaida || []).some((z) =>
+      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
+    );
 
+    // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
@@ -473,8 +611,12 @@ export default class SceneAgencia02 extends Phaser.Scene {
       this.labelSair.setPosition(personagem.x, personagem.y - 10);
     }
 
-    // Sai automaticamente ao se aproximar da porta
-    if (!this.transicionando && dentroSaida) {
+    // Ao entrar na zona, inicia automaticamente a transição para a cidade
+    if (
+      !this.transicionando &&
+      dentroSaida &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -488,9 +630,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       });
     }
 
-    //_______________________________________________________________________________________________
-
-    //Debug para mostrar as coordenadas do personagem (pode ser removido depois)
+    // Exibe as coordenadas atuais do personagem para debug
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );

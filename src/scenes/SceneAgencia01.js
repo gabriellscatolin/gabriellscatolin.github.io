@@ -9,6 +9,8 @@ export default class SceneAgencia extends Phaser.Scene {
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   preload() {
@@ -55,13 +57,31 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
+    // Sprite do NPC da agência
+    this.load.image(
+      "npc_agencia",
+      "src/assets/imagens/imagensPersonagens/NPC/npcAgencia01.png",
+    );
+
     // Sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
-      this.load.image(`esp_frente_${i}`,   `${caminhoBase}/${prefixo}_frente_${i}.png`);
-      this.load.image(`esp_tras_${i}`,     `${caminhoBase}/${prefixo}_tras_${i}.png`);
-      this.load.image(`esp_direita_${i}`,  `${caminhoBase}/${prefixo}_direita_${i}.png`);
-      this.load.image(`esp_esquerda_${i}`, `${caminhoBase}/${prefixo}_esquerda_${i}.png`);
+      this.load.image(
+        `esp_frente_${i}`,
+        `${caminhoBase}/${prefixo}_frente_${i}.png`,
+      );
+      this.load.image(
+        `esp_tras_${i}`,
+        `${caminhoBase}/${prefixo}_tras_${i}.png`,
+      );
+      this.load.image(
+        `esp_direita_${i}`,
+        `${caminhoBase}/${prefixo}_direita_${i}.png`,
+      );
+      this.load.image(
+        `esp_esquerda_${i}`,
+        `${caminhoBase}/${prefixo}_esquerda_${i}.png`,
+      );
     }
   }
 
@@ -70,12 +90,21 @@ export default class SceneAgencia extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "agencia" });
     this.mapa = mapa;
 
+    const spawnX = this.spawnXCustom ?? 297;
+    const spawnY = this.spawnYCustom ?? 395;
+    const saidaX = 165;
+    const saidaY = 255;
+
+    // Garante que câmera e mundo incluam a posição pedida, mesmo fora do tamanho base do mapa.
+    const limiteLargura = Math.max(mapa.widthInPixels, spawnX + 64);
+    const limiteAltura = Math.max(mapa.heightInPixels, spawnY + 64);
+
     const tsRoomBuilder = mapa.addTilesetImage("roombuilder", "ag_roombuilder");
-    const tsInteriorS1  = mapa.addTilesetImage("interior_s1", "ag_interior_s1");
-    const tsInteriorS2  = mapa.addTilesetImage("interior_s2", "ag_interior_s2");
-    const tsInteriorS3  = mapa.addTilesetImage("interior_s3", "ag_interior_s3");
-    const tsInteriorS4  = mapa.addTilesetImage("interior_s4", "ag_interior_s4");
-    const tsInteriorS5  = mapa.addTilesetImage("interior_s5", "ag_interior_s5");
+    const tsInteriorS1 = mapa.addTilesetImage("interior_s1", "ag_interior_s1");
+    const tsInteriorS2 = mapa.addTilesetImage("interior_s2", "ag_interior_s2");
+    const tsInteriorS3 = mapa.addTilesetImage("interior_s3", "ag_interior_s3");
+    const tsInteriorS4 = mapa.addTilesetImage("interior_s4", "ag_interior_s4");
+    const tsInteriorS5 = mapa.addTilesetImage("interior_s5", "ag_interior_s5");
 
     const tilesets = [
       tsRoomBuilder,
@@ -87,26 +116,26 @@ export default class SceneAgencia extends Phaser.Scene {
     ].filter(Boolean);
 
     this.add
-      .rectangle(0, 0, mapa.widthInPixels + 200, mapa.heightInPixels + 200, 0x888888)
+      .rectangle(0, 0, limiteLargura + 200, limiteAltura + 200, 0x888888)
       .setOrigin(0, 0);
 
     // ── CAMADAS SEM COLISÃO ───────────────────────────────────────────────────
-    this._criarCamada(mapa, "chao",           tilesets);
-    this._criarCamada(mapa, "tapete",         tilesets);
-    this._criarCamada(mapa, "parede",         tilesets);
-    this._criarCamada(mapa, "quadro",         tilesets);
-    this._criarCamada(mapa, "cadeira - n",    tilesets);
-    this._criarCamada(mapa, "cadeira 2 - n",  tilesets);
-    this._criarCamada(mapa, "objetos - n",    tilesets);
-    this._criarCamada(mapa, "objetos2 - n",   tilesets);
-    this._criarCamada(mapa, "spawn",          tilesets);
+    this._criarCamada(mapa, "chao", tilesets);
+    this._criarCamada(mapa, "tapete", tilesets);
+    this._criarCamada(mapa, "parede", tilesets);
+    this._criarCamada(mapa, "quadro", tilesets);
+    this._criarCamada(mapa, "cadeira - n", tilesets);
+    this._criarCamada(mapa, "cadeira 2 - n", tilesets);
+    this._criarCamada(mapa, "objetos - n", tilesets);
+    this._criarCamada(mapa, "objetos2 - n", tilesets);
+    this._criarCamada(mapa, "spawn", tilesets);
 
     // ── CAMADAS COM COLISÃO ───────────────────────────────────────────────────
-    const objC   = this._criarCamada(mapa, "objetos - c",    tilesets);
-    const decC   = this._criarCamada(mapa, "decoracao - c",  tilesets);
-    const decC2  = this._criarCamada(mapa, "decoracao2 - c", tilesets);
-    const bordas = this._criarCamada(mapa, "bordas",         tilesets);
-    const borda2 = this._criarCamada(mapa, "borda2",         tilesets);
+    const objC = this._criarCamada(mapa, "objetos - c", tilesets);
+    const decC = this._criarCamada(mapa, "decoracao - c", tilesets);
+    const decC2 = this._criarCamada(mapa, "decoracao2 - c", tilesets);
+    const bordas = this._criarCamada(mapa, "bordas", tilesets);
+    const borda2 = this._criarCamada(mapa, "borda2", tilesets);
 
     const camadasColisao = [objC, decC, decC2, bordas, borda2].filter(Boolean);
     camadasColisao.forEach((c) => c.setCollisionByExclusion([-1]));
@@ -115,18 +144,30 @@ export default class SceneAgencia extends Phaser.Scene {
     // Região problemática: y≈108, x de 40 até 168
     // Em tiles (16px cada): linhas 6-7, colunas 2-10
     // Usamos Math.floor/ceil para cobrir a faixa completa informada
-    const tileW = mapa.tileWidth  || 16;
+    const tileW = mapa.tileWidth || 16;
     const tileH = mapa.tileHeight || 16;
 
-    const linhaInicio  = Math.floor(96  / tileH); // 6
-    const linhaFim     = Math.ceil(120  / tileH); // 7 (um tile a mais por segurança)
-    const colunaInicio = Math.floor(40  / tileW); // 2
-    const colunaFim    = Math.ceil(168  / tileW); // 10 (inclusive)
+    const linhaInicio = Math.floor(96 / tileH); // 6
+    const linhaFim = Math.ceil(120 / tileH); // 7 (um tile a mais por segurança)
+    const colunaInicio = Math.floor(40 / tileW); // 2
+    const colunaFim = Math.ceil(168 / tileW); // 10 (inclusive)
 
     camadasColisao.forEach((camada) => {
       for (let linha = linhaInicio; linha <= linhaFim; linha++) {
         for (let col = colunaInicio; col <= colunaFim; col++) {
           const tile = camada.getTileAt(col, linha);
+          if (tile) tile.setCollision(false, false, false, false);
+        }
+      }
+    });
+
+    // Garante espaço livre no ponto de spawn para não empurrar o personagem.
+    const colSpawn = Math.floor(spawnX / tileW);
+    const linSpawn = Math.floor(spawnY / tileH);
+    camadasColisao.forEach((camada) => {
+      for (let lin = linSpawn - 1; lin <= linSpawn + 1; lin++) {
+        for (let col = colSpawn - 1; col <= colSpawn + 1; col++) {
+          const tile = camada.getTileAt(col, lin);
           if (tile) tile.setCollision(false, false, false, false);
         }
       }
@@ -150,14 +191,11 @@ export default class SceneAgencia extends Phaser.Scene {
     });
 
     // ── PERSONAGEM ────────────────────────────────────────────────────────────
-    const spawnX = 158;
-    const spawnY = 185;
-
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
     const larguraSprite = this.personagem.width;
-    const alturaSprite  = this.personagem.height;
+    const alturaSprite = this.personagem.height;
     const escala = Math.min(
       (tileW * 0.4) / larguraSprite,
       (tileW * 0.4) / alturaSprite,
@@ -165,31 +203,108 @@ export default class SceneAgencia extends Phaser.Scene {
     this.personagem.setScale(Math.max(escala, 0.04));
     this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    camadasColisao.forEach((c) => this.physics.add.collider(this.personagem, c));
+    camadasColisao.forEach((c) =>
+      this.physics.add.collider(this.personagem, c),
+    );
+
+    // ── NPC ───────────────────────────────────────────────────────────────────
+    this.npcAgencia = this.physics.add
+      .staticImage(65, 57, "npc_agencia")
+      .setDepth(5);
+    const alturaAlvo = this.personagem.displayHeight;
+    this.npcAgencia.setDisplaySize(
+      (this.npcAgencia.width / this.npcAgencia.height) * (alturaAlvo * 1.2),
+      alturaAlvo * 1.2,
+    );
+    this.npcAgencia.refreshBody();
+
+    this.physics.add.collider(this.personagem, this.npcAgencia);
+
+    this.labelNpc = this.add
+      .text(65, 76, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
 
     // ── CONTROLES ─────────────────────────────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
-      cima:     Phaser.Input.Keyboard.KeyCodes.W,
-      baixo:    Phaser.Input.Keyboard.KeyCodes.S,
+      cima: Phaser.Input.Keyboard.KeyCodes.W,
+      baixo: Phaser.Input.Keyboard.KeyCodes.S,
       esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita:  Phaser.Input.Keyboard.KeyCodes.D,
+      direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
     // ── CÂMERA ────────────────────────────────────────────────────────────────
     this.cameras.main.startFollow(this.personagem);
-    this.cameras.main.setZoom(5);
-    this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
-    this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
+    this.cameras.main.setZoom(6.5);
+    const larguraVisivel = this.cameras.main.width / this.cameras.main.zoom;
+    const alturaVisivel = this.cameras.main.height / this.cameras.main.zoom;
+    const meiaLargura = larguraVisivel * 0.5;
+    const meiaAltura = alturaVisivel * 0.5;
+
+    // Trava o scroll para a direita: a câmera só pode ir para a esquerda a partir do spawn.
+    const limiteCameraLargura = Math.max(larguraVisivel, spawnX + meiaLargura);
+    const limiteCameraAltura = Math.max(limiteAltura, spawnY + meiaAltura);
+
+    this.cameras.main.setBounds(0, 0, limiteCameraLargura, limiteCameraAltura);
+    this.physics.world.setBounds(0, 0, limiteLargura, limiteAltura);
+    this.cameras.main.centerOn(spawnX, spawnY);
+    this.scrollXMaxInicial = this.cameras.main.scrollX;
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     this.direcaoAtual = "frente";
 
-    // ── SAÍDA AUTOMÁTICA ──────────────────────────────────────────────────────
-    // Ao entrar no raio da saída, retorna automaticamente para a cidade
-    this.zonasSaida = [{ x: 158, y: 232, raio: 25 }];
+    // ── ZONA DE SAÍDA ─────────────────────────────────────────────────────────
+    this.zonasSaida = [{ x: saidaX, y: saidaY, raio: 25 }];
+    this.labelSair = this.add
+      .text(saidaX, saidaY, "[Saída]", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     this.dentroZonaSaida = false;
     this.transicionando = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // ── DEBUG ─────────────────────────────────────────────────────────────────
     this.debugTxt = this.add
@@ -211,7 +326,12 @@ export default class SceneAgencia extends Phaser.Scene {
       if (!camada) console.warn("[SceneAgencia] Camada não encontrada:", nome);
       return camada;
     } catch (erro) {
-      console.error("[SceneAgencia] Erro ao criar camada", nome, ":", erro.message);
+      console.error(
+        "[SceneAgencia] Erro ao criar camada",
+        nome,
+        ":",
+        erro.message,
+      );
       return null;
     }
   }
@@ -221,6 +341,14 @@ export default class SceneAgencia extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
 
     personagem.setVelocity(0);
     let movendo = false;
@@ -254,32 +382,79 @@ export default class SceneAgencia extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // ── INTERAÇÃO COM NPC ───────────────────────────────────────────────────
+    const distNpc = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      this.npcAgencia.x,
+      this.npcAgencia.y,
+    );
+    const pertoNpc = distNpc < 30;
+
+    this.perto_npc = pertoNpc;
+    this.labelNpc.setVisible(pertoNpc);
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcAgencia.x,
+        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+      );
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneAgencia] Interagiu com o NPC da agência");
+    }
+
     // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────
     const dentroSaida = (this.zonasSaida || []).some((z) => {
-      const d = Phaser.Math.Distance.Between(personagem.x, personagem.y, z.x, z.y);
+      const d = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        z.x,
+        z.y,
+      );
       return d <= z.raio;
     });
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
+      if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
-    // Transição automática para a cidade ao se aproximar da saída
-    if (!this.transicionando && dentroSaida) {
+    // Mantém a câmera sem scroll para a direita (apenas para esquerda).
+    if (typeof this.scrollXMaxInicial === "number") {
+      this.cameras.main.scrollX = Math.min(
+        this.cameras.main.scrollX,
+        this.scrollXMaxInicial,
+      );
+    }
+
+    // Transição automática para a cidade ao entrar na zona de saída
+    if (dentroSaida && !this.transicionando) {
       this.transicionando = true;
+      this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.start('SceneCidade', {
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 976,
-          spawnY: 856
+          spawnY: 856,
         });
       });
     }
 
     // ── Debug ─────────────────────────────────────────────────────────────
-    this.debugTxt.setText(`x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`);
+    this.debugTxt.setText(
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+    );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

@@ -190,16 +190,20 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 &emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre a viabilidade técnica e o engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um Serious Game não depende apenas da ausência de bugs, mas da capacidade de manter o "fluxo" de aprendizagem sem interrupções técnicas. A Tabela 1 detalha as ameaças mapeadas para esta etapa, utilizando a estrutura de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza a inspeção e adaptação contínua através de ciclos incrementais (sprints).
 
 <div align="center">
-<sub>Tabela 2 - Matriz de Riscos do Projeto</sub>
+<sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
 
-| # | Risco | Probabilidade | Impacto | Classificação | Plano de Resposta |
-|---|-------|:---:|:---:|:---:|---|
-| R1 | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | Média | Alto | **Crítico** | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
-| R2 | Desengajamento dos usuários com o formato de Serious Game | Média | Alto | **Crítico** | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
-| R3 | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | Baixa | Alto | **Moderado** | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
-| R4 | Escopo técnico maior que a capacidade da equipe nas sprints definidas | Alta | Médio | **Moderado** | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
-| R5 | Baixa adesão dos GNs por dificuldade com ferramentas digitais | Média | Médio | **Moderado** | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
-| R6 | Perda de dados de progresso do jogador por falha técnica | Baixa | Baixo | **Baixo** | Implementar salvamento de estado da sessão; documentar este risco para versões futuras com backend. |
+| # | Ameaça / Oportunidade  | Categoria | Descrição | Probabilidade (%) | Impacto | Responsável | Plano de Resposta |
+|---|---|---|---|:---:|:---:|---|---|
+| R1 | Ameaça | Tecnologia | Incompatibilidade do jogo com diferentes navegadores ou versões de sistema operacional dos GNs | 30% | Baixo | Alicia | Testar em Chrome, Edge e Firefox desde as primeiras sprints; padronizar versões mínimas suportadas na documentação. |
+| R2 | Ameaça | Usuário / Engajamento | Desengajamento dos usuários com o formato de Serious Game | 50% | Alto | Eduardo | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
+| R3 | Ameaça | Produto / Conteúdo | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | 30% | Moderado | Sofia | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
+| R4 | Ameaça | Gestão de Projeto | Escopo técnico maior que a capacidade da equipe nas sprints definidas | 50% | Moderado | Gabriel | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
+| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 70% | Alto | Rachel | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| O1 | Oportunidade | Produto / Qualidade | Feedback positivo de usuários durante testes de jogabilidade | 70% | Alto | Eduardo | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
+| O2 | Oportunidade | Estratégia / Treinamento | Padronização nacional do treinamento da Cielo | 90% | Alto | Lucas | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos. |
+| O3 | Oportunidade | Engajamento do Usuário | Alta adesão dos GNs ao formato gamificado | 50% | Moderado | Rachel | Reforçar elementos de gamificação como ranking, CieloCoins, progressão, feedback imediato. |
+| O4 | Oportunidade | Financeiro / Operacional | Redução de custos operacionais de treinamento | 30% | Baixo | Gabriel | Priorizar um MVP funcional que substitua parte dos treinamentos presenciais. |
+| O5 | Oportunidade | Tecnologia / Dados | Implementação de sistema robusto de salvamento e gestão de progresso do jogador | 20% | Baixo | Nicolas | Implementar salvamento de estado da sessão e estruturar base para futuras integrações com backend, aumentando a confiabilidade e escalabilidade do sistema. |
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
@@ -224,7 +228,23 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp; A definição desses objetivos evidencia um planejamento estruturado e orientado por resultados, permitindo o acompanhamento contínuo do progresso e a identificação de melhorias ao longo do desenvolvimento. A utilização do modelo SMART (Doran, 1981) [\[29\]](#ref29), aliada às práticas do Project Management Institute (2021) [\[30\]](#ref30), fortalece o alinhamento entre planejamento e execução, contribuindo para maior eficiência do projeto e aumentando a probabilidade de sucesso do Mini Mundo Cielo.
+&emsp;Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
+
+<div align="center">
+<sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
+
+| Objetivo | Meta (SMART) | Indicador (KPI) |
+|----------|--------------|----------------|
+| Desenvolver o núcleo jogável do Mini Mundo Cielo | Entregar um MVP funcional da Cidade 1 contendo mapa completo, NPCs e sistema de moedas até o final da Sprint 4 | Percentual de funcionalidades implementadas da Cidade 1 (%) |
+| Melhorar a experiência de navegação no mapa | Reduzir erros de colisão e movimentação para no máximo 2 por mapa até a Sprint 5 | Número de bugs de colisão registrados nos testes |
+| Validar a experiência de jogabilidade | Realizar testes com pelo menos 5 usuários externos e atingir nota média mínima de 7/10 até a Sprint 5 | Média de satisfação dos usuários nos playtests |
+| Garantir acessibilidade básica no jogo | Implementar modo daltônico, controle de volume e brilho no menu de configurações até a Sprint 4 | Número de funcionalidades de acessibilidade implementadas |
+| Representar diversidade entre personagens | Desenvolver 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional até a Sprint 2 | Percentual de personagens finalizados (%) |
+
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
+
+&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
@@ -693,7 +713,16 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
-*Descreva a trilha sonora do jogo, indicando quais músicas serão utilizadas no mundo e nas fases. Utilize listas ou tabelas para organizar esta seção. Caso utilize material de terceiros em licença Creative Commons, não deixe de citar os autores/fontes.*
+&emsp;A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
+
+
+&emsp; De acordo com Lucas Correia Meneguette (2016)  [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
+
+
+&emsp;No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
+
+
+Com base nisso, os áudios do jogo foram organizados e classificados conforme sua função e sua relação com o universo narrativo, conforme apresentado na tabela a seguir:
 
 *Exemplo de tabela*
 \# | titulo | ocorrência | autoria
@@ -1099,96 +1128,341 @@ Sistema de diálogo com múltiplas opções que impactam a pontuação e progres
 
 ### 3.8.1. Movimentação do Personagem
 
-&emsp;O personagem se move com **velocidade constante** em quatro direções (cima, baixo, esquerda, direita). A posição do personagem a cada frame é atualizada pela equação cinemática de movimento uniforme:
+&emsp;O personagem se move com velocidade constante em quatro direções (cima, baixo, esquerda, direita), caracterizando um movimento uniforme em cada eixo do plano cartesiano.
+&emsp;A atualização da posição pode ser descrita pela equação vetorial do movimento uniforme:
 
-$$P_{n+1} = P_n + v \cdot \Delta t$$
+$$
+\vec{P}_{n+1} = \vec{P}_n + \vec{v} \cdot \Delta t
+$$
+
+&emsp;De forma equivalente, separando por eixos:
+
+$$
+x_{n+1} = x_n + v_x \cdot \Delta t
+$$
+
+$$
+y_{n+1} = y_n + v_y \cdot \Delta t
+$$
 
 Onde:
-- $P_n$ = posição atual do personagem (em pixels)
-- $v$ = velocidade escalar constante (definida em `velocidadePersonagem`, em pixels por segundo)
-- $\Delta t$ = intervalo de tempo entre frames (gerenciado internamente pelo Phaser.js via `update()`)
+- $(x_n, y_n)$ = posição atual do personagem (em pixels)
+- $v_x$, $v_y$ = componentes da velocidade nos eixos horizontal e vertical
+- $\Delta t$ = intervalo de tempo entre frames
 
-&emsp;Na implementação com Phaser.js, a velocidade é aplicada diretamente ao corpo físico do sprite, e o motor de física atualiza a posição automaticamente a cada frame:
+&emsp;No sistema de coordenadas do Phaser, o eixo Y é invertido (valores positivos apontam para baixo), o que explica o uso de velocidade negativa para movimento para cima.
 
-```js
-corpoFisico.setVelocityX(velocidadePersonagem);  // movimento horizontal
-corpoFisico.setVelocityY(-velocidadePersonagem); // movimento vertical (eixo Y invertido)
+#### Implementação
+
+```javascript
+personagem.setVelocity(0);
+
+if (teclas.left.isDown) {
+  personagem.setVelocityX(-velocidade);
+} else if (teclas.right.isDown) {
+  personagem.setVelocityX(velocidade);
+}
+
+if (teclas.up.isDown) {
+  personagem.setVelocityY(-velocidade);
+} else if (teclas.down.isDown) {
+  personagem.setVelocityY(velocidade);
+}
 ```
+#### Interpretação
 
-### 3.8.2. Limitação de Fronteiras (Clamping)
-
-&emsp;Para impedir que o personagem saia dos limites do mapa, aplica-se a função de clamping, que restringe a posição do personagem ao intervalo $[P_{min}, P_{max}]$:
-
-$$P_{clamped} = \max(P_{min},\; \min(P_{max},\; P))$$
-
-&emsp;Na implementação:
-
-```js
-this.personagemSprite.x = Phaser.Math.Clamp(this.personagemSprite.x, 0, 1920);
-this.personagemSprite.y = Phaser.Math.Clamp(this.personagemSprite.y, 578, 690);
-```
+&emsp;A cada frame, o motor de física do Phaser atualiza automaticamente a posição do personagem com base nas velocidades definidas, garantindo um movimento uniforme (sem aceleração) em cada eixo.
+&emsp;Assim, o personagem percorre distâncias proporcionais ao tempo, mantendo velocidade constante enquanto uma tecla de direção estiver pressionada.
 
 ### 3.8.3. Detecção de Proximidade com NPCs
 
-&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. A distância euclidiana entre dois pontos no plano 2D é calculada por:
+&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. Para isso, utiliza-se a distância euclidiana entre dois pontos no plano cartesiano 2D.
 
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+$$
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$
 
-Onde $(x_1, y_1)$ é a posição do personagem e $(x_2, y_2)$ é a posição do NPC. Se $d < r_{interação}$ (definido como 150 pixels), o indicador de interação `[E]` é exibido e a tecla de ação fica disponível:
+&emsp;Onde:
+- $(x_1, y_1)$ representa a posição do personagem  
+- $(x_2, y_2)$ representa a posição do NPC  
 
-```js
-const distNpc = Phaser.Math.Distance.Between(px, py, npcX, npcY);
-this.indicadorE.setVisible(distNpc < 150 && !this.dialogoNpcAberto);
+&emsp;No sistema implementado, considera-se que o personagem está próximo do NPC quando:
+
+$$
+d < 30
+$$
+
+&emsp;Esse valor define o raio de interação em pixels. Quando essa condição é satisfeita, o indicador `[E]` é exibido na tela, permitindo a interação.
+
+#### Implementação em Código
+
+```javascript
+const distNpc = Phaser.Math.Distance.Between(
+  personagem.x,
+  personagem.y,
+  79,
+  141
+);
+
+const pertoNpc = distNpc < 30;
 ```
+#### Controle de Interface
+
+```javascript
+if (pertoNpc !== this.perto_npc) {
+  this.perto_npc = pertoNpc;
+  this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+}
+```
+
+#### Interação com o NPC
+
+```javascript
+if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
+}
+```
+
+#### Interpretação Matemática
+
+&emsp;A equação da distância euclidiana define uma região circular de raio $r = 30$ centrada no NPC. Sempre que o personagem entra nessa região, considera-se que ele está suficientemente próximo para interagir.
+
+&emsp;Geometricamente, isso corresponde ao conjunto de pontos que satisfazem:
+
+$$
+(x - x_{npc})^2 + (y - y_{npc})^2 < r^2
+$$
+
+#### Conclusão
+
+&emsp;A implementação utiliza uma função matemática clássica da geometria analítica para detectar proximidade entre dois elementos no plano. O comportamento observado no jogo é consistente com o modelo teórico, garantindo uma interação precisa e eficiente com os NPCs.
 
 ### 3.8.4. Animação Clock Wipe (Transição de Cenas)
 
-&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela, simulando o fechamento de um círculo no sentido horário ou anti-horário.
-&emsp;Matematicamente, esse efeito é controlado por um parâmetro de progresso contínuo: $t \in [0,1]$, onde $t = 0$ representa o início (tela totalmente visível) e $t = 1$ o final (tela completamente encoberta).
-&emsp;O ângulo inicial da animação é dado por $\theta_0 = -\frac{\pi}{2}$ (topo do círculo) e avança até completar $2\pi$ radianos (uma volta completa), sendo modelado por:
+&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela.
 
-\[
+&emsp;O progresso da animação é dado por $t \in [0,1]$, onde $t = 0$ representa o início e $t = 1$ o final da transição.
+
+&emsp;O ângulo inicial é dado por $\theta_0 = -\frac{\pi}{2}$ e evolui até completar $2\pi$ radianos:
+
+$$
 \theta(t) = -\frac{\pi}{2} + t \cdot 2\pi
-\]
+$$
 
-&emsp;Essa equação é aplicada diretamente no cálculo do arco da máscara a cada frame da animação:
-```
+&emsp;Aplicação no código:
+
+```javascript
 const progress = tween.getValue();
 const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
-````
-**Sentidos da animação:**
+```
 
-1) Sentido Horário (clockwise)
- No sentido horário, o arco visível da máscara é definido entre um ângulo inicial variável e um ângulo final fixo:
+#### Sentidos da animação
 
-Ângulo inicial: $\theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi$
-Ângulo final: $\theta_{final} = -\frac{\pi}{2} + 2\pi$
+##### 1) Sentido horário (clockwise)
+
+&emsp;Ângulo inicial:
+
+$$
+\theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi
+$$
+
+&emsp;Ângulo final:
+
+$$
+\theta_{final} = -\frac{\pi}{2} + 2\pi
+$$
+
+```javascript
 if (clockwise) {
   const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
   const endAngle = -Math.PI / 2 + Math.PI * 2;
   maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
 }
+```
 
- À medida que $t$ aumenta, o arco diminui, produzindo o efeito de fechamento da tela no sentido horário.
+##### 2) Sentido anti-horário (counterclockwise)
 
-Sentido Anti-horário (counterclockwise)
+&emsp;Ângulo inicial:
 
- No sentido anti-horário, o comportamento é invertido, com o ângulo final variando ao longo do tempo:
+$$
+\theta_{inicial} = -\frac{\pi}{2}
+$$
 
-Ângulo inicial: $\theta_{inicial} = -\frac{\pi}{2}$
-Ângulo final: $\theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi$
+&emsp;Ângulo final:
+
+$$
+\theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi
+$$
+
+```javascript
 else {
   const startAngle = -Math.PI / 2;
   const endAngle = -Math.PI / 2 + (1 - progress) * Math.PI * 2;
   maskGraphics.arc(cx, cy, raio, startAngle, endAngle, false);
 }
+```
 
- Esse comportamento gera o fechamento da cena no sentido oposto.
+#### Cálculo do raio da máscara
+
+$$
+r = \frac{\sqrt{w^2 + h^2}}{2}
+$$
+
+```javascript
+const raio = Math.hypot(this.scale.width, this.scale.height) / 2;
+```
+
+#### Interpolação temporal (Easing)
+
+$$
+t' = \frac{1 - \cos(\pi t)}{2}
+$$
+
+```javascript
+this.tweens.add({
+  targets: { progress: 0 },
+  progress: 1,
+  duration: this.CONFIG.WIPE_DURATION,
+  ease: this.CONFIG.WIPE_EASE,
+});
+```
+
+&emsp;Essa interpolação torna a animação mais fluida, reduzindo a velocidade no início e no fim.
+ 
+### 3.8.5. Animação Cinemática da Chuva (MU + MUV)
+
+&emsp;A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
+
+&emsp;Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[33\]](#ref33)
+
+<div align="center">
+<sub>Figura 28 - Relação matemática com a chuva do jogo</sub><br/>
+<img src="../gdd_images/gifGDDMat.gif" width="20%">
+</div>
+
+&emsp;A função responsável pela animação é:
+
+- Arquivo: `src/scenes/SceneChuva.js`  
+- Função: `animacaoCinematica(g)`  
+- Linha aproximada: 60  
+
+#### Parâmetros do Modelo
+
+| Parâmetro            | Símbolo | Descrição |
+|---------------------|--------|-----------|
+| Posição inicial X   | xi     | Coordenada horizontal inicial da gota (pixels), gerada aleatoriamente. |
+| Posição inicial Y   | yi     | Coordenada vertical inicial (negativa), acima da tela. |
+| Posição final X     | xf     | Coordenada final no eixo X, definida por deslocamento horizontal. |
+| Posição final Y     | yf     | Coordenada final no eixo Y (abaixo da tela). |
+| Tempo total         | T      | Duração total da animação da gota (1,2 s a 1,8 s). |
+| Tempo corrente      | t      | Tempo acumulado da animação: $t \in [0, T]$. |
+| Elemento gráfico    | g      | Objeto que representa a gota e armazena seu estado. |
+
+#### Modelagem Matemática
+
+&emsp;O movimento da gota é descrito pelo vetor posição:
+
+$$
+\vec{r}(t) = (x(t), y(t))
+$$
+
+##### Eixo X — Movimento Uniforme (MU)
+
+$$
+v_x = \frac{x_f - x_i}{T}
+$$
+
+$$
+x(t) = x_i + v_x \cdot t
+$$
+
+&emsp;A velocidade horizontal é constante, representando o efeito do vento.
+
+##### Eixo Y — Movimento Uniformemente Variado (MUV)
+
+$$
+a_y = \frac{2(y_f - y_i)}{T^2}
+$$
+
+$$
+v_y(t) = a_y \cdot t
+$$
+
+$$
+y(t) = y_i + \frac{1}{2} a_y \cdot t^2
+$$
+
+&emsp;A gota parte do repouso vertical ($v_0 = 0$) e acelera continuamente, simulando a gravidade.
+
+#### Implementação da Função
+
+```javascript
+animacaoCinematica(g) {
+
+  if (g.t >= g.T) {
+    g.x = g.xf;
+    g.y = g.yf;
+    g.ativo = false;
+    return;
+  }
+
+  var t = g.t;
+
+  // MU — eixo X
+  var x_atual = g.xi + g.vx * t;
+
+  // MUV — eixo Y
+  var vy_atual = g.ay * t;
+  var y_atual = g.yi + 0.5 * g.ay * t * t;
+
+  g.x = x_atual;
+  g.y = y_atual;
+
+  if (g.frame % 10 === 0) {
+    console.log("[MU  | X] vx:" + g.vx + " x:" + x_atual);
+    console.log("[MUV | Y] ay:" + g.ay + " vy:" + vy_atual + " y:" + y_atual);
+  }
+}
+```
+
+#### Pré-cálculo dos Parâmetros
+
+```javascript
+g.vx = (g.xf - g.xi) / g.T;
+g.ay = (2 * (g.yf - g.yi)) / (g.T * g.T);
+```
+
+#### Atualização Temporal
+
+```javascript
+g.t += delta / 1000;
+```
+
+&emsp;O uso do delta garante que a animação seja independente da taxa de frames.
+
+#### Interpretação Física
+
+- Eixo X → velocidade constante → Movimento Uniforme  
+- Eixo Y → aceleração constante → Movimento Uniformemente Variado  
+- Movimento resultante → trajetória parabólica  
+
+$$
+\vec{r}(t) = (x_i + v_x t)\hat{x} + \left(y_i + \frac{1}{2} a_y t^2\right)\hat{y}
+$$
+
+#### Validação (Console)
+
+&emsp;Os logs confirmam o comportamento esperado:
+
+- $v_x$ constante → MU validado  
+- $v_y$ crescente → MUV validado  
+- $y(t)$ cresce quadraticamente → queda acelerada  
 
 
+#### Conclusão
 
+&emsp;A implementação atende todos os requisitos propostos, utilizando apenas operações matemáticas básicas e modelagem física coerente. O comportamento visual da chuva reproduz corretamente um movimento bidimensional com MU no eixo X e MUV no eixo Y.
 
-###3.8.5 Animação de chuva na SceneCidade###
 
 # <a name="c4"></a>4. Desenvolvimento do Jogo
 
@@ -1727,38 +2001,6 @@ Entre os próximos objetivos estão:
 
 *Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
 
-| # | Pré-condição | Descrição do teste | Pós-condição | Requisitos relacionados
-|---|---|---|---|---| 
-| 1 | O jogo foi iniciado no navegador e está em processo de carregamento inicial. | Aguardar a abertura completa do jogo e verificar se a tela inicial é exibida corretamente. | A tela inicial é carregada sem erros visuais ou travamentos. | RF01, RNF01 |
-| 2 | A tela inicial foi carregada com sucesso. | Verificar se o fundo da tela inicial está visível, dimensionado corretamente e posicionado de forma adequada. | O fundo é exibido corretamente na tela inicial. |RF01 |
-| 3 | A tela inicial está visível e interativa. | Verificar se os botões principais da tela inicial estão visíveis, identificáveis e clicáveis. | Os botões da tela inicial estão funcionando corretamente. |RF01 |
-| 4 | A tela inicial está carregada e os botões estão visíveis. | Passar o cursor do mouse sobre os botões da tela inicial e observar se há animação visual de destaque. | As animações dos botões são executadas corretamente ao passar o mouse. |RF01|
-| 5 | O jogador está na tela inicial. | Clicar no botão **Jogar** e verificar se ocorre a transição para a tela de seleção de personagens. | A transição para a tela de seleção de personagens ocorre corretamente. |RF01, RF04 |
-| 6 | A tela de seleção de personagens foi carregada. | Verificar se os personagens são exibidos corretamente na tela de seleção. | Os personagens são carregados corretamente e ficam visíveis para seleção. | RF04 |
-| 7 | A tela de seleção de personagens está aberta. | Passar o cursor do mouse sobre os personagens e observar se ocorre o destaque visual previsto. | O efeito de hover é aplicado corretamente aos personagens. | RF04 |
-| 8 | A tela de seleção de personagens está aberta e interativa. | Selecionar um personagem com um clique e verificar se o carregamento do mundo é iniciado com o personagem escolhido. | O mundo do jogo é carregado com o personagem selecionado. |RF04|
-| 9 | O mundo do jogo foi carregado com o personagem selecionado. | Utilizar as teclas **W, A, S e D** para movimentar o personagem em diferentes direções. | O personagem se movimenta corretamente conforme os comandos do jogador. |RF02|
-| 10 | O personagem está posicionado em uma área com obstáculos no cenário. | Tentar movimentar o personagem em direção a barreiras ou objetos com colisão. | O personagem não atravessa os obstáculos do cenário. |RF02|
-| 11 | O mundo do jogo foi iniciado após a seleção do personagem. | Observar a interface logo após o início da fase e verificar se o tutorial é exibido. | O tutorial aparece corretamente ao jogador. |RF16|
-| 12 | A tela inicial foi carregada com sucesso. | Clicar no botão **Créditos** e verificar se a listagem de colaboradores é exibida corretamente. | A tela ou sobreposição de créditos é aberta corretamente. |RF01 |
-| 13 | A tela de créditos está aberta. | Fechar a tela de créditos e verificar se o jogo retorna ao menu inicial sem falhas. | O jogador retorna corretamente à tela inicial. |RF01|
-| 14 | A tela inicial foi carregada com sucesso. | Clicar no botão **Configurações** e verificar se o submenu de ajustes globais é aberto. | O menu de configurações é exibido corretamente. |RF01, RNF06| 
-| 15 | O menu de configurações está aberto. | Alterar o volume para diferentes valores dentro do intervalo permitido e verificar se o ajuste é aceito pelo sistema. | O controle de volume responde corretamente às alterações realizadas. | RNF06 |
-| 16 | O menu de configurações está aberto. | Alterar a configuração de brilho e observar se há mudança perceptível na apresentação visual. | O brilho é ajustado corretamente de acordo com a configuração escolhida. |RNF06 |
-| 17 | O menu de configurações está aberto. | Ativar e desativar o filtro de daltonismo, verificando se a mudança visual é aplicada ao jogo. | O filtro de daltonismo é ativado e desativado corretamente. |RNF06| 
-| 18 | O jogador se encontra no prólogo, em uma área próxima à NPC Vanessa. | Aproximar o personagem da NPC e verificar se o prompt de interação com a tecla **E** é exibido. | O prompt de interação aparece corretamente quando o jogador se aproxima da NPC. |RF03, RF07 |
-| 19 | O jogador está próximo da NPC Vanessa e o prompt de interação está visível. | Pressionar a tecla **E** para iniciar o diálogo com a NPC. | O diálogo com a NPC é iniciado corretamente. |RF03, RF07 |
-| 20 | O diálogo com a NPC Vanessa foi iniciado. | Tentar movimentar o personagem durante o diálogo e verificar se o controle do jogador permanece bloqueado até o fim da interação. | O jogador não consegue se mover durante o diálogo, e o bloqueio funciona corretamente. |RF09|
-| 21 | O jogador concluiu o diálogo do prólogo com a NPC Vanessa e o gatilho de progressão foi ativado. | Deslocar o personagem até a área de entrada do ônibus e verificar se a cutscene é iniciada corretamente. | A cutscene do ônibus é iniciada ao entrar na área de gatilho. |RF14|
-| 22 | A cutscene do ônibus foi iniciada. | Acompanhar a execução completa da cutscene e verificar se a transição para o banco ocorre corretamente ao final. | A transição para o hub do banco é concluída corretamente após a cutscene. | RF14|
-| 23 | O jogador concluiu o prólogo e está no hub principal do banco. | Aproximar o personagem do Gerente-Geral e iniciar a interação. | O diálogo com o Gerente-Geral é iniciado corretamente. | RF07|
-| 24 | O diálogo com o Gerente-Geral foi iniciado. | Percorrer todas as falas do NPC até o encerramento do diálogo. | A missão principal é atribuída corretamente ao jogador. | RF12 |
-| 25 | O jogador recebeu uma missão do Gerente-Geral. | Verificar se a interface exibe de forma clara o objetivo atual da missão. | O objetivo da missão aparece corretamente na interface. | RF16 |
-| 26 | O jogador está com uma missão ativa. | Deslocar-se até o primeiro estabelecimento indicado pela rota da missão. | O sistema reconhece corretamente a chegada ao local da missão. |RF12 |
-| 27 | O jogador está acompanhado do personagem PJ. | Aproximar-se de um cliente com o PJ dentro da distância exigida para interação. | A interação com o cliente é habilitada corretamente. |RF07|
-| 28 | O jogador está próximo de um cliente, mas o PJ está fora do raio exigido. | Tentar iniciar a interação com o cliente. | A interação permanece bloqueada até que o PJ esteja dentro da distância necessária. | RF07 |
-| 29 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta classificada como adequada durante a interação. | O sistema registra corretamente a pontuação máxima prevista para a resposta. | RF08, RF11 |
-| 30 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta classificada como intermediária durante a interação. | O sistema registra corretamente a pontuação intermediária prevista para a resposta. | RF08, RF11 |
 | # | Pré-condição | Descrição do teste | Pós-condição | Requisitos Relacionados |
 |---|---|---|---|---|
 | 1 | O jogo foi iniciado no navegador e está em processo de carregamento inicial. | Aguardar a abertura completa do jogo e verificar se a tela inicial é exibida corretamente. | A tela inicial é carregada sem erros visuais ou travamentos. | RF01, RNF01 |
@@ -1892,7 +2134,6 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 # <a name="c7"></a>7. Referências (sprint 5)
 
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
-
 ## 7. Referências
 
 <br><a name="ref1">[1]:</a>
@@ -1944,6 +2185,10 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref30">[30]:</a> Project Management Institute. (2021). A guide to the Project Management Body of Knowledge (PMBOK® Guide) (7th ed.). https://www.pmi.org/standards/pmbok.
 
 <br><a name="ref31">[31]:</a> Schwaber, K., & Sutherland, J. (2020). The Scrum Guide: The definitive guide to Scrum: The rules of the game. https://scrumguides.org/scrum-guide.html.
+
+<br><a name="ref32">[32]:</a> Meneguette, L. C. (2016). A afinação do mundo virtual: identidade sonora em jogos digitais. Pontifícia Universidade Católica de São Paulo (PUCSP). https://repositorio.pucsp.br/handle/handle/19060
+
+<br><a name="ref33">[33]:</a> Halliday, D., Resnick, R., & Walker, J. (2016). Fundamentos de física (10ª ed.). LTC.
 
 # <a name="c8"></a>Anexos
 

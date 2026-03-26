@@ -1,23 +1,31 @@
+import { abrirPopupConfig as abrirPopupConfigModule } from "../settings.js";
+
 export default class SceneCidade extends Phaser.Scene {
   constructor() {
     super({ key: "SceneCidade" });
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  INIT — recebe dados do personagem e posição de spawn customizada
-  // ═══════════════════════════════════════════════════════════════════
-  init(dados) {
+  // Recebe dados do personagem e do ponto de spawn
+  init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
     this.spawnXCustom = dados.spawnX || null;
     this.spawnYCustom = dados.spawnY || null;
+    this.missaoCidadeIdCustom = Number.isFinite(Number(dados.missaoCidadeId))
+      ? Math.floor(Number(dados.missaoCidadeId))
+      : null;
+    this.missaoCidadeTextoCustom =
+      typeof dados.missaoCidadeTexto === "string"
+        ? dados.missaoCidadeTexto.trim()
+        : "";
+    this.ocultarSetaAgencia01 =
+      Boolean(dados.ocultarSetaAgencia01) ||
+      Boolean(this.registry.get("ocultarSetaAgencia01"));
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  PRELOAD — carrega tilemap, tilesets e sprites do personagem
-  // ═══════════════════════════════════════════════════════════════════
+  // Carrega mapa, tilesets, sprites e audios
   preload() {
     const nomePasta = this.registry.get("nomePasta") || "Pedro";
     const prefixo = this.registry.get("prefixo") || "HB";
@@ -29,6 +37,10 @@ export default class SceneCidade extends Phaser.Scene {
         arquivo.src,
       );
     });
+
+    this.load.audio(
+      "trilhaSceneCidade", 'src/assets/audios/trilhaSceneCidade.mp3'
+    );
 
     this.load.tilemapTiledJSON(
       "mapaGeral",
@@ -42,6 +54,15 @@ export default class SceneCidade extends Phaser.Scene {
       "tilesMapaBase",
       "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1",
     );
+    this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
+    this.load.image("cieloCoinsHud", "src/assets/imagens/HUD/cieloCoinHUD.png");
+    this.load.image("botaoMapaHud", "src/assets/imagens/HUD/botaoMapa.png");
+    this.load.image(
+      "botaoConfiguracaoHud",
+      "src/assets/imagens/HUD/botaoConfiguracao.png",
+    );
+    this.load.image("botaoRankingHud", "src/assets/imagens/HUD/botaoRanking.png");
+    this.load.image("botaoMissaoHud", "src/assets/imagens/HUD/botaoMissao.png");
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -64,29 +85,33 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  CREATE — monta mapa, personagem, zonas, câmeras e lança a chuva
-  // ═══════════════════════════════════════════════════════════════════
+  // Monta mapa, personagem e interfaces
   create() {
-    // ── Limites do mundo jogável ─────────────────────────────────────
+    // Área jogável usada por câmera e física
     const MAPA_X = 720;
     const MAPA_Y = 100;
     const MAPA_LARGURA = 2432;
     const MAPA_ALTURA = 1760;
 
-    // ── Tilemap e tilesets ───────────────────────────────────────────
-    const mapa = this.make.tilemap({ key: "mapaGeral" });
+    // Adiciona audios a cena
+    this.musica = this.sound.add('trilhaSceneCidade', { loop: true, volume: 0.5});
+    this.musica.play();
 
+    // Mapa principal e tilesets exportados do Tiled
+    const mapa = this.make.tilemap({ key: "mapaGeral" });
     const tileset1 = mapa.addTilesetImage("ME_Top_1", "tilesMapaTopo");
     const tileset2 = mapa.addTilesetImage("ME_Bottom_1", "tilesMapaBase");
     const tileset3 = mapa.addTilesetImage("ME_Top_2", "tilesMapaTopo");
     const tileset4 = mapa.addTilesetImage("ME_Bottom_2", "tilesMapaBase");
     const tilesets = [tileset1, tileset2, tileset3, tileset4].filter(Boolean);
 
-    let caminhoInferior, carrosVeiculos, objetosInferior2, estabelecimentos;
+    let caminhoInferior;
+    let carrosVeiculos;
+    let objetosInferior2;
+    let estabelecimentos;
 
     if (tilesets.length > 0) {
-      // ── Camadas visuais sem colisão ──────────────────────────────
+      // Camadas visuais de base
       this._criarCamada(mapa, "objetosSemColid_em_cima_2", tilesets);
       this._criarCamada(mapa, "contorno_preto_do_mapa", tilesets);
       this._criarCamada(mapa, "chao_inferior_de_areia", tilesets);
@@ -98,7 +123,7 @@ export default class SceneCidade extends Phaser.Scene {
       this._criarCamada(mapa, "n_objetosSemColi_em_baixo_2", tilesets);
       this._criarCamada(mapa, "n_linhas da rua", tilesets);
 
-      // ── Camadas com colisão ──────────────────────────────────────
+      // Camadas com colisão
       caminhoInferior = this._criarCamada(
         mapa,
         "c_objetosComColid_em_baixo",
@@ -122,7 +147,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
     }
 
-    // ── Animações do personagem (4 direções × 4 frames) ─────────────
+    // Cria as animações de caminhada apenas uma vez
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`andar_${dir}`)) {
@@ -140,10 +165,10 @@ export default class SceneCidade extends Phaser.Scene {
       }
     });
 
-    // ── Personagem ───────────────────────────────────────────────────
     const spawnX = this.spawnXCustom || 840;
     const spawnY = this.spawnYCustom || 900;
 
+    // Jogador
     this.personagem = this.physics.add.sprite(
       spawnX,
       spawnY,
@@ -170,8 +195,8 @@ export default class SceneCidade extends Phaser.Scene {
     if (estabelecimentos)
       this.physics.add.collider(this.personagem, estabelecimentos);
 
+    // Camadas acima do personagem para efeito de profundidade
     if (tilesets.length > 0) {
-      // ── Camadas decorativas acima do personagem (depth alto) ─────
       const decSup1 = this._criarCamada(
         mapa,
         "n_estabelecimento_Sem_colid",
@@ -187,12 +212,12 @@ export default class SceneCidade extends Phaser.Scene {
         "n_objetosSemColid_em_cima_2",
         tilesets,
       );
+
       if (decSup1) decSup1.setDepth(10);
       if (decSup2) decSup2.setDepth(11);
       if (decSup3) decSup3.setDepth(12);
     }
 
-    // ── Controles (setas + WASD) ─────────────────────────────────────
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -201,15 +226,15 @@ export default class SceneCidade extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    // ── Câmera principal — segue o personagem com zoom 4x ────────────
+    // Câmera principal seguindo o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 
-    // ── Zonas de interação ───────────────────────────────────────────
-    // Retângulos invisíveis — quando o personagem entra, aparece [E]
+    // Zonas interativas e labels de entrada
     this.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
     this.labelE = this.add
       .text(976, 856, "[E] Entrar", {
@@ -236,7 +261,7 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    this.zonaPadaria = new Phaser.Geom.Rectangle(1470, 890, 100, 80);
+    this.zonaPadaria = new Phaser.Geom.Rectangle(1425, 818, 100, 80);
     this.labelPadaria = this.add
       .text(1484, 840, "[E] Entrar", {
         fontSize: "6px",
@@ -340,7 +365,19 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    // Flags de estado — evitam transições duplicadas
+    this.zonaAgencia03 = new Phaser.Geom.Rectangle(2486, 792, 80, 60);
+    this.labelAgencia03 = this.add
+      .text(2486, 792, "[E] Entrar", {
+        fontSize: "6px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     this.transicionando = false;
     this.dentroZonaAgencia = false;
     this.dentroZonaEscritorio = false;
@@ -350,10 +387,10 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaLojaDeRoupas = false;
     this.dentroZonaSupermercado = false;
     this.dentroZonaPadaria = false;
-    this.dentroZonaPostoDegasolina = false;
-    this.dentroAgencia02 = false; 
+    this.dentroZonaPostoDeGasolina = false;
+    this.dentroZonaAgencia02 = false;
+    this.dentroZonaAgencia03 = false;
 
-    // Texto de debug — coordenadas do personagem em tempo real
     this.debugTxt = this.add
       .text(0, 0, "", {
         fontSize: "4px",
@@ -366,26 +403,219 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // ── Minimapa ─────────────────────────────────────────────────────
-    const MM_X = 10,
-      MM_Y = 10;
-    const TM_W = 3328,
-      TM_H = 2048;
+    // Minimapa com câmera separada
+    // Sequencia das setas
+    this.sequenciaSetas = [
+      "agencia1",
+      "padaria",
+      "farmacia",
+      "escritorio",
+      "agencia2",
+      "cabeleireiro",
+      "metro",
+      "restaurante",
+      "supermercado",
+      "agencia3",
+      "posto",
+      "agencia3",
+    ];
+
+    const etapaSalva = Number(this.registry.get("sequenciaSetaCidade"));
+    if (Number.isInteger(etapaSalva) && etapaSalva >= 0) {
+      this.indiceSetaAtual = etapaSalva;
+    } else if (this.ocultarSetaAgencia01) {
+      this.indiceSetaAtual = 1;
+    } else {
+      this.indiceSetaAtual = 0;
+    }
+
+    const MM_X = 10;
+    const MM_Y = 10;
+    const TM_W = 3328;
+    const TM_H = 2048;
     const MM_W = 335;
     const MM_H = Math.round((MM_W * TM_H) / TM_W);
 
-    // Ponto verde = posição atual do jogador
     this.minimapPlayerDot = this.add.graphics();
     this.minimapPlayerDot.fillStyle(0x00ff44, 1);
     this.minimapPlayerDot.fillCircle(0, 0, 55);
     this.minimapPlayerDot.setDepth(52);
 
-    // Ponto vermelho piscante = destino da missão (Farmácia)
     this.minimapDestDot = this.add.graphics();
     this.minimapDestDot.fillStyle(0xff2222, 1);
     this.minimapDestDot.fillCircle(0, 0, 55);
-    this.minimapDestDot.setPosition(1121, 1221);
+    this.minimapDestDot.setPosition(987, 881);
     this.minimapDestDot.setDepth(51);
+
+    // Seta guia no chão para entrada da Agência 01
+    this.setaGuiaAgencia = this.add
+      .triangle(997, 815, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia.setStrokeStyle(2, 0x000000, 0.5);
+
+    this.tweens.add({
+      targets: this.setaGuiaAgencia,
+      y: 809,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Padaria
+    this.setaGuiaPadaria = this.add
+      .triangle(1483, 840, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaPadaria.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaPadaria,
+      y: 834,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Farmácia
+    this.setaGuiaFarmacia = this.add
+      .triangle(1118, 1211, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaFarmacia.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaFarmacia,
+      y: 1205,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Escritório Particular
+    this.setaGuiaEscritorio = this.add
+      .triangle(1754, 1256, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaEscritorio.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaEscritorio,
+      y: 1250,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Agência 02
+    this.setaGuiaAgencia02 = this.add
+      .triangle(1803, 1568, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia02.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaAgencia02,
+      y: 1562,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Loja de Roupa
+    this.setaGuiaCabeleireiro = this.add
+      .triangle(2267, 1570, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaCabeleireiro.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaCabeleireiro,
+      y: 1564,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Metrô
+    this.setaGuiaMetro = this.add
+      .triangle(3070, 1180, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaMetro.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaMetro,
+      y: 1174,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Restaurante
+    this.setaGuiaRestaurante = this.add
+      .triangle(2676, 290, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaRestaurante.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaRestaurante,
+      y: 284,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Supermercado
+    this.setaGuiaSupermercado = this.add
+      .triangle(2936, 356, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaSupermercado.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaSupermercado,
+      y: 350,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada da Agência 03
+    this.setaGuiaAgencia03 = this.add
+      .triangle(2486, 792, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaAgencia03.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaAgencia03,
+      y: 786,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Seta guia no chão para entrada do Posto de Gasolina
+    this.setaGuiaPostoDeGasolina = this.add
+      .triangle(2774, 1310, 0, 14, 12, -8, -12, -8, 0xffe066, 0.95)
+      .setDepth(19);
+    this.setaGuiaPostoDeGasolina.setStrokeStyle(2, 0x000000, 0.5);
+    this.tweens.add({
+      targets: this.setaGuiaPostoDeGasolina,
+      y: 1304,
+      alpha: { from: 1, to: 0.45 },
+      duration: 500,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.setasGuia = {
+      agencia1: this.setaGuiaAgencia,
+      padaria: this.setaGuiaPadaria,
+      farmacia: this.setaGuiaFarmacia,
+      escritorio: this.setaGuiaEscritorio,
+      agencia2: this.setaGuiaAgencia02,
+      cabeleireiro: this.setaGuiaCabeleireiro,
+      metro: this.setaGuiaMetro,
+      restaurante: this.setaGuiaRestaurante,
+      supermercado: this.setaGuiaSupermercado,
+      agencia3: this.setaGuiaAgencia03,
+      posto: this.setaGuiaPostoDeGasolina,
+    };
+    this._atualizarSetaAtual();
 
     this.tweens.add({
       targets: this.minimapDestDot,
@@ -395,12 +625,10 @@ export default class SceneCidade extends Phaser.Scene {
       repeat: -1,
     });
 
-    // Câmera de borda (só exibe cor de fundo)
     this.borderCam = this.cameras.add(MM_X - 2, MM_Y - 2, MM_W + 4, MM_H + 4);
     this.borderCam.setBackgroundColor(0x222222);
     this.borderCam.ignore(this.children.list);
 
-    // Câmera do minimapa — zoom calculado para mostrar o mapa inteiro
     const zoomFit = Math.min(MM_W / TM_W, MM_H / TM_H);
     this.miniMapCam = this.cameras.add(MM_X, MM_Y, MM_W, MM_H);
     this.miniMapCam.setZoom(zoomFit);
@@ -410,6 +638,17 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
     this.miniMapCam.ignore([
+      this.setaGuiaAgencia,
+      this.setaGuiaPadaria,
+      this.setaGuiaFarmacia,
+      this.setaGuiaEscritorio,
+      this.setaGuiaAgencia02,
+      this.setaGuiaCabeleireiro,
+      this.setaGuiaMetro,
+      this.setaGuiaRestaurante,
+      this.setaGuiaSupermercado,
+      this.setaGuiaAgencia03,
+      this.setaGuiaPostoDeGasolina,
       this.labelE,
       this.labelEscritorio,
       this.labelPadaria,
@@ -419,20 +658,26 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelLojaDeRoupas,
       this.labelSupermercado,
       this.labelPostoDeGasolina,
-      this.labelAgencia02, 
+      this.labelAgencia02,
+      this.labelAgencia03,
       this.debugTxt,
     ]);
 
-    // ── Chuva cinemática ─────────────────────────────────────────────
-    // Lança a SceneChuva em paralelo por cima desta cena.
-    // A SceneChuva tem zoom=1 e câmera fixa — as gotas ficam presas
-    // na tela independente do movimento/zoom da câmera principal.
+    // HUD da maquininha e das moedas
+    this._criarHudCidade();
+    this._criarHudCoins();
+    this._criarPopupMissaoCidade();
+
+    // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  _criarCamada — helper seguro para criar camadas do tilemap
-  // ═══════════════════════════════════════════════════════════════════
+  // Cria camada do tilemap com segurança
   _criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
@@ -449,15 +694,911 @@ export default class SceneCidade extends Phaser.Scene {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════
-  //  UPDATE — loop principal: movimento, zonas e transições
-  // ═══════════════════════════════════════════════════════════════════
+  _criarHudCidade() {
+    // Estado inicial da maquininha (canto e compacta)
+    this.hudMargemDireita = 34;
+    this.hudMargemBaixo = 44;
+    this.hudUiScale = 1 / this.cameras.main.zoom;
+    this.hudNoCentro = false;
+    this.hudAnimando = false;
+    this.hudIconBaseScale = 0.45 * this.hudUiScale;
+    this.hudIconZoomScale = 1.25 * this.hudUiScale;
+
+    this.hudIcon = this.add
+      .image(0, 0, "maquininhaCielo")
+      .setScale(this.hudIconBaseScale)
+      .setOrigin(0.5)
+      .setDepth(200)
+      .setInteractive({ useHandCursor: true });
+
+    const closeRadius = 12 * this.hudUiScale;
+    this.hudCloseBg = this.add
+      .circle(0, 0, closeRadius, 0xcf1f1f, 0.95)
+      .setStrokeStyle(Math.max(1, Math.round(2 * this.hudUiScale)), 0x7a0000, 1)
+      .setDepth(210)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+
+    const closeFont = Math.max(8, Math.round(14 * this.hudUiScale));
+    this.hudCloseTxt = this.add
+      .text(0, 0, "X", {
+        fontSize: `${closeFont}px`,
+        color: "#ffecec",
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5)
+      .setDepth(211)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+
+    // A HUD não aparece no minimapa
+    this.miniMapCam.ignore(this.hudIcon);
+    this.borderCam.ignore(this.hudIcon);
+    this.miniMapCam.ignore([this.hudCloseBg, this.hudCloseTxt]);
+    this.borderCam.ignore([this.hudCloseBg, this.hudCloseTxt]);
+
+    this.hudIcon.on("pointerover", () => {
+      if (!this.hudNoCentro && !this.hudAnimando) {
+        this.hudIcon.setScale(0.5 * this.hudUiScale);
+      }
+    });
+    this.hudIcon.on("pointerout", () => {
+      if (!this.hudNoCentro && !this.hudAnimando) {
+        this.hudIcon.setScale(this.hudIconBaseScale);
+      }
+    });
+
+    this.hudIcon.on("pointerdown", () => {
+      if (this.hudAnimando) return;
+
+      if (!this.hudNoCentro) {
+        // Primeiro clique: vai para o centro e aumenta
+        this.hudAnimando = true;
+        const cam = this.cameras.main;
+
+        this.tweens.add({
+          targets: this.hudIcon,
+          x: cam.worldView.centerX,
+          y: cam.worldView.centerY,
+          scale: this.hudIconZoomScale,
+          duration: 260,
+          ease: "Quad.Out",
+          onComplete: () => {
+            this.hudNoCentro = true;
+            this.hudAnimando = false;
+          },
+        });
+        return;
+      }
+
+      // Clique no centro: feedback rápido
+      this.tweens.add({
+        targets: this.hudIcon,
+        scale: this.hudIconZoomScale * 1.08,
+        duration: 90,
+        yoyo: true,
+        ease: "Sine.Out",
+      });
+      console.log("[HUD] Maquininha clicada no centro");
+    });
+
+    const fecharHud = () => {
+      if (!this.hudNoCentro || this.hudAnimando) return;
+
+      // Retorna para o canto
+      this.hudAnimando = true;
+      this.hudCloseBg.setVisible(false);
+      this.hudCloseTxt.setVisible(false);
+
+      const cam = this.cameras.main;
+      const alvoX = cam.worldView.right - this.hudMargemDireita;
+      const alvoY = cam.worldView.bottom - this.hudMargemBaixo;
+
+      this.tweens.add({
+        targets: this.hudIcon,
+        x: alvoX,
+        y: alvoY,
+        scale: this.hudIconBaseScale,
+        duration: 240,
+        ease: "Quad.InOut",
+        onComplete: () => {
+          this.hudNoCentro = false;
+          this.hudAnimando = false;
+        },
+      });
+    };
+
+    this.hudCloseBg.on("pointerdown", fecharHud);
+    this.hudCloseTxt.on("pointerdown", fecharHud);
+
+    this.hudDebugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "16px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#ffffff",
+        backgroundColor: "#000000ee",
+        padding: { x: 8, y: 6 },
+      })
+      .setDepth(1000)
+      .setScrollFactor(0)
+      .setVisible(false);
+
+    this.hudDebugMarker = this.add
+      .text(0, 0, "+", {
+        fontSize: "18px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#00ff66",
+        stroke: "#000000",
+        strokeThickness: 3,
+      })
+      .setDepth(1001)
+      .setOrigin(0.5)
+      .setVisible(false);
+
+    this.miniMapCam.ignore(this.hudDebugTxt);
+    this.borderCam.ignore(this.hudDebugTxt);
+    this.miniMapCam.ignore(this.hudDebugMarker);
+    this.borderCam.ignore(this.hudDebugMarker);
+    this._hudDebugWorldPoint = new Phaser.Math.Vector2();
+
+    // Botao: mapa interativo
+    this.hudBotao1Area = this.add
+      .image(0, 0, "botaoMapaHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotao1Glow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.18)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(207)
+      .setVisible(false);
+    this.hudBotao1OffsetX = 1;
+    this.hudBotao1OffsetY = -121;
+    this.hudBotao1Largura = 314;
+    this.hudBotao1Altura = 56;
+    this.hudBotao1Hover = false;
+
+    this.hudBotao1Area.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotao1Glow) {
+        return;
+      }
+
+      this.hudBotao1Hover = true;
+      this.hudBotao1Glow.setVisible(true);
+      this.hudBotao1Glow.alpha = 0.22;
+
+      if (this.hudBotao1GlowTween) this.hudBotao1GlowTween.stop();
+      this.hudBotao1GlowTween = this.tweens.add({
+        targets: this.hudBotao1Glow,
+        alpha: { from: 0.22, to: 0.65 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotao1Area.on("pointerout", () => {
+      this.hudBotao1Hover = false;
+      if (this.hudBotao1GlowTween) {
+        this.hudBotao1GlowTween.stop();
+        this.hudBotao1GlowTween = null;
+      }
+      if (this.hudBotao1Glow) this.hudBotao1Glow.setVisible(false);
+    });
+
+    this.hudBotao1Area.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+
+      // Guarda a posicao atual para retornar ao mesmo ponto apos fechar o mapa.
+      if (this.personagem) {
+        this.registry.set("cidadeRetornoX", this.personagem.x);
+        this.registry.set("cidadeRetornoY", this.personagem.y);
+      }
+
+      this.registry.events.emit("hud-maquininha-botao", "botao_1");
+      if (this.scene.isActive("SceneChuva")) {
+        this.scene.stop("SceneChuva");
+      }
+      this.scene.start("SceneMapainterativo");
+      console.log("[HUD] Botao maquininha clicado: botao_1");
+    });
+
+    // Botao: configuracoes
+    this.hudBotaoConfigArea = this.add
+      .image(0, 0, "botaoConfiguracaoHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoConfigGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.28)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoConfigOffsetX = -22;
+    this.hudBotaoConfigOffsetY = 14;
+    this.hudBotaoConfigLargura = 250;
+    this.hudBotaoConfigAltura = 56;
+    this.hudBotaoConfigHover = false;
+
+    this.hudBotaoConfigArea.on("pointerover", () => {
+      if (
+        !this.hudNoCentro ||
+        this.hudAnimando ||
+        !this.hudBotaoConfigGlow
+      ) {
+        return;
+      }
+
+      this.hudBotaoConfigHover = true;
+      this.hudBotaoConfigGlow.setVisible(true);
+      this.hudBotaoConfigGlow.alpha = 0.28;
+
+      if (this.hudBotaoConfigGlowTween) this.hudBotaoConfigGlowTween.stop();
+      this.hudBotaoConfigGlowTween = this.tweens.add({
+        targets: this.hudBotaoConfigGlow,
+        alpha: { from: 0.28, to: 0.66 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoConfigArea.on("pointerout", () => {
+      this.hudBotaoConfigHover = false;
+      if (this.hudBotaoConfigGlowTween) {
+        this.hudBotaoConfigGlowTween.stop();
+        this.hudBotaoConfigGlowTween = null;
+      }
+      if (this.hudBotaoConfigGlow) this.hudBotaoConfigGlow.setVisible(false);
+    });
+
+    this.hudBotaoConfigArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando) return;
+      if (this._elementosConfig) return;
+      this.registry.events.emit("hud-maquininha-botao", "botao_config");
+      this.abrirPopupConfig();
+      console.log("[HUD] Botao maquininha clicado: botao_config");
+    });
+
+    // Botao: ranking
+    this.hudBotaoRankingArea = this.add
+      .image(0, 0, "botaoRankingHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoRankingGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoRankingOffsetX = -54;
+    this.hudBotaoRankingOffsetY = -52;
+    this.hudBotaoRankingLargura = 198;
+    this.hudBotaoRankingAltura = 52;
+    this.hudBotaoRankingHover = false;
+
+    this.hudBotaoRankingArea.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotaoRankingGlow) {
+        return;
+      }
+
+      this.hudBotaoRankingHover = true;
+      this.hudBotaoRankingGlow.setVisible(true);
+      this.hudBotaoRankingGlow.alpha = 0.24;
+
+      if (this.hudBotaoRankingGlowTween) this.hudBotaoRankingGlowTween.stop();
+      this.hudBotaoRankingGlowTween = this.tweens.add({
+        targets: this.hudBotaoRankingGlow,
+        alpha: { from: 0.24, to: 0.62 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoRankingArea.on("pointerout", () => {
+      this.hudBotaoRankingHover = false;
+      if (this.hudBotaoRankingGlowTween) {
+        this.hudBotaoRankingGlowTween.stop();
+        this.hudBotaoRankingGlowTween = null;
+      }
+      if (this.hudBotaoRankingGlow) this.hudBotaoRankingGlow.setVisible(false);
+    });
+
+    this.hudBotaoRankingArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+      this.registry.events.emit("hud-maquininha-botao", "botao_ranking");
+      console.log("[HUD] Botao maquininha clicado: botao_ranking");
+    });
+
+    // Botao: missao
+    this.hudBotaoMissaoArea = this.add
+      .image(0, 0, "botaoMissaoHud")
+      .setDepth(206)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.hudBotaoMissaoGlow = this.add
+      .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
+      .setStrokeStyle(2, 0xcdf0ff, 0.95)
+      .setDepth(208)
+      .setVisible(false);
+    this.hudBotaoMissaoOffsetX = -49;
+    this.hudBotaoMissaoOffsetY = 78;
+    this.hudBotaoMissaoLargura = 196;
+    this.hudBotaoMissaoAltura = 52;
+    this.hudBotaoMissaoHover = false;
+
+    this.hudBotaoMissaoArea.on("pointerover", () => {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotaoMissaoGlow) {
+        return;
+      }
+
+      this.hudBotaoMissaoHover = true;
+      this.hudBotaoMissaoGlow.setVisible(true);
+      this.hudBotaoMissaoGlow.alpha = 0.24;
+
+      if (this.hudBotaoMissaoGlowTween) this.hudBotaoMissaoGlowTween.stop();
+      this.hudBotaoMissaoGlowTween = this.tweens.add({
+        targets: this.hudBotaoMissaoGlow,
+        alpha: { from: 0.24, to: 0.62 },
+        duration: 260,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.InOut",
+      });
+    });
+
+    this.hudBotaoMissaoArea.on("pointerout", () => {
+      this.hudBotaoMissaoHover = false;
+      if (this.hudBotaoMissaoGlowTween) {
+        this.hudBotaoMissaoGlowTween.stop();
+        this.hudBotaoMissaoGlowTween = null;
+      }
+      if (this.hudBotaoMissaoGlow) this.hudBotaoMissaoGlow.setVisible(false);
+    });
+
+    this.hudBotaoMissaoArea.on("pointerdown", () => {
+      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+        return;
+      }
+      this.registry.events.emit("hud-maquininha-botao", "botao_missao");
+      console.log("[HUD] Botao maquininha clicado: botao_missao");
+    });
+
+    this.miniMapCam.ignore(this.hudBotao1Area);
+    this.borderCam.ignore(this.hudBotao1Area);
+    this.miniMapCam.ignore(this.hudBotao1Glow);
+    this.borderCam.ignore(this.hudBotao1Glow);
+    this.miniMapCam.ignore(this.hudBotaoConfigArea);
+    this.borderCam.ignore(this.hudBotaoConfigArea);
+    this.miniMapCam.ignore(this.hudBotaoConfigGlow);
+    this.borderCam.ignore(this.hudBotaoConfigGlow);
+    this.miniMapCam.ignore(this.hudBotaoRankingArea);
+    this.borderCam.ignore(this.hudBotaoRankingArea);
+    this.miniMapCam.ignore(this.hudBotaoRankingGlow);
+    this.borderCam.ignore(this.hudBotaoRankingGlow);
+    this.miniMapCam.ignore(this.hudBotaoMissaoArea);
+    this.borderCam.ignore(this.hudBotaoMissaoArea);
+    this.miniMapCam.ignore(this.hudBotaoMissaoGlow);
+    this.borderCam.ignore(this.hudBotaoMissaoGlow);
+
+    this._atualizarHudCidade();
+  }
+
+  _criarHudCoins() {
+    // Saldo de moedas (valor global no registry)
+    if (typeof this.registry.get("cieloCoins") === "undefined") {
+      this.registry.set("cieloCoins", 0);
+    }
+
+    this.hudCoinsUiScale = 1 / this.cameras.main.zoom;
+    this.hudCoinsValorAtual = -1;
+    this.hudCoinsScale = 0.42 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetRight = 90 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetTop = 6 * this.hudCoinsUiScale;
+
+    this.hudCoinsBg = this.add
+      .image(0, 0, "cieloCoinsHud")
+      .setOrigin(1, 0)
+      .setScale(this.hudCoinsScale)
+      .setDepth(230);
+
+    const coinFont = Math.max(5, Math.round(14 * this.hudCoinsUiScale));
+    this.hudCoinsTxt = this.add
+      .text(0, 0, "", {
+        fontSize: `${coinFont}px`,
+        color: "#ffffff",
+        fontStyle: "bold",
+      })
+      .setOrigin(0, 0.5)
+      .setDepth(231);
+
+    // HUD de moedas também fica fora do minimapa
+    this.miniMapCam.ignore([this.hudCoinsBg, this.hudCoinsTxt]);
+    this.borderCam.ignore([this.hudCoinsBg, this.hudCoinsTxt]);
+
+    this._atualizarHudCoins();
+  }
+
+  _atualizarHudCidade() {
+    if (!this.hudIcon) return;
+
+    const cam = this.cameras.main;
+    if (this.hudAnimando) return;
+
+    if (this.hudNoCentro) {
+      // Enquanto estiver aberta, acompanha o centro da câmera
+      const centerX = cam.worldView.centerX;
+      const centerY = cam.worldView.centerY;
+      this.hudIcon.setPosition(centerX, centerY);
+
+      const closeOffsetX = 112 * this.hudUiScale;
+      const closeOffsetY = 292 * this.hudUiScale;
+      this.hudCloseBg
+        .setPosition(centerX + closeOffsetX, centerY - closeOffsetY)
+        .setVisible(true);
+      this.hudCloseTxt
+        .setPosition(centerX + closeOffsetX, centerY - closeOffsetY - 1)
+        .setVisible(true);
+      this._atualizarBotao1Hud(centerX, centerY, true);
+      this._atualizarBotaoConfigHud(centerX, centerY, true);
+      this._atualizarBotaoRankingHud(centerX, centerY, true);
+      this._atualizarBotaoMissaoHud(centerX, centerY, true);
+      this._atualizarHudDebugCoords();
+      return;
+    }
+
+    const hudX = cam.worldView.right - this.hudMargemDireita;
+    const hudY = cam.worldView.bottom - this.hudMargemBaixo;
+    this.hudIcon.setPosition(hudX, hudY);
+    this.hudCloseBg.setVisible(false);
+    this.hudCloseTxt.setVisible(false);
+    if (this.hudDebugTxt) this.hudDebugTxt.setVisible(false);
+    if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+    this._atualizarBotao1Hud(hudX, hudY, false);
+    this._atualizarBotaoConfigHud(hudX, hudY, false);
+    this._atualizarBotaoRankingHud(hudX, hudY, false);
+    this._atualizarBotaoMissaoHud(hudX, hudY, false);
+  }
+
+  _atualizarBotao1Hud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de mapa.
+    if (!this.hudBotao1Area) return;
+
+    const largura = this.hudBotao1Largura * this.hudUiScale;
+    const altura = this.hudBotao1Altura * this.hudUiScale;
+    const posX = centerX + this.hudBotao1OffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotao1OffsetY * this.hudUiScale;
+
+    this.hudBotao1Area
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotao1Glow) {
+      this.hudBotao1Glow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotao1Hover);
+    }
+
+    if (this.hudBotao1Area.input) {
+      this.hudBotao1Area.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotao1Hover = false;
+      if (this.hudBotao1GlowTween) {
+        this.hudBotao1GlowTween.stop();
+        this.hudBotao1GlowTween = null;
+      }
+      if (this.hudBotao1Glow) this.hudBotao1Glow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoConfigHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de configuracoes.
+    if (!this.hudBotaoConfigArea) return;
+
+    const largura = this.hudBotaoConfigLargura * this.hudUiScale;
+    const altura = this.hudBotaoConfigAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoConfigOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoConfigOffsetY * this.hudUiScale;
+
+    this.hudBotaoConfigArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoConfigGlow) {
+      this.hudBotaoConfigGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoConfigHover);
+    }
+
+    if (this.hudBotaoConfigArea.input) {
+      this.hudBotaoConfigArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoConfigHover = false;
+      if (this.hudBotaoConfigGlowTween) {
+        this.hudBotaoConfigGlowTween.stop();
+        this.hudBotaoConfigGlowTween = null;
+      }
+      if (this.hudBotaoConfigGlow) this.hudBotaoConfigGlow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoRankingHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de ranking.
+    if (!this.hudBotaoRankingArea) return;
+
+    const largura = this.hudBotaoRankingLargura * this.hudUiScale;
+    const altura = this.hudBotaoRankingAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoRankingOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoRankingOffsetY * this.hudUiScale;
+
+    this.hudBotaoRankingArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoRankingGlow) {
+      this.hudBotaoRankingGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoRankingHover);
+    }
+
+    if (this.hudBotaoRankingArea.input) {
+      this.hudBotaoRankingArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoRankingHover = false;
+      if (this.hudBotaoRankingGlowTween) {
+        this.hudBotaoRankingGlowTween.stop();
+        this.hudBotaoRankingGlowTween = null;
+      }
+      if (this.hudBotaoRankingGlow) this.hudBotaoRankingGlow.setVisible(false);
+    }
+  }
+
+  _atualizarBotaoMissaoHud(centerX, centerY, visivel) {
+    // Atualiza tamanho/posicao/interacao do botao de missao.
+    if (!this.hudBotaoMissaoArea) return;
+
+    const largura = this.hudBotaoMissaoLargura * this.hudUiScale;
+    const altura = this.hudBotaoMissaoAltura * this.hudUiScale;
+    const posX = centerX + this.hudBotaoMissaoOffsetX * this.hudUiScale;
+    const posY = centerY + this.hudBotaoMissaoOffsetY * this.hudUiScale;
+
+    this.hudBotaoMissaoArea
+      .setDisplaySize(largura, altura)
+      .setPosition(posX, posY)
+      .setVisible(visivel);
+
+    if (this.hudBotaoMissaoGlow) {
+      this.hudBotaoMissaoGlow
+        .setSize(largura, altura)
+        .setPosition(posX, posY)
+        .setVisible(visivel && this.hudBotaoMissaoHover);
+    }
+
+    if (this.hudBotaoMissaoArea.input) {
+      this.hudBotaoMissaoArea.input.enabled = visivel;
+    }
+
+    if (!visivel) {
+      this.hudBotaoMissaoHover = false;
+      if (this.hudBotaoMissaoGlowTween) {
+        this.hudBotaoMissaoGlowTween.stop();
+        this.hudBotaoMissaoGlowTween = null;
+      }
+      if (this.hudBotaoMissaoGlow) this.hudBotaoMissaoGlow.setVisible(false);
+    }
+  }
+
+  _atualizarHudDebugCoords() {
+    if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
+    if (!this.hudNoCentro || this.hudAnimando) {
+      this.hudDebugTxt.setVisible(false);
+      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+      return;
+    }
+
+    const pointer = this.input.activePointer;
+    if (!pointer) {
+      this.hudDebugTxt.setVisible(false);
+      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
+      return;
+    }
+
+    pointer.positionToCamera(this.cameras.main, this._hudDebugWorldPoint);
+
+    const localX =
+      (this._hudDebugWorldPoint.x - this.hudIcon.x) / this.hudUiScale;
+    const localY =
+      (this._hudDebugWorldPoint.y - this.hudIcon.y) / this.hudUiScale;
+
+    this.hudDebugLocalX = Math.round(localX);
+    this.hudDebugLocalY = Math.round(localY);
+
+    this.hudDebugTxt
+      .setText(`HUD local\nX: ${this.hudDebugLocalX}  Y: ${this.hudDebugLocalY}`)
+      .setPosition(14, 140)
+      .setVisible(true);
+
+    if (this.hudDebugMarker) {
+      this.hudDebugMarker
+        .setPosition(this._hudDebugWorldPoint.x, this._hudDebugWorldPoint.y)
+        .setVisible(true);
+    }
+  }
+
+  _atualizarHudCoins() {
+    if (!this.hudCoinsBg || !this.hudCoinsTxt) return;
+
+    const cam = this.cameras.main;
+    const posX = cam.worldView.right - this.hudCoinsOffsetRight;
+    const posY = cam.worldView.top + this.hudCoinsOffsetTop;
+
+    this.hudCoinsBg.setPosition(posX, posY);
+
+    const txtX = posX + 8 * this.hudCoinsUiScale;
+    const txtY = posY + this.hudCoinsBg.displayHeight * 0.5;
+    this.hudCoinsTxt.setPosition(txtX, txtY);
+
+    const bruto = Number(this.registry.get("cieloCoins") ?? 0);
+    const saldo = Number.isFinite(bruto) ? Math.max(0, Math.floor(bruto)) : 0;
+    if (saldo !== this.hudCoinsValorAtual) {
+      this.hudCoinsValorAtual = saldo;
+      this.hudCoinsTxt.setText(`${saldo}`);
+    }
+  }
+
+  _criarPopupMissaoCidade() {
+    if (
+      typeof this.registry.get("missaoCidadeId") === "undefined" &&
+      !Number.isFinite(this.missaoCidadeIdCustom)
+    ) {
+      this.registry.set("missaoCidadeId", 1);
+    }
+
+    if (Number.isFinite(this.missaoCidadeIdCustom)) {
+      this.registry.set("missaoCidadeId", this.missaoCidadeIdCustom);
+    }
+
+    if (this.missaoCidadeTextoCustom) {
+      this.registry.set("missaoCidadeTexto", this.missaoCidadeTextoCustom);
+    }
+
+    this.popupMissaoUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoOffsetTopo = 92 * this.popupMissaoUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoCidadeBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setScale(this.popupMissaoUiScale);
+
+    this.missaoCidadeTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoUiScale);
+
+    this.miniMapCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
+    this.borderCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
+
+    this._atualizarPopupMissaoCidade(true);
+
+    this._onMissaoCidadeMudou = () => this._atualizarPopupMissaoCidade(true);
+    this.registry.events.on(
+      "changedata-missaoCidadeId",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-missaoCidadeTexto",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoCidadeId",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-missaoCidadeTexto",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      if (this.missaoCidadeTimer) {
+        this.missaoCidadeTimer.remove();
+        this.missaoCidadeTimer = null;
+      }
+      this.fecharPopupConfig();
+    });
+  }
+
+  abrirPopupConfig() {
+    if (this._elementosConfig) return;
+
+    this._elementosConfig = abrirPopupConfigModule(this, {
+      depth: 300,
+      scrollFactor: 0,
+      onFechar: () => {
+        this._elementosConfig = null;
+      },
+    });
+
+    // Reducao visual do popup mantendo proporcoes e centro da tela.
+    const escalaPopup = 0.35;
+    const centroX = this.scale.width / 2;
+    const centroY = this.scale.height / 2;
+
+    this._elementosConfig.forEach((el) => {
+      if (el && el.active && typeof el.setScale === "function") {
+        const novoX = centroX + (el.x - centroX) * escalaPopup;
+        const novoY = centroY + (el.y - centroY) * escalaPopup;
+        if (typeof el.setPosition === "function") {
+          el.setPosition(novoX, novoY);
+        }
+        el.setScale(escalaPopup);
+      }
+    });
+  }
+
+  fecharPopupConfig() {
+    if (!this._elementosConfig) return;
+    this._elementosConfig.forEach((el) => {
+      if (el && el.active) el.destroy();
+    });
+    this._elementosConfig = null;
+  }
+
+  _textoMissaoCidadePorId(id) {
+    const missoes = {
+      1: "Missão: Vá até a Agência e fale com o gerente",
+      2: "Missao: Fale com o atendente para iniciar o atendimento.",
+      3: "Missao: Va para a Padaria e converse com o comerciante.",
+      4: "Missao: Confira seu saldo de Cielo Coins na cidade.",
+    };
+
+    return (
+      missoes[id] || "Missao: Explore a cidade e conclua seu proximo objetivo."
+    );
+  }
+
+  _resolverTextoMissaoCidade() {
+    const textoCustom = this.registry.get("missaoCidadeTexto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    const idBruto = this.registry.get("missaoCidadeId");
+    const id = Number.isFinite(Number(idBruto))
+      ? Math.floor(Number(idBruto))
+      : 1;
+
+    return this._textoMissaoCidadePorId(id);
+  }
+
+  _medirLarguraPopupMissaoCidade(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoCidade(animarTexto) {
+    if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
+
+    const texto = this._resolverTextoMissaoCidade();
+    if (!texto) return;
+
+    const larguraFinal = this._medirLarguraPopupMissaoCidade(texto);
+    this.missaoCidadeBg.setSize(larguraFinal, this.missaoCidadeBg.height);
+
+    if (this.missaoCidadeMensagemAtual === texto && !animarTexto) return;
+    this.missaoCidadeMensagemAtual = texto;
+
+    if (this.missaoCidadeTimer) {
+      this.missaoCidadeTimer.remove();
+      this.missaoCidadeTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoCidadeTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoCidadeTexto.setText("");
+    this.missaoCidadeTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoCidadeTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoCidade() {
+    if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
+    this.missaoCidadeBg.setX(popupX);
+    this.missaoCidadeBg.setY(popupY);
+    this.missaoCidadeTexto.setX(popupX);
+    this.missaoCidadeTexto.setY(popupY);
+  }
+
+  // Atualiza movimento, zonas e transições
+  _atualizarSetaAtual() {
+    if (!this.setasGuia) return;
+
+    Object.values(this.setasGuia).forEach((seta) => {
+      if (seta) seta.setVisible(false);
+    });
+
+    const nomeSetaAtual = this.sequenciaSetas[this.indiceSetaAtual];
+    const setaAtual = this.setasGuia[nomeSetaAtual];
+    if (setaAtual) setaAtual.setVisible(true);
+  }
+
+  _avancarSequenciaSetas(localAtual) {
+    const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
+    if (localAtual !== localEsperado) return;
+
+    this.indiceSetaAtual += 1;
+    this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
+    this.registry.set("ocultarSetaAgencia01", this.indiceSetaAtual > 0);
+  }
+
   update() {
-    // ── Movimento do personagem ──────────────────────────────────────
-    // Zera velocidade a cada frame para parada imediata ao soltar tecla
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 
+    if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+      } else {
+        this.scale.startFullscreen();
+      }
+    }
+
+    // Movimento do jogador
     personagem.setVelocity(0);
     let movendo = false;
 
@@ -490,8 +1631,7 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
-    // ── Detecção de zonas ────────────────────────────────────────────
-    // Só atualiza visibilidade quando o estado muda (evita setVisible todo frame)
+    // Mostra ou oculta labels ao entrar nas zonas
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia,
       personagem.x,
@@ -578,7 +1718,7 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.y,
     );
     if (dentroPostoDeGasolina !== this.dentroZonaPostoDeGasolina) {
-      this.dentroZonaPostoGasolina = dentroPostoDeGasolina;
+      this.dentroZonaPostoDeGasolina = dentroPostoDeGasolina;
       this.labelPostoDeGasolina.setVisible(dentroPostoDeGasolina);
     }
 
@@ -587,34 +1727,57 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.x,
       personagem.y,
     );
-    if (dentroAgencia02 !== this.dentroAgencia02) {
+    if (dentroAgencia02 !== this.dentroZonaAgencia02) {
       this.dentroZonaAgencia02 = dentroAgencia02;
       this.labelAgencia02.setVisible(dentroAgencia02);
     }
 
-    // ── Debug e minimapa ─────────────────────────────────────────────
+    const dentroAgencia03 = Phaser.Geom.Rectangle.Contains(
+      this.zonaAgencia03,
+      personagem.x,
+      personagem.y,
+    );
+    if (dentroAgencia03 !== this.dentroZonaAgencia03) {
+      this.dentroZonaAgencia03 = dentroAgencia03;
+      this.labelAgencia03.setVisible(dentroAgencia03);
+    }
+
+    const hudLocalInfo =
+      this.hudNoCentro && Number.isFinite(this.hudDebugLocalX)
+        ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
+        : "";
+
     this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
+      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}${hudLocalInfo}`,
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
+    this._atualizarHudCidade();
+    this._atualizarHudDebugCoords();
+    this._atualizarHudCoins();
+    this._reposicionarPopupMissaoCidade();
 
-    // ── Transições de cena (tecla E dentro de zona) ──────────────────
-    // Flag "transicionando" evita disparar múltiplas transições
+    // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       if (dentroAgencia) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("agencia1");
         this.labelE.setVisible(false);
-        this.scene.stop("SceneChuva"); // para a chuva ao sair da cidade
+        if (this.setaGuiaAgencia) this.setaGuiaAgencia.setVisible(false);
+        this.registry.set("ocultarSetaAgencia01", true);
+        this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
           this.scene.start("SceneAg", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
+            spawnX: 165,
+            spawnY: 185,
           });
         });
       } else if (dentroEscritorio) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("escritorio");
         this.labelEscritorio.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -626,6 +1789,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroPadaria) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("padaria");
         this.labelPadaria.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -637,6 +1801,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroFarmacia) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("farmacia");
         this.labelFarmacia.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -648,6 +1813,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroRestaurante) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("restaurante");
         this.labelRestaurante.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -659,6 +1825,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroMetro) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("metro");
         this.labelMetro.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -672,6 +1839,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroLojaDeRoupas) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("cabeleireiro");
         this.labelLojaDeRoupas.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -683,6 +1851,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroSupermercado) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("supermercado");
         this.labelSupermercado.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -694,6 +1863,7 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroPostoDeGasolina) {
         this.transicionando = true;
+        this._avancarSequenciaSetas("posto");
         this.labelPostoDeGasolina.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -705,13 +1875,28 @@ export default class SceneCidade extends Phaser.Scene {
         });
       } else if (dentroAgencia02) {
         this.transicionando = true;
-        this.labelPostoDeGasolina.setVisible(false);
+        this._avancarSequenciaSetas("agencia2");
+        this.labelAgencia02.setVisible(false);
         this.scene.stop("SceneChuva");
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
           this.scene.start("SceneAgencia02", {
             nomePasta: this.nomePastaEscolhida,
-            prefixo: this.prefixoEscolhido, 
+            prefixo: this.prefixoEscolhido,
+          });
+        });
+      } else if (dentroAgencia03) {
+        this.transicionando = true;
+        this._avancarSequenciaSetas("agencia3");
+        this.labelAgencia03.setVisible(false);
+        this.scene.stop("SceneChuva");
+        this.cameras.main.fadeOut(800, 0, 0, 0);
+        this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.start("SceneAgencia03", {
+            nomePasta: this.nomePastaEscolhida,
+            prefixo: this.prefixoEscolhido,
+            spawnX: 955,
+            spawnY: 518,
           });
         });
       }

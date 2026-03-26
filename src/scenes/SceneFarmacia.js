@@ -3,7 +3,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     super({ key: "SceneFarmacia" });
   }
 
-  //Registra os dados do personagem para uso na cena
+  // Recupera os dados do personagem escolhidos anteriormente
   init(dados) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -11,11 +11,12 @@ export default class SceneFarmacia extends Phaser.Scene {
       dados.prefixo || this.registry.get("prefixo") || "HB";
   }
 
-  //Carrega os recursos necessários para a cena
+  // Carrega mapa, tilesets, NPC e sprites do personagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
+    // Loga erros de carregamento para facilitar debug
     this.load.on("loaderror", (arquivo) => {
       console.error(
         "[SceneFarmacia] Erro ao carregar:",
@@ -24,19 +25,24 @@ export default class SceneFarmacia extends Phaser.Scene {
       );
     });
 
-    //_____________________________________________________________________________________________
-
-    //_________________________________Carrega os recursos do mapa_________________________________
+    // Tilemap da farmácia
     this.load.tilemapTiledJSON(
       "farmacia",
       "src/assets/imagens/mapsjson/tileMaps/farmacia.tmj?v=1",
     );
-
-    this.load.image(
-      "npc_farmacia",
-      "src/assets/imagens/imagensPersonagens/npcFarmacia/npcFarmacia.png",
+    
+    //Carrega o áudio
+     this.load.audio(
+      "trilhaSceneFarmacia", 'src/assets/audios/trilhaScenefarmacia.mp3'
     );
 
+    // Sprite do NPC da farmácia
+    this.load.image(
+      "npc_farmacia",
+      "src/assets/imagens/imagensPersonagens/NPC/npcFarmacia.png",
+    );
+
+    // Tilesets do interior
     this.load.image(
       "farm_int_p1",
       "src/assets/imagens/mapsjson/tileSets/Interiors_Part1.png",
@@ -54,9 +60,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
     );
 
-    //___________________________________________________________________________________________________
-
-    //_________________________________Carrega os recursos do personagem_________________________________
+    // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -78,15 +82,16 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
   }
 
-  //___________________________________________________________________________________________________
-
-  //__________________________Cria a cena, o mapa, o personagem e as interações________________________
+  // Monta o mapa, personagem, colisões, NPC e interações
   create() {
-    // Configura o mapa, personagem, controles, câmera, etc.
     const mapa = this.make.tilemap({ key: "farmacia" });
     this.mapa = mapa;
 
-    
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneFarmacia', { loop: true, volume: 0.5});
+    this.musica.play();
+
+    // Otimiza tilesets para reduzir uso de memória
     this._otimizarTilesetsPorUso(mapa);
 
     const tsP1 = mapa.addTilesetImage(
@@ -108,7 +113,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     const tilesets = [tsP1, tsP2, tsP3, tsRoom].filter(Boolean);
 
-    // Fundo sólido para cobrir qualquer área vazia fora dos tiles
+    // Fundo neutro para evitar bordas fora do mapa
     this.add
       .rectangle(
         0,
@@ -119,7 +124,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
-    // Camadas sem colisão
+    // Camadas visuais sem colisão
     mapa.createLayer("Chão", tilesets, 0, 0);
     mapa.createLayer("Parede - N", tilesets, 0, 0);
     mapa.createLayer("Armario 0 - N", tilesets, 0, 0);
@@ -128,7 +133,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     mapa.createLayer("Objetos - N", tilesets, 0, 0);
     mapa.createLayer("Armarios - N", tilesets, 0, 0);
 
-    // Camadas com colisão
+    // Camadas com colisão (bloqueiam o movimento)
     const paredeC = mapa.createLayer("Parede - C", tilesets, 0, 0);
     const arm3C = mapa.createLayer("Armario 3 - C", tilesets, 0, 0);
     const arm2C = mapa.createLayer("Armario 2 - C", tilesets, 0, 0);
@@ -138,16 +143,15 @@ export default class SceneFarmacia extends Phaser.Scene {
     const cadeiraC = mapa.createLayer("Cadeira de rodas - C", tilesets, 0, 0);
     const plantasC = mapa.createLayer("Plantas - C", tilesets, 0, 0);
 
-    // Define colisão para as camadas relevantes
+    // Ativa colisão nas camadas sólidas
     [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
-      .filter(Boolean) // Garante que a camada existe antes de tentar configurar colisão
+      .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
 
-    // Animações
+    // Cria animações do personagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`farm_andar_${dir}`)) {
-        // Evita recriar animação se já existir (útil para hot reload)
         this.anims.create({
           key: `farm_andar_${dir}`,
           frames: [
@@ -162,25 +166,26 @@ export default class SceneFarmacia extends Phaser.Scene {
       }
     });
 
-    // Personagem — spawn próximo à entrada (bottom-center do mapa)
+    // Spawn do personagem próximo à entrada
     const spawnX = mapa.widthInPixels / 2;
     const spawnY = mapa.heightInPixels - 24;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "farm_frente_1");
     this.personagem.setCollideWorldBounds(true);
 
-    // Sprites são 1024×1024px. Com zoom=7, escala 0.019 → ~1.3 tiles de altura na tela
+    // Ajusta escala e hitbox
     this.personagem.setScale(0.028);
     this.personagem.body.setSize(
       this.personagem.width * 0.35,
       this.personagem.height * 0.35,
     );
 
+    // Colisões com o cenário
     [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
-    // Controles
+    // Controles (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
       cima: Phaser.Input.Keyboard.KeyCodes.W,
@@ -189,7 +194,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    // Câmera
+    // Câmera segue o personagem com zoom alto (ambiente interno)
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(7);
     this.cameras.main.roundPixels = true;
@@ -197,7 +202,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
-    // Zona de saída
+    // Zona de saída da farmácia
     this.zonaSaida = new Phaser.Geom.Rectangle(118, 215, 60, 40);
     this.labelSair = this.add
       .text(148, 232, "[E] Sair", {
@@ -211,7 +216,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    // NPC da farmácia — escala ajustada para ter a mesma altura do personagem
+    // NPC da farmácia com escala proporcional ao personagem
     this.npcFarmacia = this.add.image(79, 141, "npc_farmacia").setDepth(5);
     const alturaAlvo = this.personagem.displayHeight;
     this.npcFarmacia.setDisplaySize(
@@ -231,14 +236,40 @@ export default class SceneFarmacia extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcFarmacia.x,
+        this.npcFarmacia.y - this.npcFarmacia.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // Estados de controle de interação e transição
     this.perto_npc = false;
+    this.falouComNpc = false;
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente";
 
-    // Debug: exibe coordenadas do personagem
+    // Debug com coordenadas
     this.debugTxt = this.add
       .text(0, 0, "", {
         fontSize: "3px",
@@ -248,12 +279,19 @@ export default class SceneFarmacia extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+     });
   }
 
+  // Retorna tileset otimizado ou fallback
   _keyTileset(tmjName, fallbackKey) {
     return (this._tilesetKeys && this._tilesetKeys[tmjName]) || fallbackKey;
   }
 
+  // Identifica quais tiles são realmente usados no mapa
   _coletarGidsUsados(mapa) {
     const usados = new Set();
 
@@ -272,6 +310,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     return usados;
   }
 
+  // Recorta tilesets para conter apenas os tiles utilizados
   _otimizarTilesetsPorUso(mapa) {
     const defs = [
       { tmjName: "Interior_P1", baseKey: "farm_int_p1" },
@@ -351,7 +390,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       this._tilesetKeys[def.tmjName] = cutKey;
     });
   }
-  
+
+  // Atualiza movimento, interação com NPC e saída da cena
   update() {
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
@@ -359,6 +399,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     personagem.setVelocity(0);
     let movendo = false;
 
+    // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("farm_andar_esquerda", true);
@@ -371,7 +412,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       movendo = true;
     }
 
-    // Movimentos verticais têm prioridade menor para evitar animação diagonal
+    // Movimento vertical com prioridade menor (evita animação diagonal)
     if (teclas.up.isDown || wasd.cima.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("farm_andar_tras", true);
@@ -384,13 +425,13 @@ export default class SceneFarmacia extends Phaser.Scene {
       movendo = true;
     }
 
-    // Se não estiver se movendo, exibe frame parado de acordo com a última direção
+    // Mantém sprite parado na última direção
     if (!movendo) {
       personagem.anims.stop();
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
-    // Proximidade do NPC
+    // Detecta proximidade com o NPC
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
@@ -398,27 +439,48 @@ export default class SceneFarmacia extends Phaser.Scene {
       141,
     );
     const pertoNpc = distNpc < 30;
+
     if (pertoNpc !== this.perto_npc) {
       this.perto_npc = pertoNpc;
       this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    }
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcFarmacia.x, this.npcFarmacia.y + 2);
     }
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this.scene.pause();
       this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
     }
 
-    // Zona de saída
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcFarmacia.x,
+        this.npcFarmacia.y - this.npcFarmacia.displayHeight * 0.5,
+      );
+    }
+
+    // Interação com NPC ao pressionar E
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
+    }
+
+    // Detecta entrada na zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(
       this.zonaSaida,
       personagem.x,
       personagem.y,
     );
+
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
-    // Transição para cena da cidade
+
+    // Transição de volta para a cidade ao pressionar E na saída
     if (
       dentroSaida &&
       !this.transicionando &&
@@ -427,6 +489,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
+
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
@@ -437,7 +500,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       });
     }
 
-    // Atualiza posição do texto de debug
+    // Atualiza debug com coordenadas
     this.debugTxt.setText(
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
