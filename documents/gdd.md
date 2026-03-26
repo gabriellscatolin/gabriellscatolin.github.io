@@ -208,11 +208,17 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
+&emsp; A Tabela 2 apresenta a matriz de riscos do projeto, identificando as principais incertezas relacionadas ao desenvolvimento do Mini Mundo Cielo. Entre os riscos mais relevantes estão o possível desengajamento dos usuários com o formato gamificado (R2), a dificuldade de uso das ferramentas digitais pelos Gerentes de Negócios (GNs) e a incompatibilidade do jogo com diferentes navegadores ou sistemas operacionais (R1). Além disso, considera-se a possibilidade de alterações no portfólio da Cielo durante o desenvolvimento (R3). Para mitigar esses fatores, a equipe prevê a realização de testes de jogabilidade com usuários reais, a adoção de interfaces simples com tutoriais progressivos e testes contínuos de compatibilidade entre navegadores.
+
+&emsp; A matriz também evidencia oportunidades estratégicas para o projeto, como a padronização nacional do treinamento da Cielo (O2), o aumento do engajamento por meio de elementos de gamificação (O3) e a redução de custos operacionais de treinamento (O4). Adicionalmente, a implementação de um sistema de salvamento e gestão de progresso do jogador (O5) pode aumentar a confiabilidade da solução. Dessa forma, a análise conjunta de riscos e oportunidades orienta as decisões da equipe ao longo das sprints, contribuindo para um desenvolvimento mais estratégico e alinhado aos objetivos do projeto.
+
 &emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, transformando incertezas em ações preventivas concretas. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-&emsp; O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
+&emsp; O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. 
+
+&emsp; No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
 
 <div align="center">
 <sub>Tabela 3 - Objetivos SMART do Projeto</sub>
@@ -228,7 +234,7 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp;Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
+&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
 <div align="center">
 <sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
