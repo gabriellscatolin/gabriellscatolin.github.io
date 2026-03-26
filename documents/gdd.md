@@ -1342,14 +1342,14 @@ this.tweens.add({
 
 <div align="center">
 <sub>Figura 28 - Relação matemática com a chuva do jogo</sub><br/>
-<img src="../gdd_images/gifGDDMat.gif" width="20%">
+<img src="../gdd_images/gifGDDMat.gif" width="35%">
 </div>
 
 &emsp;A função responsável pela animação é:
 
 - Arquivo: `src/scenes/SceneChuva.js`  
 - Função: `animacaoCinematica(g)`  
-- Linha aproximada: 60  
+- Linha: 60  
 
 #### Parâmetros do Modelo
 
@@ -1403,31 +1403,57 @@ $$
 
 ```javascript
 animacaoCinematica(g) {
+    // Quando o tempo total termina, a gota chega ao destino e é desativada
+    if (g.t >= g.T) {
+      g.x = g.xf;
+      g.y = g.yf;
+      g.ativo = false;
+      return;
+    }
 
-  if (g.t >= g.T) {
-    g.x = g.xf;
-    g.y = g.yf;
-    g.ativo = false;
-    return;
+    var t = g.t;
+
+    // No eixo X, a gota se move com velocidade constante
+    var x_atual = g.xi + g.vx * t;
+
+    // No eixo Y, a gota acelera para simular a queda
+    var vy_atual = g.ay * t;
+    var y_atual = g.yi + 0.5 * g.ay * t * t;
+
+    g.x = x_atual;
+    g.y = y_atual;
+
+    // Imprime a cada frame os dados de MU e MUV desta gota
+    console.log(
+      "[MU  | X] frame:" +
+        g.frame +
+        " t:" +
+        t.toFixed(3) +
+        "s" +
+        " vx:" +
+        g.vx.toFixed(2) +
+        "px/s" +
+        " x:" +
+        x_atual.toFixed(1) +
+        "px"
+    );
+    console.log(
+      "[MUV | Y] frame:" +
+        g.frame +
+        " t:" +
+        t.toFixed(3) +
+        "s" +
+        " ay:" +
+        g.ay.toFixed(2) +
+        "px/s²" +
+        " vy:" +
+        vy_atual.toFixed(2) +
+        "px/s" +
+        " y:" +
+        y_atual.toFixed(1) +
+        "px"
+    );
   }
-
-  var t = g.t;
-
-  // MU — eixo X
-  var x_atual = g.xi + g.vx * t;
-
-  // MUV — eixo Y
-  var vy_atual = g.ay * t;
-  var y_atual = g.yi + 0.5 * g.ay * t * t;
-
-  g.x = x_atual;
-  g.y = y_atual;
-
-  if (g.frame % 10 === 0) {
-    console.log("[MU  | X] vx:" + g.vx + " x:" + x_atual);
-    console.log("[MUV | Y] ay:" + g.ay + " vy:" + vy_atual + " y:" + y_atual);
-  }
-}
 ```
 
 #### Pré-cálculo dos Parâmetros

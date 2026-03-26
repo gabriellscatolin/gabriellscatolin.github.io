@@ -60,7 +60,17 @@ export default class SceneAgencia extends Phaser.Scene {
     // Sprite do NPC da agência
     this.load.image(
       "npc_agencia",
-      "src/assets/imagens/imagensPersonagens/NPC/npcAgencia01.png",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_parado02.png",
+    );
+
+    // Sprites do NPC Iza
+    this.load.image(
+      "npc_iza_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Iza/Iza_parado01.png",
+    );
+    this.load.image(
+      "npc_iza_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Iza/Iza_parado02.png",
     );
 
     // Sprites do personagem selecionado
@@ -209,8 +219,9 @@ export default class SceneAgencia extends Phaser.Scene {
 
     // ── NPC ───────────────────────────────────────────────────────────────────
     this.npcAgencia = this.physics.add
-      .staticImage(65, 57, "npc_agencia")
+      .sprite(65, 57, "npc_agencia")
       .setDepth(5);
+    this.npcAgencia.body.setImmovable(true);
     const alturaAlvo = this.personagem.displayHeight;
     this.npcAgencia.setDisplaySize(
       (this.npcAgencia.width / this.npcAgencia.height) * (alturaAlvo * 1.2),
@@ -254,6 +265,64 @@ export default class SceneAgencia extends Phaser.Scene {
       duration: 450,
       yoyo: true,
       repeat: -1,
+    });
+
+    // ── NPC IZA ───────────────────────────────────────────────────────────────
+    this.npcIza = this.physics.add
+      .sprite(183, 126, "npc_iza_1")
+      .setDepth(5);
+    this.npcIza.body.setImmovable(true);
+    const alturaAlvo2 = this.personagem.displayHeight;
+    this.npcIza.setDisplaySize(
+      (this.npcIza.width / this.npcIza.height) * (alturaAlvo2 * 1),
+      alturaAlvo2 * 1,
+    );
+    this.npcIza.refreshBody();
+    this.physics.add.collider(this.personagem, this.npcIza);
+
+    // Animação contínua de alternância de sprites
+    this.npcIzaProximaTroca = 0;
+    this.npcIzaSpriteAtual = 1; // começa com sprite 1
+    this.npcIzaIntervaloTroca = 500; // alterna a cada 500ms
+
+    // Label de fala para Iza
+    this.labelNpcIza = this.add
+      .text(183, 145, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    // Exclamação da Iza
+    this.exclamacaoIza = this.add
+      .text(
+        this.npcIza.x,
+        this.npcIza.y - this.npcIza.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.tweenExclamacaoIza = this.tweens.add({
+      targets: this.exclamacaoIza,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+      paused: true,
     });
 
     // ── CONTROLES ─────────────────────────────────────────────────────────────
@@ -303,6 +372,8 @@ export default class SceneAgencia extends Phaser.Scene {
     this.transicionando = false;
     this.perto_npc = false;
     this.falouComNpc = false;
+    this.falouComIza = false;
+    this.tweenIzaRodando = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
@@ -395,7 +466,7 @@ export default class SceneAgencia extends Phaser.Scene {
     this.labelNpc.setVisible(pertoNpc);
 
     if (pertoNpc) {
-      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
+      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 19);
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
@@ -410,6 +481,69 @@ export default class SceneAgencia extends Phaser.Scene {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneAgencia] Interagiu com o NPC da agência");
+      // Esconder exclamação da Iza quando falar com Theo
+      if (this.exclamacaoIza) this.exclamacaoIza.setVisible(false);
+    }
+
+    // ── ALTERNÂNCIA DE SPRITES DA IZA ──────────────────────────────────────────
+    if (this.npcIza) {
+      const tempoAtual = this.time.now;
+      if (tempoAtual >= this.npcIzaProximaTroca) {
+        this.npcIzaProximaTroca = tempoAtual + this.npcIzaIntervaloTroca;
+        
+        // Alterna sprite
+        if (this.npcIzaSpriteAtual === 1) {
+          this.npcIza.setTexture("npc_iza_2");
+          this.npcIzaSpriteAtual = 2;
+        } else {
+          this.npcIza.setTexture("npc_iza_1");
+          this.npcIzaSpriteAtual = 1;
+        }
+      }
+
+      // Detecção de proximidade com Iza
+      const distIza = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        this.npcIza.x,
+        this.npcIza.y,
+      );
+      const pertoIza = distIza < 30;
+      this.labelNpcIza.setVisible(pertoIza);
+
+      // Mostrar exclamação da Iza (se ainda não falou com ela)
+      if (!this.falouComIza && this.exclamacaoIza) {
+        this.exclamacaoIza.setVisible(true);
+        this.exclamacaoIza.setPosition(
+          this.npcIza.x,
+          this.npcIza.y - this.npcIza.displayHeight * 0.5,
+        );
+        if (!this.tweenIzaRodando && this.tweenExclamacaoIza) {
+          this.tweenExclamacaoIza.play();
+          this.tweenIzaRodando = true;
+        }
+      }
+
+      if (pertoIza) {
+        this.labelNpcIza.setPosition(this.npcIza.x, this.npcIza.y + 19);
+
+        if (Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+          this.falouComIza = true;
+          this.exclamacaoIza.setVisible(false);
+          if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
+          this.tweenIzaRodando = false;
+          console.log("[SceneAgencia] Interagiu com a Iza");
+          // Mostrar exclamação no Theo
+          if (this.exclamacaoNpc) {
+            this.exclamacaoNpc.setVisible(true);
+            this.exclamacaoNpc.setPosition(
+              this.npcAgencia.x,
+              this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+            );
+            if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.play();
+          }
+        }
+      }
     }
 
     // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────

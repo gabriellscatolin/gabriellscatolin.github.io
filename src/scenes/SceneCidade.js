@@ -352,9 +352,9 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    this.zonaAgencia02 = new Phaser.Geom.Rectangle(1806, 1590, 80, 60);
+    this.zonaAgencia02 = new Phaser.Geom.Rectangle(1707, 1486, 180, 180);
     this.labelAgencia02 = this.add
-      .text(1806, 1590, "[E] Entrar", {
+      .text(1797, 1576, "[E] Entrar", {
         fontSize: "6px",
         color: "#ffffff",
         backgroundColor: "#000000cc",

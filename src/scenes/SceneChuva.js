@@ -46,6 +46,9 @@ export default class SceneChuva extends Phaser.Scene {
     this._chuvaIniciada = false;
     this._chuvaEncerrada = false;
     this._tempoCriacao = 0;
+
+    // Índice da gota usada para debug frame a frame
+    this._gotaDebug = 0;
   }
 
   // Atualiza a posição da gota com MU no eixo X e MUV no eixo Y
@@ -70,38 +73,36 @@ export default class SceneChuva extends Phaser.Scene {
     g.x = x_atual;
     g.y = y_atual;
 
-    // Mostra dados no console periodicamente para depuração
-    if (g.frame % 10 === 0) {
-      console.log(
-        "[MU  | X] frame:" +
-          g.frame +
-          " t:" +
-          t.toFixed(3) +
-          "s" +
-          " vx:" +
-          g.vx.toFixed(2) +
-          "px/s" +
-          " x:" +
-          x_atual.toFixed(1) +
-          "px",
-      );
-      console.log(
-        "[MUV | Y] frame:" +
-          g.frame +
-          " t:" +
-          t.toFixed(3) +
-          "s" +
-          " ay:" +
-          g.ay.toFixed(2) +
-          "px/s²" +
-          " vy:" +
-          vy_atual.toFixed(2) +
-          "px/s" +
-          " y:" +
-          y_atual.toFixed(1) +
-          "px",
-      );
-    }
+    // Imprime a cada frame os dados de MU e MUV desta gota
+    console.log(
+      "[MU  | X] frame:" +
+        g.frame +
+        " t:" +
+        t.toFixed(3) +
+        "s" +
+        " vx:" +
+        g.vx.toFixed(2) +
+        "px/s" +
+        " x:" +
+        x_atual.toFixed(1) +
+        "px"
+    );
+    console.log(
+      "[MUV | Y] frame:" +
+        g.frame +
+        " t:" +
+        t.toFixed(3) +
+        "s" +
+        " ay:" +
+        g.ay.toFixed(2) +
+        "px/s²" +
+        " vy:" +
+        vy_atual.toFixed(2) +
+        "px/s" +
+        " y:" +
+        y_atual.toFixed(1) +
+        "px"
+    );
   }
 
   // Ativa uma gota livre do pool e define seus parâmetros de movimento
