@@ -71,6 +71,19 @@ export default class SceneAgencia02 extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
     );
 
+    this.load.image(
+      "npc_camila",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_parado02.png",
+    );
+    this.load.image(
+      "npc_enzo_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Enzo/enzo_parado01.png",
+    );
+    this.load.image(
+      "npc_enzo_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Enzo/enzo_parado02.png",
+    );
+
     // Carrega os sprites do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -279,6 +292,115 @@ export default class SceneAgencia02 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
+    this.npcCamila = this.physics.add.sprite(159, 156, "npc_camila").setDepth(5);
+    this.npcCamila.body.setImmovable(true);
+
+    const alturaAlvoNpc = this.personagem.displayHeight;
+    this.npcCamila.setDisplaySize(
+      (this.npcCamila.width / this.npcCamila.height) * (alturaAlvoNpc * 1.2),
+      alturaAlvoNpc * 1.2,
+    );
+
+    this.physics.add.collider(this.personagem, this.npcCamila);
+
+    this.labelNpcCamila = this.add
+      .text(159, 175, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoCamila = this.add
+      .text(
+        this.npcCamila.x,
+        this.npcCamila.y - this.npcCamila.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoCamila = this.tweens.add({
+      targets: this.exclamacaoCamila,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.npcEnzo = this.physics.add.sprite(334, 251, "npc_enzo_1").setDepth(5);
+    this.npcEnzo.body.setImmovable(true);
+    this.npcEnzoSpriteAtual = 1;
+
+    this.npcEnzo.setDisplaySize(
+      (this.npcEnzo.width / this.npcEnzo.height) * (alturaAlvoNpc * 1.2),
+      alturaAlvoNpc * 1.2,
+    );
+
+    this.physics.add.collider(this.personagem, this.npcEnzo);
+
+    this.time.addEvent({
+      delay: 450,
+      loop: true,
+      callback: () => {
+        if (!this.npcEnzo) return;
+        if (this.npcEnzoSpriteAtual === 1) {
+          this.npcEnzo.setTexture("npc_enzo_2");
+          this.npcEnzoSpriteAtual = 2;
+        } else {
+          this.npcEnzo.setTexture("npc_enzo_1");
+          this.npcEnzoSpriteAtual = 1;
+        }
+      },
+    });
+
+    this.labelNpcEnzo = this.add
+      .text(334, 270, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoEnzo = this.add
+      .text(
+        this.npcEnzo.x,
+        this.npcEnzo.y - this.npcEnzo.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoEnzo = this.tweens.add({
+      targets: this.exclamacaoEnzo,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // Habilita movimentação pelas setas e também por WASD
     this.teclas = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys({
@@ -324,6 +446,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.pertoNpcCamila = false;
+    this.falouComCamila = false;
+    this.pertoNpcEnzo = false;
+    this.falouComEnzo = false;
 
     // Guarda a última direção para manter o sprite parado corretamente
     this.direcaoAtual = "frente";
@@ -597,6 +723,64 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Verifica se o personagem entrou na área de saída
+    const distNpcCamila = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      this.npcCamila.x,
+      this.npcCamila.y,
+    );
+    const pertoCamila = distNpcCamila < 65;
+
+    this.pertoNpcCamila = pertoCamila;
+    this.labelNpcCamila.setVisible(pertoCamila);
+
+    if (pertoCamila) {
+      this.labelNpcCamila.setPosition(this.npcCamila.x, this.npcCamila.y + 19);
+    }
+
+    if (!this.falouComCamila && this.exclamacaoCamila) {
+      this.exclamacaoCamila.setPosition(
+        this.npcCamila.x,
+        this.npcCamila.y - this.npcCamila.displayHeight * 0.5,
+      );
+    }
+
+    if (pertoCamila && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComCamila = true;
+      this.exclamacaoCamila.setVisible(false);
+      if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
+      console.log("[SceneAgencia02] Interagiu com a Camila");
+    }
+
+    const distNpcEnzo = Phaser.Math.Distance.Between(
+      personagem.x,
+      personagem.y,
+      this.npcEnzo.x,
+      this.npcEnzo.y,
+    );
+    const pertoEnzo = distNpcEnzo < 65;
+
+    this.pertoNpcEnzo = pertoEnzo;
+    this.labelNpcEnzo.setVisible(pertoEnzo);
+
+    if (pertoEnzo) {
+      this.labelNpcEnzo.setPosition(this.npcEnzo.x, this.npcEnzo.y + 19);
+    }
+
+    if (!this.falouComEnzo && this.exclamacaoEnzo) {
+      this.exclamacaoEnzo.setPosition(
+        this.npcEnzo.x,
+        this.npcEnzo.y - this.npcEnzo.displayHeight * 0.5,
+      );
+    }
+
+    if (pertoEnzo && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComEnzo = true;
+      this.exclamacaoEnzo.setVisible(false);
+      if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
+      console.log("[SceneAgencia02] Interagiu com o Enzo");
+    }
+
     const dentroSaida = (this.zonasSaida || []).some((z) =>
       Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
     );

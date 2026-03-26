@@ -40,6 +40,7 @@ const config = {
     },
   },
   scene: [
+    SceneAgencia02,
     SceneCidade,
     SceneInicial,
     ScenePersonagem,
@@ -55,7 +56,6 @@ const config = {
     SceneLojaDeRoupas,
     ScenePostoDeGasolina,
     SceneAgencia01,
-    SceneAgencia02,
     SceneAgencia03,
     SceneDialogoFarmacia,
     SceneDialogoRestaurante,
