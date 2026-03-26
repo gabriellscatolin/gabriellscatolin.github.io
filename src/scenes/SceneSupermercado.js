@@ -18,6 +18,11 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
+    // Carrega áudios da cena
+    this.load.audio(
+      "trilhaSceneMercado", 'src/assets/audios/trilhaSceneMercado.mp3'
+    );
+
     // Loga erros de carregamento para facilitar debug
     this.load.on("loaderror", (arquivo) => {
       console.error(
@@ -100,11 +105,15 @@ export default class SceneSupermercado extends Phaser.Scene {
   }
   //___________________________________________________________________________________________________
 
-  //__________________________Cria a cena, o mapa, o personagem e as interações________________________
+  //__________________________Cria a cena, o mapa, o áudio e o personagem e as interações________________________
 
   create() {
     const mapa = this.make.tilemap({ key: "supermercado" });
     this.mapa = mapa;
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneMercado', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Otimiza os tilesets antes de montar o cenário
     this._otimizarTilesetsPorUso(mapa);
@@ -353,6 +362,11 @@ export default class SceneSupermercado extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+      });
   }
   //____________________________________________________________________________________________________________
 

@@ -65,7 +65,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png",
     );
 
-     this.load.audio(
+    this.load.audio(
       "trilhaScenePostoDeGasolina", 'src/assets/audios/trilhaScenePostoDeGasolina.mp3'
     );
 

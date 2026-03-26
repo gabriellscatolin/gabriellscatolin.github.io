@@ -18,6 +18,11 @@ export default class SceneRestaurante extends Phaser.Scene {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
+  // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaScenePadaria", 'src/assets/audios/trilhaScenePadaria.mp3'
+    );
+
     // Log de erro de carregamento
     this.load.on("loaderror", (arquivo) => {
       console.error(
@@ -202,6 +207,11 @@ export default class SceneRestaurante extends Phaser.Scene {
   }
 
   create() {
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneRestaurante', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // Prepara tilesets antes de montar o mapa
     this.prepararTilesetsRestaurante();
 
@@ -395,6 +405,11 @@ export default class SceneRestaurante extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+      });
   }
 
   update() {

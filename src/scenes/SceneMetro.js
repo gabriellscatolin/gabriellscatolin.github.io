@@ -16,6 +16,11 @@
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
+  // Carrega áudio da cena
+    this.load.audio(
+      "trilhaSceneMetro", 'src/assets/audios/trilhaSceneMetro.mp3'
+    );
+
     // Loga erros de carregamento
     this.load.on("loaderror", (arquivo) => {
       console.error("[SceneMetro] Erro ao carregar:", arquivo.key, arquivo.src);
@@ -209,6 +214,10 @@
     const mapa = this.make.tilemap({ key: "metro" });
     this.mapa = mapa;
 
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneMetro', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // Associa os tilesets já divididos
     const tiles = [
       mapa.addTilesetImage("ME_Complete_S1", "metro_mod_s1"),
@@ -363,6 +372,11 @@
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+    this.musica.stop();
+      });
   }
 
   update() {

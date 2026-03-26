@@ -27,7 +27,12 @@ export default class ScenePadaria extends Phaser.Scene {
       );
     });
 
-    // Tilemap e tilesets do ambiente
+    // Carrega o tilemap, tilesets e áudios do ambiente
+
+    this.load.audio(
+      "trilhaScenePadaria", 'src/assets/audios/trilhaScenePadaria.mp3'
+    );
+
     this.load.tilemapTiledJSON(
       "padaria",
       "src/assets/imagens/mapsjson/tileMaps/padaria.tmj",
@@ -76,6 +81,10 @@ export default class ScenePadaria extends Phaser.Scene {
   create() {
     const mapa = this.make.tilemap({ key: "padaria" });
     this.mapa = mapa;
+
+  // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaScenePadaria', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Otimiza tilesets para melhorar performance
     this._otimizarTilesetsPorUso(mapa);
@@ -283,6 +292,11 @@ export default class ScenePadaria extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+      });
   }
 
   // Cria camada com verificação de existência no mapa
