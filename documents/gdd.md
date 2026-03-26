@@ -436,7 +436,12 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 | 6 | Rachel | Trabalha na farmácia | <img src="../gdd_images/Rachel.jpg" width="80"> |
 | 7 | Sofia | Trabalha na padaria | <img src="../gdd_images/sofia.jpg" width="80"> |
 | 8 | Vanessa | Tutora do usúario/ jogador | <img src="../gdd_images/Vanessa.png" width="80"> |
-
+| 9 | Theo | PJ da primeira agência | <img src="../gdd_images/Theo.png" width="80"> |
+| 10 | Camila | PJ da segunda agência | <img src="../gdd_images/Camila.png" width="80"> |
+| 11 | Pricila | PJ da terceira agência | <img src="../gdd_images/Pricila.png" width="80"> |
+| 12 | Iza | Gerente da primeira agência | <img src="../gdd_images/Iza.png" width="80"> |
+| 13 | Enzo | Gerente da segunda agência | <img src="../gdd_images/Enzo.png" width="80"> |
+| 14 | Leticia | Gerente da terceira agência | <img src="../gdd_images/Leticia.png" width="80"> |
 </div> 
 
 
