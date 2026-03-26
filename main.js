@@ -17,6 +17,7 @@ import SceneAgencia02 from "./src/scenes/SceneAgencia02.js";
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
 import SceneDialogoFarmacia from "./src/scenesdialogos/SceneDialogoFarmacia.js";
 import SceneDialogoRestaurante from "./src/scenesdialogos/SceneDialogoRestaurante.js";
+import SceneDialogoPadaria from "./src/scenesdialogos/SceneDialogoPadaria.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -58,6 +59,7 @@ const config = {
     SceneAgencia03,
     SceneDialogoFarmacia,
     SceneDialogoRestaurante,
+    SceneDialogoPadaria,
   ],
 };
 

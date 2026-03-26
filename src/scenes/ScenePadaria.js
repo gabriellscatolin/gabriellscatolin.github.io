@@ -488,6 +488,8 @@ export default class ScenePadaria extends Phaser.Scene {
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.scene.pause();
+      this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
@@ -509,6 +511,7 @@ export default class ScenePadaria extends Phaser.Scene {
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
+      if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
     if (dentroSaida) {
