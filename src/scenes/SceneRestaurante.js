@@ -18,9 +18,12 @@ export default class SceneRestaurante extends Phaser.Scene {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
+    this.load.maxParallelDownloads = 2;
+
   // Carrega o áudio da cena
     this.load.audio(
-      "trilhaScenePadaria", 'src/assets/audios/trilhaScenePadaria.mp3'
+      "trilhaSceneRestaurante",
+      "src/assets/audios/trilhaSceneRestaurante.mp3",
     );
 
     // Log de erro de carregamento
@@ -77,6 +80,7 @@ export default class SceneRestaurante extends Phaser.Scene {
       "rest_mod_s3",
       "src/assets/imagens/mapsjson/tileSets/Modern_S3_32.png",
     );
+    // Sprite do NPC do restaurante
     this.load.image(
       "npc_restaurante",
       "src/assets/imagens/imagensPersonagens/NPC/npcRestaurante.png",
@@ -308,14 +312,28 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.physics.add.collider(this.personagem, objC);
 
     // NPC do restaurante
-    this.npcRestaurante = this.physics.add.staticImage(200, 168, "npc_restaurante");
-    this.npcRestaurante.setScale(0.07);
+    this.npcRestaurante = this.physics.add
+      .staticImage(375, 310, "npc_restaurante")
+      .setDepth(50);
+    const alturaAlvo = this.personagem.displayHeight;
+    this.npcRestaurante.setDisplaySize(
+      (this.npcRestaurante.width / this.npcRestaurante.height) *
+        (alturaAlvo * 1.2),
+      alturaAlvo * 1.2,
+    );
     this.npcRestaurante.refreshBody();
-    this.npcRestaurante.setDepth(5);
+    this.npcRestaurante.body.setSize(
+      this.npcRestaurante.width * 0.6,
+      this.npcRestaurante.height * 0.75,
+    );
+    this.npcRestaurante.body.setOffset(
+      this.npcRestaurante.width * 0.2,
+      this.npcRestaurante.height * 0.2,
+    );
     this.physics.add.collider(this.personagem, this.npcRestaurante);
 
     this.labelNpc = this.add
-      .text(this.npcRestaurante.x, this.npcRestaurante.y, "[E] Falar", {
+      .text(375, 330, "[E] Falar", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -444,15 +462,16 @@ export default class SceneRestaurante extends Phaser.Scene {
     }
 
     if (!movendo) {
+      personagem.anims.stop();
       personagem.setTexture(`rest_${this.direcaoAtual}_1`);
     }
 
-    // Interação com NPC por proximidade (ponto solicitado)
+    // Interação com NPC por proximidade
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
-      101,
-      165,
+      this.npcRestaurante.x,
+      this.npcRestaurante.y,
     );
     const pertoNpc = distNpc < 30;
 
@@ -462,10 +481,14 @@ export default class SceneRestaurante extends Phaser.Scene {
     }
 
     if (pertoNpc) {
-      this.labelNpc.setPosition(this.npcRestaurante.x, this.npcRestaurante.y + 2);
+      this.labelNpc.setPosition(375, 330);
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.scene.pause();
+      this.scene.launch("SceneDialogoRestaurante", {
+        cenaOrigem: "SceneRestaurante",
+      });
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
@@ -489,6 +512,7 @@ export default class SceneRestaurante extends Phaser.Scene {
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
+      if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
     // Transição para a cidade ao pressionar E

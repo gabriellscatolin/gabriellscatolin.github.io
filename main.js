@@ -13,9 +13,10 @@ import SceneLojaDeRoupas from "./src/scenes/SceneLojaDeRoupas.js";
 import ScenePadaria from "./src/scenes/ScenePadaria.js";
 import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
 import SceneAgencia01 from "./src/scenes/SceneAgencia01.js";
-import SceneAgencia02 from "./src/scenes/SceneAgencia02.js";
+import SceneAgencia02 from "./src/scenes/SceneAgencia02.js"; 
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
 import SceneDialogoFarmacia from "./src/scenesdialogos/SceneDialogoFarmacia.js";
+import SceneDialogoRestaurante from "./src/scenesdialogos/SceneDialogoRestaurante.js";
 
 //Configuração do jogo phaser
 const config = {
@@ -56,6 +57,7 @@ const config = {
     SceneAgencia02,
     SceneAgencia03,
     SceneDialogoFarmacia,
+    SceneDialogoRestaurante,
   ],
 };
 
