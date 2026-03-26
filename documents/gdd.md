@@ -198,7 +198,7 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 | R2 | Ameaça | Usuário / Engajamento | Desengajamento dos usuários com o formato de Serious Game | 50% | Alto | Eduardo | Aplicar testes de jogabilidade com o público-alvo real desde a Sprint 3; iterar narrativa e mecânicas com base no feedback. |
 | R3 | Ameaça | Produto / Conteúdo | Conteúdo do portfólio Cielo sofrer alterações durante o desenvolvimento | 30% | Moderado | Sofia | Manter diálogos e missões parametrizáveis para facilitar atualização de conteúdo sem necessidade de refatoração de código. |
 | R4 | Ameaça | Gestão de Projeto | Escopo técnico maior que a capacidade da equipe nas sprints definidas | 50% | Moderado | Gabriel | Priorizar MVP funcional com features essenciais; aplicar metodologia ágil com revisão de escopo a cada sprint. |
-| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 70% | Alto | Rachel | Garantir tutorial claro e progressivo no início do jogo; priorizar UX simples e intuitiva em todas as telas. |
+| R5 | Ameaça | Usuário / Usabilidade | Baixa adesão dos GNs por dificuldade com ferramentas digitais | 70% | Alto | Rachel | Garantir tutorial interativo progressivo no início do jogo;  priorizar UX simples e intuitiva em todas as telas; aplicar testes de usabilidade com usuários reais para validar a simplicidade da interface. |
 | O1 | Oportunidade | Produto / Qualidade | Feedback positivo de usuários durante testes de jogabilidade | 70% | Alto | Eduardo | Realizar playtests frequentes com usuários reais; incorporar sugestões nas iterações de sprint para melhorar experiência e usabilidade. |
 | O2 | Oportunidade | Estratégia / Treinamento | Padronização nacional do treinamento da Cielo | 90% | Alto | Lucas | Desenvolver conteúdo modular e atualizável, garantindo compatibilidade ampla entre navegadores e dispositivos. |
 | O3 | Oportunidade | Engajamento do Usuário | Alta adesão dos GNs ao formato gamificado | 50% | Moderado | Rachel | Reforçar elementos de gamificação como ranking, CieloCoins, progressão, feedback imediato. |
@@ -212,7 +212,16 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 
 &emsp; A matriz também evidencia oportunidades estratégicas para o projeto, como a padronização nacional do treinamento da Cielo (O2), o aumento do engajamento por meio de elementos de gamificação (O3) e a redução de custos operacionais de treinamento (O4). Adicionalmente, a implementação de um sistema de salvamento e gestão de progresso do jogador (O5) pode aumentar a confiabilidade da solução. Dessa forma, a análise conjunta de riscos e oportunidades orienta as decisões da equipe ao longo das sprints, contribuindo para um desenvolvimento mais estratégico e alinhado aos objetivos do projeto.
 
-&emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, transformando incertezas em ações preventivas concretas. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
+<div align="center">
+<sub>Figura 4 - Matriz de Riscos</sub><br/>
+<img src="../gdd_images/matrizDeRiscos"width="80%"> 
+
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+&emsp; A Figura 4 apresenta a representação gráfica da matriz de riscos do projeto, relacionando probabilidade de ocorrência (eixo vertical) e impacto no projeto (eixo horizontal). A visualização permite identificar rapidamente o nível de criticidade de cada item mapeado na Tabela 2, posicionando as ameaças (R1–R5) e oportunidades (O1–O5) conforme sua relevância para o desenvolvimento do Mini Mundo Cielo. As cores indicam o grau de atenção necessário, em que áreas mais críticas representam situações que demandam maior monitoramento e planejamento de resposta ao longo das sprints do projeto.
+
+&emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, ao mesmo tempo em que identifica oportunidades de melhoria no produto. Dessa forma, o projeto transforma incertezas em ações preventivas e estratégicas ao longo das sprints de desenvolvimento. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
@@ -234,6 +243,8 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
+&emsp; A Tabela 3 apresenta os principais objetivos estratégicos do projeto estruturados de acordo com os critérios do modelo SMART. Cada objetivo foi detalhado considerando sua especificidade, forma de mensuração, viabilidade de execução, relevância para o projeto e prazo de realização. Essa organização permite que os objetivos do projeto sejam compreendidos de maneira clara e objetiva, além de garantir que cada meta possua critérios concretos para sua implementação e avaliação. Dessa forma, a equipe consegue alinhar o planejamento das sprints com os resultados esperados, assegurando que o desenvolvimento do jogo avance de forma estruturada e consistente.
+
 &emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
 <div align="center">
@@ -250,7 +261,9 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
+&emsp; A Tabela 4 apresenta o desdobramento dos objetivos estratégicos em metas SMART associadas a indicadores de desempenho (KPIs). Enquanto os objetivos definem a direção geral do projeto, as metas estabelecem resultados específicos a serem alcançados dentro de um período determinado. Já os indicadores permitem medir quantitativamente o progresso do desenvolvimento, possibilitando acompanhar a evolução do projeto ao longo das sprints. Essa relação entre objetivo, meta e indicador facilita o monitoramento contínuo das entregas e contribui para uma gestão mais eficiente e orientada a resultados.
+
+&emsp; Dessa forma, a definição estruturada de objetivos, metas e indicadores contribui para garantir maior clareza no planejamento e no acompanhamento do projeto. A utilização do modelo SMART, aliada ao monitoramento por meio de indicadores de desempenho, permite avaliar de maneira objetiva o progresso das atividades e identificar possíveis necessidades de ajustes ao longo do desenvolvimento. Esse processo fortalece a gestão do projeto e assegura que as entregas estejam alinhadas aos objetivos estabelecidos e às expectativas do parceiro.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
