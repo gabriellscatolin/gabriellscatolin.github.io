@@ -403,8 +403,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
     }
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
-      // TODO: abrir diálogo do NPC
+      this.scene.pause();
+      this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
     }
 
     // Zona de saída
