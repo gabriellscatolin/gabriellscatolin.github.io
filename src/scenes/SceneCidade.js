@@ -775,6 +775,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudUiScale = 1 / this.cameras.main.zoom;
     this.hudNoCentro = false;
     this.hudAnimando = false;
+    this.hudDebugEnabled = false;
     this.hudIconBaseScale = 0.45 * this.hudUiScale;
     this.hudIconZoomScale = 1.25 * this.hudUiScale;
 
@@ -1388,7 +1389,7 @@ export default class SceneCidade extends Phaser.Scene {
 
   _atualizarHudDebugCoords() {
     if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
-    if (!this.hudNoCentro || this.hudAnimando) {
+    if (!this.hudDebugEnabled || !this.hudNoCentro || this.hudAnimando) {
       this.hudDebugTxt.setVisible(false);
       if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
       return;
@@ -2196,10 +2197,12 @@ export default class SceneCidade extends Phaser.Scene {
         ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
         : "";
 
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}${hudLocalInfo}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
+    // Debug info desativado
+    // this.debugTxt.setText(
+    //   `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}${hudLocalInfo}`,
+    // );
+    // this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
+    this.debugTxt.setVisible(false);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();
     this._atualizarHudDebugCoords();
