@@ -2127,7 +2127,6 @@ A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centrali
 Figura XX - print algum cenario 
 
 ### Integração das interações dentro dos estabelecimentos
-Integração das interações dentro dos estabelecimentos
 As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
 ```JS
 jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
@@ -2137,24 +2136,7 @@ jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
 ```
 Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
 Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
-````JS
-jsasync _chamarLLM(escolha, cena) {
-  if (this.respostaRoteiroEstrita) return cena.npcResposta;
 
-  const res = await fetch(GROQ_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      model: GROQ_MODEL,
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: `O vendedor disse: "${escolha.texto}"` },
-      ],
-    }),
-  });
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
-}
-````
 Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
 Figura XX- print cena de diálogo 
@@ -2205,7 +2187,7 @@ jsthis.input.keyboard?.once("keydown-ESC", () => {
 Figura XX - HUD 
 Figura XXX - maquininha 
 ### Desenvolvimento de novas sprite sheets
-Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos — um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
+Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
 Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
 Imagem XX - foto dos sprites 
@@ -2270,7 +2252,8 @@ Para as próximas etapas do desenvolvimento, o foco será o refinamento e o poli
 - Finalizar a implementação das missões no HUD da maquininha Cielo, com atualização dinâmica conforme o progresso do jogador
 - Finalizar o mapa interativo acessível pela maquininha Cielo
 
-
+### Conclusão da Sprint 4
+Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
 
 ## 4.5. Revisão do MVP (sprint 5)
 
