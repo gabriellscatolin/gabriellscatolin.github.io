@@ -775,10 +775,17 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (pertoEnzo && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComEnzo = true;
-      this.exclamacaoEnzo.setVisible(false);
-      if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
-      console.log("[SceneAgencia02] Interagiu com o Enzo");
+      if (this.registry.get("ag02_dialogo_enzo_concluido") === true) {
+        this.falouComEnzo = true;
+        this.exclamacaoEnzo.setVisible(false);
+        if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
+      } else {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoAgencia02", {
+          cenaOrigem: "SceneAgencia02",
+        });
+      }
+      return;
     }
 
     const dentroSaida = (this.zonasSaida || []).some((z) =>
