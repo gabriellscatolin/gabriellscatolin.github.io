@@ -737,7 +737,7 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 &emsp;A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
 
 
-&emsp; De acordo com Lucas Correia Meneguette (2016)  [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
+&emsp; De acordo com Lucas Correia Meneguette (2016) [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
 
 
 &emsp;No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
@@ -745,12 +745,27 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 
 Com base nisso, os áudios do jogo foram organizados e classificados conforme sua função e sua relação com o universo narrativo, conforme apresentado na tabela a seguir:
 
-*Exemplo de tabela*
-\# | titulo | ocorrência | autoria
+<div align="center">
+
+
+<sub>Tabela 6 - Plano de Melhorias Pós-Playtest</sub>
+
+
+\# | Titulo | Tipo | Autoria | Uso no jogo
 --- | --- | --- | ---
-1 | tema de abertura | tela de início | própria
-2 | tema de combate | cena de combate com inimigos comuns | Hans Zimmer
-3 | ... 
+# | Título | Tipo | Autoria | Uso no jogo
+--- | --- | --- | --- | ---
+1 | Trilha sonora da tela inicial | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-%e7%b4%a0%e6%99%b4%e3%82%89%e3%81%97%e3%81%84%e6%9c%9d%e6%97%a5-wonderful-morning-sun-121506/) | Executada na SceneInicial e ScenePersonagem
+2 | Trilha sonora da parte urbana | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/) | Executada quando o personagem entra na parte urbana do mapa geral
+3 | Trilha sonora da padaria | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/plush-cafe/2504928/) | Executada quando o personagem entra na padaria
+4 | Trilha sonora da parte da praia | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/sunkissed-samba/2346808/) | Executada quando o personagem entra na parte da praia no mapa geral
+5 | Trilha sonora da farmácia  | Trilha / Som não-diegético | [Toystock](https://joystock.org/royalty-free-music/track/ambient-background-music) | Executada quando o personagem entra na farmácia
+6 | Trilha sonora do escritório | Trilha / Som não-diegético | [Motionarray](https://motionarray.com/royalty-free-music/calm-corporate-background-258970/) | Executada quando o personagem entra no escritório
+7 | Trilha sonora do mercado | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/coffee-shopping/535420/) | Executada quando o personagem entra no mercado
+
+</div>
+
+
 
 ## 3.4. Inventário  (sprint 3)
 
