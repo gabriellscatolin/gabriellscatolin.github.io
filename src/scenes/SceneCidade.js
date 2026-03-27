@@ -1141,9 +1141,10 @@ export default class SceneCidade extends Phaser.Scene {
     });
 
     this.hudBotaoMissaoArea.on("pointerdown", () => {
-      if (!this.hudNoCentro || this.hudAnimando || this._elementosConfig) {
+      if (this._elementosConfig) {
         return;
       }
+      this._alternarPopupListaMissoes();
       this.registry.events.emit("hud-maquininha-botao", "botao_missao");
       console.log("[HUD] Botao maquininha clicado: botao_missao");
     });
@@ -1486,8 +1487,13 @@ export default class SceneCidade extends Phaser.Scene {
     this.borderCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
 
     this._atualizarPopupMissaoCidade(true);
+    this._criarPopupListaMissoes();
+    this._sincronizarPopupListaMissoes();
 
-    this._onMissaoCidadeMudou = () => this._atualizarPopupMissaoCidade(true);
+    this._onMissaoCidadeMudou = () => {
+      this._atualizarPopupMissaoCidade(true);
+      this._sincronizarPopupListaMissoes();
+    };
     this.registry.events.on(
       "changedata-missaoCidadeId",
       this._onMissaoCidadeMudou,
@@ -1495,6 +1501,26 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.registry.events.on(
       "changedata-missaoCidadeTexto",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-ag01_dialogo_pj_concluido",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-ag01_pj_retorno",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-padaria_dialogo_concluido",
+      this._onMissaoCidadeMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-escritorio_dialogo_concluido",
       this._onMissaoCidadeMudou,
       this,
     );
@@ -1510,12 +1536,254 @@ export default class SceneCidade extends Phaser.Scene {
         this._onMissaoCidadeMudou,
         this,
       );
+      this.registry.events.off(
+        "changedata-ag01_dialogo_pj_concluido",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-ag01_pj_retorno",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-padaria_dialogo_concluido",
+        this._onMissaoCidadeMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-escritorio_dialogo_concluido",
+        this._onMissaoCidadeMudou,
+        this,
+      );
       if (this.missaoCidadeTimer) {
         this.missaoCidadeTimer.remove();
         this.missaoCidadeTimer = null;
       }
+      this._destruirPopupListaMissoes();
       this.fecharPopupConfig();
     });
+  }
+
+  _criarPopupListaMissoes() {
+    const uiScale = 1 / this.cameras.main.zoom;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + 214 * uiScale;
+
+    this.popupListaMissoesUiScale = uiScale;
+    this.popupListaMissoesOffsetTopo = 214 * uiScale;
+    this.popupListaMissoesAberto = false;
+
+    this.popupListaMissoesBg = this.add
+      .rectangle(popupX, popupY, 760, 430, 0x020914, 0.9)
+      .setStrokeStyle(2, 0x2a5ba0, 0.95)
+      .setDepth(260)
+      .setScale(uiScale)
+      .setVisible(false);
+
+    this.popupListaMissoesTitulo = this.add
+      .text(popupX, popupY - 182 * uiScale, "Diario de Missoes", {
+        fontSize: "24px",
+        color: "#e6f2ff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(261)
+      .setScale(uiScale)
+      .setVisible(false);
+
+    this.popupListaMissoesTexto = this.add
+      .text(popupX - 340 * uiScale, popupY - 146 * uiScale, "", {
+        fontSize: "19px",
+        color: "#d8e7ff",
+        lineSpacing: 8,
+        wordWrap: { width: 680 },
+      })
+      .setOrigin(0, 0)
+      .setDepth(261)
+      .setScale(uiScale)
+      .setVisible(false);
+
+    this.popupListaMissoesHint = this.add
+      .text(popupX, popupY + 184 * uiScale, "Use o X para fechar", {
+        fontSize: "16px",
+        color: "#9bbce6",
+        fontStyle: "italic",
+      })
+      .setOrigin(0.5)
+      .setDepth(261)
+      .setScale(uiScale)
+      .setVisible(false);
+
+    this.popupListaMissoesFecharBg = this.add
+      .rectangle(popupX + 338 * uiScale, popupY - 182 * uiScale, 34, 34, 0x17304d, 0.95)
+      .setStrokeStyle(1, 0x9bc9ff, 0.95)
+      .setDepth(262)
+      .setScale(uiScale)
+      .setInteractive({ useHandCursor: true })
+      .setVisible(false);
+
+    this.popupListaMissoesFecharTxt = this.add
+      .text(popupX + 338 * uiScale, popupY - 182 * uiScale, "X", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5)
+      .setDepth(263)
+      .setScale(uiScale)
+      .setVisible(false);
+
+    this.popupListaMissoesFecharBg.on("pointerdown", () => {
+      this.popupListaMissoesAberto = false;
+      this.popupListaMissoesBg?.setVisible(false);
+      this.popupListaMissoesTitulo?.setVisible(false);
+      this.popupListaMissoesTexto?.setVisible(false);
+      this.popupListaMissoesHint?.setVisible(false);
+      this.popupListaMissoesFecharBg?.setVisible(false);
+      this.popupListaMissoesFecharTxt?.setVisible(false);
+    });
+
+    this.miniMapCam.ignore([
+      this.popupListaMissoesBg,
+      this.popupListaMissoesTitulo,
+      this.popupListaMissoesTexto,
+      this.popupListaMissoesHint,
+      this.popupListaMissoesFecharBg,
+      this.popupListaMissoesFecharTxt,
+    ]);
+    this.borderCam.ignore([
+      this.popupListaMissoesBg,
+      this.popupListaMissoesTitulo,
+      this.popupListaMissoesTexto,
+      this.popupListaMissoesHint,
+      this.popupListaMissoesFecharBg,
+      this.popupListaMissoesFecharTxt,
+    ]);
+  }
+
+  _destruirPopupListaMissoes() {
+    const elementos = [
+      this.popupListaMissoesBg,
+      this.popupListaMissoesTitulo,
+      this.popupListaMissoesTexto,
+      this.popupListaMissoesHint,
+      this.popupListaMissoesFecharBg,
+      this.popupListaMissoesFecharTxt,
+    ];
+    elementos.forEach((el) => el?.destroy?.());
+
+    this.popupListaMissoesBg = null;
+    this.popupListaMissoesTitulo = null;
+    this.popupListaMissoesTexto = null;
+    this.popupListaMissoesHint = null;
+    this.popupListaMissoesFecharBg = null;
+    this.popupListaMissoesFecharTxt = null;
+    this.popupListaMissoesAberto = false;
+  }
+
+  _construirListaMissoesCidade() {
+    const dialogoPJConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    const guiouAtePadaria = this.registry.get("ag01_pj_retorno") === true;
+    const dialogoPadariaConcluido = this.registry.get("padaria_dialogo_concluido") === true;
+    const dialogoEscritorioConcluido = this.registry.get("escritorio_dialogo_concluido") === true;
+
+    return [
+      {
+        texto: "Onboarding na Agencia 01 (GG + PJ)",
+        status: dialogoPJConcluido ? "concluida" : "pendente",
+      },
+      {
+        texto: "Siga o PJ ate a Padaria",
+        status: guiouAtePadaria
+          ? "concluida"
+          : dialogoPJConcluido
+            ? "em_andamento"
+            : "pendente",
+      },
+      {
+        texto: "Concluir atendimento na Padaria",
+        status: dialogoPadariaConcluido
+          ? "concluida"
+          : guiouAtePadaria
+            ? "em_andamento"
+            : "pendente",
+      },
+      {
+        texto: "Ir ate o Escritorio e fazer o atendimento",
+        status: dialogoEscritorioConcluido
+          ? "concluida"
+          : dialogoPadariaConcluido
+            ? "em_andamento"
+            : "pendente",
+      },
+    ];
+  }
+
+  _formatarListaMissoesCidade() {
+    const lista = this._construirListaMissoesCidade();
+    return lista
+      .map((item, idx) => {
+        const marcador = item.status === "concluida" ? "✓ " : "";
+        return `${idx + 1}. ${marcador}${item.texto}`;
+      })
+      .join("\n\n");
+  }
+
+  _sincronizarPopupListaMissoes() {
+    if (!this.popupListaMissoesTexto) return;
+    this.popupListaMissoesTexto.setText(this._formatarListaMissoesCidade());
+  }
+
+  _alternarPopupListaMissoes() {
+    if (!this.popupListaMissoesBg) {
+      this._criarPopupListaMissoes();
+      this._sincronizarPopupListaMissoes();
+    }
+
+    const abrir = !this.popupListaMissoesAberto;
+    this.popupListaMissoesAberto = abrir;
+
+    if (abrir) this._sincronizarPopupListaMissoes();
+
+    this.popupListaMissoesBg?.setVisible(abrir);
+    this.popupListaMissoesTitulo?.setVisible(abrir);
+    this.popupListaMissoesTexto?.setVisible(abrir);
+    this.popupListaMissoesHint?.setVisible(abrir);
+    this.popupListaMissoesFecharBg?.setVisible(abrir);
+    this.popupListaMissoesFecharTxt?.setVisible(abrir);
+  }
+
+  _reposicionarPopupListaMissoes() {
+    if (!this.popupListaMissoesBg) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupListaMissoesOffsetTopo;
+
+    this.popupListaMissoesBg.setPosition(popupX, popupY);
+    this.popupListaMissoesTitulo.setPosition(
+      popupX,
+      popupY - 182 * this.popupListaMissoesUiScale,
+    );
+    this.popupListaMissoesTexto.setPosition(
+      popupX - 340 * this.popupListaMissoesUiScale,
+      popupY - 146 * this.popupListaMissoesUiScale,
+    );
+    this.popupListaMissoesHint.setPosition(
+      popupX,
+      popupY + 184 * this.popupListaMissoesUiScale,
+    );
+    this.popupListaMissoesFecharBg.setPosition(
+      popupX + 338 * this.popupListaMissoesUiScale,
+      popupY - 182 * this.popupListaMissoesUiScale,
+    );
+    this.popupListaMissoesFecharTxt.setPosition(
+      popupX + 338 * this.popupListaMissoesUiScale,
+      popupY - 182 * this.popupListaMissoesUiScale,
+    );
   }
 
   abrirPopupConfig() {
@@ -1936,6 +2204,7 @@ export default class SceneCidade extends Phaser.Scene {
     this._atualizarHudDebugCoords();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();
+    this._reposicionarPopupListaMissoes();
 
     // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
