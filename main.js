@@ -4,7 +4,7 @@ import ScenePersonagem from "./src/scenes/ScenePersonagem.js";
 import SceneCutscene from "./src/scenes/SceneCutscene.js";
 import SceneEscritorio from "./src/scenes/SceneEscritorio.js";
 import SceneCidade from "./src/scenes/SceneCidade.js";
-import SceneChuva from "./src/scenes/SceneChuva.js"; // CHUVA — nova cena
+import SceneChuva from "./src/scenes/SceneChuva.js";
 import SceneFarmacia from "./src/scenes/SceneFarmacia.js";
 import SceneRestaurante from "./src/scenes/SceneRestaurante.js";
 import SceneMetro from "./src/scenes/SceneMetro.js";
@@ -18,39 +18,40 @@ import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
 import SceneDialogoAgencia01 from "./src/scenesdialogos/SceneDialogoAgencia01.js";
 import SceneDialogoFarmacia from "./src/scenesdialogos/SceneDialogoFarmacia.js";
 import SceneDialogoPadaria from "./src/scenesdialogos/SceneDialogoPadaria.js";
+import SceneMiniGame from "./src/scenes/SceneMiniGame.js"
 
-//Configuração do jogo phaser
 const config = {
-  type: Phaser.AUTO, //Phaser escolhe entre WebGL ou Canvas para renderizar
-  pixelArt: true, //Garantir bordas nítidas para os gráficos pixelados
+  type: Phaser.AUTO,
+  pixelArt: true,
   roundPixels: true,
   antialias: false,
-  width: 1920, // Resolução base: 1920x1080
-  height: 1080, // Resolução full HD
-  backgroundColor: "#000000", // Fundo preto
+  width: 1920,
+  height: 1080,
+  backgroundColor: "#000000",
   scale: {
-    mode: Phaser.Scale.FIT, // Ajusta para caber na tela
-    autoCenter: Phaser.Scale.CENTER, // Centraliza o jogo
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER,
   },
   physics: {
-    default: "arcade", // Sistema de física arcade (jogos 2D)
+    default: "arcade",
     arcade: {
-      gravity: { y: 0 }, // Sem gravidade vertical
+      gravity: { y: 0 },
       debug: false,
     },
   },
   scene: [
     SceneCidade,
+    SceneMetro,
+    SceneMiniGame,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
-    SceneChuva, 
+    SceneChuva,
     SceneJogo,
     SceneEscritorio,
     ScenePadaria,
     SceneFarmacia,
     SceneRestaurante,
-    SceneMetro,
     SceneSupermercado,
     SceneLojaDeRoupas,
     ScenePostoDeGasolina,
@@ -60,7 +61,8 @@ const config = {
     SceneDialogoAgencia01,
     SceneDialogoFarmacia,
     SceneDialogoPadaria,
+    
   ],
 };
 
-new Phaser.Game(config); //
+new Phaser.Game(config);

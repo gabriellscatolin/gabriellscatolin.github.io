@@ -20,6 +20,12 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaAgencia02",
+      "src/assets/audios/trilhaAgencia02.mp3",
+    );
+
     // Loga erros de carregamento para facilitar depuração
     this.load.on("loaderror", (arquivo) => {
       console.error(
@@ -108,6 +114,13 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   // Monta a cena, cria o mapa, o personagem e as interações principais
   create() {
+
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaAgencia02",
+      "src/assets/audios/trilhaAgencia02.mp3",
+    );
+
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
     const mapaBruto = this.cache.tilemap.get("agencia02")?.data;
@@ -464,6 +477,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   // Cria uma camada do tilemap com tratamento de erro
@@ -746,10 +764,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (pertoCamila && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComCamila = true;
-      this.exclamacaoCamila.setVisible(false);
-      if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
-      console.log("[SceneAgencia02] Interagiu com a Camila");
+      if (this.registry.get("ag02_dialogo_camila_concluido") === true) {
+        this.falouComCamila = true;
+        this.exclamacaoCamila.setVisible(false);
+        if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
+      } else {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoAgencia02", {
+          cenaOrigem: "SceneAgencia02",
+          npc: "Camila",
+        });
+      }
+      return;
     }
 
     const distNpcEnzo = Phaser.Math.Distance.Between(
@@ -775,10 +801,17 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (pertoEnzo && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComEnzo = true;
-      this.exclamacaoEnzo.setVisible(false);
-      if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
-      console.log("[SceneAgencia02] Interagiu com o Enzo");
+      if (this.registry.get("ag02_dialogo_enzo_concluido") === true) {
+        this.falouComEnzo = true;
+        this.exclamacaoEnzo.setVisible(false);
+        if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
+      } else {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoAgencia02", {
+          cenaOrigem: "SceneAgencia02",
+        });
+      }
+      return;
     }
 
     const dentroSaida = (this.zonasSaida || []).some((z) =>

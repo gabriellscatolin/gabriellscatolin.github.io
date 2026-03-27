@@ -66,7 +66,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     );
 
     this.load.audio(
-      "trilhaScenePostoDeGasolina", 'src/assets/audios/trilhaScenePostoDeGasolina.mp3'
+      "trilhaPostoDeGasolina", 'src/assets/audios/trilhaPostoDeGasolina.mp3'
     );
 
     // Carrega os frames do personagem em todas as direções
@@ -95,7 +95,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
   create() {
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaScenePostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica = this.sound.add('trilhaPostoDeGasolina', { loop: true, volume: 0.5});
     this.musica.play();
 
     // Prepara os tilesets antes de criar o mapa

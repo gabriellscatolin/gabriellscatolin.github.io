@@ -320,6 +320,20 @@
     });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
+    // Zonas interativas e labels de entrada
+    this.zonaMiniGame = new Phaser.Geom.Rectangle(676, 200, 90, 80);
+    this.labelE = this.add
+      .text(676, 200, "[E] Entrar", {
+        fontSize: "6px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
     // Câmera segue o personagem
     this.cameras.main.startFollow(this.personagem);
     this.cameras.main.setZoom(4);
@@ -362,6 +376,7 @@
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.entrarMiniGame = false;
 
     this.debugTxt = this.add
       .text(0, 0, "", {
@@ -426,6 +441,29 @@
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
+
+    const entrarMiniGame = Phaser.Geom.Rectangle.Contains(
+  this.zonaMiniGame,   // ← G maiúsculo, igual ao create()
+  personagem.x,
+  personagem.y,
+);
+
+if (entrarMiniGame !== this.entrarMiniGame) {
+  this.entrarMiniGame = entrarMiniGame;  // ← G maiúsculo
+  this.labelE.setVisible(entrarMiniGame);
+}
+
+if (entrarMiniGame && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  this.transicionando = true;
+  this.labelE.setVisible(false);
+  this.cameras.main.fadeOut(800, 0, 0, 0);
+  this.cameras.main.once("camerafadeoutcomplete", () => {
+    this.scene.start("SceneMiniGame", {
+      nomePasta: this.nomePastaEscolhida,
+      prefixo: this.prefixoEscolhido,
+    });
+  });
+}
 
     // Transição para a cidade ao pressionar E
     if (
