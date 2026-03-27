@@ -1,4 +1,5 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 // Configuração da LLM
 const GROQ_API_KEY = "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";
@@ -140,7 +141,7 @@ const ROTEIRO_PJ = [
 	},
 ];
 
-const PONTOS = { correta: 2, neutra: 1, errada: 0 };
+const CAPITULO = "chapter1";
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -172,9 +173,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 		this.estado = "tutorial";
 		this.aguardandoLLM = false;
 
-		if (typeof this.registry.get("cieloCoins") === "undefined") {
-			this.registry.set("cieloCoins", 0); 
-		}
+		initScoring(this.registry);
 	}
 
 	preload() {
@@ -562,13 +561,9 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
 		const cena = this.roteiro[this.cenaIdx];
 		const escolha = cena.escolhas[indice];
-		const pontosGanhos = PONTOS[escolha.tipo] ?? 0;
-
-		this.pontuacao += pontosGanhos;
+		const pontosGanhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
+		this.pontuacao               += pontosGanhos;
 		this.cieloCoinsGanhasDialogo += pontosGanhos;
-
-		const moedasAtuais = Number(this.registry.get("cieloCoins") ?? 0);
-		this.registry.set("cieloCoins", moedasAtuais + pontosGanhos);
 		this._atualizarHudMoedas();
 
 		const coresTipo = {
@@ -618,7 +613,10 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 		this.textoNome.setVisible(false);
 		this.textoCena.setText("Resultado Final");
 
-		const pct = Math.round((this.pontuacao / this.maxPts) * 100);
+		const faseKey = this.tipoDialogo === "PJ" ? "agency1_pj" : "agency1_gg";
+		const atingiu = checkGoal(faseKey, this.pontuacao, this.roteiro.length);
+		const meta    = goalEscalado(faseKey, this.roteiro.length);
+		const pct     = Math.round((this.pontuacao / this.maxPts) * 100);
 		let avaliacao;
 		let cor;
 		if (pct >= 90) {
@@ -644,10 +642,14 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 			"- Organizacao e processo\n" +
 			"- Uso de discurso de valor";
 
+		const statusMeta = atingiu
+			? "✅ Meta atingida!"
+			: `❌ Meta nao atingida (precisava de ${meta} coins)`;
+
 		const textoFinal =
 			this.tipoDialogo === "PJ"
-				? `${resumoFasePJ}\n\nPontos da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n\n${avaliacao}`
-				: `Conversa encerrada!\n\nPontos da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n\n${avaliacao}`;
+				? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessao: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
+				: `Conversa encerrada!\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessao: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`;
 
 		this.textoNpc.setText(textoFinal).setStyle({ color: cor });
 
@@ -686,9 +688,8 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
 	_atualizarHudMoedas() {
 		if (!this.textoCieloCoin) return;
-		const totalMoedas = Number(this.registry.get("cieloCoins") ?? 0);
 		this.textoCieloCoin.setText(
-			`Cielo Coins: ${totalMoedas}  (+${this.cieloCoinsGanhasDialogo} nesta conversa)`,
+			`Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
 		);
 	}
 

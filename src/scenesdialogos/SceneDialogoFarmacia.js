@@ -1,4 +1,5 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 // ─── Configuração da LLM ─────────────────────────────────────────────────────
 // Chave gratuita em: https://console.groq.com
@@ -120,8 +121,9 @@ const ROTEIRO = [
   },
 ];
 
-const PONTOS  = { correta: 2, neutra: 1, errada: 0 };
-const MAX_PTS = ROTEIRO.length * 2;
+const CAPITULO  = "chapter1";
+const FASE      = "farmacia";
+const N_CENAS   = ROTEIRO.length; // 10 perguntas
 
 // ─── Cores dos botões de escolha ─────────────────────────────────────────────
 const COR_NEUTRO   = 0x1d2b4a;
@@ -141,10 +143,12 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
-    this.cenaIdx       = 0;
-    this.pontuacao     = 0;
-    this.estado        = "tutorial";
-    this.aguardandoLLM = false;
+    this.cenaIdx                = 0;
+    this.pontuacaoFase          = 0;   // coins acumuladas só nesta fase
+    this.cieloCoinsGanhasDialogo = 0;  // exibido no HUD como "+X nesta conversa"
+    this.estado                 = "tutorial";
+    this.aguardandoLLM          = false;
+    initScoring(this.registry);
   }
 
   preload() {
@@ -388,8 +392,12 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     const cena   = ROTEIRO[this.cenaIdx];
     const escolha = cena.escolhas[indice];
 
-    this.pontuacao += PONTOS[escolha.tipo] ?? 0;
-    this.textoCieloCoin.setText(`Cielo Coins: ${this.pontuacao} / ${MAX_PTS}`);
+    const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
+    this.pontuacaoFase          += ganhos;
+    this.cieloCoinsGanhasDialogo += ganhos;
+    this.textoCieloCoin.setText(
+      `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
+    );
 
     // Feedback de cor na escolha feita
     const coresTipo = { correta: COR_CORRETA, neutra: COR_NEUTRA, errada: COR_ERRADA };
@@ -436,15 +444,28 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const pct = Math.round((this.pontuacao / MAX_PTS) * 100);
+    const meta      = goalEscalado(FASE, N_CENAS);
+    const maxPts    = N_CENAS * 100; // chapter1: 100 por correta
+    const atingiu   = checkGoal(FASE, this.pontuacaoFase, N_CENAS);
+    const pct       = Math.round((this.pontuacaoFase / maxPts) * 100);
+
     let avaliacao, cor;
     if      (pct >= 90) { avaliacao = "Vendedor nato! Negócio fechado!";    cor = "#44ff88"; }
     else if (pct >= 70) { avaliacao = "Bom trabalho! Quase perfeito.";      cor = "#88ccff"; }
     else if (pct >= 50) { avaliacao = "Razoável. Pratique mais!";           cor = "#ffcc44"; }
     else                { avaliacao = "Precisa melhorar. Tente de novo.";   cor = "#ff6644"; }
 
+    const statusMeta = atingiu
+      ? "✅ Meta atingida!"
+      : `❌ Meta não atingida (precisava de ${meta} coins)`;
+
     this.textoNpc
-      .setText(`Conversa encerrada!\n\nCielo Coins: ${this.pontuacao} / ${MAX_PTS}  (${pct}%)\n\n${avaliacao}`)
+      .setText(
+        `Conversa encerrada!\n\n` +
+        `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
+        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `${statusMeta}\n\n${avaliacao}`,
+      )
       .setStyle({ color: cor });
 
     this._mostrarContinuar("Fechar  [E]");

@@ -1,4 +1,5 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
@@ -222,8 +223,9 @@ const ROTEIRO = [
   },
 ];
 
-const PONTOS = { correta: 2, neutra: 1, errada: 0 };
-const MAX_PTS = ROTEIRO.length * 2;
+const CAPITULO = "chapter1";
+const FASE     = "padaria";
+const N_CENAS  = ROTEIRO.length; // 9 perguntas
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -243,10 +245,12 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
-    this.cenaIdx = 0;
-    this.pontuacao = 0;
-    this.estado = "tutorial";
-    this.aguardandoLLM = false;
+    this.cenaIdx                 = 0;
+    this.pontuacaoFase           = 0;
+    this.cieloCoinsGanhasDialogo = 0;
+    this.estado                  = "tutorial";
+    this.aguardandoLLM           = false;
+    initScoring(this.registry);
   }
 
   preload() {
@@ -510,8 +514,12 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     const cena = ROTEIRO[this.cenaIdx];
     const escolha = cena.escolhas[indice];
 
-    this.pontuacao += PONTOS[escolha.tipo] ?? 0;
-    this.textoCieloCoin.setText(`Cielo Coins: ${this.pontuacao} / ${MAX_PTS}`);
+    const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
+    this.pontuacaoFase           += ganhos;
+    this.cieloCoinsGanhasDialogo += ganhos;
+    this.textoCieloCoin.setText(
+      `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
+    );
 
     const coresTipo = { correta: COR_CORRETA, neutra: COR_NEUTRA, errada: COR_ERRADA };
     this.botoesEscolha[indice].bg.setFillStyle(coresTipo[escolha.tipo]);
@@ -556,26 +564,27 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const pct = Math.round((this.pontuacao / MAX_PTS) * 100);
-    let avaliacao;
-    let cor;
-    if (pct >= 90) {
-      avaliacao = "Vendedor nato! Negocio fechado!";
-      cor = "#44ff88";
-    } else if (pct >= 70) {
-      avaliacao = "Bom trabalho! Quase perfeito.";
-      cor = "#88ccff";
-    } else if (pct >= 50) {
-      avaliacao = "Razoavel. Pratique mais!";
-      cor = "#ffcc44";
-    } else {
-      avaliacao = "Precisa melhorar. Tente de novo.";
-      cor = "#ff6644";
-    }
+    const meta    = goalEscalado(FASE, N_CENAS);
+    const maxPts  = N_CENAS * 100;
+    const atingiu = checkGoal(FASE, this.pontuacaoFase, N_CENAS);
+    const pct     = Math.round((this.pontuacaoFase / maxPts) * 100);
+
+    let avaliacao, cor;
+    if      (pct >= 90) { avaliacao = "Vendedor nato! Negocio fechado!";    cor = "#44ff88"; }
+    else if (pct >= 70) { avaliacao = "Bom trabalho! Quase perfeito.";      cor = "#88ccff"; }
+    else if (pct >= 50) { avaliacao = "Razoavel. Pratique mais!";           cor = "#ffcc44"; }
+    else                { avaliacao = "Precisa melhorar. Tente de novo.";   cor = "#ff6644"; }
+
+    const statusMeta = atingiu
+      ? "✅ Meta atingida!"
+      : `❌ Meta nao atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
-        `Conversa encerrada!\n\nCielo Coins: ${this.pontuacao} / ${MAX_PTS}  (${pct}%)\n\n${avaliacao}`,
+        `Conversa encerrada!\n\n` +
+        `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
+        `Total da sessao: ${getScore(this.registry)}\n\n` +
+        `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({ color: cor });
 
