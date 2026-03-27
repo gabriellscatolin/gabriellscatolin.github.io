@@ -2113,6 +2113,8 @@ js_avancarSequenciaSetas(localAtual) {
   this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
 }
 ````
+
+Figura XXX- print tecla E e setas perto dos estabelecimentos 
 ### Finalização dos cenários internos
 Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
 O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
@@ -2122,6 +2124,7 @@ jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
  ````
 
 A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
+Figura XX - print algum cenario 
 
 ### Integração das interações dentro dos estabelecimentos
 Integração das interações dentro dos estabelecimentos
@@ -2154,6 +2157,9 @@ jsasync _chamarLLM(escolha, cena) {
 ````
 Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
+Figura XX- print cena de diálogo 
+
+
 ### Mini game do metrô
 Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
 ````JS
@@ -2172,6 +2178,7 @@ jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
 const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
 this.registry.set("cieloCoins", totalAtual + coinsGanhas);
 ````
+Figura XXX - print do mini game 
 ### Interface e experiência do usuário (HUD)
 Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
 O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
@@ -2195,6 +2202,75 @@ jsthis.input.keyboard?.once("keydown-ESC", () => {
   const retornoY = Number(this.registry.get("cidadeRetornoY"));
   this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
 ````
+Figura XX - HUD 
+Figura XXX - maquininha 
+### Desenvolvimento de novas sprite sheets
+Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos — um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
+Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
+
+Imagem XX - foto dos sprites 
+### Fluxo de progressão do jogador
+O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
+A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
+````JS
+jsexport const SCORING_CONFIG = {
+  chapter1: { correct: 100, generic: 50, wrong: 0 },
+  chapter3: { correct: 300, generic: 150, wrong: -50 },
+````
+
+A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
+```JS
+jsexport function handleAnswer(registry, chapter, tipo) {
+  const cfg = SCORING_CONFIG[chapter];
+  let amount = tipo === "correta" ? cfg.correct
+             : tipo === "neutra"  ? cfg.generic
+             :                     cfg.wrong;
+  addCoins(registry, amount);
+  return amount;
+```
+Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+
+### Efeitos dinâmicos de ambiente Chuva
+Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
+O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
+```JS
+jsvar x_atual = g.xi + g.vx * t;
+var y_atual = g.yi + 0.5 * g.ay * t * t;
+```
+
+A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
+
+Figura XX — Efeito de chuva no mapa da cidade
+
+### Trilha sonora e efeitos sonoros
+A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
+Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
+```JS
+jsthis.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5 });
+this.musica.play();
+
+this.events.on("shutdown", () => {
+  this.musica.stop();
+```
+Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
+### Dificuldades
+Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
+
+- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
+- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa
+- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas — como uma trilha não interrompida no shutdown — causava sobreposição de áudios e comportamentos inesperados
+- Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
+
+### Próximos passos
+Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
+
+- Corrigir inconsistências visuais, de colisão e de fluxo identificadas durante os testes
+- Corrigir e ajustar os diálogos com NPCs para garantir coerência narrativa
+- Implementar novos efeitos sonoros e expandir a cobertura de trilhas nos ambientes ainda sem áudio
+- Finalizar a implementação das missões no HUD da maquininha Cielo, com atualização dinâmica conforme o progresso do jogador
+- Finalizar o mapa interativo acessível pela maquininha Cielo
+
+
 
 ## 4.5. Revisão do MVP (sprint 5)
 
