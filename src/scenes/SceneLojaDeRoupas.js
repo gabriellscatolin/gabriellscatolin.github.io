@@ -16,6 +16,12 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaSceneLojaDeRoupa",
+      "src/assets/audios/trilhaLojaDeRoupa.mp3",
+    );
+
     // Mapa
     this.load.tilemapTiledJSON(
       "lojaDeRoupas",
@@ -55,6 +61,11 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
   }
 
   create() {
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaScenePostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // Carrega o mapa
     const mapa = this.make.tilemap({ key: "lojaDeRoupas" });
 
@@ -158,7 +169,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     this.direction = "frente";
 
-    // Exit zone
+    // Zona de saida
     this.exitZone = { x: 100, y: 50, radius: 40 };
     this.nearExit = false;
     this.isTransitioning = false;
@@ -184,6 +195,11 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   update() {
