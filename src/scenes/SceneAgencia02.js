@@ -746,10 +746,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (pertoCamila && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComCamila = true;
-      this.exclamacaoCamila.setVisible(false);
-      if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
-      console.log("[SceneAgencia02] Interagiu com a Camila");
+      if (this.registry.get("ag02_dialogo_camila_concluido") === true) {
+        this.falouComCamila = true;
+        this.exclamacaoCamila.setVisible(false);
+        if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
+      } else {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoAgencia02", {
+          cenaOrigem: "SceneAgencia02",
+          npc: "Camila",
+        });
+      }
+      return;
     }
 
     const distNpcEnzo = Phaser.Math.Distance.Between(

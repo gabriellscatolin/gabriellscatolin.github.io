@@ -151,7 +151,8 @@ const COR_ERRADA = 0x6a1a1a;
 export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoAgencia02" });
-    this.imagemKey = "falaAgencia02GG";
+    this.imagemKey = "falaAgencia02PJ";
+    this.nomeNpcDialogo = "PJ";
     this.promptLLM =
       "Voce e o PJ da Agencia 02 e conversa sob pressao de metas. " +
       "Seja objetivo, firme e profissional.";
@@ -159,6 +160,16 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
+    const npcAlvo = dados?.npc === "Camila" ? "Camila" : "Enzo";
+    // Invertido: Enzo = GG, Camila = PJ
+    const ehGG = npcAlvo === "Enzo";
+
+    this.imagemKey = ehGG ? "falaAgencia02GG" : "falaAgencia02PJ";
+    this.nomeNpcDialogo = ehGG ? "GG" : "PJ";
+    this.promptLLM = ehGG
+      ? "Voce e o GG da Agencia 02 e conversa sob pressao de metas. Seja objetivo, firme e profissional."
+      : "Voce e o PJ da Agencia 02 e conversa sob pressao de metas. Seja objetivo, firme e profissional.";
+
     this.cenaIdx = 0;
     this.pontuacaoFase = 0;
     this.cieloCoinsGanhasDialogo = 0;
@@ -168,6 +179,12 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   }
 
   preload() {
+    if (!this.textures.exists("falaAgencia02PJ")) {
+      this.load.image(
+        "falaAgencia02PJ",
+        "src/assets/imagens/imagensFalas/Agência02 - PJ.png",
+      );
+    }
     if (!this.textures.exists("falaAgencia02GG")) {
       this.load.image(
         "falaAgencia02GG",
@@ -207,7 +224,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0).setScrollFactor(0).setDepth(3);
 
     this.textoNome = this.add
-      .text(CX - BTN_W / 2, NOME_Y, "PJ  -  Agencia 02", {
+      .text(CX - BTN_W / 2, NOME_Y, `${this.nomeNpcDialogo}  -  Agencia 02`, {
         fontSize: "24px",
         color: "#5a9fd4",
         fontStyle: "bold",
@@ -314,7 +331,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
     this.textoCarregando = this.add
-      .text(CX, CONT_Y, "PJ esta pensando...", {
+      .text(CX, CONT_Y, `${this.nomeNpcDialogo} esta pensando...`, {
         fontSize: "24px",
         color: "#99bbdd",
         fontStyle: "italic",
@@ -561,6 +578,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   _mostrarResultadoFinal() {
     this.estado = "fim";
     this.registry.set("ag02_dialogo_enzo_concluido", true);
+    this.registry.set("ag02_dialogo_camila_concluido", true);
 
     this._esconderBotoes();
     this.textoNarracao.setText(
