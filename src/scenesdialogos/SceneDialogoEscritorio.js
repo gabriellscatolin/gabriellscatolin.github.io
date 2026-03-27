@@ -293,7 +293,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     if (!this.textures.exists("falaEscritorio")) {
       this.load.image(
         "falaEscritorio",
-        "src/assets/imagens/imagensFalas/Escritorio.png",
+        "src/assets/imagens/imagensFalas/Escritorio - F.png",
       );
     }
   }

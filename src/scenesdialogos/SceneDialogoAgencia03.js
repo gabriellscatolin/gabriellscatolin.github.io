@@ -155,7 +155,7 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
 
   preload() {
     if (!this.textures.exists("falaAgencia03")) {
-      this.load.image("falaAgencia03", "src/assets/imagens/imagensFalas/Agência 03 - GG.png");
+      this.load.image("falaAgencia03", "src/assets/imagens/imagensFalas/Agência 03 - GG - F.png");
     }
   }
 

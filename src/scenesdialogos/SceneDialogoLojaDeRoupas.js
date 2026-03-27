@@ -302,7 +302,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
   preload() {
     if (!this.textures.exists("falaLoja")) {
-      this.load.image("falaLoja", "src/assets/imagens/imagensFalas/Loja.png");
+      this.load.image("falaLoja", "src/assets/imagens/imagensFalas/Loja - F.png");
     }
   }
 

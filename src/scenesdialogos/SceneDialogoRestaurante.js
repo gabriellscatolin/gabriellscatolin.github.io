@@ -161,7 +161,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     if (!this.textures.exists("falaRestaurante")) {
       this.load.image(
         "falaRestaurante",
-        "src/assets/imagens/imagensFalas/FalaRestaurante.png",
+        "src/assets/imagens/imagensFalas/Restaurante - F.png",
       );
     }
   }

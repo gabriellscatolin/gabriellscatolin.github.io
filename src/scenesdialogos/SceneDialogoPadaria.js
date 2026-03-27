@@ -291,7 +291,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     if (!this.textures.exists("falaPadaria")) {
       this.load.image(
         "falaPadaria",
-        "src/assets/imagens/imagensFalas/FalaPadaria.png",
+        "src/assets/imagens/imagensFalas/Padaria - F.png",
       );
     }
   }

@@ -155,7 +155,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
   preload() {
     if (!this.textures.exists("falaPosto")) {
-      this.load.image("falaPosto", "src/assets/imagens/imagensFalas/Posto.png");
+      this.load.image("falaPosto", "src/assets/imagens/imagensFalas/Posto - F.png");
     }
   }
 

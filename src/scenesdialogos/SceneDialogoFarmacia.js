@@ -164,7 +164,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
   preload() {
     if (!this.textures.exists("falaFarmacia")) {
-      this.load.image("falaFarmacia", "src/assets/imagens/imagensFalas/FalaFarmacia.png");
+      this.load.image("falaFarmacia", "src/assets/imagens/imagensFalas/Farmacia - F.png");
     }
   }
 
