@@ -8,15 +8,15 @@ export default class SceneChuva extends Phaser.Scene {
 
       // Carrega o áudio da cena
     this.load.audio(
-      "trilhaSceneRestaurante",
-      "src/assets/audios/trilhaSceneRestaurante.mp3",
+      "trilhaChuva",
+      "src/assets/audios/trilhaChuva.mp3",
     );
   }
 
   create() {
 
      // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaScenePostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica = this.sound.add('trilhaChuva', { loop: true, volume: 0.5});
     this.musica.play();
 
     // Mantém o fundo transparente para a chuva aparecer sobre outras cenas

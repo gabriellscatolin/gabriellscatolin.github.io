@@ -40,9 +40,9 @@ const config = {
     },
   },
   scene: [
+    SceneCidade,
     SceneMetro,
     SceneMiniGame,
-    SceneCidade,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,

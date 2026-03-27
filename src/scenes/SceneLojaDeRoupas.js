@@ -18,7 +18,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     // Carrega o áudio da cena
     this.load.audio(
-      "trilhaSceneLojaDeRoupa",
+      "trilhaLojaDeRoupa",
       "src/assets/audios/trilhaLojaDeRoupa.mp3",
     );
 
@@ -63,7 +63,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
   create() {
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaScenePostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica = this.sound.add('trilhaLojaDeRoupa', { loop: true, volume: 0.5});
     this.musica.play();
 
     // Carrega o mapa

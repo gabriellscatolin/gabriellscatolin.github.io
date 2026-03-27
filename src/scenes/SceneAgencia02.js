@@ -117,8 +117,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     // Carrega o áudio da cena
     this.load.audio(
-      "trilhaSceneAgencia02",
-      "src/assets/audios/trilhaSceneAgencia02.mp3",
+      "trilhaAgencia02",
+      "src/assets/audios/trilhaAgencia02.mp3",
     );
 
     const mapa = this.make.tilemap({ key: "agencia02" });

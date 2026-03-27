@@ -29,8 +29,8 @@ export default class SceneAgencia extends Phaser.Scene {
 
     // Carrega o áudio da cena
     this.load.audio(
-      "trilhaSceneAgencia01",
-      "src/assets/audios/trilhaSceneAgencia01.mp3",
+      "trilhaAgencia01",
+      "src/assets/audios/trilhaAgencia01.mp3",
     );
 
 
@@ -105,7 +105,7 @@ export default class SceneAgencia extends Phaser.Scene {
   create() {
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneAgencia01', { loop: true, volume: 0.5});
+    this.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5});
     this.musica.play();
 
     // ── MAPA ──────────────────────────────────────────────────────────────────
