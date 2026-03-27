@@ -21,8 +21,7 @@ const ROTEIRO = [
   {
     titulo: "CENA 2 - ABORDAGEM",
     narracao: null,
-    npcInicial:
-      "Bom dia. Vi que esta cheio. Posso te mostrar algo que agilize esse caixa?",
+    npcInicial: null,
     escolhas: [
       {
         letra: "A",
@@ -236,6 +235,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoPadaria" });
     this.imagemKey = "falaPadaria";
+    this.respostaRoteiroEstrita = true;
     this.promptLLM =
       "Voce e a atendente de uma padaria muito movimentada. " +
       "Voce e agil, pratica e valoriza um atendimento rapido e sem atritos no caixa.";
@@ -423,7 +423,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       { icone: "🎯", texto: "Voce esta negociando com a atendente da padaria,\nem um horario de caixa cheio e atendimento acelerado." },
       { icone: "💬", texto: "A cada cena, escolha a melhor resposta para conduzir\na conversa sem atrapalhar o fluxo do atendimento." },
       { icone: "🪙", texto: "Cada escolha vale Cielo Coins:\nResposta correta = +2   Neutra = +1   Errada = +0" },
-      { icone: "🤖", texto: "A resposta da cliente pode se adaptar ao que voce fala,\nseguindo o mesmo padrao das outras fases." },
+      { icone: "🤖", texto: "As respostas seguem o roteiro oficial da fase,\nsem inventar variacoes fora do treinamento." },
       { icone: "🏆", texto: "Seu objetivo e mostrar valor sem pressionar,\nrespeitando o momento da operacao." },
     ];
 
@@ -603,6 +603,10 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   async _chamarLLM(escolha, cena) {
+    if (this.respostaRoteiroEstrita) {
+      return cena.npcResposta;
+    }
+
     if (!GROQ_API_KEY || GROQ_API_KEY === "SUA_CHAVE_GROQ_AQUI") {
       return cena.npcResposta;
     }

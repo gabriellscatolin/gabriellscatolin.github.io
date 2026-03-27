@@ -20,6 +20,13 @@ export default class SceneCidade extends Phaser.Scene {
       typeof dados.missaoCidadeTexto === "string"
         ? dados.missaoCidadeTexto.trim()
         : "";
+    const pjDialogoConcluido = Boolean(this.registry.get("ag01_dialogo_pj_concluido"));
+    const pjJaRetornou = Boolean(this.registry.get("ag01_pj_retorno"));
+    const fallbackEscoltaPorProgresso = pjDialogoConcluido && !pjJaRetornou;
+    this.escoltaPJAgencia2Ativa =
+      Boolean(dados.escoltaPJAgencia2) ||
+      Boolean(this.registry.get("ag01_escolta_pj_agencia2")) ||
+      fallbackEscoltaPorProgresso;
     this.ocultarSetaAgencia01 =
       Boolean(dados.ocultarSetaAgencia01) ||
       Boolean(this.registry.get("ocultarSetaAgencia01"));
@@ -63,6 +70,14 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.load.image("botaoRankingHud", "src/assets/imagens/HUD/botaoRanking.png");
     this.load.image("botaoMissaoHud", "src/assets/imagens/HUD/botaoMissao.png");
+    this.load.image(
+      "npc_agencia",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_parado02.png",
+    );
+    this.load.image(
+      "npc_agencia_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente01 (parado01).png",
+    );
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -194,6 +209,65 @@ export default class SceneCidade extends Phaser.Scene {
       this.physics.add.collider(this.personagem, objetosInferior2);
     if (estabelecimentos)
       this.physics.add.collider(this.personagem, estabelecimentos);
+
+    this.pjAcompanhandoAgencia2 = this.escoltaPJAgencia2Ativa;
+    this.pjAcompanhamentoEncerrado = false;
+    this.pjDistanciaMaxJogador = 120;
+    this.pjRaioChegadaGuia = 24;
+    this.pjVelocidadeGuia = 110;
+    this.pjEsperandoJogador = false;
+    this.pjRotaWaypoints = [
+      { x: 1160, y: 920 },
+      { x: 1320, y: 900 },
+      { x: 1475, y: 860 },
+    ];
+    this.pjRotaIndiceAtual = 0;
+    this.pjChegouDestinoRota = false;
+    this.npcTheoProximaTroca = 0;
+    this.npcTheoSpriteAtual = 2;
+    this.npcTheoIntervaloTroca = 140;
+    this.npcTheoAndandoAnterior = false;
+
+    if (this.pjAcompanhandoAgencia2) {
+      this.registry.set("ag01_escolta_pj_agencia2", true);
+      this.registry.set("ag01_pj_retorno", false);
+
+      this.npcTheoGuia = this.physics.add
+        .sprite(spawnX + 24, spawnY + 10, "npc_agencia")
+        .setDepth(9);
+      this.npcTheoGuia.setCollideWorldBounds(true);
+
+      const alturaTheo = this.personagem.displayHeight;
+      this.npcTheoGuia.setDisplaySize(
+        (this.npcTheoGuia.width / this.npcTheoGuia.height) * (alturaTheo * 1.2),
+        alturaTheo * 1.2,
+      );
+      this.npcTheoGuia.body.setSize(
+        this.npcTheoGuia.width * 0.45,
+        this.npcTheoGuia.height * 0.45,
+      );
+
+      if (caminhoInferior) this.physics.add.collider(this.npcTheoGuia, caminhoInferior);
+      if (carrosVeiculos) this.physics.add.collider(this.npcTheoGuia, carrosVeiculos);
+      if (objetosInferior2) this.physics.add.collider(this.npcTheoGuia, objetosInferior2);
+      if (estabelecimentos) this.physics.add.collider(this.npcTheoGuia, estabelecimentos);
+      this.physics.add.collider(this.personagem, this.npcTheoGuia);
+
+      this.labelTheoGuia = this.add
+        .text(this.npcTheoGuia.x, this.npcTheoGuia.y - 20, "[PJ te acompanhando]", {
+          fontSize: "6px",
+          color: "#ffffff",
+          backgroundColor: "#000000cc",
+          padding: { x: 2, y: 1 },
+          resolution: 4,
+        })
+        .setDepth(20)
+        .setOrigin(0.5, 1)
+        .setVisible(true);
+    } else {
+      this.npcTheoGuia = null;
+      this.labelTheoGuia = null;
+    }
 
     // Camadas acima do personagem para efeito de profundidade
     if (tilesets.length > 0) {
@@ -1586,6 +1660,110 @@ export default class SceneCidade extends Phaser.Scene {
     this.registry.set("ocultarSetaAgencia01", this.indiceSetaAtual > 0);
   }
 
+  _atualizarAcompanhamentoPJCidade() {
+    if (!this.pjAcompanhandoAgencia2 || !this.npcTheoGuia || !this.personagem) return;
+
+    const pontoAtual = this.pjRotaWaypoints[this.pjRotaIndiceAtual];
+    if (!pontoAtual) {
+      this.npcTheoGuia.body?.setVelocity(0, 0);
+      this.pjChegouDestinoRota = true;
+      return;
+    }
+
+    const chegouNaPadariaComJogador =
+      this.pjChegouDestinoRota &&
+      Phaser.Geom.Rectangle.Contains(this.zonaPadaria, this.personagem.x, this.personagem.y);
+
+    if (chegouNaPadariaComJogador) {
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.registry.set("ag01_escolta_pj_agencia2", false);
+      this.registry.set("ag01_pj_retorno", true);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+      this.npcTheoGuia.setVisible(false);
+      if (this.labelTheoGuia) this.labelTheoGuia.setVisible(false);
+      return;
+    }
+
+    const distJogadorNpc = Phaser.Math.Distance.Between(
+      this.personagem.x,
+      this.personagem.y,
+      this.npcTheoGuia.x,
+      this.npcTheoGuia.y,
+    );
+    const distNpcPonto = Phaser.Math.Distance.Between(
+      this.npcTheoGuia.x,
+      this.npcTheoGuia.y,
+      pontoAtual.x,
+      pontoAtual.y,
+    );
+
+    if (distJogadorNpc > this.pjDistanciaMaxJogador) {
+      this.npcTheoGuia.body?.setVelocity(0, 0);
+      this.pjEsperandoJogador = true;
+    } else if (!this.pjChegouDestinoRota && distNpcPonto > this.pjRaioChegadaGuia) {
+      this.physics.moveTo(
+        this.npcTheoGuia,
+        pontoAtual.x,
+        pontoAtual.y,
+        this.pjVelocidadeGuia,
+      );
+      this.pjEsperandoJogador = false;
+    } else {
+      this.npcTheoGuia.body?.setVelocity(0, 0);
+      this.pjEsperandoJogador = true;
+    }
+
+    const vx = this.npcTheoGuia.body?.velocity?.x ?? 0;
+    const vy = this.npcTheoGuia.body?.velocity?.y ?? 0;
+    const andando = Math.abs(vx) > 1 || Math.abs(vy) > 1;
+
+    if (andando && !this.npcTheoAndandoAnterior) {
+      this.npcTheoGuia.setTexture("npc_agencia_1");
+      this.npcTheoSpriteAtual = 1;
+      this.npcTheoProximaTroca = this.time.now + this.npcTheoIntervaloTroca;
+    } else if (!andando) {
+      this.npcTheoGuia.setTexture("npc_agencia");
+      this.npcTheoSpriteAtual = 2;
+    } else if (this.time.now >= this.npcTheoProximaTroca) {
+      this.npcTheoProximaTroca = this.time.now + this.npcTheoIntervaloTroca;
+      if (this.npcTheoSpriteAtual === 2) {
+        this.npcTheoGuia.setTexture("npc_agencia_1");
+        this.npcTheoSpriteAtual = 1;
+      } else {
+        this.npcTheoGuia.setTexture("npc_agencia");
+        this.npcTheoSpriteAtual = 2;
+      }
+    }
+    this.npcTheoAndandoAnterior = andando;
+
+    if (this.labelTheoGuia) {
+      this.labelTheoGuia
+        .setVisible(true)
+        .setText(
+          this.pjChegouDestinoRota
+            ? "[Chegamos. Entre na Padaria]"
+            : this.pjEsperandoJogador
+              ? "[Vem comigo! Estou esperando]"
+              : "[Siga o PJ]",
+        )
+        .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+    }
+
+    if (!this.pjChegouDestinoRota && distNpcPonto <= this.pjRaioChegadaGuia) {
+      if (this.pjRotaIndiceAtual < this.pjRotaWaypoints.length - 1) {
+        this.pjRotaIndiceAtual += 1;
+      } else {
+        this.pjChegouDestinoRota = true;
+        this.npcTheoGuia.body?.setVelocity(0, 0);
+      }
+    }
+  }
+
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
@@ -1630,6 +1808,8 @@ export default class SceneCidade extends Phaser.Scene {
       personagem.anims.stop();
       personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
+
+    this._atualizarAcompanhamentoPJCidade();
 
     // Mostra ou oculta labels ao entrar nas zonas
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(
@@ -1788,6 +1968,20 @@ export default class SceneCidade extends Phaser.Scene {
           });
         });
       } else if (dentroPadaria) {
+        if (this.pjAcompanhandoAgencia2) {
+          this.pjAcompanhandoAgencia2 = false;
+          this.pjAcompanhamentoEncerrado = true;
+          this.registry.set("ag01_escolta_pj_agencia2", false);
+          this.registry.set("ag01_pj_retorno", true);
+
+          if (this.npcTheoGuia?.body) {
+            this.npcTheoGuia.body.setVelocity(0, 0);
+            this.npcTheoGuia.body.enable = false;
+          }
+          if (this.npcTheoGuia) this.npcTheoGuia.setVisible(false);
+          if (this.labelTheoGuia) this.labelTheoGuia.setVisible(false);
+        }
+
         this.transicionando = true;
         this._avancarSequenciaSetas("padaria");
         this.labelPadaria.setVisible(false);

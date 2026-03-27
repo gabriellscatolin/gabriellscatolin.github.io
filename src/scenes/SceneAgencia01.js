@@ -371,8 +371,17 @@ export default class SceneAgencia extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
-    this.falouComIza = false;
+    this.dialogoGGConcluido = this.registry.get("ag01_dialogo_gg_concluido") === true;
+    this.dialogoPJConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    this.falouComIza = this.dialogoGGConcluido;
+    this.falouComNpc = this.dialogoPJConcluido;
+    this.pjGuiandoParaSaida = false;
+    this.pjChegouNaSaida = false;
+    this.pjEsperandoJogador = false;
+    this.velocidadePJGuia = 95;
+    this.distanciaMaximaSeguirPJ = 120;
+    this.raioChegadaSaida = 22;
+    this.alvoSaidaPJ = { x: saidaX, y: saidaY };
     this.tweenIzaRodando = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -407,11 +416,62 @@ export default class SceneAgencia extends Phaser.Scene {
     }
   }
 
+  _atualizarGuiaPJ() {
+    if (!this.pjGuiandoParaSaida || !this.npcAgencia || !this.personagem) return;
+
+    const distNpcSaida = Phaser.Math.Distance.Between(
+      this.npcAgencia.x,
+      this.npcAgencia.y,
+      this.alvoSaidaPJ.x,
+      this.alvoSaidaPJ.y,
+    );
+
+    if (distNpcSaida <= this.raioChegadaSaida) {
+      this.npcAgencia.body?.setVelocity(0, 0);
+      this.npcAgencia.setImmovable(true);
+      this.pjGuiandoParaSaida = false;
+      this.pjChegouNaSaida = true;
+      this.pjEsperandoJogador = true;
+      return;
+    }
+
+    const distJogadorNpc = Phaser.Math.Distance.Between(
+      this.personagem.x,
+      this.personagem.y,
+      this.npcAgencia.x,
+      this.npcAgencia.y,
+    );
+
+    if (distJogadorNpc > this.distanciaMaximaSeguirPJ) {
+      this.npcAgencia.body?.setVelocity(0, 0);
+      this.pjEsperandoJogador = true;
+      return;
+    }
+
+    this.pjEsperandoJogador = false;
+    this.physics.moveTo(
+      this.npcAgencia,
+      this.alvoSaidaPJ.x,
+      this.alvoSaidaPJ.y,
+      this.velocidadePJGuia,
+    );
+  }
+
   // ── UPDATE ────────────────────────────────────────────────────────────────
 
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+
+    // Assim que o dialogo do PJ termina, ele ja passa a guiar automaticamente.
+    const pjConcluidoAgora = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    if (pjConcluidoAgora && !this.pjChegouNaSaida && !this.pjGuiandoParaSaida) {
+      this.falouComNpc = true;
+      this.pjGuiandoParaSaida = true;
+      this.npcAgencia.setImmovable(false);
+      if (this.exclamacaoNpc) this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -460,7 +520,8 @@ export default class SceneAgencia extends Phaser.Scene {
       this.npcAgencia.x,
       this.npcAgencia.y,
     );
-    const pertoNpc = distNpc < 30;
+    const raioInteracaoPJ = 46;
+    const pertoNpc = distNpc < raioInteracaoPJ;
 
     this.perto_npc = pertoNpc;
     this.labelNpc.setVisible(pertoNpc);
@@ -477,12 +538,25 @@ export default class SceneAgencia extends Phaser.Scene {
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComNpc = true;
-      this.exclamacaoNpc.setVisible(false);
-      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      console.log("[SceneAgencia] Interagiu com o NPC da agência");
-      // Esconder exclamação da Iza quando falar com Theo
-      if (this.exclamacaoIza) this.exclamacaoIza.setVisible(false);
+      if (this.registry.get("ag01_dialogo_gg_concluido") !== true) {
+        return;
+      }
+
+      if (this.registry.get("ag01_dialogo_pj_concluido") === true) {
+        this.falouComNpc = true;
+        if (this.exclamacaoNpc) this.exclamacaoNpc.setVisible(false);
+        if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+        this.pjGuiandoParaSaida = true;
+        this.npcAgencia.setImmovable(false);
+        return;
+      }
+
+      this.scene.pause();
+      this.scene.launch("SceneDialogoAgencia01", {
+        cenaOrigem: "SceneAg",
+        tipoDialogo: "PJ",
+      });
+      return;
     }
 
     // ── ALTERNÂNCIA DE SPRITES DA IZA ──────────────────────────────────────────
@@ -508,7 +582,8 @@ export default class SceneAgencia extends Phaser.Scene {
         this.npcIza.x,
         this.npcIza.y,
       );
-      const pertoIza = distIza < 30;
+      const raioInteracaoIza = 46;
+      const pertoIza = distIza < raioInteracaoIza;
       this.labelNpcIza.setVisible(pertoIza);
 
       // Mostrar exclamação da Iza (se ainda não falou com ela)
@@ -528,23 +603,33 @@ export default class SceneAgencia extends Phaser.Scene {
         this.labelNpcIza.setPosition(this.npcIza.x, this.npcIza.y + 19);
 
         if (Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-          this.falouComIza = true;
-          this.exclamacaoIza.setVisible(false);
-          if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
-          this.tweenIzaRodando = false;
-          console.log("[SceneAgencia] Interagiu com a Iza");
-          // Mostrar exclamação no Theo
-          if (this.exclamacaoNpc) {
-            this.exclamacaoNpc.setVisible(true);
-            this.exclamacaoNpc.setPosition(
-              this.npcAgencia.x,
-              this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
-            );
-            if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.play();
+          if (this.registry.get("ag01_dialogo_gg_concluido") === true) {
+            this.falouComIza = true;
+            this.exclamacaoIza.setVisible(false);
+            if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
+            this.tweenIzaRodando = false;
+            if (this.exclamacaoNpc) {
+              this.exclamacaoNpc.setVisible(true);
+              this.exclamacaoNpc.setPosition(
+                this.npcAgencia.x,
+                this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+              );
+              if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.play();
+            }
+            return;
           }
+
+          this.scene.pause();
+          this.scene.launch("SceneDialogoAgencia01", {
+            cenaOrigem: "SceneAg",
+            tipoDialogo: "GG",
+          });
+          return;
         }
       }
     }
+
+    this._atualizarGuiaPJ();
 
     // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────
     const dentroSaida = (this.zonasSaida || []).some((z) => {
@@ -570,17 +655,33 @@ export default class SceneAgencia extends Phaser.Scene {
       );
     }
 
-    // Transição automática para a cidade ao entrar na zona de saída
-    if (dentroSaida && !this.transicionando) {
+    // Transição para a cidade: ocorre ao entrar na saída ou quando o PJ conclui o guia até a saída.
+    const podeTransicionarParaCidade =
+      dentroSaida || (pjConcluidoAgora && this.pjChegouNaSaida);
+
+    if (podeTransicionarParaCidade && !this.transicionando) {
+
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
+        const pjConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+        const escoltaAtiva = pjConcluido;
+
+        if (escoltaAtiva) {
+          this.registry.set("ag01_escolta_pj_agencia2", true);
+          this.registry.set("ag01_pj_retorno", false);
+          this.registry.set("missaoCidadeTexto", "Missao: Siga o PJ ate a Padaria.");
+        }
+
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 976,
           spawnY: 856,
+          ocultarSetaAgencia01: true,
+          escoltaPJAgencia2: escoltaAtiva,
+          missaoCidadeTexto: escoltaAtiva ? "Missao: Siga o PJ ate a Padaria." : undefined,
         });
       });
     }

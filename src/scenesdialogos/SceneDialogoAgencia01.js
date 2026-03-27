@@ -31,7 +31,7 @@ const ROTEIRO_GG = [
 				tipo: "errada",
 			},
 		],
-		npcResposta: "Bom dia, posso te ajudar?",
+		npcResposta: "Bom dia! O movimento esta intenso mesmo. Como posso te ajudar hoje?",
 	},
 	{
 		titulo: "CENA 1 - ABORDAGEM (GERENTE GERAL)",
@@ -656,6 +656,9 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 		}
 		if (this.tipoDialogo === "PJ") {
 			this.registry.set("ag01_dialogo_pj_concluido", true);
+			this.registry.set("ag01_escolta_pj_agencia2", true);
+			this.registry.set("ag01_pj_retorno", false);
+			this.registry.set("missaoCidadeTexto", "Missao: Siga o PJ ate a Padaria.");
 		}
 
 		this._mostrarContinuar("Fechar  [E]");
