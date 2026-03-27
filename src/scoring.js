@@ -41,7 +41,7 @@ export const SCORING_CONFIG = {
   },
 };
 
-// Metas base por fase (referência para 3 perguntas, escale via goalEscalado())
+// Metas por fase (para o número real de perguntas de cada fase)
 const METAS_BASE = {
   agency1_gg:  150,
   agency1_pj:  150,
@@ -59,18 +59,11 @@ const METAS_BASE = {
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
- * Retorna a meta de coins ajustada para o número real de perguntas da fase.
- * A meta base foi calibrada para 3 perguntas; este helper escala linearmente.
- *
- * @param {string}  fase      — chave do METAS_BASE (ex: "farmacia")
- * @param {number}  nPerguntas — número de cenas/perguntas da fase
+ * Retorna a meta de coins da fase.
+ * @param {string} fase — chave do METAS_BASE (ex: "farmacia")
  */
-export function goalEscalado(fase, nPerguntas) {
-  const base = METAS_BASE[fase];
-  if (base == null) return 0;
-  // Arredonda para o múltiplo de 50 mais próximo
-  const escalado = base * (nPerguntas / 3);
-  return Math.round(escalado / 50) * 50;
+export function goalEscalado(fase) {
+  return METAS_BASE[fase] ?? 0;
 }
 
 /**
@@ -129,12 +122,11 @@ export function handleAnswer(registry, chapter, tipo) {
 
 /**
  * Verifica se o jogador atingiu a meta da fase.
- * @param {string}  fase          — chave do METAS_BASE
- * @param {number}  pontuacaoFase — coins acumuladas só nesta fase
- * @param {number}  nPerguntas    — número de cenas da fase
+ * @param {string} fase          — chave do METAS_BASE
+ * @param {number} pontuacaoFase — coins acumuladas só nesta fase
  */
-export function checkGoal(fase, pontuacaoFase, nPerguntas) {
-  const meta = goalEscalado(fase, nPerguntas);
+export function checkGoal(fase, pontuacaoFase) {
+  const meta = goalEscalado(fase);
   return pontuacaoFase >= meta;
 }
 

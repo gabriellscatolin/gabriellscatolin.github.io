@@ -1,5 +1,15 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
 
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
+
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
@@ -118,8 +128,9 @@ const ROTEIRO = [
   },
 ];
 
-const PONTOS = { correta: 2, neutra: 1, errada: 0 };
-const MAX_PTS = ROTEIRO.length * 2;
+const CAPITULO = "chapter2";
+const FASE     = "restaurante";
+const N_CENAS  = ROTEIRO.length;
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -138,10 +149,12 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
-    this.cenaIdx = 0;
-    this.pontuacao = 0;
-    this.estado = "tutorial";
-    this.aguardandoLLM = false;
+    this.cenaIdx                 = 0;
+    this.pontuacaoFase           = 0;
+    this.cieloCoinsGanhasDialogo = 0;
+    this.estado                  = "tutorial";
+    this.aguardandoLLM           = false;
+    initScoring(this.registry);
   }
 
   preload() {
@@ -390,7 +403,8 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
-    cena.escolhas.forEach(({ texto }, i) => {
+    this.escolhasOrdenadas = shuffleArray(cena.escolhas);
+    this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
       txtEscolha.setText(texto);
       bg.setFillStyle(COR_NEUTRO).setVisible(true);
@@ -403,10 +417,14 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
-    const escolha = cena.escolhas[indice];
+    const escolha = this.escolhasOrdenadas[indice];
 
-    this.pontuacao += PONTOS[escolha.tipo] ?? 0;
-    this.textoCieloCoin.setText(`Cielo Coins: ${this.pontuacao} / ${MAX_PTS}`);
+    const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
+    this.pontuacaoFase           += ganhos;
+    this.cieloCoinsGanhasDialogo += ganhos;
+    this.textoCieloCoin.setText(
+      `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
+    );
 
     const coresTipo = { correta: COR_CORRETA, neutra: COR_NEUTRA, errada: COR_ERRADA };
     this.botoesEscolha[indice].bg.setFillStyle(coresTipo[escolha.tipo]);
@@ -451,26 +469,27 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const pct = Math.round((this.pontuacao / MAX_PTS) * 100);
-    let avaliacao;
-    let cor;
-    if (pct >= 90) {
-      avaliacao = "Vendedor nato! Negocio fechado!";
-      cor = "#44ff88";
-    } else if (pct >= 70) {
-      avaliacao = "Bom trabalho! Quase perfeito.";
-      cor = "#88ccff";
-    } else if (pct >= 50) {
-      avaliacao = "Razoavel. Pratique mais!";
-      cor = "#ffcc44";
-    } else {
-      avaliacao = "Precisa melhorar. Tente de novo.";
-      cor = "#ff6644";
-    }
+    const meta    = goalEscalado(FASE);
+    const maxPts  = N_CENAS * 200; // chapter2: 200 por correta
+    const atingiu = checkGoal(FASE, this.pontuacaoFase);
+    const pct     = Math.round((this.pontuacaoFase / maxPts) * 100);
+
+    let avaliacao, cor;
+    if      (pct >= 90) { avaliacao = "Vendedor nato! Negocio fechado!";    cor = "#44ff88"; }
+    else if (pct >= 70) { avaliacao = "Bom trabalho! Quase perfeito.";      cor = "#88ccff"; }
+    else if (pct >= 50) { avaliacao = "Razoavel. Pratique mais!";           cor = "#ffcc44"; }
+    else                { avaliacao = "Precisa melhorar. Tente de novo.";   cor = "#ff6644"; }
+
+    const statusMeta = atingiu
+      ? "✅ Meta atingida!"
+      : `❌ Meta nao atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
-        `Conversa encerrada!\n\nCielo Coins: ${this.pontuacao} / ${MAX_PTS}  (${pct}%)\n\n${avaliacao}`,
+        `Conversa encerrada!\n\n` +
+        `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
+        `Total da sessao: ${getScore(this.registry)}\n\n` +
+        `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({ color: cor });
 

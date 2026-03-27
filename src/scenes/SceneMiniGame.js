@@ -329,12 +329,25 @@ class SceneMiniGame extends Phaser.Scene {
         this.musica.stop();
         this.physics.pause();
 
+        // Salva coins do minigame no registry global (50 CieloCoins por ponto)
+        const coinsGanhas = Math.max(0, this.pontuacao) * 50;
+        const totalAtual  = Number(this.registry.get("cieloCoins") ?? 0);
+        this.registry.set("cieloCoins", totalAtual + coinsGanhas);
+
         this.add.rectangle(750, 470, 1500, 940, 0x000000, 0.6);
 
         this.add.text(750, 470, 'GAME OVER', {
             fontSize: '100px',
             fontFamily: 'poppis',
             fill: '#0099ff'
+        }).setOrigin(0.5);
+
+        this.add.text(750, 600,
+            `+${coinsGanhas} Cielo Coins acumulados!`, {
+            fontSize: '48px',
+            fontFamily: 'poppis',
+            fill: '#ffd700',
+            resolution: 4,
         }).setOrigin(0.5);
 
     }

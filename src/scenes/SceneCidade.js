@@ -1193,6 +1193,7 @@ export default class SceneCidade extends Phaser.Scene {
         fontSize: `${coinFont}px`,
         color: "#ffffff",
         fontStyle: "bold",
+        resolution: 4,
       })
       .setOrigin(0, 0.5)
       .setDepth(231);

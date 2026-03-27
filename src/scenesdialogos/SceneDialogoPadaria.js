@@ -1,4 +1,13 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 const GROQ_API_KEY = "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";
@@ -221,11 +230,36 @@ const ROTEIRO = [
     npcResposta:
       "Pode mostrar sim, desde que seja rapido e direto ao ponto.",
   },
+  {
+    titulo: "CENA 10 - POS-VENDA",
+    narracao: null,
+    npcInicial: "Se eu fechar, como fica o suporte depois?",
+    escolhas: [
+      {
+        letra: "A",
+        texto:
+          "A Cielo tem suporte 24h e equipe pronta para resolver qualquer problema rapidamente.",
+        tipo: "correta",
+      },
+      {
+        letra: "B",
+        texto: "Tem atendimento disponivel para ajudar quando precisar.",
+        tipo: "neutra",
+      },
+      {
+        letra: "C",
+        texto: "Dificilmente vai ter problema, mas se tiver e so ligar.",
+        tipo: "errada",
+      },
+    ],
+    npcResposta:
+      "Suporte 24h e o que me tranquiliza. Aqui nao posso parar o caixa.",
+  },
 ];
 
 const CAPITULO = "chapter1";
 const FASE     = "padaria";
-const N_CENAS  = ROTEIRO.length; // 9 perguntas
+const N_CENAS  = ROTEIRO.length; // 10 perguntas
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -499,7 +533,8 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
-    cena.escolhas.forEach(({ texto }, i) => {
+    this.escolhasOrdenadas = shuffleArray(cena.escolhas);
+    this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
       txtEscolha.setText(texto);
       bg.setFillStyle(COR_NEUTRO).setVisible(true);
@@ -512,7 +547,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
-    const escolha = cena.escolhas[indice];
+    const escolha = this.escolhasOrdenadas[indice];
 
     const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
     this.pontuacaoFase           += ganhos;
@@ -564,9 +599,9 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const meta    = goalEscalado(FASE, N_CENAS);
+    const meta    = goalEscalado(FASE);
     const maxPts  = N_CENAS * 100;
-    const atingiu = checkGoal(FASE, this.pontuacaoFase, N_CENAS);
+    const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct     = Math.round((this.pontuacaoFase / maxPts) * 100);
 
     let avaliacao, cor;
