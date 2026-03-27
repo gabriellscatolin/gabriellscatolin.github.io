@@ -15,9 +15,8 @@ export default class SceneChuva extends Phaser.Scene {
 
   create() {
 
-     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaChuva', { loop: true, volume: 0.5});
-    this.musica.play();
+    // Prepara o áudio da chuva, mas só toca quando a chuva iniciar
+    this.musica = this.sound.add('trilhaChuva', { loop: true, volume: 0.5 });
 
     // Mantém o fundo transparente para a chuva aparecer sobre outras cenas
     this.cameras.main.setBackgroundColor("rgba(0,0,0,0)");
@@ -166,6 +165,9 @@ export default class SceneChuva extends Phaser.Scene {
       this._chuvaIniciada = true;
       this._chuvaAtiva = true;
       this._tempoCriacao = 0;
+      if (this.musica && !this.musica.isPlaying) {
+        this.musica.play();
+      }
       console.log("[SceneChuva] chuva iniciada");
     }
 
@@ -177,6 +179,9 @@ export default class SceneChuva extends Phaser.Scene {
     ) {
       this._chuvaAtiva = false;
       this._chuvaEncerrada = true;
+      if (this.musica && this.musica.isPlaying) {
+        this.musica.stop();
+      }
       console.log("[SceneChuva] chuva encerrada");
     }
 
