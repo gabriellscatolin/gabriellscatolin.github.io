@@ -1,4 +1,13 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 const GROQ_API_KEY = "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";
@@ -138,8 +147,8 @@ const ROTEIRO = [
   },
 ];
 
-const CAPITULO = "chapter1";
-const FASE = "agencia02";
+const CAPITULO = "chapter2";
+const FASE = "agency2";
 const N_CENAS = ROTEIRO.length;
 
 const COR_NEUTRO = 0x1d2b4a;
@@ -508,7 +517,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
-    cena.escolhas.forEach(({ texto }, i) => {
+    this.escolhasOrdenadas = shuffleArray(cena.escolhas);
+    this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
       txtEscolha.setText(texto);
       bg.setFillStyle(COR_NEUTRO).setVisible(true);
@@ -521,16 +531,16 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
-    const escolha = cena.escolhas[indice];
+    const escolha = this.escolhasOrdenadas[indice];
 
     this.aguardandoLLM = true;
 
     const coresTipo = { correta: COR_CORRETA, neutra: COR_NEUTRA, errada: COR_ERRADA };
     this.botoesEscolha[indice].bg.setFillStyle(coresTipo[escolha.tipo]);
 
-    const antes = getScore(this.registry, CAPITULO);
+    const antes = getScore(this.registry);
     handleAnswer(this.registry, CAPITULO, FASE, escolha.tipo);
-    const depois = getScore(this.registry, CAPITULO);
+    const depois = getScore(this.registry);
 
     const ganho = Math.max(0, depois - antes);
     this.pontuacaoFase += ganho;
@@ -593,7 +603,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const meta = goalEscalado(N_CENAS);
+    const meta = goalEscalado(FASE);
     const atingiuMeta = checkGoal(this.registry, CAPITULO, FASE, N_CENAS);
 
     const cor = atingiuMeta ? "#44ff88" : "#ffcc44";
@@ -613,8 +623,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
   _atualizarHudMoedas() {
     if (!this.textoCieloCoin) return;
-    const total = getScore(this.registry, CAPITULO);
-    const meta = goalEscalado(N_CENAS);
+    const total = getScore(this.registry);
+    const meta = goalEscalado(FASE);
     this.textoCieloCoin.setText(
       `Cielo Coins: ${total} / ${meta}  (+${this.cieloCoinsGanhasDialogo} nesta conversa)`,
     );

@@ -187,32 +187,24 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
-    // Cria layers sem colisão (cada layer em sua ordem)
-    const layersNormais = [
-      "N - Chão",
-      "N - ParedeSemColid",
-      "N - ObjetsoSemColid_0",
-      "PLAYER",
-      "N - ObjetosSemColid",
-      "N - ObjetosSemColid_02",
-      "N - ObjetosSemColid_3",
-    ];
-
-    layersNormais.forEach((name) => {
-      mapa.createLayer(name, tiles, 0, 0);
-    });
-
-    // Layers com colisão
-    const layersColisao = [
-      "C - ParedeComColid_embaixo",
-      "C - ParedeComColid",
-      "C - Objetos ComColid",
-    ];
-
+    // Cria layers na ordem do TMJ (bottom → top), aplicando colisão nas certas
     const coliders = [];
-    layersColisao.forEach((name) => {
+    const ordemTMJ = [
+      { name: "N - Chão",                  colide: false },
+      { name: "C - ParedeComColid_embaixo", colide: true  },
+      { name: "C - ParedeComColid",         colide: true  },
+      { name: "N - ParedeSemColid",         colide: false },
+      { name: "N - ObjetsoSemColid_0",      colide: false },
+      { name: "PLAYER",                     colide: false },
+      { name: "C - Objetos ComColid",       colide: true  },
+      { name: "N - ObjetosSemColid",        colide: false },
+      { name: "N - ObjetosSemColid_02",     colide: false },
+      { name: "N - ObjetosSemColid_3",      colide: false },
+    ];
+
+    ordemTMJ.forEach(({ name, colide }) => {
       const layer = mapa.createLayer(name, tiles, 0, 0);
-      if (layer) {
+      if (layer && colide) {
         layer.setCollisionByExclusion([-1]);
         coliders.push(layer);
       }
@@ -415,15 +407,8 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-
-      if (this.scene.manager.keys.SceneDialogoLojaDeRoupas) {
-        this.scene.pause();
-        this.scene.launch("SceneDialogoLojaDeRoupas", {
-          cenaOrigem: "SceneLojaDeRoupas",
-        });
-      } else {
-        console.log("[SceneLojaDeRoupas] Interagiu com o NPC da loja");
-      }
+      this.scene.pause();
+      this.scene.launch("SceneDialogoLojaDeRoupas", { cenaOrigem: "SceneLojaDeRoupas" });
     }
 
     if (inExit !== this.nearExit) {

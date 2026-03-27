@@ -1,4 +1,13 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 import {
   initScoring,
   handleAnswer,
@@ -658,7 +667,8 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
-    cena.escolhas.forEach(({ texto }, i) => {
+    this.escolhasOrdenadas = shuffleArray(cena.escolhas);
+    this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
       txtEscolha.setText(texto);
       bg.setFillStyle(COR_NEUTRO).setVisible(true);
@@ -671,7 +681,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
-    const escolha = cena.escolhas[indice];
+    const escolha = this.escolhasOrdenadas[indice];
 
     const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
     this.pontuacaoFase += ganhos;
@@ -727,9 +737,9 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const meta = goalEscalado(FASE, N_CENAS);
+    const meta = goalEscalado(FASE);
     const maxPts = N_CENAS * 200;
-    const atingiu = checkGoal(FASE, this.pontuacaoFase, N_CENAS);
+    const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 
     let avaliacao;

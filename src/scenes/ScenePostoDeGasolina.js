@@ -69,6 +69,10 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       "trilhaPostoDeGasolina", 'src/assets/audios/trilhaPostoDeGasolina.mp3'
     );
 
+    if (!this.textures.exists("npc_posto")) {
+      this.load.image("npc_posto", "src/assets/imagens/imagensPersonagens/NPC/npcPosto.png");
+    }
+
     // Carrega os frames do personagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -334,6 +338,48 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // NPC
+    const npcX = this.origemChaoX + this.larguraChao * 0.35;
+    const npcY = this.origemChaoY + this.alturaChao * 0.3;
+    this.npcPosto = this.physics.add.staticImage(npcX, npcY, "npc_posto").setDepth(5);
+    this.npcPosto.setDisplaySize(
+      (this.npcPosto.width / this.npcPosto.height) * (this.personagem.displayHeight * 1.1),
+      this.personagem.displayHeight * 1.1,
+    );
+    this.npcPosto.refreshBody();
+    this.physics.add.collider(this.personagem, this.npcPosto);
+
+    this.labelNpcPosto = this.add
+      .text(npcX, npcY, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20).setOrigin(0.5, 1).setVisible(false);
+
+    this.exclamacaoPosto = this.add
+      .text(npcX, npcY - this.npcPosto.displayHeight * 0.5, "!", {
+        fontSize: "24px",
+        color: "#ffeb3b",
+        stroke: "#000000",
+        strokeThickness: 2,
+        resolution: 4,
+      })
+      .setDepth(21).setOrigin(0.5, 1);
+
+    this.tweens.add({
+      targets: this.exclamacaoPosto,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.pertoPosto = false;
+    this.falouComPosto = false;
 
     // Pausa a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
@@ -633,6 +679,27 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // Interação com NPC do posto
+    if (this.npcPosto) {
+      const distPosto = Phaser.Math.Distance.Between(
+        personagem.x, personagem.y, this.npcPosto.x, this.npcPosto.y
+      );
+      const pertoNpc = distPosto < 24;
+      if (pertoNpc !== this.pertoPosto) {
+        this.pertoPosto = pertoNpc;
+        this.labelNpcPosto.setVisible(pertoNpc);
+      }
+      if (pertoNpc) {
+        this.labelNpcPosto.setPosition(this.npcPosto.x, this.npcPosto.y + 2);
+      }
+      if (pertoNpc && !this.falouComPosto && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+        this.falouComPosto = true;
+        this.exclamacaoPosto.setVisible(false);
+        this.scene.pause();
+        this.scene.launch("SceneDialogoPostoDeGasolina", { cenaOrigem: "ScenePostoDeGasolina" });
+      }
+    }
+
     // Verifica se o personagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
@@ -653,6 +720,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     if (
       !this.transicionando &&
       dentroSaida &&
+      !this.pertoPosto &&
       Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {
       this.transicionando = true;

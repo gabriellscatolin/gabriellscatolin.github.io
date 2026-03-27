@@ -606,7 +606,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      console.log("[SceneAgencia03] Interagiu com o NPC da agência 03");
+      this.scene.pause();
+      this.scene.launch("SceneDialogoAgencia03", { cenaOrigem: "SceneAgencia03" });
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
