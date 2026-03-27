@@ -2036,7 +2036,150 @@ Entre os próximos objetivos estão:
 
 ## 4.4. Desenvolvimento final do MVP (sprint 4)
 
-*Descreva e ilustre aqui o desenvolvimento da versão final do jogo, explicando brevemente o que foi entregue em termos de MVP. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e planos futuros.*
+O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
+
+Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
+
+Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
+
+Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
+
+Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
+Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
+Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+
+ Elementos desenvolvidos na sprint 4: 
+
+- Finalização dos cenários internos (metrô e agências) utilizando o Tiled
+- Integração completa das cenas ao sistema principal (SceneCidade.js)
+- Implementação da navegação entre o mapa e os estabelecimentos
+- Desenvolvimento e integração do mini game do metrô
+- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática
+- Organização e estruturação das pastas do projeto no VS Code
+- Integração das interações dentro dos estabelecimentos
+- Integração da IA nos diálogos e interações
+- Estruturação do fluxo de progressão do jogador
+- Interface e experiência do usuário (HUD):
+    - Mini-mapa
+    - Interface da maquininha Cielo
+    - Aba de missões
+    - Contador de progresso
+- Recursos visuais e sonoros:
+    - Criação e implementação de novas sprite sheets
+    - Implementação de trilha sonora e efeitos sonoros
+- Artefatos de Negócios:
+    - Canvas de Proposta de Valor
+    - Descrição da Solução
+    - Matriz de Riscos
+    - Objetivos, Metas e Indicadores
+
+ ### SceneCidade.js como hub central de navegação
+A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
+````js
+init(dados = {}) {
+  this.nomePastaEscolhida = dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
+  this.prefixoEscolhido = dados.prefixo || this.registry.get("prefixo") || "HB";
+  this.spawnXCustom = dados.spawnX || null;
+  this.spawnYCustom = dados.spawnY || null;
+} 
+````
+ A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
+ ````JS
+jsthis.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
+this.labelE = this.add.text(976, 856, "[E] Entrar", { fontSize: "6px", color: "#ffffff" }).setVisible(false); 
+````
+A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
+
+````JS
+js_avancarSequenciaSetas(localAtual) {
+  const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
+  if (localAtual !== localEsperado) return;
+  this.indiceSetaAtual += 1;
+  this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
+}
+````
+### Finalização dos cenários internos
+Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
+O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
+````JS
+jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
+[paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
+ ````
+
+A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
+
+### Integração das interações dentro dos estabelecimentos
+Integração das interações dentro dos estabelecimentos
+As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
+```JS
+jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  this.scene.pause();
+  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
+}
+```
+Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
+Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
+````JS
+jsasync _chamarLLM(escolha, cena) {
+  if (this.respostaRoteiroEstrita) return cena.npcResposta;
+
+  const res = await fetch(GROQ_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: `O vendedor disse: "${escolha.texto}"` },
+      ],
+    }),
+  });
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
+}
+````
+Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
+
+### Mini game do metrô
+Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
+````JS
+jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
+  this.trocarFase(2, 'background2', 'musicaFase2');
+}
+````
+Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
+````JS
+jsthis.time.addEvent({ delay: 20000, callback: this.spawnMoedaExtra, loop: true });
+this.time.addEvent({ delay: 10000, callback: () => { this.spawnBomba(); }, loop: true });
+````
+Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
+````JS
+jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
+const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
+this.registry.set("cieloCoins", totalAtual + coinsGanhas);
+````
+### Interface e experiência do usuário (HUD)
+Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
+O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
+````JS
+jsthis.hudIcon.on("pointerdown", () => {
+  this.tweens.add({
+    targets: this.hudIcon,
+    x: cam.worldView.centerX,
+    y: cam.worldView.centerY,
+    scale: this.hudIconZoomScale,
+    duration: 260,
+    ease: "Quad.Out",
+````
+O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
+O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
+
+O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
+````JS
+jsthis.input.keyboard?.once("keydown-ESC", () => {
+  const retornoX = Number(this.registry.get("cidadeRetornoX"));
+  const retornoY = Number(this.registry.get("cidadeRetornoY"));
+  this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
+````
 
 ## 4.5. Revisão do MVP (sprint 5)
 
