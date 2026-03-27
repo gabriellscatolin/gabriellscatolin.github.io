@@ -173,7 +173,7 @@ export default class SceneMiniGame extends Phaser.Scene {
             this.somColeta.play();
             let posicaoX = Phaser.Math.RND.between(10, 1500);
             this.moedaComum.setPosition(posicaoX, 50);
-            this.pontuacao += 40;
+            this.pontuacao += 1;
             this.placar.setText('Cielocoins: ' + this.pontuacao);
             this.moedaComum.setVisible(true);
         });
