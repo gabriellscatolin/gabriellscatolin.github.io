@@ -36,7 +36,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     //_________________________________Carrega os recursos do mapa_________________________________
     this.load.tilemapTiledJSON(
       "supermercado",
-      "src/assets/imagens/mapsjson/tileMaps/supermercado.tmj",
+      "src/assets/imagens/mapsjson/tileMaps/Supermercado.tmj",
     );
     this.load.image(
       "super_interiors",
@@ -52,33 +52,39 @@ export default class SceneSupermercado extends Phaser.Scene {
     );
     this.load.image(
       "super_char06",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_06 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_06.png",
     );
     this.load.image(
       "super_char05",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_05 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_05.png",
     );
     this.load.image(
       "super_char04",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_04 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_04.png",
     );
     this.load.image(
       "super_char03",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_03 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_03.png",
     );
     this.load.image(
       "super_char02",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_02 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_02.png",
     );
     this.load.image(
       "super_char01",
-      "src/assets/imagens/mapsjson/tileSets/Premade_Character_01 - Copia.png",
+      "src/assets/imagens/mapsjson/tileSets/Premade_Character_01.png",
     );
 
     // Sprite do NPC do supermercado
     this.load.image(
       "npc_supermercado",
-      "src/assets/imagens/imagensPersonagens/NPC/npcMercado.png",
+      "src/assets/imagens/imagensPersonagens/NPC/npcLoja_Roupas.png",
+    );
+
+    // Imagem de fala do supermercado
+    this.load.image(
+      "falaSupermercado",
+      "src/assets/imagens/imagensFalas/Mercado.png",
     );
     //___________________________________________________________________________________________________
 
@@ -564,8 +570,8 @@ export default class SceneSupermercado extends Phaser.Scene {
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
-      88,
-      179,
+      this.npcSupermercado.x,
+      this.npcSupermercado.y,
     );
     const pertoNpc = distNpc < 30;
 
@@ -586,6 +592,10 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");
+      
+      // Pausa a cena atual e lança o diálogo
+      this.scene.pause();
+      this.scene.launch("SceneDialogoSupermercado", { cenaOrigem: "SceneSupermercado" });
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
