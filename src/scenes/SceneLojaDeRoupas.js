@@ -16,6 +16,14 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
+    this.load.on("loaderror", (arquivo) => {
+      console.error(
+        "[SceneLojaDeRoupas] Erro ao carregar:",
+        arquivo.key,
+        arquivo.src,
+      );
+    });
+
     // Carrega o áudio da cena
     this.load.audio(
       "trilhaLojaDeRoupa",
@@ -34,8 +42,28 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
     );
     this.load.image(
-      "loja_tile_int",
-      "src/assets/imagens/mapsjson/tileSets/Interiors_16x16.png",
+      "loja_tile_int_s1",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S1_4096.png",
+    );
+    this.load.image(
+      "loja_tile_int_s2",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S2_4096.png",
+    );
+    this.load.image(
+      "loja_tile_int_s3",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S3_4096.png",
+    );
+    this.load.image(
+      "loja_tile_int_s4",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S4_4096.png",
+    );
+    this.load.image(
+      "loja_tile_int_s5",
+      "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
+    );
+    this.load.image(
+      "npc_loja_roupas",
+      "src/assets/imagens/imagensPersonagens/NPC/npcLoja_Roupas.png",
     );
 
     // Sprites do personagem
@@ -60,11 +88,55 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     }
   }
 
+  prepararTilesetsLoja() {
+    const cacheMapa = this.cache.tilemap.get("lojaDeRoupas");
+    const dadosMapa = cacheMapa && cacheMapa.data;
+    if (!dadosMapa || !Array.isArray(dadosMapa.tilesets)) return;
+
+    if (dadosMapa.tilesets.some((ts) => ts.name === "Interiors_16x16_S1")) {
+      return;
+    }
+
+    const novosTilesets = [];
+
+    dadosMapa.tilesets.forEach((ts) => {
+      if (ts.name === "Interiors_16x16") {
+        const base = ts.firstgid;
+        const comuns = {
+          tilewidth: 16,
+          tileheight: 16,
+          spacing: 0,
+          margin: 0,
+          columns: 16,
+        };
+
+        for (let i = 0; i < 5; i++) {
+          novosTilesets.push({
+            ...comuns,
+            firstgid: base + i * 4096,
+            name: `Interiors_16x16_S${i + 1}`,
+            tilecount: i === 4 ? 640 : 4096,
+            image: `../tileSets/Interiors_S${i + 1}_${i === 4 ? 640 : 4096}.png`,
+            imagewidth: 256,
+            imageheight: i === 4 ? 640 : 4096,
+          });
+        }
+        return;
+      }
+
+      novosTilesets.push(ts);
+    });
+
+    dadosMapa.tilesets = novosTilesets;
+  }
+
   create() {
 
     // Adiciona áudios a cena
     this.musica = this.sound.add('trilhaLojaDeRoupa', { loop: true, volume: 0.5});
     this.musica.play();
+
+    this.prepararTilesetsLoja();
 
     // Carrega o mapa
     const mapa = this.make.tilemap({ key: "lojaDeRoupas" });
@@ -74,12 +146,35 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       "Room_Builder_16x16",
       "loja_tile_rb",
     );
-    const interiors = mapa.addTilesetImage(
-      "Interiors_16x16",
-      "loja_tile_int",
+    const interiorsS1 = mapa.addTilesetImage(
+      "Interiors_16x16_S1",
+      "loja_tile_int_s1",
+    );
+    const interiorsS2 = mapa.addTilesetImage(
+      "Interiors_16x16_S2",
+      "loja_tile_int_s2",
+    );
+    const interiorsS3 = mapa.addTilesetImage(
+      "Interiors_16x16_S3",
+      "loja_tile_int_s3",
+    );
+    const interiorsS4 = mapa.addTilesetImage(
+      "Interiors_16x16_S4",
+      "loja_tile_int_s4",
+    );
+    const interiorsS5 = mapa.addTilesetImage(
+      "Interiors_16x16_S5",
+      "loja_tile_int_s5",
     );
 
-    const tiles = [roomBuilder, interiors].filter(Boolean);
+    const tiles = [
+      roomBuilder,
+      interiorsS1,
+      interiorsS2,
+      interiorsS3,
+      interiorsS4,
+      interiorsS5,
+    ].filter(Boolean);
 
     // Fundo cinza
     this.add
@@ -156,6 +251,49 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       this.physics.add.collider(this.player, c);
     });
 
+    this.npcLoja = this.add.image(226, 109, "npc_loja_roupas").setDepth(5);
+    const alturaAlvoNpc = this.player.displayHeight;
+    this.npcLoja.setDisplaySize(
+      (this.npcLoja.width / this.npcLoja.height) * alturaAlvoNpc,
+      alturaAlvoNpc,
+    );
+
+    this.labelNpc = this.add
+      .text(226, 131, "[E] Falar", {
+        fontSize: "3px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpc = this.add
+      .text(
+        this.npcLoja.x,
+        this.npcLoja.y - this.npcLoja.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1);
+
+    this.tweenExclamacaoNpc = this.tweens.add({
+      targets: this.exclamacaoNpc,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // Controles
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys("W,A,S,D");
@@ -172,6 +310,8 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     // Zona de saida
     this.exitZone = { x: 100, y: 50, radius: 40 };
     this.nearExit = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
     this.isTransitioning = false;
 
     this.exitLabel = this.add
@@ -247,9 +387,49 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     );
     const inExit = dist <= this.exitZone.radius;
 
+    const distNpc = Phaser.Math.Distance.Between(
+      player.x,
+      player.y,
+      this.npcLoja.x,
+      this.npcLoja.y,
+    );
+    const pertoNpc = distNpc < 30;
+
+    if (pertoNpc !== this.perto_npc) {
+      this.perto_npc = pertoNpc;
+      this.labelNpc.setVisible(pertoNpc && !this.nearExit);
+    }
+
+    if (pertoNpc) {
+      this.labelNpc.setPosition(this.npcLoja.x, this.npcLoja.y + 2);
+    }
+
+    if (!this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setPosition(
+        this.npcLoja.x,
+        this.npcLoja.y - this.npcLoja.displayHeight * 0.5,
+      );
+    }
+
+    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComNpc = true;
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+
+      if (this.scene.manager.keys.SceneDialogoLojaDeRoupas) {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoLojaDeRoupas", {
+          cenaOrigem: "SceneLojaDeRoupas",
+        });
+      } else {
+        console.log("[SceneLojaDeRoupas] Interagiu com o NPC da loja");
+      }
+    }
+
     if (inExit !== this.nearExit) {
       this.nearExit = inExit;
       this.exitLabel.setVisible(inExit);
+      if (inExit) this.labelNpc.setVisible(false);
     }
 
     if (inExit) {

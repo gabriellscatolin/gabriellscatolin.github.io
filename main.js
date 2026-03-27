@@ -17,6 +17,7 @@ import SceneAgencia02 from "./src/scenes/SceneAgencia02.js";
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
 import SceneDialogoAgencia01 from "./src/scenesdialogos/SceneDialogoAgencia01.js";
 import SceneDialogoFarmacia from "./src/scenesdialogos/SceneDialogoFarmacia.js";
+import SceneDialogoLojaDeRoupas from "./src/scenesdialogos/SceneDialogoLojaDeRoupas.js";
 import SceneDialogoPadaria from "./src/scenesdialogos/SceneDialogoPadaria.js";
 import SceneMiniGame from "./src/scenes/SceneMiniGame.js"
 
@@ -60,6 +61,7 @@ const config = {
     SceneAgencia03,
     SceneDialogoAgencia01,
     SceneDialogoFarmacia,
+    SceneDialogoLojaDeRoupas,
     SceneDialogoPadaria,
     
   ],
