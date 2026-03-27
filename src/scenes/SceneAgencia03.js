@@ -30,6 +30,12 @@ export default class SceneAgencia03 extends Phaser.Scene {
       );
     });
 
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaAgencia03",
+      "src/assets/audios/trilhaAgencia03.mp3",
+    );
+
     // ── Tilemap ──────────────────────────────────────────────────────────────
     this.load.tilemapTiledJSON(
       "agencia03",
@@ -93,6 +99,10 @@ export default class SceneAgencia03 extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "agencia03" });
     this.mapa = mapa;
     this._camadasCriadas = [];
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaAgencia03', { loop: true, volume: 0.5});
+    this.musica.play();
 
     this._otimizarTilesetsPorUso(mapa);
 
@@ -350,6 +360,11 @@ export default class SceneAgencia03 extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   // ── Funções auxiliares ────────────────────────────────────────────────────

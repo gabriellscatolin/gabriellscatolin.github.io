@@ -20,6 +20,12 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaAgencia02",
+      "src/assets/audios/trilhaAgencia02.mp3",
+    );
+
     // Loga erros de carregamento para facilitar depuração
     this.load.on("loaderror", (arquivo) => {
       console.error(
@@ -108,6 +114,13 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   // Monta a cena, cria o mapa, o personagem e as interações principais
   create() {
+
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaSceneAgencia02",
+      "src/assets/audios/trilhaSceneAgencia02.mp3",
+    );
+
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
     const mapaBruto = this.cache.tilemap.get("agencia02")?.data;
@@ -464,6 +477,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   // Cria uma camada do tilemap com tratamento de erro

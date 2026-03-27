@@ -27,6 +27,13 @@ export default class SceneAgencia extends Phaser.Scene {
       );
     });
 
+    // Carrega o áudio da cena
+    this.load.audio(
+      "trilhaSceneAgencia01",
+      "src/assets/audios/trilhaSceneAgencia01.mp3",
+    );
+
+
     // Mapa e tilesets da agência
     this.load.tilemapTiledJSON(
       "agencia",
@@ -96,6 +103,11 @@ export default class SceneAgencia extends Phaser.Scene {
   }
 
   create() {
+
+    // Adiciona áudios a cena
+    this.musica = this.sound.add('trilhaSceneAgencia01', { loop: true, volume: 0.5});
+    this.musica.play();
+
     // ── MAPA ──────────────────────────────────────────────────────────────────
     const mapa = this.make.tilemap({ key: "agencia" });
     this.mapa = mapa;
@@ -396,6 +408,11 @@ export default class SceneAgencia extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // Pausa  a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+    });
   }
 
   // ── HELPERS ───────────────────────────────────────────────────────────────
