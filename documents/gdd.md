@@ -143,36 +143,34 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 <div align="center">
 <sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
-<img src="../gdd_images/CPV.png"width="80%"> 
+<img src="../gdd_images/CPV.png"width="200%"> 
 
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Proposta de Valor do *Mini Mundo Cielo* foi definida com base na lógica do Value Proposition Canvas, ferramenta que orienta o desenvolvimento da solução a partir das necessidades do usuário que interage diretamente com o produto. Nesse caso, o cliente analisado no Canvas é o *Gerente de Negócios (GN/DDN)*, profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e apresentar soluções do portfólio da Cielo em situações reais de venda.[\[29\]](#ref29)
+&emsp; A Figura 3 apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. A figura evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática real e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
 
-Embora o usuário direto da solução seja o GN/DDN, a *Cielo S.A.* também se beneficia de forma estratégica da proposta, pois o desenvolvimento das competências comerciais desses profissionais impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas de venda em diferentes regiões do país. Dessa forma, o Mini Mundo Cielo articula dois níveis de valor: no nível individual, oferece ao profissional uma experiência prática e acessível de treinamento; no nível organizacional, contribui para um processo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
+A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
 
-Um dos principais diferenciais da proposta é o fato de o Mini Mundo Cielo ser um jogo educacional totalmente *on-line, acessível diretamente pelo navegador, sem necessidade de instalação. Essa característica permite que o treinamento seja realizado de forma remota, reduzindo barreiras logísticas e ampliando o alcance da capacitação. Além disso, o projeto se posiciona como a **primeira iniciativa de treinamento gamificado desenvolvida especificamente para os DDNs da Cielo*, explorando a simulação de situações comerciais como ferramenta de aprendizagem.
+Um dos principais diferenciais do Mini Mundo Cielo está no seu formato **totalmente online**, acessível via navegador e sem necessidade de instalação, o que reduz barreiras logísticas e amplia significativamente o alcance do treinamento. Além disso, a solução se posiciona como uma iniciativa inovadora ao utilizar gamificação e **simulação de cenários reais** como ferramenta central de aprendizagem, substituindo modelos tradicionais baseados em conteúdos passivos por experiências interativas orientadas à tomada de decisão.
 
- Nesse sentido, o jogo dialoga com uma tendência crescente no ambiente corporativo: a substituição de treinamentos exclusivamente expositivos por experiências de aprendizagem ativa, nas quais o participante aprende por meio da tomada de decisões, da experimentação e do feedback imediato. Em vez de apenas transmitir informação, o Mini Mundo Cielo aproxima o treinamento da realidade operacional dos GNs/DDNs, transformando o processo de aprendizagem em prática orientada para desempenho.
+Nesse contexto, o projeto se alinha a uma **transformação relevante** no ambiente corporativo, na qual treinamentos expositivos vêm sendo substituídos por abordagens mais eficazes, baseadas em prática, experimentação e feedback contínuo. Ao aproximar o treinamento da **realidade operacional** dos GNs/DDNs, o Mini Mundo Cielo aumenta a retenção do aprendizado, acelera o desenvolvimento de habilidades comerciais e contribui diretamente para melhoria de performance em campo.
 
-*Para a Cielo S.A.:*
+Embora o **Value Proposition Canvas** tenha sido estruturado a partir da perspectiva do Gerente de Negócios (GN/DDN), é possível analisar os impactos da solução em dois níveis complementares: o nível organizacional (Cielo S.A.) e o nível do usuário final (GN/DDN).
 
-- Ganhos gerados: padronização do treinamento comercial em escala nacional; redução da dependência de treinamentos presenciais; geração de métricas que permitem acompanhar o progresso e o desempenho dos profissionais; aceleração do onboarding de novos Gerentes de Negócios, com maior familiaridade inicial com o portfólio e com as estratégias de venda da empresa.
+**Para a Cielo S.A. (impacto organizacional):**
 
-- Dores aliviadas: disparidade no nível de preparo entre profissionais de diferentes regiões; dificuldade de garantir consistência e escala nos processos de capacitação; limitação dos formatos tradicionais de treinamento, que exigem maior custo logístico e oferecem menor interatividade.
+- Ganhos gerados: padronização do treinamento comercial em escala nacional; redução da dependência de treinamentos presenciais; geração de métricas de desempenho; aceleração do onboarding de novos Gerentes de Negócios.
+- Dores aliviadas: disparidade no nível de preparo entre regiões; dificuldade de escalar treinamentos com consistência; limitações dos modelos tradicionais de capacitação.
+- Solução entregue: jogo educacional web-based que simula interações comerciais e permite acompanhamento mensurável do desenvolvimento dos profissionais.
 
-- Produto/Serviço: jogo educacional web-based que simula interações comerciais inspiradas na rotina dos Gerentes de Negócios da Cielo. A solução apresenta cenários de venda, sistemas de diálogo com clientes virtuais e feedback imediato sobre as decisões tomadas, permitindo que o treinamento ocorra de forma prática e mensurável.
+**Para os Gerentes de Negócios (cliente do Canvas):**
 
-*Para os Gerentes de Negócios (GNs/DDNs):*
+- Ganhos gerados: aprendizado prático de técnicas de venda; possibilidade de treinar no próprio ritmo; feedback imediato; aumento da confiança em situações reais; maior domínio do portfólio.
+- Dores aliviadas: dificuldade de acesso a treinamentos práticos; baixa efetividade de materiais passivos; insegurança na abordagem comercial.
+- Produto/Serviço: experiência interativa baseada em simulação de cenários reais, com tomada de decisão, feedback contínuo e progressão por desempenho.
 
-- Ganhos gerados: aprendizado prático das técnicas de abordagem e negociação comercial; possibilidade de treinar no próprio ritmo; feedback imediato sobre decisões tomadas durante as interações; aumento da confiança para lidar com clientes reais; maior domínio aplicado do portfólio Cielo.
-
-- Dores aliviadas: dificuldade de acesso a treinamentos mais dinâmicos e consistentes; baixa efetividade de materiais passivos, como manuais e conteúdos apenas expositivos; insegurança ao executar abordagens comerciais sem prática prévia em ambiente controlado.
-
-- Produto/Serviço: experiência interativa em que o jogador controla um personagem em missões inspiradas em diferentes estabelecimentos comerciais. Durante as interações, o jogador toma decisões de abordagem e negociação, recebe retorno imediato sobre seu desempenho e acompanha sua evolução por meio de sistemas de pontuação e progressão.
-
-Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de apoio ao treinamento, mas se posiciona como um ambiente de simulação de vendas, no qual o aprendizado ocorre por meio da prática e da tomada de decisão. Ao conectar conteúdo, contexto e interação, o jogo contribui para tornar o processo de capacitação mais próximo da realidade profissional, mais engajador para o usuário e mais estratégico para a organização.
+Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual com eficiência operacional.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
@@ -212,13 +210,12 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 
 &emsp; A matriz também evidencia oportunidades estratégicas para o projeto, como a padronização nacional do treinamento da Cielo (O2), o aumento do engajamento por meio de elementos de gamificação (O3) e a redução de custos operacionais de treinamento (O4). Adicionalmente, a implementação de um sistema de salvamento e gestão de progresso do jogador (O5) pode aumentar a confiabilidade da solução. Dessa forma, a análise conjunta de riscos e oportunidades orienta as decisões da equipe ao longo das sprints, contribuindo para um desenvolvimento mais estratégico e alinhado aos objetivos do projeto.
 
-<div align="center">
-<sub>Figura 4 - Matriz de Riscos</sub><br/>
-<img src="../gdd_images/matrizDeRiscos"width="80%"> 
-
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
+<div align="center">
+<sub>Figura 4 - Matriz de Riscos</sub><br/>
+<img src="../gdd_images/matrizDeRiscos.png"width="200%">
 &emsp; A Figura 4 apresenta a representação gráfica da matriz de riscos do projeto, relacionando probabilidade de ocorrência (eixo vertical) e impacto no projeto (eixo horizontal). A visualização permite identificar rapidamente o nível de criticidade de cada item mapeado na Tabela 2, posicionando as ameaças (R1–R5) e oportunidades (O1–O5) conforme sua relevância para o desenvolvimento do Mini Mundo Cielo. As cores indicam o grau de atenção necessário, em que áreas mais críticas representam situações que demandam maior monitoramento e planejamento de resposta ao longo das sprints do projeto.
 
 &emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, ao mesmo tempo em que identifica oportunidades de melhoria no produto. Dessa forma, o projeto transforma incertezas em ações preventivas e estratégicas ao longo das sprints de desenvolvimento. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
