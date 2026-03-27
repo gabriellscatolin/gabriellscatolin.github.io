@@ -535,6 +535,8 @@ export default class ScenePadaria extends Phaser.Scene {
           prefixo: this.prefixoEscolhido,
           spawnX: 1470,
           spawnY: 890,
+          escoltaPJAgencia2: true,
+          missaoCidadeTexto: "Missao: Siga o PJ até a Farmácia."
         });
       });
     }

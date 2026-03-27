@@ -866,7 +866,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 				? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessao: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
 				: `Conversa encerrada!\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessao: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`;
 
-		this.textoNpc.setText(textoFinal).setStyle({ color: cor });
+		this.textoNpc.setText(textoFinal).setStyle({ color: cor, fontSize: "22px" });
 
 		if (this.tipoDialogo === "GG") {
 			this.registry.set("ag01_dialogo_gg_concluido", true);

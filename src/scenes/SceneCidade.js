@@ -217,9 +217,10 @@ export default class SceneCidade extends Phaser.Scene {
     this.pjVelocidadeGuia = 110;
     this.pjEsperandoJogador = false;
     this.pjRotaWaypoints = [
-      { x: 1160, y: 920 },
-      { x: 1320, y: 900 },
-      { x: 1475, y: 860 },
+      // Rota até a padaria
+      { x: 1563, y: 922 },
+      { x: 1425, y: 818 }, // Entrada da padaria
+      // Após padaria, rota até a farmácia será ativada depois
     ];
     this.pjRotaIndiceAtual = 0;
     this.pjChegouDestinoRota = false;
@@ -1945,6 +1946,8 @@ export default class SceneCidade extends Phaser.Scene {
       Phaser.Geom.Rectangle.Contains(this.zonaPadaria, this.personagem.x, this.personagem.y);
 
     if (chegouNaPadariaComJogador) {
+      // O PJ espera na padaria até o jogador sair
+      this.pjAguardandoPadaria = true;
       this.pjAcompanhandoAgencia2 = false;
       this.pjAcompanhamentoEncerrado = true;
       this.registry.set("ag01_escolta_pj_agencia2", false);
@@ -1954,8 +1957,8 @@ export default class SceneCidade extends Phaser.Scene {
         this.npcTheoGuia.body.setVelocity(0, 0);
         this.npcTheoGuia.body.enable = false;
       }
-      this.npcTheoGuia.setVisible(false);
-      if (this.labelTheoGuia) this.labelTheoGuia.setVisible(false);
+      this.npcTheoGuia.setVisible(true);
+      if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Estou esperando você na Padaria]");
       return;
     }
 
@@ -2035,6 +2038,27 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   update() {
+        // Se o PJ está aguardando na padaria e o jogador saiu da padaria, ativa a escolta para a farmácia
+        if (this.pjAguardandoPadaria && this.registry.get("padaria_dialogo_concluido") === true) {
+          this.pjAguardandoPadaria = false;
+          this.pjAcompanhandoAgencia2 = true;
+          this.pjAcompanhamentoEncerrado = false;
+          this.registry.set("ag01_escolta_pj_agencia2", true);
+          this.registry.set("ag01_pj_retorno", false);
+          // Atualiza waypoints para farmácia
+          this.pjRotaWaypoints = [
+            { x: 1594, y: 1283 },
+            { x: 1529, y: 1268 },
+            // O waypoint final é a entrada da farmácia (já tratado pela zonaFarmacia)
+          ];
+          this.pjRotaIndiceAtual = 0;
+          this.pjChegouDestinoRota = false;
+          if (this.npcTheoGuia) {
+            this.npcTheoGuia.setVisible(true);
+            if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Siga o PJ até a Farmácia]");
+            if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+          }
+        }
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
 

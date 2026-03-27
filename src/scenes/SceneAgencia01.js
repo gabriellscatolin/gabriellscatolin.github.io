@@ -64,10 +64,38 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
-    // Sprite do NPC da agência
+    // Sprites do NPC da agência (Theo) - nomes reais dos arquivos
     this.load.image(
-      "npc_agencia",
-      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_parado02.png",
+      "npc_agencia_frente_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente01 (parado01).png",
+    );
+    this.load.image(
+      "npc_agencia_frente_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente02.png",
+    );
+    this.load.image(
+      "npc_agencia_tras_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras01.png",
+    );
+    this.load.image(
+      "npc_agencia_tras_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras02.png",
+    );
+    this.load.image(
+      "npc_agencia_direita_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita01.png",
+    );
+    this.load.image(
+      "npc_agencia_direita_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita02.png",
+    );
+    this.load.image(
+      "npc_agencia_esquerda_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda01.png",
+    );
+    this.load.image(
+      "npc_agencia_esquerda_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda02.png",
     );
 
     // Sprites do NPC Iza
@@ -231,8 +259,12 @@ export default class SceneAgencia extends Phaser.Scene {
 
     // ── NPC ───────────────────────────────────────────────────────────────────
     this.npcAgencia = this.physics.add
-      .sprite(65, 57, "npc_agencia")
+      .sprite(65, 57, "npc_agencia_frente_1")
       .setDepth(5);
+    this.npcAgenciaDirecao = "frente";
+    this.npcAgenciaFrame = 1;
+    this.npcAgenciaTrocaTempo = 0;
+    this.npcAgenciaTrocaIntervalo = 250;
     this.npcAgencia.body.setImmovable(true);
     const alturaAlvo = this.personagem.displayHeight;
     this.npcAgencia.setDisplaySize(
@@ -449,6 +481,8 @@ export default class SceneAgencia extends Phaser.Scene {
       this.pjGuiandoParaSaida = false;
       this.pjChegouNaSaida = true;
       this.pjEsperandoJogador = true;
+      // Parar sprite andando
+      this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_1`);
       return;
     }
 
@@ -462,6 +496,8 @@ export default class SceneAgencia extends Phaser.Scene {
     if (distJogadorNpc > this.distanciaMaximaSeguirPJ) {
       this.npcAgencia.body?.setVelocity(0, 0);
       this.pjEsperandoJogador = true;
+      // Parar sprite andando
+      this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_1`);
       return;
     }
 
@@ -472,6 +508,24 @@ export default class SceneAgencia extends Phaser.Scene {
       this.alvoSaidaPJ.y,
       this.velocidadePJGuia,
     );
+
+    // Atualiza direção e sprite do NPC acompanhante
+    const dx = this.alvoSaidaPJ.x - this.npcAgencia.x;
+    const dy = this.alvoSaidaPJ.y - this.npcAgencia.y;
+    let novaDirecao = this.npcAgenciaDirecao;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      novaDirecao = dx > 0 ? "direita" : "esquerda";
+    } else {
+      novaDirecao = dy > 0 ? "frente" : "tras";
+    }
+    this.npcAgenciaDirecao = novaDirecao;
+    // Troca de frame animado
+    const agora = this.time.now;
+    if (agora > this.npcAgenciaTrocaTempo) {
+      this.npcAgenciaFrame = this.npcAgenciaFrame === 1 ? 2 : 1;
+      this.npcAgenciaTrocaTempo = agora + this.npcAgenciaTrocaIntervalo;
+    }
+    this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaFrame}`);
   }
 
   // ── UPDATE ────────────────────────────────────────────────────────────────

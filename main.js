@@ -47,12 +47,12 @@ const config = {
     },
   },
   scene: [
+    SceneCidade,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
     SceneChuva,
     SceneJogo,
-    SceneCidade,
     SceneMetro,
     SceneMiniGame,
     SceneEscritorio,
