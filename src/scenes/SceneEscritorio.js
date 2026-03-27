@@ -252,7 +252,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc = this.registry.get("escritorio_dialogo_concluido") === true;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
@@ -348,13 +348,21 @@ export default class SceneEscritorio extends Phaser.Scene {
         this.npcEscritorio.x,
         this.npcEscritorio.y - this.npcEscritorio.displayHeight * 0.5,
       );
+    } else if (this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.falouComNpc = true;
-      this.exclamacaoNpc.setVisible(false);
-      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      console.log("[SceneEscritorio] Interagiu com o NPC do escritório");
+      if (this.registry.get("escritorio_dialogo_concluido") === true) {
+        this.falouComNpc = true;
+        this.exclamacaoNpc.setVisible(false);
+        if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      } else {
+        this.scene.pause();
+        this.scene.launch("SceneDialogoEscritorio", { cenaOrigem: "SceneEscritorio" });
+      }
+      return;
     }
 
     // Verifica se o personagem entrou na zona de saída
