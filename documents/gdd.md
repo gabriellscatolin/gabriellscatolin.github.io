@@ -148,7 +148,7 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Figura 3 apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. A figura evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática real e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
+&emsp; A Figura 3 apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. A figura evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática em situações reais e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
 
 A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
 
@@ -166,11 +166,12 @@ Embora o **Value Proposition Canvas** tenha sido estruturado a partir da perspec
 
 **Para os Gerentes de Negócios (cliente do Canvas):**
 
-- Ganhos gerados: aprendizado prático de técnicas de venda; possibilidade de treinar no próprio ritmo; feedback imediato; aumento da confiança em situações reais; maior domínio do portfólio.
-- Dores aliviadas: dificuldade de acesso a treinamentos práticos; baixa efetividade de materiais passivos; insegurança na abordagem comercial.
+- Ganhos gerados: aprendizado prático de técnicas de venda; possibilidade de treinar no próprio ritmo; feedback imediato; aumento da confiança em situações reais; maior domínio do portfólio de produtos.
+- Dores aliviadas (analgésicos): redução da insegurança na abordagem comercial; acesso a treinamento prático sem riscos reais; superação das limitações de materiais passivos de capacitação.
 - Produto/Serviço: experiência interativa baseada em simulação de cenários reais, com tomada de decisão, feedback contínuo e progressão por desempenho.
+- Criadores de ganho: gamificação do processo de aprendizagem, prática repetível de situações de venda e feedback imediato que auxilia na consolidação das habilidades comerciais.
 
-Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual com eficiência operacional.
+Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual e escalabilidade do treinamento corporativo.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
@@ -2098,51 +2099,54 @@ Apesar dos desafios técnicos relacionados à integração entre cenas e à orga
     - Implementação de trilha sonora e efeitos sonoros
 
  ### SceneCidade.js como hub central de navegação
+ 
 A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
-````js
+
+```js
 init(dados = {}) {
   this.nomePastaEscolhida = dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
   this.prefixoEscolhido = dados.prefixo || this.registry.get("prefixo") || "HB";
   this.spawnXCustom = dados.spawnX || null;
   this.spawnYCustom = dados.spawnY || null;
 } 
-````
+```
+
  A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
- ````JS
+
+ ```js
 jsthis.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
 this.labelE = this.add.text(976, 856, "[E] Entrar", { fontSize: "6px", color: "#ffffff" }).setVisible(false); 
-````
+```
+
 A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
 
-````JS
+```js
 js_avancarSequenciaSetas(localAtual) {
   const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
   if (localAtual !== localEsperado) return;
   this.indiceSetaAtual += 1;
   this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
 }
-````
+```
 
-<div align="center">
-<sub>Figura 25 - Orientação Estabelecimentos - Mini Mundo Cielo</sub>
-<img src="../gdd_images/setas.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
-</div>
+Figura XXX- print tecla E e setas perto dos estabelecimentos 
 ### Finalização dos cenários internos
+
 Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
 O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
-
 ````JS
 jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
 [paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
- ````
+ ```
 
 A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
 
 
 ### Integração das interações dentro dos estabelecimentos
+
 As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
-```JS
+
+```js
 jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.scene.pause();
   this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
@@ -2152,44 +2156,40 @@ Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito,
 
 Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
-<div align="center">
-<sub>Figura 26, 27 e 28 - Diálogo - Mini Mundo Cielo</sub>
-<img src="../gdd_images/iniciar_dialogo.png">
-<img src="../gdd_images/instrucao_dialogo.png">
-<img src="../gdd_images/dialogo.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
-</div>
+Figura XX- print cena de diálogo 
 
 
 ### Mini game do metrô
+
 Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
-````JS
+
+```js
 jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
   this.trocarFase(2, 'background2', 'musicaFase2');
 }
-````
+```
+
 Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
-````JS
+
+```js
 jsthis.time.addEvent({ delay: 20000, callback: this.spawnMoedaExtra, loop: true });
 this.time.addEvent({ delay: 10000, callback: () => { this.spawnBomba(); }, loop: true });
-````
+```
+
 Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
-````JS
+
+```js
 jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
 const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
 this.registry.set("cieloCoins", totalAtual + coinsGanhas);
 ````
-<div align="center">
-<sub>Figura 29 - Mini Game - Mini Mundo Cielo</sub>
-<img src="../gdd_images/mini_game.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
-</div>
+Figura XXX - print do mini game 
 ### Interface e experiência do usuário (HUD)
+
 Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
 O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
-
 ````JS
-this.hudIcon.on("pointerdown", () => {
+jsthis.hudIcon.on("pointerdown", () => {
   this.tweens.add({
     targets: this.hudIcon,
     x: cam.worldView.centerX,
@@ -2197,49 +2197,41 @@ this.hudIcon.on("pointerdown", () => {
     scale: this.hudIconZoomScale,
     duration: 260,
     ease: "Quad.Out",
-  });
-});
 ````
 O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
 O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
 
 O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
-````JS
+
+```js
 jsthis.input.keyboard?.once("keydown-ESC", () => {
   const retornoX = Number(this.registry.get("cidadeRetornoX"));
   const retornoY = Number(this.registry.get("cidadeRetornoY"));
   this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
 ````
-
-<div align="center">
-<sub>Figura 30 e 31 - HUDs - Mini Mundo Cielo</sub>
-<img src="../gdd_images/HUD.png">
-<img src="../gdd_images/Hud_maquininha.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
-</div>
-
-
+Figura XX - HUD 
+Figura XXX - maquininha 
 ### Desenvolvimento de novas sprite sheets
+
 Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
 Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
-<div align="center">
-<sub>Figura 32 - Sprite Sheets Agências </sub>
-<img src="../gdd_images/novas_sprites.jpeg">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
-</div>
-
+Imagem XX - foto dos sprites 
 ### Fluxo de progressão do jogador
+
 O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
 A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
-````JS
+
+```js
 jsexport const SCORING_CONFIG = {
   chapter1: { correct: 100, generic: 50, wrong: 0 },
   chapter3: { correct: 300, generic: 150, wrong: -50 },
-````
+}
+```
 
 A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
-```JS
+
+```js
 jsexport function handleAnswer(registry, chapter, tipo) {
   const cfg = SCORING_CONFIG[chapter];
   let amount = tipo === "correta" ? cfg.correct
@@ -2247,6 +2239,7 @@ jsexport function handleAnswer(registry, chapter, tipo) {
              :                     cfg.wrong;
   addCoins(registry, amount);
   return amount;
+}
 ```
 Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
 <div align="center">
@@ -2256,9 +2249,11 @@ Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final d
 </div>
 
 ### Efeitos dinâmicos de ambiente Chuva
+
 Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
 O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
-```JS
+
+```js
 jsvar x_atual = g.xi + g.vx * t;
 var y_atual = g.yi + 0.5 * g.ay * t * t;
 ```
@@ -2272,17 +2267,23 @@ A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é 
 </div>
 
 ### Trilha sonora e efeitos sonoros
+
 A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
 Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
-```JS
+
+```js
 jsthis.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5 });
 this.musica.play();
 
 this.events.on("shutdown", () => {
   this.musica.stop();
+})
 ```
+
 Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
+
 ### Dificuldades
+
 Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
 
 - Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
@@ -2291,6 +2292,7 @@ Durante o desenvolvimento desta sprint, os principais desafios estiveram relacio
 - Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
 
 ### Próximos passos
+
 Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
 
 - Corrigir inconsistências visuais, de colisão e de fluxo identificadas durante os testes
@@ -2300,6 +2302,7 @@ Para as próximas etapas do desenvolvimento, o foco será o refinamento e o poli
 - Finalizar o mapa interativo acessível pela maquininha Cielo
 
 ### Conclusão da Sprint 4
+
 Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
 
 ## 4.5. Revisão do MVP (sprint 5)
