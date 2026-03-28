@@ -2139,7 +2139,6 @@ Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase,
 
 <div align="center">
 <sub>Figura 26, 27 e 28 - Diálogo - Mini Mundo Cielo</sub>
-<img src="../gdd_images/inciar_dialogo.png">
 <img src="../gdd_images/instrucao_dialogo.png">
 <img src="../gdd_images/dialogo.png">
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
