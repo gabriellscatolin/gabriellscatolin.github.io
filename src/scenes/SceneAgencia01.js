@@ -1,10 +1,11 @@
 export default class SceneAgencia extends Phaser.Scene {
+
   constructor() {
     super({ key: "SceneAg" });
   }
 
+  // Inicializa dados do personagem vindos da cena anterior
   init(dados = {}) {
-    // Dados do personagem definidos pela cena anterior
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
@@ -13,12 +14,14 @@ export default class SceneAgencia extends Phaser.Scene {
     this.spawnYCustom = dados.spawnY ?? null;
   }
 
+  // Carrega todos os assets necessários para a cena
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
     this.load.maxParallelDownloads = 2;
 
+    // Loga erro de carregamento de asset
     this.load.on("loaderror", (arquivo) => {
       console.error(
         "[SceneAgencia] Erro ao carregar:",
@@ -32,7 +35,6 @@ export default class SceneAgencia extends Phaser.Scene {
       "trilhaAgencia01",
       "src/assets/audios/trilhaAgencia01.mp3",
     );
-
 
     // Mapa e tilesets da agência
     this.load.tilemapTiledJSON(
@@ -64,7 +66,7 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
-    // Sprites do NPC da agência (Theo) - nomes reais dos arquivos
+    // Sprites do NPC da agência (Theo)
     this.load.image(
       "npc_agencia_frente_1",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente01 (parado01).png",

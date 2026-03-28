@@ -777,6 +777,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudNoCentro = false;
     this.hudAnimando = false;
     this.hudDebugEnabled = false;
+    // Garante que debug de coordenadas nunca aparece
+    this.hudDebugForceHide = true;
     this.hudIconBaseScale = 0.45 * this.hudUiScale;
     this.hudIconZoomScale = 1.25 * this.hudUiScale;
 
@@ -1390,7 +1392,8 @@ export default class SceneCidade extends Phaser.Scene {
 
   _atualizarHudDebugCoords() {
     if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
-    if (!this.hudDebugEnabled || !this.hudNoCentro || this.hudAnimando) {
+    // Força ocultação do debug de coordenadas
+    if (this.hudDebugForceHide || !this.hudDebugEnabled || !this.hudNoCentro || this.hudAnimando) {
       this.hudDebugTxt.setVisible(false);
       if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
       return;

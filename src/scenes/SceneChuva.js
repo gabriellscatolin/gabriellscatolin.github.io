@@ -1,4 +1,3 @@
-// Cena paralela responsável pela animação cinemática da chuva
 export default class SceneChuva extends Phaser.Scene {
   constructor() {
     super({ key: "SceneChuva" });
@@ -91,36 +90,36 @@ export default class SceneChuva extends Phaser.Scene {
     g.x = x_atual;
     g.y = y_atual;
 
-    // Imprime a cada frame os dados de MU e MUV desta gota
-    console.log(
-      "[MU  | X] frame:" +
-        g.frame +
-        " t:" +
-        t.toFixed(3) +
-        "s" +
-        " vx:" +
-        g.vx.toFixed(2) +
-        "px/s" +
-        " x:" +
-        x_atual.toFixed(1) +
-        "px"
-    );
-    console.log(
-      "[MUV | Y] frame:" +
-        g.frame +
-        " t:" +
-        t.toFixed(3) +
-        "s" +
-        " ay:" +
-        g.ay.toFixed(2) +
-        "px/s²" +
-        " vy:" +
-        vy_atual.toFixed(2) +
-        "px/s" +
-        " y:" +
-        y_atual.toFixed(1) +
-        "px"
-    );
+    // Debug de coordenadas desativado
+    // console.log(
+    //   "[MU  | X] frame:" +
+    //     g.frame +
+    //     " t:" +
+    //     t.toFixed(3) +
+    //     "s" +
+    //     " vx:" +
+    //     g.vx.toFixed(2) +
+    //     "px/s" +
+    //     " x:" +
+    //     x_atual.toFixed(1) +
+    //     "px"
+    // );
+    // console.log(
+    //   "[MUV | Y] frame:" +
+    //     g.frame +
+    //     " t:" +
+    //     t.toFixed(3) +
+    //     "s" +
+    //     " ay:" +
+    //     g.ay.toFixed(2) +
+    //     "px/s²" +
+    //     " vy:" +
+    //     vy_atual.toFixed(2) +
+    //     "px/s" +
+    //     " y:" +
+    //     y_atual.toFixed(1) +
+    //     "px"
+    // );
   }
 
   // Ativa uma gota livre do pool e define seus parâmetros de movimento

@@ -1,4 +1,3 @@
-// Cena de cutscene que reproduz um vídeo com transições clock wipe
 export default class SceneCutscene extends Phaser.Scene {
   constructor() {
     super("SceneCutscene");

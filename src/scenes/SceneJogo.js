@@ -1,4 +1,3 @@
-// Cena principal do jogo com movimentação do personagem
 import {
   GameSettings,
   aplicarConfiguracoes,
@@ -167,16 +166,7 @@ export default class SceneJogo extends Phaser.Scene {
       }
     });
 
-    // DEBUG — mostra posição do mouse em tempo real (remova quando não precisar)
-    this.debugMouse = this.add
-      .text(8, 8, "", {
-        fontSize: "22px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 8, y: 6 },
-      })
-      .setDepth(999)
-      .setScrollFactor(0);
+    // ...existing code...
 
     // Aplica configurações salvas (brilho, daltonismo, etc.)
     this.sound.volume = GameSettings.volume;
@@ -454,9 +444,7 @@ export default class SceneJogo extends Phaser.Scene {
   }
 
   update() {
-    // DEBUG mouse — remove quando não precisar mais
-    const p = this.input.activePointer;
-    this.debugMouse.setText(`x: ${Math.round(p.x)}  y: ${Math.round(p.y)}`);
+    // ...existing code...
 
     if (!this.podeMover) return; //Não move enquanto tutorial estiver aberto
 
