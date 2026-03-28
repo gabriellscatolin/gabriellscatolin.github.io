@@ -157,7 +157,7 @@ export default class SceneDialogoSupermercado extends Phaser.Scene {
     if (!this.textures.exists("falaSupermercado")) {
       this.load.image(
         "falaSupermercado",
-        "src/assets/imagens/imagensFalas/Mercado.png"
+        "src/assets/imagens/imagensFalas/Mercado - F.png"
       );
     }
   }

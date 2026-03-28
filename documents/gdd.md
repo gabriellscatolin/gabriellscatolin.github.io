@@ -143,51 +143,49 @@ Impacto Social e Produtivo: Contribuir diretamente para a formação profissiona
 
 <div align="center">
 <sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
-<img src="../gdd_images/CPV.png"width="80%"> 
+<img src="../gdd_images/CPV.png"width="200%"> 
 
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Proposta de Valor do *Mini Mundo Cielo* foi definida com base na lógica do Value Proposition Canvas, ferramenta que orienta o desenvolvimento da solução a partir das necessidades do usuário que interage diretamente com o produto. Nesse caso, o cliente analisado no Canvas é o *Gerente de Negócios (GN/DDN)*, profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e apresentar soluções do portfólio da Cielo em situações reais de venda.[\[29\]](#ref29)
+&emsp; A Figura 3 apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. A figura evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática real e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
 
-Embora o usuário direto da solução seja o GN/DDN, a *Cielo S.A.* também se beneficia de forma estratégica da proposta, pois o desenvolvimento das competências comerciais desses profissionais impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas de venda em diferentes regiões do país. Dessa forma, o Mini Mundo Cielo articula dois níveis de valor: no nível individual, oferece ao profissional uma experiência prática e acessível de treinamento; no nível organizacional, contribui para um processo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
+A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
 
-Um dos principais diferenciais da proposta é o fato de o Mini Mundo Cielo ser um jogo educacional totalmente *on-line, acessível diretamente pelo navegador, sem necessidade de instalação. Essa característica permite que o treinamento seja realizado de forma remota, reduzindo barreiras logísticas e ampliando o alcance da capacitação. Além disso, o projeto se posiciona como a **primeira iniciativa de treinamento gamificado desenvolvida especificamente para os DDNs da Cielo*, explorando a simulação de situações comerciais como ferramenta de aprendizagem.
+Um dos principais diferenciais do Mini Mundo Cielo está no seu formato **totalmente online**, acessível via navegador e sem necessidade de instalação, o que reduz barreiras logísticas e amplia significativamente o alcance do treinamento. Além disso, a solução se posiciona como uma iniciativa inovadora ao utilizar gamificação e **simulação de cenários reais** como ferramenta central de aprendizagem, substituindo modelos tradicionais baseados em conteúdos passivos por experiências interativas orientadas à tomada de decisão.
 
- Nesse sentido, o jogo dialoga com uma tendência crescente no ambiente corporativo: a substituição de treinamentos exclusivamente expositivos por experiências de aprendizagem ativa, nas quais o participante aprende por meio da tomada de decisões, da experimentação e do feedback imediato. Em vez de apenas transmitir informação, o Mini Mundo Cielo aproxima o treinamento da realidade operacional dos GNs/DDNs, transformando o processo de aprendizagem em prática orientada para desempenho.
+Nesse contexto, o projeto se alinha a uma **transformação relevante** no ambiente corporativo, na qual treinamentos expositivos vêm sendo substituídos por abordagens mais eficazes, baseadas em prática, experimentação e feedback contínuo. Ao aproximar o treinamento da **realidade operacional** dos GNs/DDNs, o Mini Mundo Cielo aumenta a retenção do aprendizado, acelera o desenvolvimento de habilidades comerciais e contribui diretamente para melhoria de performance em campo.
 
-*Para a Cielo S.A.:*
+Embora o **Value Proposition Canvas** tenha sido estruturado a partir da perspectiva do Gerente de Negócios (GN/DDN), é possível analisar os impactos da solução em dois níveis complementares: o nível organizacional (Cielo S.A.) e o nível do usuário final (GN/DDN).
 
-- Ganhos gerados: padronização do treinamento comercial em escala nacional; redução da dependência de treinamentos presenciais; geração de métricas que permitem acompanhar o progresso e o desempenho dos profissionais; aceleração do onboarding de novos Gerentes de Negócios, com maior familiaridade inicial com o portfólio e com as estratégias de venda da empresa.
+**Para a Cielo S.A. (impacto organizacional):**
 
-- Dores aliviadas: disparidade no nível de preparo entre profissionais de diferentes regiões; dificuldade de garantir consistência e escala nos processos de capacitação; limitação dos formatos tradicionais de treinamento, que exigem maior custo logístico e oferecem menor interatividade.
+- Ganhos gerados: padronização do treinamento comercial em escala nacional; redução da dependência de treinamentos presenciais; geração de métricas de desempenho; aceleração do onboarding de novos Gerentes de Negócios.
+- Dores aliviadas: disparidade no nível de preparo entre regiões; dificuldade de escalar treinamentos com consistência; limitações dos modelos tradicionais de capacitação.
+- Solução entregue: jogo educacional web-based que simula interações comerciais e permite acompanhamento mensurável do desenvolvimento dos profissionais.
 
-- Produto/Serviço: jogo educacional web-based que simula interações comerciais inspiradas na rotina dos Gerentes de Negócios da Cielo. A solução apresenta cenários de venda, sistemas de diálogo com clientes virtuais e feedback imediato sobre as decisões tomadas, permitindo que o treinamento ocorra de forma prática e mensurável.
+**Para os Gerentes de Negócios (cliente do Canvas):**
 
-*Para os Gerentes de Negócios (GNs/DDNs):*
+- Ganhos gerados: aprendizado prático de técnicas de venda; possibilidade de treinar no próprio ritmo; feedback imediato; aumento da confiança em situações reais; maior domínio do portfólio.
+- Dores aliviadas: dificuldade de acesso a treinamentos práticos; baixa efetividade de materiais passivos; insegurança na abordagem comercial.
+- Produto/Serviço: experiência interativa baseada em simulação de cenários reais, com tomada de decisão, feedback contínuo e progressão por desempenho.
 
-- Ganhos gerados: aprendizado prático das técnicas de abordagem e negociação comercial; possibilidade de treinar no próprio ritmo; feedback imediato sobre decisões tomadas durante as interações; aumento da confiança para lidar com clientes reais; maior domínio aplicado do portfólio Cielo.
-
-- Dores aliviadas: dificuldade de acesso a treinamentos mais dinâmicos e consistentes; baixa efetividade de materiais passivos, como manuais e conteúdos apenas expositivos; insegurança ao executar abordagens comerciais sem prática prévia em ambiente controlado.
-
-- Produto/Serviço: experiência interativa em que o jogador controla um personagem em missões inspiradas em diferentes estabelecimentos comerciais. Durante as interações, o jogador toma decisões de abordagem e negociação, recebe retorno imediato sobre seu desempenho e acompanha sua evolução por meio de sistemas de pontuação e progressão.
-
-Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de apoio ao treinamento, mas se posiciona como um ambiente de simulação de vendas, no qual o aprendizado ocorre por meio da prática e da tomada de decisão. Ao conectar conteúdo, contexto e interação, o jogo contribui para tornar o processo de capacitação mais próximo da realidade profissional, mais engajador para o usuário e mais estratégico para a organização.
+Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual com eficiência operacional.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
 
-&emsp; O time Comercial da Cielo realiza o atendimento aos clientes no modelo porta a porta, visitando estabelecimentos comerciais para oferecer máquinas de pagamento e serviços de valor agregado. Atualmente, a empresa possui aproximadamente 3.500 profissionais distribuídos por todo o Brasil, o que gera um desafio crítico no processo de treinamento. Equipes localizadas fora dos grandes centros urbanos muitas vezes enfrentam barreiras de acesso às oportunidades de capacitação presencial. Segundo Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes corporações frequentemente resulta em falta de equidade no aprendizado e disparidades no nível de conhecimento sobre produtos e estratégias de abordagem ao cliente.
+&emsp; O time Comercial da Cielo atua no modelo porta a porta, visitando estabelecimentos para ofertar soluções de pagamento e serviços de valor agregado. Atualmente, a empresa conta com aproximadamente 3.500 profissionais distribuídos em todo o território nacional, o que impõe desafios relevantes ao processo de capacitação. Equipes fora dos grandes centros urbanos frequentemente enfrentam limitações de acesso a treinamentos presenciais, gerando assimetrias no nível de preparo. Conforme Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes organizações tende a comprometer a equidade no aprendizado e a padronização do conhecimento. 
 
-&emsp; Para enfrentar esse desafio, foi desenvolvido o Mini Mundo Cielo, um Serious Game (jogo sério) acessado via navegador web que virtualiza a gamificação dos treinamentos de vendas. A solução fundamenta-se nos princípios de Kapp (2012) [\[26\]](#ref26), que define o uso de mecânicas de jogos para facilitar a aprendizagem e a resolução de problemas em contextos não recreativos. O jogo simula o cotidiano de um Gerente de Negócios, permitindo que o jogador explore uma cidade em pixel art e interaja com NPCs que representam clientes. Através de diálogos de múltipla escolha, o colaborador pratica a superação de objeções e o letramento de produtos em um ambiente controlado e imersivo.
+&emsp; Para mitigar esse cenário, foi desenvolvido o Mini Mundo Cielo, um serious game acessado via navegador que aplica mecânicas de gamificação ao treinamento comercial. Fundamentado nos princípios de Kapp (2012) [\[26\]](#ref26), o jogo utiliza elementos típicos de jogos para facilitar a aprendizagem em contextos corporativos. A solução simula o cotidiano de um Gerente de Negócios, permitindo ao usuário explorar um ambiente em pixel art e interagir com clientes fictícios por meio de diálogos de múltipla escolha. Dessa forma, o colaborador pratica abordagens comerciais, contorna objeções e desenvolve domínio sobre o portfólio em um ambiente seguro e controlado.
 
-&emsp; A solução foi projetada como uma ferramenta digital de treinamento assíncrono. Como o jogo é executado diretamente no navegador, ele elimina a necessidade de instalações complexas, permitindo que colaboradores de diferentes regiões participem da mesma experiência de aprendizagem. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a aplicação de elementos de game design em processos de negócios permite que a prática de situações reais ocorra de forma segura, permitindo o erro como parte do processo educativo sem riscos financeiros ou de imagem à empresa.
+&emsp; A solução foi concebida como uma ferramenta de treinamento assíncrono e de fácil acesso. Por operar diretamente no navegador, elimina barreiras técnicas e amplia o alcance da capacitação, garantindo que colaboradores de diferentes regiões tenham acesso à mesma experiência de aprendizado. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a incorporação de elementos de game design em processos organizacionais permite a simulação de situações reais, favorecendo a aprendizagem prática sem riscos operacionais.
 
-&emsp; Com a implementação da solução, espera-se promover maior equidade no acesso aos treinamentos, garantindo que o conteúdo seja padronizado para todo o território nacional. A utilização de jogos educativos tende a tornar o processo de capacitação mais dinâmico e interativo, o que, conforme apontado por Gee (2017) [\[28\]](#ref28), é fundamental para o desenvolvimento de literacia digital e retenção de conhecimentos complexos. Como resultado, espera-se maior satisfação dos colaboradores, melhor compreensão do portfólio da Cielo e um impacto positivo direto no desempenho das vendas.
+&emsp; Com a implementação da solução, espera-se promover maior padronização e escalabilidade do treinamento comercial, reduzindo disparidades regionais e elevando o nível médio de preparo da equipe. Além disso, o uso de jogos educativos tende a aumentar o engajamento e a retenção do conhecimento, aspectos fundamentais para a aplicação prática no campo. Conforme Gee (2017) [\[28\]](#ref28), ambientes interativos favorecem o desenvolvimento de competências complexas. Como consequência, projeta-se impacto positivo em indicadores como qualidade da abordagem comercial, taxa de conversão e desempenho geral de vendas.
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre a viabilidade técnica e o engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um Serious Game não depende apenas da ausência de bugs, mas da capacidade de manter o "fluxo" de aprendizagem sem interrupções técnicas. A Tabela 1 detalha as ameaças mapeadas para esta etapa, utilizando a estrutura de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza a inspeção e adaptação contínua através de ciclos incrementais (sprints).
+&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário. Nesse contexto, a Tabela 1 apresenta as principais ameaças e oportunidades identificadas, estruturadas a partir da abordagem de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza ciclos iterativos de inspeção e adaptação ao longo das sprints.
 
 <div align="center">
 <sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
@@ -208,20 +206,21 @@ Dessa forma, o Mini Mundo Cielo não se limita a funcionar como um material de a
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-&emsp; A Tabela 2 apresenta a matriz de riscos do projeto, identificando as principais incertezas relacionadas ao desenvolvimento do Mini Mundo Cielo. Entre os riscos mais relevantes estão o possível desengajamento dos usuários com o formato gamificado (R2), a dificuldade de uso das ferramentas digitais pelos Gerentes de Negócios (GNs) e a incompatibilidade do jogo com diferentes navegadores ou sistemas operacionais (R1). Além disso, considera-se a possibilidade de alterações no portfólio da Cielo durante o desenvolvimento (R3). Para mitigar esses fatores, a equipe prevê a realização de testes de jogabilidade com usuários reais, a adoção de interfaces simples com tutoriais progressivos e testes contínuos de compatibilidade entre navegadores.
+&emsp; A Tabela 2 apresenta a matriz de riscos do projeto, identificando as principais incertezas relacionadas ao desenvolvimento do Mini Mundo Cielo. A análise dos riscos evidencia que os fatores mais críticos do projeto estão concentrados na dimensão do usuário. O risco de desengajamento com o formato gamificado (R2) e a baixa adesão decorrente de dificuldades com ferramentas digitais (R5) combinam alta probabilidade com elevado impacto, configurando-se como os principais pontos de atenção. Esses riscos indicam que o sucesso da solução está menos condicionado a desafios técnicos e mais à capacidade de gerar uma experiência acessível, intuitiva e relevante para o público-alvo. Em contrapartida, riscos técnicos como incompatibilidade entre navegadores (R1) e mudanças no portfólio (R3) apresentam menor criticidade relativa, sendo mitigáveis por meio de boas práticas de desenvolvimento e parametrização do conteúdo.
 
-&emsp; A matriz também evidencia oportunidades estratégicas para o projeto, como a padronização nacional do treinamento da Cielo (O2), o aumento do engajamento por meio de elementos de gamificação (O3) e a redução de custos operacionais de treinamento (O4). Adicionalmente, a implementação de um sistema de salvamento e gestão de progresso do jogador (O5) pode aumentar a confiabilidade da solução. Dessa forma, a análise conjunta de riscos e oportunidades orienta as decisões da equipe ao longo das sprints, contribuindo para um desenvolvimento mais estratégico e alinhado aos objetivos do projeto.
-
-<div align="center">
-<sub>Figura 4 - Matriz de Riscos</sub><br/>
-<img src="../gdd_images/matrizDeRiscos"width="80%"> 
+&emsp; No que se refere às oportunidades, destaca-se a possibilidade de padronização nacional do treinamento (O2), que apresenta alta probabilidade e impacto elevado, configurando-se como o principal vetor estratégico do projeto. Adicionalmente, o potencial de aumento de engajamento por meio da gamificação (O3) e a geração de feedback contínuo a partir de testes com usuários (O1) reforçam o caráter iterativo e orientado à melhoria contínua da solução. A redução de custos operacionais (O4) e a evolução tecnológica com sistemas de salvamento e gestão de progresso (O5) complementam os ganhos esperados, ainda que com menor impacto imediato.
 
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Figura 4 apresenta a representação gráfica da matriz de riscos do projeto, relacionando probabilidade de ocorrência (eixo vertical) e impacto no projeto (eixo horizontal). A visualização permite identificar rapidamente o nível de criticidade de cada item mapeado na Tabela 2, posicionando as ameaças (R1–R5) e oportunidades (O1–O5) conforme sua relevância para o desenvolvimento do Mini Mundo Cielo. As cores indicam o grau de atenção necessário, em que áreas mais críticas representam situações que demandam maior monitoramento e planejamento de resposta ao longo das sprints do projeto.
+<div align="center">
+<sub>Figura 4 - Matriz de Riscos</sub><br/>
+<img src="../gdd_images/matrizDeRiscos.png"width="200%">
+</div>
 
-&emsp; A análise detalhada desta matriz permite que a equipe antecipe gargalos técnicos e pedagógicos, ao mesmo tempo em que identifica oportunidades de melhoria no produto. Dessa forma, o projeto transforma incertezas em ações preventivas e estratégicas ao longo das sprints de desenvolvimento. Ao monitorar continuamente esses indicadores, garantimos que o desenvolvimento permaneça ágil e alinhado aos objetivos da Cielo. Assim, o projeto assegura uma experiência estável e engajadora, mitigando falhas que poderiam comprometer o aprendizado dos usuários finais.
+&emsp; A Figura 4 apresenta a matriz de riscos do projeto, relacionando probabilidade de ocorrência e impacto no desenvolvimento. A visualização permite identificar rapidamente os itens de maior criticidade, com destaque para R2 e R5, posicionados em zonas de maior atenção, e para O2, como principal oportunidade estratégica. Essa representação gráfica facilita a priorização de esforços e o direcionamento das ações ao longo das sprints.
+
+&emsp; A análise integrada da matriz permite que a equipe direcione recursos e decisões de forma mais eficiente, priorizando riscos críticos e potencializando oportunidades de maior impacto. Alinhada aos princípios ágeis, essa abordagem contribui para a redução de retrabalho, aumento da qualidade do produto e maior aderência às necessidades reais dos usuários. Como resultado, o projeto evolui de forma controlada, mantendo consistência técnica e relevância prática para o contexto comercial da Cielo.
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
@@ -740,7 +739,7 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 &emsp;A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
 
 
-&emsp; De acordo com Lucas Correia Meneguette (2016)  [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
+&emsp; De acordo com Lucas Correia Meneguette (2016) [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
 
 
 &emsp;No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
@@ -748,12 +747,27 @@ Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram 
 
 Com base nisso, os áudios do jogo foram organizados e classificados conforme sua função e sua relação com o universo narrativo, conforme apresentado na tabela a seguir:
 
-*Exemplo de tabela*
-\# | titulo | ocorrência | autoria
+<div align="center">
+
+
+<sub>Tabela 6 - Plano de Melhorias Pós-Playtest</sub>
+
+
+\# | Titulo | Tipo | Autoria | Uso no jogo
 --- | --- | --- | ---
-1 | tema de abertura | tela de início | própria
-2 | tema de combate | cena de combate com inimigos comuns | Hans Zimmer
-3 | ... 
+# | Título | Tipo | Autoria | Uso no jogo
+--- | --- | --- | --- | ---
+1 | Trilha sonora da tela inicial | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-%e7%b4%a0%e6%99%b4%e3%82%89%e3%81%97%e3%81%84%e6%9c%9d%e6%97%a5-wonderful-morning-sun-121506/) | Executada na SceneInicial e ScenePersonagem
+2 | Trilha sonora da parte urbana | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/) | Executada quando o personagem entra na parte urbana do mapa geral
+3 | Trilha sonora da padaria | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/plush-cafe/2504928/) | Executada quando o personagem entra na padaria
+4 | Trilha sonora da parte da praia | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/sunkissed-samba/2346808/) | Executada quando o personagem entra na parte da praia no mapa geral
+5 | Trilha sonora da farmácia  | Trilha / Som não-diegético | [Toystock](https://joystock.org/royalty-free-music/track/ambient-background-music) | Executada quando o personagem entra na farmácia
+6 | Trilha sonora do escritório | Trilha / Som não-diegético | [Motionarray](https://motionarray.com/royalty-free-music/calm-corporate-background-258970/) | Executada quando o personagem entra no escritório
+7 | Trilha sonora do mercado | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/coffee-shopping/535420/) | Executada quando o personagem entra no mercado
+
+</div>
+
+
 
 ## 3.4. Inventário  (sprint 3)
 
@@ -2039,7 +2053,242 @@ Entre os próximos objetivos estão:
 
 ## 4.4. Desenvolvimento final do MVP (sprint 4)
 
-*Descreva e ilustre aqui o desenvolvimento da versão final do jogo, explicando brevemente o que foi entregue em termos de MVP. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e planos futuros.*
+O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
+
+Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
+
+Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
+
+Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
+
+Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
+Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
+Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+
+ Elementos desenvolvidos na sprint 4: 
+
+- Finalização dos cenários internos (metrô e agências) utilizando o Tiled
+- Integração completa das cenas ao sistema principal (SceneCidade.js)
+- Implementação da navegação entre o mapa e os estabelecimentos
+- Desenvolvimento e integração do mini game do metrô
+- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática
+- Organização e estruturação das pastas do projeto no VS Code
+- Integração das interações dentro dos estabelecimentos
+- Integração da IA nos diálogos e interações
+- Estruturação do fluxo de progressão do jogador
+- Interface e experiência do usuário (HUD):
+    - Mini-mapa
+    - Interface da maquininha Cielo
+    - Aba de missões
+    - Contador de progresso
+- Recursos visuais e sonoros:
+    - Criação e implementação de novas sprite sheets
+    - Implementação de trilha sonora e efeitos sonoros
+
+ ### SceneCidade.js como hub central de navegação
+A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
+````js
+init(dados = {}) {
+  this.nomePastaEscolhida = dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
+  this.prefixoEscolhido = dados.prefixo || this.registry.get("prefixo") || "HB";
+  this.spawnXCustom = dados.spawnX || null;
+  this.spawnYCustom = dados.spawnY || null;
+} 
+````
+ A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
+ ````JS
+jsthis.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
+this.labelE = this.add.text(976, 856, "[E] Entrar", { fontSize: "6px", color: "#ffffff" }).setVisible(false); 
+````
+A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
+
+````JS
+js_avancarSequenciaSetas(localAtual) {
+  const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
+  if (localAtual !== localEsperado) return;
+  this.indiceSetaAtual += 1;
+  this.registry.set("sequenciaSetaCidade", this.indiceSetaAtual);
+}
+````
+
+<div align="center">
+<sub>Figura 25 - Orientação Estabelecimentos - Mini Mundo Cielo</sub>
+<img src="../gdd_images/setas.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+### Finalização dos cenários internos
+Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
+O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
+
+````JS
+jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
+[paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
+ ````
+
+A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
+
+
+### Integração das interações dentro dos estabelecimentos
+As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
+```JS
+jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+  this.scene.pause();
+  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
+```
+Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
+Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
+
+Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
+
+<div align="center">
+<sub>Figura 26, 27 e 28 - Diálogo - Mini Mundo Cielo</sub>
+<img src="../gdd_images/iniciar_dialogo.png">
+<img src="../gdd_images/instrucao_dialogo.png">
+<img src="../gdd_images/dialogo.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+
+### Mini game do metrô
+Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
+````JS
+jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
+  this.trocarFase(2, 'background2', 'musicaFase2');
+}
+````
+Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
+````JS
+jsthis.time.addEvent({ delay: 20000, callback: this.spawnMoedaExtra, loop: true });
+this.time.addEvent({ delay: 10000, callback: () => { this.spawnBomba(); }, loop: true });
+````
+Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
+````JS
+jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
+const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
+this.registry.set("cieloCoins", totalAtual + coinsGanhas);
+````
+<div align="center">
+<sub>Figura 29 - Mini Game - Mini Mundo Cielo</sub>
+<img src="../gdd_images/mini_game.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+### Interface e experiência do usuário (HUD)
+Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
+O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
+
+````JS
+this.hudIcon.on("pointerdown", () => {
+  this.tweens.add({
+    targets: this.hudIcon,
+    x: cam.worldView.centerX,
+    y: cam.worldView.centerY,
+    scale: this.hudIconZoomScale,
+    duration: 260,
+    ease: "Quad.Out",
+  });
+});
+````
+O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
+O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
+
+O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
+````JS
+jsthis.input.keyboard?.once("keydown-ESC", () => {
+  const retornoX = Number(this.registry.get("cidadeRetornoX"));
+  const retornoY = Number(this.registry.get("cidadeRetornoY"));
+  this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
+````
+
+<div align="center">
+<sub>Figura 30 e 31 - HUDs - Mini Mundo Cielo</sub>
+<img src="../gdd_images/HUD.png">
+<img src="../gdd_images/Hud_maquininha.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+
+### Desenvolvimento de novas sprite sheets
+Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
+Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
+
+<div align="center">
+<sub>Figura 32 - Sprite Sheets Agências </sub>
+<img src="../gdd_images/novas_sprites.jpeg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+### Fluxo de progressão do jogador
+O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
+A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
+````JS
+jsexport const SCORING_CONFIG = {
+  chapter1: { correct: 100, generic: 50, wrong: 0 },
+  chapter3: { correct: 300, generic: 150, wrong: -50 },
+````
+
+A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
+```JS
+jsexport function handleAnswer(registry, chapter, tipo) {
+  const cfg = SCORING_CONFIG[chapter];
+  let amount = tipo === "correta" ? cfg.correct
+             : tipo === "neutra"  ? cfg.generic
+             :                     cfg.wrong;
+  addCoins(registry, amount);
+  return amount;
+```
+Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+<div align="center">
+<sub>Figura 33 - Resultado Diálogo - Mini Mundo Cielo</sub>
+<img src="../gdd_images/resultado_dialogo.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+### Efeitos dinâmicos de ambiente Chuva
+Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
+O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
+```JS
+jsvar x_atual = g.xi + g.vx * t;
+var y_atual = g.yi + 0.5 * g.ay * t * t;
+```
+
+A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
+
+<div align="center">
+<sub>Figura 34 - Efeito de Chuva - Mini Mundo Cielo</sub>
+<img src="../gdd_images/chuva.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+### Trilha sonora e efeitos sonoros
+A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
+Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
+```JS
+jsthis.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5 });
+this.musica.play();
+
+this.events.on("shutdown", () => {
+  this.musica.stop();
+```
+Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
+### Dificuldades
+Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
+
+- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
+- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa
+- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados
+- Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
+
+### Próximos passos
+Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
+
+- Corrigir inconsistências visuais, de colisão e de fluxo identificadas durante os testes
+- Corrigir e ajustar os diálogos com NPCs para garantir coerência narrativa
+- Implementar novos efeitos sonoros e expandir a cobertura de trilhas nos ambientes ainda sem áudio
+- Finalizar a implementação das missões no HUD da maquininha Cielo, com atualização dinâmica conforme o progresso do jogador
+- Finalizar o mapa interativo acessível pela maquininha Cielo
+
+### Conclusão da Sprint 4
+Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
 
 ## 4.5. Revisão do MVP (sprint 5)
 
