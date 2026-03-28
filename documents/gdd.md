@@ -2117,6 +2117,7 @@ js_avancarSequenciaSetas(localAtual) {
 ### Finalização dos cenários internos
 Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
 O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
+
 ````JS
 jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
 [paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
@@ -2172,8 +2173,9 @@ this.registry.set("cieloCoins", totalAtual + coinsGanhas);
 ### Interface e experiência do usuário (HUD)
 Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
 O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
+
 ````JS
-jsthis.hudIcon.on("pointerdown", () => {
+this.hudIcon.on("pointerdown", () => {
   this.tweens.add({
     targets: this.hudIcon,
     x: cam.worldView.centerX,
@@ -2181,6 +2183,8 @@ jsthis.hudIcon.on("pointerdown", () => {
     scale: this.hudIconZoomScale,
     duration: 260,
     ease: "Quad.Out",
+  });
+});
 ````
 O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
 O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
@@ -2269,7 +2273,7 @@ Durante o desenvolvimento desta sprint, os principais desafios estiveram relacio
 
 - Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
 - Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa
-- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas — como uma trilha não interrompida no shutdown — causava sobreposição de áudios e comportamentos inesperados
+- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados
 - Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
 
 ### Próximos passos
