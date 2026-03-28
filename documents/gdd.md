@@ -216,6 +216,8 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 <div align="center">
 <sub>Figura 4 - Matriz de Riscos</sub><br/>
 <img src="../gdd_images/matrizDeRiscos.png"width="200%">
+</div>
+
 &emsp; A Figura 4 apresenta a matriz de riscos do projeto, relacionando probabilidade de ocorrência e impacto no desenvolvimento. A visualização permite identificar rapidamente os itens de maior criticidade, com destaque para R2 e R5, posicionados em zonas de maior atenção, e para O2, como principal oportunidade estratégica. Essa representação gráfica facilita a priorização de esforços e o direcionamento das ações ao longo das sprints.
 
 &emsp; A análise integrada da matriz permite que a equipe direcione recursos e decisões de forma mais eficiente, priorizando riscos críticos e potencializando oportunidades de maior impacto. Alinhada aos princípios ágeis, essa abordagem contribui para a redução de retrabalho, aumento da qualidade do produto e maior aderência às necessidades reais dos usuários. Como resultado, o projeto evolui de forma controlada, mantendo consistência técnica e relevância prática para o contexto comercial da Cielo.
