@@ -2082,11 +2082,6 @@ Apesar dos desafios técnicos relacionados à integração entre cenas e à orga
 - Recursos visuais e sonoros:
     - Criação e implementação de novas sprite sheets
     - Implementação de trilha sonora e efeitos sonoros
-- Artefatos de Negócios:
-    - Canvas de Proposta de Valor
-    - Descrição da Solução
-    - Matriz de Riscos
-    - Objetivos, Metas e Indicadores
 
  ### SceneCidade.js como hub central de navegação
 A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
@@ -2114,7 +2109,11 @@ js_avancarSequenciaSetas(localAtual) {
 }
 ````
 
-Figura XXX- print tecla E e setas perto dos estabelecimentos 
+<div align="center">
+<sub>Figura 25 - Orientação Estabelecimentos - Mini Mundo Cielo</sub>
+<img src="../gdd_images/setas.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 ### Finalização dos cenários internos
 Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
 O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
@@ -2124,7 +2123,7 @@ jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
  ````
 
 A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
-Figura XX - print algum cenario 
+
 
 ### Integração das interações dentro dos estabelecimentos
 As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
@@ -2132,14 +2131,19 @@ As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a t
 jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.scene.pause();
   this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
-}
 ```
 Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
 Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
 
 Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
-Figura XX- print cena de diálogo 
+<div align="center">
+<sub>Figura 26, 27 e 28 - Diálogo - Mini Mundo Cielo</sub>
+<img src="../gdd_images/inciar_dialogo.png">
+<img src="../gdd_images/instrucao_dialogo.png">
+<img src="../gdd_images/dialogo.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 
 ### Mini game do metrô
@@ -2160,7 +2164,11 @@ jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
 const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
 this.registry.set("cieloCoins", totalAtual + coinsGanhas);
 ````
-Figura XXX - print do mini game 
+<div align="center">
+<sub>Figura 29 - Mini Game - Mini Mundo Cielo</sub>
+<img src="../gdd_images/mini_game.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 ### Interface e experiência do usuário (HUD)
 Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
 O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
@@ -2184,13 +2192,25 @@ jsthis.input.keyboard?.once("keydown-ESC", () => {
   const retornoY = Number(this.registry.get("cidadeRetornoY"));
   this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
 ````
-Figura XX - HUD 
-Figura XXX - maquininha 
+
+<div align="center">
+<sub>Figura 30 e 31 - HUDs - Mini Mundo Cielo</sub>
+<img src="../gdd_images/HUD.png">
+<img src="../gdd_images/Hud_maquininha.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+
 ### Desenvolvimento de novas sprite sheets
 Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
 Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
-Imagem XX - foto dos sprites 
+<div align="center">
+<sub>Figura 32 - Sprite Sheets Agências </sub>
+<img src="../gdd_images/novas_sprites.jpeg">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 ### Fluxo de progressão do jogador
 O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
 A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
@@ -2211,6 +2231,11 @@ jsexport function handleAnswer(registry, chapter, tipo) {
   return amount;
 ```
 Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+<div align="center">
+<sub>Figura 33 - Resultado Diálogo - Mini Mundo Cielo</sub>
+<img src="../gdd_images/resultado_dialogo.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Efeitos dinâmicos de ambiente Chuva
 Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
@@ -2222,7 +2247,11 @@ var y_atual = g.yi + 0.5 * g.ay * t * t;
 
 A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
 
-Figura XX — Efeito de chuva no mapa da cidade
+<div align="center">
+<sub>Figura 34 - Efeito de Chuva - Mini Mundo Cielo</sub>
+<img src="../gdd_images/chuva.png">
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ### Trilha sonora e efeitos sonoros
 A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
