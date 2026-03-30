@@ -750,37 +750,31 @@ Com base nisso, os áudios do jogo foram organizados e classificados conforme su
 
 <div align="center">
 
-
 <sub>Tabela 6 - Plano de Melhorias Pós-Playtest</sub>
 
-
-\# | Titulo | Tipo | Autoria | Uso no jogo
-
-# | Título | Tipo | Autoria | Uso no jogo
---- | --- | --- | --- | ---
-1 | Trilha sonora da tela inicial | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-%e7%b4%a0%e6%99%b4%e3%82%89%e3%81%97%e3%81%84%e6%9c%9d%e6%97%a5-wonderful-morning-sun-121506/) | Executada na SceneInicial e ScenePersonagem
-2 | Trilha sonora da parte urbana | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/) | Executada quando o personagem entra na parte urbana do mapa geral
-3 | Trilha sonora da padaria | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/plush-cafe/2504928/) | Executada quando o personagem entra na padaria
-4 | Trilha sonora da parte da praia | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/sunkissed-samba/2346808/) | Executada quando o personagem entra na parte da praia no mapa geral
-5 | Trilha sonora da farmácia  | Trilha / Som não-diegético | [Toystock](https://joystock.org/royalty-free-music/track/ambient-background-music) | Executada quando o personagem entra na farmácia
-6 | Trilha sonora do escritório | Trilha / Som não-diegético | [Motionarray](https://motionarray.com/royalty-free-music/calm-corporate-background-258970/) | Executada quando o personagem entra no escritório
-7 | Trilha sonora do mercado | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/coffee-shopping/535420/) | Executada quando o personagem entra no mercado
-8 | Trilha sonora agência01 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/corporate-uplifting-383889/) | Executada quando o personagem entra na Agência01
-9 | Trilha sonora agência02 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/electronic-corporate-corporate-background-488317/) | Executada quando o personagem entra na Agência02
-10 | Trilha sonora agência03 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-boss-fight-one-400508/) | Executada quando o personagem entra na Agência03
-11 | Efeito sonoro chuva | Efeito / Som diegético | [Pixabay](https://pixabay.com/sound-effects/rain-110508/) | Executada quando a chuva incia
-12 | Trilha sonora loja de roupas | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-breathe-underwater-summer-house-pop-385496/) | Executada quando o personagem entra na loja de roupas 
-13 | Trilha sonora posto de gasolina | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-boss-fight-one-400508/) | Executada quando o personagem entra no posto de gasolina
-14 | Trilha sonora metrô | Trilha / Som não-diegético | [Hooksouns](https://www.hooksounds.com/pt-br/royalty-free-music/vintage-city/177508/) | Executada quando o personagem entra no metrô
-15 | Trilha sonora restaurante | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/pagoda-crest/2447913/) | Executada quando o personagem entra no restaurante
-16 | Trilha sonora cena da estação de trem do mini game do metrô | Trilha / Som não-diegético | [Hooksouns](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem estiver na cena da estação trem no mini game do metrô
-17 | Trilha sonora cena da cidade do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem estiver na cena da cidade no mini game do metrô
-18 | Trilha sonora cena da cielo do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem estiver na cena da cielo no mini game do metrô
-19 | Trilha sonora cena da floresta do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem estiver na cena da floresta no mini game do metrô
-20 | Efeito snoro de coleta de moeda | Efeito / Som diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o perosnagem colata alguma moeda no jogo
+| # | Título | Tipo | Autoria | Uso no jogo |
+|---|--------|------|---------|-------------|
+| 1 | Trilha sonora da tela inicial | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-%e7%b4%a0%e6%99%b4%e3%82%89%e3%81%97%e3%81%84%e6%9c%9d%e6%97%a5-wonderful-morning-sun-121506/) | Executada na SceneInicial e ScenePersonagem |
+| 2 | Trilha sonora da parte urbana | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/) | Executada quando o personagem entra na parte urbana do mapa geral |
+| 3 | Trilha sonora da padaria | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/plush-cafe/2504928/) | Executada quando o personagem entra na padaria |
+| 4 | Trilha sonora da parte da praia | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/sunkissed-samba/2346808/) | Executada quando o personagem entra na parte da praia no mapa geral |
+| 5 | Trilha sonora da farmácia | Trilha / Som não-diegético | [Toystock](https://joystock.org/royalty-free-music/track/ambient-background-music) | Executada quando o personagem entra na farmácia |
+| 6 | Trilha sonora do escritório | Trilha / Som não-diegético | [Motionarray](https://motionarray.com/royalty-free-music/calm-corporate-background-258970/) | Executada quando o personagem entra no escritório |
+| 7 | Trilha sonora do mercado | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/coffee-shopping/535420/) | Executada quando o personagem entra no mercado |
+| 8 | Trilha sonora agência01 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/corporate-uplifting-383889/) | Executada quando o personagem entra na Agência01 |
+| 9 | Trilha sonora agência02 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/electronic-corporate-corporate-background-488317/) | Executada quando o personagem entra na Agência02 |
+| 10 | Trilha sonora agência03 | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-boss-fight-one-400508/) | Executada quando o personagem entra na Agência03 |
+| 11 | Efeito sonoro chuva | Efeito / Som diegético | [Pixabay](https://pixabay.com/sound-effects/rain-110508/) | Executada quando a chuva inicia |
+| 12 | Trilha sonora loja de roupas | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-breathe-underwater-summer-house-pop-385496/) | Executada quando o personagem entra na loja de roupas |
+| 13 | Trilha sonora posto de gasolina | Trilha / Som não-diegético | [Pixabay](https://pixabay.com/music/upbeat-boss-fight-one-400508/) | Executada quando o personagem entra no posto de gasolina |
+| 14 | Trilha sonora metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/vintage-city/177508/) | Executada quando o personagem entra no metrô |
+| 15 | Trilha sonora restaurante | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/pagoda-crest/2447913/) | Executada quando o personagem entra no restaurante |
+| 16 | Trilha sonora cena da estação de trem do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da estação de trem no mini game do metrô |
+| 17 | Trilha sonora cena da cidade do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da cidade no mini game do metrô |
+| 18 | Trilha sonora cena da cielo do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da cielo no mini game do metrô |
+| 19 | Trilha sonora cena da floresta do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da floresta no mini game do metrô |
+| 20 | Efeito sonoro de coleta de moeda | Efeito / Som diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem coleta uma moeda |
 </div>
-
-
 
 ## 3.4. Inventário  (sprint 3)
 
