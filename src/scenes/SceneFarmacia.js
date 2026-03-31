@@ -224,12 +224,13 @@ export default class SceneFarmacia extends Phaser.Scene {
       alturaAlvo,
     );
 
+    // Botão [E] igual às outras cenas
     this.labelNpc = this.add
       .text(79, 163, "[E] Falar", {
-        fontSize: "3px",
+        fontSize: "6px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 1 },
         resolution: 4,
       })
       .setDepth(20)
@@ -431,20 +432,22 @@ export default class SceneFarmacia extends Phaser.Scene {
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
-    // Detecta proximidade com o NPC
+
+    // Novo raio maior para mostrar o botão [E] antes de chegar perto do NPC
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
       79,
       141,
     );
-    const pertoNpc = distNpc < 30;
+    const mostrarBotaoE = distNpc < 60; // raio maior para mostrar
+    const pertoNpc = distNpc < 30; // raio menor para interação
 
-    if (pertoNpc !== this.perto_npc) {
-      this.perto_npc = pertoNpc;
-      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    if (mostrarBotaoE !== this.perto_npc) {
+      this.perto_npc = mostrarBotaoE;
+      this.labelNpc.setVisible(mostrarBotaoE && !this.dentroZonaSaida);
     }
-    if (pertoNpc) {
+    if (mostrarBotaoE) {
       this.labelNpc.setPosition(this.npcFarmacia.x, this.npcFarmacia.y + 2);
     }
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {

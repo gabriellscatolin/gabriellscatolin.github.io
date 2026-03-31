@@ -102,6 +102,19 @@ export default class SceneCidade extends Phaser.Scene {
 
   // Monta mapa, personagem e interfaces
   create() {
+        // Zona de interação para o supermercado (posição x=2924, y=344, tamanho 32x32)
+        this.zonaSupermercado = new Phaser.Geom.Rectangle(2924 - 16, 344 - 16, 32, 32);
+        this.labelSupermercado = this.add
+          .text(2924, 344, "[E] Entrar", {
+            fontSize: "6px",
+            color: "#ffffff",
+            backgroundColor: "#000000cc",
+            padding: { x: 2, y: 1 },
+            resolution: 4,
+          })
+          .setDepth(20)
+          .setOrigin(0.5, 1)
+          .setVisible(false);
     // Área jogável usada por câmera e física
     const MAPA_X = 720;
     const MAPA_Y = 100;
@@ -190,6 +203,24 @@ export default class SceneCidade extends Phaser.Scene {
       "sprite_frente_1",
     );
     this.personagem.setCollideWorldBounds(true);
+
+    // Label de coordenadas acima do personagem
+    this.coordLabel = this.add.text(
+      spawnX,
+      spawnY - 40,
+      "",
+      {
+        fontSize: "20px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#ffff00",
+        stroke: "#000000",
+        strokeThickness: 4,
+        align: "center",
+        backgroundColor: "#00000088",
+        padding: { x: 6, y: 2 },
+      }
+    ).setOrigin(0.5, 1).setDepth(1002);
 
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
@@ -2063,7 +2094,7 @@ export default class SceneCidade extends Phaser.Scene {
           }
         }
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, personagem, coordLabel } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -2179,6 +2210,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelLojaDeRoupas.setVisible(dentroLojaDeRoupas);
     }
 
+    // Mostra o botão [E] para entrar no supermercado ao chegar perto da posição x=2924, y=344
     const dentroSupermercado = Phaser.Geom.Rectangle.Contains(
       this.zonaSupermercado,
       personagem.x,
@@ -2187,6 +2219,9 @@ export default class SceneCidade extends Phaser.Scene {
     if (dentroSupermercado !== this.dentroZonaSupermercado) {
       this.dentroZonaSupermercado = dentroSupermercado;
       this.labelSupermercado.setVisible(dentroSupermercado);
+    }
+    if (dentroSupermercado) {
+      this.labelSupermercado.setPosition(2924, 344 - 10);
     }
 
     const dentroPostoDeGasolina = Phaser.Geom.Rectangle.Contains(
@@ -2224,11 +2259,13 @@ export default class SceneCidade extends Phaser.Scene {
         ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
         : "";
 
-    // Debug info desativado
-    // this.debugTxt.setText(
-    //   `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}${hudLocalInfo}`,
-    // );
-    // this.debugTxt.setPosition(personagem.x - 10, personagem.y - 18);
+    // Atualiza label de coordenadas acima do personagem
+    if (coordLabel && personagem) {
+      coordLabel.setText(`x: ${Math.round(personagem.x)}\ny: ${Math.round(personagem.y)}`);
+      coordLabel.setPosition(personagem.x, personagem.y - (personagem.displayHeight / 2) - 10);
+      coordLabel.setVisible(true);
+    }
+
     this.debugTxt.setVisible(false);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();

@@ -271,21 +271,22 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.npcSupermercado = this.physics.add
       .staticImage(53, 157, "npc_supermercado")
       .setDepth(5);
+    // Deixa o tamanho do NPC igual ao do personagem
     const alturaAlvoNpc = this.personagem.displayHeight;
     this.npcSupermercado.setDisplaySize(
-      (this.npcSupermercado.width / this.npcSupermercado.height) *
-        (alturaAlvoNpc * 1.2),
-      alturaAlvoNpc * 1.2,
+      (this.npcSupermercado.width / this.npcSupermercado.height) * alturaAlvoNpc,
+      alturaAlvoNpc
     );
     this.npcSupermercado.refreshBody();
     this.physics.add.collider(this.personagem, this.npcSupermercado);
 
+    // Botão [E] igual às outras cenas
     this.labelNpc = this.add
       .text(this.npcSupermercado.x, this.npcSupermercado.y, "[E] Falar", {
-        fontSize: "3px",
+        fontSize: "6px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 1 },
         resolution: 4,
       })
       .setDepth(20)
@@ -337,12 +338,13 @@ export default class SceneSupermercado extends Phaser.Scene {
     // Define a zona de saída da cena
     this.zonasSaida = this._criarZonasSaida();
 
+    // Botão [E] padronizado para saída
     this.labelSair = this.add
-      .text(0, 0, "[Saída]", {
-        fontSize: "3px",
+      .text(129, 200, "[E] Sair", {
+        fontSize: "6px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 1 },
         resolution: 4,
       })
       .setDepth(20)
@@ -566,25 +568,23 @@ export default class SceneSupermercado extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // Interação com NPC por proximidade (ponto solicitado)
+
+    // Botão [E] igual às outras cenas: aparece ao se aproximar do NPC
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
       this.npcSupermercado.x,
-      this.npcSupermercado.y,
+      this.npcSupermercado.y
     );
-    const pertoNpc = distNpc < 30;
+    const mostrarBotaoE = distNpc < 60; // raio maior para mostrar
+    const pertoNpc = distNpc < 30; // raio menor para interação
 
-    if (pertoNpc !== this.perto_npc) {
-      this.perto_npc = pertoNpc;
-      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    if (mostrarBotaoE !== this.perto_npc) {
+      this.perto_npc = mostrarBotaoE;
+      this.labelNpc.setVisible(mostrarBotaoE && !this.dentroZonaSaida);
     }
-
-    if (pertoNpc) {
-      this.labelNpc.setPosition(
-        this.npcSupermercado.x,
-        this.npcSupermercado.y + 2,
-      );
+    if (mostrarBotaoE) {
+      this.labelNpc.setPosition(this.npcSupermercado.x, this.npcSupermercado.y + 2);
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
@@ -592,7 +592,6 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");
-      
       // Pausa a cena atual e lança o diálogo
       this.scene.pause();
       this.scene.launch("SceneDialogoSupermercado", { cenaOrigem: "SceneSupermercado" });
@@ -620,10 +619,8 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
     }
-
-    if (dentroSaida) {
-      this.labelSair.setPosition(personagem.x, personagem.y - 10);
-    }
+    // Sempre posiciona o botão na porta, mesmo se já visível
+    this.labelSair.setPosition(129, 200 - 10);
 
     // Sai automaticamente ao se aproximar da porta
     if (!this.transicionando && dentroSaida) {
