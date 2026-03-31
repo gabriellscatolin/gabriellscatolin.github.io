@@ -340,8 +340,8 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       .setDepth(999);
 
     // NPC
-    const npcX = this.origemChaoX + this.larguraChao * 0.35;
-    const npcY = this.origemChaoY + this.alturaChao * 0.3;
+    const npcX = this.origemChaoX + this.larguraChao * 0.55;
+    const npcY = this.origemChaoY + this.alturaChao * 0.45;
     this.npcPosto = this.physics.add.staticImage(npcX, npcY, "npc_posto").setDepth(5);
     this.npcPosto.setDisplaySize(
       (this.npcPosto.width / this.npcPosto.height) * (this.personagem.displayHeight * 1.1),

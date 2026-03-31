@@ -69,7 +69,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     );
     this.load.image(
       "npc_agencia03",
-      "src/assets/imagens/imagensPersonagens/NPC/npcAgencia03.png",
+      "src/assets/imagens/imagensPersonagens/NPC/npcPJ1.png",
     );
 
     // ── Spritesheet do personagem ─────────────────────────────────────────────
