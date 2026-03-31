@@ -2309,27 +2309,31 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 
 *Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
 
+# Casos de Teste — Mini Mundo Cielo
+
+## Tabela de Casos de Teste
+
 | # | Pré-condição | Descrição do teste | Pós-condição | Requisitos Relacionados |
 |---|---|---|---|---|
 | 1 | O jogo foi iniciado no navegador e está em processo de carregamento inicial. | Aguardar a abertura completa do jogo e verificar se a tela inicial é exibida corretamente. | A tela inicial é carregada sem erros visuais ou travamentos. | RF01, RNF01 |
 | 2 | A tela inicial foi carregada com sucesso. | Verificar se o fundo da tela inicial está visível, dimensionado corretamente e posicionado de forma adequada. | O fundo é exibido corretamente na tela inicial. | RF01 |
 | 3 | A tela inicial está visível e interativa. | Verificar se os botões principais da tela inicial estão visíveis, identificáveis e clicáveis. | Os botões da tela inicial estão funcionando corretamente. | RF01 |
 | 4 | A tela inicial está carregada e os botões estão visíveis. | Passar o cursor do mouse sobre os botões da tela inicial e observar se há animação visual de destaque. | As animações dos botões são executadas corretamente ao passar o mouse. | RF01 |
-| 5 | O jogador está na tela inicial. | Clicar no botão **Jogar** e verificar se ocorre a transição para a tela de seleção de personagens. | A transição para a tela de seleção de personagens ocorre corretamente. | RF01, RF04 |
+| 5 | O jogador está na tela inicial. | Clicar no botão Jogar e verificar se ocorre a transição para a tela de seleção de personagens. | A transição para a tela de seleção de personagens ocorre corretamente. | RF01, RF04 |
 | 6 | A tela de seleção de personagens foi carregada. | Verificar se os personagens são exibidos corretamente na tela de seleção. | Os personagens são carregados corretamente e ficam visíveis para seleção. | RF04 |
 | 7 | A tela de seleção de personagens está aberta. | Passar o cursor do mouse sobre os personagens e observar se ocorre o destaque visual previsto. | O efeito de hover é aplicado corretamente aos personagens. | RF04 |
 | 8 | A tela de seleção de personagens está aberta e interativa. | Selecionar um personagem com um clique e verificar se o carregamento do mundo é iniciado com o personagem escolhido. | O mundo do jogo é carregado com o personagem selecionado. | RF04 |
-| 9 | O mundo do jogo foi carregado com o personagem selecionado. | Utilizar as teclas **W, A, S e D** para movimentar o personagem em diferentes direções. | O personagem se movimenta corretamente conforme os comandos do jogador. | RF02 |
+| 9 | O mundo do jogo foi carregado com o personagem selecionado. | Utilizar as teclas W, A, S e D para movimentar o personagem em diferentes direções. | O personagem se movimenta corretamente conforme os comandos do jogador. | RF02 |
 | 10 | O personagem está posicionado em uma área com obstáculos no cenário. | Tentar movimentar o personagem em direção a barreiras ou objetos com colisão. | O personagem não atravessa os obstáculos do cenário. | RF02 |
 | 11 | O mundo do jogo foi iniciado após a seleção do personagem. | Observar a interface logo após o início da fase e verificar se o tutorial é exibido. | O tutorial aparece corretamente ao jogador. | RF16 |
-| 12 | A tela inicial foi carregada com sucesso. | Clicar no botão **Créditos** e verificar se a listagem de colaboradores é exibida corretamente. | A tela ou sobreposição de créditos é aberta corretamente. | RF01 |
+| 12 | A tela inicial foi carregada com sucesso. | Clicar no botão Créditos e verificar se a listagem de colaboradores é exibida corretamente. | A tela ou sobreposição de créditos é aberta corretamente. | RF01 |
 | 13 | A tela de créditos está aberta. | Fechar a tela de créditos e verificar se o jogo retorna ao menu inicial sem falhas. | O jogador retorna corretamente à tela inicial. | RF01 |
-| 14 | A tela inicial foi carregada com sucesso. | Clicar no botão **Configurações** e verificar se o submenu de ajustes globais é aberto. | O menu de configurações é exibido corretamente. | RF01, RNF06 |
+| 14 | A tela inicial foi carregada com sucesso. | Clicar no botão Configurações e verificar se o submenu de ajustes globais é aberto. | O menu de configurações é exibido corretamente. | RF01, RNF06 |
 | 15 | O menu de configurações está aberto. | Alterar o volume para diferentes valores dentro do intervalo permitido e verificar se o ajuste é aceito pelo sistema. | O controle de volume responde corretamente às alterações realizadas. | RNF06 |
 | 16 | O menu de configurações está aberto. | Alterar a configuração de brilho e observar se há mudança perceptível na apresentação visual. | O brilho é ajustado corretamente de acordo com a configuração escolhida. | RNF06 |
 | 17 | O menu de configurações está aberto. | Ativar e desativar o filtro de daltonismo, verificando se a mudança visual é aplicada ao jogo. | O filtro de daltonismo é ativado e desativado corretamente. | RNF06 |
-| 18 | O jogador se encontra no prólogo, em uma área próxima à NPC Vanessa. | Aproximar o personagem da NPC e verificar se o prompt de interação com a tecla **E** é exibido. | O prompt de interação aparece corretamente quando o jogador se aproxima da NPC. | RF03, RF07 |
-| 19 | O jogador está próximo da NPC Vanessa e o prompt de interação está visível. | Pressionar a tecla **E** para iniciar o diálogo com a NPC. | O diálogo com a NPC é iniciado corretamente. | RF03, RF07 |
+| 18 | O jogador se encontra no prólogo, em uma área próxima à NPC Vanessa. | Aproximar o personagem da NPC e verificar se o prompt de interação com a tecla E é exibido. | O prompt de interação aparece corretamente quando o jogador se aproxima da NPC. | RF03, RF07 |
+| 19 | O jogador está próximo da NPC Vanessa e o prompt de interação está visível. | Pressionar a tecla E para iniciar o diálogo com a NPC. | O diálogo com a NPC é iniciado corretamente. | RF03, RF07 |
 | 20 | O diálogo com a NPC Vanessa foi iniciado. | Tentar movimentar o personagem durante o diálogo e verificar se o controle do jogador permanece bloqueado até o fim da interação. | O jogador não consegue se mover durante o diálogo, e o bloqueio funciona corretamente. | RF09 |
 | 21 | O jogador concluiu o diálogo do prólogo com a NPC Vanessa e o gatilho de progressão foi ativado. | Deslocar o personagem até a área de entrada do ônibus e verificar se a cutscene é iniciada corretamente. | A cutscene do ônibus é iniciada ao entrar na área de gatilho. | RF14 |
 | 22 | A cutscene do ônibus foi iniciada. | Acompanhar a execução completa da cutscene e verificar se a transição para o banco ocorre corretamente ao final. | A transição para o hub do banco é concluída corretamente após a cutscene. | RF14 |
@@ -2356,7 +2360,6 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 | 43 | O jogador concluiu parcialmente os objetivos de uma missão. | Abrir a interface de acompanhamento da missão e verificar se o progresso parcial é exibido corretamente. | O jogador visualiza quantos objetivos já foram cumpridos e quantos ainda faltam. | RF12, RF16 |
 | 44 | O jogador acabou de concluir uma missão principal. | Verificar se o jogo apresenta feedback imediato de missão concluída. | O sistema exibe mensagem, animação ou pop-up confirmando a conclusão da missão. | RF10, RF12 |
 | 45 | O jogador concluiu uma missão e recebeu uma nova rota no mapa. | Abrir o mapa e verificar se o novo destino da missão é exibido corretamente. | O mapa passa a orientar a nova etapa da progressão. | RF05, RF12, RF16 |
-
 | 46 | O jogador está em uma fase com múltiplas missões sequenciais. | Concluir a missão anterior e verificar se a missão seguinte é liberada automaticamente. | A próxima missão da sequência fica disponível. | RF12, RF13 |
 | 47 | O jogador está em uma missão que exige interação com NPC antes de prosseguir. | Tentar avançar sem falar com o NPC obrigatório da missão. | O jogo impede a progressão até que a interação obrigatória seja realizada. | RF07, RF12, RF16 |
 | 48 | O jogador ainda não concluiu os objetivos mínimos exigidos para avançar. | Tentar acessar a área, evento ou nível seguinte antes de concluir a missão atual. | O acesso à próxima etapa permanece bloqueado. | RF12, RF13 |
@@ -2365,27 +2368,21 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 | 51 | O jogador concluiu um nível e retorna ao hub ou menu de seleção. | Verificar se o progresso do nível anterior permanece salvo ao reentrar no jogo. | O progresso permanece registrado corretamente. | RF13, RNF07 |
 | 52 | O jogador inicia um novo nível após desbloqueá-lo. | Verificar se os objetivos do novo nível são apresentados com clareza no início da fase. | O jogador recebe instruções iniciais e entende o novo objetivo. | RF13, RF16, RNF07 |
 | 53 | O jogador está no início de um nível mais avançado. | Verificar se as tarefas apresentam aumento perceptível de complexidade em relação ao nível anterior. | O nível demonstra progressão de dificuldade de forma coerente. | RF13 |
-
 | 54 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta de maior qualidade durante a interação comercial. | O sistema registra corretamente melhor desempenho e recompensa proporcional em CieloCoins. | RF08, RF11, RF12 |
 | 55 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta intermediária durante a interação comercial. | O sistema registra corretamente desempenho intermediário e recompensa compatível. | RF08, RF11, RF12 |
 | 56 | O jogador concluiu uma interação de venda com desempenho abaixo do esperado. | Verificar se o sistema apresenta feedback pedagógico orientando melhoria antes da próxima missão. | O jogador recebe retorno educativo sobre erros e acertos. | RF10, RF11, RNF04 |
-
 | 57 | O jogador iniciou um quiz vinculado à progressão da missão. | Responder corretamente ao quiz e verificar se o objetivo da missão é atualizado. | O sistema registra o acerto e atualiza o progresso da missão. | RF11, RF12 |
 | 58 | O jogador iniciou um quiz obrigatório para continuar a fase. | Responder incorretamente ao quiz e verificar se o jogo fornece feedback e mantém a missão pendente. | O erro é registrado, o jogador recebe feedback e precisa tentar novamente ou seguir instrução alternativa. | RF10, RF11, RF16 |
 | 59 | O jogador está em uma missão com etapa de puzzle obrigatória. | Resolver o puzzle corretamente e verificar se a próxima etapa narrativa é liberada. | A missão avança para a próxima etapa após a solução do puzzle. | RF11, RF12 |
 | 60 | O jogador está em uma missão com etapa de puzzle obrigatória. | Falhar na resolução do puzzle e verificar se o sistema registra a falha sem quebrar o fluxo do jogo. | A falha é registrada e o jogador pode refazer ou receber orientação adicional. | RF10, RF11, RF16 |
-
 | 61 | O jogador está em transição entre duas missões conectadas narrativamente. | Verificar se uma cutscene ou evento intermediário é executado antes de liberar a próxima missão. | A transição narrativa ocorre corretamente e preserva o fluxo de progressão. | RF14, RF12, RF13 |
 | 62 | O jogador sai de uma interação narrativa obrigatória e retorna ao controle do personagem. | Verificar se os controles são reativados somente após o término completo do evento. | O controle é restaurado no momento correto, sem antecipação ou atraso. | RF09 |
 | 63 | O jogador pausou o jogo durante uma fase com missão ativa. | Retomar a partida e verificar se o progresso da missão permanece inalterado. | O estado da missão é preservado após a pausa. | RF15, RF12 |
-
 | 64 | O jogador completa uma missão relacionada ao aprendizado de técnica de venda. | Verificar se a missão concluída está coerente com a proposta pedagógica do jogo. | A missão reforça corretamente o conteúdo de vendas e atendimento. | RNF04, RF12 |
 | 65 | O jogador percorre uma rota de missão baseada em situação real de atendimento. | Verificar se o objetivo da missão representa adequadamente uma situação prática do contexto comercial. | A progressão mantém coerência com situações reais do vendedor. | RNF05, RF12 |
 | 66 | O jogador conclui todos os requisitos principais de progressão. | Verificar se o jogo apresenta sensação clara de evolução por meio de desbloqueios, feedbacks e transições. | A progressão é percebida de forma intuitiva e contínua pelo jogador. | RF12, RF13, RNF07 |
-
 | 67 | O jogador inicia uma nova sessão no navegador após já ter avançado anteriormente. | Verificar se o fluxo do jogo direciona o jogador ao ponto compatível com seu progresso, e não ao início absoluto sem motivo. | O acesso respeita a progressão já alcançada, se houver sistema de continuidade implementado. | RF13, RNF07 |
 | 68 | O jogador tenta repetir uma missão já concluída, caso o sistema ofereça essa opção. | Verificar se a repetição da missão não corrompe o progresso principal do jogo. | O progresso principal é mantido consistente mesmo com repetição. | RF12, RF13 |
-
 | 69 | O jogador concluiu a última missão do último nível do jogo. | Verificar se o sistema encerra a progressão principal e direciona o jogador para a cena final. | A progressão é encerrada corretamente e a cena final é iniciada. | RF17 |
 | 70 | A cena final do jogo foi iniciada após a conclusão de todos os objetivos principais. | Assistir à execução completa da cena final e verificar se o encerramento é apresentado corretamente. | O jogo exibe a tela de encerramento ou os créditos finais de forma adequada. | RF17 |
 
