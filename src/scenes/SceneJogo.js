@@ -134,7 +134,7 @@ export default class SceneJogo extends Phaser.Scene {
     // Indicador [E] que aparece quando o jogador está perto do NPC
     this.indicadorE = this.add
       .text(430, 615, "[E]", {
-        fontSize: "18px",
+        fontSize: "36px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",
