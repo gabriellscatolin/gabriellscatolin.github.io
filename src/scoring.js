@@ -45,9 +45,9 @@ export const SCORING_CONFIG = {
 const METAS_BASE = {
   agency1_gg:  150,
   agency1_pj:  150,
-  padaria:     150,
-  farmacia:    200,
-  escritorio:  250,
+  padaria:     200,
+  farmacia:    250,
+  escritorio:  300,
   agency2:     400,
   cabeleleiro: 400,
   restaurante: 450,
