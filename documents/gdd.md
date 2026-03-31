@@ -2351,6 +2351,43 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 | 38 | O menu de pausa está aberto. | Selecionar a opção de retornar ao jogo. | O menu de pausa é fechado e o jogo continua normalmente. | RF15 |
 | 39 | O jogador concluiu todas as missões e níveis do jogo. | Aguardar a conclusão final da última missão e observar o comportamento do sistema. | A cutscene ou cena final do jogo é exibida ao jogador. | RF17 |
 | 40 | A cena final do jogo foi iniciada. | Assistir à execução completa da cena final. | O jogo apresenta a tela de encerramento ou os créditos finais. | RF17 |
+| 41 | O jogador concluiu uma missão com sucesso e ainda permanece na fase atual. | Verificar se o sistema registra a missão como concluída no progresso do jogador. | A missão passa a constar como concluída no sistema de progresso. | RF12, RF13 |
+| 42 | O jogador concluiu uma missão que concede CieloCoins como recompensa. | Finalizar a missão e verificar se a quantidade correta de CieloCoins é adicionada ao total do jogador. | O saldo de CieloCoins é atualizado corretamente. | RF12 |
+| 43 | O jogador concluiu parcialmente os objetivos de uma missão. | Abrir a interface de acompanhamento da missão e verificar se o progresso parcial é exibido corretamente. | O jogador visualiza quantos objetivos já foram cumpridos e quantos ainda faltam. | RF12, RF16 |
+| 44 | O jogador acabou de concluir uma missão principal. | Verificar se o jogo apresenta feedback imediato de missão concluída. | O sistema exibe mensagem, animação ou pop-up confirmando a conclusão da missão. | RF10, RF12 |
+| 45 | O jogador concluiu uma missão e recebeu uma nova rota no mapa. | Abrir o mapa e verificar se o novo destino da missão é exibido corretamente. | O mapa passa a orientar a nova etapa da progressão. | RF05, RF12, RF16 |
+
+| 46 | O jogador está em uma fase com múltiplas missões sequenciais. | Concluir a missão anterior e verificar se a missão seguinte é liberada automaticamente. | A próxima missão da sequência fica disponível. | RF12, RF13 |
+| 47 | O jogador está em uma missão que exige interação com NPC antes de prosseguir. | Tentar avançar sem falar com o NPC obrigatório da missão. | O jogo impede a progressão até que a interação obrigatória seja realizada. | RF07, RF12, RF16 |
+| 48 | O jogador ainda não concluiu os objetivos mínimos exigidos para avançar. | Tentar acessar a área, evento ou nível seguinte antes de concluir a missão atual. | O acesso à próxima etapa permanece bloqueado. | RF12, RF13 |
+| 49 | O jogador termina todas as missões principais de um nível. | Verificar se o jogo reconhece o cumprimento completo dos requisitos da fase. | A fase é encerrada corretamente e o avanço é autorizado. | RF12, RF13 |
+| 50 | O jogador completou um nível inteiro com todas as metas previstas. | Verificar se o sistema salva o nível como concluído e marca o próximo como disponível. | O nível atual é registrado como concluído e o próximo é desbloqueado. | RF13 |
+| 51 | O jogador concluiu um nível e retorna ao hub ou menu de seleção. | Verificar se o progresso do nível anterior permanece salvo ao reentrar no jogo. | O progresso permanece registrado corretamente. | RF13, RNF07 |
+| 52 | O jogador inicia um novo nível após desbloqueá-lo. | Verificar se os objetivos do novo nível são apresentados com clareza no início da fase. | O jogador recebe instruções iniciais e entende o novo objetivo. | RF13, RF16, RNF07 |
+| 53 | O jogador está no início de um nível mais avançado. | Verificar se as tarefas apresentam aumento perceptível de complexidade em relação ao nível anterior. | O nível demonstra progressão de dificuldade de forma coerente. | RF13 |
+
+| 54 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta de maior qualidade durante a interação comercial. | O sistema registra corretamente melhor desempenho e recompensa proporcional em CieloCoins. | RF08, RF11, RF12 |
+| 55 | O jogador iniciou uma negociação com um cliente. | Selecionar uma resposta intermediária durante a interação comercial. | O sistema registra corretamente desempenho intermediário e recompensa compatível. | RF08, RF11, RF12 |
+| 56 | O jogador concluiu uma interação de venda com desempenho abaixo do esperado. | Verificar se o sistema apresenta feedback pedagógico orientando melhoria antes da próxima missão. | O jogador recebe retorno educativo sobre erros e acertos. | RF10, RF11, RNF04 |
+
+| 57 | O jogador iniciou um quiz vinculado à progressão da missão. | Responder corretamente ao quiz e verificar se o objetivo da missão é atualizado. | O sistema registra o acerto e atualiza o progresso da missão. | RF11, RF12 |
+| 58 | O jogador iniciou um quiz obrigatório para continuar a fase. | Responder incorretamente ao quiz e verificar se o jogo fornece feedback e mantém a missão pendente. | O erro é registrado, o jogador recebe feedback e precisa tentar novamente ou seguir instrução alternativa. | RF10, RF11, RF16 |
+| 59 | O jogador está em uma missão com etapa de puzzle obrigatória. | Resolver o puzzle corretamente e verificar se a próxima etapa narrativa é liberada. | A missão avança para a próxima etapa após a solução do puzzle. | RF11, RF12 |
+| 60 | O jogador está em uma missão com etapa de puzzle obrigatória. | Falhar na resolução do puzzle e verificar se o sistema registra a falha sem quebrar o fluxo do jogo. | A falha é registrada e o jogador pode refazer ou receber orientação adicional. | RF10, RF11, RF16 |
+
+| 61 | O jogador está em transição entre duas missões conectadas narrativamente. | Verificar se uma cutscene ou evento intermediário é executado antes de liberar a próxima missão. | A transição narrativa ocorre corretamente e preserva o fluxo de progressão. | RF14, RF12, RF13 |
+| 62 | O jogador sai de uma interação narrativa obrigatória e retorna ao controle do personagem. | Verificar se os controles são reativados somente após o término completo do evento. | O controle é restaurado no momento correto, sem antecipação ou atraso. | RF09 |
+| 63 | O jogador pausou o jogo durante uma fase com missão ativa. | Retomar a partida e verificar se o progresso da missão permanece inalterado. | O estado da missão é preservado após a pausa. | RF15, RF12 |
+
+| 64 | O jogador completa uma missão relacionada ao aprendizado de técnica de venda. | Verificar se a missão concluída está coerente com a proposta pedagógica do jogo. | A missão reforça corretamente o conteúdo de vendas e atendimento. | RNF04, RF12 |
+| 65 | O jogador percorre uma rota de missão baseada em situação real de atendimento. | Verificar se o objetivo da missão representa adequadamente uma situação prática do contexto comercial. | A progressão mantém coerência com situações reais do vendedor. | RNF05, RF12 |
+| 66 | O jogador conclui todos os requisitos principais de progressão. | Verificar se o jogo apresenta sensação clara de evolução por meio de desbloqueios, feedbacks e transições. | A progressão é percebida de forma intuitiva e contínua pelo jogador. | RF12, RF13, RNF07 |
+
+| 67 | O jogador inicia uma nova sessão no navegador após já ter avançado anteriormente. | Verificar se o fluxo do jogo direciona o jogador ao ponto compatível com seu progresso, e não ao início absoluto sem motivo. | O acesso respeita a progressão já alcançada, se houver sistema de continuidade implementado. | RF13, RNF07 |
+| 68 | O jogador tenta repetir uma missão já concluída, caso o sistema ofereça essa opção. | Verificar se a repetição da missão não corrompe o progresso principal do jogo. | O progresso principal é mantido consistente mesmo com repetição. | RF12, RF13 |
+
+| 69 | O jogador concluiu a última missão do último nível do jogo. | Verificar se o sistema encerra a progressão principal e direciona o jogador para a cena final. | A progressão é encerrada corretamente e a cena final é iniciada. | RF17 |
+| 70 | A cena final do jogo foi iniciada após a conclusão de todos os objetivos principais. | Assistir à execução completa da cena final e verificar se o encerramento é apresentado corretamente. | O jogo exibe a tela de encerramento ou os créditos finais de forma adequada. | RF17 |
 
 <sub>Fonte: Autoria Própria (2026) </sub>
 </div>
