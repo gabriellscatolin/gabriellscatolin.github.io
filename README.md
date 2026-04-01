@@ -21,13 +21,14 @@
 
 ## 👩‍🏫 Professores:
 ### Orientador(a) 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do orientador</a>
+- <a href="https://www.linkedin.com/in/vanunes/">Vanessa Tavares Nunes</a>
 ### Instrutores
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 1</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 2</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 3</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 4</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 5</a> 
+- <a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/
+">Geraldo Magela Severino Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/pedroteberga/">Pedro Teberga</a> 
+- <a href="https://www.linkedin.com/in/victorbarq/">Fabiana Martins</a> 
+- <a href="https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/">Cristiano Benites</a>
+- <a href="https://www.linkedin.com/in/victorbarq/">Ana Cristina Do Santos</a> 
 
 ## 📜 Descrição
 
