@@ -138,8 +138,14 @@ const COR_NEUTRA  = 0x1a3a5c;
 const COR_ERRADA  = 0x6a1a1a;
 
 export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
+    update() {
+      if (this.estado === "fim" && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+        this._fechar();
+      }
+    }
   constructor() {
     super({ key: "SceneDialogoPostoDeGasolina" });
+    this.imagemKey = "falaPosto";
   }
 
   init(dados) {

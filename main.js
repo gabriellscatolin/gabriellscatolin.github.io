@@ -47,7 +47,6 @@ const config = {
     },
   },
   scene: [
-    ScenePostoDeGasolina,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,

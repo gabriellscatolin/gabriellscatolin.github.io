@@ -258,9 +258,9 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       }
     });
 
-    // Usa um spawn fixo calculado dentro da área útil do posto
-    const spawnX = this.origemChaoX + this.larguraChao * 0.5;
-    const spawnY = this.origemChaoY + this.alturaChao * 0.7;
+    // Spawn fixo solicitado
+    const spawnX = 301;
+    const spawnY = 396;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
     this.personagem.setCollideWorldBounds(true);
@@ -309,12 +309,15 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Define a zona de saída próxima à porta
+    // Define zonas de saída: antiga + nova solicitada
     this.zonasSaida = [
       { x: this.origemChaoX + 48, y: this.origemChaoY + 160, raio: 24 },
+      { x: 301, y: 422, raio: 24 },
     ];
     this.dentroZonaSaida = false;
     this.transicionando = false;
+
+    this.podeSairPosto = false;
 
     this.labelSair = this.add
       .text(this.origemChaoX + 48, this.origemChaoY + 160, "[E] Sair", {
@@ -352,13 +355,15 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
     this.labelNpcPosto = this.add
       .text(npcX, npcY, "[E] Falar", {
-        fontSize: "3px",
+        fontSize: "6px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 1 },
         resolution: 4,
       })
-      .setDepth(20).setOrigin(0.5, 1).setVisible(false);
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
 
     this.exclamacaoPosto = this.add
       .text(npcX, npcY - this.npcPosto.displayHeight * 0.5, "!", {
@@ -378,8 +383,8 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.pertoPosto = false;
-    this.falouComPosto = false;
+    this.perto_npc = false;
+    this.falouComNpc = false;
 
     // Pausa a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
@@ -679,21 +684,28 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // Interação com NPC do posto
+    // Interação com NPC do posto (padrão supermercado/padaria)
     if (this.npcPosto) {
-      const distPosto = Phaser.Math.Distance.Between(
-        personagem.x, personagem.y, this.npcPosto.x, this.npcPosto.y
+      const distNpc = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        this.npcPosto.x,
+        this.npcPosto.y
       );
-      const pertoNpc = distPosto < 24;
-      if (pertoNpc !== this.pertoPosto) {
-        this.pertoPosto = pertoNpc;
-        this.labelNpcPosto.setVisible(pertoNpc);
+      const mostrarBotaoE = distNpc < 60;
+      const pertoNpc = distNpc < 30;
+
+      if (mostrarBotaoE !== this.perto_npc) {
+        this.perto_npc = mostrarBotaoE;
+        this.labelNpcPosto.setVisible(mostrarBotaoE && !this.dentroZonaSaida);
       }
-      if (pertoNpc) {
+      if (mostrarBotaoE) {
         this.labelNpcPosto.setPosition(this.npcPosto.x, this.npcPosto.y + 2);
       }
-      if (pertoNpc && !this.falouComPosto && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-        this.falouComPosto = true;
+
+      // Só permite diálogo se NÃO estiver na zona de saída
+      if (pertoNpc && !this.falouComNpc && !this.dentroZonaSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+        this.falouComNpc = true;
         this.exclamacaoPosto.setVisible(false);
         this.scene.pause();
         this.scene.launch("SceneDialogoPostoDeGasolina", { cenaOrigem: "ScenePostoDeGasolina" });
@@ -716,13 +728,13 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       this.labelSair.setVisible(dentroSaida);
     }
 
-    // Transição para a cidade ao se aproximar da saída e apertar E
-    if (
-      !this.transicionando &&
-      dentroSaida &&
-      !this.pertoPosto &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    // Evita saída imediata ao entrar na cena: precisa sair da zona uma vez
+    if (!this.podeSairPosto && !dentroSaida) {
+      this.podeSairPosto = true;
+    }
+
+    // Transição automática para a cidade ao entrar na zona de saída
+    if (!this.transicionando && this.podeSairPosto && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
