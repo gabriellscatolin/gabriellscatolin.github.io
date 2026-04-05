@@ -30,10 +30,17 @@ export default class SceneMapaInterativo extends Phaser.Scene {
 
     // Imagem de fundo do mapa interativo
     this.load.image("mapaInterativo",   baseFotos + "mapaInterativo.png");
+
+    // Som da cena
+    this.load.audio("trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3');
   }
 
   create() {
     const { width, height } = this.cameras.main;
+
+    // Adiciona som na cena
+    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // DEBUG — texto no canto inferior esquerdo mostrando as coordenadas
     // do cursor em tempo real. Útil para ajustar as zonas (zona.x/y/w/h).
@@ -493,6 +500,11 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         }
       }
     });
+
+    // Pausa a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+     });
 
     // -----------------------------------------------------------------------
     // ATALHO DE TECLADO — ESC

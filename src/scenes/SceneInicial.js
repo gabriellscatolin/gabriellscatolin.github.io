@@ -88,7 +88,7 @@ export default class SceneInicial extends Phaser.Scene {
       }
     });
 
-    // Pausa  a trilha sonora ao iniciar nova cena
+    // Pausa a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
      this.musica.stop();
     });
