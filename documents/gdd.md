@@ -2408,18 +2408,18 @@ O que poderia melhorar no jogo? | A responsividade do personagem aos controles, 
 
 ### 5.2.2 Melhorias
 
-&emsp;Com base nos resultados obtidos durante os playtests e nas observações realizadas pela equipe ao longo do desenvolvimento, foram identificadas algumas oportunidades de melhoria relacionadas principalmente à responsividade dos controles, clareza das mecânicas e feedback fornecido ao jogador.
+&emsp; Com base nos resultados obtidos durante os playtests e nas observações realizadas pela equipe ao longo do desenvolvimento, foram identificadas algumas oportunidades de melhoria relacionadas principalmente à responsividade dos controles, clareza das mecânicas e feedback fornecido ao jogador.
 
-A análise das sessões de teste indicou que parte dos participantes, especialmente aqueles com menor experiência prévia com jogos digitais, apresentou dificuldades na compreensão inicial das interações e objetivos do jogo. Considerando que o público-alvo do projeto inclui jogadores mais velhos, essas melhorias foram definidas com o objetivo de tornar a experiência mais acessível, intuitiva e compreensível.
+&emsp; A análise das sessões de teste indicou que parte dos participantes, especialmente aqueles com menor experiência prévia com jogos digitais, apresentou dificuldades na compreensão inicial das interações e objetivos do jogo. Considerando que o público-alvo do projeto inclui jogadores mais velhos, essas melhorias foram definidas com o objetivo de tornar a experiência mais acessível, intuitiva e compreensível.
 
-A Tabela 4 apresenta os principais problemas identificados durante os testes, bem como sua origem, prioridade de desenvolvimento e o plano de ação proposto.
+# Justificativa das Prioridades
 
-Justificativa das Prioridades
+&emsp; A priorização das melhorias foi definida considerando principalmente o *impacto* de cada problema na experiência inicial do jogador, bem como sua influência na compreensão das mecânicas fundamentais do jogo.
 
-A priorização das melhorias foi definida considerando principalmente o impacto de cada problema na experiência inicial do jogador, bem como sua influência na compreensão das mecânicas fundamentais do jogo.
+&emsp; A *Tabela 8* apresenta os principais problemas identificados durante os testes, bem como sua origem, prioridade de desenvolvimento e o plano de ação proposto.
 
 <div align="center">
-<sub>Tabela 4 - Plano de Melhorias Pós-Playtest</sub>
+<sub>Tabela 8 - Plano de Melhorias Pós-Playtest</sub>
 
 | # | Problema Identificado | Origem | Prioridade | Plano de Ação |
 |---|---|---|---|---|
@@ -2433,17 +2433,17 @@ A priorização das melhorias foi definida considerando principalmente o impacto
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
 
-As melhorias M1 e M2 receberam prioridade alta, pois estão diretamente relacionadas à compreensão dos objetivos e à orientação do jogador dentro do jogo. Durante os testes, foi observado que alguns participantes tiveram dificuldade em identificar o que deveria ser feito em determinados momentos, o que pode comprometer a progressão e gerar frustração, especialmente entre jogadores com menor familiaridade com jogos digitais.
+&emsp; As melhorias **M1** e **M2** receberam prioridade **alta**, pois estão diretamente relacionadas à compreensão dos objetivos e à orientação do jogador dentro do jogo. Durante os testes, foi observado que alguns participantes tiveram dificuldade em identificar o que deveria ser feito em determinados momentos, o que pode comprometer a progressão e gerar frustração, especialmente entre jogadores com menor familiaridade com jogos digitais.
 
-As melhorias M3, M4 e M5 foram classificadas como prioridade média, pois contribuem para melhorar a clareza das interações e o entendimento das mecânicas disponíveis. A presença de indicadores visuais, tutoriais contextuais e feedbacks de conclusão de missão pode facilitar a interpretação das ações do jogador e tornar a experiência mais intuitiva.
+&emsp; As melhorias **M3**, **M4** e **M5** foram classificadas como prioridade **média**, pois contribuem para melhorar a clareza das interações e o entendimento das mecânicas disponíveis. A presença de indicadores visuais, tutoriais contextuais e feedbacks de conclusão de missão pode facilitar a interpretação das ações do jogador e tornar a experiência mais intuitiva.
 
-Por fim, a melhoria M6 recebeu prioridade baixa, pois está relacionada ao balanceamento das escolhas nos primeiros diálogos de negociação. Embora essa melhoria contribua para aprimorar a experiência narrativa e estratégica do jogo, ela não impede diretamente a progressão do jogador.
+&emsp; Por fim, a melhoria **M6** recebeu prioridade **baixa**, pois está relacionada ao balanceamento das escolhas nos primeiros diálogos de negociação. Embora essa melhoria contribua para aprimorar a experiência narrativa e estratégica do jogo, ela não impede diretamente a progressão do jogador.
 
-Conclusão
+# Conclusão
 
-A identificação dessas melhorias evidencia a importância da realização de playtests durante o desenvolvimento de jogos, pois permite identificar dificuldades reais enfrentadas pelos jogadores e orientar decisões de design baseadas na experiência do usuário.
+&emsp; A identificação dessas melhorias evidencia a importância da realização de playtests durante o desenvolvimento de jogos, pois permite identificar dificuldades reais enfrentadas pelos jogadores e orientar decisões de design baseadas na experiência do usuário.
 
-A implementação das melhorias propostas contribuirá para tornar o jogo mais acessível, claro e intuitivo, especialmente para jogadores com menor experiência em jogos digitais. 
+&emsp; A implementação das melhorias propostas contribuirá para tornar o jogo mais acessível, claro e intuitivo, especialmente para jogadores com menor experiência em jogos digitais. 
 
 # <a name="c6"></a>6. Conclusões e trabalhos futuros (sprint 5)
 
