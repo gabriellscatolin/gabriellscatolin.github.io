@@ -2393,18 +2393,104 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 
 ### 5.2.1 Registros de testes
 
-*Descreva nesta seção as sessões de teste/entrevista com diferentes jogadores. Registre cada teste conforme o template a seguir.*
+Para avaliar a experiência do jogador e identificar possíveis melhorias no jogo, foram realizados 12 playtests com dois grupos de participantes:
 
-Nome | João Jonas (use nomes fictícios)
---- | ---
-Já possuía experiência prévia com games? | sim, é um jogador casual
-Conseguiu iniciar o jogo? | sim
-Entendeu as regras e mecânicas do jogo? | entendeu as regras, mas sobre as mecânicas, apenas as essenciais, não explorou os comandos complexos
-Conseguiu progredir no jogo? | sim, sem dificuldades  
-Apresentou dificuldades? | Não, conseguiu jogar com facilidade e afirmou ser fácil
-Que nota deu ao jogo? | 9.0
-O que gostou no jogo? | Gostou  de como o jogo vai ficando mais difícil ao longo do tempo sem deixar de ser divertido
-O que poderia melhorar no jogo? | A responsividade do personagem aos controles, disse que havia um pouco de atraso desde o momento do comando até a resposta do personagem
+- **7 estudantes universitários**
+- **5 participantes com perfil semelhante ao público-alvo do jogo**
+
+Os nomes apresentados são fictícios, utilizados apenas para fins de organização e registro das sessões de teste.
+
+A divisão entre os grupos permitiu comparar a experiência de jogadores com maior familiaridade com jogos digitais com a de jogadores que representam o público-alvo principal do projeto.
+
+Os testes foram realizados em notebooks, em sessões individuais com duração média entre 10 e 15 minutos. Durante esse período, os participantes exploraram o jogo livremente enquanto foram observados aspectos relacionados à compreensão das mecânicas, progressão nas missões, dificuldades encontradas e percepção geral da experiência.
+
+As sessões ocorreram sem interferência direta dos avaliadores, permitindo observar dificuldades naturais de navegação, interação e compreensão dos objetivos. Ao final da experiência, os participantes também forneceram comentários qualitativos e uma nota geral para o jogo.
+
+# Registro detalhado dos participantes
+
+A Tabela 1 apresenta o registro completo dos 12 playtests realizados, incluindo informações sobre o perfil dos participantes, experiência prévia com jogos, compreensão das mecânicas, progressão no jogo, dificuldades relatadas, avaliação geral e sugestões de melhoria.
+
+
+
+# Perfil dos participantes
+
+[FIGURA 1 — Experiência prévia com jogos digitais]
+
+O gráfico apresenta a proporção de participantes com experiência prévia em jogos. Observa-se que a maioria dos estudantes já possuía familiaridade com jogos digitais, enquanto parte dos participantes do público-alvo apresentou experiência limitada, o que influencia diretamente a facilidade de compreensão das mecânicas e controles.
+
+# Distribuição das Avaliações
+
+[FIGURA 2 — Distribuição das notas atribuídas pelos jogadores]
+
+A maior parte das avaliações ficou entre 7 e 8 pontos, indicando uma percepção geral positiva da experiência. Mesmo entre participantes com menor experiência em jogos, o jogo foi considerado interessante e visualmente atrativo.
+
+# Análise dos Testes — Estudantes
+
+Entre os estudantes, a maioria conseguiu iniciar e progredir no jogo sem grandes dificuldades, demonstrando boa compreensão dos controles e das mecânicas básicas.
+
+As principais dificuldades observadas foram:
+
+- identificação de objetivos no mapa  
+- alguns bugs de interface  
+- quantidade de perguntas nos quizzes  
+
+Apesar dessas questões, vários participantes destacaram positivamente o design visual, ambientação, cutscenes e o mini game.
+
+# Interpretação
+
+Os estudantes demonstraram maior facilidade em compreender os controles e as mecânicas básicas, porém ainda foram identificados problemas relacionados principalmente à interface e à clareza dos objetivos das missões.
+
+Isso indica que, mesmo para jogadores experientes, alguns elementos do jogo ainda precisam de melhorias para facilitar a progressão. 
+
+
+# Análise dos Testes — Público-Alvo (Jogadores mais velhos)
+
+Os participantes que representam o público-alvo apresentaram maior dificuldade com controles e interações iniciais, especialmente aqueles com menor experiência prévia em jogos digitais.
+
+As principais dificuldades observadas foram:
+
+- movimentação utilizando WASD
+- identificação de zonas de interação
+- compreensão de alguns elementos do HUD
+- entendimento do mini game
+
+Durante alguns testes foi observado que alguns jogadores **exploraram o cenário por alguns minutos antes de perceber o NPC responsável por iniciar a missão**, indicando que a sinalização de objetivos poderia ser mais clara.
+
+Apesar dessas dificuldades, os participantes destacaram positivamente a diversidade dos personagens, narrativa, ambientação e o mini game.
+
+# Interpretação
+
+Jogadores com menor experiência em jogos digitais apresentaram maior dificuldade em compreender os controles e as interações básicas do jogo.
+
+Esse resultado indica a necessidade de melhorias como tutoriais mais claros e instruções mais objetivas
+
+# Comparação entre grupos
+
+[FIGURA 3 — Comparação de dificuldades entre estudantes e público-alvo]
+
+A figura apresenta uma comparação entre as dificuldades relatadas por estudantes e participantes com perfil semelhante ao público-alvo do jogo. Os estudantes relataram com maior frequência bugs e problemas de orientação no mapa, enquanto o público-alvo apresentou mais dificuldades relacionadas à interação com objetos e compreensão de algumas mecânicas.
+
+Essa diferença indica que jogadores com menor familiaridade com jogos digitais podem necessitar de tutoriais mais claros, feedback visual e melhor sinalização de elementos interativos, contribuindo para tornar a experiência mais acessível e intuitiva.
+
+# Análise Geral dos Playtests
+
+[FIGURA 4 — Principais dificuldades encontradas durante os testes]
+
+A figura apresenta a frequência das principais dificuldades relatadas pelos participantes durante os testes do jogo. Observa-se que os problemas mais recorrentes estiveram relacionados a bugs técnicos, orientação de objetivos no mapa e interação com elementos do jogo, indicando pontos em que a experiência do jogador pode ser aprimorada.
+
+Esses problemas foram observados em ambos os grupos, mas tiveram **impacto maior entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
+
+# Conclusão
+
+Os playtests realizados permitiram identificar pontos importantes de melhoria relacionados principalmente à interface, orientação do jogador e feedback das mecânicas.
+
+Também foi possível observar diferenças relevantes entre jogadores experientes e jogadores que representam o **público-alvo do projeto**, especialmente em relação à compreensão dos controles e das interações iniciais.
+
+Apesar dessas dificuldades, os participantes apresentaram **avaliações positivas sobre o jogo**, destacando principalmente o **design visual, ambientação, personagens e mini game**.
+
+Esses resultados indicam que o projeto possui uma base sólida, podendo ser aprimorado com melhorias voltadas à acessibilidade, clareza das mecânicas e orientação do jogador, especialmente considerando as necessidades do público-alvo mais velho.
+
+
 
 ### 5.2.2 Melhorias
 
