@@ -54,7 +54,11 @@ export default class SceneJogo extends Phaser.Scene {
       "falaVanessa",
       "src/assets/imagens/imagensFalas/falaVanessa.png",
     );
-    this.load.image("onibus", "src/assets/imagens/sprites/onibus.png");
+    this.load.image("onibus", "src/assets/imagens/sprites/onibus.png"
+    );
+    this.load.audio("trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3'
+    );
+
 
     // Carrega os sprites do personagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${this.nomePastaEscolhida}`;
@@ -93,6 +97,10 @@ export default class SceneJogo extends Phaser.Scene {
     this.fundoImage = this.add.image(0, 0, "mapaPonteImage").setOrigin(0, 0);
     this.fundoImage.displayWidth = this.scale.width;
     this.fundoImage.displayHeight = this.scale.height;
+
+    // Adiciona audios a cena
+    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica.play();
 
     // Ônibus estático com só a traseira aparecendo na borda direita
     this.onibusSprite = this.add
@@ -441,6 +449,12 @@ export default class SceneJogo extends Phaser.Scene {
         this.npcSprite = null;
       },
     });
+
+    // Pausa a trilha sonora ao iniciar nova cena
+     this.events.on("shutdown", () => {
+     this.musica.stop();
+     });
+
   }
 
   update() {
