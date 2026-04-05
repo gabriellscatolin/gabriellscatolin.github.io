@@ -38,15 +38,10 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // DEBUG — texto no canto inferior esquerdo mostrando as coordenadas
     // do cursor em tempo real. Útil para ajustar as zonas (zona.x/y/w/h).
     const txtDebugCoords = this.add
-      .text(16, height - 16, "x: 0 y: 0", {
+      .text(16, height - 16, {
         fontSize: "16px",
-        color: "#ffffff",
-        backgroundColor: "rgba(0, 0, 0, 0.55)",
-        padding: { x: 10, y: 6 },
       })
-      .setOrigin(0, 1)  // ancora no canto inferior esquerdo
-      .setDepth(320);   // fica acima de tudo
-
+    
 
     // DADOS DOS ESTABELECIMENTOS
     // Cada objeto representa um local clicável no mapa.
@@ -120,7 +115,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "escritorio",
         nome: "Escritório",
         tipo: "Corporativo",
-        zona: { x: 515, y: 581, w: 170, h: 130 },
+        zona: { x: 527, y: 581, w: 100, h: 130 },
         imgLocal: "localEscritorio",
         personagem: {
           nome: "Gabriel",
@@ -161,35 +156,25 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         tipo: "Serviços",
         zona: { x: 60, y: 323, w: 150, h: 120 },
         imgLocal: "localAgencia01",
-        personagem: {
-          nome: "Agente Silva",
-          cargo: "Agente",
-          imgPersonagem: "fotoGabriel", // Placeholder enquanto não há foto própria
-          historia: "Agente dedicado aos serviços da comunidade, sempre pronto para ajudar.",
-        },
+        historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
       {
         id: "agencia02",
         nome: "Agência 02",
         tipo: "Serviços",
-        zona: { x: 607, y: 839, w: 150, h: 120 },
-        imgLocal: "localAgencia02",
-        personagem: {
-          nome: "Agente Costa",
-          cargo: "Agente",
-          imgPersonagem: "fotoGabriel", // Placeholder enquanto não há foto própria
-          historia: "Especialista em resolver problemas locais com eficiência.",
-        },
+        zona: { x: 549, y: 750, w: 150, h: 120 },
+        imgLocal: "localAgencia02", // ← certifique-se que o arquivo no disco se chama localAgencia02.png
+        historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
-      {     
+      {       
         id: "agencia03",
         nome: "Agência 03",
         tipo: "Serviços",
-        zona: { x: 561, y: 768, w: 150, h: 120 },
+        zona: { x: 950, y: 314, w: 150, h: 120 }, // ← coordenadas corrigidas
         imgLocal: "localAgencia03",
         historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
-            
+
       {
         // Metro NÃO tem personagem — só exibe a história do local no painel.
         // A função mostrarPainel trata esse caso separadamente.
@@ -285,7 +270,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Nome do estabelecimento (ex: "Farmácia")
     const txtNomeLocal = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "22px", color: "#ffffff", fontStyle: "bold",
+        fontSize: "30px", color: "#ffffff", fontStyle: "bold",
         wordWrap: { width: painelW - margem * 2 },
       })
       .setVisible(false);
@@ -293,7 +278,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Tipo/categoria (ex: "Saúde")
     const txtTipo = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "11px", color: "#aaaacc",
+        fontSize: "20px", color: "#aaaacc",
         wordWrap: { width: painelW - margem * 2 },
       })
       .setVisible(false);
@@ -301,7 +286,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Nome do personagem (ao lado do avatar)
     const txtNomeChar = this.add
       .text(painelX + margem + avatarSize + 10, 0, "", {
-        fontSize: "13px", color: "#ffdd57", fontStyle: "bold",
+        fontSize: "20px", color: "#ffdd57", fontStyle: "bold",
         wordWrap: { width: painelW - margem * 2 - avatarSize - 10 },
       })
       .setVisible(false);
@@ -309,7 +294,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Cargo do personagem (abaixo do nome)
     const txtCargo = this.add
       .text(painelX + margem + avatarSize + 10, 0, "", {
-        fontSize: "11px", color: "#aaaacc",
+        fontSize: "17px", color: "#aaaacc",
         wordWrap: { width: painelW - margem * 2 - avatarSize - 10 },
       })
       .setVisible(false);
@@ -317,7 +302,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Texto da história (do personagem ou do local, dependendo do estabelecimento)
     const txtHistoria = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "20px", color: "#eeeeff",
+        fontSize: "27px", color: "#eeeeff",
         wordWrap: { width: painelW - margem * 2 },
         lineSpacing: 5,
       })
@@ -326,7 +311,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Dica inicial exibida quando nenhum local está selecionado
     const txtHint = this.add
       .text(painelX + painelW / 2, height / 2, "Passe o cursor\nsobre um local\nno mapa", {
-        fontSize: "13px", color: "#666688", align: "center",
+        fontSize: "30px", color: "#666688", align: "center",
       })
       .setOrigin(0.5);
 
@@ -347,7 +332,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
       txtHint.setVisible(false);
       imgLocalPlaceholder.setVisible(true);
 
-      // Foto do local 
+      // Foto do local
       // Destrói o sprite anterior antes de criar um novo
       if (imgLocalSprite) imgLocalSprite.destroy();
       if (this.textures.exists(dados.imgLocal)) {
@@ -418,7 +403,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           .setVisible(true);
 
       } else {
-        // Este estabelecimento NÃO tem personagem (ex: Metro):
+        // Este estabelecimento NÃO tem personagem (ex: Metro, Agência 03):
         // esconde nome/cargo e exibe apenas a história do próprio local
         txtNomeChar.setVisible(false);
         txtCargo.setVisible(false);
