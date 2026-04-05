@@ -2418,7 +2418,8 @@ Justificativa das Prioridades
 
 A priorização das melhorias foi definida considerando principalmente o impacto de cada problema na experiência inicial do jogador, bem como sua influência na compreensão das mecânicas fundamentais do jogo.
 
-**Tabela 4 — Plano de Melhorias Pós-Playtest**
+<div align="center">
+<sub>Tabela 4 - Plano de Melhorias Pós-Playtest</sub>
 
 | # | Problema Identificado | Origem | Prioridade | Plano de Ação |
 |---|---|---|---|---|
@@ -2429,8 +2430,8 @@ A priorização das melhorias foi definida considerando principalmente o impacto
 | M5 | Ausência de feedback visual claro ao completar missões ou objetivos. | Identificado pela equipe durante a análise dos testes | Média | Implementar animações ou efeitos visuais que indiquem claramente a conclusão de objetivos e reforcem a sensação de progresso. |
 | M6 | Diferença pouco clara entre escolhas nos primeiros diálogos de negociação. | Observação durante os playtests | Baixa | Ajustar as respostas iniciais dos NPCs para tornar mais evidente a diferença entre escolhas adequadas e inadequadas. |
 
-Fonte: Autoria própria (2026).
-
+<sub>Fonte: Autoria Própria (2026)</sub>
+</div>
 
 As melhorias M1 e M2 receberam prioridade alta, pois estão diretamente relacionadas à compreensão dos objetivos e à orientação do jogador dentro do jogo. Durante os testes, foi observado que alguns participantes tiveram dificuldade em identificar o que deveria ser feito em determinados momentos, o que pode comprometer a progressão e gerar frustração, especialmente entre jogadores com menor familiaridade com jogos digitais.
 
@@ -2443,20 +2444,6 @@ Conclusão
 A identificação dessas melhorias evidencia a importância da realização de playtests durante o desenvolvimento de jogos, pois permite identificar dificuldades reais enfrentadas pelos jogadores e orientar decisões de design baseadas na experiência do usuário.
 
 A implementação das melhorias propostas contribuirá para tornar o jogo mais acessível, claro e intuitivo, especialmente para jogadores com menor experiência em jogos digitais. 
-
-
-<div align="center">
-<sub>Tabela 4 - Plano de Melhorias Pós-Playtest</sub>
-
-| # | Problema Identificado | Origem | Prioridade | Plano de Ação |
-|---|----------------------|--------|:---:|---------------|
-| M1 | Atraso na resposta do personagem aos comandos de movimento (input lag) | Feedback do testador João Jonas | Alta | Revisar a lógica da função `update()` para garantir que a aplicação de velocidade ocorra antes do cálculo de posição no mesmo frame; avaliar redução do `frameRate` de animação para eliminar sobrecarga. |
-| M2 | Mecânicas avançadas não exploradas espontaneamente pelo jogador | Observação durante o playtest | Média | Expandir o tutorial inicial para apresentar todos os controles disponíveis (E para interação, F para tela cheia, ESC para pausa) de forma gradual e contextualizada. |
-| M3 | Ausência de feedback visual ao completar uma missão com sucesso | Identificado pela equipe | Média | Implementar animação de celebração (ex: efeito de partículas ou tela de resultado) ao atingir o objetivo de moedas da missão. |
-| M4 | Dificuldade não percebida nos primeiros diálogos de negociação | Observação durante o playtest | Baixa | Rebalancear as respostas dos primeiros NPCs para que a diferença entre opções adequada/inadequada seja mais clara, servindo como tutorial implícito de negociação. |
-
-<sub>Fonte: Autoria Própria (2026)</sub>
-</div>
 
 # <a name="c6"></a>6. Conclusões e trabalhos futuros (sprint 5)
 
