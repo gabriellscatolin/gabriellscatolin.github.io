@@ -2493,7 +2493,7 @@ Essa diferença indica que jogadores com menor familiaridade com jogos digitais 
 
 A figura apresenta a frequência das principais dificuldades relatadas pelos participantes durante os testes do jogo. Observa-se que os problemas mais recorrentes estiveram relacionados a bugs técnicos, orientação de objetivos no mapa e interação com elementos do jogo, indicando pontos em que a experiência do jogador pode ser aprimorada.
 
-Esses problemas foram observados em ambos os grupos, mas tiveram **impacto maior entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
+Esses problemas foram observados em ambos os grupos, mas tiveram **maior impacto entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
 
 # Conclusão
 
