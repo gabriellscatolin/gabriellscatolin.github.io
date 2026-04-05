@@ -48,7 +48,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "farmacia",
         nome: "Farmácia",
         tipo: "Saúde",
-        zona: { x: 80, y: 420, w: 220, h: 160 },
+        zona: { x: 214, y: 574, w: 220, h: 160 },
         imgLocal: "localFarmacia",
         personagem: {
           nome: "Rachel",
@@ -61,7 +61,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "padaria",
         nome: "Padaria",
         tipo: "Gastronomia",
-        zona: { x: 300, y: 270, w: 140, h: 110 },
+        zona: { x: 336, y: 334, w: 140, h: 110 },
         imgLocal: "localPadaria",
         personagem: {
           nome: "Sofia",
@@ -74,7 +74,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "mercado",
         nome: "Mercado",
         tipo: "Comércio",
-        zona: { x: 500, y: 300, w: 160, h: 130 },
+        zona: { x: 1172, y: 77, w: 160, h: 130 },
         imgLocal: "localMercado",
         personagem: {
           nome: "Alicia",
@@ -87,7 +87,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "restaurante",
         nome: "Restaurante",
         tipo: "Gastronomia",
-        zona: { x: 650, y: 180, w: 150, h: 120 },
+        zona: { x: 1023, y: 40, w: 150, h: 120 },
         imgLocal: "localRestaurante",
         personagem: {
           nome: "Lucas",
@@ -100,7 +100,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "escritorio",
         nome: "Escritório",
         tipo: "Corporativo",
-        zona: { x: 400, y: 100, w: 170, h: 130 },
+        zona: { x: 515, y: 581, w: 170, h: 130 },
         imgLocal: "localEscritorio",
         personagem: {
           nome: "Gabriel",
@@ -113,7 +113,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "loja",
         nome: "Loja de Roupas",
         tipo: "Moda & Varejo",
-        zona: { x: 200, y: 150, w: 130, h: 100 },
+        zona: { x: 777, y: 803, w: 130, h: 100 },
         imgLocal: "localLojaRoupas",
         personagem: {
           nome: "Eduardo",
@@ -126,13 +126,65 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         id: "posto",
         nome: "Posto de Gasolina",
         tipo: "Combustíveis",
-        zona: { x: 700, y: 400, w: 150, h: 110 },
+        zona: { x: 1089, y: 722, w: 150, h: 110 },
         imgLocal: "localPosto",
         personagem: {
           nome: "Nicolas",
           cargo: "Frentista & Mecânico",
           imgPersonagem: "fotoNicolas",
           historia: "Todo carro que entra na cidade para no posto de Nicolas. Ele anota tudo — quem chegou, que horas e com quem.",
+        },
+      },
+      {
+        id: "agencia01",
+        nome: "Agência 01",
+        tipo: "Serviços",
+        zona: { x: 60, y: 323, w: 150, h: 120 },
+        imgLocal: "localAgencia01",
+        personagem: {
+          nome: "Agente Silva",
+          cargo: "Agente",
+          imgPersonagem: "fotoGabriel", // Placeholder
+          historia: "Agente dedicado aos serviços da comunidade, sempre pronto para ajudar.",
+        },
+      },
+      {
+        id: "agencia02",
+        nome: "Agência 02",
+        tipo: "Serviços",
+        zona: { x: 607, y: 839, w: 150, h: 120 },
+        imgLocal: "localAgencia02",
+        personagem: {
+          nome: "Agente Costa",
+          cargo: "Agente",
+          imgPersonagem: "fotoGabriel", // Placeholder
+          historia: "Especialista em resolver problemas locais com eficiência.",
+        },
+      },
+      {
+        id: "agencia03",
+        nome: "Agência 03",
+        tipo: "Serviços",
+        zona: { x: 561, y: 768, w: 150, h: 120 },
+        imgLocal: "localAgencia03",
+        personagem: {
+          nome: "Agente Lima",
+          cargo: "Agente",
+          imgPersonagem: "fotoGabriel", // Placeholder
+          historia: "Comprometido com o atendimento e bem-estar da população.",
+        },
+      },
+      {
+        id: "metro",
+        nome: "Metro",
+        tipo: "Transporte",
+        zona: { x: 1237, y: 609, w: 150, h: 120 },
+        imgLocal: "localMetro",
+        personagem: {
+          nome: "Funcionário Metro",
+          cargo: "Bilheteiro",
+          imgPersonagem: "fotoNicolas", // Placeholder
+          historia: "Responsável por facilitar o transporte diário dos moradores.",
         },
       },
     ];
