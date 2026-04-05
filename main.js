@@ -26,6 +26,7 @@ import SceneDialogoRestaurante from "./src/scenesdialogos/SceneDialogoRestaurant
 import SceneDialogoSupermercado from "./src/scenesdialogos/SceneDialogoSupermercado.js";
 import SceneDialogoPostoDeGasolina from "./src/scenesdialogos/SceneDialogoPostoDeGasolina.js";
 import SceneMiniGame from "./src/scenes/SceneMiniGame.js"
+import SceneMapaInterativo from "./src/scenes/SceneMapaInterativo.js"
 
 const config = {
   type: Phaser.AUTO,
@@ -55,6 +56,7 @@ const config = {
     SceneJogo,
     SceneMetro,
     SceneMiniGame,
+    SceneMapaInterativo,
     SceneEscritorio,
     ScenePadaria,
     SceneFarmacia,
