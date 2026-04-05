@@ -21,13 +21,14 @@
 
 ## 👩‍🏫 Professores:
 ### Orientador(a) 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do orientador</a>
+- <a href="https://www.linkedin.com/in/vanunes/">Vanessa Tavares Nunes</a>
 ### Instrutores
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 1</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 2</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 3</a> 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 4</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 5</a> 
+- <a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/
+">Geraldo Magela Severino Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/pedroteberga/">Pedro Teberga</a> 
+- <a href="https://www.linkedin.com/in/victorbarq/">Fabiana Martins</a> 
+- <a href="https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/">Cristiano Benites</a>
+- <a href="https://www.linkedin.com/in/victorbarq/">Ana Cristina Do Santos</a> 
 
 ## 📜 Descrição
 
@@ -55,15 +56,22 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 ## 🗃 Histórico de lançamentos
 
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
+
+
+**0.1.0 – 18/02/2026**  
+Na versão inicial do projeto, foi estruturada a base do Game Design Document (GDD) do **Mini Mundo Cielo**, com o levantamento preliminar do problema proposto pelo parceiro e da solução em formato de serious game educacional. Foram definidos os primeiros requisitos funcionais do jogo, organizados de acordo com uma ordem lógica de desenvolvimento, além da criação inicial da board Kanban com tarefas distribuídas entre os integrantes do grupo. No protótipo, foi implementada ao menos uma cena funcional, contemplando movimentação básica de personagem e primeiros testes de navegação no ambiente.
+
+**0.2.0 – 04/03/2026**  
+Na segunda sprint, o GDD foi ampliado com a definição do público-alvo, visão geral do jogo, características principais da experiência, concept arts iniciais, diagramas de cenas e diversidade dos personagens. Também foram refinados os requisitos do projeto e elaborada a primeira versão dos casos de teste. Paralelamente, o projeto passou a contar com pelo menos duas cenas integradas e funcionais, com elementos gráficos e mecânicas básicas já conectadas entre si. Houve ainda atualização da board Kanban e consolidação do direcionamento visual e narrativo do jogo.
+
+**0.3.0 – 19/03/2026**  
+Na terceira versão, o GDD recebeu aprofundamento das regras e mecânicas do jogo, com atualização das subseções relacionadas à estrutura de funcionamento, integração entre cenas e evolução do protótipo. A lista de casos de teste foi expandida e ajustada de acordo com o estágio atual do projeto, incluindo testes de cenas e fluxos integrados. No desenvolvimento do jogo, avançaram as implementações de movimentação, interação com NPCs, transições entre cenas e lógica de progressão. Também foram realizadas revisões na organização da board Kanban, alinhando prioridades e tarefas ao valor agregado ao produto.
+
+**0.4.0 – 03/04/2026**  
+Com base na evolução do projeto, a quarta sprint consolidou elementos estratégicos e técnicos do Mini Mundo Cielo. No GDD, foram adicionados o Canvas de Proposta de Valor, a descrição detalhada da solução, a matriz de riscos e os objetivos, metas e indicadores do projeto. Também foi incluída a modelagem matemática do movimento bidimensional, descrevendo a animação com base em vetores e cinemática, conforme exigido na documentação. No protótipo, foram finalizadas mecânicas essenciais do jogo, ampliadas as interações e realizado o deploy intermediário, além de testes mais robustos sobre a experiência e a progressão do jogador.
+
+**0.5.0 – 10/04/2026**  
+Na versão final do MVP, o projeto recebeu revisão completa de documentação, atualização dos casos de teste, registro dos resultados de playtest e consolidação das propostas de melhorias futuras. O GDD foi finalizado com as seções de encerramento, trabalhos futuros e referências, garantindo alinhamento entre documentação e versão entregue do jogo. No produto final, foram realizados ajustes de polimento em interface, progressão, feedbacks, estabilidade, sons e fluxo de navegação, além do deploy final do MVP. A sprint também contemplou a preparação da apresentação em formato de pitch e a adequação do projeto aos critérios de publicação institucional.
     *
 
 ## 📋 Licença/License

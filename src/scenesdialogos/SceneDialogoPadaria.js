@@ -1,7 +1,13 @@
-// Cena de dialogo da padaria com escolhas baseadas no roteiro
+// Cena de diálogo da padaria com escolhas baseadas no roteiro
 import SceneDialogoBase from "./SceneDialogoBase.js";
+import {
+  initScoring,
+  handleAnswer,
+  checkGoal,
+  getScore,
+  goalEscalado,
+} from "../scoring.js";
 
-// Embaralha a ordem das escolhas da cena
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -14,7 +20,6 @@ function shuffleArray(arr) {
 function esperar(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
 
 // Configuracoes da API para respostas dinamicas
 const GROQ_API_KEY = "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";
@@ -22,135 +27,212 @@ const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // Roteiro principal da fase da padaria
-// Cada item descreve uma etapa da conversa com titulo, contexto, alternativas e resposta esperada
 const ROTEIRO = [
   {
     titulo: "CENA 1 - ABERTURA",
     narracao:
-      'Ambiente: Padaria cheia. Sofia no caixa, visivelmente cansada.\n"Aborde a cliente da melhor forma possível"',
+      'Ambiente: Padaria cheia. Sofia no caixa, visivelmente cansada, atendendo rápido.\n"Aborde a cliente da melhor forma possível."',
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia... tá naquele ritmo puxado de sempre ou hoje apertou mais?",
+        texto: "Bom dia… movimento forte hoje. Tá sendo um daqueles dias puxados desde cedo?",
         tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Abordagem empática e contextual. Mostra percepção do ambiente e abre espaço para conversa.",
       },
       {
         letra: "B",
-        texto: "Bom dia! Trabalho com soluções para melhorar o seu financeiro aqui na padaria. Tá lotado aqui.",
-        tipo: "errada",
+        texto: "Bom dia! Esse horário costuma ser o mais cheio aqui?",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Pergunta válida, mas superficial. Não gera conexão emocional.",
       },
       {
         letra: "C",
-        texto: "Bom dia! Esse horário costuma ser mais cheio aqui na padaria?",
-        tipo: "neutra",
-      },
-    ],
-    npcResposta:
-      "Bom dia. Aqui na padaria de manhã é sempre cheio. E hoje ainda acordei mais cedo...",
-  },
-  {
-    titulo: "CENA 2 - DIAGNÓSTICO",
-    narracao: null,
-    npcInicial: null, 
-    escolhas: [
-      {
-        letra: "A",
-        texto: "Todo mundo passar por isso. Com esse movimento, o faturamento deve ser alto, né? ",
+        texto: "Bom dia! Trabalho com soluções financeiras pra padaria. Posso te explicar rapidinho?",
         tipo: "errada",
-      },
-      {
-        letra: "B",
-        texto: "Que bom que é assim, você costuma ter bastante cliente recorrente aqui no dia a dia?", 
-        tipo: "neutra",
-      },
-      {
-        letra: "C",
-        texto: "Te entendo, e no fim do mês, você sente que esse movimento todo vira resultado?",
-        tipo: "correta",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Abordagem direta demais. Tenta vender antes de criar conexão.",
       },
     ],
     npcResposta:
-      "Então... assumi aqui depois que meu pai morreu, estou entendo tudo. O problema é que até entra dinheiro, mas parece que não sobra. Eu trabalho o mês inteiro e fico com essa sensação.",
+      "Bom dia… aqui de manhã é sempre assim. Hoje ainda comecei mais cedo… tá puxado.",
   },
   {
-    titulo: "CENA 3 - EXPLORAÇÃO",
+    titulo: "CENA 2 - CONEXÃO E CONTEXTO",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Isso pode ser custo de fornecedor ou desperdício no estoque. Tem que ver o quanto você confia nos seus funcionários.",
-        tipo: "errada",
+        texto: "Imagino o quanto cansa… e no fim do mês, esse movimento todo acaba compensando?",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Explora a dor real do cliente. Boa transição de empatia para diagnóstico.",
       },
       {
         letra: "B",
-        texto: "Você já conseguiu ver direitinho quanto fica nas taxas e no dinheiro que antecipa?",
-        tipo: "correta",
+        texto: "Mas pelo menos é bom que não falta cliente, né?",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Comentário positivo, mas não aprofunda o problema.",
       },
       {
         letra: "C",
-        texto: "É importante saber se você trabalha mais com cartão ou dinheiro aqui na padaria.",
-        tipo: "neutra",
+        texto: "Com esse movimento todo, você deve estar faturando bem, né?",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Suposição equivocada. Pode gerar resistência e quebra de confiança.",
       },
     ],
     npcResposta:
-      "Confesso que lidar com tanto não é fácil. Entendo pouco de taxa, os clientes pagam em dinheiro e cartão.",
+      "Então… eu assumi aqui depois que meu pai faleceu. Ainda tô aprendendo tudo… entra dinheiro, mas parece que não sobra. Trabalho o mês inteiro e não vejo isso virar resultado.",
   },
   {
-    titulo: "CENA 4 - DIRECIONAMENTO",
+    titulo: "CENA 3 - EXPLORAÇÃO DO PROBLEMA",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Tem bastante detalhe nessas cobranças, mas dá para organizar melhor depois. Precisa analisar tudo com calma. ",
-        tipo: "neutra",
+        texto: "Você costuma acompanhar direitinho quanto paga nas taxas e quando antecipa vendas?",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Direciona para a causa do problema de forma técnica e acessível.",
       },
       {
         letra: "B",
-        texto: "Ás vezes não é a venda, é o quanto vai ficando pelo caminho nas taxas e antecipações.",
-        tipo: "correta",
+        texto: "Aqui o pessoal paga mais no cartão ou no dinheiro?",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Ajuda no contexto, mas ainda não chega na dor principal.",
       },
       {
         letra: "C",
-        texto: "O problema deve ser a taxa da sua maquininha, que provavelmente é alta. Precisa ver isso...",
+        texto: "Isso costuma ser problema de gestão ou equipe… tem que olhar melhor isso aí.",
         tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Julgamento precoce. Pode gerar defensividade e travar a conversa.",
       },
     ],
     npcResposta:
-      "Preciso analisar... porque eu vendo bem, mas quando olho no final... não bate com o esforço.",
+      "Pra ser sincera… não muito. Eu sei que tem taxa, tem antecipação… mas no dia a dia não consigo parar pra entender tudo isso.",
   },
   {
-    titulo: "CENA 5 - VALOR",
+    titulo: "CENA 4 - CLAREZA DO PROBLEMA",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Se você trocar agora, já consegue reduzir bastante esses custos seus. Se a situação está tão ruim assim...",
-        tipo: "errada",
+        texto: "Às vezes não é que vende pouco… é que parte do dinheiro vai ficando nas taxas e nas antecipações sem perceber.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Gera clareza. Ajuda o cliente a enxergar o problema de forma simples.",
       },
       {
         letra: "B",
-        texto: "Se você visse claramente quando paga no total e onde dá para ajustar, ajudaria no seu mês?",
-        tipo: "correta",
+        texto: "Tem bastante detalhe nisso mesmo… depois com calma dá pra organizar melhor.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Não está errado, mas é genérico e pouco educativo.",
       },
       {
         letra: "C",
-        texto: "Posso te mostrar várias opções, a Cielo resolve tudo que você precisar. Poderia interessar bastante. Pode ser?",
-        tipo: "neutra",
+        texto: "Então você precisa rever isso urgente, porque está perdendo dinheiro.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Tom impositivo. Aponta problema sem construir entendimento.",
       },
     ],
     npcResposta:
-      "Ok!",
+      "Faz sentido… porque eu vendo bem, mas quando olho no final… não bate com o esforço.",
+  },
+  {
+    titulo: "CENA 5 - GERAÇÃO DE VALOR",
+    narracao: null,
+    npcInicial: null,
+    escolhas: [
+      {
+        letra: "A",
+        texto: "Se você conseguisse enxergar claramente quanto paga no total e onde ajustar, ajudaria no seu resultado?",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Conecta solução com a dor. Faz o cliente reconhecer valor.",
+      },
+      {
+        letra: "B",
+        texto: "A Cielo tem várias soluções que podem ajudar nisso. Posso te mostrar depois?",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Introduz a solução, mas ainda sem gerar percepção forte de valor.",
+      },
+      {
+        letra: "C",
+        texto: "Então você precisa trocar sua maquininha urgente, porque isso está errado.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Venda direta e agressiva. Não respeita o tempo de decisão do cliente.",
+      },
+    ],
+    npcResposta:
+      "Ajudaria sim… porque hoje eu sinto que trabalho muito e não tenho clareza pra onde tá indo o dinheiro.",
+  },
+  {
+    titulo: "CENA 6 - CONDUÇÃO PARA PRÓXIMO PASSO",
+    narracao:
+      "Contexto: Sofia já reconheceu o problema e demonstrou interesse.",
+    npcInicial: null,
+    escolhas: [
+      {
+        letra: "A",
+        texto: "Se fizer sentido pra você, posso olhar isso com você rapidinho depois, sem compromisso. Só pra te mostrar onde pode estar ficando esse dinheiro.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Condução leve e respeitosa. Foca em ajudar antes de vender e reduz a barreira de decisão.",
+      },
+      {
+        letra: "B",
+        texto: "Se quiser, posso te explicar melhor como funciona a Cielo em outro momento.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Abre porta, mas é genérico e pouco conectado com a dor da cliente.",
+      },
+      {
+        letra: "C",
+        texto: "Então vamos fazer assim, já vou pedir pra trocar sua maquininha e você começa a usar a Cielo.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Avança rápido demais. Ignora o tempo da cliente e pode gerar rejeição.",
+      },
+    ],
+    npcResposta:
+      "Olha… eu quero sim entender melhor. Mas agora tô no meio da correria. Você consegue passar mais tarde?",
   },
 ];
 
-
 const CAPITULO = "chapter1";
-const FASE     = "padaria";
-const N_CENAS  = ROTEIRO.length; // 5 perguntas
+const FASE = "padaria";
+const N_CENAS = ROTEIRO.length;
 
 // Paleta visual usada para diferenciar estado padrao, hover e feedback das respostas
 const COR_NEUTRO = 0x1d2b4a;
@@ -163,30 +245,27 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoPadaria" });
 
-    // Configurações da personagem e do comportamento da conversa
     this.imagemKey = "falaPadaria";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Voce e a atendente de uma padaria muito movimentada. " +
-      "Voce e agil, pratica e valoriza um atendimento rapido e sem atritos no caixa.";
+      "Você é a atendente de uma padaria muito movimentada. " +
+      "Você é ágil, prática e valoriza um atendimento rápido e sem atritos no caixa.";
   }
 
   init(dados) {
     super.init(dados);
 
-    // "estado" organiza o fluxo da interface entre tutorial, intro, escolha, resposta e fim
-
-    // Estados iniciais da fase e da pontuação
-    this.cenaIdx                 = 0;
-    this.pontuacaoFase           = 0;
+    this.cenaIdx = 0;
+    this.pontuacaoFase = 0;
     this.cieloCoinsGanhasDialogo = 0;
-    this.estado                  = "tutorial";
-    this.aguardandoLLM           = false;
+    this.estado = "tutorial";
+    this.aguardandoLLM = false;
+    this.escolhaAtual = null;
+    this.respostaAtualNpc = "";
     initScoring(this.registry);
   }
 
   preload() {
-    // Carrega a imagem da personagem se ainda não estiver disponivel
     if (!this.textures.exists("falaPadaria")) {
       this.load.image(
         "falaPadaria",
@@ -196,8 +275,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   create() {
-    // Define medidas base da interface
-    // A composicao separa a arte na parte superior e a area interativa na parte inferior
     const W = this.scale.width;
     const H = this.scale.height;
     const CX = W / 2;
@@ -216,27 +293,21 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     const BTN_H = 82;
     const CONT_Y = PANEL_TOP + PANEL_H - 38;
 
-    // Guarda a posicao do botao principal para reaproveitar no fluxo da cena
     this._CONT_Y = CONT_Y;
 
-    // Fundo escurecido da cena de dialogo
     this.add.rectangle(CX, H / 2, W, H, 0x000000, 0.78)
       .setScrollFactor(0).setDepth(0).setInteractive();
 
-    // Imagem principal da personagem
     const img = this.add.image(CX, IMG_CY, "falaPadaria")
       .setScrollFactor(0).setDepth(1).setOrigin(0.5);
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
-    // Painel inferior com textos e escolhas
-    // A linha horizontal cria a separacao visual entre ilustracao e interface de dialogo
     this.add.rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
       .setScrollFactor(0).setDepth(2);
     this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
       .setScrollFactor(0).setDepth(3);
 
-    // Nome da personagem exibido nas falas
     this.textoNome = this.add.text(
       CX - BTN_W / 2,
       NOME_Y,
@@ -249,7 +320,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       },
     ).setScrollFactor(0).setDepth(3).setVisible(false);
 
-    // Texto de narração da cena
     this.textoNarracao = this.add.text(CX, NAR_Y + 30, "", {
       fontSize: "40px",
       color: "#e8f4ff",
@@ -259,7 +329,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(3);
 
-    // Fala atual da NPC
     this.textoNpc = this.add.text(CX, TEXTO_NPC_Y, "", {
       fontSize: "40px",
       color: "#e8f4ff",
@@ -268,8 +337,22 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(3);
 
-    // Cria os botoes interativos das alternativas
-    // Cada alternativa tem fundo, marcador de letra e texto separados para facilitar os estados visuais
+    this.textoFeedbackTitulo = this.add.text(CX, PANEL_TOP + 60, "", {
+      fontSize: "38px",
+      color: "#ffd166",
+      fontStyle: "bold",
+      align: "center",
+      resolution: 4,
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+
+    this.textoFeedback = this.add.text(CX, TEXTO_NPC_Y, "", {
+      fontSize: "32px",
+      color: "#e8f4ff",
+      wordWrap: { width: BTN_W },
+      align: "center",
+      resolution: 4,
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
@@ -280,12 +363,17 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
 
-      const labelLetra = this.add.text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
-        fontSize: "20px",
-        color: "#776fe6",
-        fontStyle: "bold",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const labelLetra = this.add.text(
+        CX - BTN_W / 2 + 16,
+        by + BTN_H / 2,
+        `[${letra}]`,
+        {
+          fontSize: "20px",
+          color: "#776fe6",
+          fontStyle: "bold",
+          resolution: 4,
+        },
+      ).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
       const txtEscolha = this.add.text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
         fontSize: "30px",
@@ -294,21 +382,26 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
         resolution: 4,
       }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-      // Enquanto a cena aguarda resposta, os eventos visuais e de clique ficam bloqueados
-      bg.on("pointerover", () => { if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER); });
-      bg.on("pointerout", () => { if (!this.aguardandoLLM) bg.setFillStyle(COR_NEUTRO); });
-      bg.on("pointerdown", () => { if (!this.aguardandoLLM) this._aoEscolher(i); });
+      bg.on("pointerover", () => {
+        if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER);
+      });
+      bg.on("pointerout", () => {
+        if (!this.aguardandoLLM) bg.setFillStyle(COR_NEUTRO);
+      });
+      bg.on("pointerdown", () => {
+        if (!this.aguardandoLLM) this._aoEscolher(i);
+      });
 
       return { bg, labelLetra, txtEscolha };
     });
 
-    // Botao para avancar entre as etapas da conversa
     this.btnContinuar = this.add.rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(3)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
+
     this.txtContinuar = this.add.text(CX, CONT_Y, "", {
       fontSize: "22px",
       color: "#ffffff",
@@ -316,20 +409,17 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    // Efeitos visuais do botao continuar
     this.btnContinuar.on("pointerover", () => this.btnContinuar.setFillStyle(0x2a7c2a));
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    // Texto mostrado enquanto a resposta e processada
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Sofia esta pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Sofia está pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    // Exibe a pontuacao acumulada da sessao
     this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 500", {
       fontSize: "30px",
       color: "#ffd700",
@@ -338,7 +428,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
 
-    // Mostra o titulo da cena atual
     this.textoCena = this.add.text(20, 16, "", {
       fontSize: "40px",
       color: "#ffffff",
@@ -347,23 +436,18 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0, 0).setScrollFactor(0).setDepth(10);
 
-    // Atalho para fechar o resultado final
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    // Cria o tutorial inicial da fase
     this._criarTutorial(W, H, CX, H / 2);
   }
 
   update() {
-    // Fecha a cena final ao apertar E
     if (this.estado === "fim" && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this._fechar();
     }
   }
 
   _criarTutorial(W, H, CX, CY) {
-    // Monta o popup com instruções da fase
-    // Os elementos ficam agrupados em array para serem destruidos juntos ao iniciar a conversa
     const els = [];
     const D = 5;
 
@@ -380,16 +464,26 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     els.push(this.add.rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
       .setScrollFactor(0).setDepth(D + 1));
 
-    // Regras resumidas da fase antes do primeiro contato com a cliente
     const linhas = [
-      { icone: "🎯", texto: "Você vai entrar na sua primeira negociação! Seu objetivo é trazer a experiência Cielo\n para o cliente." },
-      { icone: "💬", texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido." },
-      { icone: "🪙", texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0" },
+      {
+        icone: "🎯",
+        texto: "Você vai entrar em uma negociação consultiva. Seu objetivo é entender a dor da cliente e gerar valor antes de oferecer a solução.",
+      },
+      {
+        icone: "💬",
+        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+      },
+      {
+        icone: "🪙",
+        texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
+      },
     ];
 
     linhas.forEach(({ icone, texto }, i) => {
-      els.push(this.add.text(CX - 480, CY - 125 + i * 120, icone, { fontSize: "26px", resolution: 4 })
-        .setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
+      els.push(this.add.text(CX - 480, CY - 125 + i * 120, icone, {
+        fontSize: "26px",
+        resolution: 4,
+      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
       els.push(this.add.text(CX - 430, CY - 110 + i * 120, texto, {
         fontSize: "30px",
         color: "#c8d8f0",
@@ -405,7 +499,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Comecar  ->", {
+    els.push(this.add.text(CX, btnY, "Começar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -415,7 +509,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     btnBg.on("pointerover", () => btnBg.setFillStyle(0x2a7c2a));
     btnBg.on("pointerout", () => btnBg.setFillStyle(0x1a5c1a));
     btnBg.on("pointerdown", () => {
-      // Ao comecar, remove o overlay e libera a primeira cena do roteiro
       els.forEach((el) => el?.destroy?.());
       this._mostrarCena(0);
     });
@@ -424,12 +517,16 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   _mostrarCena(idx) {
-    // Exibe a cena atual do roteiro
-    // Sempre reseta os elementos visuais para evitar herdar estado da cena anterior
     const cena = ROTEIRO[idx];
     this.cenaIdx = idx;
     this.estado = "intro";
     this.aguardandoLLM = false;
+    this.escolhaAtual = null;
+    this.respostaAtualNpc = "";
+
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
 
     this.textoCena.setText(`${cena.titulo}  (${idx + 1} / ${ROTEIRO.length})`);
     this._esconderBotoes();
@@ -440,7 +537,6 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNarracao.setText(cena.narracao || "");
     this.textoNpc.setText(cena.npcInicial ? `"${cena.npcInicial}"` : "");
 
-    // Cenas sem introducao pulam direto para o momento de escolha
     if (!cena.narracao && !cena.npcInicial) {
       this._mostrarEscolhas();
     } else {
@@ -450,13 +546,15 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   _mostrarEscolhas() {
-    // Mostra as alternativas embaralhadas para o jogador
-    // A aleatorizacao reduz memorizacao da posicao e incentiva leitura das opcoes
     const cena = ROTEIRO[this.cenaIdx];
     this.estado = "escolha";
 
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
+
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que voce diz?");
+    this.textoNpc.setText("O que você diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -470,59 +568,83 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     });
   }
 
+  _mostrarFeedbackEscolha(escolha) {
+    this.estado = "feedback";
+
+    this.textoNarracao.setText("");
+    this.textoNome.setVisible(false);
+    this.textoNpc.setVisible(false);
+
+    this.textoFeedbackTitulo
+      .setText(escolha.feedbackTitulo || "Feedback")
+      .setVisible(true);
+
+    this.textoFeedback
+      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setVisible(true);
+
+    this._mostrarContinuar("Continuar  ->");
+  }
+
+  _mostrarRespostaNpc(resposta) {
+    this.estado = "resposta";
+
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+
+    this.textoNarracao.setText("");
+    this.textoNome.setVisible(true);
+    this.textoNpc.setVisible(true);
+    this.textoNpc.setText(`"${resposta}"`);
+
+    const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+  }
+
   async _aoEscolher(indice) {
-    // Processa a alternativa escolhida e atualiza a pontuação
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
     const escolha = this.escolhasOrdenadas[indice];
 
-    // Atualiza tanto a pontuação local da fase quanto o acumulado global salvo no registry
+    this.escolhaAtual = escolha;
+
     const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
-    this.pontuacaoFase           += ganhos;
+    this.pontuacaoFase += ganhos;
     this.cieloCoinsGanhasDialogo += ganhos;
     this.textoCieloCoin.setText(
       `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
     );
 
-    // Destaca visualmente o botão escolhido com a cor do resultado obtido
     if (escolha.tipo === "correta") {
       this.botoesEscolha[indice].bg.setFillStyle(COR_CORRETA);
     } else if (escolha.tipo === "errada") {
       this.botoesEscolha[indice].bg.setFillStyle(COR_ERRADA);
     } else {
-      this.botoesEscolha[indice].bg.setFillStyle(COR_NEUTRO);
+      this.botoesEscolha[indice].bg.setFillStyle(COR_NEUTRA);
     }
 
     this.aguardandoLLM = true;
     this._esconderBotoes(indice);
     this.textoCarregando.setVisible(true);
 
-    // Mantem o feedback visual por um instante antes de avancar para a resposta
     await esperar(350);
 
-    // A resposta pode vir do roteiro fixo ou de uma chamada externa, mas a interface trata igual
     const resposta = await this._chamarLLM(escolha, cena);
+    this.respostaAtualNpc = resposta;
 
     this.aguardandoLLM = false;
     this.textoCarregando.setVisible(false);
     this._esconderBotoes();
 
-    this.estado = "resposta";
-    this.textoNarracao.setText("");
-    this.textoNome.setVisible(true);
-    this.textoNpc.setText(`"${resposta}"`);
-
-    // Na ultima etapa, o botao deixa de avancar cena e passa a abrir o resumo final
-    const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Proxima cena  ->");
+    this._mostrarFeedbackEscolha(escolha);
   }
 
   _aoContinuar() {
-    // Controla o fluxo entre introducao, resposta e fim
-    // O mesmo botao reutiliza comportamentos diferentes conforme o estado atual da conversa
     if (this.estado === "intro") {
       this._mostrarEscolhas();
+    } else if (this.estado === "feedback") {
+      this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {
       if (this.cenaIdx >= ROTEIRO.length - 1) {
         this._mostrarResultadoFinal();
@@ -535,27 +657,33 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   _mostrarResultadoFinal() {
-    // Exibe o desempenho final da fase
-    // O resumo combina progresso percentual, meta da fase e mensagem de avaliacao
     this.estado = "fim";
     this._esconderBotoes();
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
     this.textoNarracao.setText("");
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const meta    = goalEscalado(FASE);
-    const maxPts  = N_CENAS * 100;
+    const meta = goalEscalado(FASE);
+    const maxPts = N_CENAS * 100;
     const atingiu = checkGoal(FASE, this.pontuacaoFase);
-    const pct     = Math.round((this.pontuacaoFase / maxPts) * 100);
+    const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 
-    let avaliacao, cor;
-    if      (pct >= 40) { avaliacao = "Vendedor nato! Negócio fechado!";    cor = "#44ff88"; }
-    else                { avaliacao = "Quase...";      cor = "#ff6644"; }
+    let avaliacao;
+    let cor;
+    if (pct >= 40) {
+      avaliacao = "Vendedor nato! Negócio fechado!";
+      cor = "#44ff88";
+    } else {
+      avaliacao = "Quase...";
+      cor = "#ff6644";
+    }
 
-    // A meta indica se o jogador conseguiu o desempenho minimo esperado para a fase
     const statusMeta = atingiu
-      ? "✅ Meta atingida! Parabéns, você conseguiu trazer a experiência Cielo para o cliente!"
-      : `❌ Tente novamente... você precisava de ${meta} coins`;
+      ? "Meta atingida! Parabéns, você conseguiu trazer a experiência Cielo para o cliente!"
+      : `Tente novamente... você precisava de ${meta} coins`;
 
     this.textoNpc
       .setText(
@@ -565,28 +693,24 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
-  color: cor,
-  fontSize: "32px",
-});
+        color: cor,
+        fontSize: "32px",
+      });
 
     this._mostrarContinuar("Fechar  [E]");
   }
 
   _mostrarContinuar(label) {
-    // Mostra o botão de continuar com o texto definido
     this.btnContinuar.setVisible(true);
     this.txtContinuar.setVisible(true).setText(label);
   }
 
   _ocultarContinuar() {
-    // Esconde o botão de continuar
     this.btnContinuar.setVisible(false);
     this.txtContinuar.setVisible(false);
   }
 
   _esconderBotoes(manter = -1) {
-    // Oculta os botões de escolha, mantendo um se preciso
-    // Isso permite destacar temporariamente apenas a alternativa clicada antes da resposta aparecer
     this.botoesEscolha.forEach(({ bg, labelLetra, txtEscolha }, i) => {
       if (i !== manter) {
         bg.setVisible(false);
@@ -597,34 +721,28 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
   }
 
   async _chamarLLM(escolha, cena) {
-    // Usa a resposta fixa do roteiro quando a fase está em modo estrito
-    // Esse modo garante consistencia pedagogica nas respostas durante o treinamento
     if (this.respostaRoteiroEstrita) {
       return cena.npcResposta;
     }
 
-    // Se não houver chave valida, usa a resposta padrão
     if (!GROQ_API_KEY || GROQ_API_KEY === "SUA_CHAVE_GROQ_AQUI") {
       return cena.npcResposta;
     }
 
-    // Ajusta o tom da resposta conforme o tipo da escolha
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avancando a conversa.",
-      neutra: "O vendedor foi aceitavel porém generico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
+      neutra: "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
       errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
     };
 
-    // O prompt combina persona, contexto da cena, resposta-modelo e o tipo de abordagem escolhida
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portugues do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referencia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {
-      // Solicita uma resposta dinâmica para a NPC
       const res = await fetch(GROQ_URL, {
         method: "POST",
         headers: {
@@ -644,10 +762,8 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      // Se a API vier sem conteudo util, a cena faz fallback para a resposta do roteiro
       return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
     } catch (err) {
-      // Em caso de falha, retorna a resposta fixa do roteiro
       console.warn("[SceneDialogoPadaria] Falha na LLM, usando roteiro:", err.message);
       return cena.npcResposta;
     }
