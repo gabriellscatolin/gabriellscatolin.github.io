@@ -2410,7 +2410,22 @@ As sessões ocorreram sem interferência direta dos avaliadores, permitindo obse
 
 A Tabela 1 apresenta o registro completo dos 12 playtests realizados, incluindo informações sobre o perfil dos participantes, experiência prévia com jogos, compreensão das mecânicas, progressão no jogo, dificuldades relatadas, avaliação geral e sugestões de melhoria.
 
+| Teste | Tipo | Nome | Experiência prévia com games | Conseguiu iniciar o jogo ? | Entendeu regras e mecânicas ? | Conseguiu progredir ? | Dificuldades | Nota | O que gostou | O que pode melhorar ? |
+|------|------|------|------|------|------|------|------|------|------|------|
+| 1 | Estudante | Lucas Andrade | Sim, jogador casual | Sim | Parcialmente | Sim | Dificuldade em identificar objetivo | 7.5 | Design visual | Objetivos mais claros |
+| 2 | Estudante | Mariana Costa | Não | Sim | Parcialmente | Parcialmente | Ficou perdida após padaria | 6.5 | Música | Instruções iniciais |
+| 3 | Estudante | Pedro Henrique | Sim | Sim | Sim | Sim | Bugs de interface | 8.0 | Design | Reduzir perguntas |
+| 4 | Estudante | Ana Ribeiro | Sim | Sim | Parcialmente | Sim | Bugs no mapa | 7.0 | Cutscenes | Menos texto |
+| 5 | Estudante | Rafael Martins | Sim | Sim | Sim | Sim | Falta feedback quizzes | 8.0 | Mini game | Feedback respostas |
+| 6 | Estudante | Beatriz Ferreira | Sim | Sim | Sim | Sim | Bugs movimentação | 7.5 | Visual | Melhorar movimentação |
+| 7 | Estudante | Gabriel Rocha | Sim | Sim | Parcialmente | Sim | Objetivos no mapa | 7.0 | Ambientação | Melhor orientação |
+| 8 | Público-alvo | Carlos Menezes | Sim casual | Sim | Sim | Sim | Demorou para perceber interação | 8.5 | Mini game | Destacar interações |
+| 9 | Público-alvo | Fernanda Lopes | Sim | Sim | Parcialmente | Sim | Ficou perdida | 7.5 | História | Melhor orientação |
+| 10 | Público-alvo | João Victor | Sim | Sim | Sim | Sim | Quiz longo | 8.0 | Mini game | Reduzir perguntas |
+| 11 | Público-alvo | Juliana Martins | Sim casual | Sim | Sim | Sim | Bugs no mapa | 8.0 | Visual | Corrigir colisão |
+| 12 | Público-alvo | Roberto Almeida | Baixa experiência | Sim | Parcialmente | Parcialmente | WASD e interações | 7.0 | Personagens | Tutorial mais claro |
 
+Esses registros permitiram identificar padrões de comportamento e diferenças entre jogadores experientes e jogadores que representam o público-alvo.
 
 # Perfil dos participantes
 
