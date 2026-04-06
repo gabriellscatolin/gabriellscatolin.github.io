@@ -276,9 +276,14 @@ export default class ScenePadaria extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.podeSairPadaria = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc = this.registry.get("padaria_dialogo_concluido") === true;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     this.direcaoAtual = "frente";
 
@@ -292,6 +297,9 @@ export default class ScenePadaria extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    // HUD de missão no topo (mesmo conceito da Agência 01).
+    this._criarPopupMissaoPadaria();
 
     // Pausa a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
@@ -424,10 +432,148 @@ export default class ScenePadaria extends Phaser.Scene {
     return [new Phaser.Geom.Rectangle(spawnX - 7, spawnY + 8, 14, 14)];
   }
 
+  _resolverTextoMissaoPadaria() {
+    const dialogoConcluido = this.registry.get("padaria_dialogo_concluido") === true;
+    if (dialogoConcluido) {
+      return "";
+    }
+
+    const textoCustom = this.registry.get("missaoPadariaTexto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    return "Missão: Fale com a Sofia.";
+  }
+
+  _medirLarguraPopupMissaoPadaria(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoPadaria(animarTexto) {
+    if (!this.missaoPadariaBg || !this.missaoPadariaTexto) return;
+
+    const texto = this._resolverTextoMissaoPadaria();
+    if (!texto) {
+      this.missaoPadariaBg.setVisible(false);
+      this.missaoPadariaTexto.setVisible(false);
+      this.missaoPadariaMensagemAtual = "";
+      return;
+    }
+
+    this.missaoPadariaBg.setVisible(true);
+    this.missaoPadariaTexto.setVisible(true);
+
+    const larguraFinal = this._medirLarguraPopupMissaoPadaria(texto);
+    this.missaoPadariaBg.setSize(larguraFinal, this.missaoPadariaBg.height);
+
+    if (this.missaoPadariaMensagemAtual === texto && !animarTexto) return;
+    this.missaoPadariaMensagemAtual = texto;
+
+    if (this.missaoPadariaTimer) {
+      this.missaoPadariaTimer.remove();
+      this.missaoPadariaTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoPadariaTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoPadariaTexto.setText("");
+    this.missaoPadariaTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoPadariaTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoPadaria() {
+    if (!this.missaoPadariaBg || !this.missaoPadariaTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoPadariaOffsetTopo;
+    this.missaoPadariaBg.setX(popupX);
+    this.missaoPadariaBg.setY(popupY);
+    this.missaoPadariaTexto.setX(popupX);
+    this.missaoPadariaTexto.setY(popupY);
+  }
+
+  _criarPopupMissaoPadaria() {
+    this.popupMissaoPadariaUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoPadariaOffsetTopo = 92 * this.popupMissaoPadariaUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoPadariaOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoPadariaBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setScale(this.popupMissaoPadariaUiScale);
+
+    this.missaoPadariaTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoPadariaUiScale);
+
+    this._atualizarPopupMissaoPadaria(true);
+
+    this._onMissaoPadariaMudou = () => {
+      this._atualizarPopupMissaoPadaria(true);
+    };
+
+    this.registry.events.on(
+      "changedata-missaoPadariaTexto",
+      this._onMissaoPadariaMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoPadariaTexto",
+        this._onMissaoPadariaMudou,
+        this,
+      );
+
+      if (this.missaoPadariaTimer) {
+        this.missaoPadariaTimer.remove();
+        this.missaoPadariaTimer = null;
+      }
+    });
+  }
+
   // Atualiza movimento e saída da cena
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+    const dialogoPadariaConcluido = this.registry.get("padaria_dialogo_concluido") === true;
+
+    if (dialogoPadariaConcluido && !this.falouComNpc) {
+      this.falouComNpc = true;
+      if (this.exclamacaoNpc) this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      this._atualizarPopupMissaoPadaria(false);
+    }
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -480,14 +626,20 @@ export default class ScenePadaria extends Phaser.Scene {
 
     if (pertoNpc !== this.perto_npc) {
       this.perto_npc = pertoNpc;
-      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+      this.labelNpc.setVisible(
+        pertoNpc && !this.dentroZonaSaida && !dialogoPadariaConcluido,
+      );
     }
 
-    if (pertoNpc) {
+    if (pertoNpc && !dialogoPadariaConcluido) {
       this.labelNpc.setPosition(this.npcPadaria.x, this.npcPadaria.y + 2);
     }
 
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      pertoNpc &&
+      !dialogoPadariaConcluido &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.scene.pause();
       this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
       this.falouComNpc = true;
@@ -546,5 +698,10 @@ export default class ScenePadaria extends Phaser.Scene {
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
+
+    this._reposicionarPopupMissaoPadaria();
+    if (dialogoPadariaConcluido) {
+      this.labelNpc.setVisible(false);
+    }
   }
 }

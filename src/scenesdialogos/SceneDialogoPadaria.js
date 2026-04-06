@@ -697,6 +697,8 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
         fontSize: "32px",
       });
 
+    this.registry.set("padaria_dialogo_concluido", true);
+
     this._mostrarContinuar("Fechar  [E]");
   }
 
