@@ -900,6 +900,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     if (this.tipoDialogo === "GG") {
       this.registry.set("ag01_dialogo_gg_concluido", true);
+      this.registry.set("missaoAgencia01Texto", "Missão: Suba e fale com o PJ Theo.");
     }
     if (this.tipoDialogo === "PJ") {
       this.registry.set("ag01_dialogo_pj_concluido", true);

@@ -48,11 +48,10 @@ const config = {
     },
   },
   scene: [
-    
+    SceneCidade,
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
-    SceneCidade,
     SceneChuva,
     SceneJogo,
     SceneMetro,

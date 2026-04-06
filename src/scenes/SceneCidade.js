@@ -173,6 +173,12 @@ export default class SceneCidade extends Phaser.Scene {
       if (carrosVeiculos) carrosVeiculos.setCollisionByExclusion([-1]);
       if (objetosInferior2) objetosInferior2.setCollisionByExclusion([-1]);
       if (estabelecimentos) estabelecimentos.setCollisionByExclusion([-1]);
+
+      // Remove colisao apenas no tile da coordenada solicitada.
+      this._removerColisaoNoPonto(caminhoInferior, 1004, 1000);
+      this._removerColisaoNoPonto(carrosVeiculos, 1004, 1000);
+      this._removerColisaoNoPonto(objetosInferior2, 1004, 1000);
+      this._removerColisaoNoPonto(estabelecimentos, 1004, 1000);
     }
 
     // Cria as animações de caminhada apenas uma vez
@@ -241,6 +247,11 @@ export default class SceneCidade extends Phaser.Scene {
     if (estabelecimentos)
       this.physics.add.collider(this.personagem, estabelecimentos);
 
+    // Colisao manual para bloquear o ponto x:1035 y:1048.
+    this.colisaoManualCidade = this.add.zone(1035, 1048, 16, 16);
+    this.physics.add.existing(this.colisaoManualCidade, true);
+    this.physics.add.collider(this.personagem, this.colisaoManualCidade);
+
     this.pjAcompanhandoAgencia2 = this.escoltaPJAgencia2Ativa;
     this.pjAcompanhamentoEncerrado = false;
     this.pjDistanciaMaxJogador = 120;
@@ -283,6 +294,7 @@ export default class SceneCidade extends Phaser.Scene {
       if (carrosVeiculos) this.physics.add.collider(this.npcTheoGuia, carrosVeiculos);
       if (objetosInferior2) this.physics.add.collider(this.npcTheoGuia, objetosInferior2);
       if (estabelecimentos) this.physics.add.collider(this.npcTheoGuia, estabelecimentos);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade);
       this.physics.add.collider(this.personagem, this.npcTheoGuia);
 
       this.labelTheoGuia = this.add
@@ -798,6 +810,15 @@ export default class SceneCidade extends Phaser.Scene {
       );
       return null;
     }
+  }
+
+  _removerColisaoNoPonto(camada, xMundo, yMundo) {
+    if (!camada) return;
+
+    const tile = camada.getTileAtWorldXY(xMundo, yMundo, false);
+    if (!tile || tile.index === -1) return;
+
+    tile.setCollision(false, false, false, false);
   }
 
   _criarHudCidade() {

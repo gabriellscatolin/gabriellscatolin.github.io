@@ -443,6 +443,9 @@ export default class SceneAgencia extends Phaser.Scene {
       })
       .setDepth(999);
 
+    // HUD de missão no topo da cena (mesma lógica visual da cidade).
+    this._criarPopupMissaoAgencia();
+
     // Pausa  a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
      this.musica.stop();
@@ -530,11 +533,164 @@ export default class SceneAgencia extends Phaser.Scene {
     this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaFrame}`);
   }
 
+  _resolverTextoMissaoAgencia() {
+    const textoCustom = this.registry.get("missaoAgencia01Texto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    const falouComIza = this.registry.get("ag01_dialogo_gg_concluido") === true;
+    if (falouComIza) {
+      return "Missão: Suba e fale com o PJ Theo.";
+    }
+
+    return "Missão: Fale com a gerente Iza.";
+  }
+
+  _medirLarguraPopupMissaoAgencia(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoAgencia(animarTexto) {
+    if (!this.missaoAgenciaBg || !this.missaoAgenciaTexto) return;
+
+    const texto = this._resolverTextoMissaoAgencia();
+    if (!texto) return;
+
+    const larguraFinal = this._medirLarguraPopupMissaoAgencia(texto);
+    this.missaoAgenciaBg.setSize(larguraFinal, this.missaoAgenciaBg.height);
+
+    if (this.missaoAgenciaMensagemAtual === texto && !animarTexto) return;
+    this.missaoAgenciaMensagemAtual = texto;
+
+    if (this.missaoAgenciaTimer) {
+      this.missaoAgenciaTimer.remove();
+      this.missaoAgenciaTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoAgenciaTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoAgenciaTexto.setText("");
+    this.missaoAgenciaTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoAgenciaTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoAgencia() {
+    if (!this.missaoAgenciaBg || !this.missaoAgenciaTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
+    this.missaoAgenciaBg.setX(popupX);
+    this.missaoAgenciaBg.setY(popupY);
+    this.missaoAgenciaTexto.setX(popupX);
+    this.missaoAgenciaTexto.setY(popupY);
+  }
+
+  _criarPopupMissaoAgencia() {
+    this.popupMissaoAgenciaUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoAgenciaOffsetTopo = 92 * this.popupMissaoAgenciaUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoAgenciaBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setVisible(true)
+      .setScale(this.popupMissaoAgenciaUiScale);
+
+    this.missaoAgenciaTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setVisible(true)
+      .setScale(this.popupMissaoAgenciaUiScale);
+
+    this._atualizarPopupMissaoAgencia(true);
+
+    this._onMissaoAgenciaMudou = () => {
+      this._atualizarPopupMissaoAgencia(true);
+    };
+
+    this.registry.events.on(
+      "changedata-missaoAgencia01Texto",
+      this._onMissaoAgenciaMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-ag01_dialogo_gg_concluido",
+      this._onMissaoAgenciaMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoAgencia01Texto",
+        this._onMissaoAgenciaMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-ag01_dialogo_gg_concluido",
+        this._onMissaoAgenciaMudou,
+        this,
+      );
+
+      if (this.missaoAgenciaTimer) {
+        this.missaoAgenciaTimer.remove();
+        this.missaoAgenciaTimer = null;
+      }
+    });
+  }
+
   // ── UPDATE ────────────────────────────────────────────────────────────────
 
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+    const izaConcluidaAgora = this.registry.get("ag01_dialogo_gg_concluido") === true;
+
+    if (izaConcluidaAgora && !this.falouComIza) {
+      this.falouComIza = true;
+      this.registry.set("missaoAgencia01Texto", "Missão: Suba e fale com o PJ Theo.");
+      if (this.exclamacaoIza) this.exclamacaoIza.setVisible(false);
+      if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
+      this.tweenIzaRodando = false;
+      if (this.exclamacaoNpc) {
+        this.exclamacaoNpc.setVisible(true);
+        this.exclamacaoNpc.setPosition(
+          this.npcAgencia.x,
+          this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+        );
+        if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.play();
+      }
+
+      this._atualizarPopupMissaoAgencia(true);
+    }
 
     // Assim que o dialogo do PJ termina, ele ja passa a guiar automaticamente.
     const pjConcluidoAgora = this.registry.get("ag01_dialogo_pj_concluido") === true;
@@ -657,7 +813,7 @@ export default class SceneAgencia extends Phaser.Scene {
       );
       const raioInteracaoIza = 46;
       const pertoIza = distIza < raioInteracaoIza;
-      this.labelNpcIza.setVisible(pertoIza);
+      this.labelNpcIza.setVisible(!izaConcluidaAgora && pertoIza);
 
       // Mostrar exclamação da Iza (se ainda não falou com ela)
       if (!this.falouComIza && this.exclamacaoIza) {
@@ -672,26 +828,10 @@ export default class SceneAgencia extends Phaser.Scene {
         }
       }
 
-      if (pertoIza) {
+      if (!izaConcluidaAgora && pertoIza) {
         this.labelNpcIza.setPosition(this.npcIza.x, this.npcIza.y + 19);
 
         if (Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-          if (this.registry.get("ag01_dialogo_gg_concluido") === true) {
-            this.falouComIza = true;
-            this.exclamacaoIza.setVisible(false);
-            if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
-            this.tweenIzaRodando = false;
-            if (this.exclamacaoNpc) {
-              this.exclamacaoNpc.setVisible(true);
-              this.exclamacaoNpc.setPosition(
-                this.npcAgencia.x,
-                this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
-              );
-              if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.play();
-            }
-            return;
-          }
-
           this.scene.pause();
           this.scene.launch("SceneDialogoAgencia01", {
             cenaOrigem: "SceneAg",
@@ -764,5 +904,14 @@ export default class SceneAgencia extends Phaser.Scene {
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
+
+    const textoMissaoAtual = this._resolverTextoMissaoAgencia();
+    if (textoMissaoAtual && textoMissaoAtual !== this.missaoAgenciaMensagemAtual) {
+      this._atualizarPopupMissaoAgencia(true);
+    }
+    if (this.missaoAgenciaBg) this.missaoAgenciaBg.setVisible(true).setAlpha(1);
+    if (this.missaoAgenciaTexto) this.missaoAgenciaTexto.setVisible(true).setAlpha(1);
+
+    this._reposicionarPopupMissaoAgencia();
   }
 }
