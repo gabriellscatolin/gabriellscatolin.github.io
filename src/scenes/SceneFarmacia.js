@@ -263,7 +263,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     // Estados de controle de interação e transição
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc = this.registry.get("farmacia_dialogo_concluido") === true;
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -280,6 +280,14 @@ export default class SceneFarmacia extends Phaser.Scene {
         resolution: 4,
       })
       .setDepth(999);
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
+
+    // HUD de missão no topo (mesmo padrão das demais cenas).
+    this._criarPopupMissaoFarmacia();
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -392,10 +400,158 @@ export default class SceneFarmacia extends Phaser.Scene {
     });
   }
 
+  _resolverTextoMissaoFarmacia() {
+    const dialogoConcluido = this.registry.get("farmacia_dialogo_concluido") === true;
+    if (dialogoConcluido) {
+      return "";
+    }
+
+    const textoCustom = this.registry.get("missaoFarmaciaTexto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    return "Missão: Fale com a Raquel.";
+  }
+
+  _medirLarguraPopupMissaoFarmacia(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoFarmacia(animarTexto) {
+    if (!this.missaoFarmaciaBg || !this.missaoFarmaciaTexto) return;
+
+    const texto = this._resolverTextoMissaoFarmacia();
+    if (!texto) {
+      this.missaoFarmaciaBg.setVisible(false);
+      this.missaoFarmaciaTexto.setVisible(false);
+      this.missaoFarmaciaMensagemAtual = "";
+      return;
+    }
+
+    this.missaoFarmaciaBg.setVisible(true);
+    this.missaoFarmaciaTexto.setVisible(true);
+
+    const larguraFinal = this._medirLarguraPopupMissaoFarmacia(texto);
+    this.missaoFarmaciaBg.setSize(larguraFinal, this.missaoFarmaciaBg.height);
+
+    if (this.missaoFarmaciaMensagemAtual === texto && !animarTexto) return;
+    this.missaoFarmaciaMensagemAtual = texto;
+
+    if (this.missaoFarmaciaTimer) {
+      this.missaoFarmaciaTimer.remove();
+      this.missaoFarmaciaTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoFarmaciaTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoFarmaciaTexto.setText("");
+    this.missaoFarmaciaTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoFarmaciaTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoFarmacia() {
+    if (!this.missaoFarmaciaBg || !this.missaoFarmaciaTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoFarmaciaOffsetTopo;
+    this.missaoFarmaciaBg.setX(popupX);
+    this.missaoFarmaciaBg.setY(popupY);
+    this.missaoFarmaciaTexto.setX(popupX);
+    this.missaoFarmaciaTexto.setY(popupY);
+  }
+
+  _criarPopupMissaoFarmacia() {
+    this.popupMissaoFarmaciaUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoFarmaciaOffsetTopo = 92 * this.popupMissaoFarmaciaUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoFarmaciaOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoFarmaciaBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setScale(this.popupMissaoFarmaciaUiScale);
+
+    this.missaoFarmaciaTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoFarmaciaUiScale);
+
+    this._atualizarPopupMissaoFarmacia(true);
+
+    this._onMissaoFarmaciaMudou = () => {
+      this._atualizarPopupMissaoFarmacia(true);
+    };
+
+    this.registry.events.on(
+      "changedata-missaoFarmaciaTexto",
+      this._onMissaoFarmaciaMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-farmacia_dialogo_concluido",
+      this._onMissaoFarmaciaMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoFarmaciaTexto",
+        this._onMissaoFarmaciaMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-farmacia_dialogo_concluido",
+        this._onMissaoFarmaciaMudou,
+        this,
+      );
+
+      if (this.missaoFarmaciaTimer) {
+        this.missaoFarmaciaTimer.remove();
+        this.missaoFarmaciaTimer = null;
+      }
+    });
+  }
+
   // Atualiza movimento, interação com NPC e saída da cena
   update() {
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
+    const dialogoFarmaciaConcluido = this.registry.get("farmacia_dialogo_concluido") === true;
+
+    if (dialogoFarmaciaConcluido && !this.falouComNpc) {
+      this.falouComNpc = true;
+      if (this.exclamacaoNpc) this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      this._atualizarPopupMissaoFarmacia(false);
+    }
 
     personagem.setVelocity(0);
     let movendo = false;
@@ -445,14 +601,12 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     if (mostrarBotaoE !== this.perto_npc) {
       this.perto_npc = mostrarBotaoE;
-      this.labelNpc.setVisible(mostrarBotaoE && !this.dentroZonaSaida);
+      this.labelNpc.setVisible(
+        mostrarBotaoE && !this.dentroZonaSaida && !dialogoFarmaciaConcluido,
+      );
     }
-    if (mostrarBotaoE) {
+    if (mostrarBotaoE && !dialogoFarmaciaConcluido) {
       this.labelNpc.setPosition(this.npcFarmacia.x, this.npcFarmacia.y + 2);
-    }
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      this.scene.pause();
-      this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
@@ -463,10 +617,16 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
 
     // Interação com NPC ao pressionar E
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      pertoNpc &&
+      !dialogoFarmaciaConcluido &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+      this.scene.pause();
+      this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
       console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
     }
 
@@ -508,5 +668,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
     this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
+
+    this._reposicionarPopupMissaoFarmacia();
+    if (dialogoFarmaciaConcluido) this.labelNpc.setVisible(false);
   }
 }

@@ -179,6 +179,18 @@ export default class SceneCidade extends Phaser.Scene {
       this._removerColisaoNoPonto(carrosVeiculos, 1004, 1000);
       this._removerColisaoNoPonto(objetosInferior2, 1004, 1000);
       this._removerColisaoNoPonto(estabelecimentos, 1004, 1000);
+
+      // Remove colisao no ponto informado na farmacia.
+      this._removerColisaoNoPonto(caminhoInferior, 1198, 1296);
+      this._removerColisaoNoPonto(carrosVeiculos, 1198, 1296);
+      this._removerColisaoNoPonto(objetosInferior2, 1198, 1296);
+      this._removerColisaoNoPonto(estabelecimentos, 1198, 1296);
+
+      // Adiciona colisao em toda a extensao horizontal solicitada.
+      this._adicionarColisaoFaixaHorizontal(caminhoInferior, 1485, 1055, 963);
+      this._adicionarColisaoFaixaHorizontal(carrosVeiculos, 1485, 1055, 963);
+      this._adicionarColisaoFaixaHorizontal(objetosInferior2, 1485, 1055, 963);
+      this._adicionarColisaoFaixaHorizontal(estabelecimentos, 1485, 1055, 963);
     }
 
     // Cria as animações de caminhada apenas uma vez
@@ -252,6 +264,26 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.add.existing(this.colisaoManualCidade, true);
     this.physics.add.collider(this.personagem, this.colisaoManualCidade);
 
+    // Colisao manual continua na faixa y:963 de x:1055 ate x:1485.
+    this.colisaoFaixaCidade = this.add.zone((1055 + 1485) / 2, 963, (1485 - 1055) + 16, 16);
+    this.physics.add.existing(this.colisaoFaixaCidade, true);
+    this.physics.add.collider(this.personagem, this.colisaoFaixaCidade);
+
+    // Colisao manual continua na faixa x:1478 de y:980 ate y:1064.
+    this.colisaoFaixaVerticalCidade = this.add.zone(1478, (980 + 1064) / 2, 16, (1064 - 980) + 16);
+    this.physics.add.existing(this.colisaoFaixaVerticalCidade, true);
+    this.physics.add.collider(this.personagem, this.colisaoFaixaVerticalCidade);
+
+    // Colisao manual continua na faixa x:1062 de y:979 ate y:1048.
+    this.colisaoFaixaVerticalCidade2 = this.add.zone(1062, (979 + 1048) / 2, 16, (1048 - 979) + 16);
+    this.physics.add.existing(this.colisaoFaixaVerticalCidade2, true);
+    this.physics.add.collider(this.personagem, this.colisaoFaixaVerticalCidade2);
+
+    // Colisao manual continua na faixa y:1033 de x:856 ate x:985.
+    this.colisaoFaixaCidade2 = this.add.zone((856 + 985) / 2, 1033, (985 - 856) + 16, 16);
+    this.physics.add.existing(this.colisaoFaixaCidade2, true);
+    this.physics.add.collider(this.personagem, this.colisaoFaixaCidade2);
+
     this.pjAcompanhandoAgencia2 = this.escoltaPJAgencia2Ativa;
     this.pjAcompanhamentoEncerrado = false;
     this.pjDistanciaMaxJogador = 120;
@@ -266,6 +298,7 @@ export default class SceneCidade extends Phaser.Scene {
     ];
     this.pjRotaIndiceAtual = 0;
     this.pjChegouDestinoRota = false;
+    this.pjDestinoAtual = "padaria";
     this.npcTheoProximaTroca = 0;
     this.npcTheoSpriteAtual = 2;
     this.npcTheoIntervaloTroca = 140;
@@ -295,6 +328,10 @@ export default class SceneCidade extends Phaser.Scene {
       if (objetosInferior2) this.physics.add.collider(this.npcTheoGuia, objetosInferior2);
       if (estabelecimentos) this.physics.add.collider(this.npcTheoGuia, estabelecimentos);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade2);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade2);
       this.physics.add.collider(this.personagem, this.npcTheoGuia);
 
       this.labelTheoGuia = this.add
@@ -819,6 +856,20 @@ export default class SceneCidade extends Phaser.Scene {
     if (!tile || tile.index === -1) return;
 
     tile.setCollision(false, false, false, false);
+  }
+
+  _adicionarColisaoFaixaHorizontal(camada, xInicialMundo, xFinalMundo, yMundo) {
+    if (!camada) return;
+
+    const inicio = Math.min(xInicialMundo, xFinalMundo);
+    const fim = Math.max(xInicialMundo, xFinalMundo);
+    const larguraTile = this.mapa?.tileWidth || 16;
+
+    for (let x = inicio; x <= fim; x += larguraTile) {
+      const tile = camada.getTileAtWorldXY(x, yMundo, false);
+      if (!tile || tile.index === -1) continue;
+      tile.setCollision(true, true, true, true);
+    }
   }
 
   _criarHudCidade() {
@@ -1998,6 +2049,7 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     const chegouNaPadariaComJogador =
+      this.pjDestinoAtual === "padaria" &&
       this.pjChegouDestinoRota &&
       Phaser.Geom.Rectangle.Contains(this.zonaPadaria, this.personagem.x, this.personagem.y);
 
@@ -2071,14 +2123,23 @@ export default class SceneCidade extends Phaser.Scene {
     this.npcTheoAndandoAnterior = andando;
 
     if (this.labelTheoGuia) {
+      const textoChegada =
+        this.pjDestinoAtual === "farmacia"
+          ? "[Chegamos. Interaja na Farmácia]"
+          : "[Chegamos. Entre na Padaria]";
+      const textoSeguir =
+        this.pjDestinoAtual === "farmacia"
+          ? "[Me siga até a Farmácia]"
+          : "[Siga o PJ]";
+
       this.labelTheoGuia
         .setVisible(true)
         .setText(
           this.pjChegouDestinoRota
-            ? "[Chegamos. Entre na Padaria]"
+            ? textoChegada
             : this.pjEsperandoJogador
               ? "[Vem comigo! Estou esperando]"
-              : "[Siga o PJ]",
+              : textoSeguir,
         )
         .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
     }
@@ -2099,19 +2160,20 @@ export default class SceneCidade extends Phaser.Scene {
           this.pjAguardandoPadaria = false;
           this.pjAcompanhandoAgencia2 = true;
           this.pjAcompanhamentoEncerrado = false;
+          this.pjDestinoAtual = "farmacia";
           this.registry.set("ag01_escolta_pj_agencia2", true);
           this.registry.set("ag01_pj_retorno", false);
-          // Atualiza waypoints para farmácia
+          // Atualiza waypoints para farmácia passando pelos pontos solicitados.
           this.pjRotaWaypoints = [
-            { x: 1594, y: 1283 },
-            { x: 1529, y: 1268 },
-            // O waypoint final é a entrada da farmácia (já tratado pela zonaFarmacia)
+            { x: 1421, y: 1281 },
+            { x: 1283, y: 1271 },
+            { x: 1121, y: 1179 }, // Entrada da farmácia
           ];
           this.pjRotaIndiceAtual = 0;
           this.pjChegouDestinoRota = false;
           if (this.npcTheoGuia) {
             this.npcTheoGuia.setVisible(true);
-            if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Siga o PJ até a Farmácia]");
+            if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Me siga até a Farmácia]");
             if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
           }
         }

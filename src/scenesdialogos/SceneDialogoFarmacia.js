@@ -480,6 +480,8 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       )
       .setStyle({ color: cor });
 
+    this.registry.set("farmacia_dialogo_concluido", true);
+
     this._mostrarContinuar("Fechar  [E]");
   }
 
