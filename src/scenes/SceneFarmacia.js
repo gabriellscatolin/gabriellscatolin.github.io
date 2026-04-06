@@ -4,11 +4,13 @@ export default class SceneFarmacia extends Phaser.Scene {
   }
 
   // Recupera os dados do personagem escolhidos anteriormente
-  init(dados) {
+  init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = dados.spawnX ?? null;
+    this.spawnYCustom = dados.spawnY ?? null;
   }
 
   // Carrega mapa, tilesets, NPC e sprites do personagem
@@ -167,8 +169,10 @@ export default class SceneFarmacia extends Phaser.Scene {
     });
 
     // Spawn do personagem próximo à entrada
-    const spawnX = mapa.widthInPixels / 2;
-    const spawnY = mapa.heightInPixels - 24;
+    const spawnX = this.spawnXCustom ?? 154;
+    const spawnY = this.spawnYCustom ?? 215;
+    const saidaX = 142;
+    const saidaY = 235;
 
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "farm_frente_1");
     this.personagem.setCollideWorldBounds(true);
@@ -203,9 +207,9 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Zona de saída da farmácia
-    this.zonaSaida = new Phaser.Geom.Rectangle(118, 215, 60, 40);
+    this.zonasSaida = this._criarZonasSaida(saidaX, saidaY);
     this.labelSair = this.add
-      .text(148, 232, "[E] Sair", {
+      .text(saidaX, saidaY, "[E] Sair", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -227,10 +231,10 @@ export default class SceneFarmacia extends Phaser.Scene {
     // Botão [E] igual às outras cenas
     this.labelNpc = this.add
       .text(79, 163, "[E] Falar", {
-        fontSize: "6px",
+        fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 2, y: 1 },
+        padding: { x: 1, y: 1 },
         resolution: 4,
       })
       .setDepth(20)
@@ -266,6 +270,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.falouComNpc = this.registry.get("farmacia_dialogo_concluido") === true;
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.podeSairFarmacia = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.direcaoAtual = "frente";
@@ -291,8 +296,13 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
-    this.musica.stop();
-     });
+      this.musica?.stop();
+      this.musica = null;
+    });
+  }
+
+  _criarZonasSaida(saidaX, saidaY) {
+    return [new Phaser.Geom.Rectangle(saidaX - 30, saidaY - 20, 60, 40)];
   }
 
   // Retorna tileset otimizado ou fallback
@@ -631,10 +641,8 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
 
     // Detecta entrada na zona de saída
-    const dentroSaida = Phaser.Geom.Rectangle.Contains(
-      this.zonaSaida,
-      personagem.x,
-      personagem.y,
+    const dentroSaida = (this.zonasSaida || []).some((z) =>
+      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -643,12 +651,13 @@ export default class SceneFarmacia extends Phaser.Scene {
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
-    // Transição de volta para a cidade ao pressionar E na saída
-    if (
-      dentroSaida &&
-      !this.transicionando &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    // Evita saída imediata ao entrar na cena: precisa sair da zona uma vez
+    if (!this.podeSairFarmacia && !dentroSaida) {
+      this.podeSairFarmacia = true;
+    }
+
+    // Transição automática de volta para a cidade ao entrar na saída
+    if (!this.transicionando && this.podeSairFarmacia && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -659,6 +668,8 @@ export default class SceneFarmacia extends Phaser.Scene {
           prefixo: this.prefixoEscolhido,
           spawnX: 1121,
           spawnY: 1261,
+          retornoFarmacia: true,
+          missaoCidadeTexto: "Missão: Vire à direita e siga a rua até a Agência 02.",
         });
       });
     }

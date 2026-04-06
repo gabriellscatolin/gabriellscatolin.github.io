@@ -20,6 +20,7 @@ export default class SceneCidade extends Phaser.Scene {
       typeof dados.missaoCidadeTexto === "string"
         ? dados.missaoCidadeTexto.trim()
         : "";
+    this.retornoFarmacia = Boolean(dados.retornoFarmacia);
     const pjDialogoConcluido = Boolean(this.registry.get("ag01_dialogo_pj_concluido"));
     const pjJaRetornou = Boolean(this.registry.get("ag01_pj_retorno"));
     const fallbackEscoltaPorProgresso = pjDialogoConcluido && !pjJaRetornou;
@@ -822,6 +823,38 @@ export default class SceneCidade extends Phaser.Scene {
     this._criarHudCidade();
     this._criarHudCoins();
     this._criarPopupMissaoCidade();
+
+    if (this.retornoFarmacia) {
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Vire à direita e siga a rua até a Agência 02.",
+      );
+      this._atualizarPopupMissaoCidade(true);
+
+      const recadoPJ = this.add
+        .text(
+          this.personagem.x,
+          this.personagem.y - 22,
+          "[Vire à direita e siga a rua até a Agência 02. Boa sorte!]",
+          {
+            fontSize: "6px",
+            color: "#ffffff",
+            backgroundColor: "#000000cc",
+            padding: { x: 2, y: 1 },
+            resolution: 4,
+          },
+        )
+        .setDepth(25)
+        .setOrigin(0.5, 1);
+
+      this.tweens.add({
+        targets: recadoPJ,
+        alpha: { from: 1, to: 0 },
+        duration: 2800,
+        delay: 1800,
+        onComplete: () => recadoPJ.destroy(),
+      });
+    }
 
     // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");

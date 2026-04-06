@@ -173,6 +173,10 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.npcAlvo = npcAlvo;
     // Invertido: Enzo = GG, Camila = PJ
     const ehGG = npcAlvo === "Enzo";
+    this.cenaPrincipalNumero = ehGG ? "CENA 01" : "CENA 02";
+    this.cenaPrincipalRotulo = ehGG
+      ? "CENA 01 - GG (Agencia 02)"
+      : "CENA 02 - PJ (Agencia 02)";
 
     this.imagemKey = ehGG ? "falaAgencia02GG" : "falaAgencia02PJ";
     this.nomeNpcDialogo = ehGG ? "GG" : "PJ";
@@ -411,6 +415,11 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     const linhas = [
       {
+        icone: "🧭",
+        texto:
+          `${this.cenaPrincipalRotulo} comeca agora e termina no bloco "Resultado Final" desta conversa.`,
+      },
+      {
         icone: "🎯",
         texto:
           "Nessa fase voce e avaliado por seguranca no discurso, defesa de marca e controle emocional.",
@@ -492,7 +501,9 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.estado = "intro";
     this.aguardandoLLM = false;
 
-    this.textoCena.setText(`${cena.titulo}  (${idx + 1} / ${ROTEIRO.length})`);
+    this.textoCena.setText(
+      `${this.cenaPrincipalRotulo}  |  ${cena.titulo}  (${idx + 1} / ${ROTEIRO.length})`,
+    );
     this._esconderBotoes();
     this._ocultarContinuar();
     this.textoCarregando.setVisible(false);
@@ -607,7 +618,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
         "- Direcionamento estrategico",
     );
     this.textoNome.setVisible(false);
-    this.textoCena.setText("Resultado Final");
+    this.textoCena.setText(`Resultado Final  |  Fim da ${this.cenaPrincipalNumero}`);
 
     const meta = goalEscalado(FASE);
     const atingiuMeta = checkGoal(this.registry, CAPITULO, FASE, N_CENAS);
