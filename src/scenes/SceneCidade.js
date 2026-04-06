@@ -1008,12 +1008,13 @@ export default class SceneCidade extends Phaser.Scene {
         this.registry.set("cidadeRetornoX", this.personagem.x);
         this.registry.set("cidadeRetornoY", this.personagem.y);
       }
+      this.registry.set("mapaRetornoCena", "SceneCidade");
 
       this.registry.events.emit("hud-maquininha-botao", "botao_1");
       if (this.scene.isActive("SceneChuva")) {
         this.scene.stop("SceneChuva");
       }
-      this.scene.start("SceneMapainterativo");
+      this.scene.start("SceneMapaInterativo");
       console.log("[HUD] Botao maquininha clicado: botao_1");
     });
 

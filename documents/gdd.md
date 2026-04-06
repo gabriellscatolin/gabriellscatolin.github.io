@@ -2393,35 +2393,158 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 
 ### 5.2.1 Registros de testes
 
-*Descreva nesta seção as sessões de teste/entrevista com diferentes jogadores. Registre cada teste conforme o template a seguir.*
+Para avaliar a experiência do jogador e identificar possíveis melhorias no jogo, foram realizados 12 playtests com dois grupos de participantes:
 
-Nome | João Jonas (use nomes fictícios)
---- | ---
-Já possuía experiência prévia com games? | sim, é um jogador casual
-Conseguiu iniciar o jogo? | sim
-Entendeu as regras e mecânicas do jogo? | entendeu as regras, mas sobre as mecânicas, apenas as essenciais, não explorou os comandos complexos
-Conseguiu progredir no jogo? | sim, sem dificuldades  
-Apresentou dificuldades? | Não, conseguiu jogar com facilidade e afirmou ser fácil
-Que nota deu ao jogo? | 9.0
-O que gostou no jogo? | Gostou  de como o jogo vai ficando mais difícil ao longo do tempo sem deixar de ser divertido
-O que poderia melhorar no jogo? | A responsividade do personagem aos controles, disse que havia um pouco de atraso desde o momento do comando até a resposta do personagem
+- **7 estudantes universitários**
+- **5 participantes com perfil semelhante ao público-alvo do jogo**
+
+Os nomes apresentados são fictícios, utilizados apenas para fins de organização e registro das sessões de teste.
+
+A divisão entre os grupos permitiu comparar a experiência de jogadores com maior familiaridade com jogos digitais com a de jogadores que representam o público-alvo principal do projeto.
+
+Os testes foram realizados em notebooks, em sessões individuais com duração média entre 10 e 15 minutos. Durante esse período, os participantes exploraram o jogo livremente enquanto foram observados aspectos relacionados à compreensão das mecânicas, progressão nas missões, dificuldades encontradas e percepção geral da experiência.
+
+As sessões ocorreram sem interferência direta dos avaliadores, permitindo observar dificuldades naturais de navegação, interação e compreensão dos objetivos. Ao final da experiência, os participantes também forneceram comentários qualitativos e uma nota geral para o jogo.
+
+# Registro detalhado dos participantes
+
+A Tabela 1 apresenta o registro completo dos 12 playtests realizados, incluindo informações sobre o perfil dos participantes, experiência prévia com jogos, compreensão das mecânicas, progressão no jogo, dificuldades relatadas, avaliação geral e sugestões de melhoria.
+
+| Teste | Tipo | Nome | Experiência prévia com games | Conseguiu iniciar o jogo ? | Entendeu regras e mecânicas ? | Conseguiu progredir ? | Dificuldades | Nota | O que gostou | O que pode melhorar ? |
+|------|------|------|------|------|------|------|------|------|------|------|
+| 1 | Estudante | Lucas Andrade | Sim, jogador casual | Sim | Parcialmente | Sim | Dificuldade em identificar objetivo | 7.5 | Design visual | Objetivos mais claros |
+| 2 | Estudante | Mariana Costa | Não | Sim | Parcialmente | Parcialmente | Ficou perdida após padaria | 6.5 | Música | Instruções iniciais |
+| 3 | Estudante | Pedro Henrique | Sim | Sim | Sim | Sim | Bugs de interface | 8.0 | Design | Reduzir perguntas |
+| 4 | Estudante | Ana Ribeiro | Sim | Sim | Parcialmente | Sim | Bugs no mapa | 7.0 | Cutscenes | Menos texto |
+| 5 | Estudante | Rafael Martins | Sim | Sim | Sim | Sim | Falta feedback quizzes | 8.0 | Mini game | Feedback respostas |
+| 6 | Estudante | Beatriz Ferreira | Sim | Sim | Sim | Sim | Bugs movimentação | 7.5 | Visual | Melhorar movimentação |
+| 7 | Estudante | Gabriel Rocha | Sim | Sim | Parcialmente | Sim | Objetivos no mapa | 7.0 | Ambientação | Melhor orientação |
+| 8 | Público-alvo | Carlos Menezes | Sim casual | Sim | Sim | Sim | Demorou para perceber interação | 8.5 | Mini game | Destacar interações |
+| 9 | Público-alvo | Fernanda Lopes | Sim | Sim | Parcialmente | Sim | Ficou perdida | 7.5 | História | Melhor orientação |
+| 10 | Público-alvo | João Victor | Sim | Sim | Sim | Sim | Quiz longo | 8.0 | Mini game | Reduzir perguntas |
+| 11 | Público-alvo | Juliana Martins | Sim casual | Sim | Sim | Sim | Bugs no mapa | 8.0 | Visual | Corrigir colisão |
+| 12 | Público-alvo | Roberto Almeida | Baixa experiência | Sim | Parcialmente | Parcialmente | WASD e interações | 7.0 | Personagens | Tutorial mais claro |
+
+Esses registros permitiram identificar padrões de comportamento e diferenças entre jogadores experientes e jogadores que representam o público-alvo.
+
+# Perfil dos participantes
+
+[FIGURA 1 — Experiência prévia com jogos digitais]
+
+O gráfico apresenta a proporção de participantes com experiência prévia em jogos. Observa-se que a maioria dos estudantes já possuía familiaridade com jogos digitais, enquanto parte dos participantes do público-alvo apresentou experiência limitada, o que influencia diretamente a facilidade de compreensão das mecânicas e controles.
+
+# Distribuição das Avaliações
+
+[FIGURA 2 — Distribuição das notas atribuídas pelos jogadores]
+
+A maior parte das avaliações ficou entre 7 e 8 pontos, indicando uma percepção geral positiva da experiência. Mesmo entre participantes com menor experiência em jogos, o jogo foi considerado interessante e visualmente atrativo.
+
+# Análise dos Testes — Estudantes
+
+Entre os estudantes, a maioria conseguiu iniciar e progredir no jogo sem grandes dificuldades, demonstrando boa compreensão dos controles e das mecânicas básicas.
+
+As principais dificuldades observadas foram:
+
+- identificação de objetivos no mapa  
+- alguns bugs de interface  
+- quantidade de perguntas nos quizzes  
+
+Apesar dessas questões, vários participantes destacaram positivamente o design visual, ambientação, cutscenes e o mini game.
+
+# Interpretação
+
+Os estudantes demonstraram maior facilidade em compreender os controles e as mecânicas básicas, porém ainda foram identificados problemas relacionados principalmente à interface e à clareza dos objetivos das missões.
+
+Isso indica que, mesmo para jogadores experientes, alguns elementos do jogo ainda precisam de melhorias para facilitar a progressão. 
+
+
+# Análise dos Testes — Público-Alvo (Jogadores mais velhos)
+
+Os participantes que representam o público-alvo apresentaram maior dificuldade com controles e interações iniciais, especialmente aqueles com menor experiência prévia em jogos digitais.
+
+As principais dificuldades observadas foram:
+
+- movimentação utilizando WASD
+- identificação de zonas de interação
+- compreensão de alguns elementos do HUD
+- entendimento do mini game
+
+Durante alguns testes foi observado que alguns jogadores **exploraram o cenário por alguns minutos antes de perceber o NPC responsável por iniciar a missão**, indicando que a sinalização de objetivos poderia ser mais clara.
+
+Apesar dessas dificuldades, os participantes destacaram positivamente a diversidade dos personagens, narrativa, ambientação e o mini game.
+
+# Interpretação
+
+Jogadores com menor experiência em jogos digitais apresentaram maior dificuldade em compreender os controles e as interações básicas do jogo.
+
+Esse resultado indica a necessidade de melhorias como tutoriais mais claros e instruções mais objetivas
+
+# Comparação entre grupos
+
+[FIGURA 3 — Comparação de dificuldades entre estudantes e público-alvo]
+
+A figura apresenta uma comparação entre as dificuldades relatadas por estudantes e participantes com perfil semelhante ao público-alvo do jogo. Os estudantes relataram com maior frequência bugs e problemas de orientação no mapa, enquanto o público-alvo apresentou mais dificuldades relacionadas à interação com objetos e compreensão de algumas mecânicas.
+
+Essa diferença indica que jogadores com menor familiaridade com jogos digitais podem necessitar de tutoriais mais claros, feedback visual e melhor sinalização de elementos interativos, contribuindo para tornar a experiência mais acessível e intuitiva.
+
+# Análise Geral dos Playtests
+
+[FIGURA 4 — Principais dificuldades encontradas durante os testes]
+
+A figura apresenta a frequência das principais dificuldades relatadas pelos participantes durante os testes do jogo. Observa-se que os problemas mais recorrentes estiveram relacionados a bugs técnicos, orientação de objetivos no mapa e interação com elementos do jogo, indicando pontos em que a experiência do jogador pode ser aprimorada.
+
+Esses problemas foram observados em ambos os grupos, mas tiveram **maior impacto entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
+
+# Conclusão
+
+Os playtests realizados permitiram identificar pontos importantes de melhoria relacionados principalmente à interface, orientação do jogador e feedback das mecânicas.
+
+Também foi possível observar diferenças relevantes entre jogadores experientes e jogadores que representam o **público-alvo do projeto**, especialmente em relação à compreensão dos controles e das interações iniciais.
+
+Apesar dessas dificuldades, os participantes apresentaram **avaliações positivas sobre o jogo**, destacando principalmente o **design visual, ambientação, personagens e mini game**.
+
+Esses resultados indicam que o projeto possui uma base sólida, podendo ser aprimorado com melhorias voltadas à acessibilidade, clareza das mecânicas e orientação do jogador, especialmente considerando as necessidades do público-alvo mais velho.
+
+
 
 ### 5.2.2 Melhorias
 
-&emsp;Com base nos resultados do playtest realizado e nas observações da equipe durante o desenvolvimento, foram identificados os seguintes pontos de melhoria e respectivos planos de ação:
+&emsp; Com base nos resultados obtidos durante os playtests e nas observações realizadas pela equipe ao longo do desenvolvimento, foram identificadas algumas oportunidades de melhoria relacionadas principalmente à responsividade dos controles, clareza das mecânicas e feedback fornecido ao jogador.
+
+&emsp; A análise das sessões de teste indicou que parte dos participantes, especialmente aqueles com menor experiência prévia com jogos digitais, apresentou dificuldades na compreensão inicial das interações e objetivos do jogo. Considerando que o público-alvo do projeto inclui jogadores mais velhos, essas melhorias foram definidas com o objetivo de tornar a experiência mais acessível, intuitiva e compreensível.
+
+# Justificativa das Prioridades
+
+&emsp; A priorização das melhorias foi definida considerando principalmente o *impacto* de cada problema na experiência inicial do jogador, bem como sua influência na compreensão das mecânicas fundamentais do jogo.
+
+&emsp; A *Tabela 8* apresenta os principais problemas identificados durante os testes, bem como sua origem, prioridade de desenvolvimento e o plano de ação proposto.
 
 <div align="center">
-<sub>Tabela 4 - Plano de Melhorias Pós-Playtest</sub>
+<sub>Tabela 8 - Plano de Melhorias Pós-Playtest</sub>
 
 | # | Problema Identificado | Origem | Prioridade | Plano de Ação |
-|---|----------------------|--------|:---:|---------------|
-| M1 | Atraso na resposta do personagem aos comandos de movimento (input lag) | Feedback do testador João Jonas | Alta | Revisar a lógica da função `update()` para garantir que a aplicação de velocidade ocorra antes do cálculo de posição no mesmo frame; avaliar redução do `frameRate` de animação para eliminar sobrecarga. |
-| M2 | Mecânicas avançadas não exploradas espontaneamente pelo jogador | Observação durante o playtest | Média | Expandir o tutorial inicial para apresentar todos os controles disponíveis (E para interação, F para tela cheia, ESC para pausa) de forma gradual e contextualizada. |
-| M3 | Ausência de feedback visual ao completar uma missão com sucesso | Identificado pela equipe | Média | Implementar animação de celebração (ex: efeito de partículas ou tela de resultado) ao atingir o objetivo de moedas da missão. |
-| M4 | Dificuldade não percebida nos primeiros diálogos de negociação | Observação durante o playtest | Baixa | Rebalancear as respostas dos primeiros NPCs para que a diferença entre opções adequada/inadequada seja mais clara, servindo como tutorial implícito de negociação. |
+|---|---|---|---|---|
+| M1 | Alguns jogadores não perceberam o HUD de missões ou os objetivos atuais. | Relatos de participantes durante o playtest | Alta | Reestruturar o HUD de missões com maior destaque visual, utilizando ícones, cores e posicionamento mais evidente na interface. |
+| M2 | Parte dos jogadores teve dificuldade em entender os objetivos iniciais do jogo. | Observação da equipe e relatos de participantes | Alta | Melhorar o tutorial inicial e incluir instruções contextuais nas primeiras missões para orientar o jogador sobre as tarefas a serem realizadas. |
+| M3 | Alguns jogadores não perceberam quais elementos do cenário eram interativos. | Observação durante os testes | Média | Adicionar indicadores visuais próximos a NPCs e objetos interativos, como ícones ou destaque ao se aproximar. |
+| M4 | Mecânicas adicionais do jogo não foram exploradas espontaneamente pelos jogadores. | Observação durante o playtest | Média | Apresentar gradualmente os controles e mecânicas do jogo durante as primeiras etapas da experiência, utilizando mensagens de tutorial contextual. |
+| M5 | Ausência de feedback visual claro ao completar missões ou objetivos. | Identificado pela equipe durante a análise dos testes | Média | Implementar animações ou efeitos visuais que indiquem claramente a conclusão de objetivos e reforcem a sensação de progresso. |
+| M6 | Diferença pouco clara entre escolhas nos primeiros diálogos de negociação. | Observação durante os playtests | Baixa | Ajustar as respostas iniciais dos NPCs para tornar mais evidente a diferença entre escolhas adequadas e inadequadas. |
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
+
+&emsp; As melhorias **M1** e **M2** receberam prioridade **alta**, pois estão diretamente relacionadas à compreensão dos objetivos e à orientação do jogador dentro do jogo. Durante os testes, foi observado que alguns participantes tiveram dificuldade em identificar o que deveria ser feito em determinados momentos, o que pode comprometer a progressão e gerar frustração, especialmente entre jogadores com menor familiaridade com jogos digitais.
+
+&emsp; As melhorias **M3**, **M4** e **M5** foram classificadas como prioridade **média**, pois contribuem para melhorar a clareza das interações e o entendimento das mecânicas disponíveis. A presença de indicadores visuais, tutoriais contextuais e feedbacks de conclusão de missão pode facilitar a interpretação das ações do jogador e tornar a experiência mais intuitiva.
+
+&emsp; Por fim, a melhoria **M6** recebeu prioridade **baixa**, pois está relacionada ao balanceamento das escolhas nos primeiros diálogos de negociação. Embora essa melhoria contribua para aprimorar a experiência narrativa e estratégica do jogo, ela não impede diretamente a progressão do jogador.
+
+# Conclusão
+
+&emsp; A identificação dessas melhorias evidencia a importância da realização de playtests durante o desenvolvimento de jogos, pois permite identificar dificuldades reais enfrentadas pelos jogadores e orientar decisões de design baseadas na experiência do usuário.
+
+&emsp; A implementação das melhorias propostas contribuirá para tornar o jogo mais acessível, claro e intuitivo, especialmente para jogadores com menor experiência em jogos digitais. 
 
 # <a name="c6"></a>6. Conclusões e trabalhos futuros (sprint 5)
 
