@@ -457,7 +457,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       },
       {
         icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
+        texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
 
