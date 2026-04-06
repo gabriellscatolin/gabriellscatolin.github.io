@@ -14,26 +14,26 @@ export const SCORING_CONFIG = {
     generic:       50,
     wrong:          0,   // errar não penaliza no cap. 1
     agency_goal:  150,
-    phase1_goal:  150,   // Padaria
-    phase2_goal:  200,   // Farmácia
-    phase3_goal:  250,   // Escritório
+    phase1_goal:  350,   // Padaria
+    phase2_goal:  400,   // Farmácia
+    phase3_goal:  450,   // Escritório
   },
   chapter2: {
     correct:      200,
     generic:      100,
     wrong:          0,   // errar não penaliza no cap. 2
-    agency_goal:  400,
-    phase4_goal:  400,   // Cabeleleiro / Loja de Roupas
+    agency_goal:  600,
+    phase4_goal:  700,   // Cabeleleiro / Loja de Roupas
     phase5_goal:  null,  // Metrô — minigame separado, sem meta obrigatória
-    phase6_goal:  450,   // Restaurante
-    phase7_goal:  500,   // Supermercado
+    phase6_goal:  800,   // Restaurante
+    phase7_goal:  900,   // Supermercado
   },
   chapter3: {
     correct:      300,
     generic:      150,
     wrong:        -50,   // ATENÇÃO: errar subtrai coins no cap. 3
-    agency_goal:  500,
-    phase8_goal:  750,   // Posto de Gasolina
+    agency_goal:  900,
+    phase8_goal:  1500,   // Posto de Gasolina
   },
   metro_minigame: {
     coin_value:      50,
@@ -45,15 +45,15 @@ export const SCORING_CONFIG = {
 const METAS_BASE = {
   agency1_gg:  150,
   agency1_pj:  150,
-  padaria:     200,
-  farmacia:    250,
-  escritorio:  300,
-  agency2:     400,
-  cabeleleiro: 400,
-  restaurante: 450,
-  mercado:     500,
-  agency3:     500,
-  posto:       750,
+  padaria:     350,
+  farmacia:    400,
+  escritorio:  450,
+  agency2:     600,
+  cabeleleiro: 700,
+  restaurante: 800,
+  mercado:     900,
+  agency3:     900,
+  posto:       1500,
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
