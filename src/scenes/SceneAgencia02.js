@@ -1,3 +1,4 @@
+
 export default class SceneAgencia02 extends Phaser.Scene {
   constructor() {
     super({ key: "SceneAgencia02" });
@@ -80,6 +81,22 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.load.image(
       "npc_camila",
       "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_parado02.png",
+    );
+    this.load.image(
+      "npc_camila_andando_frente_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente01 (parado01).png",
+    );
+    this.load.image(
+      "npc_camila_andando_frente_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente02.png",
+    );
+    this.load.image(
+      "npc_camila_andando_frente_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente03.png",
+    );
+    this.load.image(
+      "npc_camila_andando_frente_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente04.png",
     );
     this.load.image(
       "npc_enzo_1",
@@ -281,8 +298,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     });
 
     // Define o ponto inicial do personagem na cena
-    const spawnX = this.spawnXCustom ?? 500;
-    const spawnY = this.spawnYCustom ?? 500;
+    const spawnX = this.spawnXCustom ?? 481;
+    const spawnY = this.spawnYCustom ?? 344;
+    const saidaX = 492;
+    const saidaY = 382;
 
     // Cria o personagem com física e limita seu movimento ao mapa
     this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
@@ -307,6 +326,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     this.npcCamila = this.physics.add.sprite(159, 156, "npc_camila").setDepth(5);
     this.npcCamila.body.setImmovable(true);
+    this.npcCamilaSpriteAtual = 1;
+    this.npcCamilaProximaTroca = 0;
+    this.npcCamilaIntervaloTroca = 130;
 
     const alturaAlvoNpc = this.personagem.displayHeight;
     this.npcCamila.setDisplaySize(
@@ -443,10 +465,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.cameras.main.fadeIn(600, 0, 0, 0);
 
     // Cria a zona de saída e o aviso visual exibido ao se aproximar dela
-    this.zonasSaida = this._criarZonasSaida(spawnX, spawnY);
+    this.zonasSaida = this._criarZonasSaida(saidaX, saidaY);
 
     this.labelSair = this.add
-      .text(0, 0, "[Saída]", {
+      .text(saidaX, saidaY, "[Saída]", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -498,9 +520,13 @@ export default class SceneAgencia02 extends Phaser.Scene {
       })
       .setDepth(999);
 
+    // HUD de missão no topo, seguindo o mesmo padrão da Agencia 01.
+    this._criarPopupMissaoAgencia();
+
     // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    this.events.on("shutdown", () => {
+      this.musica?.stop();
+      this.musica = null;
     });
   }
 
@@ -708,14 +734,189 @@ export default class SceneAgencia02 extends Phaser.Scene {
   }
 
   // Define a posição da única saída válida da cena
-  _criarZonasSaida(spawnX, spawnY) {
-    return [new Phaser.Geom.Rectangle(spawnX - 60, spawnY - 60, 120, 120)];
+  _criarZonasSaida(saidaX, saidaY) {
+    return [{ x: saidaX, y: saidaY, raio: 25 }];
+  }
+
+  _resolverTextoMissaoAgencia() {
+    const textoCustom = this.registry.get("missaoAgencia02Texto");
+    if (typeof textoCustom === "string" && textoCustom.trim()) {
+      return textoCustom.trim();
+    }
+
+    const camilaConcluida = this.registry.get("ag02_dialogo_camila_concluido") === true;
+    const enzoConcluido = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+    if (camilaConcluida && enzoConcluido) {
+      return "";
+    }
+
+    if (enzoConcluido) {
+      return "Missão: Fale com o PJ Camila.";
+    }
+
+    if (camilaConcluida) {
+      return "Missão: Fale com o PJ Camila.";
+    }
+
+    return "Missão: Fale com o GG Enzo.";
+  }
+
+  _medirLarguraPopupMissaoAgencia(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "20px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 48;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+  }
+
+  _atualizarPopupMissaoAgencia(animarTexto) {
+    if (!this.missaoAgenciaBg || !this.missaoAgenciaTexto) return;
+
+    const texto = this._resolverTextoMissaoAgencia();
+    if (!texto) {
+      this.missaoAgenciaBg.setVisible(false);
+      this.missaoAgenciaTexto.setVisible(false);
+      this.missaoAgenciaMensagemAtual = "";
+      return;
+    }
+
+    this.missaoAgenciaBg.setVisible(true);
+    this.missaoAgenciaTexto.setVisible(true);
+
+    const larguraFinal = this._medirLarguraPopupMissaoAgencia(texto);
+    this.missaoAgenciaBg.setSize(larguraFinal, this.missaoAgenciaBg.height);
+
+    if (this.missaoAgenciaMensagemAtual === texto && !animarTexto) return;
+    this.missaoAgenciaMensagemAtual = texto;
+
+    if (this.missaoAgenciaTimer) {
+      this.missaoAgenciaTimer.remove();
+      this.missaoAgenciaTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoAgenciaTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoAgenciaTexto.setText("");
+    this.missaoAgenciaTimer = this.time.addEvent({
+      delay: 35,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoAgenciaTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoAgencia() {
+    if (!this.missaoAgenciaBg || !this.missaoAgenciaTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
+    this.missaoAgenciaBg.setX(popupX);
+    this.missaoAgenciaBg.setY(popupY);
+    this.missaoAgenciaTexto.setX(popupX);
+    this.missaoAgenciaTexto.setY(popupY);
+  }
+
+  _criarPopupMissaoAgencia() {
+    this.popupMissaoAgenciaUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoAgenciaOffsetTopo = 92 * this.popupMissaoAgenciaUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoAgenciaBg = this.add
+      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .setDepth(240)
+      .setScale(this.popupMissaoAgenciaUiScale);
+
+    this.missaoAgenciaTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoAgenciaUiScale);
+
+    this._atualizarPopupMissaoAgencia(true);
+
+    this._onMissaoAgenciaMudou = () => {
+      this._atualizarPopupMissaoAgencia(true);
+    };
+
+    this.registry.events.on(
+      "changedata-missaoAgencia02Texto",
+      this._onMissaoAgenciaMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-ag02_dialogo_camila_concluido",
+      this._onMissaoAgenciaMudou,
+      this,
+    );
+    this.registry.events.on(
+      "changedata-ag02_dialogo_enzo_concluido",
+      this._onMissaoAgenciaMudou,
+      this,
+    );
+
+    this.events.once("shutdown", () => {
+      this.registry.events.off(
+        "changedata-missaoAgencia02Texto",
+        this._onMissaoAgenciaMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-ag02_dialogo_camila_concluido",
+        this._onMissaoAgenciaMudou,
+        this,
+      );
+      this.registry.events.off(
+        "changedata-ag02_dialogo_enzo_concluido",
+        this._onMissaoAgenciaMudou,
+        this,
+      );
+
+      if (this.missaoAgenciaTimer) {
+        this.missaoAgenciaTimer.remove();
+        this.missaoAgenciaTimer = null;
+      }
+    });
   }
 
   // Atualiza movimentação, animação, saída e debug a cada frame
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
+    const camilaConcluidaAgora = this.registry.get("ag02_dialogo_camila_concluido") === true;
+    const enzoConcluidoAgora = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+
+    if (camilaConcluidaAgora && !this.falouComCamila) {
+      this.falouComCamila = true;
+      if (this.exclamacaoCamila) this.exclamacaoCamila.setVisible(false);
+      if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
+      this._atualizarPopupMissaoAgencia(true);
+    }
+
+    if (enzoConcluidoAgora && !this.falouComEnzo) {
+      this.falouComEnzo = true;
+      if (this.exclamacaoEnzo) this.exclamacaoEnzo.setVisible(false);
+      if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
+      this._atualizarPopupMissaoAgencia(true);
+    }
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -770,9 +971,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
     const pertoCamila = distNpcCamila < 65;
 
     this.pertoNpcCamila = pertoCamila;
-    this.labelNpcCamila.setVisible(pertoCamila);
+    this.labelNpcCamila.setVisible(pertoCamila && !camilaConcluidaAgora);
 
-    if (pertoCamila) {
+    if (pertoCamila && !camilaConcluidaAgora) {
       this.labelNpcCamila.setPosition(this.npcCamila.x, this.npcCamila.y + 19);
     }
 
@@ -783,12 +984,21 @@ export default class SceneAgencia02 extends Phaser.Scene {
       );
     }
 
+    const camilaEmMovimento = !camilaConcluidaAgora && !pertoCamila;
+    if (camilaEmMovimento) {
+      const agora = this.time.now;
+      if (agora >= this.npcCamilaProximaTroca) {
+        this.npcCamilaProximaTroca = agora + this.npcCamilaIntervaloTroca;
+        this.npcCamilaSpriteAtual = this.npcCamilaSpriteAtual >= 4 ? 1 : this.npcCamilaSpriteAtual + 1;
+        this.npcCamila.setTexture(`npc_camila_andando_frente_${this.npcCamilaSpriteAtual}`);
+      }
+    } else {
+      this.npcCamilaSpriteAtual = 1;
+      this.npcCamila.setTexture("npc_camila");
+    }
+
     if (pertoCamila && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      if (this.registry.get("ag02_dialogo_camila_concluido") === true) {
-        this.falouComCamila = true;
-        this.exclamacaoCamila.setVisible(false);
-        if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
-      } else {
+      if (!camilaConcluidaAgora) {
         this.scene.pause();
         this.scene.launch("SceneDialogoAgencia02", {
           cenaOrigem: "SceneAgencia02",
@@ -807,9 +1017,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
     const pertoEnzo = distNpcEnzo < 65;
 
     this.pertoNpcEnzo = pertoEnzo;
-    this.labelNpcEnzo.setVisible(pertoEnzo);
+    this.labelNpcEnzo.setVisible(pertoEnzo && !enzoConcluidoAgora);
 
-    if (pertoEnzo) {
+    if (pertoEnzo && !enzoConcluidoAgora) {
       this.labelNpcEnzo.setPosition(this.npcEnzo.x, this.npcEnzo.y + 19);
     }
 
@@ -821,11 +1031,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (pertoEnzo && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-      if (this.registry.get("ag02_dialogo_enzo_concluido") === true) {
-        this.falouComEnzo = true;
-        this.exclamacaoEnzo.setVisible(false);
-        if (this.tweenExclamacaoEnzo) this.tweenExclamacaoEnzo.stop();
-      } else {
+      if (!enzoConcluidoAgora) {
         this.scene.pause();
         this.scene.launch("SceneDialogoAgencia02", {
           cenaOrigem: "SceneAgencia02",
@@ -835,14 +1041,23 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return;
     }
 
-    const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
-    );
+    const dentroSaida = (this.zonasSaida || []).some((z) => {
+      const distancia = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        z.x,
+        z.y,
+      );
+      return distancia <= z.raio;
+    });
 
     // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
       this.labelSair.setVisible(dentroSaida);
+      if (!dentroSaida) {
+        this.transicionando = false;
+      }
     }
 
     if (dentroSaida) {
@@ -850,11 +1065,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Ao entrar na zona, inicia automaticamente a transição para a cidade
-    if (
-      !this.transicionando &&
-      dentroSaida &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    if (!this.transicionando && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -862,8 +1073,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
-          spawnX: 1200,
-          spawnY: 1200,
+          spawnX: 1797,
+          spawnY: 1598,
         });
       });
     }
@@ -873,5 +1084,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
     );
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
+
+    this._reposicionarPopupMissaoAgencia();
   }
 }

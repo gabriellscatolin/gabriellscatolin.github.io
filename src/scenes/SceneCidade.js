@@ -2165,9 +2165,9 @@ export default class SceneCidade extends Phaser.Scene {
           this.registry.set("ag01_pj_retorno", false);
           // Atualiza waypoints para farmácia passando pelos pontos solicitados.
           this.pjRotaWaypoints = [
-            { x: 1421, y: 1281 },
-            { x: 1283, y: 1271 },
-            { x: 1121, y: 1179 }, // Entrada da farmácia
+            { x: 1571, y: 983 },
+            { x: 1571, y: 1290 },
+            { x: 1114, y: 1290 },
           ];
           this.pjRotaIndiceAtual = 0;
           this.pjChegouDestinoRota = false;

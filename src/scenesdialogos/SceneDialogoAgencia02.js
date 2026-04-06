@@ -590,8 +590,10 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.estado = "fim";
     if (this.npcAlvo === "Camila") {
       this.registry.set("ag02_dialogo_camila_concluido", true);
+      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
     } else {
       this.registry.set("ag02_dialogo_enzo_concluido", true);
+      this.registry.set("missaoAgencia02Texto", "Missão: Fale com o PJ Camila.");
     }
 
     this._esconderBotoes();

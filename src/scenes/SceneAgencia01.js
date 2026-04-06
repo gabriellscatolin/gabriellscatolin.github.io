@@ -76,12 +76,28 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente02.png",
     );
     this.load.image(
+      "npc_agencia_frente_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente03.png",
+    );
+    this.load.image(
+      "npc_agencia_frente_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente04.png",
+    );
+    this.load.image(
       "npc_agencia_tras_1",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras01.png",
     );
     this.load.image(
       "npc_agencia_tras_2",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras02.png",
+    );
+    this.load.image(
+      "npc_agencia_tras_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras03.png",
+    );
+    this.load.image(
+      "npc_agencia_tras_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras04.png",
     );
     this.load.image(
       "npc_agencia_direita_1",
@@ -92,12 +108,28 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita02.png",
     );
     this.load.image(
+      "npc_agencia_direita_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita03.png",
+    );
+    this.load.image(
+      "npc_agencia_direita_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita04.png",
+    );
+    this.load.image(
       "npc_agencia_esquerda_1",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda01.png",
     );
     this.load.image(
       "npc_agencia_esquerda_2",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda02.png",
+    );
+    this.load.image(
+      "npc_agencia_esquerda_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda03.png",
+    );
+    this.load.image(
+      "npc_agencia_esquerda_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda04.png",
     );
 
     // Sprites do NPC Iza
@@ -429,6 +461,9 @@ export default class SceneAgencia extends Phaser.Scene {
     this.raioChegadaSaida = 22;
     this.alvoSaidaPJ = { x: saidaX, y: saidaY };
     this.tweenIzaRodando = false;
+    this.npcAgenciaSpriteAtual = 1;
+    this.npcAgenciaProximaTroca = 0;
+    this.npcAgenciaIntervaloTroca = 130;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
@@ -488,6 +523,7 @@ export default class SceneAgencia extends Phaser.Scene {
       this.pjEsperandoJogador = true;
       // Parar sprite andando
       this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_1`);
+      this.npcAgenciaSpriteAtual = 1;
       return;
     }
 
@@ -503,6 +539,7 @@ export default class SceneAgencia extends Phaser.Scene {
       this.pjEsperandoJogador = true;
       // Parar sprite andando
       this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_1`);
+      this.npcAgenciaSpriteAtual = 1;
       return;
     }
 
@@ -523,14 +560,20 @@ export default class SceneAgencia extends Phaser.Scene {
     } else {
       novaDirecao = dy > 0 ? "frente" : "tras";
     }
-    this.npcAgenciaDirecao = novaDirecao;
-    // Troca de frame animado
-    const agora = this.time.now;
-    if (agora > this.npcAgenciaTrocaTempo) {
-      this.npcAgenciaFrame = this.npcAgenciaFrame === 1 ? 2 : 1;
-      this.npcAgenciaTrocaTempo = agora + this.npcAgenciaTrocaIntervalo;
+
+    if (novaDirecao !== this.npcAgenciaDirecao) {
+      this.npcAgenciaSpriteAtual = 1;
+      this.npcAgenciaProximaTroca = this.time.now + this.npcAgenciaIntervaloTroca;
     }
-    this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaFrame}`);
+    this.npcAgenciaDirecao = novaDirecao;
+
+    // Troca de frame animado em 4 passos quando o PJ está andando
+    const agora = this.time.now;
+    if (agora >= this.npcAgenciaProximaTroca) {
+      this.npcAgenciaSpriteAtual = this.npcAgenciaSpriteAtual >= 4 ? 1 : this.npcAgenciaSpriteAtual + 1;
+      this.npcAgenciaProximaTroca = agora + this.npcAgenciaIntervaloTroca;
+    }
+    this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaSpriteAtual}`);
   }
 
   _resolverTextoMissaoAgencia() {
