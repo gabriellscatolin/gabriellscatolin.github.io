@@ -238,7 +238,6 @@ const COR_ERRADA = 0x6a1a1a;
 export default class SceneDialogoFarmacia extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoFarmacia" });
-
     this.imagemKey = "falaFarmacia";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
@@ -248,7 +247,6 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
-
     this.cenaIdx = 0;
     this.pontuacaoFase = 0;
     this.cieloCoinsGanhasDialogo = 0;
@@ -409,7 +407,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 600", {
+    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 500", {
       fontSize: "30px",
       color: "#ffd700",
       backgroundColor: "#000000bb",
@@ -464,7 +462,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       },
       {
         icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
+        texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
       },
     ];
 
@@ -662,9 +660,15 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     let avaliacao;
     let cor;
-    if (pct >= 58) {
+    if (pct >= 90) {
       avaliacao = "Vendedor nato! Negócio fechado!";
       cor = "#44ff88";
+    } else if (pct >= 70) {
+      avaliacao = "Bom trabalho! Quase perfeito.";
+      cor = "#88ccff";
+    } else if (pct >= 50) {
+      avaliacao = "Razoável. Pratique mais!";
+      cor = "#ffcc44";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo.";
       cor = "#ff6644";
