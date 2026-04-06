@@ -460,9 +460,29 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.pertoNpcCamila = false;
-    this.falouComCamila = false;
+    let camilaConcluida =
+      this.registry.get("ag02_dialogo_camila_concluido") === true;
     this.pertoNpcEnzo = false;
-    this.falouComEnzo = false;
+    const enzoConcluido = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+
+    // Compatibilidade com saves antigos: um bug marcava Camila como concluida
+    // ao finalizar apenas o dialogo do Enzo.
+    if (camilaConcluida && !enzoConcluido) {
+      camilaConcluida = false;
+      this.registry.set("ag02_dialogo_camila_concluido", false);
+    }
+
+    this.falouComCamila = camilaConcluida;
+    this.falouComEnzo = enzoConcluido;
+
+    if (this.falouComCamila) {
+      this.exclamacaoCamila?.setVisible(false);
+      this.tweenExclamacaoCamila?.stop();
+    }
+    if (this.falouComEnzo) {
+      this.exclamacaoEnzo?.setVisible(false);
+      this.tweenExclamacaoEnzo?.stop();
+    }
 
     // Guarda a última direção para manter o sprite parado corretamente
     this.direcaoAtual = "frente";
@@ -809,6 +829,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
         this.scene.pause();
         this.scene.launch("SceneDialogoAgencia02", {
           cenaOrigem: "SceneAgencia02",
+          npc: "Enzo",
         });
       }
       return;

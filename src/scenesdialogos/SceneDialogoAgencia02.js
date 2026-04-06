@@ -170,6 +170,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   init(dados) {
     super.init(dados);
     const npcAlvo = dados?.npc === "Camila" ? "Camila" : "Enzo";
+    this.npcAlvo = npcAlvo;
     // Invertido: Enzo = GG, Camila = PJ
     const ehGG = npcAlvo === "Enzo";
 
@@ -587,8 +588,11 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
   _mostrarResultadoFinal() {
     this.estado = "fim";
-    this.registry.set("ag02_dialogo_enzo_concluido", true);
-    this.registry.set("ag02_dialogo_camila_concluido", true);
+    if (this.npcAlvo === "Camila") {
+      this.registry.set("ag02_dialogo_camila_concluido", true);
+    } else {
+      this.registry.set("ag02_dialogo_enzo_concluido", true);
+    }
 
     this._esconderBotoes();
     this.textoNarracao.setText(
