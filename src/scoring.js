@@ -23,7 +23,7 @@ export const SCORING_CONFIG = {
     generic:      100,
     wrong:          0,   // errar não penaliza no cap. 2
     agency_goal:  600,
-    phase4_goal:  700,   // Cabeleleiro / Loja de Roupas
+    phase4_goal:  700,   // Loja de Roupas
     phase5_goal:  null,  // Metrô — minigame separado, sem meta obrigatória
     phase6_goal:  800,   // Restaurante
     phase7_goal:  900,   // Supermercado
