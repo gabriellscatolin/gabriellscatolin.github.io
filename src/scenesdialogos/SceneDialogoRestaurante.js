@@ -405,7 +405,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 500", {
+    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 1200", {
       fontSize: "30px",
       color: "#ffd700",
       backgroundColor: "#000000bb",
@@ -459,7 +459,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       },
       {
         icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
+        texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
 
@@ -657,15 +657,9 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     let avaliacao;
     let cor;
-    if (pct >= 90) {
+    if (pct >= 66) {
       avaliacao = "Excelente condução! Operação e clareza bem conectadas.";
       cor = "#44ff88";
-    } else if (pct >= 70) {
-      avaliacao = "Bom trabalho! Quase perfeito.";
-      cor = "#88ccff";
-    } else if (pct >= 50) {
-      avaliacao = "Razoável. Vale refinar mais a condução.";
-      cor = "#ffcc44";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo com mais foco no fluxo.";
       cor = "#ff6644";

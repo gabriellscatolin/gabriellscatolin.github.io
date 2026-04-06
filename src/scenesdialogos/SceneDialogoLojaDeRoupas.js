@@ -402,7 +402,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 600", {
+    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 1200", {
       fontSize: "30px",
       color: "#ffd700",
       backgroundColor: "#000000bb",
