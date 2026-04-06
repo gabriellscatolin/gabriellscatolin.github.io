@@ -74,9 +74,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localFarmacia",
         personagem: {
           nome: "Rachel",
-          cargo: "Farmacêutica",
+          faturamento: "~R$ 300 mil/mês",
           imgPersonagem: "fotoRachel",
-          historia: "Rachel trabalha na farmácia há anos e conhece cada morador pelo nome. Discreta e atenciosa, ela guarda segredos de muita gente da cidade.",
+          historia: "Rachel trabalha na farmácia há anos e é mãe solteira. Ela construiu a farmácia com anos de economia e muito esforço. Divide a rotina entre o negócio e o filho pequeno, vivendo sempre no limite do tempo. É organizada e exigente, porque sabe que qualquer erro vira mais uma coisa para resolver no fim do dia.",
         },
       },
       {
@@ -87,9 +87,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localPadaria",
         personagem: {
           nome: "Sofia",
-          cargo: "Padeira & Proprietária",
+          faturamento: "~R$ 120 mil/mês",
           imgPersonagem: "fotoSofia",
-          historia: "Sofia acorda antes do sol para garantir que o pão saia quentinho. Sua padaria é o coração do bairro — e ela ouve tudo que acontece por aqui.",
+          historia: "Sofia acorda antes do sol para garantir que o pão saia quentinho. Assumiu a padaria após a morte repentina do pai, sem estar totalmente preparada. Aprendeu na prática, errando e acertando, enquanto cuida da mãe idosa em casa. Trabalha todos os dias, abre cedo e fecha tarde. No fim do mês, sente que o dinheiro não acompanha o esforço.",
         },
       },
       {
@@ -100,9 +100,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localMercado",
         personagem: {
           nome: "Alicia",
-          cargo: "Gerente do Mercado",
+          faturamento: "~R$ 800 mil/mês",
           imgPersonagem: "fotoAlicia",
-          historia: "Alicia comanda o mercado com mão de ferro e sorriso no rosto. Ninguém passa despercebido pelos seus olhos atentos.",
+          historia: "Alicia começou como operadora de caixa ainda adolescente e cresceu dentro do negócio da família. Hoje lidera duas unidades e uma equipe grande, lidando com pressão constante. Já enfrentou perdas financeiras que só apareceram dias depois, e isso mudou sua forma de gerir.",
         },
       },
       {
@@ -113,9 +113,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localRestaurante",
         personagem: {
           nome: "Lucas",
-          cargo: "Chef & Proprietário",
+          faturamento: "~R$ 800 mil/mês",
           imgPersonagem: "fotoLucas",
-          historia: "Lucas voltou à cidade após anos trabalhando em restaurantes estrelados no exterior. Ninguém sabe ao certo por que ele largou tudo para abrir um lugar tão pequeno.",
+          historia: "Lucas deixou a estabilidade do mundo corporativo para empreender. Investiu alto, assumiu dívidas e carrega a pressão de fazer o negócio dar certo. Vive com a sensação de que qualquer falha pode comprometer semanas de trabalho.",
         },
       },
       {
@@ -126,9 +126,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localEscritorio",
         personagem: {
           nome: "Gabriel",
-          cargo: "Advogado",
+          faturamento: "~R$ 80 mil/mês",
           imgPersonagem: "fotoGabriel",
-          historia: "Gabriel representa os clientes mais influentes da cidade. Sua agenda é cheia de nomes que nunca aparecem em nenhum registro público.",
+          historia: "Gabriel é uma pessoa com deficiência visual parcial, construiu a carreira enfrentando barreiras desde cedo. Desenvolveu um estilo de trabalho extremamente organizado e independente. Prefere processos claros e previsíveis, porque qualquer ruído ou inconsistência gera insegurança.",
         },
       },
       {
@@ -139,9 +139,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localLojaRoupas",
         personagem: {
           nome: "Eduardo",
-          cargo: "Vendedor",
+          faturamento: "~R$ 80 mil/mês",
           imgPersonagem: "fotoEduardo",
-          historia: "Eduardo tem um dom especial para agradar clientes. Por trás do charme, existe uma história que ele prefere não contar.",
+          historia: "Eduardo é um jovem empreendedor, criou a marca a partir do Instagram e transformou a loja em um espaço híbrido, com roupas e serviços de beleza. Enxerga o negócio como experiência, não só venda. Já passou por situações em que falhas no pagamento quebraram o clima com o cliente.",
         },
       },
       {
@@ -152,9 +152,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localPosto",
         personagem: {
           nome: "Nicolas",
-          cargo: "Frentista & Mecânico",
+          faturamento: "~R$ 990 mil/mês",
           imgPersonagem: "fotoNicolas",
-          historia: "Todo carro que entra na cidade para no posto de Nicolas. Ele anota tudo — quem chegou, que horas e com quem.",
+          historia: "Nicolas assumiu o posto da família e expandiu a operação com muita disciplina. Trabalha praticamente todos os dias e está sempre atento ao funcionamento do negócio. Já teve prejuízos relevantes por falhas de sistema e não aceita qualquer risco de parada.",
         },
       },
       {
@@ -181,7 +181,6 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         imgLocal: "localAgencia03",
         historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
-
       {
         // Metro NÃO tem personagem — só exibe a história do local no painel.
         // A função mostrarPainel trata esse caso separadamente.
@@ -309,7 +308,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Texto da história (do personagem ou do local, dependendo do estabelecimento)
     const txtHistoria = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "27px", color: "#eeeeff",
+        fontSize: "23px", color: "#eeeeff",
         wordWrap: { width: painelW - margem * 2 },
         lineSpacing: 5,
       })
@@ -318,7 +317,7 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Dica inicial exibida quando nenhum local está selecionado
     const txtHint = this.add
       .text(painelX + painelW / 2, height / 2, "Passe o cursor\nsobre um local\nno mapa", {
-        fontSize: "30px", color: "#666688", align: "center",
+        fontSize: "25px", color: "#666688", align: "center",
       })
       .setOrigin(0.5);
 
