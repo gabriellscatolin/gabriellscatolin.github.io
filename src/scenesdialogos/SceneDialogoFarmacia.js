@@ -38,7 +38,7 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia, prometo ser rápido. Vi que está corrido... no fim do mês, esse movimento todo vira resultado pra você?",
+        texto: "Prometo ser rápido. Vi que está corrido... no fim do mês, esse movimento todo vira resultado pra você?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -46,7 +46,7 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Bom dia, sei que está corrido. Queria entender melhor como funciona o movimento da farmácia no dia a dia.",
+        texto: "Sei que está corrido. Queria entender melhor como funciona o movimento da farmácia no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -54,7 +54,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Bom dia, trabalho com soluções de pagamento e tenho algumas opções que podem ajudar a sua operação aqui.",
+        texto: "Certo, trabalho com soluções de pagamento e tenho algumas opções que podem ajudar a sua operação aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -62,7 +62,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Aqui vende bem... mas no fim do mês parece que eu estou sempre correndo atrás do dinheiro.",
+      "Olha, aqui vende bem... mas no fim do mês parece que eu estou sempre correndo atrás do dinheiro.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DA DOR",
@@ -95,7 +95,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "É... principalmente no crédito. Eu vendo, mas não sei quando esse dinheiro vai cair.",
+      "Então... Eu vendo, mas não sei quando esse dinheiro vai cair, especialemente no crédito.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
@@ -120,7 +120,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Isso é comum... depois com mais calma você consegue organizar isso melhor e entender esses valores.",
+        texto: "Isso é comum... depois com mais calma você consegue organizar isso melhor e entender esses valores. Nem tudo que você vende, você ganha.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -128,7 +128,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Então eu posso vender bem e mesmo assim ficar sem dinheiro disponível?",
+      "Então o problema é que eu posso vender bem e mesmo assim ficar sem dinheiro disponível?",
   },
   {
     titulo: "CENA 4 - CLAREZA",
@@ -226,8 +226,6 @@ const ROTEIRO = [
           "Apressado e desalinhado.",
       },
     ],
-    npcResposta:
-      "Pode ser. Se for simples assim, já vale entender melhor.",
   },
 ];
 

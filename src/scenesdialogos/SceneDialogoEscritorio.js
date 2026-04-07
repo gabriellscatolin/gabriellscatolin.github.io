@@ -46,7 +46,7 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Bom dia. Queria entender como você acompanha os recebimentos no dia a dia.",
+        texto: "Queria entender como você acompanha os recebimentos no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -54,7 +54,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Bom dia, vim te mostrar algumas soluções de pagamento que podem melhorar sua operação.",
+        texto: "Vim te mostrar algumas soluções de pagamento que podem melhorar sua operação.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -62,7 +62,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Eu olho mais o total... não entro tanto no detalhe de cada venda.",
+      "Olha, o meu problema é que eu olho mais o total... não entro tanto no detalhe de cada venda.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DO GAP REAL",
@@ -94,7 +94,7 @@ const ROTEIRO = [
           "Incorreto e perigoso. Ignora divergências por transação.",
       },
     ],
-    npcResposta: "Que tipo de diferença você está falando?",
+    npcResposta: "Eu sinto que existe essa diferença que passa batida. Por que será?",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
@@ -126,7 +126,7 @@ const ROTEIRO = [
           "Simplificação incorreta.",
       },
     ],
-    npcResposta: "E como eu consigo ter essa visibilidade em cada caso?",
+    npcResposta: "Ok. Como eu consigo ter visibilidade de quanto estou ganhando em cada venda?",
   },
   {
     titulo: "CENA 4 - MÉTODO DE VALIDAÇÃO",
@@ -223,8 +223,6 @@ const ROTEIRO = [
           "Desorganizado e desalinhado com perfil analítico.",
       },
     ],
-    npcResposta:
-      "Perfeito. Se eu conseguir validar assim, faz bastante sentido pra mim.",
   },
 ];
 

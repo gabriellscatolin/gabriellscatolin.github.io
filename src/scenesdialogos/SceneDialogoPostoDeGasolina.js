@@ -33,17 +33,18 @@ const ROTEIRO = [
   },
   {
     titulo: "CENA 1 - RETOMADA DE RELAÇÃO",
-    narracao: null,
+    narracao:
+      "Ambiente: Estabelecimento em horário de pico. Movimento intenso, equipe acelerada. Nicolas acompanha o caixa com atenção, claramente focado em não perder tempo. A representante se aproxima com objetividade, sem interromper bruscamente.",
     npcInicial:
-      "Você voltou… espero que não seja pra repetir o que já falou. Aqui eu não tenho tempo pra conversa bonita.",
+      "Você voltou... espero que não seja pra repetir o que já falou. Aqui eu não tenho tempo pra conversa bonita.",
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito. Nem vou repetir. Voltei com um cenário direto de quando a operação para, pra ver como você continuaria vendendo.",
+        texto: "Perfeito. Nem vou repetir. Voltei com um cenário direto de quando a operação para... pra ver como você continuaria vendendo.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Retoma com valor novo e foco prático. Não tenta convencer, tenta mostrar.",
+          "Retoma com valor novo, direto ao ponto e alinhado ao perfil do cliente.",
       },
       {
         letra: "B",
@@ -51,7 +52,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas não traz nada novo. Para esse cliente, soa fraco.",
+          "Correto, mas fraco. Não traz novidade.",
       },
       {
         letra: "C",
@@ -59,7 +60,7 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Pressiona sem agregar valor. Perde o cliente.",
+          "Pressiona sem gerar valor. Perde o cliente.",
       },
     ],
     npcResposta:
@@ -72,11 +73,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Hoje, se a maquininha cai, você para de vender. A ideia é ter um caminho paralelo pra continuar cobrando.",
+        texto: "Hoje, se a maquininha cai, você para de vender. A ideia é ter um caminho paralelo pra continuar cobrando, sem depender dela.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Direto, sem rodeio. Introduz fallback como continuidade.",
+          "Direto, claro e já introduz fallback como continuidade.",
       },
       {
         letra: "B",
@@ -84,7 +85,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não sustenta a pressão.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
@@ -92,11 +93,11 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Minimiza risco. Para esse cliente, erro crítico.",
+          "Minimiza risco. Erro crítico para esse perfil.",
       },
     ],
     npcResposta:
-      "Eu já ouvi isso. No papel tudo funciona, na prática é outra história.",
+      "Eu já ouvi isso. Na teoria tudo funciona, na prática é outra história.",
   },
   {
     titulo: "CENA 3 - OBJEÇÃO FORTE",
@@ -105,11 +106,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Concordo. Por isso não é trocar nada, é ter uma segunda opção quando a principal falhar.",
+        texto: "Concordo. Por isso não é trocar nada... é ter uma segunda opção quando a principal falhar.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz redundância. Não confronta, nem promete demais.",
+          "Introduz redundância sem confronto. Ganha confiança.",
       },
       {
         letra: "B",
@@ -117,7 +118,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas vago. Não responde a objeção.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
@@ -125,7 +126,7 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Argumento fraco. Não resolve a dúvida dele.",
+          "Argumento fraco. Não resolve a objeção.",
       },
     ],
     npcResposta:
@@ -138,23 +139,23 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Você gera um link no celular, mostra pro cliente e ele paga ali. A venda continua, mesmo sem a maquininha.",
+        texto: "Você gera um link no celular, mostra pro cliente e ele paga ali na hora. A venda continua, mesmo sem a maquininha.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Explica link de pagamento de forma direta e prática.",
+          "Explicação direta, prática e visual.",
       },
       {
         letra: "B",
-        texto: "Existe o link de pagamento, que permite cobrar de forma digital sem depender do equipamento físico naquele momento.",
+        texto: "Existe o link de pagamento, que permite cobrar de forma digital sem depender do equipamento físico.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas mais conceitual. Menos operacional.",
+          "Correto, mas menos operacional.",
       },
       {
         letra: "C",
-        texto: "Você pode anotar a venda e depois cobrar quando o sistema voltar, assim não perde o cliente na hora.",
+        texto: "Você pode anotar a venda e depois cobrar quando o sistema voltar.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -171,27 +172,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "O que muda é funcionar quando você precisa. Não adianta ter alternativa se ela falha junto com o resto.",
+        texto: "O que muda é funcionar quando você precisa. Não adianta ter alternativa se ela falha junto com o resto... aqui é pra segurar a venda quando o problema acontece.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Defende confiabilidade. Posiciona valor real.",
+          "Posiciona confiabilidade como diferencial real.",
       },
       {
         letra: "B",
-        texto: "O conceito existe no mercado, mas a forma como cada empresa entrega pode variar bastante.",
+        texto: "O conceito existe no mercado, mas a forma como cada empresa entrega pode variar.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas não se posiciona. Falta firmeza.",
+          "Correto, mas sem posicionamento.",
       },
       {
         letra: "C",
-        texto: "Na prática é tudo parecido, qualquer solução vai funcionar bem nesse tipo de situação.",
+        texto: "Na prática é tudo parecido, qualquer solução resolve isso.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Elimina diferencial competitivo.",
+          "Incorreto. Elimina diferencial.",
       },
     ],
     npcResposta:
@@ -204,15 +205,15 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito. Então não muda. Testa como backup, sem mexer no que já funciona, só pra você ver se segura quando precisar.",
+        texto: "Perfeito. Sugiro você testar como backup, sem mexer no que já funciona... Posso deixar isso configurado agora pra você ver na prática se segura quando cair.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Reduz risco, propõe teste. Alinhado ao perfil dele.",
+          "Reduz risco, respeita histórico e propõe teste. Alto poder de conversão.",
       },
       {
         letra: "B",
-        texto: "Se quiser, posso te mostrar isso com mais calma depois, pra você entender melhor como funciona.",
+        texto: "Se quiser, posso te mostrar isso com mais calma depois.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -220,11 +221,11 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "A gente já pode implementar isso agora e você vai ajustando conforme for usando na operação.",
+        texto: "A gente já pode implementar agora e você ajusta depois.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Pressiona e ignora histórico de perda.",
+          "Pressiona e ignora histórico do cliente.",
       },
     ],
     npcResposta:
@@ -248,8 +249,8 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.imagemKey = "falaPosto";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Nicolas, responsável por uma operação de posto de gasolina. " +
-      "Você é direto, cético e intolerante a risco operacional.";
+      "VocÃª Ã© Nicolas, responsÃ¡vel por uma operaÃ§Ã£o de posto de gasolina. " +
+      "VocÃª Ã© direto, cÃ©tico e intolerante a risco operacional.";
   }
 
   init(dados) {
@@ -403,7 +404,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Nicolas está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Nicolas estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -456,15 +457,15 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai fazer um follow-up com o Nicolas, focando em continuidade da operação, backup e redução de risco.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai fazer um follow-up com o Nicolas, focando em continuidade da operaÃ§Ã£o, backup e reduÃ§Ã£o de risco.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +300. Neutra = +150. Errada = -50",
       },
     ];
@@ -489,7 +490,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -544,7 +545,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -570,7 +571,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -588,7 +589,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -673,13 +674,13 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 90) {
-      avaliacao = "Excelente condução! Risco e continuidade bem posicionados.";
+      avaliacao = "Excelente conduÃ§Ã£o! Risco e continuidade bem posicionados.";
       cor = "#44ff88";
     } else if (pct >= 70) {
       avaliacao = "Bom trabalho! Quase perfeito.";
       cor = "#88ccff";
     } else if (pct >= 50) {
-      avaliacao = "Razoável. Vale refinar mais a pressão comercial.";
+      avaliacao = "RazoÃ¡vel. Vale refinar mais a pressÃ£o comercial.";
       cor = "#ffcc44";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo com mais foco em backup e teste.";
@@ -688,13 +689,13 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -735,16 +736,16 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
-      neutra: "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
+      neutra: "O vendedor foi aceitÃ¡vel, porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {
