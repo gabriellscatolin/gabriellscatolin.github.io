@@ -28,36 +28,36 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ambiente: Farmácia movimentada, Rachel no caixa, atendendo rápido e visivelmente cansada.",
-    npcInicial: "Bom dia… pode falar rapidinho? Estou no meio do atendimento.",
+      "Ambiente: Farmácia movimentada, Rachel no caixa, atendendo rápido e visivelmente cansada. Há uma pequena fila. A representante se aproxima e aguarda uma brecha entre um atendimento e outro.",
+    npcInicial: "Bom dia... pode falar rapidinho? Estou no meio do atendimento.",
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia, prometo ser rápido. Vi que está bem corrido… queria só te fazer uma pergunta sobre como você acompanha o dinheiro que entra das vendas.",
+        texto: "Bom dia, prometo ser rápido. Vi que está corrido... no fim do mês, esse movimento todo vira resultado pra você?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Respeita o tempo, reconhece o contexto e já direciona para a dor real.",
+          "Respeita o tempo, lê o ambiente e entra direto na dor.",
       },
       {
         letra: "B",
-        texto: "Bom dia, sei que está corrido. Vim entender melhor como funciona o movimento da farmácia no dia a dia.",
+        texto: "Bom dia, sei que está corrido. Queria entender melhor como funciona o movimento da farmácia no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Educado, mas genérico. Não cria urgência.",
+          "Educado, mas genérico. Não direciona.",
       },
       {
         letra: "C",
-        texto: "Bom dia, trabalho com soluções de pagamento e tenho algumas opções que podem ajudar sua operação e suas vendas.",
+        texto: "Bom dia, trabalho com soluções de pagamento e tenho algumas opções que podem ajudar a sua operação aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Abordagem padrão, centrada em produto e desconectada do momento.",
+          "Fala de produto cedo demais e ignora o contexto.",
       },
     ],
     npcResposta:
-      "Aqui vende bem… mas no fim do mês parece que eu estou sempre correndo atrás do dinheiro.",
+      "Aqui vende bem... mas no fim do mês parece que eu estou sempre correndo atrás do dinheiro.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DA DOR",
@@ -66,31 +66,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Isso acontece bastante por aqui. Você sente que vende bem, mas não consegue prever quanto vai entrar nos próximos dias?",
+        texto: "Isso acontece bastante... você vende bem, mas não tem muita clareza de quando o dinheiro entra na conta do banco, né?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Combina autoridade leve com diagnóstico. Faz a cliente se reconhecer no problema.",
+          "Conecta com a dor e traz o banco de forma natural.",
       },
       {
         letra: "B",
-        texto: "Imagino que com esse movimento todo seja difícil acompanhar tudo com precisão no dia a dia.",
+        texto: "Imagino... com esse movimento todo deve ser difícil acompanhar tudo que entra no caixa no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Empático, mas pouco direcionado.",
+          "Empático, mas não aprofunda.",
       },
       {
         letra: "C",
-        texto: "Mas com esse volume você deve ter um controle bem organizado do caixa, não?",
+        texto: "Mas isso não é só questão de organizar melhor o caixa e acompanhar os valores com mais frequência?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Suposição equivocada. Pode afastar.",
+          "Simplifica demais o problema.",
       },
     ],
     npcResposta:
-      "Principalmente no crédito… eu vendo, mas não sei quando esse dinheiro entra.",
+      "É... principalmente no crédito. Eu vendo, mas não sei quando esse dinheiro vai cair.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
@@ -99,27 +99,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Normal. Se você vende 10 mil hoje no crédito, uma parte entra rápido, mas o parcelado vai pingando nos dias seguintes.",
+        texto: "Normal... você vende hoje, uma parte entra antes, o restante vai caindo aos poucos na conta ao longo dos dias.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Explica com exemplo simples e real. Introduz o conceito de fluxo sem complicar.",
+          "Explica de forma simples e próxima da realidade.",
       },
       {
         letra: "B",
-        texto: "No crédito o dinheiro não entra todo de uma vez, então isso acaba dificultando o controle do caixa.",
+        texto: "No crédito o dinheiro não entra todo de uma vez, então isso acaba confundindo um pouco no acompanhamento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas mais abstrato.",
+          "Correto, mas menos prático.",
       },
       {
         letra: "C",
-        texto: "Isso é comum, depois com mais calma você consegue organizar melhor e entender como esses valores entram.",
+        texto: "Isso é comum... depois com mais calma você consegue organizar isso melhor e entender esses valores.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Minimiza o problema e não ensina nada prático.",
+          "Minimiza a dor e não resolve.",
       },
     ],
     npcResposta:
@@ -132,23 +132,23 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Pode sim. Você vende 10 mil hoje, mas às vezes só uma parte entra amanhã, e o resto fica espalhado nos próximos dias.",
+        texto: "Pode sim. Você vende hoje, mas o dinheiro entra em dias diferentes... e sem organizar isso com o banco, parece que falta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Torna visível o problema com número simples. Clareza prática.",
+          "Traduz o problema com clareza e lógica.",
       },
       {
         letra: "B",
-        texto: "Sim, porque o dinheiro entra em momentos diferentes, então pode dar essa sensação de falta no caixa.",
+        texto: "Sim, porque o dinheiro entra em momentos diferentes ao longo dos dias e isso pode confundir no controle.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas menos concreto.",
+          "Correto, mas pouco direto.",
       },
       {
         letra: "C",
-        texto: "Se você vender mais, no final entra mais dinheiro, então essa diferença acaba se resolvendo ao longo do tempo.",
+        texto: "Se você vender mais, no final entra mais dinheiro e isso acaba se equilibrando naturalmente ao longo do tempo.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -156,7 +156,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Mas eu não tenho tempo pra ficar olhando isso… já estou no limite aqui.",
+      "Mas eu não tenho tempo pra ficar olhando isso... já estou no limite aqui.",
   },
   {
     titulo: "CENA 5 - OBJEÇÃO",
@@ -165,31 +165,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Nem precisa. A ideia é você conseguir ver algo simples, tipo quanto entra hoje, amanhã e depois, sem parar o dia.",
+        texto: "E nem precisa. Com o Cielo Conciliador integrado ao banco, já fica tudo organizado pra você ver o que entrou e o que falta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Remove a objeção com praticidade. Mostra solução leve e aplicável.",
+          "Resolve com clareza, simplicidade e integração.",
       },
       {
         letra: "B",
-        texto: "Dá pra organizar isso aos poucos, sem precisar mudar muito sua rotina nem complicar o dia a dia.",
+        texto: "Dá pra organizar isso melhor com algumas ferramentas e acompanhando com mais frequência o que entra no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Ajuda, mas pouco tangível.",
+          "Ajuda, mas não resolve totalmente.",
       },
       {
         letra: "C",
-        texto: "Para ter esse controle, você vai precisar separar um tempo e acompanhar esses números com mais frequência.",
+        texto: "Você vai precisar separar um tempo pra acompanhar isso melhor e conferir os valores com mais atenção todos os dias.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Aumenta a dor. Inviabiliza para o perfil dela.",
+          "Aumenta a barreira e desmotiva.",
       },
     ],
     npcResposta:
-      "Se eu conseguisse enxergar isso melhor… já me ajudava muito no dia a dia.",
+      "Se eu conseguisse enxergar isso melhor... já me ajudava muito no dia a dia.",
   },
   {
     titulo: "CENA 6 - PRÓXIMO PASSO",
@@ -198,30 +198,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se fizer sentido, te mostro depois como ver isso organizado por data, tipo uma agenda do que entra em cada dia.",
+        texto: "Se fizer sentido, passo mais tarde e te mostro o Cielo Conciliador junto com o banco, já organizado por dia pra você acompanhar.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta solução com dor de forma natural. Introduz ferramenta sem parecer venda.",
+          "Conecta solução com clareza e ação prática.",
       },
       {
         letra: "B",
-        texto: "Posso te explicar isso com mais calma outro dia, quando você estiver com menos movimento.",
+        texto: "Posso te explicar isso com mais calma outro dia e te mostrar como funciona essa organização no sistema.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Abre espaço, mas sem valor claro.",
+          "Abre espaço, mas sem urgência.",
       },
       {
         letra: "C",
-        texto: "A gente já pode configurar isso agora e você começa a usar hoje mesmo, resolve tudo de uma vez.",
+        texto: "A gente pode configurar isso agora e você começa a usar hoje mesmo, depois você vai entendendo melhor como funciona.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Apressado e invasivo. Ignora o momento dela.",
+          "Apressado e desalinhado.",
       },
     ],
-    npcResposta: "Pode ser. Se for simples assim, já vale entender melhor.",
+    npcResposta:
+      "Pode ser. Se for simples assim, já vale entender melhor.",
   },
 ];
 
@@ -241,8 +242,8 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.imagemKey = "falaFarmacia";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Rachel, gerente de uma farmácia movimentada. " +
-      "Você é direta, ocupada e profissional.";
+      "VocÃª Ã© Rachel, gerente de uma farmÃ¡cia movimentada. " +
+      "VocÃª Ã© direta, ocupada e profissional.";
   }
 
   init(dados) {
@@ -303,7 +304,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNome = this.add.text(
       CX - BTN_W / 2,
       NOME_Y,
-      "Rachel  -  Gerente da Farmácia",
+      "Rachel  -  Gerente da FarmÃ¡cia",
       {
         fontSize: "20px",
         color: "#5a9fd4",
@@ -400,7 +401,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Rachel está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Rachel estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -453,15 +454,15 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avançar para a solução.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avanÃ§ar para a soluÃ§Ã£o.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
       },
     ];
@@ -486,7 +487,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -541,7 +542,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -567,7 +568,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -585,7 +586,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -661,13 +662,13 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 90) {
-      avaliacao = "Vendedor nato! Negócio fechado!";
+      avaliacao = "Vendedor nato! NegÃ³cio fechado!";
       cor = "#44ff88";
     } else if (pct >= 70) {
       avaliacao = "Bom trabalho! Quase perfeito.";
       cor = "#88ccff";
     } else if (pct >= 50) {
-      avaliacao = "Razoável. Pratique mais!";
+      avaliacao = "RazoÃ¡vel. Pratique mais!";
       cor = "#ffcc44";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo.";
@@ -676,13 +677,13 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -723,16 +724,16 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
-      neutra: "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
+      neutra: "O vendedor foi aceitÃ¡vel, porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

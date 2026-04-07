@@ -28,36 +28,37 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ambiente: Loja moderna, música ambiente, cliente sendo atendido. Eduardo atento à experiência.",
+      "Ambiente: Loja moderna, música ambiente. Um cliente finaliza a compra. Eduardo acompanha atento a experiência. A representante aguarda um momento e se aproxima após o atendimento.",
     npcInicial:
-      "Fala… pode falar, mas rapidinho. Aqui eu cuido muito da experiência do cliente.",
+      "Fala... pode falar, mas rapidinho. Aqui eu cuido muito da experiência do cliente.",
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito, e é exatamente isso que me chamou atenção. Como está sendo a experiência do cliente na hora de pagar hoje?",
+        texto: "Perfeito, e foi exatamente isso que me chamou atenção. Como está sendo a experiência do cliente na hora de pagar hoje?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta diretamente com o valor dele: experiência. Abre espaço relevante.",
+          "Conecta direto com o valor central do cliente e entra no tema certo.",
       },
       {
         letra: "B",
-        texto: "Legal o espaço, dá pra ver que você pensou bastante na experiência do cliente aqui dentro.",
+        texto: "Espaço muito bom, dá pra ver que você pensou bastante na experiência aqui.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Empático, mas não leva a conversa para o problema.",
+          "Parece alinhado, mas não gera avanço.",
       },
       {
         letra: "C",
-        texto: "Fala, vim te mostrar umas soluções de pagamento que podem ajudar a loja a vender mais.",
+        texto: "Fala, vim te mostrar umas soluções de pagamento que ajudam a aumentar conversão e melhorar a operação da loja.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Genérico e centrado em produto. Não conecta com o posicionamento da marca.",
+          "Parece sofisticado, mas continua centrado em produto e não no cliente.",
       },
     ],
-    npcResposta: "A experiência é boa… mas às vezes no pagamento quebra o clima.",
+    npcResposta:
+      "A experiência é boa... mas às vezes no pagamento quebra o clima.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DA DOR",
@@ -66,31 +67,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Tipo fila, demora ou a maquininha travando na hora do fechamento?",
+        texto: "Fila, demora... ou a maquininha travando bem na hora de fechar a compra?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Nomeia fricção no pagamento. Mostra leitura real de operação.",
+          "Nomeia fricções reais e mostra domínio da operação.",
       },
       {
         letra: "B",
-        texto: "Imagino que com movimento isso possa acontecer em alguns momentos do dia.",
+        texto: "Imagino... com volume alto, é normal ter algum ponto da jornada que perde fluidez.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas pouco específico.",
+          "Soa inteligente, mas não aprofunda.",
       },
       {
         letra: "C",
-        texto: "Mas no geral o pagamento funciona bem, né? Isso não deve impactar tanto assim.",
+        texto: "Mas isso é mais operacional... não costuma impactar tanto assim a decisão de compra no final.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Minimiza um ponto crítico: quebra de experiência.",
+          "Erro conceitual relevante. Subestima o momento mais crítico da venda.",
       },
     ],
     npcResposta:
-      "Sim… às vezes perde o ritmo, o cliente já estava no clima e trava ali.",
+      "Trava... justo na hora de pagar. O cliente já está no clima e perde o ritmo ali.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DA EXPERIÊNCIA",
@@ -99,62 +100,64 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "E nessa hora você perde mais que tempo, porque qualquer fricção no pagamento pode quebrar a decisão de compra.",
+        texto: "E aí você não perde só tempo... qualquer quebra nesse momento pode fazer o cliente repensar a compra.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz conceito de fricção: qualquer obstáculo que atrapalha o fluxo da compra.",
+          "Conecta fricção com perda real de conversão.",
       },
       {
         letra: "B",
-        texto: "É, realmente não é o ideal, mas faz parte do dia a dia de qualquer operação.",
+        texto: "É... não é o ideal, mas faz parte da operação quando tem bastante movimento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Reconhece, mas normaliza o problema.",
+          "Normaliza algo que deveria ser resolvido.",
       },
       {
         letra: "C",
-        texto: "Isso acontece mesmo, mas o importante é que o cliente já decidiu comprar antes de chegar no caixa.",
+        texto: "Mas como o cliente já escolheu o produto, dificilmente ele desiste nessa etapa, então o impacto é pequeno.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. A decisão ainda pode ser revertida na etapa final.",
+          "Parece lógico, mas está errado. A decisão ainda não está totalmente consolidada.",
       },
     ],
-    npcResposta: "E o que daria pra fazer pra deixar isso mais fluido?",
+    npcResposta:
+      "E o que daria pra fazer pra deixar isso mais fluido?",
   },
   {
-    titulo: "CENA 4 - TÉCNICA (TAP TO PAY / NFC)",
+    titulo: "CENA 4 - TÉCNICA (BANCO + TC)",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Hoje você consegue transformar o próprio celular em ponto de pagamento, com aproximação direta, sem depender da maquininha.",
+        texto: "Hoje muita loja resolve isso quando integra com o banco. Você vende e o valor já entra na conta na hora, sem depender de etapas depois, o que deixa o fluxo mais leve.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz Tap to Pay. NFC, pagamento direto no celular, reduz etapas e dependência de equipamento.",
+          "Introduz o “vendeu, tá na conta” como ganho de fluidez operacional.",
       },
       {
         letra: "B",
-        texto: "Dá pra melhorar a forma de pagamento, deixando o processo mais rápido e menos dependente de equipamento físico.",
+        texto: "Dá pra melhorar o pagamento deixando o processo mais rápido e reduzindo algumas etapas no caixa.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas pouco concreto.",
+          "Parece correto, mas não mostra como resolver.",
       },
       {
         letra: "C",
-        texto: "Você pode colocar mais maquininhas na loja, assim diminui a fila e resolve esse tipo de situação.",
+        texto: "O ideal nesses casos é aumentar a quantidade de maquininhas e distribuir melhor os pontos de pagamento.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Resolve parcialmente, mas não elimina fricção. Aumenta custo e não melhora a experiência.",
+          "Parece solução prática, mas não resolve o problema estrutural de fluxo e integração.",
       },
     ],
-    npcResposta: "Mas isso muda tanto assim na prática?",
+    npcResposta:
+      "Mas isso muda tanto assim na prática?",
   },
   {
     titulo: "CENA 5 - IMPACTO NA CONVERSÃO",
@@ -163,27 +166,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Muda porque você reduz etapas. O cliente aproxima e paga na hora, sem pausa, mantendo o fluxo da experiência.",
+        texto: "Muda porque você não só acelera o pagamento. Quando está integrado com a Cielo e com o banco parceiro, você vende e o dinheiro já está na conta, sem travar a operação nem depois no financeiro.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta velocidade com experiência. Menos fricção = maior conversão.",
+          "Conecta experiência, operação e fluxo de caixa em um único benefício.",
       },
       {
         letra: "B",
-        texto: "Ajuda porque deixa o pagamento mais rápido, o que pode melhorar um pouco a experiência.",
+        texto: "Ajuda sim, porque deixa o pagamento mais rápido e melhora a percepção do cliente na hora de finalizar.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Verdadeiro, mas fraco.",
+          "Correto, mas superficial.",
       },
       {
         letra: "C",
-        texto: "Não muda tanto, é mais uma questão de conforto do cliente do que impacto real na venda.",
+        texto: "Ajuda um pouco, mas no fim o cliente valoriza mais o produto do que essa parte do pagamento.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Velocidade impacta diretamente conversão.",
+          "Meia-verdade perigosa. Ignora o impacto do momento final da compra.",
       },
     ],
     npcResposta:
@@ -196,27 +199,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se fizer sentido, te mostro como usar isso no celular e aplicar direto no atendimento, sem mudar sua dinâmica.",
+        texto: "Faz sentido. Posso te mostrar isso funcionando em 5 minutos, já com essa integração com o banco aplicada no seu fluxo. Quer ver agora ou prefere depois?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta solução com operação real. Sem fricção de implementação.",
+          "Direto, prático e orientado à ação.",
       },
       {
         letra: "B",
-        texto: "Posso te explicar melhor isso depois, com mais calma, pra você entender como funciona.",
+        texto: "Se quiser, posso te explicar melhor isso em outro momento com mais detalhes.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Abre espaço, mas pouco prático.",
+          "Não gera urgência nem conexão com o que foi discutido.",
       },
       {
         letra: "C",
-        texto: "A gente já pode configurar isso agora e você começa a usar, depois você vai se adaptando no dia a dia.",
+        texto: "A gente pode já ativar isso aqui e você vai ajustando depois conforme for usando no dia a dia.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Falta de alinhamento com experiência. Implementação sem contexto.",
+          "Parece ágil, mas ignora o processo de decisão do cliente.",
       },
     ],
     npcResposta:
@@ -240,8 +243,8 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.imagemKey = "falaLoja";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Eduardo, responsável por uma loja de roupas moderna. " +
-      "Você valoriza experiência, fluidez, conversão e coerência com a marca.";
+      "VocÃª Ã© Eduardo, responsÃ¡vel por uma loja de roupas moderna. " +
+      "VocÃª valoriza experiÃªncia, fluidez, conversÃ£o e coerÃªncia com a marca.";
   }
 
   init(dados) {
@@ -395,7 +398,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Eduardo está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Eduardo estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -448,15 +451,15 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai conversar com Eduardo, conectando pagamento, fluidez e experiência de marca.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai conversar com Eduardo, conectando pagamento, fluidez e experiÃªncia de marca.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
@@ -481,7 +484,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -536,7 +539,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -562,7 +565,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -580,7 +583,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -656,22 +659,22 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 58) {
-      avaliacao = "Excelente condução! Valor conectado à experiência.";
+      avaliacao = "Excelente conduÃ§Ã£o! Valor conectado Ã  experiÃªncia.";
       cor = "#44ff88";
     } else {
-      avaliacao = "Precisa melhorar. Tente novamente com mais foco na experiência.";
+      avaliacao = "Precisa melhorar. Tente novamente com mais foco na experiÃªncia.";
       cor = "#ff6644";
     }
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
           `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-          `Total da sessão: ${getScore(this.registry)}\n\n` +
+          `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
           `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -713,18 +716,18 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
     const guias = {
       correta:
-        "O vendedor conduziu muito bem a conversa. Responda de forma receptiva, estratégica e aberta ao próximo passo.",
+        "O vendedor conduziu muito bem a conversa. Responda de forma receptiva, estratÃ©gica e aberta ao prÃ³ximo passo.",
       neutra:
-        "O vendedor foi aceitável, mas ainda genérico. Responda de forma neutra, com interesse moderado.",
+        "O vendedor foi aceitÃ¡vel, mas ainda genÃ©rico. Responda de forma neutra, com interesse moderado.",
       errada:
         "O vendedor conduziu mal a abordagem. Responda de forma mais fria ou cautelosa, sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

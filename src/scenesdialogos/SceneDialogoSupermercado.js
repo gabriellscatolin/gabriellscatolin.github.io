@@ -27,21 +27,22 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
-    narracao: "Ambiente: Supermercado grande, vários caixas operando, fluxo intenso.",
+    narracao:
+      "Ambiente: Supermercado grande, vários caixas operando, fluxo intenso. Sons de bip constantes, clientes passando, equipe em ritmo acelerado. A representante observa por alguns segundos a operação antes de se aproximar. A representante se aproxima com cuidado, aguardando um breve intervalo entre atendimentos. Alícia percebe a presença, mas continua acompanhando o movimento dos caixas.",
     npcInicial:
-      "Pode falar… mas já aviso, aqui o problema nunca é simples.",
+      "Pode falar... mas já aviso, aqui o problema nunca é simples.",
     escolhas: [
       {
         letra: "A",
-        texto: "Imagino. Com vários caixas rodando ao mesmo tempo, você consegue ter uma visão clara do que está entrando no total?",
+        texto: "Imagino... com esse volume todo de caixas rodando, dá pra ter uma visão clara do que está entrando, inclusive já na conta com a Cielo junto com o banco?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Começa pelo ponto certo: escala e visão consolidada.",
+          "Mantém escala + integração + parceria, com ritmo natural.",
       },
       {
         letra: "B",
-        texto: "Deve ser bem complexo controlar tudo isso com tantos caixas funcionando ao mesmo tempo.",
+        texto: "Deve ser bem complexo controlar tudo isso com tantos caixas funcionando ao mesmo tempo e depois acompanhar no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -49,15 +50,15 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Mas no fim do dia o sistema já mostra o total, então fica mais fácil de controlar, não?",
+        texto: "Mas no fim do dia o sistema já mostra o total, então depois o banco organiza isso e fica mais fácil de controlar, não?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. O problema não é o total, é o que acontece dentro dele.",
+          "Incorreto. O banco não resolve falta de estrutura.",
       },
     ],
     npcResposta:
-      "Eu vejo o total… mas o problema é quando algo não bate depois.",
+      "Eu até vejo o total... mas o problema é quando algo não bate depois.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DO PROBLEMA",
@@ -66,31 +67,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Tipo descobrir diferença dias depois, sem saber em qual caixa ou operação aconteceu?",
+        texto: "Você quer dizer, quando aparece uma diferença dias depois... e você não consegue identificar nem o caixa, nem em que momento isso virou na conta do banco?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Nomeia a dor real: perda invisível e tardia.",
+          "Nomeia a dor real e conecta operação com financeiro.",
       },
       {
         letra: "B",
-        texto: "Imagino que com volume alto possam surgir diferenças ao longo do tempo.",
+        texto: "Imagino que com volume alto possam surgir diferenças ao longo do tempo e isso acabe aparecendo depois no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não traz a origem do problema.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
-        texto: "Isso acontece mesmo, mas em operação grande é normal ter alguma diferença no caminho.",
+        texto: "Isso acontece mesmo, mas em operação grande é normal ter alguma diferença até o valor chegar no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Normalizar perda é erro grave nesse nível.",
+          "Incorreto. Normalizar perda é erro grave.",
       },
     ],
     npcResposta:
-      "Exato… às vezes aparece diferença e eu nem sei de onde veio.",
+      "Exato... às vezes aparece uma diferença e eu nem sei de onde veio.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DA COMPLEXIDADE",
@@ -99,30 +100,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Porque cada caixa está operando separado, e quando junta tudo, você perde a origem de cada transação.",
+        texto: "Porque cada caixa funciona separado... e quando isso chega na conta, vira tudo um número só. Aí você perde de onde cada venda veio.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Explica o problema de escala: falta de rastreabilidade.",
+          "Explica o problema completo com clareza.",
       },
       {
         letra: "B",
-        texto: "Quando tem muitos caixas, o volume de transações aumenta e fica mais difícil acompanhar tudo com detalhe.",
+        texto: "Quando tem muitos caixas, o volume de transações aumenta e fica mais difícil acompanhar tudo até o momento que entra no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas não explica o “porquê”.",
+          "Correto, mas não explica a causa.",
       },
       {
         letra: "C",
-        texto: "Isso acontece mais por falha da equipe do que pela forma como a operação está organizada.",
+        texto: "Isso acontece mais por falha da equipe do que pela forma como a operação está organizada ou como chega no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. O modelo influencia diretamente o controle.",
+          "Incorreto. O modelo influencia diretamente.",
       },
     ],
-    npcResposta: "E como daria pra organizar isso melhor?",
+    npcResposta:
+      "E como daria pra organizar isso melhor?",
   },
   {
     titulo: "CENA 4 - ORGANIZAÇÃO NA PRÁTICA",
@@ -131,55 +133,56 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "O ideal é cada venda já ficar vinculada ao caixa e ao pagamento, assim você consegue rastrear exatamente de onde veio.",
+        texto: "O ideal é que cada venda já saia identificada, ligada ao caixa e ao pagamento, e com a Cielo junto com o banco isso já chega organizado na conta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz rastreabilidade: saber origem de cada venda.",
+          "Introduz rastreabilidade + parceria de forma natural.",
       },
       {
         letra: "B",
-        texto: "Dá pra melhorar organizando melhor as informações e acompanhando os dados de forma mais estruturada.",
+        texto: "Dá pra melhorar organizando melhor as informações e acompanhando os dados até o momento em que entram na conta.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas vago. Não mostra como.",
+          "Correto, mas vago.",
       },
       {
         letra: "C",
-        texto: "Você pode pedir pra equipe ter mais atenção e conferir melhor os valores durante o dia.",
+        texto: "Você pode pedir pra equipe ter mais atenção e conferir melhor os valores antes de fechar e depois validar no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Não resolve problema estrutural.",
+          "Incorreto. Não resolve a estrutura.",
       },
     ],
-    npcResposta: "Mas com esse volume, isso não fica complicado?",
+    npcResposta:
+      "Mas com esse volume, isso não fica complicado?",
   },
   {
-    titulo: "CENA 5 - INTRODUÇÃO DO CONCEITO (COM EXPLICAÇÃO)",
+    titulo: "CENA 5 - INTRODUÇÃO DO CONCEITO",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Fica se for manual. Por isso existe o que chamam de centralização com divisão por operação, onde cada pagamento já vem separado e organizado.",
+        texto: "Fica se for manual. Por isso a Cielo junto com o banco já organiza isso: você vê tudo na conta, mas cada operação separada por origem.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz conceito de forma simples: centralização = visão única; divisão = cada operação separada.",
+          "centralização na conta, divisão por origem, reforça parceria Cielo + banco",
       },
       {
         letra: "B",
-        texto: "Existe um modelo de split de pagamento, que separa e organiza os valores por origem dentro da operação.",
+        texto: "Existe um modelo de split de pagamento, que separa e organiza os valores por origem dentro da operação e depois no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto tecnicamente: split = divisão automática dos valores. Mas menos didático, não traduz bem o impacto.",
+          "Correto, mas menos didático.",
       },
       {
         letra: "C",
-        texto: "Com volume alto, o melhor é olhar só o total e evitar entrar em muitos detalhes da operação.",
+        texto: "Com volume alto, o melhor é olhar só o total no banco e evitar entrar em muitos detalhes da operação.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -196,27 +199,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Exatamente. Você passa a ver o todo, mas também cada parte, sabendo qual caixa gerou o quê, sem perder controle.",
+        texto: "Exatamente. Você vê o total na conta com a Cielo junto com o banco, mas também cada parte, sabendo qual caixa gerou o quê. Posso te mostrar isso rápido.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta centralização com rastreabilidade e controle.",
+          "Fecha com força: visão + rastreabilidade + parceria.",
       },
       {
         letra: "B",
-        texto: "Isso ajuda porque organiza melhor os dados e facilita a análise da operação como um todo.",
+        texto: "Isso ajuda porque organiza melhor os dados e facilita a análise da operação tanto no sistema quanto no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não destaca o ganho prático.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
-        texto: "Dá pra melhorar isso ajustando o fechamento diário e pedindo mais conferência da equipe.",
+        texto: "Dá pra melhorar isso ajustando o fechamento diário e pedindo mais conferência antes de bater o valor no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Não resolve a causa do problema.",
+          "Incorreto. Não resolve a causa.",
       },
     ],
     npcResposta:
@@ -240,8 +243,8 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.imagemKey = "falaSupermercado";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Alícia, responsável por um supermercado de grande porte. " +
-      "Você valoriza escala, controle, rastreabilidade e visão clara da operação.";
+      "VocÃª Ã© AlÃ­cia, responsÃ¡vel por um supermercado de grande porte. " +
+      "VocÃª valoriza escala, controle, rastreabilidade e visÃ£o clara da operaÃ§Ã£o.";
   }
 
   init(dados) {
@@ -302,7 +305,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoNome = this.add.text(
       CX - BTN_W / 2,
       NOME_Y,
-      "Alícia  -  Supermercado",
+      "AlÃ­cia  -  Supermercado",
       {
         fontSize: "20px",
         color: "#5a9fd4",
@@ -398,7 +401,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Alícia está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "AlÃ­cia estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -451,15 +454,15 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai conduzir uma conversa com Alícia, focando em escala, rastreabilidade e controle da operação.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai conduzir uma conversa com AlÃ­cia, focando em escala, rastreabilidade e controle da operaÃ§Ã£o.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
@@ -484,7 +487,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -539,7 +542,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -565,7 +568,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -583,7 +586,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -659,7 +662,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 75) {
-      avaliacao = "Excelente condução! Escala e controle bem posicionados.";
+      avaliacao = "Excelente conduÃ§Ã£o! Escala e controle bem posicionados.";
       cor = "#44ff88";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo com mais foco no controle.";
@@ -668,13 +671,13 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -715,16 +718,16 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
-      neutra: "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
+      neutra: "O vendedor foi aceitÃ¡vel, porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

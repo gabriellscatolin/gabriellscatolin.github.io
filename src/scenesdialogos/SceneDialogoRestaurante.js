@@ -29,7 +29,7 @@ const ROTEIRO = [
     titulo: "CENA 1 - ABORDAGEM",
     narracao: "Ambiente: Restaurante cheio, equipe correndo, pedidos saindo.",
     npcInicial:
-      "Fala… pode ser rápido? Aqui qualquer minuto já vira problema.",
+      "Fala... pode ser rápido? Aqui qualquer minuto já vira problema.",
     escolhas: [
       {
         letra: "A",
@@ -37,7 +37,7 @@ const ROTEIRO = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Começa totalmente natural, sem sigla. Foco no fluxo real da operação.",
+          "Começa natural, focado no fluxo da operação.",
       },
       {
         letra: "B",
@@ -45,7 +45,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas já traz linguagem mais técnica cedo demais, sem contextualizar.",
+          "Correto, mas mais técnico cedo demais.",
       },
       {
         letra: "C",
@@ -53,11 +53,11 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Parece lógico, mas é incorreto. Simplicidade não significa eficiência.",
+          "Parece lógico, mas é incorreto.",
       },
     ],
     npcResposta:
-      "Hoje é separado… passa no sistema e depois na maquininha.",
+      "Hoje é separado... passa no sistema e depois na maquininha.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DO PROBLEMA",
@@ -70,7 +70,7 @@ const ROTEIRO = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Mantém linguagem simples e valida o fluxo real antes de aprofundar.",
+          "Valida o fluxo real antes de aprofundar.",
       },
       {
         letra: "B",
@@ -78,7 +78,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas já entra em conceito antes de construir a cena.",
+          "Correto, mas conceitual demais.",
       },
       {
         letra: "C",
@@ -86,10 +86,11 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Repetição aumenta erro, não segurança.",
+          "Incorreto. Repetição aumenta erro.",
       },
     ],
-    npcResposta: "Sim… funciona, mas às vezes dá uns erros chatos.",
+    npcResposta:
+      "Sim... funciona, mas às vezes dá uns erros chatos.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DO RISCO",
@@ -102,7 +103,7 @@ const ROTEIRO = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Nomeia erros reais de forma simples. Conecta com dor operacional.",
+          "Nomeia erros reais de forma prática.",
       },
       {
         letra: "B",
@@ -110,7 +111,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não traz exemplos do dia a dia.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
@@ -118,10 +119,11 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. O processo influencia diretamente o erro.",
+          "Incorreto. O processo influencia diretamente.",
       },
     ],
-    npcResposta: "E como isso ficaria mais seguro?",
+    npcResposta:
+      "E como isso ficaria mais seguro?",
   },
   {
     titulo: "CENA 4 - INTRODUÇÃO DA TÉCNICA",
@@ -130,11 +132,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Quando o sistema está integrado ao pagamento, o valor já sai pronto, sem precisar digitar, e já volta confirmado.",
+        texto: "Quando o sistema está integrado ao pagamento, o valor já sai pronto, sem digitar, e já volta confirmado no sistema.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Explica o conceito primeiro, sem sigla. Clareza antes da técnica.",
+          "Clareza de fluxo, sem sobrecarregar.",
       },
       {
         letra: "B",
@@ -142,7 +144,7 @@ const ROTEIRO = [
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas ainda pouco conectado com o fluxo completo.",
+          "Correto, mas pouco conectado ao impacto.",
       },
       {
         letra: "C",
@@ -150,40 +152,40 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. O pagamento continua existindo, apenas integrado.",
+          "Incorreto. O pagamento continua existindo.",
       },
     ],
     npcResposta:
-      "Entendi… isso tem algum nome ou é só uma forma diferente de operar?",
+      "Entendi... isso tem algum nome ou é só uma forma diferente de operar?",
   },
   {
-    titulo: "CENA 5 - INTRODUÇÃO DAS SIGLAS (COM EXPLICAÇÃO)",
+    titulo: "CENA 5 - INTRODUÇÃO DAS SIGLAS (COM PARCERIA)",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Tem sim. Isso é o que chamam de integração com o sistema, às vezes via TEF, que basicamente liga o caixa direto ao pagamento.",
+        texto: "Tem sim. Isso é integração com o sistema, às vezes via TEF, e com a parceria da Cielo com o banco isso já fica tudo conectado.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz TEF com tradução simples: ligação direta entre sistema e pagamento.",
+          "Introduz TEF e posiciona claramente a parceria Cielo + banco.",
       },
       {
         letra: "B",
-        texto: "Isso é conhecido como TEF, que é quando o sistema se conecta com o pagamento para automatizar o processo.",
+        texto: "Isso é conhecido como TEF, quando o sistema se conecta com o pagamento e depois você acompanha os valores no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto tecnicamente, mas menos didático. Não explica o impacto no dia a dia.",
+          "Correto, mas menos completo.",
       },
       {
         letra: "C",
-        texto: "Isso é só um tipo de maquininha diferente, que funciona de forma mais moderna que as outras.",
+        texto: "Isso é só um tipo de maquininha diferente, que depois já organiza automaticamente tudo no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. TEF não é maquininha, é integração entre sistemas.",
+          "Incorreto. Confunde produto com integração.",
       },
     ],
     npcResposta:
@@ -196,27 +198,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Resolve porque você tira a digitação, reduz erro e já deixa tudo registrado certo, sem depender da equipe acertar toda vez.",
+        texto: "Resolve porque você tira a digitação, reduz erro e com a Cielo junto com o banco já deixa tudo registrado certo no sistema e na conta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta tecnologia com impacto real sob pressão.",
+          "Conecta operação + parceria + impacto real.",
       },
       {
         letra: "B",
-        texto: "Ajuda porque melhora o controle e deixa o processo mais organizado no dia a dia.",
+        texto: "Ajuda porque melhora o controle e deixa o processo mais organizado no dia a dia e depois no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não mostra o ganho direto na operação.",
+          "Correto, mas genérico.",
       },
       {
         letra: "C",
-        texto: "A gente pode manter como está e só ajustar o processo da equipe para evitar esses erros.",
+        texto: "A gente pode manter como está e só ajustar o processo da equipe para depois conferir melhor no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Tenta resolver problema estrutural com comportamento.",
+          "Incorreto. Problema estrutural.",
       },
     ],
     npcResposta:
@@ -240,8 +242,8 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.imagemKey = "falaRestaurante";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Lucas, responsável por um restaurante movimentado. " +
-      "Você é ágil, objetivo e muito atento à eficiência da operação e ao fluxo de pagamentos.";
+      "VocÃª Ã© Lucas, responsÃ¡vel por um restaurante movimentado. " +
+      "VocÃª Ã© Ã¡gil, objetivo e muito atento Ã  eficiÃªncia da operaÃ§Ã£o e ao fluxo de pagamentos.";
   }
 
   init(dados) {
@@ -398,7 +400,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Lucas está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Lucas estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -450,15 +452,15 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai conversar com Lucas, focando em ritmo operacional, redução de erro e fluidez no pagamento.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai conversar com Lucas, focando em ritmo operacional, reduÃ§Ã£o de erro e fluidez no pagamento.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
@@ -483,7 +485,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -538,7 +540,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -564,7 +566,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -582,7 +584,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -658,7 +660,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 66) {
-      avaliacao = "Excelente condução! Operação e clareza bem conectadas.";
+      avaliacao = "Excelente conduÃ§Ã£o! OperaÃ§Ã£o e clareza bem conectadas.";
       cor = "#44ff88";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo com mais foco no fluxo.";
@@ -667,13 +669,13 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -714,16 +716,16 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
-      neutra: "O vendedor foi aceitável porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
+      neutra: "O vendedor foi aceitÃ¡vel porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {
