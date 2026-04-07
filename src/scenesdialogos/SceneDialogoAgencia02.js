@@ -278,7 +278,6 @@ const ROTEIRO_PJ = [
 ];
 
 const CAPITULO = "chapter2";
-const FASE = "agency2";
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -301,6 +300,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     this.npcAlvo = npcAlvo;
     this.tipoDialogo = ehGG ? "GG" : "PJ";
+    this.fase = ehGG ? "agency2_gg" : "agency2_pj";
     this.roteiro = ehGG ? ROTEIRO_GG : ROTEIRO_PJ;
     this.maxPts = this.roteiro.length * 200;
     this.nomeNpcDialogo = this.tipoDialogo;
@@ -608,7 +608,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     const linhas = [
       {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 02.`,
+        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 02.",
       },
       {
         icone: "💬",
@@ -827,21 +827,15 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this.textoCena.setText("Resultado Final");
 
-    const atingiu = checkGoal(FASE, this.pontuacao);
-    const meta = goalEscalado(FASE);
+    const atingiu = checkGoal(this.fase, this.pontuacao);
+    const meta = goalEscalado(this.fase);
     const pct = Math.round((this.pontuacao / this.maxPts) * 100);
 
     let avaliacao;
     let cor;
-    if (pct >= 90) {
+    if (pct >= 60) {
       avaliacao = "Excelente condução!";
       cor = "#44ff88";
-    } else if (pct >= 70) {
-      avaliacao = "Bom trabalho!";
-      cor = "#88ccff";
-    } else if (pct >= 50) {
-      avaliacao = "Razoável, mas ainda dá para evoluir.";
-      cor = "#ffcc44";
     } else {
       avaliacao = "Tente novamente para fortalecer a abordagem.";
       cor = "#ff6644";

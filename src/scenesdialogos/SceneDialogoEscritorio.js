@@ -543,12 +543,12 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       {
         icone: "🎯",
         texto:
-          "Voc? vai conduzir uma conversa t?cnica com o Gabriel, gerando confian?a por clareza, m?todo e valida?o.",
+          "Você vai conduzir uma conversa técnica com o Gabriel, gerando confiança por clareza, método e validação.",
       },
       {
         icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
       },
       {
         icone: "🪙",

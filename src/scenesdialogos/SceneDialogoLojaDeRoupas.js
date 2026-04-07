@@ -211,7 +211,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Faz sentido. Posso te mostrar isso funcionando em 5 minutos, j? com essa integra?�o com o banco aplicada no seu fluxo. Quer ver agora ou prefere depois?",
+          "Faz sentido. Posso te mostrar isso funcionando em 5 minutos, já com essa integração com o banco aplicada no seu fluxo. Quer ver agora ou prefere depois?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Direto, prático e orientado à ação.",
@@ -547,12 +547,12 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       {
         icone: "🎯",
         texto:
-          "Voc? vai conversar com Eduardo, conectando pagamento, fluidez e experi?ncia de marca.",
+          "Você vai conversar com Eduardo, conectando pagamento, fluidez e experiência de marca.",
       },
       {
         icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op??es de resposta a que mais fizer sentido para avan?ar a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
       },
       {
         icone: "🪙",
