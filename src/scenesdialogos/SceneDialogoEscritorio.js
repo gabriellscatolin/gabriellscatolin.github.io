@@ -26,10 +26,15 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const ROTEIRO = [
   {
+    titulo: "INTRODUÇÃO",
+    narracao:
+      "Ambiente: Escritório silencioso, organizado. Gabriel está concentrado no computador. Você se aproxima e aguarda um momento. Gabriel levanta os olhos rapidamente, percebendo a sua presença.",
+  },
+  {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ambiente: Escritório silencioso, organizado. Gabriel está concentrado no computador. A representante se aproxima e aguarda um momento. Gabriel levanta os olhos rapidamente, percebendo a presença dela.",
-    npcInicial: "Bom dia. Pode falar... só peço objetividade.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
@@ -625,7 +630,16 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {

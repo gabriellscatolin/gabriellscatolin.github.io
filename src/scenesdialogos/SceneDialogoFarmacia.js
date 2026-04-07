@@ -26,10 +26,15 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const ROTEIRO = [
   {
-    titulo: "CENA 1 - ABORDAGEM",
+    titulo: "INTRODUÇÃO",
     narracao:
       "Ambiente: Farmácia movimentada, Rachel no caixa, atendendo rápido e visivelmente cansada. Há uma pequena fila. A representante se aproxima e aguarda uma brecha entre um atendimento e outro.",
-    npcInicial: "Bom dia... pode falar rapidinho? Estou no meio do atendimento.",
+  },
+  {
+    titulo: "CENA 1 - ABORDAGEM",
+    narracao:
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
@@ -630,7 +635,16 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {

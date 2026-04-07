@@ -26,11 +26,17 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const ROTEIRO = [
   {
+    titulo: "INTRODUÇÃO",
+    narracao:
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
+  },
+  {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
       "Ambiente: Supermercado grande, vários caixas operando, fluxo intenso. Sons de bip constantes, clientes passando, equipe em ritmo acelerado. A representante observa por alguns segundos a operação antes de se aproximar. A representante se aproxima com cuidado, aguardando um breve intervalo entre atendimentos. Alícia percebe a presença, mas continua acompanhando o movimento dos caixas.",
     npcInicial:
-      "Pode falar... mas já aviso, aqui o problema nunca é simples.",
+      "Já aviso, aqui o problema nunca é simples.",
     escolhas: [
       {
         letra: "A",
@@ -222,8 +228,6 @@ const ROTEIRO = [
           "Incorreto. Não resolve a causa.",
       },
     ],
-    npcResposta:
-      "Se eu tiver essa visibilidade sem perder tempo, aí sim começa a fazer sentido.",
   },
 ];
 
@@ -630,7 +634,16 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {

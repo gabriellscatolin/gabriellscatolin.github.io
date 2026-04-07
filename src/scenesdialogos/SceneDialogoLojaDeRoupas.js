@@ -26,11 +26,16 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const ROTEIRO = [
   {
-    titulo: "CENA 1 - ABORDAGEM",
+    titulo: "INTRODUÇÃO",
     narracao:
       "Ambiente: Loja moderna, música ambiente. Um cliente finaliza a compra. Eduardo acompanha atento a experiência. A representante aguarda um momento e se aproxima após o atendimento.",
+  },
+  {
+    titulo: "CENA 1 - ABORDAGEM",
+    narracao:
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
     npcInicial:
-      "Fala... pode falar, mas rapidinho. Aqui eu cuido muito da experiência do cliente.",
+      "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo, mas rapidinho. Aqui eu cuido muito da experiência do cliente.",
     escolhas: [
       {
         letra: "A",
@@ -58,7 +63,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "A experiência é boa... mas às vezes no pagamento quebra o clima.",
+      "Bom, a dificuldade é que a experiência é boa... mas às vezes no pagamento quebra o clima.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DA DOR",
@@ -166,7 +171,7 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Muda porque você não só acelera o pagamento. Quando está integrado com a Cielo e com o banco parceiro, você vende e o dinheiro já está na conta, sem travar a operação nem depois no financeiro.",
+        texto: "Muda porque você não só acelera o pagamento. Quando está integrado com a Cielo e com o banco parceiro, você vende e o dinheiro já está na conta, sem travar tudo.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -182,7 +187,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Ajuda um pouco, mas no fim o cliente valoriza mais o produto do que essa parte do pagamento.",
+        texto: "Ajuda um pouco, mas no fim o cliente valoriza mais o produto do que essa parte do pagamento. É mais sobre ter algo de qualidade do que pagamento.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -222,8 +227,6 @@ const ROTEIRO = [
           "Parece ágil, mas ignora o processo de decisão do cliente.",
       },
     ],
-    npcResposta:
-      "Boa. Se funcionar desse jeito, eu consigo testar sem quebrar a dinâmica da loja.",
   },
 ];
 
@@ -627,7 +630,16 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {

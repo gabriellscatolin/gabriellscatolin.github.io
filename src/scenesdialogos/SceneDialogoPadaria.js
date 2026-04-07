@@ -29,14 +29,19 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 // Roteiro principal da fase da padaria
 const ROTEIRO = [
   {
+    titulo: "INTRODUÇÃO",
+    narracao:
+      "Ambiente: Padaria cheia. Sofia no caixa, visivelmente cansada, atendendo rápido.\n Aborde a cliente da melhor forma possível.",
+  },
+  {
     titulo: "CENA 1 - ABERTURA",
     narracao:
-      'Ambiente: Padaria cheia. Sofia no caixa, visivelmente cansada, atendendo rápido.\n"Aborde a cliente da melhor forma possível."',
-    npcInicial: null,
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia... movimento forte hoje. Tá sendo um daqueles dias puxados desde cedo?",
+        texto: "Movimento forte hoje, né? Tá sendo um daqueles dias puxados desde cedo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -44,7 +49,7 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Bom dia! Esse horário costuma ser o mais cheio aqui?",
+        texto: "Perfeito. Esse horário costuma ser o mais cheio aqui?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -52,7 +57,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Bom dia! Trabalho com soluções financeiras pra padaria. Posso te explicar rapidinho?",
+        texto: "Então, eu trabalho com soluções financeiras pra padaria. Posso te explicar rapidinho. Como estão seus horários?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -60,7 +65,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Bom dia... aqui de manhã é sempre assim. Hoje ainda comecei mais cedo... tá puxado.",
+      "Olha... aqui de manhã é sempre assim. Hoje ainda comecei mais cedo... tá puxado.",
   },
   {
     titulo: "CENA 2 - CONEXÃO E CONTEXTO",
@@ -118,7 +123,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Isso costuma ser problema de gestão ou equipe... tem que olhar melhor isso aí.",
+        texto: "Isso costuma ser problema de gestão ou equipe... tem que olhar melhor isso aí. Já olhou isso?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -126,7 +131,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Pra ser sincera... não muito. Eu vejo entrando, mas não tenho muita clareza no final.",
+      "Para ser sincera, eu vejo entrando, tanto em dinheiro quanto em cartão, mas não tenho muita clareza no final.",
   },
   {
     titulo: "CENA 4 - CLAREZA DO PROBLEMA",
@@ -192,7 +197,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Ajudaria sim... porque hoje eu sinto que trabalho muito e não tenho clareza pra onde tá indo o dinheiro.",
+      "Isso ajudaria... porque hoje eu sinto que trabalho muito e não tenho clareza pra onde tá indo o dinheiro.",
   },
   {
     titulo: "CENA 6 - CONDUÇÃO PARA PRÓXIMO PASSO",
@@ -225,8 +230,6 @@ const ROTEIRO = [
           "Avança rápido demais. Ignora o tempo da cliente e pode gerar rejeição.",
       },
     ],
-    npcResposta:
-      "Olha... eu quero sim entender melhor. Mas agora tô no meio da correria. Você consegue passar mais tarde?",
   },
 ];
 
@@ -642,7 +645,16 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {

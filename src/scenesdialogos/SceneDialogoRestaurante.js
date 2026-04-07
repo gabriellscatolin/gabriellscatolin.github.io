@@ -26,6 +26,12 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const ROTEIRO = [
   {
+    titulo: "INTRODUÇÃO",
+    narracao:
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+  },
+  {
     titulo: "CENA 1 - ABORDAGEM",
     narracao: "Ambiente: Restaurante cheio, equipe correndo, pedidos saindo.",
     npcInicial:
@@ -57,7 +63,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Hoje é separado... passa no sistema e depois na maquininha.",
+      "Hoje o pagamento é separado... passa no sistema e depois na maquininha.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DO PROBLEMA",
@@ -90,7 +96,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Sim... funciona, mas às vezes dá uns erros chatos.",
+      "Sim, às vezes dá uns erros chatos.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DO RISCO",
@@ -221,8 +227,6 @@ const ROTEIRO = [
           "Incorreto. Problema estrutural.",
       },
     ],
-    npcResposta:
-      "Perfeito. Se isso simplificar o fluxo sem travar a operação, faz sentido olhar.",
   },
 ];
 
@@ -628,7 +632,16 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
   _aoContinuar() {
     if (this.estado === "intro") {
-      this._mostrarEscolhas();
+      const cena = ROTEIRO[this.cenaIdx];
+      if (!cena.escolhas?.length) {
+        if (this.cenaIdx >= ROTEIRO.length - 1) {
+          this._mostrarResultadoFinal();
+        } else {
+          this._mostrarCena(this.cenaIdx + 1);
+        }
+      } else {
+        this._mostrarEscolhas();
+      }
     } else if (this.estado === "feedback") {
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {
