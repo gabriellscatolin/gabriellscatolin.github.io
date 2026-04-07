@@ -1,4 +1,4 @@
-// Cena de diálogo da padaria com escolhas baseadas no roteiro
+// Cena de diÃ¡logo da padaria com escolhas baseadas no roteiro
 import SceneDialogoBase from "./SceneDialogoBase.js";
 import {
   initScoring,
@@ -36,7 +36,7 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia… movimento forte hoje. Tá sendo um daqueles dias puxados desde cedo?",
+        texto: "Bom dia... movimento forte hoje. Tá sendo um daqueles dias puxados desde cedo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -60,7 +60,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Bom dia… aqui de manhã é sempre assim. Hoje ainda comecei mais cedo… tá puxado.",
+      "Bom dia... aqui de manhã é sempre assim. Hoje ainda comecei mais cedo... tá puxado.",
   },
   {
     titulo: "CENA 2 - CONEXÃO E CONTEXTO",
@@ -69,7 +69,7 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Imagino o quanto cansa… e no fim do mês, esse movimento todo acaba compensando?",
+        texto: "Imagino o quanto cansa... e no fim do mês, esse movimento todo acaba compensando?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -93,7 +93,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Então… eu assumi aqui depois que meu pai faleceu. Ainda tô aprendendo tudo… entra dinheiro, mas parece que não sobra. Trabalho o mês inteiro e não vejo isso virar resultado.",
+      "Então... eu assumi aqui depois que meu pai faleceu. Ainda tô aprendendo tudo... entra dinheiro, mas parece que não sobra. Trabalho o mês inteiro e não vejo isso virar resultado.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DO PROBLEMA",
@@ -102,11 +102,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Você costuma acompanhar direitinho quanto paga nas taxas e quando antecipa vendas?",
+        texto: "Hoje você consegue ter uma visão clara de quanto entra e quanto realmente vira resultado no fim do mês?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Direciona para a causa do problema de forma técnica e acessível.",
+          "Direciona para a dor real de forma simples e acessível.",
       },
       {
         letra: "B",
@@ -118,7 +118,7 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Isso costuma ser problema de gestão ou equipe… tem que olhar melhor isso aí.",
+        texto: "Isso costuma ser problema de gestão ou equipe... tem que olhar melhor isso aí.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -126,7 +126,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Pra ser sincera… não muito. Eu sei que tem taxa, tem antecipação… mas no dia a dia não consigo parar pra entender tudo isso.",
+      "Pra ser sincera... não muito. Eu vejo entrando, mas não tenho muita clareza no final.",
   },
   {
     titulo: "CENA 4 - CLAREZA DO PROBLEMA",
@@ -135,15 +135,15 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Às vezes não é que vende pouco… é que parte do dinheiro vai ficando nas taxas e nas antecipações sem perceber.",
+        texto: "Às vezes não é que vende pouco... é que no dia a dia fica difícil acompanhar tudo e entender pra onde o dinheiro está indo.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Gera clareza. Ajuda o cliente a enxergar o problema de forma simples.",
+          "Gera clareza sem tecnicismo. Ajuda a cliente a reconhecer o problema.",
       },
       {
         letra: "B",
-        texto: "Tem bastante detalhe nisso mesmo… depois com calma dá pra organizar melhor.",
+        texto: "Tem bastante detalhe nisso mesmo... depois com calma dá pra organizar melhor.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -159,7 +159,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Faz sentido… porque eu vendo bem, mas quando olho no final… não bate com o esforço.",
+      "Faz sentido... porque eu vendo bem, mas quando olho no final... não bate com o esforço.",
   },
   {
     titulo: "CENA 5 - GERAÇÃO DE VALOR",
@@ -168,11 +168,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se você conseguisse enxergar claramente quanto paga no total e onde ajustar, ajudaria no seu resultado?",
+        texto: "Hoje muita padaria resolve isso quando consegue integrar a maquininha com a conta do banco, deixando os pagamentos e o financeiro organizados no mesmo lugar.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta solução com a dor. Faz o cliente reconhecer valor.",
+          "Introduz a união Cielo + banco como solução prática e aplicável.",
       },
       {
         letra: "B",
@@ -192,7 +192,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Ajudaria sim… porque hoje eu sinto que trabalho muito e não tenho clareza pra onde tá indo o dinheiro.",
+      "Ajudaria sim... porque hoje eu sinto que trabalho muito e não tenho clareza pra onde tá indo o dinheiro.",
   },
   {
     titulo: "CENA 6 - CONDUÇÃO PARA PRÓXIMO PASSO",
@@ -202,11 +202,11 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se fizer sentido pra você, posso olhar isso com você rapidinho depois, sem compromisso. Só pra te mostrar onde pode estar ficando esse dinheiro.",
+        texto: "Se fizer sentido pra você, posso olhar isso com você depois, sem compromisso. Eu trabalho com a Cielo junto com o banco parceiro aqui da região, então dá pra organizar tanto os pagamentos quanto a parte financeira no mesmo lugar.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Condução leve e respeitosa. Foca em ajudar antes de vender e reduz a barreira de decisão.",
+          "Posiciona o DDN corretamente com proposta integrada Cielo + banco.",
       },
       {
         letra: "B",
@@ -226,7 +226,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Olha… eu quero sim entender melhor. Mas agora tô no meio da correria. Você consegue passar mais tarde?",
+      "Olha... eu quero sim entender melhor. Mas agora tô no meio da correria. Você consegue passar mais tarde?",
   },
 ];
 
@@ -248,8 +248,8 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.imagemKey = "falaPadaria";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é a atendente de uma padaria muito movimentada. " +
-      "Você é ágil, prática e valoriza um atendimento rápido e sem atritos no caixa.";
+      "VocÃª Ã© a atendente de uma padaria muito movimentada. " +
+      "VocÃª Ã© Ã¡gil, prÃ¡tica e valoriza um atendimento rÃ¡pido e sem atritos no caixa.";
   }
 
   init(dados) {
@@ -413,7 +413,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Sofia está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Sofia estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -466,15 +466,15 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai entrar em uma negociação consultiva. Seu objetivo é entender a dor da cliente e gerar valor antes de oferecer a solução.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai entrar em uma negociaÃ§Ã£o consultiva. Seu objetivo Ã© entender a dor da cliente e gerar valor antes de oferecer a soluÃ§Ã£o.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
     ];
@@ -499,7 +499,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -554,7 +554,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -580,7 +580,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -598,7 +598,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -674,7 +674,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 40) {
-      avaliacao = "Vendedor nato! Negócio fechado!";
+      avaliacao = "Vendedor nato! NegÃ³cio fechado!";
       cor = "#44ff88";
     } else {
       avaliacao = "Quase...";
@@ -682,14 +682,14 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     }
 
     const statusMeta = atingiu
-      ? "Meta atingida! Parabéns, você conseguiu trazer a experiência Cielo para o cliente!"
-      : `Tente novamente... você precisava de ${meta} coins`;
+      ? "Meta atingida! ParabÃ©ns, vocÃª conseguiu trazer a experiÃªncia Cielo para o cliente!"
+      : `Tente novamente... vocÃª precisava de ${meta} coins`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -732,16 +732,16 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
-      neutra: "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
+      neutra: "O vendedor foi aceitÃ¡vel, porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {
