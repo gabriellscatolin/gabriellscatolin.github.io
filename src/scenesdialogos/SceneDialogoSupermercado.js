@@ -458,15 +458,15 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "ðŸŽ¯",
-        texto: "VocÃª vai conduzir uma conversa com AlÃ­cia, focando em escala, rastreabilidade e controle da operaÃ§Ã£o.",
+        icone: "🎯",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
       },
       {
-        icone: "ðŸ’¬",
-        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
+        icone: "💬",
+        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
       },
       {
-        icone: "ðŸª™",
+        icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];

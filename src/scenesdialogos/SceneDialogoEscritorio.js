@@ -452,15 +452,15 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "ðŸŽ¯",
-        texto: "VocÃª vai conduzir uma conversa tÃ©cnica com o Gabriel, gerando confianÃ§a por clareza, mÃ©todo e validaÃ§Ã£o.",
+        icone: "🎯",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
       },
       {
-        icone: "ðŸ’¬",
-        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
+        icone: "💬",
+        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
       },
       {
-        icone: "ðŸª™",
+        icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
     ];

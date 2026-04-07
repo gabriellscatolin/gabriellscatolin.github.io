@@ -411,7 +411,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       resolution: 4,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 500", {
+    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 600", {
       fontSize: "30px",
       color: "#ffd700",
       backgroundColor: "#000000bb",
@@ -457,15 +457,15 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "ðŸŽ¯",
-        texto: "VocÃª vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avanÃ§ar para a soluÃ§Ã£o.",
+        icone: "🎯",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
       },
       {
-        icone: "ðŸ’¬",
-        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para a conversa.",
+        icone: "💬",
+        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
       },
       {
-        icone: "ðŸª™",
+        icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
       },
     ];
