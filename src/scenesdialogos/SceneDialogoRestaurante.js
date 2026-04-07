@@ -535,7 +535,6 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     const linhas = [
       {
-<<<<<<< Updated upstream
         icone: "🎯",
         texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
       },
@@ -546,21 +545,8 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       {
         icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
-=======
-        icone: "ðŸŽ¯",
-        texto:
-          "Você vai conversar com Lucas, focando em ritmo operacional, redução de erro e fluidez no pagamento.",
-      },
-      {
-        icone: "ðŸ’¬",
-        texto:
-          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
-      },
-      {
-        icone: "ðŸª™",
-        texto:
-          "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
->>>>>>> Stashed changes
+
+      
       },
     ];
 
