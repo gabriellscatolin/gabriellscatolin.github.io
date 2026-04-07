@@ -27,24 +27,25 @@ const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
-    narracao: "Ambiente: Escritório silencioso, organizado. Gabriel concentrado.",
-    npcInicial: "Bom dia. Pode falar… prefiro ser objetivo.",
+    narracao:
+      "Ambiente: Escritório silencioso, organizado. Gabriel está concentrado no computador. A representante se aproxima e aguarda um momento. Gabriel levanta os olhos rapidamente, percebendo a presença dela.",
+    npcInicial: "Bom dia. Pode falar... só peço objetividade.",
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito. Vou ser direto: você consegue conferir cada venda com o valor líquido que entra, ou olha mais o total consolidado?",
+        texto: "Perfeito. Vou ser direto. Hoje você olha mais o total no final, ou costuma conferir venda por venda?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Direto e técnico. Introduz dois conceitos importantes: visão consolidada (total do período) versus visão por transação (cada venda individual).",
+          "Direto, respeita o perfil do cliente e introduz o ponto central sem parecer técnico demais.",
       },
       {
         letra: "B",
-        texto: "Bom dia. Queria entender como você acompanha os recebimentos do escritório no dia a dia.",
+        texto: "Bom dia. Queria entender como você acompanha os recebimentos no dia a dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas amplo. Não direciona para conciliação, que é o cruzamento entre venda e recebimento.",
+          "Correto, mas amplo e pouco direcionado.",
       },
       {
         letra: "C",
@@ -52,11 +53,11 @@ const ROTEIRO = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Abordagem genérica. Não entra no ponto crítico do cliente, que é controle e validação dos dados.",
+          "Genérico e desalinhado com o perfil analítico do cliente.",
       },
     ],
     npcResposta:
-      "Eu olho bastante o total… mas nem sempre entro no detalhe de cada venda.",
+      "Eu olho mais o total... não entro tanto no detalhe de cada venda.",
   },
   {
     titulo: "CENA 2 - IDENTIFICAÇÃO DO GAP REAL",
@@ -65,62 +66,62 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Então pode estar tudo certo no total, mas ainda assim ter diferença em algumas transações específicas.",
+        texto: "Entendi... então pode acontecer de o total fechar, mas alguma venda específica ter diferença e passar batido.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz um conceito-chave: divergências podem ficar escondidas no total consolidado, mesmo que o valor final pareça correto.",
+          "Introduz risco real de forma lógica e sem confronto.",
       },
       {
         letra: "B",
-        texto: "Entendi, então você já tem um controle, mas talvez não tão detalhado em todas as vendas.",
+        texto: "Entendi, então você tem um controle mais geral, mas não tão detalhado.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas não explica o risco. Sem análise por transação, você pode não identificar erros individuais.",
+          "Correto, mas não evidencia o problema.",
       },
       {
         letra: "C",
-        texto: "Se o total bate no final, normalmente não tem problema relevante nisso.",
+        texto: "Se o total fecha, normalmente não tem problema relevante.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. O total pode “bater” e ainda assim existir diferenças por venda, causadas por taxa incorreta, antecipação ou erro operacional.",
+          "Incorreto e perigoso. Ignora divergências por transação.",
       },
     ],
     npcResposta: "Que tipo de diferença você está falando?",
   },
   {
-    titulo: "CENA 3 - EXEMPLO PRÁTICO",
+    titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
     narracao: null,
     npcInicial: null,
     escolhas: [
       {
         letra: "A",
-        texto: "Por exemplo, você vende R$ 1.000, mas recebe R$ 970. Sem cruzar a venda, você não sabe se foi taxa, antecipação ou erro.",
+        texto: "Por exemplo, você vende R$ 1.000, mas recebe R$ 970. Sem cruzar a venda, você não sabe se foi taxa, antecipação ou algum erro.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Traz três conceitos técnicos: taxa (MDR), antecipação e erro. Mostra a necessidade de validação.",
+          "Simples, direto e técnico na medida certa. Traz três conceitos técnicos: taxa (MDR), antecipação e erro, mostrando a necessidade de validação.",
       },
       {
         letra: "B",
-        texto: "Podem existir diferenças entre o valor vendido e o recebido, dependendo das condições da operação.",
+        texto: "Pode existir diferença entre o valor vendido e o recebido, dependendo das condições.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Correto, mas genérico. Não explica quais condições geram essas diferenças.",
+          "Correto, mas abstrato.",
       },
       {
         letra: "C",
-        texto: "Essas diferenças costumam ser só de taxas, então não precisa entrar tanto nesse nível de detalhe.",
+        texto: "Essas diferenças normalmente são só taxa, então não precisa aprofundar tanto.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Nem toda diferença é taxa. Pode envolver antecipação (custo por receber antes) ou até erro no processamento.",
+          "Simplificação incorreta.",
       },
     ],
-    npcResposta: "E como eu teria certeza do que está acontecendo em cada caso?",
+    npcResposta: "E como eu consigo ter essa visibilidade em cada caso?",
   },
   {
     titulo: "CENA 4 - MÉTODO DE VALIDAÇÃO",
@@ -129,15 +130,15 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Você precisa ver cada venda com três pontos: valor bruto, taxa aplicada e valor líquido recebido, tudo vinculado.",
+        texto: "Você precisa olhar cada venda com três pontos juntos: quanto foi vendido, qual taxa foi aplicada e quanto entrou líquido.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Define o processo de conciliação: valor bruto, taxa e valor líquido. A vinculação entre esses três garante validação correta.",
+          "Estrutura clara e prática. Ensina sem parecer aula. Define o processo de conciliação: valor bruto, taxa e valor líquido.",
       },
       {
         letra: "B",
-        texto: "O ideal é acompanhar os valores com mais detalhe e tentar entender como eles são calculados.",
+        texto: "O ideal é acompanhar com mais detalhe e entender como os valores são calculados.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -145,14 +146,14 @@ const ROTEIRO = [
       },
       {
         letra: "C",
-        texto: "Você pode olhar o extrato e tentar entender pelos valores, normalmente dá pra ter uma ideia geral.",
+        texto: "O extrato já dá uma boa ideia geral do que está acontecendo.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Frágil. O extrato mostra o que entrou, mas não mostra claramente a origem de cada valor nem o cálculo por venda.",
+          "Frágil. Não permite validação por venda. O extrato mostra o que entrou, mas não mostra claramente a origem de cada valor nem o cálculo por venda.",
       },
     ],
-    npcResposta: "Mas fazer isso manualmente em cada venda fica inviável.",
+    npcResposta: "Mas fazer isso venda a venda fica inviável no dia a dia.",
   },
   {
     titulo: "CENA 5 - OBJEÇÃO",
@@ -161,31 +162,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Exato. Por isso o ideal é ter isso estruturado, onde cada venda já aparece conciliada com o recebimento automaticamente.",
+        texto: "Exato... por isso o ideal é já ter isso organizado, com cada venda vinculada ao que entrou. Quando a maquininha já está integrada com o banco, você não precisa conciliar manualmente, porque a informação já chega estruturada na conta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Introduz automação da conciliação. Elimina esforço manual e aumenta precisão.",
+          "Resolve a objeção com eficiência e adiciona o benefício real da integração Cielo + banco.",
       },
       {
         letra: "B",
-        texto: "Dá trabalho mesmo, mas com organização você consegue fazer esse controle com mais consistência.",
+        texto: "Dá trabalho mesmo, mas com organização dá pra acompanhar melhor.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Verdade, mas ineficiente. Controle manual aumenta risco de erro e perda de tempo.",
+          "Ajuda, mas não resolve. Verdade, mas ineficiente. Controle manual aumenta risco de erro e perda de tempo.",
       },
       {
         letra: "C",
-        texto: "Você pode ir conferindo aos poucos quando tiver tempo, não precisa ser algo tão estruturado assim.",
+        texto: "Você pode ir olhando aos poucos quando tiver tempo.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Incorreto. Sem estrutura, a conciliação perde confiabilidade e pode gerar erro acumulado.",
+          "Inviável para o perfil do cliente. Sem estrutura, a conciliação perde confiabilidade e pode gerar erro acumulado.",
       },
     ],
     npcResposta:
-      "Se eu conseguisse ver isso dessa forma, eu teria muito mais confiança no controle.",
+      "Se eu tivesse isso estruturado, eu teria muito mais confiança no controle.",
   },
   {
     titulo: "CENA 6 - PRÓXIMO PASSO",
@@ -194,27 +195,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se fizer sentido, te mostro como visualizar cada venda já conciliada com o valor líquido, assim você valida tudo com precisão.",
+        texto: "Se fizer sentido, eu te mostro isso na prática em 10 minutos, já integrado com o banco e com as vendas organizadas por entrada. Quando fica melhor pra você, agora ou mais tarde?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Conecta diretamente com a necessidade do cliente: segurança, validação e previsibilidade.",
+          "CTA direto, reforça integração como diferencial e conduz para ação concreta.",
       },
       {
         letra: "B",
-        texto: "Posso te explicar melhor isso em outro momento, mostrando algumas formas de acompanhar esses dados.",
+        texto: "Posso te explicar melhor isso em outro momento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Abre espaço, mas não deixa claro o ganho prático.",
+          "Vago e sem compromisso.",
       },
       {
         letra: "C",
-        texto: "A gente pode configurar isso agora e você vai aprendendo a usar conforme for aparecendo no sistema.",
+        texto: "A gente pode configurar isso agora e você vai vendo como funciona depois.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Falta estrutura e previsibilidade. Vai contra o perfil do cliente.",
+          "Desorganizado e desalinhado com perfil analítico.",
       },
     ],
     npcResposta:
@@ -238,8 +239,8 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.imagemKey = "falaEscritorio";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "Você é Gabriel, um cliente de escritório organizado, analítico e objetivo. " +
-      "Valoriza clareza, validação, precisão e previsibilidade.";
+      "VocÃª Ã© Gabriel, um cliente de escritÃ³rio organizado, analÃ­tico e objetivo. " +
+      "Valoriza clareza, validaÃ§Ã£o, precisÃ£o e previsibilidade.";
   }
 
   init(dados) {
@@ -300,7 +301,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNome = this.add.text(
       CX - BTN_W / 2,
       NOME_Y,
-      "Gabriel  -  Escritório",
+      "Gabriel  -  EscritÃ³rio",
       {
         fontSize: "20px",
         color: "#5a9fd4",
@@ -396,7 +397,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Gabriel está pensando...", {
+    this.textoCarregando = this.add.text(CX, CONT_Y, "Gabriel estÃ¡ pensando...", {
       fontSize: "21px",
       color: "#99bbdd",
       fontStyle: "italic",
@@ -448,15 +449,15 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🎯",
-        texto: "Você vai conduzir uma conversa técnica com o Gabriel, gerando confiança por clareza, método e validação.",
+        icone: "ðŸŽ¯",
+        texto: "VocÃª vai conduzir uma conversa tÃ©cnica com o Gabriel, gerando confianÃ§a por clareza, mÃ©todo e validaÃ§Ã£o.",
       },
       {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+        icone: "ðŸ’¬",
+        texto: "A cada cena, escolha entre trÃªs opÃ§Ãµes de resposta a que mais fizer sentido para avanÃ§ar a conversa.",
       },
       {
-        icone: "🪙",
+        icone: "ðŸª™",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
     ];
@@ -481,7 +482,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Começar  ->", {
+    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
       fontSize: "24px",
       color: "#ffffff",
       fontStyle: "bold",
@@ -536,7 +537,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que vocÃª diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -562,7 +563,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
+      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -580,7 +581,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -657,7 +658,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 67) {
-      avaliacao = "Excelente! Argumentação impecável.";
+      avaliacao = "Excelente! ArgumentaÃ§Ã£o impecÃ¡vel.";
       cor = "#44ff88";
     } else {
       avaliacao = "Precisa melhorar. Tente novamente.";
@@ -666,13 +667,13 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta não atingida (precisava de ${meta} coins)`;
+      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
         `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
         `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -714,18 +715,18 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const guias = {
       correta:
-        "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
+        "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
       neutra:
-        "O vendedor foi aceitável, porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+        "O vendedor foi aceitÃ¡vel, porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
       errada:
-        "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
+        "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em português do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referência (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

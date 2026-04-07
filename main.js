@@ -49,10 +49,6 @@ const config = {
   },
   scene: [
     SceneCidade,
-<<<<<<< Updated upstream
-    SceneDialogoFarmacia,
-=======
->>>>>>> Stashed changes
     SceneInicial,
     ScenePersonagem,
     SceneCutscene,
@@ -80,6 +76,7 @@ const config = {
     SceneDialogoSupermercado,
     SceneDialogoLojaDeRoupas,
     SceneDialogoPostoDeGasolina,
+    SceneDialogoFarmacia,
   ],
 };
 
