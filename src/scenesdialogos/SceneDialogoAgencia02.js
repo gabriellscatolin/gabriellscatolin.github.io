@@ -1,4 +1,11 @@
 import SceneDialogoBase from "./SceneDialogoBase.js";
+import {
+  initScoring,
+  handleAnswer,
+  checkGoal,
+  getScore,
+  goalEscalado,
+} from "../scoring.js";
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -8,194 +15,270 @@ function shuffleArray(arr) {
   }
   return a;
 }
-import {
-  initScoring,
-  handleAnswer,
-  checkGoal,
-  getScore,
-  goalEscalado,
-} from "../scoring.js";
+
+function esperar(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const IA_MODO_ESTRITO_ROTEIRO = true;
 
-const ROTEIRO = [
+const ROTEIRO_GG = [
   {
-    titulo: "CENA 0 - AMBIENTE",
+    titulo: "ETAPA 1 - ABORDAGEM INICIAL",
     narracao:
-      "Agencia tensa. Conversas sobre meta. Clima de cobranca.\nO ambiente mudou. Aqui voce precisa de seguranca e firmeza.",
-    npcInicial: null,
-    escolhas: [
-      { letra: "A", texto: "Bom dia. Movimento intenso hoje.", tipo: "neutra" },
-      {
-        letra: "B",
-        texto: "Bom dia. Imagino que as metas estejam pressionando.",
-        tipo: "correta",
-      },
-      {
-        letra: "C",
-        texto: "Bom dia. Vim falar das solucoes da Cielo.",
-        tipo: "errada",
-      },
-    ],
-    npcResposta: "Bom dia. Hoje o dia esta complicado.",
-  },
-  {
-    titulo: "CENA 1 - ABORDAGEM SOB PRESSAO",
-    narracao: null,
-    npcInicial: null,
-    escolhas: [
-      { letra: "A", texto: "Entao volto outro dia.", tipo: "errada" },
-      { letra: "B", texto: "Vou ser rapido, prometo.", tipo: "neutra" },
-      {
-        letra: "C",
-        texto:
-          "Imagino. Vou ser direto e focar em oportunidades da sua carteira.",
-        tipo: "correta",
-      },
-    ],
-    npcResposta: "Pode falar, mas bem direto.",
-  },
-  {
-    titulo: "CENA 2 - INICIO COM RESISTENCIA",
-    narracao: null,
-    npcInicial: "Pra ser sincero, cliente anda reclamando da Cielo.",
-    escolhas: [
-      { letra: "A", texto: "Nao, acho que nao e bem assim.", tipo: "errada" },
-      { letra: "B", texto: "Pode acontecer as vezes.", tipo: "neutra" },
-      {
-        letra: "C",
-        texto: "Entendo. O que mais eles tem comentado?",
-        tipo: "correta",
-      },
-    ],
-    npcResposta: "Falam de taxa e algumas instabilidades.",
-  },
-  {
-    titulo: "CENA 3 - DEFESA DE MARCA",
-    narracao: null,
-    npcInicial: null,
+      "Ambiente: Agência elegante, com mármore, iluminação fria e acabamento impecável. Espaço silencioso, clientes bem vestidos, atendimento eficiente e sem excesso de proximidade. A equipe é profissional, mas distante. O GG mantém postura objetiva, cordial, porém sem abertura.",
+    npcInicial: "Oi… tudo bem. Pode falar, estou com um pouco de pressa.",
     escolhas: [
       {
         letra: "A",
-        texto: "A concorrencia tambem tem problema.",
-        tipo: "errada",
-      },
-      { letra: "B", texto: "A Cielo tem melhorado isso.", tipo: "neutra" },
-      {
-        letra: "C",
         texto:
-          "Faz sentido. Hoje a Cielo tem estrutura forte e estabilidade, principalmente pelo suporte dos grandes bancos.",
+          "Perfeito, vou ser direto. Sou da Cielo e estou passando pra entender a operação e ver como posso apoiar vocês com os clientes PJ.",
         tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Leitura correta do contexto. Objetivo e respeitoso com o tempo do GG.",
       },
-    ],
-    npcResposta: "Mesmo assim, tem concorrente ganhando espaco.",
-  },
-  {
-    titulo: "CENA 4 - COMPARACAO COM CONCORRENCIA",
-    narracao: null,
-    npcInicial: null,
-    escolhas: [
-      { letra: "A", texto: "A concorrencia nao e melhor.", tipo: "errada" },
-      { letra: "B", texto: "Depende muito do cliente.", tipo: "neutra" },
-      {
-        letra: "C",
-        texto:
-          "Em alguns casos entram por preco, mas na recorrencia o cliente valoriza estabilidade e suporte.",
-        tipo: "correta",
-      },
-    ],
-    npcResposta: "Pode ser... mas cliente olha muito taxa.",
-  },
-  {
-    titulo: "CENA 5 - OBJECAO DE TAXA",
-    narracao: null,
-    npcInicial: null,
-    escolhas: [
-      { letra: "A", texto: "A gente cobre qualquer taxa.", tipo: "errada" },
       {
         letra: "B",
-        texto: "A gente pode tentar melhorar taxa.",
+        texto:
+          "Oi, tudo bem. Sou da Cielo e estou passando hoje na agência pra me apresentar e conhecer melhor a operação de vocês.",
         tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Educado, mas não se adapta à pressa. Pode perder atenção.",
       },
       {
         letra: "C",
         texto:
-          "Taxa pesa, mas quando impacta operacao e vendas, o custo fica maior que a diferenca.",
-        tipo: "correta",
+          "Oi, tudo bem. Sou da Cielo e queria te explicar melhor tudo que a gente pode oferecer para os clientes da agência.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Ignora o contexto e tenta alongar a conversa. Baixa aderência.",
       },
     ],
-    npcResposta: "Entendi, mas precisa fazer sentido pra ele.",
+    npcResposta: "Certo, siga em frente. O que você precisa alinhar aqui hoje?",
   },
   {
-    titulo: "CENA 6 - RETOMADA DE CONTROLE",
+    titulo: "ETAPA 2 - POSICIONAMENTO E INTENÇÃO",
     narracao: null,
-    npcInicial: null,
+    npcInicial: "Certo… mas hoje está bem corrido. Como você pretende ajudar aqui?",
     escolhas: [
-      { letra: "A", texto: "Entao fica dificil.", tipo: "errada" },
-      { letra: "B", texto: "A gente tenta ver algum cliente.", tipo: "neutra" },
+      {
+        letra: "A",
+        texto:
+          "A ideia é atuar junto com vocês na carteira PJ, apoiando nas oportunidades e ajudando a resolver pontos do dia a dia que impactam o atendimento.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Responde com valor prático e foco na dor real da agência.",
+      },
+      {
+        letra: "B",
+        texto:
+          "A ideia é entender melhor os clientes da carteira PJ e ver onde posso apoiar conforme as oportunidades que forem surgindo.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Correto, mas ainda genérico e pouco conectado ao momento.",
+      },
       {
         letra: "C",
         texto:
-          "Vamos focar em clientes com volume, onde essa diferenca aparece mais no resultado.",
-        tipo: "correta",
+          "A ideia é identificar clientes que possam trocar as soluções atuais e avaliar onde conseguimos melhorar as condições para eles.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Foco em venda e troca. Não responde à pressão do GG.",
       },
     ],
-    npcResposta: "Tem alguns clientes assim...",
+    npcResposta: "Entendi. Se for objetivo, faz sentido. O que você sugere agora?",
   },
   {
-    titulo: "CENA 7 - GERACAO DE OPORTUNIDADE",
+    titulo: "ETAPA 3 - TRANSIÇÃO PARA AÇÃO (LIBERAÇÃO)",
     narracao: null,
-    npcInicial: null,
+    npcInicial: "Tudo bem… mas tenta ser rápido. O que você sugere fazer agora?",
     escolhas: [
-      { letra: "A", texto: "Qualquer um serve.", tipo: "errada" },
-      { letra: "B", texto: "Pode me indicar alguns depois.", tipo: "neutra" },
       {
-        letra: "C",
-        texto: "Algum cliente com volume alto ou crescimento recente?",
+        letra: "A",
+        texto:
+          "Perfeito. Posso falar com alguns clientes agora de forma objetiva e depois te trago um resumo do que identifiquei para alinharmos juntos.",
         tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Respeita o tempo, propõe ação e mantém alinhamento com o GG.",
       },
-    ],
-    npcResposta: "Tem loja de roupa, supermercado e um restaurante na regiao.",
-  },
-  {
-    titulo: "CENA 8 - POSICIONAMENTO FINAL",
-    narracao: null,
-    npcInicial: null,
-    escolhas: [
-      { letra: "A", texto: "Vou la ver entao.", tipo: "errada" },
-      { letra: "B", texto: "Depois te conto como foi.", tipo: "neutra" },
+      {
+        letra: "B",
+        texto:
+          "Perfeito. Posso falar com alguns clientes agora e depois te atualizo sobre o que eu encontrar por aqui.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Vai para ação, mas não reforça o alinhamento conjunto.",
+      },
       {
         letra: "C",
         texto:
-          "Vou priorizar esses e te trago retorno com oportunidades reais.",
-        tipo: "correta",
+          "Perfeito. Vou falar com alguns clientes agora e já sigo com as oportunidades que aparecerem ao longo do dia.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Assume autonomia total e ignora o contexto de pressa e controle.",
       },
     ],
-    npcResposta: "Perfeito.",
+    npcResposta: "Combinado. Me traga esse resumo depois para fecharmos os próximos passos.",
   },
+];
+
+const ROTEIRO_PJ = [
   {
-    titulo: "CENA 9 - CHECK-IN / DISCIPLINA",
-    narracao: "Mesmo sob pressao, o processo continua.",
-    npcInicial: null,
+    titulo: "ETAPA 1 - ABORDAGEM INICIAL",
+    narracao:
+      "Ambiente: Agência elegante, com mármore, iluminação fria e atendimento silencioso. Clientes exigentes, equipe eficiente e pouco expansiva. O PJ é profissional, direto e seletivo no uso do tempo.",
+    npcInicial: "Bom dia. Pode falar, estou com a agenda um pouco apertada.",
     escolhas: [
-      { letra: "A", texto: "Depois vejo isso.", tipo: "errada" },
-      { letra: "B", texto: "Anoto e registro depois.", tipo: "neutra" },
+      {
+        letra: "A",
+        texto:
+          "Perfeito, vou ser direto. Sou da Cielo e passei pra alinhar oportunidades da carteira PJ junto com a operação da agência.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Leitura correta do contexto e alinhamento com a agência.",
+      },
+      {
+        letra: "B",
+        texto:
+          "Bom dia. Sou da Cielo e estou passando hoje na agência pra me apresentar e entender melhor a operação de vocês.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Educado, mas não se adapta ao nível de objetividade.",
+      },
       {
         letra: "C",
-        texto: "Ja registro no sistema para manter controle das oportunidades.",
-        tipo: "correta",
+        texto:
+          "Bom dia. Sou da Cielo e queria te explicar melhor tudo que podemos oferecer para os clientes da agência.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Tenta alongar a conversa e perde aderência ao contexto.",
       },
     ],
-    npcResposta: "Boa, isso ajuda.",
+    npcResposta: "Tudo bem. O que você identificou de relevante nessa carteira?",
+  },
+  {
+    titulo: "ETAPA 2 - GERAÇÃO DE INTERESSE",
+    narracao: null,
+    npcInicial: "Certo. O que você identificou de relevante na carteira?",
+    escolhas: [
+      {
+        letra: "A",
+        texto:
+          "Analisei alguns clientes da sua carteira com bom potencial e que podem evoluir com a Cielo integrada ao banco, gerando mais resultado para a agência.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Reforça parceria estratégica e conecta com resultado.",
+      },
+      {
+        letra: "B",
+        texto:
+          "Analisei alguns clientes da carteira e acredito que existem oportunidades onde as soluções da Cielo podem ser aplicadas.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Correto, mas não explora a integração com o banco.",
+      },
+      {
+        letra: "C",
+        texto:
+          "Analisei alguns clientes que podem trocar a solução atual e aproveitar melhores condições nas operações que realizam.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Foco em troca e preço, sem valor institucional.",
+      },
+    ],
+    npcResposta: "Entendi. E quais clientes você está priorizando agora?",
+  },
+  {
+    titulo: "ETAPA 3 - PRIORIZAÇÃO DA CARTEIRA",
+    narracao: null,
+    npcInicial: "Entendi. Quais clientes você está priorizando agora?",
+    escolhas: [
+      {
+        letra: "A",
+        texto:
+          "Separei três perfis com potencial: uma loja de roupas, um restaurante e um supermercado que podem evoluir com banco e Cielo atuando juntos.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Prioriza com clareza e reforça atuação conjunta.",
+      },
+      {
+        letra: "B",
+        texto:
+          "Separei alguns clientes com perfis diferentes e acredito que podemos avaliar juntos quais fazem mais sentido abordar neste momento.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Correto, mas menos direto na priorização.",
+      },
+      {
+        letra: "C",
+        texto:
+          "Separei alguns clientes variados e posso começar abordando para entender onde surgem melhores oportunidades comerciais.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Falta critério claro e reduz eficiência.",
+      },
+    ],
+    npcResposta: "Certo. E como você pretende conduzir isso daqui pra frente?",
+  },
+  {
+    titulo: "ETAPA 4 - TRANSIÇÃO PARA AÇÃO",
+    narracao: null,
+    npcInicial: "Tudo bem. Como você pretende conduzir isso?",
+    escolhas: [
+      {
+        letra: "A",
+        texto:
+          "Posso começar por esses clientes de forma objetiva e depois te trago um retorno para alinharmos os próximos passos juntos.",
+        tipo: "correta",
+        feedbackTitulo: "Escolha correta",
+        feedbackTexto:
+          "Respeita o tempo, mantém controle compartilhado e estrutura o processo.",
+      },
+      {
+        letra: "B",
+        texto:
+          "Posso falar com esses clientes e depois te atualizo sobre o que eu identificar ao longo das abordagens.",
+        tipo: "neutra",
+        feedbackTitulo: "Escolha neutra",
+        feedbackTexto:
+          "Vai para ação, mas reduz o alinhamento conjunto.",
+      },
+      {
+        letra: "C",
+        texto:
+          "Posso falar com esses clientes e seguir com as oportunidades conforme elas forem surgindo durante o dia.",
+        tipo: "errada",
+        feedbackTitulo: "Escolha inadequada",
+        feedbackTexto:
+          "Assume autonomia total e reduz o controle do PJ.",
+      },
+    ],
+    npcResposta: "Perfeito. Me traga esse retorno depois e alinhamos os próximos passos.",
   },
 ];
 
 const CAPITULO = "chapter2";
 const FASE = "agency2";
-const N_CENAS = ROTEIRO.length;
 
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
@@ -206,35 +289,33 @@ const COR_ERRADA = 0x6a1a1a;
 export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoAgencia02" });
-    this.imagemKey = "falaAgencia02PJ";
-    this.nomeNpcDialogo = "PJ";
-    this.promptLLM =
-      "Voce e o PJ da Agencia 02 e conversa sob pressao de metas. " +
-      "Seja objetivo, firme e profissional.";
+    this.imagemKey = "falaAgencia02GG";
+    this.respostaRoteiroEstrita = true;
+    this.promptLLM = "";
   }
 
   init(dados) {
     super.init(dados);
     const npcAlvo = dados?.npc === "Camila" ? "Camila" : "Enzo";
-    this.npcAlvo = npcAlvo;
-    // Invertido: Enzo = GG, Camila = PJ
     const ehGG = npcAlvo === "Enzo";
-    this.cenaPrincipalNumero = ehGG ? "CENA 01" : "CENA 02";
-    this.cenaPrincipalRotulo = ehGG
-      ? "CENA 01 - GG (Agencia 02)"
-      : "CENA 02 - PJ (Agencia 02)";
 
-    this.imagemKey = ehGG ? "falaAgencia02GG" : "falaAgencia02PJ";
-    this.nomeNpcDialogo = ehGG ? "GG" : "PJ";
+    this.npcAlvo = npcAlvo;
+    this.tipoDialogo = ehGG ? "GG" : "PJ";
+    this.roteiro = ehGG ? ROTEIRO_GG : ROTEIRO_PJ;
+    this.maxPts = this.roteiro.length * 200;
+    this.nomeNpcDialogo = this.tipoDialogo;
     this.promptLLM = ehGG
-      ? "Voce e o GG da Agencia 02 e conversa sob pressao de metas. Seja objetivo, firme e profissional."
-      : "Voce e o PJ da Agencia 02 e conversa sob pressao de metas. Seja objetivo, firme e profissional.";
-
+      ? "Você é o Gerente Geral (GG) da Agência 02. Seja objetivo, cordial e profissional."
+      : "Você é o Gerente PJ da Agência 02. Seja objetivo, profissional e seletivo no uso do tempo.";
+    this.imagemKey = ehGG ? "falaAgencia02GG" : "falaAgencia02PJ";
     this.cenaIdx = 0;
-    this.pontuacaoFase = 0;
+    this.pontuacao = 0;
     this.cieloCoinsGanhasDialogo = 0;
     this.estado = "tutorial";
     this.aguardandoLLM = false;
+    this.escolhaAtual = null;
+    this.respostaAtualNpc = "";
+
     initScoring(this.registry);
   }
 
@@ -242,13 +323,13 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     if (!this.textures.exists("falaAgencia02PJ")) {
       this.load.image(
         "falaAgencia02PJ",
-        "src/assets/imagens/imagensFalas/Agência02 - PJ - F.png",
+        "src/assets/imagens/imagensFalas/AgÃªncia02 - PJ - F.png",
       );
     }
     if (!this.textures.exists("falaAgencia02GG")) {
       this.load.image(
         "falaAgencia02GG",
-        "src/assets/imagens/imagensFalas/Agência02 - GG - F.png",
+        "src/assets/imagens/imagensFalas/AgÃªncia02 - GG - F.png",
       );
     }
   }
@@ -298,20 +379,25 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setDepth(3);
 
     this.textoNome = this.add
-      .text(CX - BTN_W / 2, NOME_Y, `${this.nomeNpcDialogo}  -  Agencia 02`, {
-        fontSize: "24px",
-        color: "#5a9fd4",
-        fontStyle: "bold",
-        resolution: 4,
-      })
+      .text(
+        CX - BTN_W / 2,
+        NOME_Y,
+        `${this.nomeNpcDialogo}  -  Agência 02`,
+        {
+          fontSize: "20px",
+          color: "#5a9fd4",
+          fontStyle: "bold",
+          resolution: 4,
+        },
+      )
       .setScrollFactor(0)
       .setDepth(3)
       .setVisible(false);
 
     this.textoNarracao = this.add
       .text(CX, NAR_Y + 30, "", {
-        fontSize: "22px",
-        color: "#99bbdd",
+        fontSize: "40px",
+        color: "#e8f4ff",
         fontStyle: "italic",
         wordWrap: { width: BTN_W },
         align: "center",
@@ -323,7 +409,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     this.textoNpc = this.add
       .text(CX, TEXTO_NPC_Y, "", {
-        fontSize: "30px",
+        fontSize: "40px",
         color: "#e8f4ff",
         wordWrap: { width: BTN_W },
         align: "center",
@@ -332,6 +418,32 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setOrigin(0.5)
       .setScrollFactor(0)
       .setDepth(3);
+
+    this.textoFeedbackTitulo = this.add
+      .text(CX, PANEL_TOP + 60, "", {
+        fontSize: "38px",
+        color: "#ffd166",
+        fontStyle: "bold",
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
+
+    this.textoFeedback = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "32px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
@@ -346,8 +458,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
       const labelLetra = this.add
         .text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
-          fontSize: "25px",
-          color: "#5a9fd4",
+          fontSize: "20px",
+          color: "#776fe6",
           fontStyle: "bold",
           resolution: 4,
         })
@@ -358,7 +470,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
       const txtEscolha = this.add
         .text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
-          fontSize: "25px",
+          fontSize: "30px",
           color: "#ffffff",
           wordWrap: { width: BTN_W - 80 },
           resolution: 4,
@@ -390,7 +502,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setVisible(false);
     this.txtContinuar = this.add
       .text(CX, CONT_Y, "", {
-        fontSize: "26px",
+        fontSize: "22px",
         color: "#ffffff",
         fontStyle: "bold",
         resolution: 4,
@@ -409,8 +521,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
     this.textoCarregando = this.add
-      .text(CX, CONT_Y, `${this.nomeNpcDialogo} esta pensando...`, {
-        fontSize: "24px",
+      .text(CX, CONT_Y, `${this.nomeNpcDialogo} está pensando...`, {
+        fontSize: "21px",
         color: "#99bbdd",
         fontStyle: "italic",
         resolution: 4,
@@ -421,8 +533,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setVisible(false);
 
     this.textoCieloCoin = this.add
-      .text(W - 20, 16, "", {
-        fontSize: "24px",
+      .text(W - 20, 16, "Cielo Coins: 0 / 600", {
+        fontSize: "30px",
         color: "#ffd700",
         backgroundColor: "#000000bb",
         padding: { x: 10, y: 5 },
@@ -435,8 +547,8 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     this.textoCena = this.add
       .text(20, 16, "", {
-        fontSize: "24px",
-        color: "#aaccee",
+        fontSize: "40px",
+        color: "#ffffff",
         backgroundColor: "#000000bb",
         padding: { x: 10, y: 5 },
         resolution: 4,
@@ -446,6 +558,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setDepth(10);
 
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
     this._criarTutorial(W, H, CX, H / 2);
   }
 
@@ -473,11 +586,10 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
         .setDepth(D + 0.1)
         .setStrokeStyle(2, 0x2a5ba0),
     );
-
     els.push(
       this.add
         .text(CX, CY - 270, "Como funciona esta conversa", {
-          fontSize: "32px",
+          fontSize: "25px",
           color: "#ffffff",
           fontStyle: "bold",
           resolution: 4,
@@ -486,7 +598,6 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
         .setScrollFactor(0)
         .setDepth(D + 1),
     );
-
     els.push(
       this.add
         .rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
@@ -496,49 +607,36 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "🧭",
-        texto: `${this.cenaPrincipalRotulo} comeca agora e termina no bloco "Resultado Final" desta conversa.`,
-      },
-      {
         icone: "🎯",
-        texto:
-          "Nessa fase voce e avaliado por seguranca no discurso, defesa de marca e controle emocional.",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 02.`,
       },
       {
         icone: "💬",
         texto:
-          "A cada cena, escolha a resposta mais estrategica para sustentar a conversa sob pressao.",
+          "A cada etapa, escolha entre três opções de resposta a que mais fizer sentido para o contexto.",
       },
       {
         icone: "🪙",
         texto:
-          "Cielo Coins:\n✅ correta = +2   ⚪ neutra = +1   ❌ errada = +0",
-      },
-      {
-        icone: "🤖",
-        texto:
-          "As respostas seguem o roteiro oficial da fase para manter o treino consistente.",
-      },
-      {
-        icone: "🏆",
-        texto:
-          "Nessa fase, nao bastava vender: era preciso sustentar com argumentacao sob pressao.",
+          "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },
     ];
 
     linhas.forEach(({ icone, texto }, i) => {
-      const y = CY - 170 + i * 82;
       els.push(
         this.add
-          .text(CX - 480, y, icone, { fontSize: "26px", resolution: 4 })
+          .text(CX - 480, CY - 125 + i * 120, icone, {
+            fontSize: "26px",
+            resolution: 4,
+          })
           .setOrigin(0, 0.5)
           .setScrollFactor(0)
           .setDepth(D + 1),
       );
       els.push(
         this.add
-          .text(CX - 430, y, texto, {
-            fontSize: "20px",
+          .text(CX - 430, CY - 110 + i * 120, texto, {
+            fontSize: "30px",
             color: "#c8d8f0",
             wordWrap: { width: 900 },
             resolution: 4,
@@ -557,10 +655,9 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-
     els.push(
       this.add
-        .text(CX, btnY, "Comecar  ->", {
+        .text(CX, btnY, "Começar  ->", {
           fontSize: "24px",
           color: "#ffffff",
           fontStyle: "bold",
@@ -582,13 +679,19 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   }
 
   _mostrarCena(idx) {
-    const cena = ROTEIRO[idx];
+    const cena = this.roteiro[idx];
     this.cenaIdx = idx;
     this.estado = "intro";
     this.aguardandoLLM = false;
+    this.escolhaAtual = null;
+    this.respostaAtualNpc = "";
+
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
 
     this.textoCena.setText(
-      `${this.cenaPrincipalRotulo}  |  ${cena.titulo}  (${idx + 1} / ${ROTEIRO.length})`,
+      `${cena.titulo}  (${idx + 1} / ${this.roteiro.length})`,
     );
     this._esconderBotoes();
     this._ocultarContinuar();
@@ -607,11 +710,15 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
   }
 
   _mostrarEscolhas() {
-    const cena = ROTEIRO[this.cenaIdx];
+    const cena = this.roteiro[this.cenaIdx];
     this.estado = "escolha";
 
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
+
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que voce diz?");
+    this.textoNpc.setText("O que você diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -625,124 +732,148 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     });
   }
 
+  _mostrarFeedbackEscolha(escolha) {
+    this.estado = "feedback";
+
+    this.textoNarracao.setText("");
+    this.textoNome.setVisible(false);
+    this.textoNpc.setVisible(false);
+
+    this.textoFeedbackTitulo
+      .setText(escolha.feedbackTitulo || "Feedback")
+      .setVisible(true);
+
+    this.textoFeedback
+      .setText(escolha.feedbackTexto || "Feedback da escolha.")
+      .setVisible(true);
+
+    this._mostrarContinuar("Continuar  ->");
+  }
+
+  _mostrarRespostaNpc(resposta) {
+    this.estado = "resposta";
+
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+
+    this.textoNarracao.setText("");
+    this.textoNome.setVisible(true);
+    this.textoNpc.setVisible(true);
+    this.textoNpc.setText(`"${resposta}"`);
+
+    const ultimo = this.cenaIdx >= this.roteiro.length - 1;
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+  }
+
   async _aoEscolher(indice) {
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
-    const cena = ROTEIRO[this.cenaIdx];
+    const cena = this.roteiro[this.cenaIdx];
     const escolha = this.escolhasOrdenadas[indice];
+    const pontosGanhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
 
-    this.aguardandoLLM = true;
-
-    const coresTipo = {
-      correta: COR_CORRETA,
-      neutra: COR_NEUTRA,
-      errada: COR_ERRADA,
-    };
-    this.botoesEscolha[indice].bg.setFillStyle(coresTipo[escolha.tipo]);
-
-    const antes = getScore(this.registry);
-    handleAnswer(this.registry, CAPITULO, FASE, escolha.tipo);
-    const depois = getScore(this.registry);
-
-    const ganho = Math.max(0, depois - antes);
-    this.pontuacaoFase += ganho;
-    this.cieloCoinsGanhasDialogo += ganho;
+    this.escolhaAtual = escolha;
+    this.pontuacao += pontosGanhos;
+    this.cieloCoinsGanhasDialogo += pontosGanhos;
     this._atualizarHudMoedas();
 
+    if (escolha.tipo === "correta") {
+      this.botoesEscolha[indice].bg.setFillStyle(COR_CORRETA);
+    } else if (escolha.tipo === "errada") {
+      this.botoesEscolha[indice].bg.setFillStyle(COR_ERRADA);
+    } else {
+      this.botoesEscolha[indice].bg.setFillStyle(COR_NEUTRA);
+    }
+
+    this.aguardandoLLM = true;
     this._esconderBotoes(indice);
     this.textoCarregando.setVisible(true);
 
+    await esperar(350);
+
     const resposta = await this._chamarLLM(escolha, cena);
+    this.respostaAtualNpc = resposta;
 
     this.aguardandoLLM = false;
     this.textoCarregando.setVisible(false);
     this._esconderBotoes();
 
-    this.estado = "resposta";
-    this.textoNarracao.setText("");
-    this.textoNome.setVisible(true);
-    this.textoNpc.setText(`"${resposta}"`);
-
-    const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Proxima cena  ->");
+    this._mostrarFeedbackEscolha(escolha);
   }
 
   _aoContinuar() {
     if (this.estado === "intro") {
       this._mostrarEscolhas();
-      return;
-    }
-
-    if (this.estado === "resposta") {
-      if (this.cenaIdx >= ROTEIRO.length - 1) {
+    } else if (this.estado === "feedback") {
+      this._mostrarRespostaNpc(this.respostaAtualNpc);
+    } else if (this.estado === "resposta") {
+      if (this.cenaIdx >= this.roteiro.length - 1) {
         this._mostrarResultadoFinal();
       } else {
         this._mostrarCena(this.cenaIdx + 1);
       }
-      return;
-    }
-
-    if (this.estado === "fim") {
+    } else if (this.estado === "fim") {
       this._fechar();
     }
   }
 
   _mostrarResultadoFinal() {
     this.estado = "fim";
-    if (this.npcAlvo === "Camila") {
-      this.registry.set("ag02_dialogo_camila_concluido", true);
-      this.registry.set(
-        "missaoAgencia02Texto",
-        "Missão: Suba e fale com a PJ Camila.",
-      );
+    this._esconderBotoes();
+    this.textoFeedbackTitulo.setVisible(false);
+    this.textoFeedback.setVisible(false);
+    this.textoNpc.setVisible(true);
+    this.textoNarracao.setText("");
+    this.textoNome.setVisible(false);
+    this.textoCena.setText("Resultado Final");
+
+    const atingiu = checkGoal(FASE, this.pontuacao);
+    const meta = goalEscalado(FASE);
+    const pct = Math.round((this.pontuacao / this.maxPts) * 100);
+
+    let avaliacao;
+    let cor;
+    if (pct >= 90) {
+      avaliacao = "Excelente condução!";
+      cor = "#44ff88";
+    } else if (pct >= 70) {
+      avaliacao = "Bom trabalho!";
+      cor = "#88ccff";
+    } else if (pct >= 50) {
+      avaliacao = "Razoável, mas ainda dá para evoluir.";
+      cor = "#ffcc44";
     } else {
-      this.registry.set("ag02_dialogo_enzo_concluido", true);
-      this.registry.set(
-        "missaoAgencia02Texto",
-        "Missão: Suba e fale com a PJ Camila.",
-      );
+      avaliacao = "Tente novamente para fortalecer a abordagem.";
+      cor = "#ff6644";
     }
 
-    this._esconderBotoes();
-    this.textoNarracao.setText(
-      "Nessa fase, nao bastava vender. Era preciso sustentar.\n\n" +
-        "Competencias avaliadas:\n" +
-        "- Seguranca no discurso\n" +
-        "- Defesa de marca\n" +
-        "- Controle emocional\n" +
-        "- Argumentacao sob pressao\n" +
-        "- Direcionamento estrategico",
-    );
-    this.textoNome.setVisible(false);
-    this.textoCena.setText(
-      `Resultado Final  |  Fim da ${this.cenaPrincipalNumero}`,
-    );
+    const resumo =
+      this.tipoDialogo === "GG"
+        ? "Competências avaliadas:\n- Leitura de contexto\n- Objetividade\n- Respeito ao tempo do gestor\n- Alinhamento com a agência"
+        : "Competências avaliadas:\n- Geração de interesse\n- Priorização de carteira\n- Atuação conjunta\n- Estruturação do próximo passo";
 
-    const meta = goalEscalado(FASE);
-    const atingiuMeta = checkGoal(this.registry, CAPITULO, FASE, N_CENAS);
+    const statusMeta = atingiu
+      ? "Meta atingida!"
+      : `Meta não atingida (precisava de ${meta} coins)`;
 
-    const cor = atingiuMeta ? "#44ff88" : "#ffcc44";
-    const status = atingiuMeta ? "Meta atingida" : `Meta: ${meta} moedas`;
+    this.textoNpc.setText(
+      `${resumo}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n` +
+        `Total da sessão: ${getScore(this.registry)}\n\n` +
+        `${statusMeta}\n\n${avaliacao}`,
+    ).setStyle({
+      color: cor,
+      fontSize: "32px",
+    });
 
-    this.textoNpc
-      .setText(
-        `Conversa encerrada!\n\n` +
-          `Cielo Coins nesta conversa: +${this.cieloCoinsGanhasDialogo}\n` +
-          `${status}`,
-      )
-      .setStyle({ color: cor });
+    if (this.npcAlvo === "Camila") {
+      this.registry.set("ag02_dialogo_camila_concluido", true);
+      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
+    } else {
+      this.registry.set("ag02_dialogo_enzo_concluido", true);
+      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
+    }
 
-    this._atualizarHudMoedas();
     this._mostrarContinuar("Fechar  [E]");
-  }
-
-  _atualizarHudMoedas() {
-    if (!this.textoCieloCoin) return;
-    const total = getScore(this.registry);
-    const meta = goalEscalado(FASE);
-    this.textoCieloCoin.setText(
-      `Cielo Coins: ${total} / ${meta}  (+${this.cieloCoinsGanhasDialogo} nesta conversa)`,
-    );
   }
 
   _mostrarContinuar(label) {
@@ -765,8 +896,15 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     });
   }
 
+  _atualizarHudMoedas() {
+    if (!this.textoCieloCoin) return;
+    this.textoCieloCoin.setText(
+      `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
+    );
+  }
+
   async _chamarLLM(escolha, cena) {
-    if (IA_MODO_ESTRITO_ROTEIRO) {
+    if (this.respostaRoteiroEstrita) {
       return cena.npcResposta;
     }
 
@@ -776,18 +914,16 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     const guias = {
       correta:
-        "O vendedor conduziu bem sob pressao. Responda de forma objetiva e colaborativa.",
-      neutra:
-        "O vendedor foi aceitavel, mas sem muita firmeza. Responda de forma neutra.",
-      errada:
-        "O vendedor falhou na condu??o. Responda com mais resist?ncia, sem encerrar a conversa.",
+        "O jogador fez uma abordagem excelente. Responda de forma receptiva e objetiva.",
+      neutra: "O jogador foi aceitável. Responda de forma neutra.",
+      errada: "O jogador errou a abordagem. Responda de forma mais fria, porém profissional.",
     };
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda em portugues do Brasil com 1-2 frases.\n" +
-      `Contexto da cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referencia (adapte): \"${cena.npcResposta}\"\n` +
+      "Responda em português do Brasil, em 1-2 frases.\n" +
+      `Contexto: ${cena.titulo}. ${cena.narracao || ""}\n` +
+      `Resposta de referência: "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {
@@ -801,7 +937,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
           model: GROQ_MODEL,
           messages: [
             { role: "system", content: system },
-            { role: "user", content: `O vendedor disse: \"${escolha.texto}\"` },
+            { role: "user", content: `O jogador disse: "${escolha.texto}"` },
           ],
           max_tokens: 120,
           temperature: 0.7,

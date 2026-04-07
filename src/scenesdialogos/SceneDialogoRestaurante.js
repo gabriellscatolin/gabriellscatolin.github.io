@@ -536,7 +536,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     const linhas = [
       {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} no restaurante.`,
+        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} no restaurante.",
       },
       {
         icone: "💬",

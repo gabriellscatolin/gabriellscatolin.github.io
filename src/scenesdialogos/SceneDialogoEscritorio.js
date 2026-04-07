@@ -541,17 +541,17 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
           "Voc? vai conduzir uma conversa t?cnica com o Gabriel, gerando confian?a por clareza, m?todo e valida?o.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
           "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },

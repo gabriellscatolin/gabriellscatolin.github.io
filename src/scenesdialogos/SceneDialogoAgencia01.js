@@ -732,7 +732,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     const linhas = [
      {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.`,
+        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.",
       },
       {
         icone: "💬",

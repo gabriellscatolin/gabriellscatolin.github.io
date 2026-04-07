@@ -538,17 +538,17 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
-          "Voc? vai fazer um follow-up com o Nicolas, focando em continuidade da opera?o, backup e redu?o de risco.",
+          "Você vai fazer um follow-up com o Nicolas, focando em continuidade da operação, backup e redução de risco.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +300. Neutra = +150. Errada = -50",
       },

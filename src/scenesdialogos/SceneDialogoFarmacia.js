@@ -538,19 +538,19 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
-          "Voc? vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avan?ar para a solu?o.",
+          "Você vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avançar para a solução.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
-          "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
+          "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
     ];
 

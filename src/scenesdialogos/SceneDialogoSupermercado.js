@@ -538,17 +538,17 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
-          "Voc? vai conduzir uma conversa com Al?cia, focando em escala, rastreabilidade e controle da opera?o.",
+          "Você vai conduzir uma conversa com Alícia, focando em escala, rastreabilidade e controle da operação.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },

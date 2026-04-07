@@ -545,17 +545,17 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
           "Voc? vai conversar com Eduardo, conectando pagamento, fluidez e experi?ncia de marca.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
           "A cada cena, escolha entre tr?s op??es de resposta a que mais fizer sentido para avan?ar a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
       },

@@ -557,17 +557,17 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
     const linhas = [
       {
-        icone: "?",
+        icone: "🎯",
         texto:
-          "Voc? vai entrar em uma negocia?o consultiva. Seu objetivo ? entender a dor da cliente e gerar valor antes de oferecer a solu?o.",
+          "Você vai entrar em uma negociação consultiva. Seu objetivo é entender a dor da cliente e gerar valor antes de oferecer a solução.",
       },
       {
-        icone: "?",
+        icone: "💬",
         texto:
-          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
       },
       {
-        icone: "?",
+        icone: "🪙",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
