@@ -28,8 +28,8 @@ const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
     narracao:
-      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
-    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
+      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+    npcInicial: "Ol?, tudo bem? Sim, sou eu mesma, pode falar comigo.",
   },
   {
     titulo: "CENA 1 - ABORDAGEM",
@@ -40,7 +40,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Imagino... com esse volume todo de caixas rodando, dá pra ter uma visão clara do que está entrando, inclusive já na conta com a Cielo junto com o banco?",
+          "Imagino... com esse volume todo de caixas rodando, d� pra ter uma vis?o clara do que est? entrando, inclusive j? na conta com a Cielo junto com o banco?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -57,7 +57,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Mas no fim do dia o sistema já mostra o total, então depois o banco organiza isso e fica mais fácil de controlar, não?",
+          "Mas no fim do dia o sistema j? mostra o total, ent?o depois o banco organiza isso e fica mais f?cil de controlar, n?o?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Incorreto. O banco não resolve falta de estrutura.",
@@ -74,7 +74,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Você quer dizer, quando aparece uma diferença dias depois... e você não consegue identificar nem o caixa, nem em que momento isso virou na conta do banco?",
+          "Voc� quer dizer, quando aparece uma diferen?a dias depois... e voc? n?o consegue identificar nem o caixa, nem em que momento isso virou na conta do banco?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Nomeia a dor real e conecta operação com financeiro.",
@@ -161,7 +161,7 @@ const ROTEIRO = [
         feedbackTexto: "Incorreto. Não resolve a estrutura.",
       },
     ],
-    npcResposta: "Mas com esse volume, isso não fica complicado?",
+    npcResposta: "Mas com esse volume, isso n?o fica complicado?",
   },
   {
     titulo: "CENA 5 - INTRODUÇÃO DO CONCEITO",
@@ -316,7 +316,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
       .setDepth(3);
 
     this.textoNome = this.add
-      .text(CX - BTN_W / 2, NOME_Y, "AlÃ­cia  -  Supermercado", {
+      .text(CX - BTN_W / 2, NOME_Y, "Al?cia  -  Supermercado", {
         fontSize: "20px",
         color: "#5a9fd4",
         fontStyle: "bold",
@@ -538,32 +538,19 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const linhas = [
       {
-<<<<<<< Updated upstream
-        icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
-      },
-      {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
-      },
-      {
-        icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
-=======
-        icone: "ðŸŽ¯",
+        icone: "?",
         texto:
-          "Você vai conduzir uma conversa com Alícia, focando em escala, rastreabilidade e controle da operação.",
+          "Voc? vai conduzir uma conversa com Al?cia, focando em escala, rastreabilidade e controle da opera?o.",
       },
       {
-        icone: "ðŸ’¬",
+        icone: "?",
         texto:
-          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
       },
       {
-        icone: "ðŸª™",
+        icone: "?",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
->>>>>>> Stashed changes
       },
     ];
 
@@ -661,7 +648,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -705,7 +692,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -856,9 +843,9 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de refer?ncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

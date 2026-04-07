@@ -33,13 +33,13 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
-    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
+      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+    npcInicial: "Ol?, tudo bem? Sim, sou eu mesma, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Prometo ser rápido. Vi que está corrido... no fim do mês, esse movimento todo vira resultado pra você?",
+          "Prometo ser r?pido. Vi que est? corrido... no fim do m?s, esse movimento todo vira resultado pra voc??",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Respeita o tempo, lê o ambiente e entra direto na dor.",
@@ -72,7 +72,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Isso acontece bastante... você vende bem, mas não tem muita clareza de quando o dinheiro entra na conta do banco, né?",
+          "Isso acontece bastante... voc? vende bem, mas n?o tem muita clareza de quando o dinheiro entra na conta do banco, n??",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Conecta com a dor e traz o banco de forma natural.",
@@ -88,7 +88,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Mas isso não é só questão de organizar melhor o caixa e acompanhar os valores com mais frequência?",
+          "Mas isso n?o ? s? quest?o de organizar melhor o caixa e acompanhar os valores com mais frequ?ncia?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Simplifica demais o problema.",
@@ -128,7 +128,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Então o problema é que eu posso vender bem e mesmo assim ficar sem dinheiro disponível?",
+      "Ent?o o problema � que eu posso vender bem e mesmo assim ficar sem dinheiro dispon?vel?",
   },
   {
     titulo: "CENA 4 - CLAREZA",
@@ -464,15 +464,6 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
-<<<<<<< Updated upstream
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 600", {
-      fontSize: "30px",
-      color: "#ffd700",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
-=======
     this.textoCieloCoin = this.add
       .text(W - 20, 16, "Cielo Coins: 0 / 500", {
         fontSize: "30px",
@@ -484,7 +475,6 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       .setOrigin(1, 0)
       .setScrollFactor(0)
       .setDepth(10);
->>>>>>> Stashed changes
 
     this.textoCena = this.add
       .text(20, 16, "", {
@@ -548,32 +538,19 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const linhas = [
       {
-<<<<<<< Updated upstream
-        icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
-      },
-      {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
-      },
-      {
-        icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
-=======
-        icone: "ðŸŽ¯",
+        icone: "?",
         texto:
-          "Você vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avançar para a solução.",
+          "Voc? vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avan?ar para a solu?o.",
       },
       {
-        icone: "ðŸ’¬",
+        icone: "?",
         texto:
-          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para a conversa.",
+          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para a conversa.",
       },
       {
-        icone: "ðŸª™",
+        icone: "?",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
->>>>>>> Stashed changes
       },
     ];
 
@@ -671,7 +648,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -715,7 +692,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -872,9 +849,9 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de refer?ncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

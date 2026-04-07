@@ -33,13 +33,13 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
-    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Perfeito. Vou ser direto. Hoje você olha mais o total no final, ou costuma conferir venda por venda?",
+          "Perfeito. Vou ser direto. Hoje voc? olha mais o total no final, ou costuma conferir venda por venda?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -97,7 +97,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Eu sinto que existe essa diferença que passa batida. Por que será?",
+      "Eu sinto que existe essa diferen?a que passa batida. Por que ser??",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
@@ -209,7 +209,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Se fizer sentido, eu te mostro isso na prática em 10 minutos, já integrado com o banco e com as vendas organizadas por entrada. Quando fica melhor pra você, agora ou mais tarde?",
+          "Se fizer sentido, eu te mostro isso na pr?tica em 10 minutos, j? integrado com o banco e com as vendas organizadas por entrada. Quando fica melhor pra voc?, agora ou mais tarde?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -541,32 +541,19 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const linhas = [
       {
-<<<<<<< Updated upstream
-        icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
-      },
-      {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
-      },
-      {
-        icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
-=======
-        icone: "ðŸŽ¯",
+        icone: "?",
         texto:
-          "Você vai conduzir uma conversa técnica com o Gabriel, gerando confiança por clareza, método e validação.",
+          "Voc? vai conduzir uma conversa t?cnica com o Gabriel, gerando confian?a por clareza, m?todo e valida?o.",
       },
       {
-        icone: "ðŸ’¬",
+        icone: "?",
         texto:
-          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
       },
       {
-        icone: "ðŸª™",
+        icone: "?",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
->>>>>>> Stashed changes
       },
     ];
 
@@ -664,7 +651,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -708,7 +695,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -860,9 +847,9 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de refer?ncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

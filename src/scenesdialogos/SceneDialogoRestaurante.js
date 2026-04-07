@@ -28,19 +28,19 @@ const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
     narracao:
-      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
-    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
   },
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao: "Ambiente: Restaurante cheio, equipe correndo, pedidos saindo.",
     npcInicial:
-      "Fala... pode ser rápido? Aqui qualquer minuto já vira problema.",
+      "Fala... pode ser r?pido? Aqui qualquer minuto j? vira problema.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Claro. Hoje, quando fecha um pedido, o pagamento já sai direto do sistema ou alguém ainda digita na maquininha?",
+          "Claro. Hoje, quando fecha um pedido, o pagamento j? sai direto do sistema ou algu?m ainda digita na maquininha?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Começa natural, focado no fluxo da operação.",
@@ -48,7 +48,7 @@ const ROTEIRO = [
       {
         letra: "B",
         texto:
-          "Hoje o pagamento é integrado ao sistema ou você usa a maquininha separada na hora de cobrar?",
+          "Hoje o pagamento ? integrado ao sistema ou voc? usa a maquininha separada na hora de cobrar?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Correto, mas mais técnico cedo demais.",
@@ -56,7 +56,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Hoje você usa só maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
+          "Hoje voc? usa s� maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Parece lógico, mas é incorreto.",
@@ -73,7 +73,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Então você fecha o pedido no sistema e depois alguém precisa digitar o valor de novo pra cobrar, certo?",
+          "Ent?o voc? fecha o pedido no sistema e depois algu?m precisa digitar o valor de novo pra cobrar, certo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Valida o fluxo real antes de aprofundar.",
@@ -105,7 +105,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferença no fechamento?",
+          "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferen?a no fechamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Nomeia erros reais de forma prática.",
@@ -160,7 +160,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Entendi... isso tem algum nome ou é só uma forma diferente de operar?",
+      "Entendi... isso tem algum nome ou ? s? uma forma diferente de operar?",
   },
   {
     titulo: "CENA 5 - INTRODUÇÃO DAS SIGLAS (COM PARCERIA)",
@@ -536,7 +536,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     const linhas = [
       {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} no restaurante.`,
       },
       {
         icone: "💬",
@@ -644,7 +644,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -688,7 +688,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -839,9 +839,9 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de refer?ncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

@@ -28,8 +28,8 @@ const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
     narracao:
-      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
-    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
   },
   {
     titulo: "CENA 1 - RETOMADA DE RELAÇÃO",
@@ -132,7 +132,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Tá, então me explica sem enrolar. Como eu continuo vendendo sem maquininha?",
+      "T?, ent?o me explica sem enrolar. Como eu continuo vendendo sem maquininha?",
   },
   {
     titulo: "CENA 4 - TÉCNICA (COM PROVA SIMPLES)",
@@ -164,7 +164,7 @@ const ROTEIRO = [
         feedbackTexto: "Incorreto. Aumenta risco e quebra o fluxo.",
       },
     ],
-    npcResposta: "Isso aí qualquer um fala que tem. O que muda de verdade?",
+    npcResposta: "Isso a? qualquer um fala que tem. O que muda de verdade?",
   },
   {
     titulo: "CENA 5 - ATAQUE AO DIFERENCIAL",
@@ -538,32 +538,19 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     const linhas = [
       {
-<<<<<<< Updated upstream
-        icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
-      },
-      {
-        icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
-      },
-      {
-        icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +300. Neutra = +150. Errada = -50",
-=======
-        icone: "ðŸŽ¯",
+        icone: "?",
         texto:
-          "Você vai fazer um follow-up com o Nicolas, focando em continuidade da operação, backup e redução de risco.",
+          "Voc? vai fazer um follow-up com o Nicolas, focando em continuidade da opera?o, backup e redu?o de risco.",
       },
       {
-        icone: "ðŸ’¬",
+        icone: "?",
         texto:
-          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+          "A cada cena, escolha entre tr?s op?es de resposta a que mais fizer sentido para avan?ar a conversa.",
       },
       {
-        icone: "ðŸª™",
+        icone: "?",
         texto:
           "Cada escolha vale Cielo Coins. Resposta correta = +300. Neutra = +150. Errada = -50",
->>>>>>> Stashed changes
       },
     ];
 
@@ -661,7 +648,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -705,7 +692,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -863,9 +850,9 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     const system =
       `${this.promptLLM}\n` +
-      "Responda de forma natural e breve (1-2 frases) em portuguÃªs do Brasil.\n" +
+      "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
       `Contexto desta cena: ${cena.titulo}. ${cena.narracao || ""}\n` +
-      `Resposta de referÃªncia (adapte para soar natural): "${cena.npcResposta}"\n` +
+      `Resposta de refer?ncia (adapte para soar natural): "${cena.npcResposta}"\n` +
       `${guias[escolha.tipo]}`;
 
     try {

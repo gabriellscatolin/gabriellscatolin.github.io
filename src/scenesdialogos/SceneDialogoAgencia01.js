@@ -24,13 +24,13 @@ const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
-// Roteiro oficial da conversa com o Gerente Geral na agência
+// Roteiro oficial da conversa com o Gerente Geral na agÃªncia
 const ROTEIRO_GG = [
   {
-    titulo: "CENA 1 - ABORDAGEM NA AGÊNCIA",
+    titulo: "ETAPA 1 - ABORDAGEM INICIAL",
     narracao:
-      'Ambiente: Agência movimentada. Equipe trabalhando, clima dinâmico. O Gerente Geral observa de longe.\n"Aborde o Gerente Geral da melhor forma possível."',
-    npcInicial: null,
+      "Ambiente: Agência organizada, clima leve e receptivo. Equipe colaborativa, clientes sendo atendidos com tranquilidade. O GG demonstra abertura, atenção e disposição para ajudar desde o primeiro contato.",
+    npcInicial: "Oi! Tudo bem? Pode falar, seja bem-vindo!",
     escolhas: [
       {
         letra: "A",
@@ -39,28 +39,28 @@ const ROTEIRO_GG = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Leitura de ambiente + naturalidade. Mostra presença e evita abordagem mecânica.",
+          "Objetivo, respeitoso e j? conecta com apoio ? operaÃ§Ã£o.",
       },
       {
         letra: "B",
-        texto: "Bom dia! Movimento está grande hoje, né?",
+        texto: "Obrigado! Sou da Cielo. Estou passando hoje na agência pra me apresentar e conhecer melhor como vocês trabalham.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Correta, mas genérica. Não diferencia o atendimento.",
       },
       {
         letra: "C",
-        texto: "Bom dia! Vim falar das soluções da Cielo.",
+        texto: "Obrigado! Sou da Cielo. Estou passando hoje pra falar com os clientes PJ e ver oportunidades por aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Entra vendendo sem contexto. Quebra a conexão inicial.",
       },
     ],
     npcResposta:
-      "Bom dia! Está mesmo... hoje está puxado. Como posso te ajudar?",
+      "Bom dia! Est? mesmo... hoje est? puxado. Como posso te ajudar?",
   },
   {
-    titulo: "CENA 2 - POSICIONAMENTO",
+    titulo: "ETAPA 2 - POSICIONAMENTO E INTEN??O",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -71,19 +71,19 @@ const ROTEIRO_GG = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Posicionamento estratégico. Mostra parceria, não venda.",
+          "Reforça parceria e traz impacto prático para a agência.",
       },
       {
         letra: "B",
-        texto: "Sou da Cielo, passei aqui para ver como posso ajudar.",
+        texto: "A ideia é entender melhor os clientes da carteira PJ e ver onde posso apoiar conforme as necessidades que vocês enxergam.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
-          "Ok, mas pouco específico. Não reforça papel dentro da agência.",
+          "Correto, mas ainda reativo e pouco direcionado.",
       },
       {
         letra: "C",
-        texto: "Vim ver se tem cliente para fechar máquina hoje.",
+        texto: "A ideia é identificar clientes que possam melhorar as condições atuais e avaliar possíveis trocas nas soluções que utilizam hoje.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Foco transacional. Reduz credibilidade.",
@@ -94,7 +94,7 @@ const ROTEIRO_GG = [
   {
     titulo: "CENA 3 - ALINHAMENTO DE ATUAÇÃO",
     narracao: null,
-    npcInicial: "E qual é a sua ideia de atuação aqui hoje?",
+    npcInicial: "E qual ? a sua ideia de atua??o aqui hoje?",
     escolhas: [
       {
         letra: "A",
@@ -123,7 +123,7 @@ const ROTEIRO_GG = [
     npcResposta: "Isso faz sentido. Está alinhado com o que buscamos.",
   },
   {
-    titulo: "CENA 4 - GERAÇÃO DE VALOR PARA A AGÊNCIA",
+    titulo: "ETAPA 3 - TRANSIÇÃO PARA AÇÃO (LIBERAÇÃO)",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -134,18 +134,18 @@ const ROTEIRO_GG = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Equilíbrio entre negócio e cliente. Fortalece parceria.",
+          "Propõe ação com alinhamento e mantém o GG no processo.",
       },
       {
         letra: "B",
-        texto: "A Cielo é bem reconhecida no mercado.",
+        texto: "Perfeito. Posso começar falando com alguns clientes hoje e depois te atualizo sobre o que eu for identificando.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Verdadeiro, mas fraco. Não conecta com resultado.",
       },
       {
         letra: "C",
-        texto: "A Cielo paga comissão quando vocês indicam cliente.",
+        texto: "Perfeito. Vou começar falando com alguns clientes hoje e depois sigo com as oportunidades que aparecerem por aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Foco errado. Reduz a relação a incentivo financeiro.",
@@ -192,7 +192,7 @@ const ROTEIRO_GG = [
       {
         letra: "A",
         texto:
-          "Posso começar com dois clientes prioritários essa semana e te mandar um resumo do andamento?",
+          "Posso come?ar com dois clientes priorit?rios essa semana e te mandar um resumo do andamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Proposta concreta + organização + previsibilidade.",
@@ -218,10 +218,10 @@ const ROTEIRO_GG = [
 
 const ROTEIRO_PJ = [
   {
-    titulo: "CENA 1 - ABORDAGEM (GERENTE PJ)",
+    titulo: "ETAPA 1 - ABORDAGEM INICIAL",
     narracao:
-      'Ambiente: Gerente PJ atendendo, agenda cheia, pouco tempo.\n"Instrução:\nMostre rapidamente que você agrega valor."',
-    npcInicial: "Bom dia. O que você trouxe hoje?",
+      "Ambiente: Agência organizada, clima leve e colaborativo. O PJ está acessível, receptivo e aberto a construir junto. Existe confiança e espaço para troca.",
+    npcInicial: "Bom dia! Tudo bem? Pode falar, em que posso te ajudar?",
     escolhas: [
       {
         letra: "A",
@@ -230,28 +230,28 @@ const ROTEIRO_PJ = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Começa com análise e dor real. Mostra preparo e chama atenção.",
+          "Claro, direto e já conecta com a carteira do PJ.",
       },
       {
         letra: "B",
-        texto: "Bom dia. Separei alguns clientes que podem usar maquininha.",
+        texto: "Bom dia! Sou da Cielo e estou passando hoje na agência pra me apresentar e entender melhor a operação de vocês.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Direção ok, mas superficial. Não diferencia.",
       },
       {
         letra: "C",
-        texto: "Trouxe maquininhas para oferecer.",
+        texto: "Bom dia! Sou da Cielo e estou passando hoje pra falar com alguns clientes e ver oportunidades por aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Foco em produto, não em problema. Baixo valor percebido.",
+          "Parece v?lido, mas ignora o alinhamento com o PJ.",
       },
     ],
-    npcResposta: "Quais clientes você viu?",
+    npcResposta: "Legal! O que voc? trouxe de oportunidades?",
   },
   {
-    titulo: "CENA 2 - QUALIFICAÇÃO DE OPORTUNIDADES",
+    titulo: "ETAPA 2 - GERAÇÃO DE INTERESSE",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -265,14 +265,14 @@ const ROTEIRO_PJ = [
       },
       {
         letra: "B",
-        texto: "Clientes próximos aqui da agência, com bastante movimento.",
+        texto: "Separei alguns clientes da carteira e estou avaliando onde pode existir alguma oportunidade usando as soluções da Cielo.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Ajuda, mas ainda genérico.",
       },
       {
         letra: "C",
-        texto: "Qualquer cliente que quiser aceitar cartão.",
+        texto: "Separei alguns clientes que podem trocar a solução atual por algo melhor e aproveitar condições mais competitivas.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Sem critério. Mostra falta de estratégia.",
@@ -283,7 +283,7 @@ const ROTEIRO_PJ = [
   {
     titulo: "CENA 3 - CONSTRUÇÃO DE VALOR",
     narracao: null,
-    npcInicial: "Mas o que você enxerga de ganho nesses clientes?",
+    npcInicial: "Mas o que voc? enxerga de ganho nesses clientes?",
     escolhas: [
       {
         letra: "A",
@@ -312,7 +312,7 @@ const ROTEIRO_PJ = [
     npcResposta: "Isso pega mesmo… cliente reclama disso direto.",
   },
   {
-    titulo: "CENA 4 - VISITA CONJUNTA",
+    titulo: "ETAPA 3 - CONSTRUÇÃO CONJUNTA",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -326,14 +326,14 @@ const ROTEIRO_PJ = [
       },
       {
         letra: "B",
-        texto: "Se quiser, podemos ir juntos depois.",
+        texto: "Separei alguns clientes com perfis diferentes e acredito que podemos avaliar juntos quais fazem mais sentido abordar agora.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Ok, mas sem força.",
       },
       {
         letra: "C",
-        texto: "Posso ir sozinho mesmo, sem problema.",
+        texto: "Separei alguns clientes variados e posso ir abordando aos poucos para ver onde aparecem melhores oportunidades.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Perde alavancagem da parceria.",
@@ -373,7 +373,7 @@ const ROTEIRO_PJ = [
     npcResposta: "Se tiver argumento concreto, dá pra abrir conversa.",
   },
   {
-    titulo: "CENA 6 - FECHAMENTO E PRÓXIMO PASSO",
+    titulo: "ETAPA 4 - TRANSIÇÃO PARA AÇÃO",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -387,20 +387,20 @@ const ROTEIRO_PJ = [
       },
       {
         letra: "B",
-        texto: "Vou entrar em contato com eles e te aviso.",
+        texto: "Posso começar falando com esses clientes e depois te atualizo sobre o que eu for encontrando ao longo do dia.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Intenção boa, mas sem compromisso claro.",
       },
       {
         letra: "C",
-        texto: "Vou ver se consigo falar com eles essa semana.",
+        texto: "Posso ir falando com esses clientes e seguir com as oportunidades conforme elas forem surgindo por aqui.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Fraco e sem urgência.",
       },
     ],
-    npcResposta: "Boa. Quanto mais rápido, melhor.",
+    npcResposta: null,
   },
 ];
 
@@ -428,7 +428,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.nomeNpcDialogo = this.tipoDialogo === "PJ" ? "PJ" : "GG";
     this.promptLLM =
       this.tipoDialogo === "PJ"
-        ? "Você é o PJ da Agência Cielo. Seja objetivo e comercial."
+        ? "Voc? ? o PJ da Ag?ncia Cielo. Seja objetivo e comercial."
         : "Você é o Gerente Geral (GG) da Agência Cielo. Seja profissional e acolhedor.";
     this.imagemKey =
       this.tipoDialogo === "PJ" ? "falaAgencia01PJ" : "falaAgencia01GG";
@@ -730,9 +730,9 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     );
 
     const linhas = [
-      {
+     {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.`,
       },
       {
         icone: "💬",
@@ -842,7 +842,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -886,7 +886,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= this.roteiro.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -965,7 +965,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       avaliacao = "Bom trabalho!";
       cor = "#88ccff";
     } else if (pct >= 50) {
-      avaliacao = "Razoável, dá para evoluir.";
+      avaliacao = "Razo?vel, d? para evoluir.";
       cor = "#ffcc44";
     } else {
       avaliacao = "Tente novamente para melhorar a abordagem.";
@@ -987,7 +987,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     const textoFinal =
       this.tipoDialogo === "PJ"
-        ? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessão: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
+        ? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sess?o: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
         : `Conversa encerrada!\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessão: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`;
 
     this.textoNpc.setText(textoFinal).setStyle({

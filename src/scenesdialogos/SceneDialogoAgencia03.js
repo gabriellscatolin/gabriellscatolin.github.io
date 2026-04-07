@@ -517,7 +517,7 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
     this.estado = "escolha";
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que você diz?");
+    this.textoNpc.setText("O que voc? diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -595,7 +595,7 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
       cor = "#ff6644";
     }
 
-    const statusMeta = atingiu ? "✓ Meta atingida!" : `Meta: ${meta} moedas`;
+    const statusMeta = atingiu ? " Meta atingida!" : `Meta: ${meta} moedas`;
 
     this.textoNpc
       .setText(

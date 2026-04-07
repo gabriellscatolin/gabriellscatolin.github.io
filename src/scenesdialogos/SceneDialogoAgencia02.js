@@ -780,7 +780,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       neutra:
         "O vendedor foi aceitavel, mas sem muita firmeza. Responda de forma neutra.",
       errada:
-        "O vendedor falhou na condução. Responda com mais resistencia, sem encerrar a conversa.",
+        "O vendedor falhou na condu??o. Responda com mais resist?ncia, sem encerrar a conversa.",
     };
 
     const system =
