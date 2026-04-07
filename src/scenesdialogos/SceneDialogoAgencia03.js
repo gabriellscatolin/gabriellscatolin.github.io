@@ -285,10 +285,16 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
   }
 
   preload() {
-    if (!this.textures.exists("falaAgencia03")) {
+    if (!this.textures.exists("falaAgencia03GG")) {
       this.load.image(
         "falaAgencia03",
-        "src/assets/imagens/imagensFalas/Agência 03 - GG - F.png",
+        "src/assets/imagens/imagensFalas/Agência 03 - GG - B.png",
+      );
+    }
+    if (!this.textures.exists("falaAgencia03PJ")) {
+      this.load.image(
+        "falaAgencia02GG",
+        "src/assets/imagens/imagensFalas/Agência 03 - PJ - B.png",
       );
     }
   }
