@@ -2123,7 +2123,6 @@ js_avancarSequenciaSetas(localAtual) {
 }
 ```
 
-Figura XXX- print tecla E e setas perto dos estabelecimentos 
 ### Finalização dos cenários internos
 
 Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
@@ -2149,8 +2148,6 @@ Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria co
 Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
 
 Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
-
-Figura XX- print cena de diálogo 
 
 
 ### Mini game do metrô
@@ -2210,7 +2207,6 @@ Figura XXX - maquininha
 Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
 Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
-Imagem XX - foto dos sprites 
 ### Fluxo de progressão do jogador
 
 O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
