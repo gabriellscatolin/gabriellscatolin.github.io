@@ -58,9 +58,7 @@ export default class SceneDialogoBase extends Phaser.Scene {
     this.input.on("pointerdown", () => this._fechar());
 
     // Tecla E
-    this.teclaE = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.E,
-    );
+    this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
   }
 
   update() {
@@ -82,6 +80,9 @@ export default class SceneDialogoBase extends Phaser.Scene {
   // Hook para LLM — sobrescrever nas subclasses quando for integrar
   _chamarLLM(mensagem) {
     // TODO: integrar com LLM
-    console.log("[SceneDialogoBase] LLM não integrado ainda. Mensagem:", mensagem);
+    console.log(
+      "[SceneDialogoBase] LLM não integrado ainda. Mensagem:",
+      mensagem,
+    );
   }
 }

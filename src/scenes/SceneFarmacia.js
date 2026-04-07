@@ -32,10 +32,11 @@ export default class SceneFarmacia extends Phaser.Scene {
       "farmacia",
       "src/assets/imagens/mapsjson/tileMaps/farmacia.tmj?v=1",
     );
-    
+
     //Carrega o áudio
-     this.load.audio(
-      "trilhaSceneFarmacia", 'src/assets/audios/trilhaScenefarmacia.mp3'
+    this.load.audio(
+      "trilhaSceneFarmacia",
+      "src/assets/audios/trilhaScenefarmacia.mp3",
     );
 
     // Sprite do NPC da farmácia
@@ -90,7 +91,10 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.mapa = mapa;
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneFarmacia', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneFarmacia", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Otimiza tilesets para reduzir uso de memória
@@ -416,7 +420,8 @@ export default class SceneFarmacia extends Phaser.Scene {
   }
 
   _resolverTextoMissaoFarmacia() {
-    const dialogoConcluido = this.registry.get("farmacia_dialogo_concluido") === true;
+    const dialogoConcluido =
+      this.registry.get("farmacia_dialogo_concluido") === true;
     if (dialogoConcluido) {
       return "";
     }
@@ -559,7 +564,8 @@ export default class SceneFarmacia extends Phaser.Scene {
   update() {
     const velocidade = 100;
     const { teclas, wasd, personagem } = this;
-    const dialogoFarmaciaConcluido = this.registry.get("farmacia_dialogo_concluido") === true;
+    const dialogoFarmaciaConcluido =
+      this.registry.get("farmacia_dialogo_concluido") === true;
 
     if (dialogoFarmaciaConcluido && !this.falouComNpc) {
       this.falouComNpc = true;
@@ -602,7 +608,6 @@ export default class SceneFarmacia extends Phaser.Scene {
       personagem.anims.stop();
       personagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
-
 
     // Novo raio maior para mostrar o botão [E] antes de chegar perto do NPC
     const distNpc = Phaser.Math.Distance.Between(
@@ -649,7 +654,9 @@ export default class SceneFarmacia extends Phaser.Scene {
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
+      this.scene.launch("SceneDialogoFarmacia", {
+        cenaOrigem: "SceneFarmacia",
+      });
       this.time.delayedCall(0, () => {
         this.dialogoFarmaciaAbrindo = false;
       });
@@ -686,7 +693,8 @@ export default class SceneFarmacia extends Phaser.Scene {
           spawnX: 1121,
           spawnY: 1261,
           retornoFarmacia: true,
-          missaoCidadeTexto: "Missão: Vire à direita e siga a rua até a Agência 02.",
+          missaoCidadeTexto:
+            "Missão: Vire à direita e siga a rua até a Agência 02.",
         });
       });
     }
@@ -698,6 +706,5 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
 
     this._reposicionarPopupMissaoFarmacia();
-    if (dialogoFarmaciaConcluido) this.labelNpc.setVisible(false);
   }
 }

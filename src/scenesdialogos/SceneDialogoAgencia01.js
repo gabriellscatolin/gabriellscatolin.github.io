@@ -34,7 +34,8 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia! Agência está bem dinâmica hoje... bastante movimento por aqui.",
+        texto:
+          "Bom dia! Agência está bem dinâmica hoje... bastante movimento por aqui.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -45,19 +46,18 @@ const ROTEIRO_GG = [
         texto: "Bom dia! Movimento está grande hoje, né?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correta, mas genérica. Não diferencia o atendimento.",
+        feedbackTexto: "Correta, mas genérica. Não diferencia o atendimento.",
       },
       {
         letra: "C",
         texto: "Bom dia! Vim falar das soluções da Cielo.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Entra vendendo sem contexto. Quebra a conexão inicial.",
+        feedbackTexto: "Entra vendendo sem contexto. Quebra a conexão inicial.",
       },
     ],
-    npcResposta: "Bom dia! Está mesmo... hoje está puxado. Como posso te ajudar?",
+    npcResposta:
+      "Bom dia! Está mesmo... hoje está puxado. Como posso te ajudar?",
   },
   {
     titulo: "CENA 2 - POSICIONAMENTO",
@@ -66,7 +66,8 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "Sou o parceiro da Cielo aqui da agência. Vim me alinhar com você e apoiar o PJ nas oportunidades.",
+        texto:
+          "Sou o parceiro da Cielo aqui da agência. Vim me alinhar com você e apoiar o PJ nas oportunidades.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -85,8 +86,7 @@ const ROTEIRO_GG = [
         texto: "Vim ver se tem cliente para fechar máquina hoje.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Foco transacional. Reduz credibilidade.",
+        feedbackTexto: "Foco transacional. Reduz credibilidade.",
       },
     ],
     npcResposta: "Perfeito, bom saber. Pode seguir.",
@@ -98,7 +98,8 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "Quero atuar junto com o PJ, olhando clientes com potencial e fortalecendo a carteira da agência.",
+        texto:
+          "Quero atuar junto com o PJ, olhando clientes com potencial e fortalecendo a carteira da agência.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -109,16 +110,14 @@ const ROTEIRO_GG = [
         texto: "Vou ver com o PJ como posso ajudar nos clientes.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Direção correta, mas pouco estratégica.",
+        feedbackTexto: "Direção correta, mas pouco estratégica.",
       },
       {
         letra: "C",
         texto: "Vou dar uma rodada nos clientes e ver o que aparece.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Falta de planejamento. Passa insegurança.",
+        feedbackTexto: "Falta de planejamento. Passa insegurança.",
       },
     ],
     npcResposta: "Isso faz sentido. Está alinhado com o que buscamos.",
@@ -130,7 +129,8 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "A ideia é gerar resultado para a agência e também entregar valor real para o cliente PJ.",
+        texto:
+          "A ideia é gerar resultado para a agência e também entregar valor real para o cliente PJ.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -141,16 +141,14 @@ const ROTEIRO_GG = [
         texto: "A Cielo é bem reconhecida no mercado.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Verdadeiro, mas fraco. Não conecta com resultado.",
+        feedbackTexto: "Verdadeiro, mas fraco. Não conecta com resultado.",
       },
       {
         letra: "C",
         texto: "A Cielo paga comissão quando vocês indicam cliente.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Foco errado. Reduz a relação a incentivo financeiro.",
+        feedbackTexto: "Foco errado. Reduz a relação a incentivo financeiro.",
       },
     ],
     npcResposta: "Se gerar valor para os dois lados, faz sentido mesmo.",
@@ -162,7 +160,8 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "Entendo totalmente. Por isso quero combinar um acompanhamento claro, com retorno frequente e resultado visível.",
+        texto:
+          "Entendo totalmente. Por isso quero combinar um acompanhamento claro, com retorno frequente e resultado visível.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -173,16 +172,14 @@ const ROTEIRO_GG = [
         texto: "Imagino... mas dessa vez vai ser diferente.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Genérico. Não resolve a objeção.",
+        feedbackTexto: "Genérico. Não resolve a objeção.",
       },
       {
         letra: "C",
         texto: "Com a Cielo isso não acontece. Pode confiar.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Promessa vazia. Baixa credibilidade.",
+        feedbackTexto: "Promessa vazia. Baixa credibilidade.",
       },
     ],
     npcResposta: "Se tiver esse acompanhamento, já muda bastante.",
@@ -194,27 +191,25 @@ const ROTEIRO_GG = [
     escolhas: [
       {
         letra: "A",
-        texto: "Posso começar com dois clientes prioritários essa semana e te mandar um resumo do andamento?",
+        texto:
+          "Posso começar com dois clientes prioritários essa semana e te mandar um resumo do andamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Proposta concreta + organização + previsibilidade.",
+        feedbackTexto: "Proposta concreta + organização + previsibilidade.",
       },
       {
         letra: "B",
         texto: "Vou falando com você conforme tiver novidade.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Intenção ok, mas pouco estruturada.",
+        feedbackTexto: "Intenção ok, mas pouco estruturada.",
       },
       {
         letra: "C",
         texto: "Depois te aviso se fechar alguma coisa.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Reativo e fraco. Não constrói parceria.",
+        feedbackTexto: "Reativo e fraco. Não constrói parceria.",
       },
     ],
     npcResposta: "Perfeito. Assim consigo acompanhar e te apoiar melhor.",
@@ -230,7 +225,8 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Bom dia. Dei uma olhada na carteira e vi alguns clientes com volume bom que podem estar perdendo margem no cartão.",
+        texto:
+          "Bom dia. Dei uma olhada na carteira e vi alguns clientes com volume bom que podem estar perdendo margem no cartão.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -241,8 +237,7 @@ const ROTEIRO_PJ = [
         texto: "Bom dia. Separei alguns clientes que podem usar maquininha.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Direção ok, mas superficial. Não diferencia.",
+        feedbackTexto: "Direção ok, mas superficial. Não diferencia.",
       },
       {
         letra: "C",
@@ -262,27 +257,25 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Uma padaria e uma farmácia com bom giro no crédito. Provavelmente antecipam e pagam mais taxa do que percebem.",
+        texto:
+          "Uma padaria e uma farmácia com bom giro no crédito. Provavelmente antecipam e pagam mais taxa do que percebem.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Específico + técnico + conectado à dor financeira.",
+        feedbackTexto: "Específico + técnico + conectado à dor financeira.",
       },
       {
         letra: "B",
         texto: "Clientes próximos aqui da agência, com bastante movimento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Ajuda, mas ainda genérico.",
+        feedbackTexto: "Ajuda, mas ainda genérico.",
       },
       {
         letra: "C",
         texto: "Qualquer cliente que quiser aceitar cartão.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Sem critério. Mostra falta de estratégia.",
+        feedbackTexto: "Sem critério. Mostra falta de estratégia.",
       },
     ],
     npcResposta: "Faz sentido… esses normalmente giram bastante mesmo.",
@@ -294,7 +287,8 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Muitos vendem bem, mas perdem margem na taxa e na antecipação. Se ajustar isso, o resultado melhora sem precisar vender mais.",
+        texto:
+          "Muitos vendem bem, mas perdem margem na taxa e na antecipação. Se ajustar isso, o resultado melhora sem precisar vender mais.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -305,16 +299,14 @@ const ROTEIRO_PJ = [
         texto: "Dá pra melhorar a operação deles com a Cielo.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas vago.",
+        feedbackTexto: "Correto, mas vago.",
       },
       {
         letra: "C",
         texto: "A gente consegue colocar a maquininha neles.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Volta para produto. Não gera valor.",
+        feedbackTexto: "Volta para produto. Não gera valor.",
       },
     ],
     npcResposta: "Isso pega mesmo… cliente reclama disso direto.",
@@ -326,27 +318,25 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Se você puder ir junto comigo, aumenta a confiança do cliente e a gente consegue avançar mais rápido.",
+        texto:
+          "Se você puder ir junto comigo, aumenta a confiança do cliente e a gente consegue avançar mais rápido.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Estratégia comercial madura. Usa a força da agência.",
+        feedbackTexto: "Estratégia comercial madura. Usa a força da agência.",
       },
       {
         letra: "B",
         texto: "Se quiser, podemos ir juntos depois.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Ok, mas sem força.",
+        feedbackTexto: "Ok, mas sem força.",
       },
       {
         letra: "C",
         texto: "Posso ir sozinho mesmo, sem problema.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Perde alavancagem da parceria.",
+        feedbackTexto: "Perde alavancagem da parceria.",
       },
     ],
     npcResposta: "Ir junto ajuda bastante mesmo.",
@@ -358,7 +348,8 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito, e normalmente é aí que está a oportunidade. Dá pra mostrar ganho em taxa, estabilidade e principalmente no custo da antecipação.",
+        texto:
+          "Perfeito, e normalmente é aí que está a oportunidade. Dá pra mostrar ganho em taxa, estabilidade e principalmente no custo da antecipação.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -369,16 +360,14 @@ const ROTEIRO_PJ = [
         texto: "A Cielo pode complementar o que eles já usam.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Válido, mas pouco forte.",
+        feedbackTexto: "Válido, mas pouco forte.",
       },
       {
         letra: "C",
         texto: "Então já são clientes Cielo também.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Resposta sem lógica. Perde credibilidade.",
+        feedbackTexto: "Resposta sem lógica. Perde credibilidade.",
       },
     ],
     npcResposta: "Se tiver argumento concreto, dá pra abrir conversa.",
@@ -390,27 +379,25 @@ const ROTEIRO_PJ = [
     escolhas: [
       {
         letra: "A",
-        texto: "Fechado então. Já falo com esses dois hoje, vejo melhor horário e te mando para alinharmos a visita juntos.",
+        texto:
+          "Fechado então. Já falo com esses dois hoje, vejo melhor horário e te mando para alinharmos a visita juntos.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Próximo passo claro, rápido e organizado.",
+        feedbackTexto: "Próximo passo claro, rápido e organizado.",
       },
       {
         letra: "B",
         texto: "Vou entrar em contato com eles e te aviso.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Intenção boa, mas sem compromisso claro.",
+        feedbackTexto: "Intenção boa, mas sem compromisso claro.",
       },
       {
         letra: "C",
         texto: "Vou ver se consigo falar com eles essa semana.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Fraco e sem urgência.",
+        feedbackTexto: "Fraco e sem urgência.",
       },
     ],
     npcResposta: "Boa. Quanto mais rápido, melhor.",
@@ -443,7 +430,8 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       this.tipoDialogo === "PJ"
         ? "Você é o PJ da Agência Cielo. Seja objetivo e comercial."
         : "Você é o Gerente Geral (GG) da Agência Cielo. Seja profissional e acolhedor.";
-    this.imagemKey = this.tipoDialogo === "PJ" ? "falaAgencia01PJ" : "falaAgencia01GG";
+    this.imagemKey =
+      this.tipoDialogo === "PJ" ? "falaAgencia01PJ" : "falaAgencia01GG";
     this.cenaIdx = 0;
     this.pontuacao = 0;
     this.cieloCoinsGanhasDialogo = 0;
@@ -491,87 +479,130 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     this._CONT_Y = CONT_Y;
 
-    this.add.rectangle(CX, H / 2, W, H, 0x000000, 0.78)
-      .setScrollFactor(0).setDepth(0).setInteractive();
+    this.add
+      .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
+      .setScrollFactor(0)
+      .setDepth(0)
+      .setInteractive();
 
-    const img = this.add.image(CX, IMG_CY, this.imagemKey)
-      .setScrollFactor(0).setDepth(1).setOrigin(0.5);
+    const img = this.add
+      .image(CX, IMG_CY, this.imagemKey)
+      .setScrollFactor(0)
+      .setDepth(1)
+      .setOrigin(0.5);
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
-    this.add.rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
-      .setScrollFactor(0).setDepth(2);
-    this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(3);
+    this.add
+      .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
+      .setScrollFactor(0)
+      .setDepth(2);
+    this.add
+      .rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNome = this.add.text(
-      CX - BTN_W / 2,
-      NOME_Y,
-      `${this.nomeNpcDialogo}  -  Agência Cielo`,
-      {
-        fontSize: "20px",
-        color: "#5a9fd4",
-        fontStyle: "bold",
+    this.textoNome = this.add
+      .text(
+        CX - BTN_W / 2,
+        NOME_Y,
+        `${this.nomeNpcDialogo}  -  Agência Cielo`,
+        {
+          fontSize: "20px",
+          color: "#5a9fd4",
+          fontStyle: "bold",
+          resolution: 4,
+        },
+      )
+      .setScrollFactor(0)
+      .setDepth(3)
+      .setVisible(false);
+
+    this.textoNarracao = this.add
+      .text(CX, NAR_Y + 30, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        fontStyle: "italic",
+        wordWrap: { width: BTN_W },
+        align: "center",
         resolution: 4,
-      },
-    ).setScrollFactor(0).setDepth(3).setVisible(false);
+      })
+      .setOrigin(0.5, 0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNarracao = this.add.text(CX, NAR_Y + 30, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      fontStyle: "italic",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(3);
+    this.textoNpc = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNpc = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(3);
+    this.textoFeedbackTitulo = this.add
+      .text(CX, PANEL_TOP + 60, "", {
+        fontSize: "38px",
+        color: "#ffd166",
+        fontStyle: "bold",
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoFeedbackTitulo = this.add.text(CX, PANEL_TOP + 60, "", {
-      fontSize: "38px",
-      color: "#ffd166",
-      fontStyle: "bold",
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
-
-    this.textoFeedback = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "32px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoFeedback = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "32px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
-      const bg = this.add.rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
+      const bg = this.add
+        .rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
         .setScrollFactor(0)
         .setDepth(3)
         .setStrokeStyle(1, 0x3a5ba0)
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
 
-      const labelLetra = this.add.text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
-        fontSize: "20px",
-        color: "#776fe6",
-        fontStyle: "bold",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const labelLetra = this.add
+        .text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
+          fontSize: "20px",
+          color: "#776fe6",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
-      const txtEscolha = this.add.text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
-        fontSize: "30px",
-        color: "#ffffff",
-        wordWrap: { width: BTN_W - 80 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const txtEscolha = this.add
+        .text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
+          fontSize: "30px",
+          color: "#ffffff",
+          wordWrap: { width: BTN_W - 80 },
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
       bg.on("pointerover", () => {
         if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER);
@@ -586,46 +617,69 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       return { bg, labelLetra, txtEscolha };
     });
 
-    this.btnContinuar = this.add.rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
+    this.btnContinuar = this.add
+      .rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(3)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
-    this.txtContinuar = this.add.text(CX, CONT_Y, "", {
-      fontSize: "22px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.txtContinuar = this.add
+      .text(CX, CONT_Y, "", {
+        fontSize: "22px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.btnContinuar.on("pointerover", () => this.btnContinuar.setFillStyle(0x2a7c2a));
-    this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
+    this.btnContinuar.on("pointerover", () =>
+      this.btnContinuar.setFillStyle(0x2a7c2a),
+    );
+    this.btnContinuar.on("pointerout", () =>
+      this.btnContinuar.setFillStyle(0x1a5c1a),
+    );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, `${this.nomeNpcDialogo} está pensando...`, {
-      fontSize: "21px",
-      color: "#99bbdd",
-      fontStyle: "italic",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoCarregando = this.add
+      .text(CX, CONT_Y, `${this.nomeNpcDialogo} está pensando...`, {
+        fontSize: "21px",
+        color: "#99bbdd",
+        fontStyle: "italic",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 500", {
-      fontSize: "30px",
-      color: "#ffd700",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
+    this.textoCieloCoin = this.add
+      .text(W - 20, 16, "Cielo Coins: 0 / 500", {
+        fontSize: "30px",
+        color: "#ffd700",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(1, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
     this._atualizarHudMoedas();
 
-    this.textoCena = this.add.text(20, 16, "", {
-      fontSize: "40px",
-      color: "#ffffff",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(0, 0).setScrollFactor(0).setDepth(10);
+    this.textoCena = this.add
+      .text(20, 16, "", {
+        fontSize: "40px",
+        color: "#ffffff",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(0, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
 
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
@@ -642,18 +696,38 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
-    els.push(this.add.rectangle(CX, CY, W, H, 0x000000, 0.88)
-      .setScrollFactor(0).setDepth(D).setInteractive());
-    els.push(this.add.rectangle(CX, CY, 1100, 640, 0x08101e)
-      .setScrollFactor(0).setDepth(D + 0.1).setStrokeStyle(2, 0x2a5ba0));
-    els.push(this.add.text(CX, CY - 270, "Como funciona esta conversa", {
-      fontSize: "25px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 1));
-    els.push(this.add.rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(D + 1));
+    els.push(
+      this.add
+        .rectangle(CX, CY, W, H, 0x000000, 0.88)
+        .setScrollFactor(0)
+        .setDepth(D)
+        .setInteractive(),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY, 1100, 640, 0x08101e)
+        .setScrollFactor(0)
+        .setDepth(D + 0.1)
+        .setStrokeStyle(2, 0x2a5ba0),
+    );
+    els.push(
+      this.add
+        .text(CX, CY - 270, "Como funciona esta conversa", {
+          fontSize: "25px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
 
     const linhas = [
       {
@@ -662,40 +736,61 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       },
       {
         icone: "💬",
-        texto: "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
+        texto:
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido.",
       },
       {
         icone: "🪙",
-        texto: "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
+        texto:
+          "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
       },
     ];
 
     linhas.forEach(({ icone, texto }, i) => {
-      els.push(this.add.text(CX - 480, CY - 125 + i * 120, icone, {
-        fontSize: "26px",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
-      els.push(this.add.text(CX - 430, CY - 110 + i * 120, texto, {
-        fontSize: "30px",
-        color: "#c8d8f0",
-        wordWrap: { width: 900 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
+      els.push(
+        this.add
+          .text(CX - 480, CY - 125 + i * 120, icone, {
+            fontSize: "26px",
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
+      els.push(
+        this.add
+          .text(CX - 430, CY - 110 + i * 120, texto, {
+            fontSize: "30px",
+            color: "#c8d8f0",
+            wordWrap: { width: 900 },
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
     });
 
     const btnY = CY + 255;
-    const btnBg = this.add.rectangle(CX, btnY, 300, 58, 0x1a5c1a)
+    const btnBg = this.add
+      .rectangle(CX, btnY, 300, 58, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(D + 1)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "Comecar  ->", {
-      fontSize: "24px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 2));
+    els.push(
+      this.add
+        .text(CX, btnY, "Comecar  ->", {
+          fontSize: "24px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 2),
+    );
 
     btnBg.on("pointerover", () => btnBg.setFillStyle(0x2a7c2a));
     btnBg.on("pointerout", () => btnBg.setFillStyle(0x1a5c1a));
@@ -719,7 +814,9 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.textoFeedback.setVisible(false);
     this.textoNpc.setVisible(true);
 
-    this.textoCena.setText(`${cena.titulo}  (${idx + 1} / ${this.roteiro.length})`);
+    this.textoCena.setText(
+      `${cena.titulo}  (${idx + 1} / ${this.roteiro.length})`,
+    );
     this._esconderBotoes();
     this._ocultarContinuar();
     this.textoCarregando.setVisible(false);
@@ -900,13 +997,19 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     if (this.tipoDialogo === "GG") {
       this.registry.set("ag01_dialogo_gg_concluido", true);
-      this.registry.set("missaoAgencia01Texto", "Missão: Suba e fale com o PJ Theo.");
+      this.registry.set(
+        "missaoAgencia01Texto",
+        "Missão: Suba e fale com o PJ Theo.",
+      );
     }
     if (this.tipoDialogo === "PJ") {
       this.registry.set("ag01_dialogo_pj_concluido", true);
       this.registry.set("ag01_escolta_pj_agencia2", true);
       this.registry.set("ag01_pj_retorno", false);
-      this.registry.set("missaoCidadeTexto", "Missao: Siga o PJ ate a Padaria.");
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missao: Siga o PJ ate a Padaria.",
+      );
     }
 
     this._mostrarContinuar("Fechar  [E]");
@@ -949,7 +1052,8 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O jogador fez uma abordagem excelente. Responda de forma receptiva.",
+      correta:
+        "O jogador fez uma abordagem excelente. Responda de forma receptiva.",
       neutra: "O jogador foi aceitável. Responda de forma neutra.",
       errada: "O jogador errou a abordagem. Responda de forma mais cética.",
     };

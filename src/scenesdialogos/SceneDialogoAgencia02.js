@@ -8,7 +8,13 @@ function shuffleArray(arr) {
   }
   return a;
 }
-import { initScoring, handleAnswer, checkGoal, getScore, goalEscalado } from "../scoring.js";
+import {
+  initScoring,
+  handleAnswer,
+  checkGoal,
+  getScore,
+  goalEscalado,
+} from "../scoring.js";
 
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
@@ -23,8 +29,16 @@ const ROTEIRO = [
     npcInicial: null,
     escolhas: [
       { letra: "A", texto: "Bom dia. Movimento intenso hoje.", tipo: "neutra" },
-      { letra: "B", texto: "Bom dia. Imagino que as metas estejam pressionando.", tipo: "correta" },
-      { letra: "C", texto: "Bom dia. Vim falar das solucoes da Cielo.", tipo: "errada" },
+      {
+        letra: "B",
+        texto: "Bom dia. Imagino que as metas estejam pressionando.",
+        tipo: "correta",
+      },
+      {
+        letra: "C",
+        texto: "Bom dia. Vim falar das solucoes da Cielo.",
+        tipo: "errada",
+      },
     ],
     npcResposta: "Bom dia. Hoje o dia esta complicado.",
   },
@@ -35,7 +49,12 @@ const ROTEIRO = [
     escolhas: [
       { letra: "A", texto: "Entao volto outro dia.", tipo: "errada" },
       { letra: "B", texto: "Vou ser rapido, prometo.", tipo: "neutra" },
-      { letra: "C", texto: "Imagino. Vou ser direto e focar em oportunidades da sua carteira.", tipo: "correta" },
+      {
+        letra: "C",
+        texto:
+          "Imagino. Vou ser direto e focar em oportunidades da sua carteira.",
+        tipo: "correta",
+      },
     ],
     npcResposta: "Pode falar, mas bem direto.",
   },
@@ -46,7 +65,11 @@ const ROTEIRO = [
     escolhas: [
       { letra: "A", texto: "Nao, acho que nao e bem assim.", tipo: "errada" },
       { letra: "B", texto: "Pode acontecer as vezes.", tipo: "neutra" },
-      { letra: "C", texto: "Entendo. O que mais eles tem comentado?", tipo: "correta" },
+      {
+        letra: "C",
+        texto: "Entendo. O que mais eles tem comentado?",
+        tipo: "correta",
+      },
     ],
     npcResposta: "Falam de taxa e algumas instabilidades.",
   },
@@ -55,7 +78,11 @@ const ROTEIRO = [
     narracao: null,
     npcInicial: null,
     escolhas: [
-      { letra: "A", texto: "A concorrencia tambem tem problema.", tipo: "errada" },
+      {
+        letra: "A",
+        texto: "A concorrencia tambem tem problema.",
+        tipo: "errada",
+      },
       { letra: "B", texto: "A Cielo tem melhorado isso.", tipo: "neutra" },
       {
         letra: "C",
@@ -88,10 +115,15 @@ const ROTEIRO = [
     npcInicial: null,
     escolhas: [
       { letra: "A", texto: "A gente cobre qualquer taxa.", tipo: "errada" },
-      { letra: "B", texto: "A gente pode tentar melhorar taxa.", tipo: "neutra" },
+      {
+        letra: "B",
+        texto: "A gente pode tentar melhorar taxa.",
+        tipo: "neutra",
+      },
       {
         letra: "C",
-        texto: "Taxa pesa, mas quando impacta operacao e vendas, o custo fica maior que a diferenca.",
+        texto:
+          "Taxa pesa, mas quando impacta operacao e vendas, o custo fica maior que a diferenca.",
         tipo: "correta",
       },
     ],
@@ -106,7 +138,8 @@ const ROTEIRO = [
       { letra: "B", texto: "A gente tenta ver algum cliente.", tipo: "neutra" },
       {
         letra: "C",
-        texto: "Vamos focar em clientes com volume, onde essa diferenca aparece mais no resultado.",
+        texto:
+          "Vamos focar em clientes com volume, onde essa diferenca aparece mais no resultado.",
         tipo: "correta",
       },
     ],
@@ -119,7 +152,11 @@ const ROTEIRO = [
     escolhas: [
       { letra: "A", texto: "Qualquer um serve.", tipo: "errada" },
       { letra: "B", texto: "Pode me indicar alguns depois.", tipo: "neutra" },
-      { letra: "C", texto: "Algum cliente com volume alto ou crescimento recente?", tipo: "correta" },
+      {
+        letra: "C",
+        texto: "Algum cliente com volume alto ou crescimento recente?",
+        tipo: "correta",
+      },
     ],
     npcResposta: "Tem loja de roupa, supermercado e um restaurante na regiao.",
   },
@@ -130,7 +167,12 @@ const ROTEIRO = [
     escolhas: [
       { letra: "A", texto: "Vou la ver entao.", tipo: "errada" },
       { letra: "B", texto: "Depois te conto como foi.", tipo: "neutra" },
-      { letra: "C", texto: "Vou priorizar esses e te trago retorno com oportunidades reais.", tipo: "correta" },
+      {
+        letra: "C",
+        texto:
+          "Vou priorizar esses e te trago retorno com oportunidades reais.",
+        tipo: "correta",
+      },
     ],
     npcResposta: "Perfeito.",
   },
@@ -141,7 +183,11 @@ const ROTEIRO = [
     escolhas: [
       { letra: "A", texto: "Depois vejo isso.", tipo: "errada" },
       { letra: "B", texto: "Anoto e registro depois.", tipo: "neutra" },
-      { letra: "C", texto: "Ja registro no sistema para manter controle das oportunidades.", tipo: "correta" },
+      {
+        letra: "C",
+        texto: "Ja registro no sistema para manter controle das oportunidades.",
+        tipo: "correta",
+      },
     ],
     npcResposta: "Boa, isso ajuda.",
   },
@@ -228,14 +274,28 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     this._CONT_Y = CONT_Y;
 
-    this.add.rectangle(CX, H / 2, W, H, 0x000000, 0.78).setScrollFactor(0).setDepth(0).setInteractive();
+    this.add
+      .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
+      .setScrollFactor(0)
+      .setDepth(0)
+      .setInteractive();
 
-    const img = this.add.image(CX, IMG_CY, this.imagemKey).setScrollFactor(0).setDepth(1).setOrigin(0.5);
+    const img = this.add
+      .image(CX, IMG_CY, this.imagemKey)
+      .setScrollFactor(0)
+      .setDepth(1)
+      .setOrigin(0.5);
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
-    this.add.rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96).setScrollFactor(0).setDepth(2);
-    this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0).setScrollFactor(0).setDepth(3);
+    this.add
+      .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
+      .setScrollFactor(0)
+      .setDepth(2);
+    this.add
+      .rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
     this.textoNome = this.add
       .text(CX - BTN_W / 2, NOME_Y, `${this.nomeNpcDialogo}  -  Agencia 02`, {
@@ -340,8 +400,12 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
-    this.btnContinuar.on("pointerover", () => this.btnContinuar.setFillStyle(0x2a7c2a));
-    this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
+    this.btnContinuar.on("pointerover", () =>
+      this.btnContinuar.setFillStyle(0x2a7c2a),
+    );
+    this.btnContinuar.on("pointerout", () =>
+      this.btnContinuar.setFillStyle(0x1a5c1a),
+    );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
     this.textoCarregando = this.add
@@ -395,8 +459,20 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
-    els.push(this.add.rectangle(CX, CY, W, H, 0x000000, 0.88).setScrollFactor(0).setDepth(D).setInteractive());
-    els.push(this.add.rectangle(CX, CY, 1100, 640, 0x08101e).setScrollFactor(0).setDepth(D + 0.1).setStrokeStyle(2, 0x2a5ba0));
+    els.push(
+      this.add
+        .rectangle(CX, CY, W, H, 0x000000, 0.88)
+        .setScrollFactor(0)
+        .setDepth(D)
+        .setInteractive(),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY, 1100, 640, 0x08101e)
+        .setScrollFactor(0)
+        .setDepth(D + 0.1)
+        .setStrokeStyle(2, 0x2a5ba0),
+    );
 
     els.push(
       this.add
@@ -411,13 +487,17 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
         .setDepth(D + 1),
     );
 
-    els.push(this.add.rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0).setScrollFactor(0).setDepth(D + 1));
+    els.push(
+      this.add
+        .rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
 
     const linhas = [
       {
         icone: "🧭",
-        texto:
-          `${this.cenaPrincipalRotulo} comeca agora e termina no bloco "Resultado Final" desta conversa.`,
+        texto: `${this.cenaPrincipalRotulo} comeca agora e termina no bloco "Resultado Final" desta conversa.`,
       },
       {
         icone: "🎯",
@@ -448,7 +528,13 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     linhas.forEach(({ icone, texto }, i) => {
       const y = CY - 170 + i * 82;
-      els.push(this.add.text(CX - 480, y, icone, { fontSize: "26px", resolution: 4 }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
+      els.push(
+        this.add
+          .text(CX - 480, y, icone, { fontSize: "26px", resolution: 4 })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
       els.push(
         this.add
           .text(CX - 430, y, texto, {
@@ -547,7 +633,11 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
 
     this.aguardandoLLM = true;
 
-    const coresTipo = { correta: COR_CORRETA, neutra: COR_NEUTRA, errada: COR_ERRADA };
+    const coresTipo = {
+      correta: COR_CORRETA,
+      neutra: COR_NEUTRA,
+      errada: COR_ERRADA,
+    };
     this.botoesEscolha[indice].bg.setFillStyle(coresTipo[escolha.tipo]);
 
     const antes = getScore(this.registry);
@@ -601,10 +691,16 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.estado = "fim";
     if (this.npcAlvo === "Camila") {
       this.registry.set("ag02_dialogo_camila_concluido", true);
-      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
+      this.registry.set(
+        "missaoAgencia02Texto",
+        "Missão: Suba e fale com a PJ Camila.",
+      );
     } else {
       this.registry.set("ag02_dialogo_enzo_concluido", true);
-      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
+      this.registry.set(
+        "missaoAgencia02Texto",
+        "Missão: Suba e fale com a PJ Camila.",
+      );
     }
 
     this._esconderBotoes();
@@ -618,7 +714,9 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
         "- Direcionamento estrategico",
     );
     this.textoNome.setVisible(false);
-    this.textoCena.setText(`Resultado Final  |  Fim da ${this.cenaPrincipalNumero}`);
+    this.textoCena.setText(
+      `Resultado Final  |  Fim da ${this.cenaPrincipalNumero}`,
+    );
 
     const meta = goalEscalado(FASE);
     const atingiuMeta = checkGoal(this.registry, CAPITULO, FASE, N_CENAS);
@@ -714,7 +812,10 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       const data = await res.json();
       return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
     } catch (err) {
-      console.warn("[SceneDialogoAgencia02] Falha na LLM, usando roteiro:", err.message);
+      console.warn(
+        "[SceneDialogoAgencia02] Falha na LLM, usando roteiro:",
+        err.message,
+      );
       return cena.npcResposta;
     }
   }

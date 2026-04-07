@@ -1,5 +1,4 @@
 export default class SceneAgencia extends Phaser.Scene {
-
   constructor() {
     super({ key: "SceneAg" });
   }
@@ -31,10 +30,7 @@ export default class SceneAgencia extends Phaser.Scene {
     });
 
     // Carrega o áudio da cena
-    this.load.audio(
-      "trilhaAgencia01",
-      "src/assets/audios/trilhaAgencia01.mp3",
-    );
+    this.load.audio("trilhaAgencia01", "src/assets/audios/trilhaAgencia01.mp3");
 
     // Mapa e tilesets da agência
     this.load.tilemapTiledJSON(
@@ -165,9 +161,11 @@ export default class SceneAgencia extends Phaser.Scene {
   }
 
   create() {
-
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaAgencia01", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // ── MAPA ──────────────────────────────────────────────────────────────────
@@ -346,9 +344,7 @@ export default class SceneAgencia extends Phaser.Scene {
     });
 
     // ── NPC IZA ───────────────────────────────────────────────────────────────
-    this.npcIza = this.physics.add
-      .sprite(183, 126, "npc_iza_1")
-      .setDepth(5);
+    this.npcIza = this.physics.add.sprite(183, 126, "npc_iza_1").setDepth(5);
     this.npcIza.body.setImmovable(true);
     const alturaAlvo2 = this.personagem.displayHeight;
     this.npcIza.setDisplaySize(
@@ -449,8 +445,10 @@ export default class SceneAgencia extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
-    this.dialogoGGConcluido = this.registry.get("ag01_dialogo_gg_concluido") === true;
-    this.dialogoPJConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    this.dialogoGGConcluido =
+      this.registry.get("ag01_dialogo_gg_concluido") === true;
+    this.dialogoPJConcluido =
+      this.registry.get("ag01_dialogo_pj_concluido") === true;
     this.falouComIza = this.dialogoGGConcluido;
     this.falouComNpc = this.dialogoPJConcluido;
     this.pjGuiandoParaSaida = false;
@@ -482,8 +480,8 @@ export default class SceneAgencia extends Phaser.Scene {
     this._criarPopupMissaoAgencia();
 
     // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    this.events.on("shutdown", () => {
+      this.musica.stop();
     });
   }
 
@@ -506,7 +504,8 @@ export default class SceneAgencia extends Phaser.Scene {
   }
 
   _atualizarGuiaPJ() {
-    if (!this.pjGuiandoParaSaida || !this.npcAgencia || !this.personagem) return;
+    if (!this.pjGuiandoParaSaida || !this.npcAgencia || !this.personagem)
+      return;
 
     const distNpcSaida = Phaser.Math.Distance.Between(
       this.npcAgencia.x,
@@ -563,17 +562,21 @@ export default class SceneAgencia extends Phaser.Scene {
 
     if (novaDirecao !== this.npcAgenciaDirecao) {
       this.npcAgenciaSpriteAtual = 1;
-      this.npcAgenciaProximaTroca = this.time.now + this.npcAgenciaIntervaloTroca;
+      this.npcAgenciaProximaTroca =
+        this.time.now + this.npcAgenciaIntervaloTroca;
     }
     this.npcAgenciaDirecao = novaDirecao;
 
     // Troca de frame animado em 4 passos quando o PJ está andando
     const agora = this.time.now;
     if (agora >= this.npcAgenciaProximaTroca) {
-      this.npcAgenciaSpriteAtual = this.npcAgenciaSpriteAtual >= 4 ? 1 : this.npcAgenciaSpriteAtual + 1;
+      this.npcAgenciaSpriteAtual =
+        this.npcAgenciaSpriteAtual >= 4 ? 1 : this.npcAgenciaSpriteAtual + 1;
       this.npcAgenciaProximaTroca = agora + this.npcAgenciaIntervaloTroca;
     }
-    this.npcAgencia.setTexture(`npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaSpriteAtual}`);
+    this.npcAgencia.setTexture(
+      `npc_agencia_${this.npcAgenciaDirecao}_${this.npcAgenciaSpriteAtual}`,
+    );
   }
 
   _resolverTextoMissaoAgencia() {
@@ -715,11 +718,15 @@ export default class SceneAgencia extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
-    const izaConcluidaAgora = this.registry.get("ag01_dialogo_gg_concluido") === true;
+    const izaConcluidaAgora =
+      this.registry.get("ag01_dialogo_gg_concluido") === true;
 
     if (izaConcluidaAgora && !this.falouComIza) {
       this.falouComIza = true;
-      this.registry.set("missaoAgencia01Texto", "Missão: Suba e fale com o PJ Theo.");
+      this.registry.set(
+        "missaoAgencia01Texto",
+        "Missão: Suba e fale com o PJ Theo.",
+      );
       if (this.exclamacaoIza) this.exclamacaoIza.setVisible(false);
       if (this.tweenExclamacaoIza) this.tweenExclamacaoIza.stop();
       this.tweenIzaRodando = false;
@@ -736,7 +743,8 @@ export default class SceneAgencia extends Phaser.Scene {
     }
 
     // Assim que o dialogo do PJ termina, ele ja passa a guiar automaticamente.
-    const pjConcluidoAgora = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    const pjConcluidoAgora =
+      this.registry.get("ag01_dialogo_pj_concluido") === true;
     if (pjConcluidoAgora && !this.pjChegouNaSaida && !this.pjGuiandoParaSaida) {
       this.falouComNpc = true;
       this.pjGuiandoParaSaida = true;
@@ -836,7 +844,7 @@ export default class SceneAgencia extends Phaser.Scene {
       const tempoAtual = this.time.now;
       if (tempoAtual >= this.npcIzaProximaTroca) {
         this.npcIzaProximaTroca = tempoAtual + this.npcIzaIntervaloTroca;
-        
+
         // Alterna sprite
         if (this.npcIzaSpriteAtual === 1) {
           this.npcIza.setTexture("npc_iza_2");
@@ -916,18 +924,21 @@ export default class SceneAgencia extends Phaser.Scene {
       dentroSaida || (pjConcluidoAgora && this.pjChegouNaSaida);
 
     if (podeTransicionarParaCidade && !this.transicionando) {
-
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
-        const pjConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+        const pjConcluido =
+          this.registry.get("ag01_dialogo_pj_concluido") === true;
         const escoltaAtiva = pjConcluido;
 
         if (escoltaAtiva) {
           this.registry.set("ag01_escolta_pj_agencia2", true);
           this.registry.set("ag01_pj_retorno", false);
-          this.registry.set("missaoCidadeTexto", "Missao: Siga o PJ ate a Padaria.");
+          this.registry.set(
+            "missaoCidadeTexto",
+            "Missao: Siga o PJ ate a Padaria.",
+          );
         }
 
         this.scene.start("SceneCidade", {
@@ -937,7 +948,9 @@ export default class SceneAgencia extends Phaser.Scene {
           spawnY: 856,
           ocultarSetaAgencia01: true,
           escoltaPJAgencia2: escoltaAtiva,
-          missaoCidadeTexto: escoltaAtiva ? "Missao: Siga o PJ ate a Padaria." : undefined,
+          missaoCidadeTexto: escoltaAtiva
+            ? "Missao: Siga o PJ ate a Padaria."
+            : undefined,
         });
       });
     }
@@ -949,11 +962,15 @@ export default class SceneAgencia extends Phaser.Scene {
     this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
 
     const textoMissaoAtual = this._resolverTextoMissaoAgencia();
-    if (textoMissaoAtual && textoMissaoAtual !== this.missaoAgenciaMensagemAtual) {
+    if (
+      textoMissaoAtual &&
+      textoMissaoAtual !== this.missaoAgenciaMensagemAtual
+    ) {
       this._atualizarPopupMissaoAgencia(true);
     }
     if (this.missaoAgenciaBg) this.missaoAgenciaBg.setVisible(true).setAlpha(1);
-    if (this.missaoAgenciaTexto) this.missaoAgenciaTexto.setVisible(true).setAlpha(1);
+    if (this.missaoAgenciaTexto)
+      this.missaoAgenciaTexto.setVisible(true).setAlpha(1);
 
     this._reposicionarPopupMissaoAgencia();
   }

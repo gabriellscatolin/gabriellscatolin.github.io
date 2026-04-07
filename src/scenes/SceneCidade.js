@@ -20,10 +20,23 @@ export default class SceneCidade extends Phaser.Scene {
       typeof dados.missaoCidadeTexto === "string"
         ? dados.missaoCidadeTexto.trim()
         : "";
+    this.destacarMissaoCidadeNoInicio = Boolean(dados.destacarMissaoCidade);
+    this.limparDestaqueMissaoCidadeAoRetornarDoMapa =
+      Boolean(dados.limparDestaqueMissaoCidadeAoRetornarDoMapa) ||
+      Boolean(this.registry.get("limparDestaqueMissaoCidadeAoRetornarDoMapa"));
     this.retornoFarmacia = Boolean(dados.retornoFarmacia);
     this.escoltaPJSalaoAtiva =
       Boolean(dados.escoltaPJSalao) ||
       Boolean(this.registry.get("ag02_escolta_pj_salao"));
+    this.escoltaPJMetroAtiva =
+      Boolean(dados.escoltaPJMetro) ||
+      Boolean(this.registry.get("ag02_escolta_pj_metro"));
+    this.escoltaPJRestauranteAtiva =
+      Boolean(dados.escoltaPJRestaurante) ||
+      Boolean(this.registry.get("ag02_escolta_pj_restaurante"));
+    this.escoltaPJSupermercadoAtiva =
+      Boolean(dados.escoltaPJSupermercado) ||
+      Boolean(this.registry.get("ag02_escolta_pj_supermercado"));
     const pjDialogoConcluido = Boolean(
       this.registry.get("ag01_dialogo_pj_concluido"),
     );
@@ -37,6 +50,15 @@ export default class SceneCidade extends Phaser.Scene {
       this.escoltaPJAgencia2Ativa = true;
     }
     if (this.escoltaPJSalaoAtiva) {
+      this.escoltaPJAgencia2Ativa = true;
+    }
+    if (this.escoltaPJMetroAtiva) {
+      this.escoltaPJAgencia2Ativa = true;
+    }
+    if (this.escoltaPJRestauranteAtiva) {
+      this.escoltaPJAgencia2Ativa = true;
+    }
+    if (this.escoltaPJSupermercadoAtiva) {
       this.escoltaPJAgencia2Ativa = true;
     }
     this.ocultarSetaAgencia01 =
@@ -58,7 +80,8 @@ export default class SceneCidade extends Phaser.Scene {
     });
 
     this.load.audio(
-      "trilhaSceneCidade", 'src/assets/audios/trilhaSceneCidade.mp3'
+      "trilhaSceneCidade",
+      "src/assets/audios/trilhaSceneCidade.mp3",
     );
 
     this.load.tilemapTiledJSON(
@@ -80,7 +103,10 @@ export default class SceneCidade extends Phaser.Scene {
       "botaoConfiguracaoHud",
       "src/assets/imagens/HUD/botaoConfiguracao.png",
     );
-    this.load.image("botaoRankingHud", "src/assets/imagens/HUD/botaoRanking.png");
+    this.load.image(
+      "botaoRankingHud",
+      "src/assets/imagens/HUD/botaoRanking.png",
+    );
     this.load.image("botaoMissaoHud", "src/assets/imagens/HUD/botaoMissao.png");
     this.load.image(
       "falaVanessa",
@@ -252,7 +278,12 @@ export default class SceneCidade extends Phaser.Scene {
   // Monta mapa, personagem e interfaces
   create() {
     // Zona de interação para o supermercado.
-    this.zonaSupermercado = new Phaser.Geom.Rectangle(2924 - 16, 344 - 16, 32, 32);
+    this.zonaSupermercado = new Phaser.Geom.Rectangle(
+      2924 - 16,
+      344 - 16,
+      32,
+      32,
+    );
     this.labelSupermercado = this.add
       .text(2924, 344, "[E] Entrar", {
         fontSize: "6px",
@@ -271,7 +302,10 @@ export default class SceneCidade extends Phaser.Scene {
     const MAPA_ALTURA = 1760;
 
     // Adiciona audios a cena
-    this.musica = this.sound.add('trilhaSceneCidade', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneCidade", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Mapa principal e tilesets exportados do Tiled
@@ -372,11 +406,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true);
 
     // Label de coordenadas acima do personagem
-    this.coordLabel = this.add.text(
-      spawnX,
-      spawnY - 40,
-      "",
-      {
+    this.coordLabel = this.add
+      .text(spawnX, spawnY - 40, "", {
         fontSize: "20px",
         fontFamily: "monospace",
         fontStyle: "bold",
@@ -386,8 +417,9 @@ export default class SceneCidade extends Phaser.Scene {
         align: "center",
         backgroundColor: "#00000088",
         padding: { x: 6, y: 2 },
-      }
-    ).setOrigin(0.5, 1).setDepth(1002);
+      })
+      .setOrigin(0.5, 1)
+      .setDepth(1002);
 
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.personagem.width;
@@ -414,22 +446,45 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.colisaoManualCidade);
 
     // Colisao manual continua na faixa y:963 de x:1055 ate x:1485.
-    this.colisaoFaixaCidade = this.add.zone((1055 + 1485) / 2, 963, (1485 - 1055) + 16, 16);
+    this.colisaoFaixaCidade = this.add.zone(
+      (1055 + 1485) / 2,
+      963,
+      1485 - 1055 + 16,
+      16,
+    );
     this.physics.add.existing(this.colisaoFaixaCidade, true);
     this.physics.add.collider(this.personagem, this.colisaoFaixaCidade);
 
     // Colisao manual continua na faixa x:1478 de y:980 ate y:1064.
-    this.colisaoFaixaVerticalCidade = this.add.zone(1478, (980 + 1064) / 2, 16, (1064 - 980) + 16);
+    this.colisaoFaixaVerticalCidade = this.add.zone(
+      1478,
+      (980 + 1064) / 2,
+      16,
+      1064 - 980 + 16,
+    );
     this.physics.add.existing(this.colisaoFaixaVerticalCidade, true);
     this.physics.add.collider(this.personagem, this.colisaoFaixaVerticalCidade);
 
     // Colisao manual continua na faixa x:1062 de y:979 ate y:1048.
-    this.colisaoFaixaVerticalCidade2 = this.add.zone(1062, (979 + 1048) / 2, 16, (1048 - 979) + 16);
+    this.colisaoFaixaVerticalCidade2 = this.add.zone(
+      1062,
+      (979 + 1048) / 2,
+      16,
+      1048 - 979 + 16,
+    );
     this.physics.add.existing(this.colisaoFaixaVerticalCidade2, true);
-    this.physics.add.collider(this.personagem, this.colisaoFaixaVerticalCidade2);
+    this.physics.add.collider(
+      this.personagem,
+      this.colisaoFaixaVerticalCidade2,
+    );
 
     // Colisao manual continua na faixa y:1033 de x:856 ate x:985.
-    this.colisaoFaixaCidade2 = this.add.zone((856 + 985) / 2, 1033, (985 - 856) + 16, 16);
+    this.colisaoFaixaCidade2 = this.add.zone(
+      (856 + 985) / 2,
+      1033,
+      985 - 856 + 16,
+      16,
+    );
     this.physics.add.existing(this.colisaoFaixaCidade2, true);
     this.physics.add.collider(this.personagem, this.colisaoFaixaCidade2);
 
@@ -438,7 +493,12 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.add.existing(this.colisaoManualCidade3, true);
     this.physics.add.collider(this.personagem, this.colisaoManualCidade3);
 
-    this.pjAcompanhandoAgencia2 = this.escoltaPJAgencia2Ativa;
+    this.pjAcompanhandoAgencia2 =
+      this.escoltaPJAgencia2Ativa ||
+      this.escoltaPJSalaoAtiva ||
+      this.escoltaPJMetroAtiva ||
+      this.escoltaPJRestauranteAtiva ||
+      this.escoltaPJSupermercadoAtiva;
     this.pjAcompanhamentoEncerrado = false;
     this.pjDespedidaAgencia02Feita = false;
     this.pjPopupAgencia02Ativo = false;
@@ -461,6 +521,15 @@ export default class SceneCidade extends Phaser.Scene {
     if (this.escoltaPJSalaoAtiva) {
       this.pjDestinoAtual = "loja_roupas";
     }
+    if (this.escoltaPJMetroAtiva) {
+      this.pjDestinoAtual = "metro";
+    }
+    if (this.escoltaPJRestauranteAtiva) {
+      this.pjDestinoAtual = "restaurante";
+    }
+    if (this.escoltaPJSupermercadoAtiva) {
+      this.pjDestinoAtual = "supermercado";
+    }
     this.npcTheoProximaTroca = 0;
     this.npcTheoSpriteAtual = 1;
     this.npcTheoIntervaloTroca = 130;
@@ -468,7 +537,13 @@ export default class SceneCidade extends Phaser.Scene {
     this.npcTheoAndandoAnterior = false;
 
     if (this.pjAcompanhandoAgencia2) {
-      this.npcGuiaPrefix = this.escoltaPJSalaoAtiva ? "npc_camila" : "npc_agencia";
+      this.npcGuiaPrefix =
+        this.escoltaPJSalaoAtiva ||
+        this.escoltaPJMetroAtiva ||
+        this.escoltaPJRestauranteAtiva ||
+        this.escoltaPJSupermercadoAtiva
+        ? "npc_camila"
+        : "npc_agencia";
       const spriteInicialGuia = `${this.npcGuiaPrefix}_frente_1`;
       this.registry.set("ag01_escolta_pj_agencia2", true);
       this.registry.set("ag01_pj_retorno", false);
@@ -484,30 +559,45 @@ export default class SceneCidade extends Phaser.Scene {
         alturaTheo,
       );
       this.npcTheoGuia.body.setSize(
-        this.npcTheoGuia.width * 0.45,
-        this.npcTheoGuia.height * 0.45,
+        this.npcTheoGuia.displayWidth * 0.4,
+        this.npcTheoGuia.displayHeight * 0.4,
       );
 
-      if (caminhoInferior) this.physics.add.collider(this.npcTheoGuia, caminhoInferior);
-      if (carrosVeiculos) this.physics.add.collider(this.npcTheoGuia, carrosVeiculos);
-      if (objetosInferior2) this.physics.add.collider(this.npcTheoGuia, objetosInferior2);
-      if (estabelecimentos) this.physics.add.collider(this.npcTheoGuia, estabelecimentos);
+      if (caminhoInferior)
+        this.physics.add.collider(this.npcTheoGuia, caminhoInferior);
+      if (carrosVeiculos)
+        this.physics.add.collider(this.npcTheoGuia, carrosVeiculos);
+      if (objetosInferior2)
+        this.physics.add.collider(this.npcTheoGuia, objetosInferior2);
+      if (estabelecimentos)
+        this.physics.add.collider(this.npcTheoGuia, estabelecimentos);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade);
-      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade);
-      this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade2);
+      this.physics.add.collider(
+        this.npcTheoGuia,
+        this.colisaoFaixaVerticalCidade,
+      );
+      this.physics.add.collider(
+        this.npcTheoGuia,
+        this.colisaoFaixaVerticalCidade2,
+      );
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade2);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade3);
       this.physics.add.collider(this.personagem, this.npcTheoGuia);
 
       this.labelTheoGuia = this.add
-        .text(this.npcTheoGuia.x, this.npcTheoGuia.y - 20, "[PJ te acompanhando]", {
-          fontSize: "6px",
-          color: "#ffffff",
-          backgroundColor: "#000000cc",
-          padding: { x: 2, y: 1 },
-          resolution: 4,
-        })
+        .text(
+          this.npcTheoGuia.x,
+          this.npcTheoGuia.y - 20,
+          "[PJ te acompanhando]",
+          {
+            fontSize: "6px",
+            color: "#ffffff",
+            backgroundColor: "#000000cc",
+            padding: { x: 2, y: 1 },
+            resolution: 4,
+          },
+        )
         .setDepth(20)
         .setOrigin(0.5, 1)
         .setVisible(true);
@@ -990,7 +1080,34 @@ export default class SceneCidade extends Phaser.Scene {
     this._criarPopupMissaoCidade();
 
     if (this.escoltaPJSalaoAtiva) {
-      this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até a Loja de Roupas.",
+      );
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJMetroAtiva) {
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Metrô.",
+      );
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJRestauranteAtiva) {
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Restaurante.",
+      );
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJSupermercadoAtiva) {
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Mercado.",
+      );
       this._atualizarPopupMissaoCidade(true);
     }
 
@@ -1068,7 +1185,10 @@ export default class SceneCidade extends Phaser.Scene {
         this.pjDespedidaSalaoFeita = false;
         this.registry.set("ag02_escolta_pj_salao", true);
         this.registry.set("ag02_pj_retorno", false);
-        this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+        this.registry.set(
+          "missaoCidadeTexto",
+          "Missão: Siga a PJ Camila até a Loja de Roupas.",
+        );
         if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
         this.npcTheoGuia.setVisible(true);
         if (this.labelTheoGuia) {
@@ -1096,13 +1216,103 @@ export default class SceneCidade extends Phaser.Scene {
       this.pjDespedidaSalaoFeita = false;
       this.registry.set("ag02_escolta_pj_salao", true);
       this.registry.set("ag02_pj_retorno", false);
-      this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até a Loja de Roupas.",
+      );
       if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
       this.npcTheoGuia.setVisible(true);
       if (this.labelTheoGuia) {
         this.labelTheoGuia
           .setVisible(true)
           .setText("[Me siga até a Loja de Roupas]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJMetroAtiva && this.npcTheoGuia) {
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjAguardandoPadaria = false;
+      this.pjDestinoAtual = "metro";
+      this.pjRotaWaypoints = [
+        { x: 2266, y: 1658 },
+        { x: 2536, y: 1658 },
+        { x: 2536, y: 1175 },
+        { x: 3032, y: 1175 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      this.registry.set("ag02_escolta_pj_metro", true);
+      this.registry.set("ag02_pj_metro_retorno", false);
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Metrô.",
+      );
+      if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+      this.npcTheoGuia.setVisible(true);
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Me siga até o Metrô]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJRestauranteAtiva && this.npcTheoGuia) {
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjAguardandoPadaria = false;
+      this.pjDestinoAtual = "restaurante";
+      this.pjRotaWaypoints = [
+        { x: 2699, y: 449 },
+        { x: 2644, y: 318 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      this.registry.set("ag02_escolta_pj_restaurante", true);
+      this.registry.set("ag02_pj_restaurante_retorno", false);
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Restaurante.",
+      );
+      if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+      this.npcTheoGuia.setVisible(true);
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Me siga até o Restaurante]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      this._atualizarPopupMissaoCidade(true);
+    }
+
+    if (this.escoltaPJSupermercadoAtiva && this.npcTheoGuia) {
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjAguardandoPadaria = false;
+      this.pjDestinoAtual = "supermercado";
+      this.pjRotaWaypoints = [
+        { x: 2716, y: 410 },
+        { x: 2871, y: 355 },
+        { x: 2976, y: 355 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      this.registry.set("ag02_escolta_pj_supermercado", true);
+      this.registry.set("ag02_pj_supermercado_retorno", false);
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Siga a PJ Camila até o Mercado.",
+      );
+      if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+      this.npcTheoGuia.setVisible(true);
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Me siga até o Mercado]")
           .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
       }
       this._atualizarPopupMissaoCidade(true);
@@ -1393,11 +1603,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudBotaoConfigHover = false;
 
     this.hudBotaoConfigArea.on("pointerover", () => {
-      if (
-        !this.hudNoCentro ||
-        this.hudAnimando ||
-        !this.hudBotaoConfigGlow
-      ) {
+      if (!this.hudNoCentro || this.hudAnimando || !this.hudBotaoConfigGlow) {
         return;
       }
 
@@ -1784,7 +1990,12 @@ export default class SceneCidade extends Phaser.Scene {
   _atualizarHudDebugCoords() {
     if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
     // Força ocultação do debug de coordenadas
-    if (this.hudDebugForceHide || !this.hudDebugEnabled || !this.hudNoCentro || this.hudAnimando) {
+    if (
+      this.hudDebugForceHide ||
+      !this.hudDebugEnabled ||
+      !this.hudNoCentro ||
+      this.hudAnimando
+    ) {
       this.hudDebugTxt.setVisible(false);
       if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
       return;
@@ -1808,7 +2019,9 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudDebugLocalY = Math.round(localY);
 
     this.hudDebugTxt
-      .setText(`HUD local\nX: ${this.hudDebugLocalX}  Y: ${this.hudDebugLocalY}`)
+      .setText(
+        `HUD local\nX: ${this.hudDebugLocalX}  Y: ${this.hudDebugLocalY}`,
+      )
       .setPosition(14, 140)
       .setVisible(true);
 
@@ -1884,6 +2097,13 @@ export default class SceneCidade extends Phaser.Scene {
     this.borderCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
 
     this._atualizarPopupMissaoCidade(true);
+    if (this.destacarMissaoCidadeNoInicio) {
+      this._destacarPopupMissaoCidadeTemporario();
+    }
+    if (this.limparDestaqueMissaoCidadeAoRetornarDoMapa) {
+      this._removerDestaquePopupMissaoCidade();
+      this.registry.set("limparDestaqueMissaoCidadeAoRetornarDoMapa", false);
+    }
     this._criarPopupListaMissoes();
     this._sincronizarPopupListaMissoes();
 
@@ -1957,6 +2177,22 @@ export default class SceneCidade extends Phaser.Scene {
         this.missaoCidadeTimer.remove();
         this.missaoCidadeTimer = null;
       }
+      if (this.missaoCidadeDestaqueTweenBg) {
+        this.missaoCidadeDestaqueTweenBg.stop();
+        this.missaoCidadeDestaqueTweenBg = null;
+      }
+      if (this.missaoCidadeDestaqueTweenTxt) {
+        this.missaoCidadeDestaqueTweenTxt.stop();
+        this.missaoCidadeDestaqueTweenTxt = null;
+      }
+      if (this.missaoCidadeDestaqueTimer) {
+        this.missaoCidadeDestaqueTimer.remove();
+        this.missaoCidadeDestaqueTimer = null;
+      }
+      if (this.missaoCidadeExclamacao) {
+        this.missaoCidadeExclamacao.destroy();
+        this.missaoCidadeExclamacao = null;
+      }
       this._destruirPopupListaMissoes();
       this.fecharPopupConfig();
     });
@@ -2016,7 +2252,14 @@ export default class SceneCidade extends Phaser.Scene {
       .setVisible(false);
 
     this.popupListaMissoesFecharBg = this.add
-      .rectangle(popupX + 338 * uiScale, popupY - 182 * uiScale, 34, 34, 0x17304d, 0.95)
+      .rectangle(
+        popupX + 338 * uiScale,
+        popupY - 182 * uiScale,
+        34,
+        34,
+        0x17304d,
+        0.95,
+      )
       .setStrokeStyle(1, 0x9bc9ff, 0.95)
       .setDepth(262)
       .setScale(uiScale)
@@ -2083,10 +2326,13 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _construirListaMissoesCidade() {
-    const dialogoPJConcluido = this.registry.get("ag01_dialogo_pj_concluido") === true;
+    const dialogoPJConcluido =
+      this.registry.get("ag01_dialogo_pj_concluido") === true;
     const guiouAtePadaria = this.registry.get("ag01_pj_retorno") === true;
-    const dialogoPadariaConcluido = this.registry.get("padaria_dialogo_concluido") === true;
-    const dialogoEscritorioConcluido = this.registry.get("escritorio_dialogo_concluido") === true;
+    const dialogoPadariaConcluido =
+      this.registry.get("padaria_dialogo_concluido") === true;
+    const dialogoEscritorioConcluido =
+      this.registry.get("escritorio_dialogo_concluido") === true;
 
     return [
       {
@@ -2292,6 +2538,72 @@ export default class SceneCidade extends Phaser.Scene {
     });
   }
 
+  _destacarPopupMissaoCidadeTemporario() {
+    if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
+
+    this._removerDestaquePopupMissaoCidade();
+
+    this.missaoCidadeExclamacao = this.add
+      .text(
+        this.missaoCidadeBg.x +
+          this.missaoCidadeBg.width * 0.5 +
+          14 * this.popupMissaoUiScale,
+        this.missaoCidadeBg.y,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          fontStyle: "bold",
+          stroke: "#000000",
+          strokeThickness: 2,
+        },
+      )
+      .setDepth(242)
+      .setScale(this.popupMissaoUiScale)
+      .setOrigin(0.5);
+
+    this.missaoCidadeDestaqueTweenBg = this.tweens.add({
+      targets: this.missaoCidadeBg,
+      alpha: { from: 0.62, to: 1 },
+      duration: 260,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.missaoCidadeDestaqueTweenTxt = this.tweens.add({
+      targets: [this.missaoCidadeTexto, this.missaoCidadeExclamacao],
+      alpha: { from: 1, to: 0.25 },
+      duration: 260,
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+
+  _removerDestaquePopupMissaoCidade() {
+    if (this.missaoCidadeDestaqueTweenBg) {
+      this.missaoCidadeDestaqueTweenBg.stop();
+      this.missaoCidadeDestaqueTweenBg = null;
+    }
+    if (this.missaoCidadeDestaqueTweenTxt) {
+      this.missaoCidadeDestaqueTweenTxt.stop();
+      this.missaoCidadeDestaqueTweenTxt = null;
+    }
+    if (this.missaoCidadeDestaqueTimer) {
+      this.missaoCidadeDestaqueTimer.remove();
+      this.missaoCidadeDestaqueTimer = null;
+    }
+    if (this.missaoCidadeBg) {
+      this.missaoCidadeBg.setAlpha(0.62);
+    }
+    if (this.missaoCidadeTexto) {
+      this.missaoCidadeTexto.setAlpha(1);
+    }
+    if (this.missaoCidadeExclamacao) {
+      this.missaoCidadeExclamacao.destroy();
+      this.missaoCidadeExclamacao = null;
+    }
+  }
+
   _reposicionarPopupMissaoCidade() {
     if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
     const cam = this.cameras.main;
@@ -2301,6 +2613,13 @@ export default class SceneCidade extends Phaser.Scene {
     this.missaoCidadeBg.setY(popupY);
     this.missaoCidadeTexto.setX(popupX);
     this.missaoCidadeTexto.setY(popupY);
+
+    if (this.missaoCidadeExclamacao) {
+      this.missaoCidadeExclamacao.setPosition(
+        popupX + this.missaoCidadeBg.width * 0.5 + 14 * this.popupMissaoUiScale,
+        popupY,
+      );
+    }
   }
 
   _abrirPopupDespedidaAgencia02() {
@@ -2325,7 +2644,6 @@ export default class SceneCidade extends Phaser.Scene {
       .text(cx - iW * 0.12, cy - iH * 0.06, "", {
         fontSize: "13px",
         color: "#000000",
-        fontStyle: "bold",
         stroke: "#000000",
         strokeThickness: 1,
         wordWrap: { width: iW * 0.58, useAdvancedWrap: true },
@@ -2452,8 +2770,71 @@ export default class SceneCidade extends Phaser.Scene {
     this.registry.set("ocultarSetaAgencia01", this.indiceSetaAtual > 0);
   }
 
+  _podeEntrarNoEstabelecimento(alvo) {
+    if (
+      alvo === "agencia2" &&
+      (this.pjAguardandoDespedidaAgencia02 || this.pjDespedidaAgencia02Feita)
+    ) {
+      return true;
+    }
+
+    if (alvo === "cabeleireiro" && this.registry.get("ag02_pj_retorno") === true) {
+      return true;
+    }
+
+    if (
+      alvo === "restaurante" &&
+      this.registry.get("ag02_pj_restaurante_retorno") === true
+    ) {
+      return true;
+    }
+
+    if (
+      alvo === "supermercado" &&
+      (this.registry.get("ag02_pj_supermercado_retorno") === true ||
+        (this.pjDestinoAtual === "supermercado" && this.pjChegouDestinoRota))
+    ) {
+      return true;
+    }
+
+    if (
+      alvo === "metro" &&
+      (this.registry.get("ag02_pj_metro_retorno") === true ||
+        (this.pjDestinoAtual === "metro" && this.pjChegouDestinoRota))
+    ) {
+      return true;
+    }
+
+    const localEsperado = this.sequenciaSetas[this.indiceSetaAtual];
+    if (alvo !== localEsperado) return false;
+
+    const destinoPorAlvo = {
+      padaria: "padaria",
+      farmacia: "farmacia",
+      agencia2: "agencia2",
+      cabeleireiro: "loja_roupas",
+      metro: "metro",
+      restaurante: "restaurante",
+      supermercado: "supermercado",
+    };
+
+    const destinoRelacionado = destinoPorAlvo[alvo];
+    if (!destinoRelacionado) return true;
+
+    // Para destinos guiados pelo PJ, so libera quando o guia realmente chegar.
+    if (
+      this.pjDestinoAtual === destinoRelacionado &&
+      !this.pjChegouDestinoRota
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
   _atualizarAcompanhamentoPJCidade() {
-    if (!this.pjAcompanhandoAgencia2 || !this.npcTheoGuia || !this.personagem) return;
+    if (!this.pjAcompanhandoAgencia2 || !this.npcTheoGuia || !this.personagem)
+      return;
 
     const pontoAtual = this.pjRotaWaypoints[this.pjRotaIndiceAtual];
     if (!pontoAtual) {
@@ -2462,12 +2843,10 @@ export default class SceneCidade extends Phaser.Scene {
       return;
     }
 
-    const chegouNaPadariaComJogador =
-      this.pjDestinoAtual === "padaria" &&
-      this.pjChegouDestinoRota &&
-      Phaser.Geom.Rectangle.Contains(this.zonaPadaria, this.personagem.x, this.personagem.y);
+    const chegouNaPadariaComPj =
+      this.pjDestinoAtual === "padaria" && this.pjChegouDestinoRota;
 
-    if (chegouNaPadariaComJogador) {
+    if (chegouNaPadariaComPj) {
       // O PJ espera na padaria até o jogador sair
       this.pjAguardandoPadaria = true;
       this.pjAcompanhandoAgencia2 = false;
@@ -2480,16 +2859,17 @@ export default class SceneCidade extends Phaser.Scene {
         this.npcTheoGuia.body.enable = false;
       }
       this.npcTheoGuia.setVisible(true);
-      if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Estou esperando você na Padaria]");
+      if (this.labelTheoGuia)
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Estou esperando você na Padaria]");
       return;
     }
 
-    const chegouNaAgencia02ComJogador =
-      this.pjDestinoAtual === "agencia2" &&
-      this.pjChegouDestinoRota &&
-      Phaser.Geom.Rectangle.Contains(this.zonaAgencia02, this.personagem.x, this.personagem.y);
+    const chegouNaAgencia02ComPj =
+      this.pjDestinoAtual === "agencia2" && this.pjChegouDestinoRota;
 
-    if (chegouNaAgencia02ComJogador && !this.pjDespedidaAgencia02Feita) {
+    if (chegouNaAgencia02ComPj && !this.pjDespedidaAgencia02Feita) {
       this.pjAcompanhandoAgencia2 = false;
       this.pjAcompanhamentoEncerrado = true;
       this.pjAguardandoDespedidaAgencia02 = true;
@@ -2532,12 +2912,10 @@ export default class SceneCidade extends Phaser.Scene {
       return;
     }
 
-    const chegouNoSalaoComJogador =
-      this.pjDestinoAtual === "loja_roupas" &&
-      this.pjChegouDestinoRota &&
-      Phaser.Geom.Rectangle.Contains(this.zonaLojaDeRoupas, this.personagem.x, this.personagem.y);
+    const chegouNoSalaoComPj =
+      this.pjDestinoAtual === "loja_roupas" && this.pjChegouDestinoRota;
 
-    if (chegouNoSalaoComJogador && !this.pjDespedidaSalaoFeita) {
+    if (chegouNoSalaoComPj && !this.pjDespedidaSalaoFeita) {
       this.pjDespedidaSalaoFeita = true;
       this.pjAcompanhandoAgencia2 = false;
       this.pjAcompanhamentoEncerrado = true;
@@ -2552,14 +2930,78 @@ export default class SceneCidade extends Phaser.Scene {
       if (this.labelTheoGuia) {
         this.labelTheoGuia
           .setVisible(true)
-          .setText("[Boa sorte! Nos vemos depois]")
+          .setText("[Estou esperando você na Loja de Roupas]")
           .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
       }
+      return;
+    }
 
-      this.time.delayedCall(1200, () => {
-        if (this.npcTheoGuia) this.npcTheoGuia.setVisible(false);
-        if (this.labelTheoGuia) this.labelTheoGuia.setVisible(false);
-      });
+    const chegouNoMetroComPj =
+      this.pjDestinoAtual === "metro" && this.pjChegouDestinoRota;
+
+    if (chegouNoMetroComPj) {
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.registry.set("ag02_escolta_pj_metro", false);
+      this.registry.set("ag02_pj_metro_retorno", true);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Chegamos. Entre no Metrô]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      return;
+    }
+
+    const chegouNoRestauranteComPj =
+      this.pjDestinoAtual === "restaurante" && this.pjChegouDestinoRota;
+
+    if (chegouNoRestauranteComPj) {
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.registry.set("ag02_escolta_pj_restaurante", false);
+      this.registry.set("ag02_pj_restaurante_retorno", true);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Chegamos. Entre no Restaurante]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      return;
+    }
+
+    const chegouNoSupermercadoComPj =
+      this.pjDestinoAtual === "supermercado" && this.pjChegouDestinoRota;
+
+    if (chegouNoSupermercadoComPj) {
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.registry.set("ag02_escolta_pj_supermercado", false);
+      this.registry.set("ag02_pj_supermercado_retorno", true);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Chegamos. Entre no Mercado]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
       return;
     }
 
@@ -2579,7 +3021,10 @@ export default class SceneCidade extends Phaser.Scene {
     if (distJogadorNpc > this.pjDistanciaMaxJogador) {
       this.npcTheoGuia.body?.setVelocity(0, 0);
       this.pjEsperandoJogador = true;
-    } else if (!this.pjChegouDestinoRota && distNpcPonto > this.pjRaioChegadaGuia) {
+    } else if (
+      !this.pjChegouDestinoRota &&
+      distNpcPonto > this.pjRaioChegadaGuia
+    ) {
       this.physics.moveTo(
         this.npcTheoGuia,
         pontoAtual.x,
@@ -2610,12 +3055,17 @@ export default class SceneCidade extends Phaser.Scene {
     this.npcTheoDirecao = novaDirecao;
 
     if (!andando) {
-      this.npcTheoGuia.setTexture(`${this.npcGuiaPrefix}_${this.npcTheoDirecao}_1`);
+      this.npcTheoGuia.setTexture(
+        `${this.npcGuiaPrefix}_${this.npcTheoDirecao}_1`,
+      );
       this.npcTheoSpriteAtual = 1;
     } else if (this.time.now >= this.npcTheoProximaTroca) {
-      this.npcTheoSpriteAtual = this.npcTheoSpriteAtual >= 4 ? 1 : this.npcTheoSpriteAtual + 1;
+      this.npcTheoSpriteAtual =
+        this.npcTheoSpriteAtual >= 4 ? 1 : this.npcTheoSpriteAtual + 1;
       this.npcTheoProximaTroca = this.time.now + this.npcTheoIntervaloTroca;
-      this.npcTheoGuia.setTexture(`${this.npcGuiaPrefix}_${this.npcTheoDirecao}_${this.npcTheoSpriteAtual}`);
+      this.npcTheoGuia.setTexture(
+        `${this.npcGuiaPrefix}_${this.npcTheoDirecao}_${this.npcTheoSpriteAtual}`,
+      );
     }
     this.npcTheoAndandoAnterior = andando;
 
@@ -2627,7 +3077,13 @@ export default class SceneCidade extends Phaser.Scene {
             ? "[Chegamos. Entre na Agência 02]"
             : this.pjDestinoAtual === "loja_roupas"
               ? "[Chegamos. Entre na Loja de Roupas]"
-            : "[Chegamos. Entre na Padaria]";
+              : this.pjDestinoAtual === "metro"
+                ? "[Chegamos. Entre no Metrô]"
+                : this.pjDestinoAtual === "restaurante"
+                  ? "[Chegamos. Entre no Restaurante]"
+                  : this.pjDestinoAtual === "supermercado"
+                    ? "[Chegamos. Entre no Mercado]"
+              : "[Chegamos. Entre na Padaria]";
       const textoSeguir =
         this.pjDestinoAtual === "farmacia"
           ? "[Me siga até a Farmácia]"
@@ -2635,7 +3091,13 @@ export default class SceneCidade extends Phaser.Scene {
             ? "[Me siga até a Agência 02]"
             : this.pjDestinoAtual === "loja_roupas"
               ? "[Me siga até a Loja de Roupas]"
-            : "[Siga o PJ]";
+              : this.pjDestinoAtual === "metro"
+                ? "[Me siga até o Metrô]"
+                : this.pjDestinoAtual === "restaurante"
+                  ? "[Me siga até o Restaurante]"
+                  : this.pjDestinoAtual === "supermercado"
+                    ? "[Me siga até o Mercado]"
+              : "[Siga o PJ]";
 
       this.labelTheoGuia
         .setVisible(true)
@@ -2684,29 +3146,35 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   update() {
-        // Se o PJ está aguardando na padaria e o jogador saiu da padaria, ativa a escolta para a farmácia
-        if (this.pjAguardandoPadaria && this.registry.get("padaria_dialogo_concluido") === true) {
-          this.pjAguardandoPadaria = false;
-          this.pjAcompanhandoAgencia2 = true;
-          this.pjAcompanhamentoEncerrado = false;
-          this.pjDestinoAtual = "farmacia";
-          this.registry.set("ag01_escolta_pj_agencia2", true);
-          this.registry.set("ag01_pj_retorno", false);
-          // Atualiza waypoints para farmácia passando pelos pontos solicitados.
-          this.pjRotaWaypoints = [
-            { x: 1488, y: 915 },
-            { x: 1596, y: 915 },
-            { x: 1596, y: 1295 },
-            { x: 1126, y: 1295 },
-          ];
-          this.pjRotaIndiceAtual = 0;
-          this.pjChegouDestinoRota = false;
-          if (this.npcTheoGuia) {
-            this.npcTheoGuia.setVisible(true);
-            if (this.labelTheoGuia) this.labelTheoGuia.setVisible(true).setText("[Me siga até a Farmácia]");
-            if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
-          }
-        }
+    // Se o PJ está aguardando na padaria e o jogador saiu da padaria, ativa a escolta para a farmácia
+    if (
+      this.pjAguardandoPadaria &&
+      this.registry.get("padaria_dialogo_concluido") === true
+    ) {
+      this.pjAguardandoPadaria = false;
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjDestinoAtual = "farmacia";
+      this.registry.set("ag01_escolta_pj_agencia2", true);
+      this.registry.set("ag01_pj_retorno", false);
+      // Atualiza waypoints para farmácia passando pelos pontos solicitados.
+      this.pjRotaWaypoints = [
+        { x: 1488, y: 915 },
+        { x: 1596, y: 915 },
+        { x: 1596, y: 1295 },
+        { x: 1126, y: 1295 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      if (this.npcTheoGuia) {
+        this.npcTheoGuia.setVisible(true);
+        if (this.labelTheoGuia)
+          this.labelTheoGuia
+            .setVisible(true)
+            .setText("[Me siga até a Farmácia]");
+        if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+      }
+    }
     const velocidade = 150;
     const { teclas, wasd, personagem, coordLabel } = this;
 
@@ -2875,8 +3343,13 @@ export default class SceneCidade extends Phaser.Scene {
 
     // Atualiza label de coordenadas acima do personagem
     if (coordLabel && personagem) {
-      coordLabel.setText(`x: ${Math.round(personagem.x)}\ny: ${Math.round(personagem.y)}`);
-      coordLabel.setPosition(personagem.x, personagem.y - (personagem.displayHeight / 2) - 10);
+      coordLabel.setText(
+        `x: ${Math.round(personagem.x)}\ny: ${Math.round(personagem.y)}`,
+      );
+      coordLabel.setPosition(
+        personagem.x,
+        personagem.y - personagem.displayHeight / 2 - 10,
+      );
       coordLabel.setVisible(true);
     }
 
@@ -2890,6 +3363,32 @@ export default class SceneCidade extends Phaser.Scene {
 
     // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      let alvoTentado = null;
+      if (dentroAgencia) alvoTentado = "agencia1";
+      else if (dentroEscritorio) alvoTentado = "escritorio";
+      else if (dentroPadaria) alvoTentado = "padaria";
+      else if (dentroFarmacia) alvoTentado = "farmacia";
+      else if (dentroRestaurante) alvoTentado = "restaurante";
+      else if (dentroMetro) alvoTentado = "metro";
+      else if (dentroLojaDeRoupas) alvoTentado = "cabeleireiro";
+      else if (dentroSupermercado) alvoTentado = "supermercado";
+      else if (dentroPostoDeGasolina) alvoTentado = "posto";
+      else if (dentroAgencia02) alvoTentado = "agencia2";
+      else if (dentroAgencia03) alvoTentado = "agencia3";
+
+      const podeInteragirComPjNaAgencia02 =
+        dentroAgencia02 &&
+        this.pjAguardandoDespedidaAgencia02 &&
+        !this.pjDespedidaAgencia02Feita;
+
+      if (
+        alvoTentado &&
+        !podeInteragirComPjNaAgencia02 &&
+        !this._podeEntrarNoEstabelecimento(alvoTentado)
+      ) {
+        return;
+      }
+
       if (dentroAgencia) {
         this.transicionando = true;
         this._avancarSequenciaSetas("agencia1");
@@ -2983,7 +3482,10 @@ export default class SceneCidade extends Phaser.Scene {
           });
         });
       } else if (dentroLojaDeRoupas) {
-        if (this.pjAcompanhandoAgencia2 || (this.npcTheoGuia && this.npcTheoGuia.visible)) {
+        if (
+          this.pjAcompanhandoAgencia2 ||
+          (this.npcTheoGuia && this.npcTheoGuia.visible)
+        ) {
           this.pjAcompanhandoAgencia2 = false;
           this.pjAcompanhamentoEncerrado = true;
           this.registry.set("ag02_escolta_pj_salao", false);
@@ -3037,7 +3539,10 @@ export default class SceneCidade extends Phaser.Scene {
           });
         });
       } else if (dentroAgencia02) {
-        if (!this.pjDespedidaAgencia02Feita && this.pjAguardandoDespedidaAgencia02) {
+        if (
+          !this.pjDespedidaAgencia02Feita &&
+          this.pjAguardandoDespedidaAgencia02
+        ) {
           this._abrirPopupDespedidaAgencia02();
           return;
         }

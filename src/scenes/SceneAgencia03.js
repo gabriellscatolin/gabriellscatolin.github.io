@@ -31,10 +31,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     });
 
     // Carrega o áudio da cena
-    this.load.audio(
-      "trilhaAgencia03",
-      "src/assets/audios/trilhaAgencia03.mp3",
-    );
+    this.load.audio("trilhaAgencia03", "src/assets/audios/trilhaAgencia03.mp3");
 
     // ── Tilemap ──────────────────────────────────────────────────────────────
     this.load.tilemapTiledJSON(
@@ -101,7 +98,10 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this._camadasCriadas = [];
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaAgencia03', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaAgencia03", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     this._otimizarTilesetsPorUso(mapa);
@@ -219,7 +219,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
     // Usa a posição passada por outra cena; caso contrário, usa o centro visual
     // do mapa já compensado pelo offset aplicado nas camadas (OX/OY).
     const temSpawnCustom =
-      Number.isFinite(this.spawnXInicial) && Number.isFinite(this.spawnYInicial);
+      Number.isFinite(this.spawnXInicial) &&
+      Number.isFinite(this.spawnYInicial);
 
     const SPAWN_PADRAO_X = 955;
     const SPAWN_PADRAO_Y = 518;
@@ -362,8 +363,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .setDepth(999);
 
     // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    this.events.on("shutdown", () => {
+      this.musica.stop();
     });
   }
 
@@ -607,7 +608,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       this.scene.pause();
-      this.scene.launch("SceneDialogoAgencia03", { cenaOrigem: "SceneAgencia03" });
+      this.scene.launch("SceneDialogoAgencia03", {
+        cenaOrigem: "SceneAgencia03",
+      });
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {

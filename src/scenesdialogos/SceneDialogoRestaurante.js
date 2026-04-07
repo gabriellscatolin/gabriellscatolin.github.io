@@ -39,27 +39,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Claro. Hoje, quando fecha um pedido, o pagamento já sai direto do sistema ou alguém ainda digita na maquininha?",
+        texto:
+          "Claro. Hoje, quando fecha um pedido, o pagamento já sai direto do sistema ou alguém ainda digita na maquininha?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Começa natural, focado no fluxo da operação.",
+        feedbackTexto: "Começa natural, focado no fluxo da operação.",
       },
       {
         letra: "B",
-        texto: "Hoje o pagamento é integrado ao sistema ou você usa a maquininha separada na hora de cobrar?",
+        texto:
+          "Hoje o pagamento é integrado ao sistema ou você usa a maquininha separada na hora de cobrar?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas mais técnico cedo demais.",
+        feedbackTexto: "Correto, mas mais técnico cedo demais.",
       },
       {
         letra: "C",
-        texto: "Hoje você usa só maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
+        texto:
+          "Hoje você usa só maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Parece lógico, mas é incorreto.",
+        feedbackTexto: "Parece lógico, mas é incorreto.",
       },
     ],
     npcResposta:
@@ -72,31 +72,30 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Então você fecha o pedido no sistema e depois alguém precisa digitar o valor de novo pra cobrar, certo?",
+        texto:
+          "Então você fecha o pedido no sistema e depois alguém precisa digitar o valor de novo pra cobrar, certo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Valida o fluxo real antes de aprofundar.",
+        feedbackTexto: "Valida o fluxo real antes de aprofundar.",
       },
       {
         letra: "B",
-        texto: "Nesse modelo o sistema e o pagamento não estão integrados, então o valor precisa ser repetido manualmente.",
+        texto:
+          "Nesse modelo o sistema e o pagamento não estão integrados, então o valor precisa ser repetido manualmente.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas conceitual demais.",
+        feedbackTexto: "Correto, mas conceitual demais.",
       },
       {
         letra: "C",
-        texto: "Esse modelo até ajuda, porque você confere o valor duas vezes antes de cobrar o cliente.",
+        texto:
+          "Esse modelo até ajuda, porque você confere o valor duas vezes antes de cobrar o cliente.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Incorreto. Repetição aumenta erro.",
+        feedbackTexto: "Incorreto. Repetição aumenta erro.",
       },
     ],
-    npcResposta:
-      "Sim, às vezes dá uns erros chatos.",
+    npcResposta: "Sim, às vezes dá uns erros chatos.",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO DO RISCO",
@@ -105,31 +104,30 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferença no fechamento?",
+        texto:
+          "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferença no fechamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Nomeia erros reais de forma prática.",
+        feedbackTexto: "Nomeia erros reais de forma prática.",
       },
       {
         letra: "B",
-        texto: "Quando o processo é separado, podem acontecer diferenças entre o que foi registrado e o que foi cobrado.",
+        texto:
+          "Quando o processo é separado, podem acontecer diferenças entre o que foi registrado e o que foi cobrado.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas genérico.",
+        feedbackTexto: "Correto, mas genérico.",
       },
       {
         letra: "C",
-        texto: "Esses erros são mais falta de atenção da equipe, não tem tanto a ver com o processo.",
+        texto:
+          "Esses erros são mais falta de atenção da equipe, não tem tanto a ver com o processo.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Incorreto. O processo influencia diretamente.",
+        feedbackTexto: "Incorreto. O processo influencia diretamente.",
       },
     ],
-    npcResposta:
-      "E como isso ficaria mais seguro?",
+    npcResposta: "E como isso ficaria mais seguro?",
   },
   {
     titulo: "CENA 4 - INTRODUÇÃO DA TÉCNICA",
@@ -138,27 +136,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Quando o sistema está integrado ao pagamento, o valor já sai pronto, sem digitar, e já volta confirmado no sistema.",
+        texto:
+          "Quando o sistema está integrado ao pagamento, o valor já sai pronto, sem digitar, e já volta confirmado no sistema.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Clareza de fluxo, sem sobrecarregar.",
+        feedbackTexto: "Clareza de fluxo, sem sobrecarregar.",
       },
       {
         letra: "B",
-        texto: "Existe um modelo integrado onde o sistema envia automaticamente o valor para o pagamento.",
+        texto:
+          "Existe um modelo integrado onde o sistema envia automaticamente o valor para o pagamento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas pouco conectado ao impacto.",
+        feedbackTexto: "Correto, mas pouco conectado ao impacto.",
       },
       {
         letra: "C",
-        texto: "Nesse modelo você não usa mais maquininha, tudo acontece direto dentro do sistema.",
+        texto:
+          "Nesse modelo você não usa mais maquininha, tudo acontece direto dentro do sistema.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Incorreto. O pagamento continua existindo.",
+        feedbackTexto: "Incorreto. O pagamento continua existindo.",
       },
     ],
     npcResposta:
@@ -171,7 +169,8 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Tem sim. Isso é integração com o sistema, às vezes via TEF, e com a parceria da Cielo com o banco isso já fica tudo conectado.",
+        texto:
+          "Tem sim. Isso é integração com o sistema, às vezes via TEF, e com a parceria da Cielo com o banco isso já fica tudo conectado.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -179,23 +178,22 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Isso é conhecido como TEF, quando o sistema se conecta com o pagamento e depois você acompanha os valores no banco.",
+        texto:
+          "Isso é conhecido como TEF, quando o sistema se conecta com o pagamento e depois você acompanha os valores no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas menos completo.",
+        feedbackTexto: "Correto, mas menos completo.",
       },
       {
         letra: "C",
-        texto: "Isso é só um tipo de maquininha diferente, que depois já organiza automaticamente tudo no banco.",
+        texto:
+          "Isso é só um tipo de maquininha diferente, que depois já organiza automaticamente tudo no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Incorreto. Confunde produto com integração.",
+        feedbackTexto: "Incorreto. Confunde produto com integração.",
       },
     ],
-    npcResposta:
-      "Se isso evitar erro aqui, já resolve muita dor pra mim.",
+    npcResposta: "Se isso evitar erro aqui, já resolve muita dor pra mim.",
   },
   {
     titulo: "CENA 6 - IMPACTO + PRÓXIMO PASSO",
@@ -204,27 +202,27 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Resolve porque você tira a digitação, reduz erro e com a Cielo junto com o banco já deixa tudo registrado certo no sistema e na conta.",
+        texto:
+          "Resolve porque você tira a digitação, reduz erro e com a Cielo junto com o banco já deixa tudo registrado certo no sistema e na conta.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Conecta operação + parceria + impacto real.",
+        feedbackTexto: "Conecta operação + parceria + impacto real.",
       },
       {
         letra: "B",
-        texto: "Ajuda porque melhora o controle e deixa o processo mais organizado no dia a dia e depois no banco.",
+        texto:
+          "Ajuda porque melhora o controle e deixa o processo mais organizado no dia a dia e depois no banco.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas genérico.",
+        feedbackTexto: "Correto, mas genérico.",
       },
       {
         letra: "C",
-        texto: "A gente pode manter como está e só ajustar o processo da equipe para depois conferir melhor no banco.",
+        texto:
+          "A gente pode manter como está e só ajustar o processo da equipe para depois conferir melhor no banco.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
-        feedbackTexto:
-          "Incorreto. Problema estrutural.",
+        feedbackTexto: "Incorreto. Problema estrutural.",
       },
     ],
   },
@@ -246,8 +244,8 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.imagemKey = "falaRestaurante";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "VocÃª Ã© Lucas, responsÃ¡vel por um restaurante movimentado. " +
-      "VocÃª Ã© Ã¡gil, objetivo e muito atento Ã  eficiÃªncia da operaÃ§Ã£o e ao fluxo de pagamentos.";
+      "Você é Lucas, responsável por um restaurante movimentado. " +
+      "Você é ágil, objetivo e muito atento à eficiência da operação e ao fluxo de pagamentos.";
   }
 
   init(dados) {
@@ -292,87 +290,125 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     this._CONT_Y = CONT_Y;
 
-    this.add.rectangle(CX, H / 2, W, H, 0x000000, 0.78)
-      .setScrollFactor(0).setDepth(0).setInteractive();
+    this.add
+      .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
+      .setScrollFactor(0)
+      .setDepth(0)
+      .setInteractive();
 
-    const img = this.add.image(CX, IMG_CY, "falaRestaurante")
-      .setScrollFactor(0).setDepth(1).setOrigin(0.5);
+    const img = this.add
+      .image(CX, IMG_CY, "falaRestaurante")
+      .setScrollFactor(0)
+      .setDepth(1)
+      .setOrigin(0.5);
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
-    this.add.rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
-      .setScrollFactor(0).setDepth(2);
-    this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(3);
+    this.add
+      .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
+      .setScrollFactor(0)
+      .setDepth(2);
+    this.add
+      .rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNome = this.add.text(
-      CX - BTN_W / 2,
-      NOME_Y,
-      "Lucas  -  Restaurante",
-      {
+    this.textoNome = this.add
+      .text(CX - BTN_W / 2, NOME_Y, "Lucas  -  Restaurante", {
         fontSize: "20px",
         color: "#5a9fd4",
         fontStyle: "bold",
         resolution: 4,
-      },
-    ).setScrollFactor(0).setDepth(3).setVisible(false);
+      })
+      .setScrollFactor(0)
+      .setDepth(3)
+      .setVisible(false);
 
-    this.textoNarracao = this.add.text(CX, NAR_Y + 30, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      fontStyle: "italic",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(3);
+    this.textoNarracao = this.add
+      .text(CX, NAR_Y + 30, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        fontStyle: "italic",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5, 0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNpc = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(3);
+    this.textoNpc = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoFeedbackTitulo = this.add.text(CX, PANEL_TOP + 60, "", {
-      fontSize: "38px",
-      color: "#ffd166",
-      fontStyle: "bold",
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoFeedbackTitulo = this.add
+      .text(CX, PANEL_TOP + 60, "", {
+        fontSize: "38px",
+        color: "#ffd166",
+        fontStyle: "bold",
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoFeedback = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "32px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoFeedback = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "32px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
-      const bg = this.add.rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
+      const bg = this.add
+        .rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
         .setScrollFactor(0)
         .setDepth(3)
         .setStrokeStyle(1, 0x3a5ba0)
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
 
-      const labelLetra = this.add.text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
-        fontSize: "20px",
-        color: "#776fe6",
-        fontStyle: "bold",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const labelLetra = this.add
+        .text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
+          fontSize: "20px",
+          color: "#776fe6",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
-      const txtEscolha = this.add.text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
-        fontSize: "30px",
-        color: "#ffffff",
-        wordWrap: { width: BTN_W - 80 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const txtEscolha = this.add
+        .text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
+          fontSize: "30px",
+          color: "#ffffff",
+          wordWrap: { width: BTN_W - 80 },
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
       bg.on("pointerover", () => {
         if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER);
@@ -387,45 +423,68 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       return { bg, labelLetra, txtEscolha };
     });
 
-    this.btnContinuar = this.add.rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
+    this.btnContinuar = this.add
+      .rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(3)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
-    this.txtContinuar = this.add.text(CX, CONT_Y, "", {
-      fontSize: "22px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.txtContinuar = this.add
+      .text(CX, CONT_Y, "", {
+        fontSize: "22px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.btnContinuar.on("pointerover", () => this.btnContinuar.setFillStyle(0x2a7c2a));
-    this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
+    this.btnContinuar.on("pointerover", () =>
+      this.btnContinuar.setFillStyle(0x2a7c2a),
+    );
+    this.btnContinuar.on("pointerout", () =>
+      this.btnContinuar.setFillStyle(0x1a5c1a),
+    );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Lucas estÃ¡ pensando...", {
-      fontSize: "21px",
-      color: "#99bbdd",
-      fontStyle: "italic",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoCarregando = this.add
+      .text(CX, CONT_Y, "Lucas está pensando...", {
+        fontSize: "21px",
+        color: "#99bbdd",
+        fontStyle: "italic",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 1200", {
-      fontSize: "30px",
-      color: "#ffd700",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
+    this.textoCieloCoin = this.add
+      .text(W - 20, 16, "Cielo Coins: 0 / 1200", {
+        fontSize: "30px",
+        color: "#ffd700",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(1, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
 
-    this.textoCena = this.add.text(20, 16, "", {
-      fontSize: "40px",
-      color: "#ffffff",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(0, 0).setScrollFactor(0).setDepth(10);
+    this.textoCena = this.add
+      .text(20, 16, "", {
+        fontSize: "40px",
+        color: "#ffffff",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(0, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
 
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this._criarTutorial(W, H, CX, H / 2);
@@ -441,21 +500,42 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
-    els.push(this.add.rectangle(CX, CY, W, H, 0x000000, 0.88)
-      .setScrollFactor(0).setDepth(D).setInteractive());
-    els.push(this.add.rectangle(CX, CY, 1100, 640, 0x08101e)
-      .setScrollFactor(0).setDepth(D + 0.1).setStrokeStyle(2, 0x2a5ba0));
-    els.push(this.add.text(CX, CY - 270, "Como funciona esta conversa", {
-      fontSize: "25px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 1));
-    els.push(this.add.rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(D + 1));
+    els.push(
+      this.add
+        .rectangle(CX, CY, W, H, 0x000000, 0.88)
+        .setScrollFactor(0)
+        .setDepth(D)
+        .setInteractive(),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY, 1100, 640, 0x08101e)
+        .setScrollFactor(0)
+        .setDepth(D + 0.1)
+        .setStrokeStyle(2, 0x2a5ba0),
+    );
+    els.push(
+      this.add
+        .text(CX, CY - 270, "Como funciona esta conversa", {
+          fontSize: "25px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
 
     const linhas = [
       {
+<<<<<<< Updated upstream
         icone: "🎯",
         texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
       },
@@ -466,35 +546,69 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       {
         icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
+=======
+        icone: "ðŸŽ¯",
+        texto:
+          "Você vai conversar com Lucas, focando em ritmo operacional, redução de erro e fluidez no pagamento.",
+      },
+      {
+        icone: "ðŸ’¬",
+        texto:
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+      },
+      {
+        icone: "ðŸª™",
+        texto:
+          "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
+>>>>>>> Stashed changes
       },
     ];
 
     linhas.forEach(({ icone, texto }, i) => {
-      els.push(this.add.text(CX - 480, CY - 125 + i * 120, icone, {
-        fontSize: "26px",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
-      els.push(this.add.text(CX - 430, CY - 110 + i * 120, texto, {
-        fontSize: "30px",
-        color: "#c8d8f0",
-        wordWrap: { width: 900 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
+      els.push(
+        this.add
+          .text(CX - 480, CY - 125 + i * 120, icone, {
+            fontSize: "26px",
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
+      els.push(
+        this.add
+          .text(CX - 430, CY - 110 + i * 120, texto, {
+            fontSize: "30px",
+            color: "#c8d8f0",
+            wordWrap: { width: 900 },
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
     });
 
     const btnY = CY + 255;
-    const btnBg = this.add.rectangle(CX, btnY, 300, 58, 0x1a5c1a)
+    const btnBg = this.add
+      .rectangle(CX, btnY, 300, 58, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(D + 1)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
-      fontSize: "24px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 2));
+    els.push(
+      this.add
+        .text(CX, btnY, "Começar  ->", {
+          fontSize: "24px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 2),
+    );
 
     btnBg.on("pointerover", () => btnBg.setFillStyle(0x2a7c2a));
     btnBg.on("pointerout", () => btnBg.setFillStyle(0x1a5c1a));
@@ -544,7 +658,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que vocÃª diz?");
+    this.textoNpc.setText("O que você diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -570,7 +684,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
+      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -588,7 +702,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -673,7 +787,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 66) {
-      avaliacao = "Excelente conduÃ§Ã£o! OperaÃ§Ã£o e clareza bem conectadas.";
+      avaliacao = "Excelente condução! Operação e clareza bem conectadas.";
       cor = "#44ff88";
     } else {
       avaliacao = "Precisa melhorar. Tente de novo com mais foco no fluxo.";
@@ -682,14 +796,14 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
+      : `Meta não atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
-        `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-        `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
-        `${statusMeta}\n\n${avaliacao}`,
+          `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
+          `Total da sessão: ${getScore(this.registry)}\n\n` +
+          `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
         color: cor,
@@ -729,9 +843,12 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     }
 
     const guias = {
-      correta: "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avanÃ§ando a conversa.",
-      neutra: "O vendedor foi aceitÃ¡vel porÃ©m genÃ©rico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
-      errada: "O vendedor errou a abordagem. Responda de forma mais fria ou cÃ©tica, mas sem encerrar a conversa.",
+      correta:
+        "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
+      neutra:
+        "O vendedor foi aceitável porém genérico. Responda de forma neutra, sem entusiasmo mas sem fechar portas.",
+      errada:
+        "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
     };
 
     const system =
@@ -763,7 +880,10 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       const data = await res.json();
       return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
     } catch (err) {
-      console.warn("[SceneDialogoRestaurante] Falha na LLM, usando roteiro:", err.message);
+      console.warn(
+        "[SceneDialogoRestaurante] Falha na LLM, usando roteiro:",
+        err.message,
+      );
       return cena.npcResposta;
     }
   }

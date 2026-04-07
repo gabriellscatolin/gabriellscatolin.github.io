@@ -32,14 +32,14 @@ export default class SceneInicial extends Phaser.Scene {
           x: "center",
           y: 870,
           scale: 0.48,
-          action: "openSettings",
+          action: "abrirConfiguracoes",
         },
         {
           key: "botaoJogar",
           x: "center",
           y: 600,
           scale: 0.5,
-          action: "startGame",
+          action: "iniciarJogo",
         },
         {
           key: "botaoCreditos",
@@ -61,7 +61,10 @@ export default class SceneInicial extends Phaser.Scene {
     this.load.image("configFundo", this.Config.ASSETS.configFundo);
     this.load.image("imagemCreditos", this.Config.ASSETS.imagemCreditos);
     this.load.image("logoCielo", this.Config.ASSETS.logoCielo);
-    this.load.audio("trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3');
+    this.load.audio(
+      "trilhaSceneInicial",
+      "src/assets/audios/trilhaSceneInicial.mp3",
+    );
   }
   //Configura os elementos visuais, interativos e sonoros das cenas
   create() {
@@ -70,7 +73,10 @@ export default class SceneInicial extends Phaser.Scene {
     this.redimensionarFundo();
 
     // Adiciona audios a cena
-    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneInicial", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Aplica configurações salvas (brilho, daltonismo, etc.)
@@ -89,8 +95,8 @@ export default class SceneInicial extends Phaser.Scene {
     });
 
     // Pausa a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    this.events.on("shutdown", () => {
+      this.musica.stop();
     });
 
     // Resize
@@ -126,7 +132,7 @@ export default class SceneInicial extends Phaser.Scene {
     this.fundo.displayHeight = altura;
   }
 
-  startGame() {
+  iniciarJogo() {
     // Se animações desativadas (acessibilidade), pula a transição
     if (!GameSettings.animacoes) {
       this.scene.start("ScenePersonagem");
@@ -146,7 +152,7 @@ export default class SceneInicial extends Phaser.Scene {
     });
   }
 
-  openSettings() {
+  abrirConfiguracoes() {
     this.abrirPopupConfig();
   }
 

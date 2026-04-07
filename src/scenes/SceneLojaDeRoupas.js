@@ -131,9 +131,11 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
   }
 
   create() {
-
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaLojaDeRoupa', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaLojaDeRoupa", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     this.prepararTilesetsLoja();
@@ -190,16 +192,16 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     // Cria layers na ordem do TMJ (bottom → top), aplicando colisão nas certas
     const coliders = [];
     const ordemTMJ = [
-      { name: "N - Chão",                  colide: false },
-      { name: "C - ParedeComColid_embaixo", colide: true  },
-      { name: "C - ParedeComColid",         colide: true  },
-      { name: "N - ParedeSemColid",         colide: false },
-      { name: "N - ObjetsoSemColid_0",      colide: false },
-      { name: "PLAYER",                     colide: false },
-      { name: "C - Objetos ComColid",       colide: true  },
-      { name: "N - ObjetosSemColid",        colide: false },
-      { name: "N - ObjetosSemColid_02",     colide: false },
-      { name: "N - ObjetosSemColid_3",      colide: false },
+      { name: "N - Chão", colide: false },
+      { name: "C - ParedeComColid_embaixo", colide: true },
+      { name: "C - ParedeComColid", colide: true },
+      { name: "N - ParedeSemColid", colide: false },
+      { name: "N - ObjetsoSemColid_0", colide: false },
+      { name: "PLAYER", colide: false },
+      { name: "C - Objetos ComColid", colide: true },
+      { name: "N - ObjetosSemColid", colide: false },
+      { name: "N - ObjetosSemColid_02", colide: false },
+      { name: "N - ObjetosSemColid_3", colide: false },
     ];
 
     ordemTMJ.forEach(({ name, colide }) => {
@@ -231,10 +233,10 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     this.player = this.physics.add.sprite(76, 246, "loja_frente_1");
     this.player.setCollideWorldBounds(true);
 
-    const escala = (mapa.tileWidth || 16) / Math.max(
-      this.player.width,
-      this.player.height,
-    ) * 0.4;
+    const escala =
+      ((mapa.tileWidth || 16) /
+        Math.max(this.player.width, this.player.height)) *
+      0.4;
     this.player.setScale(Math.max(0.05, escala));
     this.player.body.setSize(50, 50);
 
@@ -303,19 +305,22 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     this.registry.set("missaoLojaDeRoupasTexto", "Missão: Fale com o Eduardo.");
     this._atualizarPopupMissaoLoja(true);
 
-    // Zona de saida
-    this.exitZone = { x: 76, y: 289, radius: 40 };
+    // Zona de saída (principal + tolerância para garantir interação)
+    this.zonasSaida = [
+      { x: 73, y: 279, raio: 42 },
+      { x: 76, y: 289, raio: 36 },
+    ];
     this.nearExit = false;
     this.perto_npc = false;
     this.falouComNpc = false;
     this.isTransitioning = false;
 
     this.exitLabel = this.add
-      .text(76, 289, "[E] Sair", {
-        fontSize: "3px",
+      .text(73, 279, "[E] Sair", {
+        fontSize: "6px",
         color: "#fff",
         backgroundColor: "#000c",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 1 },
         resolution: 4,
       })
       .setDepth(20)
@@ -333,46 +338,60 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       .setDepth(999);
 
     // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
-     if (this.missaoLojaTimer) {
-       this.missaoLojaTimer.remove();
-       this.missaoLojaTimer = null;
-     }
+    this.events.on("shutdown", () => {
+      this.musica.stop();
+      if (this.missaoLojaTimer) {
+        this.missaoLojaTimer.remove();
+        this.missaoLojaTimer = null;
+      }
     });
   }
 
   _criarPopupMissaoLoja() {
-    this.popupMissaoLojaUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoLojaOffsetTopo = 56 * this.popupMissaoLojaUiScale;
-
-    const cam = this.cameras.main;
-    const popupY = cam.worldView.top + this.popupMissaoLojaOffsetTopo;
-    const popupX = cam.worldView.centerX;
+    const popupX = this.scale.width / 2;
+    const popupY = 56;
 
     this.missaoLojaBg = this.add
-      .rectangle(popupX, popupY, 240, 34, 0x000000, 0.62)
+      .rectangle(popupX, popupY, 340, 44, 0x000000, 0.8)
       .setDepth(240)
-      .setScale(this.popupMissaoLojaUiScale);
+      .setScrollFactor(0)
+      .setOrigin(0.5);
 
     this.missaoLojaTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "12px",
-        color: "#ffffff",
+        fontSize: "24px",
         fontStyle: "bold",
         stroke: "#000000",
         strokeThickness: 2,
+        color: "#ffffff",
       })
       .setOrigin(0.5)
       .setDepth(241)
-      .setScale(this.popupMissaoLojaUiScale);
+      .setScrollFactor(0);
+  }
+
+  _medirLarguraPopupMissaoLoja(texto) {
+    const medidor = this.add.text(-9999, -9999, texto, {
+      fontSize: "24px",
+      fontStyle: "bold",
+      stroke: "#000000",
+      strokeThickness: 2,
+    });
+    const largura = medidor.displayWidth + 64;
+    medidor.destroy();
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoLoja(animarTexto) {
     if (!this.missaoLojaBg || !this.missaoLojaTexto) return;
 
-    const texto = this.registry.get("missaoLojaDeRoupasTexto") || "Missão: Fale com o Eduardo.";
+    const texto =
+      this.registry.get("missaoLojaDeRoupasTexto") ||
+      "Missão: Fale com o Eduardo.";
     if (!texto) return;
+
+    const larguraFinal = this._medirLarguraPopupMissaoLoja(texto);
+    this.missaoLojaBg.setSize(larguraFinal, this.missaoLojaBg.height);
 
     if (this.missaoLojaMensagemAtual === texto && !animarTexto) return;
     this.missaoLojaMensagemAtual = texto;
@@ -397,15 +416,6 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
         this.missaoLojaTexto.setText(texto.substring(0, charIndex));
       },
     });
-  }
-
-  _reposicionarPopupMissaoLoja() {
-    if (!this.missaoLojaBg || !this.missaoLojaTexto) return;
-    const cam = this.cameras.main;
-    const popupX = cam.worldView.centerX;
-    const popupY = cam.worldView.top + this.popupMissaoLojaOffsetTopo;
-    this.missaoLojaBg.setPosition(popupX, popupY);
-    this.missaoLojaTexto.setPosition(popupX, popupY);
   }
 
   update() {
@@ -444,14 +454,16 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       player.setTexture(`loja_${this.direction}_1`);
     }
 
-    // Exit detection
-    const dist = Phaser.Math.Distance.Between(
-      player.x,
-      player.y,
-      this.exitZone.x,
-      this.exitZone.y,
-    );
-    const inExit = dist <= this.exitZone.radius;
+    // Detecção da zona de saída
+    const inExit = (this.zonasSaida || []).some((zona) => {
+      const distancia = Phaser.Math.Distance.Between(
+        player.x,
+        player.y,
+        zona.x,
+        zona.y,
+      );
+      return distancia <= zona.raio;
+    });
 
     const distNpc = Phaser.Math.Distance.Between(
       player.x,
@@ -482,7 +494,9 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       this.scene.pause();
-      this.scene.launch("SceneDialogoLojaDeRoupas", { cenaOrigem: "SceneLojaDeRoupas" });
+      this.scene.launch("SceneDialogoLojaDeRoupas", {
+        cenaOrigem: "SceneLojaDeRoupas",
+      });
     }
 
     if (inExit !== this.nearExit) {
@@ -494,16 +508,29 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     if (inExit) {
       this.exitLabel.setPosition(player.x, player.y - 15);
 
-      if (!this.isTransitioning && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      if (
+        !this.isTransitioning &&
+        Phaser.Input.Keyboard.JustDown(this.teclaE)
+      ) {
         this.isTransitioning = true;
         this.exitLabel.setVisible(false);
         this.cameras.main.fadeOut(800, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.registry.set("ag02_escolta_pj_salao", false);
+          this.registry.set("ag02_escolta_pj_metro", true);
+          this.registry.set("ag02_pj_metro_retorno", false);
+          this.registry.set(
+            "missaoCidadeTexto",
+            "Missão: Siga a PJ Camila até o Metrô.",
+          );
+
           this.scene.start("SceneCidade", {
             nomePasta: this.nomePastaEscolhida,
             prefixo: this.prefixoEscolhido,
             spawnX: 2248,
             spawnY: 1568,
+            escoltaPJMetro: true,
+            missaoCidadeTexto: "Missão: Siga a PJ Camila até o Metrô.",
           });
         });
       }
@@ -513,6 +540,5 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       `x: ${Math.round(player.x).toString().padStart(4)} y: ${Math.round(player.y).toString().padStart(4)}`,
     );
     this.debugText.setPosition(player.x - 20, player.y - 20);
-    this._reposicionarPopupMissaoLoja();
   }
 }

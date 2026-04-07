@@ -20,7 +20,7 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     this.load.maxParallelDownloads = 2;
 
-  // Carrega o áudio da cena
+    // Carrega o áudio da cena
     this.load.audio(
       "trilhaSceneRestaurante",
       "src/assets/audios/trilhaSceneRestaurante.mp3",
@@ -85,7 +85,6 @@ export default class SceneRestaurante extends Phaser.Scene {
       "npc_restaurante",
       "src/assets/imagens/imagensPersonagens/NPC/npcRestaurante.png",
     );
-
 
     // Sprites do personagem
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
@@ -211,9 +210,11 @@ export default class SceneRestaurante extends Phaser.Scene {
   }
 
   create() {
-
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneRestaurante', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneRestaurante", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Prepara tilesets antes de montar o mapa
@@ -344,7 +345,7 @@ export default class SceneRestaurante extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-      this.exclamacaoNpc = this.add
+    this.exclamacaoNpc = this.add
       .text(
         this.npcRestaurante.x,
         this.npcRestaurante.y - this.npcRestaurante.displayHeight * 0.5,
@@ -360,14 +361,13 @@ export default class SceneRestaurante extends Phaser.Scene {
       .setDepth(21)
       .setOrigin(0.5, 1);
 
-      this.tweenExclamacaoNpc = this.tweens.add({
+    this.tweenExclamacaoNpc = this.tweens.add({
       targets: this.exclamacaoNpc,
       alpha: { from: 1, to: 0.25 },
       duration: 450,
       yoyo: true,
       repeat: -1,
     });
-
 
     // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -410,8 +410,7 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.perto_npc = false;
-    this.falouComNpc = false; 
-
+    this.falouComNpc = false;
 
     // Debug
     this.debugTxt = this.add
@@ -426,8 +425,8 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
-    this.musica.stop();
-      });
+      this.musica.stop();
+    });
   }
 
   update() {
@@ -526,11 +525,20 @@ export default class SceneRestaurante extends Phaser.Scene {
 
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
+        const missaoPosRestaurante =
+          "Missão: Siga a PJ Camila até o Mercado.";
+        this.registry.set("ag02_escolta_pj_restaurante", false);
+        this.registry.set("ag02_escolta_pj_supermercado", true);
+        this.registry.set("ag02_pj_supermercado_retorno", false);
+        this.registry.set("missaoCidadeTexto", missaoPosRestaurante);
+
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
-          spawnX: 2660,
-          spawnY: 310,
+          spawnX: 2684,
+          spawnY: 350,
+          escoltaPJSupermercado: true,
+          missaoCidadeTexto: missaoPosRestaurante,
         });
       });
     }

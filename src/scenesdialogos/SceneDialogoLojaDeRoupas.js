@@ -39,7 +39,8 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Perfeito, e foi exatamente isso que me chamou atenção. Como está sendo a experiência do cliente na hora de pagar hoje?",
+        texto:
+          "Perfeito, e foi exatamente isso que me chamou atenção. Como está sendo a experiência do cliente na hora de pagar hoje?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -47,15 +48,16 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Espaço muito bom, dá pra ver que você pensou bastante na experiência aqui.",
+        texto:
+          "Espaço muito bom, dá pra ver que você pensou bastante na experiência aqui.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Parece alinhado, mas não gera avanço.",
+        feedbackTexto: "Parece alinhado, mas não gera avanço.",
       },
       {
         letra: "C",
-        texto: "Fala, vim te mostrar umas soluções de pagamento que ajudam a aumentar conversão e melhorar a operação da loja.",
+        texto:
+          "Fala, vim te mostrar umas soluções de pagamento que ajudam a aumentar conversão e melhorar a operação da loja.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -72,23 +74,24 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Fila, demora... ou a maquininha travando bem na hora de fechar a compra?",
+        texto:
+          "Fila, demora... ou a maquininha travando bem na hora de fechar a compra?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Nomeia fricções reais e mostra domínio da operação.",
+        feedbackTexto: "Nomeia fricções reais e mostra domínio da operação.",
       },
       {
         letra: "B",
-        texto: "Imagino... com volume alto, é normal ter algum ponto da jornada que perde fluidez.",
+        texto:
+          "Imagino... com volume alto, é normal ter algum ponto da jornada que perde fluidez.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Soa inteligente, mas não aprofunda.",
+        feedbackTexto: "Soa inteligente, mas não aprofunda.",
       },
       {
         letra: "C",
-        texto: "Mas isso é mais operacional... não costuma impactar tanto assim a decisão de compra no final.",
+        texto:
+          "Mas isso é mais operacional... não costuma impactar tanto assim a decisão de compra no final.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -105,31 +108,31 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "E aí você não perde só tempo... qualquer quebra nesse momento pode fazer o cliente repensar a compra.",
+        texto:
+          "E aí você não perde só tempo... qualquer quebra nesse momento pode fazer o cliente repensar a compra.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Conecta fricção com perda real de conversão.",
+        feedbackTexto: "Conecta fricção com perda real de conversão.",
       },
       {
         letra: "B",
-        texto: "É... não é o ideal, mas faz parte da operação quando tem bastante movimento.",
+        texto:
+          "É... não é o ideal, mas faz parte da operação quando tem bastante movimento.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Normaliza algo que deveria ser resolvido.",
+        feedbackTexto: "Normaliza algo que deveria ser resolvido.",
       },
       {
         letra: "C",
-        texto: "Mas como o cliente já escolheu o produto, dificilmente ele desiste nessa etapa, então o impacto é pequeno.",
+        texto:
+          "Mas como o cliente já escolheu o produto, dificilmente ele desiste nessa etapa, então o impacto é pequeno.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
           "Parece lógico, mas está errado. A decisão ainda não está totalmente consolidada.",
       },
     ],
-    npcResposta:
-      "E o que daria pra fazer pra deixar isso mais fluido?",
+    npcResposta: "E o que daria pra fazer pra deixar isso mais fluido?",
   },
   {
     titulo: "CENA 4 - TÉCNICA (BANCO + TC)",
@@ -138,7 +141,8 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Hoje muita loja resolve isso quando integra com o banco. Você vende e o valor já entra na conta na hora, sem depender de etapas depois, o que deixa o fluxo mais leve.",
+        texto:
+          "Hoje muita loja resolve isso quando integra com o banco. Você vende e o valor já entra na conta na hora, sem depender de etapas depois, o que deixa o fluxo mais leve.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -146,23 +150,23 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Dá pra melhorar o pagamento deixando o processo mais rápido e reduzindo algumas etapas no caixa.",
+        texto:
+          "Dá pra melhorar o pagamento deixando o processo mais rápido e reduzindo algumas etapas no caixa.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Parece correto, mas não mostra como resolver.",
+        feedbackTexto: "Parece correto, mas não mostra como resolver.",
       },
       {
         letra: "C",
-        texto: "O ideal nesses casos é aumentar a quantidade de maquininhas e distribuir melhor os pontos de pagamento.",
+        texto:
+          "O ideal nesses casos é aumentar a quantidade de maquininhas e distribuir melhor os pontos de pagamento.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
           "Parece solução prática, mas não resolve o problema estrutural de fluxo e integração.",
       },
     ],
-    npcResposta:
-      "Mas isso muda tanto assim na prática?",
+    npcResposta: "Mas isso muda tanto assim na prática?",
   },
   {
     titulo: "CENA 5 - IMPACTO NA CONVERSÃO",
@@ -171,7 +175,8 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Muda porque você não só acelera o pagamento. Quando está integrado com a Cielo e com o banco parceiro, você vende e o dinheiro já está na conta, sem travar tudo.",
+        texto:
+          "Muda porque você não só acelera o pagamento. Quando está integrado com a Cielo e com o banco parceiro, você vende e o dinheiro já está na conta, sem travar tudo.",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -179,15 +184,16 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Ajuda sim, porque deixa o pagamento mais rápido e melhora a percepção do cliente na hora de finalizar.",
+        texto:
+          "Ajuda sim, porque deixa o pagamento mais rápido e melhora a percepção do cliente na hora de finalizar.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Correto, mas superficial.",
+        feedbackTexto: "Correto, mas superficial.",
       },
       {
         letra: "C",
-        texto: "Ajuda um pouco, mas no fim o cliente valoriza mais o produto do que essa parte do pagamento. É mais sobre ter algo de qualidade do que pagamento.",
+        texto:
+          "Ajuda um pouco, mas no fim o cliente valoriza mais o produto do que essa parte do pagamento. É mais sobre ter algo de qualidade do que pagamento.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -204,23 +210,24 @@ const ROTEIRO = [
     escolhas: [
       {
         letra: "A",
-        texto: "Faz sentido. Posso te mostrar isso funcionando em 5 minutos, já com essa integração com o banco aplicada no seu fluxo. Quer ver agora ou prefere depois?",
+        texto:
+          "Faz sentido. Posso te mostrar isso funcionando em 5 minutos, já com essa integração com o banco aplicada no seu fluxo. Quer ver agora ou prefere depois?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
-        feedbackTexto:
-          "Direto, prático e orientado à ação.",
+        feedbackTexto: "Direto, prático e orientado à ação.",
       },
       {
         letra: "B",
-        texto: "Se quiser, posso te explicar melhor isso em outro momento com mais detalhes.",
+        texto:
+          "Se quiser, posso te explicar melhor isso em outro momento com mais detalhes.",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
-        feedbackTexto:
-          "Não gera urgência nem conexão com o que foi discutido.",
+        feedbackTexto: "Não gera urgência nem conexão com o que foi discutido.",
       },
       {
         letra: "C",
-        texto: "A gente pode já ativar isso aqui e você vai ajustando depois conforme for usando no dia a dia.",
+        texto:
+          "A gente pode já ativar isso aqui e você vai ajustando depois conforme for usando no dia a dia.",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -246,8 +253,8 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.imagemKey = "falaLoja";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
-      "VocÃª Ã© Eduardo, responsÃ¡vel por uma loja de roupas moderna. " +
-      "VocÃª valoriza experiÃªncia, fluidez, conversÃ£o e coerÃªncia com a marca.";
+      "Você é Eduardo, responsável por uma loja de roupas moderna. " +
+      "Você valoriza experiência, fluidez, conversão e coe rência com a marca.";
   }
 
   init(dados) {
@@ -264,7 +271,10 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
   preload() {
     if (!this.textures.exists("falaLoja")) {
-      this.load.image("falaLoja", "src/assets/imagens/imagensFalas/Loja - F.png");
+      this.load.image(
+        "falaLoja",
+        "src/assets/imagens/imagensFalas/Loja - F.png",
+      );
     }
   }
 
@@ -289,87 +299,125 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
     this._CONT_Y = CONT_Y;
 
-    this.add.rectangle(CX, H / 2, W, H, 0x000000, 0.78)
-      .setScrollFactor(0).setDepth(0).setInteractive();
+    this.add
+      .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
+      .setScrollFactor(0)
+      .setDepth(0)
+      .setInteractive();
 
-    const img = this.add.image(CX, IMG_CY, "falaLoja")
-      .setScrollFactor(0).setDepth(1).setOrigin(0.5);
+    const img = this.add
+      .image(CX, IMG_CY, "falaLoja")
+      .setScrollFactor(0)
+      .setDepth(1)
+      .setOrigin(0.5);
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
-    this.add.rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
-      .setScrollFactor(0).setDepth(2);
-    this.add.rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(3);
+    this.add
+      .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
+      .setScrollFactor(0)
+      .setDepth(2);
+    this.add
+      .rectangle(CX, PANEL_TOP, W, 3, 0x2a5ba0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNome = this.add.text(
-      CX - BTN_W / 2,
-      NOME_Y,
-      "Eduardo  -  Loja de Roupas",
-      {
+    this.textoNome = this.add
+      .text(CX - BTN_W / 2, NOME_Y, "Eduardo  -  Loja de Roupas", {
         fontSize: "20px",
         color: "#5a9fd4",
         fontStyle: "bold",
         resolution: 4,
-      },
-    ).setScrollFactor(0).setDepth(3).setVisible(false);
+      })
+      .setScrollFactor(0)
+      .setDepth(3)
+      .setVisible(false);
 
-    this.textoNarracao = this.add.text(CX, NAR_Y + 30, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      fontStyle: "italic",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(3);
+    this.textoNarracao = this.add
+      .text(CX, NAR_Y + 30, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        fontStyle: "italic",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5, 0)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoNpc = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "40px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(3);
+    this.textoNpc = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "40px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(3);
 
-    this.textoFeedbackTitulo = this.add.text(CX, PANEL_TOP + 60, "", {
-      fontSize: "38px",
-      color: "#ffd166",
-      fontStyle: "bold",
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoFeedbackTitulo = this.add
+      .text(CX, PANEL_TOP + 60, "", {
+        fontSize: "38px",
+        color: "#ffd166",
+        fontStyle: "bold",
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoFeedback = this.add.text(CX, TEXTO_NPC_Y, "", {
-      fontSize: "32px",
-      color: "#e8f4ff",
-      wordWrap: { width: BTN_W },
-      align: "center",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoFeedback = this.add
+      .text(CX, TEXTO_NPC_Y, "", {
+        fontSize: "32px",
+        color: "#e8f4ff",
+        wordWrap: { width: BTN_W },
+        align: "center",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
-      const bg = this.add.rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
+      const bg = this.add
+        .rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
         .setScrollFactor(0)
         .setDepth(3)
         .setStrokeStyle(1, 0x3a5ba0)
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
 
-      const labelLetra = this.add.text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
-        fontSize: "20px",
-        color: "#776fe6",
-        fontStyle: "bold",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const labelLetra = this.add
+        .text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
+          fontSize: "20px",
+          color: "#776fe6",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
-      const txtEscolha = this.add.text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
-        fontSize: "30px",
-        color: "#ffffff",
-        wordWrap: { width: BTN_W - 80 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+      const txtEscolha = this.add
+        .text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
+          fontSize: "30px",
+          color: "#ffffff",
+          wordWrap: { width: BTN_W - 80 },
+          resolution: 4,
+        })
+        .setOrigin(0, 0.5)
+        .setScrollFactor(0)
+        .setDepth(4)
+        .setVisible(false);
 
       bg.on("pointerover", () => {
         if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER);
@@ -384,45 +432,68 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       return { bg, labelLetra, txtEscolha };
     });
 
-    this.btnContinuar = this.add.rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
+    this.btnContinuar = this.add
+      .rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(3)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
-    this.txtContinuar = this.add.text(CX, CONT_Y, "", {
-      fontSize: "22px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.txtContinuar = this.add
+      .text(CX, CONT_Y, "", {
+        fontSize: "22px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.btnContinuar.on("pointerover", () => this.btnContinuar.setFillStyle(0x2a7c2a));
-    this.btnContinuar.on("pointerout", () => this.btnContinuar.setFillStyle(0x1a5c1a));
+    this.btnContinuar.on("pointerover", () =>
+      this.btnContinuar.setFillStyle(0x2a7c2a),
+    );
+    this.btnContinuar.on("pointerout", () =>
+      this.btnContinuar.setFillStyle(0x1a5c1a),
+    );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
-    this.textoCarregando = this.add.text(CX, CONT_Y, "Eduardo estÃ¡ pensando...", {
-      fontSize: "21px",
-      color: "#99bbdd",
-      fontStyle: "italic",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(4).setVisible(false);
+    this.textoCarregando = this.add
+      .text(CX, CONT_Y, "Eduardo está pensando...", {
+        fontSize: "21px",
+        color: "#99bbdd",
+        fontStyle: "italic",
+        resolution: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(4)
+      .setVisible(false);
 
-    this.textoCieloCoin = this.add.text(W - 20, 16, "Cielo Coins: 0 / 1200", {
-      fontSize: "30px",
-      color: "#ffd700",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
+    this.textoCieloCoin = this.add
+      .text(W - 20, 16, "Cielo Coins: 0 / 1200", {
+        fontSize: "30px",
+        color: "#ffd700",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(1, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
 
-    this.textoCena = this.add.text(20, 16, "", {
-      fontSize: "40px",
-      color: "#ffffff",
-      backgroundColor: "#000000bb",
-      padding: { x: 10, y: 5 },
-      resolution: 4,
-    }).setOrigin(0, 0).setScrollFactor(0).setDepth(10);
+    this.textoCena = this.add
+      .text(20, 16, "", {
+        fontSize: "40px",
+        color: "#ffffff",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 5 },
+        resolution: 4,
+      })
+      .setOrigin(0, 0)
+      .setScrollFactor(0)
+      .setDepth(10);
 
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
@@ -439,20 +510,41 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
-    els.push(this.add.rectangle(CX, CY, W, H, 0x000000, 0.88)
-      .setScrollFactor(0).setDepth(D).setInteractive());
-    els.push(this.add.rectangle(CX, CY, 1100, 640, 0x08101e)
-      .setScrollFactor(0).setDepth(D + 0.1).setStrokeStyle(2, 0x2a5ba0));
-    els.push(this.add.text(CX, CY - 270, "Como funciona esta conversa", {
-      fontSize: "25px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 1));
-    els.push(this.add.rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
-      .setScrollFactor(0).setDepth(D + 1));
+    els.push(
+      this.add
+        .rectangle(CX, CY, W, H, 0x000000, 0.88)
+        .setScrollFactor(0)
+        .setDepth(D)
+        .setInteractive(),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY, 1100, 640, 0x08101e)
+        .setScrollFactor(0)
+        .setDepth(D + 0.1)
+        .setStrokeStyle(2, 0x2a5ba0),
+    );
+    els.push(
+      this.add
+        .text(CX, CY - 270, "Como funciona esta conversa", {
+          fontSize: "25px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
+    els.push(
+      this.add
+        .rectangle(CX, CY - 230, 1000, 2, 0x2a5ba0)
+        .setScrollFactor(0)
+        .setDepth(D + 1),
+    );
 
     const linhas = [
+<<<<<<< Updated upstream
      {
         icone: "🎯",
         texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência Cielo.`,
@@ -464,35 +556,70 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       {
         icone: "🪙",
         texto: "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
+=======
+      {
+        icone: "ðŸŽ¯",
+        texto:
+          "Você vai conversar com Eduardo, conectando pagamento, fluidez e experiência de marca.",
+      },
+      {
+        icone: "ðŸ’¬",
+        texto:
+          "A cada cena, escolha entre três opções de resposta a que mais fizer sentido para avançar a conversa.",
+      },
+      {
+        icone: "ðŸª™",
+        texto:
+          "Cada escolha vale Cielo Coins. Resposta correta = +200. Neutra = +100. Errada = +0",
+>>>>>>> Stashed changes
       },
     ];
 
     linhas.forEach(({ icone, texto }, i) => {
-      els.push(this.add.text(CX - 480, CY - 125 + i * 120, icone, {
-        fontSize: "26px",
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
-      els.push(this.add.text(CX - 430, CY - 110 + i * 120, texto, {
-        fontSize: "30px",
-        color: "#c8d8f0",
-        wordWrap: { width: 900 },
-        resolution: 4,
-      }).setOrigin(0, 0.5).setScrollFactor(0).setDepth(D + 1));
+      els.push(
+        this.add
+          .text(CX - 480, CY - 125 + i * 120, icone, {
+            fontSize: "26px",
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
+      els.push(
+        this.add
+          .text(CX - 430, CY - 110 + i * 120, texto, {
+            fontSize: "30px",
+            color: "#c8d8f0",
+            wordWrap: { width: 900 },
+            resolution: 4,
+          })
+          .setOrigin(0, 0.5)
+          .setScrollFactor(0)
+          .setDepth(D + 1),
+      );
     });
 
     const btnY = CY + 255;
-    const btnBg = this.add.rectangle(CX, btnY, 300, 58, 0x1a5c1a)
+    const btnBg = this.add
+      .rectangle(CX, btnY, 300, 58, 0x1a5c1a)
       .setScrollFactor(0)
       .setDepth(D + 1)
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true });
     els.push(btnBg);
-    els.push(this.add.text(CX, btnY, "ComeÃ§ar  ->", {
-      fontSize: "24px",
-      color: "#ffffff",
-      fontStyle: "bold",
-      resolution: 4,
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(D + 2));
+    els.push(
+      this.add
+        .text(CX, btnY, "Começar  ->", {
+          fontSize: "24px",
+          color: "#ffffff",
+          fontStyle: "bold",
+          resolution: 4,
+        })
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setDepth(D + 2),
+    );
 
     btnBg.on("pointerover", () => btnBg.setFillStyle(0x2a7c2a));
     btnBg.on("pointerout", () => btnBg.setFillStyle(0x1a5c1a));
@@ -542,7 +669,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que vocÃª diz?");
+    this.textoNpc.setText("O que você diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
@@ -568,7 +695,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       .setVisible(true);
 
     this.textoFeedback
-      .setText(escolha.feedbackTexto || "VocÃª fez uma escolha.")
+      .setText(escolha.feedbackTexto || "Você fez uma escolha.")
       .setVisible(true);
 
     this._mostrarContinuar("Continuar  ->");
@@ -586,7 +713,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "PrÃ³xima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -671,22 +798,23 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     let avaliacao;
     let cor;
     if (pct >= 58) {
-      avaliacao = "Excelente conduÃ§Ã£o! Valor conectado Ã  experiÃªncia.";
+      avaliacao = "Excelente condução! Valor conectado à experiência.";
       cor = "#44ff88";
     } else {
-      avaliacao = "Precisa melhorar. Tente novamente com mais foco na experiÃªncia.";
+      avaliacao =
+        "Precisa melhorar. Tente novamente com mais foco na experiÃªncia.";
       cor = "#ff6644";
     }
 
     const statusMeta = atingiu
       ? "Meta atingida!"
-      : `Meta nÃ£o atingida (precisava de ${meta} coins)`;
+      : `Meta não atingida (precisava de ${meta} coins)`;
 
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
           `Coins desta fase: ${this.pontuacaoFase} / ${maxPts}  (${pct}%)\n` +
-          `Total da sessÃ£o: ${getScore(this.registry)}\n\n` +
+          `Total da sessão: ${getScore(this.registry)}\n\n` +
           `${statusMeta}\n\n${avaliacao}`,
       )
       .setStyle({
@@ -728,9 +856,9 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
 
     const guias = {
       correta:
-        "O vendedor conduziu muito bem a conversa. Responda de forma receptiva, estratÃ©gica e aberta ao prÃ³ximo passo.",
+        "O vendedor conduziu muito bem a conversa. Responda de forma receptiva, estratégica e aberta ao próximo passo.",
       neutra:
-        "O vendedor foi aceitÃ¡vel, mas ainda genÃ©rico. Responda de forma neutra, com interesse moderado.",
+        "O vendedor foi aceitável, mas ainda genérico. Responda de forma neutra, com interesse moderado.",
       errada:
         "O vendedor conduziu mal a abordagem. Responda de forma mais fria ou cautelosa, sem encerrar a conversa.",
     };

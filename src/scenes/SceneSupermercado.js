@@ -20,7 +20,8 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     // Carrega áudios da cena
     this.load.audio(
-      "trilhaSceneMercado", 'src/assets/audios/trilhaSceneMercado.mp3'
+      "trilhaSceneMercado",
+      "src/assets/audios/trilhaSceneMercado.mp3",
     );
 
     // Loga erros de carregamento para facilitar debug
@@ -118,7 +119,10 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.mapa = mapa;
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneMercado', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneMercado", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Otimiza os tilesets antes de montar o cenário
@@ -274,8 +278,9 @@ export default class SceneSupermercado extends Phaser.Scene {
     // Deixa o tamanho do NPC igual ao do personagem
     const alturaAlvoNpc = this.personagem.displayHeight;
     this.npcSupermercado.setDisplaySize(
-      (this.npcSupermercado.width / this.npcSupermercado.height) * alturaAlvoNpc,
-      alturaAlvoNpc
+      (this.npcSupermercado.width / this.npcSupermercado.height) *
+        alturaAlvoNpc,
+      alturaAlvoNpc,
     );
     this.npcSupermercado.refreshBody();
     this.physics.add.collider(this.personagem, this.npcSupermercado);
@@ -373,8 +378,8 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
-    this.musica.stop();
-      });
+      this.musica.stop();
+    });
   }
   //____________________________________________________________________________________________________________
 
@@ -568,13 +573,12 @@ export default class SceneSupermercado extends Phaser.Scene {
       personagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-
     // Botão [E] igual às outras cenas: aparece ao se aproximar do NPC
     const distNpc = Phaser.Math.Distance.Between(
       personagem.x,
       personagem.y,
       this.npcSupermercado.x,
-      this.npcSupermercado.y
+      this.npcSupermercado.y,
     );
     const mostrarBotaoE = distNpc < 60; // raio maior para mostrar
     const pertoNpc = distNpc < 30; // raio menor para interação
@@ -584,7 +588,10 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.labelNpc.setVisible(mostrarBotaoE && !this.dentroZonaSaida);
     }
     if (mostrarBotaoE) {
-      this.labelNpc.setPosition(this.npcSupermercado.x, this.npcSupermercado.y + 2);
+      this.labelNpc.setPosition(
+        this.npcSupermercado.x,
+        this.npcSupermercado.y + 2,
+      );
     }
 
     if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
@@ -594,7 +601,9 @@ export default class SceneSupermercado extends Phaser.Scene {
       console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");
       // Pausa a cena atual e lança o diálogo
       this.scene.pause();
-      this.scene.launch("SceneDialogoSupermercado", { cenaOrigem: "SceneSupermercado" });
+      this.scene.launch("SceneDialogoSupermercado", {
+        cenaOrigem: "SceneSupermercado",
+      });
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
@@ -628,11 +637,17 @@ export default class SceneSupermercado extends Phaser.Scene {
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
+        const missaoPosSupermercado =
+          "Missão: Ache a Agência 03. Use o mapa interativo da maquininha à esquerda. Boa sorte!";
+        this.registry.set("missaoCidadeTexto", missaoPosSupermercado);
+
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 2926,
           spawnY: 349,
+          missaoCidadeTexto: missaoPosSupermercado,
+          destacarMissaoCidade: true,
         });
       });
     }

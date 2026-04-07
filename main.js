@@ -77,7 +77,6 @@ const config = {
     SceneDialogoSupermercado,
     SceneDialogoLojaDeRoupas,
     SceneDialogoPostoDeGasolina,
-    SceneDialogoFarmacia,
   ],
 };
 

@@ -16,9 +16,10 @@
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
 
-  // Carrega áudio da cena
+    // Carrega áudio da cena
     this.load.audio(
-      "trilhaSceneMetro", 'src/assets/audios/trilhaSceneMetro.mp3'
+      "trilhaSceneMetro",
+      "src/assets/audios/trilhaSceneMetro.mp3",
     );
 
     // Loga erros de carregamento
@@ -215,7 +216,10 @@
     this.mapa = mapa;
 
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneMetro', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneMetro", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Associa os tilesets já divididos
@@ -390,8 +394,8 @@
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
-    this.musica.stop();
-      });
+      this.musica.stop();
+    });
   }
 
   update() {
@@ -443,27 +447,31 @@
     }
 
     const entrarMiniGame = Phaser.Geom.Rectangle.Contains(
-  this.zonaMiniGame,   // ← G maiúsculo, igual ao create()
-  personagem.x,
-  personagem.y,
-);
+      this.zonaMiniGame, // ← G maiúsculo, igual ao create()
+      personagem.x,
+      personagem.y,
+    );
 
-if (entrarMiniGame !== this.entrarMiniGame) {
-  this.entrarMiniGame = entrarMiniGame;  // ← G maiúsculo
-  this.labelE.setVisible(entrarMiniGame);
-}
+    if (entrarMiniGame !== this.entrarMiniGame) {
+      this.entrarMiniGame = entrarMiniGame; // ← G maiúsculo
+      this.labelE.setVisible(entrarMiniGame);
+    }
 
-if (entrarMiniGame && !this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
-  this.transicionando = true;
-  this.labelE.setVisible(false);
-  this.cameras.main.fadeOut(800, 0, 0, 0);
-  this.cameras.main.once("camerafadeoutcomplete", () => {
-    this.scene.start("SceneMiniGame", {
-      nomePasta: this.nomePastaEscolhida,
-      prefixo: this.prefixoEscolhido,
-    });
-  });
-}
+    if (
+      entrarMiniGame &&
+      !this.transicionando &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
+      this.transicionando = true;
+      this.labelE.setVisible(false);
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.scene.start("SceneMiniGame", {
+          nomePasta: this.nomePastaEscolhida,
+          prefixo: this.prefixoEscolhido,
+        });
+      });
+    }
 
     // Transição para a cidade ao pressionar E
     if (
@@ -476,11 +484,22 @@ if (entrarMiniGame && !this.transicionando && Phaser.Input.Keyboard.JustDown(thi
 
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.registry.set("ag02_escolta_pj_metro", false);
+        this.registry.set("ag02_pj_metro_retorno", true);
+        this.registry.set("ag02_escolta_pj_restaurante", true);
+        this.registry.set("ag02_pj_restaurante_retorno", false);
+        this.registry.set(
+          "missaoCidadeTexto",
+          "Missão: Siga a PJ Camila até o Restaurante.",
+        );
+
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 2632,
           spawnY: 471,
+          escoltaPJRestaurante: true,
+          missaoCidadeTexto: "Missão: Siga a PJ Camila até o Restaurante.",
         });
       });
     }

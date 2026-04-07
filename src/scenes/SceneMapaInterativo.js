@@ -7,48 +7,52 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     const baseFotos = "src/assets/imagens/imagensMapa/";
 
     // Fotos dos personagens que aparecem no painel lateral
-    this.load.image("fotoAlicia",   baseFotos + "fotoAliciaMercado.png");
-    this.load.image("fotoEduardo",  baseFotos + "fotoEduardoLoja.png");
-    this.load.image("fotoGabriel",  baseFotos + "fotoGabrielEscritorio.png");
-    this.load.image("fotoLucas",    baseFotos + "fotoLucasRestaurante.png");
-    this.load.image("fotoNicolas",  baseFotos + "fotoNicolasPosto.png");
-    this.load.image("fotoRachel",   baseFotos + "fotoRachelFarmacia.png");
-    this.load.image("fotoSofia",    baseFotos + "fotoSofiaPadaria.png");
+    this.load.image("fotoAlicia", baseFotos + "fotoAliciaMercado.png");
+    this.load.image("fotoEduardo", baseFotos + "fotoEduardoLoja.png");
+    this.load.image("fotoGabriel", baseFotos + "fotoGabrielEscritorio.png");
+    this.load.image("fotoLucas", baseFotos + "fotoLucasRestaurante.png");
+    this.load.image("fotoNicolas", baseFotos + "fotoNicolasPosto.png");
+    this.load.image("fotoRachel", baseFotos + "fotoRachelFarmacia.png");
+    this.load.image("fotoSofia", baseFotos + "fotoSofiaPadaria.png");
 
     // Fotos dos locais exibidas no topo do painel lateral
-    this.load.image("localAgencia01",   baseFotos + "localAgencia01.png");
-    this.load.image("localAgencia02",   baseFotos + "localAgencia02.png");
-    this.load.image("localAgencia03",   baseFotos + "localAgencia03.png");
-    this.load.image("localEscritorio",  baseFotos + "localEscritorio.png");
-    this.load.image("localFarmacia",    baseFotos + "localFarmacia.png");
-    this.load.image("localLojaRoupas",  baseFotos + "localLojadeRoupas.png");
-    this.load.image("localMercado",     baseFotos + "localmercado.png");
-    this.load.image("localMetro",       baseFotos + "localMetro.png");
-    this.load.image("localPadaria",     baseFotos + "localPadaria.png");
-    this.load.image("localPosto",       baseFotos + "localPosto.png");
+    this.load.image("localAgencia01", baseFotos + "localAgencia01.png");
+    this.load.image("localAgencia02", baseFotos + "localAgencia02.png");
+    this.load.image("localAgencia03", baseFotos + "localAgencia03.png");
+    this.load.image("localEscritorio", baseFotos + "localEscritorio.png");
+    this.load.image("localFarmacia", baseFotos + "localFarmacia.png");
+    this.load.image("localLojaRoupas", baseFotos + "localLojadeRoupas.png");
+    this.load.image("localMercado", baseFotos + "localmercado.png");
+    this.load.image("localMetro", baseFotos + "localMetro.png");
+    this.load.image("localPadaria", baseFotos + "localPadaria.png");
+    this.load.image("localPosto", baseFotos + "localPosto.png");
     this.load.image("localRestaurante", baseFotos + "localRestaurante.png");
 
     // Imagem de fundo do mapa interativo
-    this.load.image("mapaInterativo",   baseFotos + "mapaInterativo.png");
+    this.load.image("mapaInterativo", baseFotos + "mapaInterativo.png");
 
     // Som da cena
-    this.load.audio("trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3');
+    this.load.audio(
+      "trilhaSceneInicial",
+      "src/assets/audios/trilhaSceneInicial.mp3",
+    );
   }
 
   create() {
     const { width, height } = this.cameras.main;
 
     // Adiciona som na cena
-    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneInicial", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // DEBUG — texto no canto inferior esquerdo mostrando as coordenadas
     // do cursor em tempo real. Útil para ajustar as zonas (zona.x/y/w/h).
-    const txtDebugCoords = this.add
-      .text(16, height - 16, {
-        fontSize: "16px",
-      })
-    
+    const txtDebugCoords = this.add.text(16, height - 16, {
+      fontSize: "16px",
+    });
 
     // DADOS DOS ESTABELECIMENTOS
     // Cada objeto representa um local clicável no mapa.
@@ -76,7 +80,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Rachel",
           faturamento: "~R$ 300 mil/mês",
           imgPersonagem: "fotoRachel",
-          historia: "Rachel trabalha na farmácia há anos e é mãe solteira. Ela construiu a farmácia com anos de economia e muito esforço. Divide a rotina entre o negócio e o filho pequeno, vivendo sempre no limite do tempo. É organizada e exigente, porque sabe que qualquer erro vira mais uma coisa para resolver no fim do dia.",
+          historia:
+            "Rachel trabalha na farmácia há anos e é mãe solteira. Ela construiu a farmácia com anos de economia e muito esforço. Divide a rotina entre o negócio e o filho pequeno, vivendo sempre no limite do tempo. É organizada e exigente, porque sabe que qualquer erro vira mais uma coisa para resolver no fim do dia.",
         },
       },
       {
@@ -89,7 +94,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Sofia",
           faturamento: "~R$ 120 mil/mês",
           imgPersonagem: "fotoSofia",
-          historia: "Sofia acorda antes do sol para garantir que o pão saia quentinho. Assumiu a padaria após a morte repentina do pai, sem estar totalmente preparada. Aprendeu na prática, errando e acertando, enquanto cuida da mãe idosa em casa. Trabalha todos os dias, abre cedo e fecha tarde. No fim do mês, sente que o dinheiro não acompanha o esforço.",
+          historia:
+            "Sofia acorda antes do sol para garantir que o pão saia quentinho. Assumiu a padaria após a morte repentina do pai, sem estar totalmente preparada. Aprendeu na prática, errando e acertando, enquanto cuida da mãe idosa em casa. Trabalha todos os dias, abre cedo e fecha tarde. No fim do mês, sente que o dinheiro não acompanha o esforço.",
         },
       },
       {
@@ -102,7 +108,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Alicia",
           faturamento: "~R$ 800 mil/mês",
           imgPersonagem: "fotoAlicia",
-          historia: "Alicia começou como operadora de caixa ainda adolescente e cresceu dentro do negócio da família. Hoje lidera duas unidades e uma equipe grande, lidando com pressão constante. Já enfrentou perdas financeiras que só apareceram dias depois, e isso mudou sua forma de gerir.",
+          historia:
+            "Alicia começou como operadora de caixa ainda adolescente e cresceu dentro do negócio da família. Hoje lidera duas unidades e uma equipe grande, lidando com pressão constante. Já enfrentou perdas financeiras que só apareceram dias depois, e isso mudou sua forma de gerir.",
         },
       },
       {
@@ -115,7 +122,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Lucas",
           faturamento: "~R$ 800 mil/mês",
           imgPersonagem: "fotoLucas",
-          historia: "Lucas deixou a estabilidade do mundo corporativo para empreender. Investiu alto, assumiu dívidas e carrega a pressão de fazer o negócio dar certo. Vive com a sensação de que qualquer falha pode comprometer semanas de trabalho.",
+          historia:
+            "Lucas deixou a estabilidade do mundo corporativo para empreender. Investiu alto, assumiu dívidas e carrega a pressão de fazer o negócio dar certo. Vive com a sensação de que qualquer falha pode comprometer semanas de trabalho.",
         },
       },
       {
@@ -128,7 +136,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Gabriel",
           faturamento: "~R$ 80 mil/mês",
           imgPersonagem: "fotoGabriel",
-          historia: "Gabriel é uma pessoa com deficiência visual parcial, construiu a carreira enfrentando barreiras desde cedo. Desenvolveu um estilo de trabalho extremamente organizado e independente. Prefere processos claros e previsíveis, porque qualquer ruído ou inconsistência gera insegurança.",
+          historia:
+            "Gabriel é uma pessoa com deficiência visual parcial, construiu a carreira enfrentando barreiras desde cedo. Desenvolveu um estilo de trabalho extremamente organizado e independente. Prefere processos claros e previsíveis, porque qualquer ruído ou inconsistência gera insegurança.",
         },
       },
       {
@@ -141,7 +150,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Eduardo",
           faturamento: "~R$ 80 mil/mês",
           imgPersonagem: "fotoEduardo",
-          historia: "Eduardo é um jovem empreendedor, criou a marca a partir do Instagram e transformou a loja em um espaço híbrido, com roupas e serviços de beleza. Enxerga o negócio como experiência, não só venda. Já passou por situações em que falhas no pagamento quebraram o clima com o cliente.",
+          historia:
+            "Eduardo é um jovem empreendedor, criou a marca a partir do Instagram e transformou a loja em um espaço híbrido, com roupas e serviços de beleza. Enxerga o negócio como experiência, não só venda. Já passou por situações em que falhas no pagamento quebraram o clima com o cliente.",
         },
       },
       {
@@ -154,7 +164,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           nome: "Nicolas",
           faturamento: "~R$ 990 mil/mês",
           imgPersonagem: "fotoNicolas",
-          historia: "Nicolas assumiu o posto da família e expandiu a operação com muita disciplina. Trabalha praticamente todos os dias e está sempre atento ao funcionamento do negócio. Já teve prejuízos relevantes por falhas de sistema e não aceita qualquer risco de parada.",
+          historia:
+            "Nicolas assumiu o posto da família e expandiu a operação com muita disciplina. Trabalha praticamente todos os dias e está sempre atento ao funcionamento do negócio. Já teve prejuízos relevantes por falhas de sistema e não aceita qualquer risco de parada.",
         },
       },
       {
@@ -163,7 +174,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         tipo: "Serviços",
         zona: { x: 60, y: 323, w: 150, h: 120 },
         imgLocal: "localAgencia01",
-        historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
+        historia:
+          "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
       {
         id: "agencia02",
@@ -171,15 +183,17 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         tipo: "Serviços",
         zona: { x: 549, y: 750, w: 150, h: 120 },
         imgLocal: "localAgencia02", // ← certifique-se que o arquivo no disco se chama localAgencia02.png
-        historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
+        historia:
+          "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
-      {       
+      {
         id: "agencia03",
         nome: "Agência 03",
         tipo: "Serviços",
         zona: { x: 950, y: 314, w: 150, h: 120 }, // ← coordenadas corrigidas
         imgLocal: "localAgencia03",
-        historia: "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
+        historia:
+          "Nesta agência você poderá encontrar o PJ e o Gerente responsável pelo atendimento da região.",
       },
       {
         // Metro NÃO tem personagem — só exibe a história do local no painel.
@@ -189,7 +203,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
         tipo: "Transporte",
         zona: { x: 1237, y: 609, w: 150, h: 120 },
         imgLocal: "localMetro",
-        historia: "Aqui é o local onde você pode viajar de metro pelo mini mundo Cielo.",
+        historia:
+          "Aqui é o local onde você pode viajar de metro pelo mini mundo Cielo.",
       },
     ];
 
@@ -205,31 +220,50 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     }
 
     // BOTÃO VOLTAR
-    const botaoVoltarWidth  = 150;
+    const botaoVoltarWidth = 150;
     const botaoVoltarHeight = 44;
-    const botaoVoltarX = width - 16;           // alinhado à direita com margem de 16px
+    const botaoVoltarX = width - 16; // alinhado à direita com margem de 16px
     const botaoVoltarY = height - 16 - botaoVoltarHeight;
 
     // Fundo visual do botão
     const btnVoltarBg = this.add
-      .rectangle(botaoVoltarX, botaoVoltarY, botaoVoltarWidth, botaoVoltarHeight, 0x222244, 0.9)
+      .rectangle(
+        botaoVoltarX,
+        botaoVoltarY,
+        botaoVoltarWidth,
+        botaoVoltarHeight,
+        0x222244,
+        0.9,
+      )
       .setOrigin(1, 0)
       .setStrokeStyle(2, 0xffdd57)
       .setDepth(310);
 
     // Texto do botão
     this.add
-      .text(botaoVoltarX - botaoVoltarWidth / 2, botaoVoltarY + botaoVoltarHeight / 2, "Voltar", {
-        fontSize: "20px",
-        color: "#ffffff",
-        fontStyle: "bold",
-      })
+      .text(
+        botaoVoltarX - botaoVoltarWidth / 2,
+        botaoVoltarY + botaoVoltarHeight / 2,
+        "Voltar",
+        {
+          fontSize: "20px",
+          color: "#ffffff",
+          fontStyle: "bold",
+        },
+      )
       .setOrigin(0.5)
       .setDepth(311);
 
     // Área invisível que recebe os eventos de mouse (fica acima do visual)
     const btnVoltarArea = this.add
-      .rectangle(botaoVoltarX, botaoVoltarY, botaoVoltarWidth, botaoVoltarHeight, 0x000000, 0)
+      .rectangle(
+        botaoVoltarX,
+        botaoVoltarY,
+        botaoVoltarWidth,
+        botaoVoltarHeight,
+        0x000000,
+        0,
+      )
       .setOrigin(1, 0)
       .setInteractive({ useHandCursor: true })
       .setDepth(312);
@@ -247,36 +281,51 @@ export default class SceneMapaInterativo extends Phaser.Scene {
       const dadosRetorno = {};
       if (Number.isFinite(retornoX)) dadosRetorno.spawnX = retornoX;
       if (Number.isFinite(retornoY)) dadosRetorno.spawnY = retornoY;
+      this.registry.set("limparDestaqueMissaoCidadeAoRetornarDoMapa", true);
       this.scene.start(obterCenaRetorno(), dadosRetorno);
     };
 
     // Hover: escurece o fundo ao passar o mouse
-    btnVoltarArea.on("pointerover", () => { btnVoltarBg.setFillStyle(0x2a2a60, 0.95); });
+    btnVoltarArea.on("pointerover", () => {
+      btnVoltarBg.setFillStyle(0x2a2a60, 0.95);
+    });
     // Hover out: restaura a cor original
-    btnVoltarArea.on("pointerout",  () => { btnVoltarBg.setFillStyle(0x222244, 0.9);  });
+    btnVoltarArea.on("pointerout", () => {
+      btnVoltarBg.setFillStyle(0x222244, 0.9);
+    });
     // Click: volta para a cena anterior
-    btnVoltarArea.on("pointerdown", () => { retornarCenaAnterior(); });
+    btnVoltarArea.on("pointerdown", () => {
+      retornarCenaAnterior();
+    });
 
     // PAINEL LATERAL
-    const painelX = width * 0.72;  // onde o painel começa (X)
-    const painelW = width * 0.28;  // largura do painel
-    const margem  = 14;            // margem interna padrão
-    const fotoH   = height * 0.48; // altura reservada para a foto do local
-    const avatarSize = 80;         // tamanho do avatar circular do personagem
+    const painelX = width * 0.72; // onde o painel começa (X)
+    const painelW = width * 0.28; // largura do painel
+    const margem = 14; // margem interna padrão
+    const fotoH = height * 0.48; // altura reservada para a foto do local
+    const avatarSize = 80; // tamanho do avatar circular do personagem
 
     // Fundo escuro do painel
     this.add.rectangle(painelX, 0, painelW, height, 0x1a1a2e).setOrigin(0, 0);
 
     // Placeholder cinza por trás da foto do local (visível enquanto a imagem carrega)
     const imgLocalPlaceholder = this.add
-      .rectangle(painelX + margem, margem, painelW - margem * 2, fotoH, 0x2a2a3e)
+      .rectangle(
+        painelX + margem,
+        margem,
+        painelW - margem * 2,
+        fotoH,
+        0x2a2a3e,
+      )
       .setOrigin(0, 0)
       .setVisible(false);
 
     // Nome do estabelecimento (ex: "Farmácia")
     const txtNomeLocal = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "30px", color: "#ffffff", fontStyle: "bold",
+        fontSize: "30px",
+        color: "#ffffff",
+        fontStyle: "bold",
         wordWrap: { width: painelW - margem * 2 },
       })
       .setVisible(false);
@@ -284,7 +333,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Tipo/categoria (ex: "Saúde")
     const txtTipo = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "20px", color: "#aaaacc",
+        fontSize: "20px",
+        color: "#aaaacc",
         wordWrap: { width: painelW - margem * 2 },
       })
       .setVisible(false);
@@ -292,7 +342,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Nome do personagem (ao lado do avatar)
     const txtNomeChar = this.add
       .text(painelX + margem + avatarSize + 10, 0, "", {
-        fontSize: "20px", color: "#ffdd57", fontStyle: "bold",
+        fontSize: "20px",
+        color: "#ffdd57",
+        fontStyle: "bold",
         wordWrap: { width: painelW - margem * 2 - avatarSize - 10 },
       })
       .setVisible(false);
@@ -300,7 +352,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Cargo do personagem (abaixo do nome)
     const txtCargo = this.add
       .text(painelX + margem + avatarSize + 10, 0, "", {
-        fontSize: "17px", color: "#aaaacc",
+        fontSize: "17px",
+        color: "#aaaacc",
         wordWrap: { width: painelW - margem * 2 - avatarSize - 10 },
       })
       .setVisible(false);
@@ -308,7 +361,8 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // Texto da história (do personagem ou do local, dependendo do estabelecimento)
     const txtHistoria = this.add
       .text(painelX + margem, 0, "", {
-        fontSize: "23px", color: "#eeeeff",
+        fontSize: "23px",
+        color: "#eeeeff",
         wordWrap: { width: painelW - margem * 2 },
         lineSpacing: 5,
       })
@@ -316,16 +370,23 @@ export default class SceneMapaInterativo extends Phaser.Scene {
 
     // Dica inicial exibida quando nenhum local está selecionado
     const txtHint = this.add
-      .text(painelX + painelW / 2, height / 2, "Passe o cursor\nsobre um local\nno mapa", {
-        fontSize: "25px", color: "#666688", align: "center",
-      })
+      .text(
+        painelX + painelW / 2,
+        height / 2,
+        "Passe o cursor\nsobre um local\nno mapa",
+        {
+          fontSize: "25px",
+          color: "#666688",
+          align: "center",
+        },
+      )
       .setOrigin(0.5);
 
     // Referências aos objetos dinâmicos que são destruídos e recriados a cada hover
     let imgLocalSprite = null; // foto do local (recriada a cada troca)
-    let imgCharSprite  = null; // avatar do personagem (recriado a cada troca)
+    let imgCharSprite = null; // avatar do personagem (recriado a cada troca)
     let separadorAtual = null; // linha separadora (recriada a cada troca)
-    let estabAtivo     = null; // estabelecimento atualmente em foco
+    let estabAtivo = null; // estabelecimento atualmente em foco
 
     // -----------------------------------------------------------------------
     // mostrarPainel(dados)
@@ -352,11 +413,17 @@ export default class SceneMapaInterativo extends Phaser.Scene {
       let curY = margem + fotoH + 10;
 
       // Nome do local
-      txtNomeLocal.setPosition(painelX + margem, curY).setText(dados.nome).setVisible(true);
+      txtNomeLocal
+        .setPosition(painelX + margem, curY)
+        .setText(dados.nome)
+        .setVisible(true);
       curY += txtNomeLocal.height + 4;
 
       // Tipo/categoria
-      txtTipo.setPosition(painelX + margem, curY).setText(dados.tipo).setVisible(true);
+      txtTipo
+        .setPosition(painelX + margem, curY)
+        .setText(dados.tipo)
+        .setVisible(true);
       curY += txtTipo.height + 12;
 
       // Linha separadora horizontal
@@ -378,12 +445,16 @@ export default class SceneMapaInterativo extends Phaser.Scene {
             .image(
               painelX + margem + avatarSize / 2,
               curY + avatarSize / 2,
-              dados.personagem.imgPersonagem
+              dados.personagem.imgPersonagem,
             )
             .setDisplaySize(avatarSize, avatarSize);
 
           // Cria um círculo como máscara para recortar a imagem em formato redondo
-          const maskShape = this.make.graphics({ x: painelX + margem, y: curY, add: false });
+          const maskShape = this.make.graphics({
+            x: painelX + margem,
+            y: curY,
+            add: false,
+          });
           maskShape.fillCircle(avatarSize / 2, avatarSize / 2, avatarSize / 2);
           imgCharSprite.setMask(maskShape.createGeometryMask());
         }
@@ -395,19 +466,22 @@ export default class SceneMapaInterativo extends Phaser.Scene {
           .setVisible(true);
 
         txtCargo
-          .setPosition(painelX + margem + avatarSize + 10, curY + txtNomeChar.height + 4)
+          .setPosition(
+            painelX + margem + avatarSize + 10,
+            curY + txtNomeChar.height + 4,
+          )
           .setText(dados.personagem.cargo)
           .setVisible(true);
 
         // Avança curY pelo maior entre o avatar e o bloco de texto (nome + cargo)
-        curY += Math.max(avatarSize, txtNomeChar.height + txtCargo.height + 4) + 14;
+        curY +=
+          Math.max(avatarSize, txtNomeChar.height + txtCargo.height + 4) + 14;
 
         // História do personagem
         txtHistoria
           .setPosition(painelX + margem, curY)
           .setText(dados.personagem.historia)
           .setVisible(true);
-
       } else {
         // Este estabelecimento NÃO tem personagem (ex: Metro, Agência 03):
         // esconde nome/cargo e exibe apenas a história do próprio local
@@ -424,13 +498,28 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // esconderPainel()
     const esconderPainel = () => {
       // Esconde todos os textos e o placeholder de uma vez
-      [imgLocalPlaceholder, txtNomeLocal, txtTipo, txtNomeChar, txtCargo, txtHistoria]
-        .forEach(o => o.setVisible(false));
+      [
+        imgLocalPlaceholder,
+        txtNomeLocal,
+        txtTipo,
+        txtNomeChar,
+        txtCargo,
+        txtHistoria,
+      ].forEach((o) => o.setVisible(false));
 
       // Destrói os objetos dinâmicos para liberar memória
-      if (imgLocalSprite) { imgLocalSprite.destroy(); imgLocalSprite = null; }
-      if (imgCharSprite)  { imgCharSprite.destroy();  imgCharSprite = null;  }
-      if (separadorAtual) { separadorAtual.destroy();  separadorAtual = null; }
+      if (imgLocalSprite) {
+        imgLocalSprite.destroy();
+        imgLocalSprite = null;
+      }
+      if (imgCharSprite) {
+        imgCharSprite.destroy();
+        imgCharSprite = null;
+      }
+      if (separadorAtual) {
+        separadorAtual.destroy();
+        separadorAtual = null;
+      }
 
       // Restaura a dica de "passe o cursor"
       txtHint.setVisible(true);
@@ -472,7 +561,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     // EVENTO GLOBAL DE MOVIMENTO DO MOUSE
     this.input.on("pointermove", (pointer) => {
       // Atualiza coordenadas de debug
-      txtDebugCoords.setText(`x: ${Math.round(pointer.x)} y: ${Math.round(pointer.y)}`);
+      txtDebugCoords.setText(
+        `x: ${Math.round(pointer.x)} y: ${Math.round(pointer.y)}`,
+      );
 
       // Lógica de drag só roda se o botão estiver pressionado
       if (!pointer.isDown) return;
@@ -481,9 +572,12 @@ export default class SceneMapaInterativo extends Phaser.Scene {
       const py = pointer.y;
 
       // Verifica se o cursor (em drag) está dentro de alguma zona
-      const estabArrastado = estabelecimentos.find((e) =>
-        px >= e.zona.x && px <= e.zona.x + e.zona.w &&
-        py >= e.zona.y && py <= e.zona.y + e.zona.h
+      const estabArrastado = estabelecimentos.find(
+        (e) =>
+          px >= e.zona.x &&
+          px <= e.zona.x + e.zona.w &&
+          py >= e.zona.y &&
+          py <= e.zona.y + e.zona.h,
       );
 
       if (estabArrastado) {
@@ -501,9 +595,9 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     });
 
     // Pausa a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
-     });
+    this.events.on("shutdown", () => {
+      this.musica.stop();
+    });
 
     // -----------------------------------------------------------------------
     // ATALHO DE TECLADO — ESC

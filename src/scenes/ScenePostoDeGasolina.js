@@ -66,11 +66,15 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     );
 
     this.load.audio(
-      "trilhaPostoDeGasolina", 'src/assets/audios/trilhaPostoDeGasolina.mp3'
+      "trilhaPostoDeGasolina",
+      "src/assets/audios/trilhaPostoDeGasolina.mp3",
     );
 
     if (!this.textures.exists("npc_posto")) {
-      this.load.image("npc_posto", "src/assets/imagens/imagensPersonagens/NPC/npcPosto.png");
+      this.load.image(
+        "npc_posto",
+        "src/assets/imagens/imagensPersonagens/NPC/npcPosto.png",
+      );
     }
 
     // Carrega os frames do personagem em todas as direções
@@ -97,9 +101,11 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
   // Monta o mapa, o personagem, as colisões e a saída da cena
   create() {
-
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaPostoDeGasolina', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaPostoDeGasolina", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Prepara os tilesets antes de criar o mapa
@@ -345,9 +351,12 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     // NPC
     const npcX = this.origemChaoX + this.larguraChao * 0.55;
     const npcY = this.origemChaoY + this.alturaChao * 0.45;
-    this.npcPosto = this.physics.add.staticImage(npcX, npcY, "npc_posto").setDepth(5);
+    this.npcPosto = this.physics.add
+      .staticImage(npcX, npcY, "npc_posto")
+      .setDepth(5);
     this.npcPosto.setDisplaySize(
-      (this.npcPosto.width / this.npcPosto.height) * (this.personagem.displayHeight * 1.1),
+      (this.npcPosto.width / this.npcPosto.height) *
+        (this.personagem.displayHeight * 1.1),
       this.personagem.displayHeight * 1.1,
     );
     this.npcPosto.refreshBody();
@@ -373,7 +382,8 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         strokeThickness: 2,
         resolution: 4,
       })
-      .setDepth(21).setOrigin(0.5, 1);
+      .setDepth(21)
+      .setOrigin(0.5, 1);
 
     this.tweens.add({
       targets: this.exclamacaoPosto,
@@ -387,9 +397,9 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     this.falouComNpc = false;
 
     // Pausa a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
-      });
+    this.events.on("shutdown", () => {
+      this.musica.stop();
+    });
   }
 
   // Cria uma camada do tilemap com tratamento de erro
@@ -690,7 +700,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         personagem.x,
         personagem.y,
         this.npcPosto.x,
-        this.npcPosto.y
+        this.npcPosto.y,
       );
       const mostrarBotaoE = distNpc < 60;
       const pertoNpc = distNpc < 30;
@@ -704,11 +714,18 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       }
 
       // Só permite diálogo se NÃO estiver na zona de saída
-      if (pertoNpc && !this.falouComNpc && !this.dentroZonaSaida && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      if (
+        pertoNpc &&
+        !this.falouComNpc &&
+        !this.dentroZonaSaida &&
+        Phaser.Input.Keyboard.JustDown(this.teclaE)
+      ) {
         this.falouComNpc = true;
         this.exclamacaoPosto.setVisible(false);
         this.scene.pause();
-        this.scene.launch("SceneDialogoPostoDeGasolina", { cenaOrigem: "ScenePostoDeGasolina" });
+        this.scene.launch("SceneDialogoPostoDeGasolina", {
+          cenaOrigem: "ScenePostoDeGasolina",
+        });
       }
     }
 

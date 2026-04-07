@@ -30,7 +30,8 @@ export default class ScenePadaria extends Phaser.Scene {
     // Carrega o tilemap, tilesets e áudios do ambiente
 
     this.load.audio(
-      "trilhaScenePadaria", 'src/assets/audios/trilhaScenePadaria.mp3'
+      "trilhaScenePadaria",
+      "src/assets/audios/trilhaScenePadaria.mp3",
     );
 
     this.load.tilemapTiledJSON(
@@ -78,8 +79,11 @@ export default class ScenePadaria extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "padaria" });
     this.mapa = mapa;
 
-  // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaScenePadaria', { loop: true, volume: 0.5});
+    // Adiciona áudios a cena
+    this.musica = this.sound.add("trilhaScenePadaria", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Otimiza tilesets para melhorar performance
@@ -294,9 +298,9 @@ export default class ScenePadaria extends Phaser.Scene {
     this._criarPopupMissaoPadaria();
 
     // Pausa a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
-      });
+    this.events.on("shutdown", () => {
+      this.musica.stop();
+    });
   }
 
   // Cria camada com verificação de existência no mapa
@@ -421,7 +425,8 @@ export default class ScenePadaria extends Phaser.Scene {
   }
 
   _resolverTextoMissaoPadaria() {
-    const dialogoConcluido = this.registry.get("padaria_dialogo_concluido") === true;
+    const dialogoConcluido =
+      this.registry.get("padaria_dialogo_concluido") === true;
     if (dialogoConcluido) {
       return "";
     }
@@ -554,7 +559,8 @@ export default class ScenePadaria extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
-    const dialogoPadariaConcluido = this.registry.get("padaria_dialogo_concluido") === true;
+    const dialogoPadariaConcluido =
+      this.registry.get("padaria_dialogo_concluido") === true;
 
     if (dialogoPadariaConcluido && !this.falouComNpc) {
       this.falouComNpc = true;
@@ -676,7 +682,7 @@ export default class ScenePadaria extends Phaser.Scene {
           spawnX: 1470,
           spawnY: 890,
           escoltaPJAgencia2: true,
-          missaoCidadeTexto: "Missao: Siga o PJ até a Farmácia."
+          missaoCidadeTexto: "Missao: Siga o PJ até a Farmácia.",
         });
       });
     }

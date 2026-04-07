@@ -35,7 +35,8 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     //Carrega o áudio
     this.load.audio(
-      "trilhaSceneEscritorio", 'src/assets/audios/trilhaSceneEscritorio.mp3'
+      "trilhaSceneEscritorio",
+      "src/assets/audios/trilhaSceneEscritorio.mp3",
     );
 
     // Sprite do NPC do escritório
@@ -68,9 +69,11 @@ export default class SceneEscritorio extends Phaser.Scene {
 
   // Monta o mapa, personagem, áudios, colisões, câmera e saída com tecla E
   create() {
-
     // Adiciona áudios a cena
-    this.musica = this.sound.add('trilhaSceneEscritorio', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneEscritorio", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Cria o tilemap e associa o tileset
@@ -252,7 +255,8 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.transicionando = false;
     this.perto_npc = false;
-    this.falouComNpc = this.registry.get("escritorio_dialogo_concluido") === true;
+    this.falouComNpc =
+      this.registry.get("escritorio_dialogo_concluido") === true;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
@@ -267,10 +271,10 @@ export default class SceneEscritorio extends Phaser.Scene {
       })
       .setDepth(999);
 
-      // Pausa a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
-     });
+    // Pausa a trilha sonora ao iniciar nova cena
+    this.events.on("shutdown", () => {
+      this.musica.stop();
+    });
   }
 
   // Atualiza movimento, animações, interação com NPC e saída por tecla E
@@ -360,7 +364,9 @@ export default class SceneEscritorio extends Phaser.Scene {
         if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       } else {
         this.scene.pause();
-        this.scene.launch("SceneDialogoEscritorio", { cenaOrigem: "SceneEscritorio" });
+        this.scene.launch("SceneDialogoEscritorio", {
+          cenaOrigem: "SceneEscritorio",
+        });
       }
       return;
     }

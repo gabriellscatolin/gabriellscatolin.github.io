@@ -1,4 +1,3 @@
-
 export default class SceneAgencia02 extends Phaser.Scene {
   constructor() {
     super({ key: "SceneAgencia02" });
@@ -22,10 +21,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.load.maxParallelDownloads = 2;
 
     // Carrega o áudio da cena
-    this.load.audio(
-      "trilhaAgencia02",
-      "src/assets/audios/trilhaAgencia02.mp3",
-    );
+    this.load.audio("trilhaAgencia02", "src/assets/audios/trilhaAgencia02.mp3");
 
     // Loga erros de carregamento para facilitar depuração
     this.load.on("loaderror", (arquivo) => {
@@ -131,12 +127,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   // Monta a cena, cria o mapa, o personagem e as interações principais
   create() {
-
     // Carrega o áudio da cena
-    this.load.audio(
-      "trilhaAgencia02",
-      "src/assets/audios/trilhaAgencia02.mp3",
-    );
+    this.load.audio("trilhaAgencia02", "src/assets/audios/trilhaAgencia02.mp3");
 
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
@@ -324,7 +316,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.personagem, c));
 
-    this.npcCamila = this.physics.add.sprite(159, 156, "npc_camila").setDepth(5);
+    this.npcCamila = this.physics.add
+      .sprite(159, 156, "npc_camila")
+      .setDepth(5);
     this.npcCamila.body.setImmovable(true);
     this.npcCamilaSpriteAtual = 1;
     this.npcCamilaProximaTroca = 0;
@@ -482,10 +476,18 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.pertoNpcCamila = false;
+    this.camilaGuiandoParaSaida = false;
+    this.camilaChegouSaida = false;
+    this.camilaEsperandoJogador = false;
+    this.camilaVelocidadeGuia = 95;
+    this.camilaRaioChegadaSaida = 12;
+    this.camilaDistanciaMaxJogador = 110;
+    this.camilaPontoSaida = { x: saidaX, y: saidaY - 6 };
     let camilaConcluida =
       this.registry.get("ag02_dialogo_camila_concluido") === true;
     this.pertoNpcEnzo = false;
-    const enzoConcluido = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+    const enzoConcluido =
+      this.registry.get("ag02_dialogo_enzo_concluido") === true;
 
     // Compatibilidade com saves antigos: um bug marcava Camila como concluida
     // ao finalizar apenas o dialogo do Enzo.
@@ -500,6 +502,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     if (this.falouComCamila) {
       this.exclamacaoCamila?.setVisible(false);
       this.tweenExclamacaoCamila?.stop();
+      this.camilaGuiandoParaSaida = true;
     }
     if (this.falouComEnzo) {
       this.exclamacaoEnzo?.setVisible(false);
@@ -744,8 +747,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return textoCustom.trim();
     }
 
-    const camilaConcluida = this.registry.get("ag02_dialogo_camila_concluido") === true;
-    const enzoConcluido = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+    const camilaConcluida =
+      this.registry.get("ag02_dialogo_camila_concluido") === true;
+    const enzoConcluido =
+      this.registry.get("ag02_dialogo_enzo_concluido") === true;
     if (camilaConcluida && enzoConcluido) {
       return "";
     }
@@ -901,13 +906,17 @@ export default class SceneAgencia02 extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, wasd, personagem } = this;
-    const camilaConcluidaAgora = this.registry.get("ag02_dialogo_camila_concluido") === true;
-    const enzoConcluidoAgora = this.registry.get("ag02_dialogo_enzo_concluido") === true;
+    const camilaConcluidaAgora =
+      this.registry.get("ag02_dialogo_camila_concluido") === true;
+    const enzoConcluidoAgora =
+      this.registry.get("ag02_dialogo_enzo_concluido") === true;
 
     if (camilaConcluidaAgora && !this.falouComCamila) {
       this.falouComCamila = true;
       if (this.exclamacaoCamila) this.exclamacaoCamila.setVisible(false);
       if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
+      this.camilaGuiandoParaSaida = true;
+      this.camilaChegouSaida = false;
       this._atualizarPopupMissaoAgencia(true);
     }
 
@@ -971,10 +980,23 @@ export default class SceneAgencia02 extends Phaser.Scene {
     const pertoCamila = distNpcCamila < 65;
 
     this.pertoNpcCamila = pertoCamila;
-    this.labelNpcCamila.setVisible(pertoCamila && !camilaConcluidaAgora);
 
-    if (pertoCamila && !camilaConcluidaAgora) {
-      this.labelNpcCamila.setPosition(this.npcCamila.x, this.npcCamila.y + 19);
+    if (camilaConcluidaAgora) {
+      this.labelNpcCamila
+        .setVisible(true)
+        .setText(
+          this.camilaChegouSaida
+            ? "[Chegamos. Vá para a saída]"
+            : this.camilaEsperandoJogador
+              ? "[Vem comigo! Estou esperando]"
+              : "[Me siga até a saída]",
+        )
+        .setPosition(this.npcCamila.x, this.npcCamila.y + 19);
+    } else {
+      this.labelNpcCamila.setVisible(pertoCamila);
+      if (pertoCamila) {
+        this.labelNpcCamila.setPosition(this.npcCamila.x, this.npcCamila.y + 19);
+      }
     }
 
     if (!this.falouComCamila && this.exclamacaoCamila) {
@@ -984,13 +1006,50 @@ export default class SceneAgencia02 extends Phaser.Scene {
       );
     }
 
-    const camilaEmMovimento = !camilaConcluidaAgora && !pertoCamila;
+    if (camilaConcluidaAgora && this.camilaGuiandoParaSaida && !this.camilaChegouSaida) {
+      const distJogadorCamila = Phaser.Math.Distance.Between(
+        personagem.x,
+        personagem.y,
+        this.npcCamila.x,
+        this.npcCamila.y,
+      );
+      const distCamilaSaida = Phaser.Math.Distance.Between(
+        this.npcCamila.x,
+        this.npcCamila.y,
+        this.camilaPontoSaida.x,
+        this.camilaPontoSaida.y,
+      );
+
+      if (distJogadorCamila > this.camilaDistanciaMaxJogador) {
+        this.npcCamila.body?.setVelocity(0, 0);
+        this.camilaEsperandoJogador = true;
+      } else if (distCamilaSaida > this.camilaRaioChegadaSaida) {
+        this.physics.moveTo(
+          this.npcCamila,
+          this.camilaPontoSaida.x,
+          this.camilaPontoSaida.y,
+          this.camilaVelocidadeGuia,
+        );
+        this.camilaEsperandoJogador = false;
+      } else {
+        this.npcCamila.body?.setVelocity(0, 0);
+        this.camilaChegouSaida = true;
+        this.camilaEsperandoJogador = false;
+      }
+    }
+
+    const camilaEmMovimento =
+      (camilaConcluidaAgora && this.camilaGuiandoParaSaida && !this.camilaChegouSaida && !this.camilaEsperandoJogador) ||
+      (!camilaConcluidaAgora && !pertoCamila);
     if (camilaEmMovimento) {
       const agora = this.time.now;
       if (agora >= this.npcCamilaProximaTroca) {
         this.npcCamilaProximaTroca = agora + this.npcCamilaIntervaloTroca;
-        this.npcCamilaSpriteAtual = this.npcCamilaSpriteAtual >= 4 ? 1 : this.npcCamilaSpriteAtual + 1;
-        this.npcCamila.setTexture(`npc_camila_andando_frente_${this.npcCamilaSpriteAtual}`);
+        this.npcCamilaSpriteAtual =
+          this.npcCamilaSpriteAtual >= 4 ? 1 : this.npcCamilaSpriteAtual + 1;
+        this.npcCamila.setTexture(
+          `npc_camila_andando_frente_${this.npcCamilaSpriteAtual}`,
+        );
       }
     } else {
       this.npcCamilaSpriteAtual = 1;
@@ -1041,7 +1100,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return;
     }
 
-    const dentroSaida = (this.zonasSaida || []).some((z) => {
+    const saidaLiberada = !camilaConcluidaAgora || this.camilaChegouSaida;
+    const dentroSaida = saidaLiberada && (this.zonasSaida || []).some((z) => {
       const distancia = Phaser.Math.Distance.Between(
         personagem.x,
         personagem.y,
@@ -1070,11 +1130,15 @@ export default class SceneAgencia02 extends Phaser.Scene {
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
-        const pjConcluido = this.registry.get("ag02_dialogo_camila_concluido") === true;
+        const pjConcluido =
+          this.registry.get("ag02_dialogo_camila_concluido") === true;
         if (pjConcluido) {
           this.registry.set("ag02_escolta_pj_salao", true);
           this.registry.set("ag02_pj_retorno", false);
-          this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+          this.registry.set(
+            "missaoCidadeTexto",
+            "Missão: Siga a PJ Camila até a Loja de Roupas.",
+          );
         }
 
         this.scene.start("SceneCidade", {

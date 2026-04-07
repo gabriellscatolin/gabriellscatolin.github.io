@@ -20,8 +20,9 @@ export default class ScenePersonagem extends Phaser.Scene {
     this.load.setPath(
       "src/assets/imagens/imagensPersonagens/selecaoPersonagens/",
     );
-     this.load.audio(
-      "trilhaSceneInicial", 'src/assets/audios/trilhaSceneInicial.mp3'
+    this.load.audio(
+      "trilhaSceneInicial",
+      "src/assets/audios/trilhaSceneInicial.mp3",
     );
 
     // Loop para carregar dinamicamente as imagens de visualização de cada personagem
@@ -47,12 +48,15 @@ export default class ScenePersonagem extends Phaser.Scene {
     });
 
     // Adiciona audios a cena
-    this.musica = this.sound.add('trilhaSceneInicial', { loop: true, volume: 0.5});
+    this.musica = this.sound.add("trilhaSceneInicial", {
+      loop: true,
+      volume: 0.5,
+    });
     this.musica.play();
 
     // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    this.events.on("shutdown", () => {
+      this.musica.stop();
     });
   }
 
