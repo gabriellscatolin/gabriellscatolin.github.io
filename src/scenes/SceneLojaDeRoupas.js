@@ -228,7 +228,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     });
 
     // Personagem spawn
-    this.player = this.physics.add.sprite(100, 160, "loja_frente_1");
+    this.player = this.physics.add.sprite(76, 246, "loja_frente_1");
     this.player.setCollideWorldBounds(true);
 
     const escala = (mapa.tileWidth || 16) / Math.max(
@@ -299,15 +299,19 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     this.direction = "frente";
 
+    this._criarPopupMissaoLoja();
+    this.registry.set("missaoLojaDeRoupasTexto", "Missão: Fale com o Eduardo.");
+    this._atualizarPopupMissaoLoja(true);
+
     // Zona de saida
-    this.exitZone = { x: 100, y: 50, radius: 40 };
+    this.exitZone = { x: 76, y: 289, radius: 40 };
     this.nearExit = false;
     this.perto_npc = false;
     this.falouComNpc = false;
     this.isTransitioning = false;
 
     this.exitLabel = this.add
-      .text(100, 50, "[E] Sair", {
+      .text(76, 289, "[E] Sair", {
         fontSize: "3px",
         color: "#fff",
         backgroundColor: "#000c",
@@ -331,7 +335,77 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     // Pausa  a trilha sonora ao iniciar nova cena
      this.events.on("shutdown", () => {
      this.musica.stop();
+     if (this.missaoLojaTimer) {
+       this.missaoLojaTimer.remove();
+       this.missaoLojaTimer = null;
+     }
     });
+  }
+
+  _criarPopupMissaoLoja() {
+    this.popupMissaoLojaUiScale = 1 / this.cameras.main.zoom;
+    this.popupMissaoLojaOffsetTopo = 56 * this.popupMissaoLojaUiScale;
+
+    const cam = this.cameras.main;
+    const popupY = cam.worldView.top + this.popupMissaoLojaOffsetTopo;
+    const popupX = cam.worldView.centerX;
+
+    this.missaoLojaBg = this.add
+      .rectangle(popupX, popupY, 240, 34, 0x000000, 0.62)
+      .setDepth(240)
+      .setScale(this.popupMissaoLojaUiScale);
+
+    this.missaoLojaTexto = this.add
+      .text(popupX, popupY, "", {
+        fontSize: "12px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5)
+      .setDepth(241)
+      .setScale(this.popupMissaoLojaUiScale);
+  }
+
+  _atualizarPopupMissaoLoja(animarTexto) {
+    if (!this.missaoLojaBg || !this.missaoLojaTexto) return;
+
+    const texto = this.registry.get("missaoLojaDeRoupasTexto") || "Missão: Fale com o Eduardo.";
+    if (!texto) return;
+
+    if (this.missaoLojaMensagemAtual === texto && !animarTexto) return;
+    this.missaoLojaMensagemAtual = texto;
+
+    if (this.missaoLojaTimer) {
+      this.missaoLojaTimer.remove();
+      this.missaoLojaTimer = null;
+    }
+
+    if (!animarTexto) {
+      this.missaoLojaTexto.setText(texto);
+      return;
+    }
+
+    let charIndex = 0;
+    this.missaoLojaTexto.setText("");
+    this.missaoLojaTimer = this.time.addEvent({
+      delay: 25,
+      repeat: texto.length - 1,
+      callback: () => {
+        charIndex++;
+        this.missaoLojaTexto.setText(texto.substring(0, charIndex));
+      },
+    });
+  }
+
+  _reposicionarPopupMissaoLoja() {
+    if (!this.missaoLojaBg || !this.missaoLojaTexto) return;
+    const cam = this.cameras.main;
+    const popupX = cam.worldView.centerX;
+    const popupY = cam.worldView.top + this.popupMissaoLojaOffsetTopo;
+    this.missaoLojaBg.setPosition(popupX, popupY);
+    this.missaoLojaTexto.setPosition(popupX, popupY);
   }
 
   update() {
@@ -439,5 +513,6 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       `x: ${Math.round(player.x).toString().padStart(4)} y: ${Math.round(player.y).toString().padStart(4)}`,
     );
     this.debugText.setPosition(player.x - 20, player.y - 20);
+    this._reposicionarPopupMissaoLoja();
   }
 }

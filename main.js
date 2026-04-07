@@ -70,6 +70,7 @@ const config = {
     SceneDialogoAgencia01,
     SceneDialogoAgencia02,
     SceneDialogoAgencia03,
+    SceneDialogoFarmacia,
     SceneDialogoPadaria,
     SceneDialogoEscritorio,
     SceneDialogoRestaurante,

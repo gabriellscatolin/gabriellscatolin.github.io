@@ -47,10 +47,6 @@ export default class ScenePadaria extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
     );
     this.load.image(
-      "super_exteriors",
-      "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Complete_Tileset.png",
-    );
-    this.load.image(
       "npc_padaria",
       "src/assets/imagens/imagensPersonagens/NPC/npcPadaria.png",
     );
@@ -97,12 +93,8 @@ export default class ScenePadaria extends Phaser.Scene {
       "Room_Builder_16x16",
       this._keyTileset("Room_Builder_16x16", "super_roombuilder"),
     );
-    const tsExteriors = mapa.addTilesetImage(
-      "Modern_Exteriors_Complete_Tileset",
-      this._keyTileset("Modern_Exteriors_Complete_Tileset", "super_exteriors"),
-    );
 
-    const tilesets = [tsInteriors, tsRoomBuilder, tsExteriors].filter(Boolean);
+    const tilesets = [tsInteriors, tsRoomBuilder].filter(Boolean);
 
     // Fundo neutro para evitar áreas vazias fora do mapa
     this.add
@@ -347,10 +339,6 @@ export default class ScenePadaria extends Phaser.Scene {
     const defs = [
       { tmjName: "Interiors_16x16", baseKey: "super_interiors" },
       { tmjName: "Room_Builder_16x16", baseKey: "super_roombuilder" },
-      {
-        tmjName: "Modern_Exteriors_Complete_Tileset",
-        baseKey: "super_exteriors",
-      },
     ];
 
     this._tilesetKeys = {};
@@ -448,14 +436,14 @@ export default class ScenePadaria extends Phaser.Scene {
 
   _medirLarguraPopupMissaoPadaria(texto) {
     const medidor = this.add.text(-9999, -9999, texto, {
-      fontSize: "20px",
+      fontSize: "24px",
       fontStyle: "bold",
       stroke: "#000000",
       strokeThickness: 2,
     });
-    const largura = medidor.displayWidth + 48;
+    const largura = medidor.displayWidth + 64;
     medidor.destroy();
-    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoPadaria(animarTexto) {
@@ -513,20 +501,20 @@ export default class ScenePadaria extends Phaser.Scene {
 
   _criarPopupMissaoPadaria() {
     this.popupMissaoPadariaUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoPadariaOffsetTopo = 92 * this.popupMissaoPadariaUiScale;
+    this.popupMissaoPadariaOffsetTopo = 102 * this.popupMissaoPadariaUiScale;
 
     const cam = this.cameras.main;
     const popupY = cam.worldView.top + this.popupMissaoPadariaOffsetTopo;
     const popupX = cam.worldView.centerX;
 
     this.missaoPadariaBg = this.add
-      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
       .setScale(this.popupMissaoPadariaUiScale);
 
     this.missaoPadariaTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "20px",
+        fontSize: "24px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",

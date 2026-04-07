@@ -271,7 +271,12 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.podeSairFarmacia = false;
+    this.dialogoFarmaciaAbrindo = false;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
+    this.events.on("resume", () => {
+      this.dialogoFarmaciaAbrindo = false;
+    });
 
     this.direcaoAtual = "frente";
 
@@ -426,14 +431,14 @@ export default class SceneFarmacia extends Phaser.Scene {
 
   _medirLarguraPopupMissaoFarmacia(texto) {
     const medidor = this.add.text(-9999, -9999, texto, {
-      fontSize: "20px",
+      fontSize: "24px",
       fontStyle: "bold",
       stroke: "#000000",
       strokeThickness: 2,
     });
-    const largura = medidor.displayWidth + 48;
+    const largura = medidor.displayWidth + 64;
     medidor.destroy();
-    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoFarmacia(animarTexto) {
@@ -491,20 +496,20 @@ export default class SceneFarmacia extends Phaser.Scene {
 
   _criarPopupMissaoFarmacia() {
     this.popupMissaoFarmaciaUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoFarmaciaOffsetTopo = 92 * this.popupMissaoFarmaciaUiScale;
+    this.popupMissaoFarmaciaOffsetTopo = 102 * this.popupMissaoFarmaciaUiScale;
 
     const cam = this.cameras.main;
     const popupY = cam.worldView.top + this.popupMissaoFarmaciaOffsetTopo;
     const popupX = cam.worldView.centerX;
 
     this.missaoFarmaciaBg = this.add
-      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
       .setScale(this.popupMissaoFarmaciaUiScale);
 
     this.missaoFarmaciaTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "20px",
+        fontSize: "24px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",
@@ -606,8 +611,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       79,
       141,
     );
-    const mostrarBotaoE = distNpc < 60; // raio maior para mostrar
-    const pertoNpc = distNpc < 30; // raio menor para interação
+    const mostrarBotaoE = distNpc < 90; // raio maior para mostrar
+    const pertoNpc = distNpc < 65; // raio de interação mais abrangente
 
     if (mostrarBotaoE !== this.perto_npc) {
       this.perto_npc = mostrarBotaoE;
@@ -632,12 +637,24 @@ export default class SceneFarmacia extends Phaser.Scene {
       !dialogoFarmaciaConcluido &&
       Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {
+      if (this.dialogoFarmaciaAbrindo) {
+        return;
+      }
+
+      if (this.scene.isActive("SceneDialogoFarmacia")) {
+        return;
+      }
+
+      this.dialogoFarmaciaAbrindo = true;
       this.falouComNpc = true;
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
-      this.scene.pause();
       this.scene.launch("SceneDialogoFarmacia", { cenaOrigem: "SceneFarmacia" });
+      this.time.delayedCall(0, () => {
+        this.dialogoFarmaciaAbrindo = false;
+      });
       console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
+      return;
     }
 
     // Detecta entrada na zona de saída

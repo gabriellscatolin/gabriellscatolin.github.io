@@ -592,14 +592,14 @@ export default class SceneAgencia extends Phaser.Scene {
 
   _medirLarguraPopupMissaoAgencia(texto) {
     const medidor = this.add.text(-9999, -9999, texto, {
-      fontSize: "20px",
+      fontSize: "24px",
       fontStyle: "bold",
       stroke: "#000000",
       strokeThickness: 2,
     });
-    const largura = medidor.displayWidth + 48;
+    const largura = medidor.displayWidth + 64;
     medidor.destroy();
-    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoAgencia(animarTexto) {
@@ -649,21 +649,21 @@ export default class SceneAgencia extends Phaser.Scene {
 
   _criarPopupMissaoAgencia() {
     this.popupMissaoAgenciaUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoAgenciaOffsetTopo = 92 * this.popupMissaoAgenciaUiScale;
+    this.popupMissaoAgenciaOffsetTopo = 102 * this.popupMissaoAgenciaUiScale;
 
     const cam = this.cameras.main;
     const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
     const popupX = cam.worldView.centerX;
 
     this.missaoAgenciaBg = this.add
-      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
       .setVisible(true)
       .setScale(this.popupMissaoAgenciaUiScale);
 
     this.missaoAgenciaTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "20px",
+        fontSize: "24px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",

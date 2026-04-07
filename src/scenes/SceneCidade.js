@@ -21,13 +21,24 @@ export default class SceneCidade extends Phaser.Scene {
         ? dados.missaoCidadeTexto.trim()
         : "";
     this.retornoFarmacia = Boolean(dados.retornoFarmacia);
-    const pjDialogoConcluido = Boolean(this.registry.get("ag01_dialogo_pj_concluido"));
+    this.escoltaPJSalaoAtiva =
+      Boolean(dados.escoltaPJSalao) ||
+      Boolean(this.registry.get("ag02_escolta_pj_salao"));
+    const pjDialogoConcluido = Boolean(
+      this.registry.get("ag01_dialogo_pj_concluido"),
+    );
     const pjJaRetornou = Boolean(this.registry.get("ag01_pj_retorno"));
     const fallbackEscoltaPorProgresso = pjDialogoConcluido && !pjJaRetornou;
     this.escoltaPJAgencia2Ativa =
       Boolean(dados.escoltaPJAgencia2) ||
       Boolean(this.registry.get("ag01_escolta_pj_agencia2")) ||
       fallbackEscoltaPorProgresso;
+    if (this.retornoFarmacia) {
+      this.escoltaPJAgencia2Ativa = true;
+    }
+    if (this.escoltaPJSalaoAtiva) {
+      this.escoltaPJAgencia2Ativa = true;
+    }
     this.ocultarSetaAgencia01 =
       Boolean(dados.ocultarSetaAgencia01) ||
       Boolean(this.registry.get("ocultarSetaAgencia01"));
@@ -72,12 +83,149 @@ export default class SceneCidade extends Phaser.Scene {
     this.load.image("botaoRankingHud", "src/assets/imagens/HUD/botaoRanking.png");
     this.load.image("botaoMissaoHud", "src/assets/imagens/HUD/botaoMissao.png");
     this.load.image(
-      "npc_agencia",
-      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_parado02.png",
+      "falaVanessa",
+      "src/assets/imagens/imagensFalas/falaVanessa.png",
     );
-    this.load.image(
-      "npc_agencia_1",
+    this.load.image("falaTheo", "src/assets/imagens/imagensFalas/falaTheo.png");
+    // Sprites do Theo guia (igual Agencia 01) com protecao para nao duplicar chave.
+    const carregarTheoGuia = (key, path) => {
+      if (!this.textures.exists(key)) {
+        this.load.image(key, path);
+      }
+    };
+    carregarTheoGuia(
+      "npc_agencia_frente_1",
       "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente01 (parado01).png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_frente_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente02.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_frente_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente03.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_frente_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandofrente04.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_tras_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras01.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_tras_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras02.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_tras_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras03.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_tras_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandotras04.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_direita_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita01.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_direita_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita02.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_direita_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita03.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_direita_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandodireita04.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_esquerda_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda01.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_esquerda_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda02.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_esquerda_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda03.png",
+    );
+    carregarTheoGuia(
+      "npc_agencia_esquerda_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Theo/theo_andandoesquerda04.png",
+    );
+
+    const carregarCamilaGuia = (key, path) => {
+      if (!this.textures.exists(key)) {
+        this.load.image(key, path);
+      }
+    };
+    carregarCamilaGuia(
+      "npc_camila_frente_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente01 (parado01).png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_frente_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente02.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_frente_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente03.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_frente_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandofrente04.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_tras_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandotras01.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_tras_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandotras02.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_tras_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandotras03.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_tras_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandotras04.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_direita_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandodireita01.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_direita_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandodireita02.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_direita_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandodireita03.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_direita_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandodireita04.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_esquerda_1",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandoesquerda01.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_esquerda_2",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandoesquerda02.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_esquerda_3",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandoesquerda03.png",
+    );
+    carregarCamilaGuia(
+      "npc_camila_esquerda_4",
+      "src/assets/imagens/imagensPersonagens/NPC/Camila/camila_andandoesquerda04.png",
     );
 
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
@@ -103,19 +251,19 @@ export default class SceneCidade extends Phaser.Scene {
 
   // Monta mapa, personagem e interfaces
   create() {
-        // Zona de interação para o supermercado (posição x=2924, y=344, tamanho 32x32)
-        this.zonaSupermercado = new Phaser.Geom.Rectangle(2924 - 16, 344 - 16, 32, 32);
-        this.labelSupermercado = this.add
-          .text(2924, 344, "[E] Entrar", {
-            fontSize: "6px",
-            color: "#ffffff",
-            backgroundColor: "#000000cc",
-            padding: { x: 2, y: 1 },
-            resolution: 4,
-          })
-          .setDepth(20)
-          .setOrigin(0.5, 1)
-          .setVisible(false);
+    // Zona de interação para o supermercado.
+    this.zonaSupermercado = new Phaser.Geom.Rectangle(2924 - 16, 344 - 16, 32, 32);
+    this.labelSupermercado = this.add
+      .text(2924, 344, "[E] Entrar", {
+        fontSize: "6px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
     // Área jogável usada por câmera e física
     const MAPA_X = 720;
     const MAPA_Y = 100;
@@ -285,14 +433,24 @@ export default class SceneCidade extends Phaser.Scene {
     this.physics.add.existing(this.colisaoFaixaCidade2, true);
     this.physics.add.collider(this.personagem, this.colisaoFaixaCidade2);
 
+    // Colisao manual no ponto solicitado x:1192 y:1240.
+    this.colisaoManualCidade3 = this.add.zone(1192, 1240, 16, 16);
+    this.physics.add.existing(this.colisaoManualCidade3, true);
+    this.physics.add.collider(this.personagem, this.colisaoManualCidade3);
+
     this.pjAcompanhandoAgencia2 = this.escoltaPJAgencia2Ativa;
     this.pjAcompanhamentoEncerrado = false;
+    this.pjDespedidaAgencia02Feita = false;
+    this.pjPopupAgencia02Ativo = false;
+    this.pjAguardandoDespedidaAgencia02 = false;
     this.pjDistanciaMaxJogador = 120;
     this.pjRaioChegadaGuia = 24;
     this.pjVelocidadeGuia = 110;
     this.pjEsperandoJogador = false;
     this.pjRotaWaypoints = [
       // Rota até a padaria
+      { x: 985, y: 870 },
+      { x: 985, y: 928 },
       { x: 1563, y: 922 },
       { x: 1425, y: 818 }, // Entrada da padaria
       // Após padaria, rota até a farmácia será ativada depois
@@ -300,24 +458,30 @@ export default class SceneCidade extends Phaser.Scene {
     this.pjRotaIndiceAtual = 0;
     this.pjChegouDestinoRota = false;
     this.pjDestinoAtual = "padaria";
+    if (this.escoltaPJSalaoAtiva) {
+      this.pjDestinoAtual = "loja_roupas";
+    }
     this.npcTheoProximaTroca = 0;
-    this.npcTheoSpriteAtual = 2;
-    this.npcTheoIntervaloTroca = 140;
+    this.npcTheoSpriteAtual = 1;
+    this.npcTheoIntervaloTroca = 130;
+    this.npcTheoDirecao = "frente";
     this.npcTheoAndandoAnterior = false;
 
     if (this.pjAcompanhandoAgencia2) {
+      this.npcGuiaPrefix = this.escoltaPJSalaoAtiva ? "npc_camila" : "npc_agencia";
+      const spriteInicialGuia = `${this.npcGuiaPrefix}_frente_1`;
       this.registry.set("ag01_escolta_pj_agencia2", true);
       this.registry.set("ag01_pj_retorno", false);
 
       this.npcTheoGuia = this.physics.add
-        .sprite(spawnX + 24, spawnY + 10, "npc_agencia")
+        .sprite(spawnX + 24, spawnY + 10, spriteInicialGuia)
         .setDepth(9);
       this.npcTheoGuia.setCollideWorldBounds(true);
 
       const alturaTheo = this.personagem.displayHeight;
       this.npcTheoGuia.setDisplaySize(
-        (this.npcTheoGuia.width / this.npcTheoGuia.height) * (alturaTheo * 1.2),
-        alturaTheo * 1.2,
+        (this.npcTheoGuia.width / this.npcTheoGuia.height) * alturaTheo,
+        alturaTheo,
       );
       this.npcTheoGuia.body.setSize(
         this.npcTheoGuia.width * 0.45,
@@ -333,6 +497,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaVerticalCidade2);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade2);
+      this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade3);
       this.physics.add.collider(this.personagem, this.npcTheoGuia);
 
       this.labelTheoGuia = this.add
@@ -824,6 +989,11 @@ export default class SceneCidade extends Phaser.Scene {
     this._criarHudCoins();
     this._criarPopupMissaoCidade();
 
+    if (this.escoltaPJSalaoAtiva) {
+      this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+      this._atualizarPopupMissaoCidade(true);
+    }
+
     if (this.retornoFarmacia) {
       this.registry.set(
         "missaoCidadeTexto",
@@ -854,14 +1024,96 @@ export default class SceneCidade extends Phaser.Scene {
         delay: 1800,
         onComplete: () => recadoPJ.destroy(),
       });
+
+      if (this.npcTheoGuia) {
+        this.pjAcompanhandoAgencia2 = true;
+        this.pjAcompanhamentoEncerrado = false;
+        this.pjAguardandoPadaria = false;
+        this.pjDestinoAtual = "agencia2";
+        this.pjRotaWaypoints = [
+          { x: 1126, y: 1295 },
+          { x: 1578, y: 1295 },
+          { x: 1578, y: 1655 },
+          { x: 1806, y: 1655 },
+        ];
+        this.pjRotaIndiceAtual = 0;
+        this.pjChegouDestinoRota = false;
+        this.pjDespedidaAgencia02Feita = false;
+        this.pjAguardandoDespedidaAgencia02 = false;
+        this.registry.set("ag01_escolta_pj_agencia2", true);
+        this.registry.set("ag01_pj_retorno", false);
+        this.registry.set("missaoCidadeTexto", "Missão: Fale com o PJ Theo.");
+        if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+        this.npcTheoGuia.setVisible(true);
+        if (this.labelTheoGuia) {
+          this.labelTheoGuia
+            .setVisible(true)
+            .setText("[Me siga até a Agência 02]")
+            .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+        }
+      }
+
+      if (this.escoltaPJSalaoAtiva && this.npcTheoGuia) {
+        this.pjAcompanhandoAgencia2 = true;
+        this.pjAcompanhamentoEncerrado = false;
+        this.pjAguardandoPadaria = false;
+        this.pjDestinoAtual = "loja_roupas";
+        this.pjRotaWaypoints = [
+          { x: 1823, y: 1651 },
+          { x: 2235, y: 1651 },
+          { x: 2280, y: 1575 },
+        ];
+        this.pjRotaIndiceAtual = 0;
+        this.pjChegouDestinoRota = false;
+        this.pjDespedidaSalaoFeita = false;
+        this.registry.set("ag02_escolta_pj_salao", true);
+        this.registry.set("ag02_pj_retorno", false);
+        this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+        if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+        this.npcTheoGuia.setVisible(true);
+        if (this.labelTheoGuia) {
+          this.labelTheoGuia
+            .setVisible(true)
+            .setText("[Me siga até a Loja de Roupas]")
+            .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+        }
+        this._atualizarPopupMissaoCidade(true);
+      }
+    }
+
+    if (this.escoltaPJSalaoAtiva && this.npcTheoGuia && !this.retornoFarmacia) {
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjAguardandoPadaria = false;
+      this.pjDestinoAtual = "loja_roupas";
+      this.pjRotaWaypoints = [
+        { x: 1823, y: 1651 },
+        { x: 2235, y: 1651 },
+        { x: 2280, y: 1575 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      this.pjDespedidaSalaoFeita = false;
+      this.registry.set("ag02_escolta_pj_salao", true);
+      this.registry.set("ag02_pj_retorno", false);
+      this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+      if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+      this.npcTheoGuia.setVisible(true);
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Me siga até a Loja de Roupas]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+      this._atualizarPopupMissaoCidade(true);
     }
 
     // Cena de chuva em paralelo
     this.scene.launch("SceneChuva");
 
-    // Pausa  a trilha sonora ao iniciar nova cena
-     this.events.on("shutdown", () => {
-     this.musica.stop();
+    // Para a trilha sonora ao encerrar a cena.
+    this.events.on("shutdown", () => {
+      this.musica.stop();
     });
   }
 
@@ -1318,9 +1570,9 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.hudCoinsUiScale = 1 / this.cameras.main.zoom;
     this.hudCoinsValorAtual = -1;
-    this.hudCoinsScale = 0.42 * this.hudCoinsUiScale;
-    this.hudCoinsOffsetRight = 90 * this.hudCoinsUiScale;
-    this.hudCoinsOffsetTop = 6 * this.hudCoinsUiScale;
+    this.hudCoinsScale = 0.56 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetRight = 106 * this.hudCoinsUiScale;
+    this.hudCoinsOffsetTop = 8 * this.hudCoinsUiScale;
 
     this.hudCoinsBg = this.add
       .image(0, 0, "cieloCoinsHud")
@@ -1328,12 +1580,14 @@ export default class SceneCidade extends Phaser.Scene {
       .setScale(this.hudCoinsScale)
       .setDepth(230);
 
-    const coinFont = Math.max(5, Math.round(14 * this.hudCoinsUiScale));
+    const coinFont = Math.max(7, Math.round(22 * this.hudCoinsUiScale));
     this.hudCoinsTxt = this.add
       .text(0, 0, "", {
         fontSize: `${coinFont}px`,
-        color: "#ffffff",
+        color: "#ffe86b",
         fontStyle: "bold",
+        stroke: "#4a2a00",
+        strokeThickness: 2,
         resolution: 4,
       })
       .setOrigin(0, 0.5)
@@ -1574,7 +1828,7 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.hudCoinsBg.setPosition(posX, posY);
 
-    const txtX = posX + 8 * this.hudCoinsUiScale;
+    const txtX = posX + 14 * this.hudCoinsUiScale;
     const txtY = posY + this.hudCoinsBg.displayHeight * 0.5;
     this.hudCoinsTxt.setPosition(txtX, txtY);
 
@@ -1603,20 +1857,20 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     this.popupMissaoUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoOffsetTopo = 92 * this.popupMissaoUiScale;
+    this.popupMissaoOffsetTopo = 102 * this.popupMissaoUiScale;
 
     const cam = this.cameras.main;
     const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
     const popupX = cam.worldView.centerX;
 
     this.missaoCidadeBg = this.add
-      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
       .setScale(this.popupMissaoUiScale);
 
     this.missaoCidadeTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "20px",
+        fontSize: "24px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",
@@ -1994,14 +2248,14 @@ export default class SceneCidade extends Phaser.Scene {
 
   _medirLarguraPopupMissaoCidade(texto) {
     const medidor = this.add.text(-9999, -9999, texto, {
-      fontSize: "20px",
+      fontSize: "24px",
       fontStyle: "bold",
       stroke: "#000000",
       strokeThickness: 2,
     });
-    const largura = medidor.displayWidth + 48;
+    const largura = medidor.displayWidth + 64;
     medidor.destroy();
-    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoCidade(animarTexto) {
@@ -2047,6 +2301,133 @@ export default class SceneCidade extends Phaser.Scene {
     this.missaoCidadeBg.setY(popupY);
     this.missaoCidadeTexto.setX(popupX);
     this.missaoCidadeTexto.setY(popupY);
+  }
+
+  _abrirPopupDespedidaAgencia02() {
+    if (this.pjPopupAgencia02Ativo) return;
+    this.pjPopupAgencia02Ativo = true;
+
+    const cx = this.scale.width / 2;
+    const cy = this.scale.height / 2;
+    const mensagem =
+      "Missão concluída! Foi incrível te acompanhar. Avance para a próxima agência e continue evoluindo na sua jornada de vendas.";
+
+    this.popupDespedidaAgencia02Bg = this.add
+      .image(cx, cy, "falaTheo")
+      .setDisplaySize(390, 150)
+      .setDepth(260)
+      .setScrollFactor(0);
+
+    const iW = this.popupDespedidaAgencia02Bg.displayWidth;
+    const iH = this.popupDespedidaAgencia02Bg.displayHeight;
+
+    this.popupDespedidaAgencia02Texto = this.add
+      .text(cx - iW * 0.12, cy - iH * 0.06, "", {
+        fontSize: "13px",
+        color: "#000000",
+        fontStyle: "bold",
+        stroke: "#000000",
+        strokeThickness: 1,
+        wordWrap: { width: iW * 0.58, useAdvancedWrap: true },
+        align: "center",
+      })
+      .setOrigin(0.5, 0.5)
+      .setDepth(261)
+      .setScrollFactor(0);
+
+    this.popupDespedidaAgencia02Botao = this.add
+      .text(cx, cy + iH * 0.27, "  Continuar  ", {
+        fontSize: "12px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        backgroundColor: "#3a7bd5",
+        padding: { x: 8, y: 4 },
+        stroke: "#1a4fa0",
+        strokeThickness: 1,
+      })
+      .setOrigin(0.5)
+      .setDepth(262)
+      .setScrollFactor(0)
+      .setInteractive({ useHandCursor: true })
+      .setVisible(false);
+
+    this.popupDespedidaAgencia02Botao.on("pointerover", () =>
+      this.popupDespedidaAgencia02Botao.setStyle({
+        backgroundColor: "#1a55b8",
+        color: "#ffffff",
+      }),
+    );
+    this.popupDespedidaAgencia02Botao.on("pointerout", () =>
+      this.popupDespedidaAgencia02Botao.setStyle({
+        backgroundColor: "#3a7bd5",
+        color: "#ffffff",
+      }),
+    );
+
+    this.popupDespedidaAgencia02Botao.on("pointerdown", () => {
+      this._fecharPopupDespedidaAgencia02();
+    });
+
+    let charIndex = 0;
+    this.popupDespedidaAgencia02Timer = this.time.addEvent({
+      delay: 45,
+      repeat: mensagem.length - 1,
+      callback: () => {
+        charIndex++;
+        this.popupDespedidaAgencia02Texto.setText(
+          mensagem.substring(0, charIndex),
+        );
+
+        if (charIndex >= mensagem.length) {
+          this.popupDespedidaAgencia02Botao.setVisible(true);
+          this.input.keyboard.once("keydown-ENTER", () => {
+            if (this.pjPopupAgencia02Ativo) {
+              this._fecharPopupDespedidaAgencia02();
+            }
+          });
+        }
+      },
+    });
+  }
+
+  _fecharPopupDespedidaAgencia02() {
+    if (!this.pjPopupAgencia02Ativo) return;
+    this.pjPopupAgencia02Ativo = false;
+    this.pjDespedidaAgencia02Feita = true;
+    this.pjAguardandoDespedidaAgencia02 = false;
+    this.registry.set("ag01_pj_retorno", true);
+    this.registry.set("ag01_escolta_pj_agencia2", false);
+
+    if (this.exclamacaoPjAgencia02) {
+      this.exclamacaoPjAgencia02.destroy();
+      this.exclamacaoPjAgencia02 = null;
+    }
+
+    if (this.labelTheoGuia) {
+      this.labelTheoGuia.setVisible(false);
+    }
+
+    if (this.popupDespedidaAgencia02Timer) {
+      this.popupDespedidaAgencia02Timer.remove();
+      this.popupDespedidaAgencia02Timer = null;
+    }
+
+    if (this.popupDespedidaAgencia02Botao) {
+      this.popupDespedidaAgencia02Botao.destroy();
+      this.popupDespedidaAgencia02Botao = null;
+    }
+    if (this.popupDespedidaAgencia02Texto) {
+      this.popupDespedidaAgencia02Texto.destroy();
+      this.popupDespedidaAgencia02Texto = null;
+    }
+    if (this.popupDespedidaAgencia02Bg) {
+      this.popupDespedidaAgencia02Bg.destroy();
+      this.popupDespedidaAgencia02Bg = null;
+    }
+
+    if (this.npcTheoGuia) {
+      this.npcTheoGuia.setVisible(false);
+    }
   }
 
   // Atualiza movimento, zonas e transições
@@ -2103,6 +2484,85 @@ export default class SceneCidade extends Phaser.Scene {
       return;
     }
 
+    const chegouNaAgencia02ComJogador =
+      this.pjDestinoAtual === "agencia2" &&
+      this.pjChegouDestinoRota &&
+      Phaser.Geom.Rectangle.Contains(this.zonaAgencia02, this.personagem.x, this.personagem.y);
+
+    if (chegouNaAgencia02ComJogador && !this.pjDespedidaAgencia02Feita) {
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.pjAguardandoDespedidaAgencia02 = true;
+      this.registry.set("ag01_escolta_pj_agencia2", false);
+      this.registry.set("ag01_pj_retorno", false);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[E] Falar")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+
+      if (!this.exclamacaoPjAgencia02) {
+        this.exclamacaoPjAgencia02 = this.add
+          .text(this.npcTheoGuia.x, this.npcTheoGuia.y - 40, "!", {
+            fontSize: "18px",
+            color: "#ffffff",
+            fontStyle: "bold",
+            stroke: "#000000",
+            strokeThickness: 3,
+            backgroundColor: "#cc0000cc",
+            padding: { x: 4, y: 1 },
+            resolution: 4,
+          })
+          .setDepth(25)
+          .setOrigin(0.5)
+          .setVisible(true);
+      } else {
+        this.exclamacaoPjAgencia02
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 40)
+          .setVisible(true);
+      }
+
+      return;
+    }
+
+    const chegouNoSalaoComJogador =
+      this.pjDestinoAtual === "loja_roupas" &&
+      this.pjChegouDestinoRota &&
+      Phaser.Geom.Rectangle.Contains(this.zonaLojaDeRoupas, this.personagem.x, this.personagem.y);
+
+    if (chegouNoSalaoComJogador && !this.pjDespedidaSalaoFeita) {
+      this.pjDespedidaSalaoFeita = true;
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.registry.set("ag02_escolta_pj_salao", false);
+      this.registry.set("ag02_pj_retorno", true);
+
+      if (this.npcTheoGuia.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Boa sorte! Nos vemos depois]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+
+      this.time.delayedCall(1200, () => {
+        if (this.npcTheoGuia) this.npcTheoGuia.setVisible(false);
+        if (this.labelTheoGuia) this.labelTheoGuia.setVisible(false);
+      });
+      return;
+    }
+
     const distJogadorNpc = Phaser.Math.Distance.Between(
       this.personagem.x,
       this.personagem.y,
@@ -2132,26 +2592,30 @@ export default class SceneCidade extends Phaser.Scene {
       this.pjEsperandoJogador = true;
     }
 
-    const vx = this.npcTheoGuia.body?.velocity?.x ?? 0;
-    const vy = this.npcTheoGuia.body?.velocity?.y ?? 0;
-    const andando = Math.abs(vx) > 1 || Math.abs(vy) > 1;
+    const andando = !this.pjChegouDestinoRota && !this.pjEsperandoJogador;
 
-    if (andando && !this.npcTheoAndandoAnterior) {
-      this.npcTheoGuia.setTexture("npc_agencia_1");
+    const dxDirecao = pontoAtual.x - this.npcTheoGuia.x;
+    const dyDirecao = pontoAtual.y - this.npcTheoGuia.y;
+    let novaDirecao = this.npcTheoDirecao || "frente";
+    if (Math.abs(dxDirecao) > Math.abs(dyDirecao)) {
+      novaDirecao = dxDirecao > 0 ? "direita" : "esquerda";
+    } else {
+      novaDirecao = dyDirecao > 0 ? "frente" : "tras";
+    }
+
+    if (novaDirecao !== this.npcTheoDirecao) {
       this.npcTheoSpriteAtual = 1;
       this.npcTheoProximaTroca = this.time.now + this.npcTheoIntervaloTroca;
-    } else if (!andando) {
-      this.npcTheoGuia.setTexture("npc_agencia");
-      this.npcTheoSpriteAtual = 2;
+    }
+    this.npcTheoDirecao = novaDirecao;
+
+    if (!andando) {
+      this.npcTheoGuia.setTexture(`${this.npcGuiaPrefix}_${this.npcTheoDirecao}_1`);
+      this.npcTheoSpriteAtual = 1;
     } else if (this.time.now >= this.npcTheoProximaTroca) {
+      this.npcTheoSpriteAtual = this.npcTheoSpriteAtual >= 4 ? 1 : this.npcTheoSpriteAtual + 1;
       this.npcTheoProximaTroca = this.time.now + this.npcTheoIntervaloTroca;
-      if (this.npcTheoSpriteAtual === 2) {
-        this.npcTheoGuia.setTexture("npc_agencia_1");
-        this.npcTheoSpriteAtual = 1;
-      } else {
-        this.npcTheoGuia.setTexture("npc_agencia");
-        this.npcTheoSpriteAtual = 2;
-      }
+      this.npcTheoGuia.setTexture(`${this.npcGuiaPrefix}_${this.npcTheoDirecao}_${this.npcTheoSpriteAtual}`);
     }
     this.npcTheoAndandoAnterior = andando;
 
@@ -2159,22 +2623,39 @@ export default class SceneCidade extends Phaser.Scene {
       const textoChegada =
         this.pjDestinoAtual === "farmacia"
           ? "[Chegamos. Interaja na Farmácia]"
-          : "[Chegamos. Entre na Padaria]";
+          : this.pjDestinoAtual === "agencia2"
+            ? "[Chegamos. Entre na Agência 02]"
+            : this.pjDestinoAtual === "loja_roupas"
+              ? "[Chegamos. Entre na Loja de Roupas]"
+            : "[Chegamos. Entre na Padaria]";
       const textoSeguir =
         this.pjDestinoAtual === "farmacia"
           ? "[Me siga até a Farmácia]"
-          : "[Siga o PJ]";
+          : this.pjDestinoAtual === "agencia2"
+            ? "[Me siga até a Agência 02]"
+            : this.pjDestinoAtual === "loja_roupas"
+              ? "[Me siga até a Loja de Roupas]"
+            : "[Siga o PJ]";
 
       this.labelTheoGuia
         .setVisible(true)
         .setText(
-          this.pjChegouDestinoRota
-            ? textoChegada
-            : this.pjEsperandoJogador
-              ? "[Vem comigo! Estou esperando]"
-              : textoSeguir,
+          this.pjAguardandoDespedidaAgencia02
+            ? "[E] Falar"
+            : this.pjChegouDestinoRota
+              ? textoChegada
+              : this.pjEsperandoJogador
+                ? "[Vem comigo! Estou esperando]"
+                : textoSeguir,
         )
         .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+    }
+
+    if (this.exclamacaoPjAgencia02 && this.pjAguardandoDespedidaAgencia02) {
+      this.exclamacaoPjAgencia02.setPosition(
+        this.npcTheoGuia.x,
+        this.npcTheoGuia.y - 40,
+      );
     }
 
     if (!this.pjChegouDestinoRota && distNpcPonto <= this.pjRaioChegadaGuia) {
@@ -2183,6 +2664,21 @@ export default class SceneCidade extends Phaser.Scene {
       } else {
         this.pjChegouDestinoRota = true;
         this.npcTheoGuia.body?.setVelocity(0, 0);
+        if (this.pjDestinoAtual === "agencia2") {
+          this.pjAguardandoDespedidaAgencia02 = true;
+          this.registry.set("missaoCidadeTexto", "Missão: Fale com o PJ Theo.");
+          if (this.labelTheoGuia) {
+            this.labelTheoGuia
+              .setVisible(true)
+              .setText("[E] Falar")
+              .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+          }
+          if (this.exclamacaoPjAgencia02) {
+            this.exclamacaoPjAgencia02
+              .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 40)
+              .setVisible(true);
+          }
+        }
       }
     }
   }
@@ -2198,9 +2694,10 @@ export default class SceneCidade extends Phaser.Scene {
           this.registry.set("ag01_pj_retorno", false);
           // Atualiza waypoints para farmácia passando pelos pontos solicitados.
           this.pjRotaWaypoints = [
-            { x: 1571, y: 983 },
-            { x: 1571, y: 1290 },
-            { x: 1114, y: 1290 },
+            { x: 1488, y: 915 },
+            { x: 1596, y: 915 },
+            { x: 1596, y: 1295 },
+            { x: 1126, y: 1295 },
           ];
           this.pjRotaIndiceAtual = 0;
           this.pjChegouDestinoRota = false;
@@ -2486,6 +2983,24 @@ export default class SceneCidade extends Phaser.Scene {
           });
         });
       } else if (dentroLojaDeRoupas) {
+        if (this.pjAcompanhandoAgencia2 || (this.npcTheoGuia && this.npcTheoGuia.visible)) {
+          this.pjAcompanhandoAgencia2 = false;
+          this.pjAcompanhamentoEncerrado = true;
+          this.registry.set("ag02_escolta_pj_salao", false);
+          this.registry.set("ag02_pj_retorno", true);
+          if (this.npcTheoGuia?.body) {
+            this.npcTheoGuia.body.setVelocity(0, 0);
+            this.npcTheoGuia.body.enable = false;
+          }
+          if (this.labelTheoGuia) {
+            this.labelTheoGuia
+              .setVisible(true)
+              .setText("[Boa sorte! Nos vemos depois]")
+              .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+          }
+          if (this.npcTheoGuia) this.npcTheoGuia.setVisible(false);
+        }
+
         this.transicionando = true;
         this._avancarSequenciaSetas("cabeleireiro");
         this.labelLojaDeRoupas.setVisible(false);
@@ -2522,6 +3037,11 @@ export default class SceneCidade extends Phaser.Scene {
           });
         });
       } else if (dentroAgencia02) {
+        if (!this.pjDespedidaAgencia02Feita && this.pjAguardandoDespedidaAgencia02) {
+          this._abrirPopupDespedidaAgencia02();
+          return;
+        }
+
         this.transicionando = true;
         this._avancarSequenciaSetas("agencia2");
         this.labelAgencia02.setVisible(false);

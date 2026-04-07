@@ -751,11 +751,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     if (enzoConcluido) {
-      return "Missão: Fale com o PJ Camila.";
+      return "Missão: Suba e fale com a PJ Camila.";
     }
 
     if (camilaConcluida) {
-      return "Missão: Fale com o PJ Camila.";
+      return "Missão: Suba e fale com a PJ Camila.";
     }
 
     return "Missão: Fale com o GG Enzo.";
@@ -763,14 +763,14 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   _medirLarguraPopupMissaoAgencia(texto) {
     const medidor = this.add.text(-9999, -9999, texto, {
-      fontSize: "20px",
+      fontSize: "24px",
       fontStyle: "bold",
       stroke: "#000000",
       strokeThickness: 2,
     });
-    const largura = medidor.displayWidth + 48;
+    const largura = medidor.displayWidth + 64;
     medidor.destroy();
-    return Phaser.Math.Clamp(largura, 260, this.scale.width - 40);
+    return Phaser.Math.Clamp(largura, 340, this.scale.width - 40);
   }
 
   _atualizarPopupMissaoAgencia(animarTexto) {
@@ -828,20 +828,20 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   _criarPopupMissaoAgencia() {
     this.popupMissaoAgenciaUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoAgenciaOffsetTopo = 92 * this.popupMissaoAgenciaUiScale;
+    this.popupMissaoAgenciaOffsetTopo = 102 * this.popupMissaoAgenciaUiScale;
 
     const cam = this.cameras.main;
     const popupY = cam.worldView.top + this.popupMissaoAgenciaOffsetTopo;
     const popupX = cam.worldView.centerX;
 
     this.missaoAgenciaBg = this.add
-      .rectangle(popupX, popupY, 300, 44, 0x000000, 0.55)
+      .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
       .setScale(this.popupMissaoAgenciaUiScale);
 
     this.missaoAgenciaTexto = this.add
       .text(popupX, popupY, "", {
-        fontSize: "20px",
+        fontSize: "24px",
         color: "#ffffff",
         fontStyle: "bold",
         stroke: "#000000",
@@ -1070,11 +1070,22 @@ export default class SceneAgencia02 extends Phaser.Scene {
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
+        const pjConcluido = this.registry.get("ag02_dialogo_camila_concluido") === true;
+        if (pjConcluido) {
+          this.registry.set("ag02_escolta_pj_salao", true);
+          this.registry.set("ag02_pj_retorno", false);
+          this.registry.set("missaoCidadeTexto", "Missão: Siga a PJ Camila até a Loja de Roupas.");
+        }
+
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
           spawnX: 1797,
           spawnY: 1598,
+          escoltaPJSalao: pjConcluido,
+          missaoCidadeTexto: pjConcluido
+            ? "Missão: Siga a PJ Camila até a Loja de Roupas."
+            : undefined,
         });
       });
     }

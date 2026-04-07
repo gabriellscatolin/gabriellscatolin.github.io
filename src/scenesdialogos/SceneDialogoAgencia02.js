@@ -604,7 +604,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
     } else {
       this.registry.set("ag02_dialogo_enzo_concluido", true);
-      this.registry.set("missaoAgencia02Texto", "Missão: Fale com o PJ Camila.");
+      this.registry.set("missaoAgencia02Texto", "Missão: Suba e fale com a PJ Camila.");
     }
 
     this._esconderBotoes();
