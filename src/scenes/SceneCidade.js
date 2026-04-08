@@ -24,6 +24,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.limparDestaqueMissaoCidadeAoRetornarDoMapa =
       Boolean(dados.limparDestaqueMissaoCidadeAoRetornarDoMapa) ||
       Boolean(this.registry.get("limparDestaqueMissaoCidadeAoRetornarDoMapa"));
+    this.fromCutscene = Boolean(dados.fromCutscene);
     this.retornoFarmacia = Boolean(dados.retornoFarmacia);
     this.escoltaPJSalaoAtiva =
       Boolean(dados.escoltaPJSalao) ||
@@ -97,6 +98,10 @@ export default class SceneCidade extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1",
     );
     this.load.image("maquininhaCielo", "src/assets/imagens/HUD/maquininha.png");
+    this.load.image(
+      "imagemTutorialMapa",
+      "src/assets/imagens/imagensPopUps/imagemTutorialMapa.png",
+    );
     this.load.image("cieloCoinsHud", "src/assets/imagens/HUD/cieloCoinHUD.png");
     this.load.image("botaoMapaHud", "src/assets/imagens/HUD/botaoMapa.png");
     this.load.image(
@@ -1325,6 +1330,61 @@ export default class SceneCidade extends Phaser.Scene {
     this.events.on("shutdown", () => {
       this.musica.stop();
     });
+
+    // Mostra tutorial do mapa quando vem da cutscene do ônibus
+    if (this.fromCutscene) {
+      this.mostrarTutorialMapa();
+    }
+  }
+
+  mostrarTutorialMapa() {
+    const cx = this.scale.width / 2;
+    const cy = this.scale.height / 2;
+    this.elementosTutorialMapa = [];
+
+    // Fundo escuro semi-transparente
+    this.elementosTutorialMapa.push(
+      this.add
+        .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000, 0.7)
+        .setDepth(50)
+        .setScrollFactor(0),
+    );
+
+    // Imagem do tutorial do mapa
+    this.elementosTutorialMapa.push(
+      this.add
+        .image(cx, cy, "imagemTutorialMapa")
+        .setDepth(51)
+        .setScrollFactor(0),
+    );
+
+    // Botão "Fechar"
+    const botaoFechar = this.add
+      .text(cx, cy + 230, "Fechar", {
+        fontSize: "20px",
+        fontStyle: "bold",
+        color: "#ffffff",
+        backgroundColor: "#333333",
+        padding: { x: 24, y: 10 },
+      })
+      .setDepth(52)
+      .setScrollFactor(0)
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+    this.elementosTutorialMapa.push(botaoFechar);
+
+    botaoFechar.on("pointerover", () =>
+      botaoFechar.setStyle({ backgroundColor: "#555555" }),
+    );
+    botaoFechar.on("pointerout", () =>
+      botaoFechar.setStyle({ backgroundColor: "#333333" }),
+    );
+    botaoFechar.on("pointerdown", () => this.fecharTutorialMapa());
+  }
+
+  fecharTutorialMapa() {
+    this.elementosTutorialMapa.forEach((el) => el.destroy());
+    this.elementosTutorialMapa = [];
   }
 
   // Cria camada do tilemap com segurança
