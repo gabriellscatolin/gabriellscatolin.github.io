@@ -48,7 +48,7 @@ export default class SceneJogo extends Phaser.Scene {
     );
     this.load.image(
       "imagemTutorial",
-      "src/assets/imagens/imagensPopUps/imagemTutorial.png",
+      "src/assets/imagens/imagensPopUps/imagemTutorial.jpeg",
     );
     this.load.image(
       "falaVanessa",
