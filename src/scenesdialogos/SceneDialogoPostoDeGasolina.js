@@ -7,6 +7,7 @@ import {
   goalEscalado,
 } from "../scoring.js";
 
+// Embaralha as alternativas para evitar memorização pela posição
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -20,10 +21,12 @@ function esperar(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Configuração da LLM usada para gerar respostas dinâmicas do NPC
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+// Roteiro completo da conversa com narrativa, escolhas e resposta base do NPC
 const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
@@ -230,10 +233,12 @@ const ROTEIRO = [
   },
 ];
 
+// Identificadores usados pela pontuação global e pela meta desta fase
 const CAPITULO = "chapter3";
 const FASE = "posto";
 const N_CENAS = ROTEIRO.length;
 
+// Paleta dos botões para estado neutro, hover e feedback da escolha
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
 const COR_CORRETA = 0x1a5c1a;
@@ -243,6 +248,7 @@ const COR_ERRADA = 0x6a1a1a;
 export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoPostoDeGasolina" });
+    // Define a arte e o perfil base usados nesta conversa
     this.imagemKey = "falaPosto";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
@@ -252,17 +258,21 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
+    // Reinicia o progresso local sempre que esta conversa começa
     this.cenaIdx = 0;
     this.pontuacaoFase = 0;
     this.cieloCoinsGanhasDialogo = 0;
+    // Controla a etapa atual do fluxo visual do diálogo
     this.estado = "tutorial";
     this.aguardandoLLM = false;
     this.escolhaAtual = null;
     this.respostaAtualNpc = "";
+    // Garante que a pontuação compartilhada esteja pronta para uso
     initScoring(this.registry);
   }
 
   preload() {
+    // Carrega a arte principal desta cena de diálogo
     if (!this.textures.exists("falaPosto")) {
       this.load.image(
         "falaPosto",
@@ -272,6 +282,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   create() {
+    // Medidas-base para montar a tela de diálogo e o painel inferior
     const W = this.scale.width;
     const H = this.scale.height;
     const CX = W / 2;
@@ -290,14 +301,17 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     const BTN_H = 82;
     const CONT_Y = PANEL_TOP + PANEL_H - 38;
 
+    // Guarda a posição do botão de continuar para reaproveitar em outros estados
     this._CONT_Y = CONT_Y;
 
+    // Camada escura para destacar a interface da conversa
     this.add
       .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
       .setScrollFactor(0)
       .setDepth(0)
       .setInteractive();
 
+    // Imagem principal da personagem/cena
     const img = this.add
       .image(CX, IMG_CY, "falaPosto")
       .setScrollFactor(0)
@@ -306,6 +320,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
+    // Painel inferior onde ficam fala, narrativa e escolhas
     this.add
       .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
       .setScrollFactor(0)
@@ -315,6 +330,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Nome do interlocutor exibido apenas quando há fala direta do NPC
     this.textoNome = this.add
       .text(CX - BTN_W / 2, NOME_Y, "Nicolas  -  Posto de Gasolina", {
         fontSize: "20px",
@@ -326,6 +342,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setDepth(3)
       .setVisible(false);
 
+    // Texto de contextualização usado nas aberturas das cenas
     this.textoNarracao = this.add
       .text(CX, NAR_Y + 30, "", {
         fontSize: "40px",
@@ -339,6 +356,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Campo principal para a fala do NPC
     this.textoNpc = this.add
       .text(CX, TEXTO_NPC_Y, "", {
         fontSize: "40px",
@@ -351,6 +369,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Título do feedback após o jogador escolher uma alternativa
     this.textoFeedbackTitulo = this.add
       .text(CX, PANEL_TOP + 60, "", {
         fontSize: "38px",
@@ -364,6 +383,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // Mensagem explicando por que a escolha foi correta, neutra ou errada
     this.textoFeedback = this.add
       .text(CX, TEXTO_NPC_Y, "", {
         fontSize: "32px",
@@ -377,6 +397,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // Botões das três alternativas de resposta
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
@@ -425,6 +446,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       return { bg, labelLetra, txtEscolha };
     });
 
+    // Botão usado para avançar entre introdução, feedback, resposta e fim
     this.btnContinuar = this.add
       .rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
@@ -452,6 +474,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
+    // Mensagem temporária exibida enquanto a próxima fala é preparada
     this.textoCarregando = this.add
       .text(CX, CONT_Y, "Nicolas está pensando...", {
         fontSize: "21px",
@@ -464,6 +487,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // HUD com a soma da sessão e o ganho acumulado nesta conversa
     this.textoCieloCoin = this.add
       .text(W - 20, 16, "Cielo Coins: 0 / 1800", {
         fontSize: "30px",
@@ -476,6 +500,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(10);
 
+    // Cabeçalho com o nome da cena atual dentro do roteiro
     this.textoCena = this.add
       .text(20, 16, "", {
         fontSize: "40px",
@@ -488,8 +513,10 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(10);
 
+    // Atalho usado para fechar a tela quando o diálogo termina
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
+    // Abre a conversa exibindo antes um tutorial de contexto
     this._criarTutorial(W, H, CX, H / 2);
   }
 
@@ -503,6 +530,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
+    // Overlay inicial com instruções rápidas da dinâmica do diálogo
     els.push(
       this.add
         .rectangle(CX, CY, W, H, 0x000000, 0.88)
@@ -536,6 +564,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
         .setDepth(D + 1),
     );
 
+    // Resume objetivo, mecânica das escolhas e regra de pontuação
     const linhas = [
       {
         icone: "🎯",
@@ -579,6 +608,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       );
     });
 
+    // Botão que encerra o tutorial e libera a primeira cena
     const btnY = CY + 255;
     const btnBg = this.add
       .rectangle(CX, btnY, 300, 58, 0x1a5c1a)
@@ -600,9 +630,11 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
         .setDepth(D + 2),
     );
 
+    // Feedback visual simples para destacar a ação principal
     btnBg.on("pointerover", () => btnBg.setFillStyle(0x2a7c2a));
     btnBg.on("pointerout", () => btnBg.setFillStyle(0x1a5c1a));
     btnBg.on("pointerdown", () => {
+      // Remove os elementos do tutorial antes de entrar no roteiro
       els.forEach((el) => el?.destroy?.());
       this._mostrarCena(0);
     });
@@ -611,6 +643,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _mostrarCena(idx) {
+    // Carrega a cena correspondente do roteiro e limpa resíduos da etapa anterior
     const cena = ROTEIRO[idx];
     this.cenaIdx = idx;
     this.estado = "intro";
@@ -622,6 +655,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoFeedback.setVisible(false);
     this.textoNpc.setVisible(true);
 
+    // Atualiza o cabeçalho com o nome da etapa e o progresso no roteiro
     this.textoCena.setText(`${cena.titulo}  (${idx + 1} / ${ROTEIRO.length})`);
     this._esconderBotoes();
     this._ocultarContinuar();
@@ -631,15 +665,18 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNarracao.setText(cena.narracao || "");
     this.textoNpc.setText(cena.npcInicial ? `"${cena.npcInicial}"` : "");
 
+    // Quando não há introdução, a cena já começa nas alternativas
     if (!cena.narracao && !cena.npcInicial) {
       this._mostrarEscolhas();
     } else {
+      // Se existe contexto ou fala inicial, o avanço passa pelo botão
       this.textoNome.setVisible(!!cena.npcInicial);
       this._mostrarContinuar("Responder  ->");
     }
   }
 
   _mostrarEscolhas() {
+    // Troca a interface para o modo de decisão do jogador
     const cena = ROTEIRO[this.cenaIdx];
     this.estado = "escolha";
 
@@ -652,6 +689,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
+    // Embaralha as opções para evitar memorização por posição fixa
     this.escolhasOrdenadas = shuffleArray(cena.escolhas);
     this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
@@ -663,6 +701,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _mostrarFeedbackEscolha(escolha) {
+    // Mostra a avaliação da alternativa antes da fala seguinte do NPC
     this.estado = "feedback";
 
     this.textoNarracao.setText("");
@@ -673,6 +712,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       .setText(escolha.feedbackTitulo || "Feedback")
       .setVisible(true);
 
+    // Explica ao jogador o motivo do feedback daquela resposta
     this.textoFeedback
       .setText(escolha.feedbackTexto || "Você fez uma escolha.")
       .setVisible(true);
@@ -681,6 +721,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _mostrarRespostaNpc(resposta) {
+    // Exibe a resposta do NPC e prepara a transição para a próxima cena
     this.estado = "resposta";
 
     this.textoFeedbackTitulo.setVisible(false);
@@ -691,11 +732,13 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
     this.textoNpc.setText(`"${resposta}"`);
 
+    // Ajusta o CTA conforme a resposta leve à próxima cena ou ao encerramento
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
     this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
   }
 
   async _aoEscolher(indice) {
+    // Processa a alternativa escolhida, atualiza pontuação e prepara a reação da NPC
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
     const cena = ROTEIRO[this.cenaIdx];
@@ -703,6 +746,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     this.escolhaAtual = escolha;
 
+    // Soma a pontuação da escolha atual ao total da fase e da sessão
     const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
     this.pontuacaoFase += ganhos;
     this.cieloCoinsGanhasDialogo += ganhos;
@@ -710,6 +754,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       `Cielo Coins: ${getScore(this.registry)}  (+${this.cieloCoinsGanhasDialogo} aqui)`,
     );
 
+    // Destaca visualmente o tipo de resposta selecionada
     if (escolha.tipo === "correta") {
       this.botoesEscolha[indice].bg.setFillStyle(COR_CORRETA);
     } else if (escolha.tipo === "errada") {
@@ -718,12 +763,14 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       this.botoesEscolha[indice].bg.setFillStyle(COR_NEUTRA);
     }
 
+    // Esconde as demais opções enquanto a próxima resposta é preparada
     this.aguardandoLLM = true;
     this._esconderBotoes(indice);
     this.textoCarregando.setVisible(true);
 
     await esperar(350);
 
+    // Busca a fala seguinte do NPC usando roteiro fixo ou geração dinâmica
     const resposta = await this._chamarLLM(escolha, cena);
     this.respostaAtualNpc = resposta;
 
@@ -735,8 +782,10 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _aoContinuar() {
+    // Avança o fluxo conforme a etapa atual da conversa
     if (this.estado === "intro") {
       const cena = ROTEIRO[this.cenaIdx];
+      // Cenas sem escolhas funcionam como passagem direta para o próximo bloco
       if (!cena.escolhas?.length) {
         if (this.cenaIdx >= ROTEIRO.length - 1) {
           this._mostrarResultadoFinal();
@@ -747,8 +796,10 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
         this._mostrarEscolhas();
       }
     } else if (this.estado === "feedback") {
+      // Depois do feedback, o NPC reage à abordagem escolhida
       this._mostrarRespostaNpc(this.respostaAtualNpc);
     } else if (this.estado === "resposta") {
+      // Após a resposta do NPC, segue para a próxima cena ou para o fim
       if (this.cenaIdx >= ROTEIRO.length - 1) {
         this._mostrarResultadoFinal();
       } else {
@@ -760,6 +811,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _mostrarResultadoFinal() {
+    // Tela final com percentual, meta atingida e mensagem de desempenho
     this.estado = "fim";
     this._esconderBotoes();
     this.textoFeedbackTitulo.setVisible(false);
@@ -776,21 +828,16 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
 
     let avaliacao;
     let cor;
-    if (pct >= 90) {
+    if (pct >= 83) {
       avaliacao = "Excelente condução! Risco e continuidade bem posicionados.";
       cor = "#44ff88";
-    } else if (pct >= 70) {
-      avaliacao = "Bom trabalho! Quase perfeito.";
-      cor = "#88ccff";
-    } else if (pct >= 50) {
-      avaliacao = "Razoável. Vale refinar mais a pressão comercial.";
-      cor = "#ffcc44";
     } else {
       avaliacao =
         "Precisa melhorar. Tente de novo com mais foco em backup e teste.";
       cor = "#ff6644";
     }
 
+    // Mostra explicitamente se a meta mínima da fase foi alcançada
     const statusMeta = atingiu
       ? "Meta atingida!"
       : `Meta não atingida (precisava de ${meta} coins)`;
@@ -811,16 +858,19 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   _mostrarContinuar(label) {
+    // Reaproveita o mesmo CTA em todas as transições do diálogo
     this.btnContinuar.setVisible(true);
     this.txtContinuar.setVisible(true).setText(label);
   }
 
   _ocultarContinuar() {
+    // Some com o CTA quando a ação esperada é escolher uma resposta
     this.btnContinuar.setVisible(false);
     this.txtContinuar.setVisible(false);
   }
 
   _esconderBotoes(manter = -1) {
+    // Esconde todas as alternativas ou preserva apenas a selecionada
     this.botoesEscolha.forEach(({ bg, labelLetra, txtEscolha }, i) => {
       if (i !== manter) {
         bg.setVisible(false);
@@ -831,14 +881,17 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
   }
 
   async _chamarLLM(escolha, cena) {
+    // Quando o modo estrito está ativo, usa apenas a resposta definida no roteiro
     if (this.respostaRoteiroEstrita) {
       return cena.npcResposta;
     }
 
+    // Sem chave válida, o fluxo continua usando a resposta fixa do roteiro
     if (!GROQ_API_KEY || GROQ_API_KEY === "SUA_CHAVE_GROQ_AQUI") {
       return cena.npcResposta;
     }
 
+    // Ajusta o tom da resposta do NPC conforme a qualidade da abordagem
     const guias = {
       correta:
         "O vendedor fez uma abordagem excelente. Responda de forma receptiva, avançando a conversa.",
@@ -848,6 +901,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
         "O vendedor errou a abordagem. Responda de forma mais fria ou cética, mas sem encerrar a conversa.",
     };
 
+    // Monta o contexto enviado ao modelo para manter o personagem consistente
     const system =
       `${this.promptLLM}\n` +
       "Responda de forma natural e breve (1-2 frases) em portugu?s do Brasil.\n" +
@@ -856,6 +910,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       `${guias[escolha.tipo]}`;
 
     try {
+      // Tenta gerar uma resposta contextual do NPC com base na escolha do jogador
       const res = await fetch(GROQ_URL, {
         method: "POST",
         headers: {
@@ -877,6 +932,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       const data = await res.json();
       return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
     } catch (err) {
+      // Em caso de falha, mantém a progressão usando a resposta fixa do roteiro
       console.warn(
         "[SceneDialogoPostoDeGasolina] Falha na LLM, usando roteiro:",
         err.message,

@@ -8,6 +8,7 @@
 
 export default class SceneDialogoBase extends Phaser.Scene {
   init(dados) {
+    // Guarda a cena de origem para retomá-la quando o diálogo for fechado
     this.cenaOrigem = dados?.cenaOrigem || null;
 
     // Remove image-rendering: pixelated do canvas enquanto o diálogo estiver aberto
@@ -62,12 +63,14 @@ export default class SceneDialogoBase extends Phaser.Scene {
   }
 
   update() {
+    // Permite fechar o diálogo rapidamente usando teclado
     if (Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this._fechar();
     }
   }
 
   _fechar() {
+    // Restaura a cena anterior e encerra o diálogo atual
     // Restaura o image-rendering original dos sprites pixel art
     const canvas = this.game?.canvas;
     if (canvas && this._imageRenderingAnterior !== undefined) {
@@ -79,6 +82,7 @@ export default class SceneDialogoBase extends Phaser.Scene {
 
   // Hook para LLM — sobrescrever nas subclasses quando for integrar
   _chamarLLM(mensagem) {
+    // Método de extensão previsto para subclasses com integração de IA
     // TODO: integrar com LLM
     console.log(
       "[SceneDialogoBase] LLM não integrado ainda. Mensagem:",

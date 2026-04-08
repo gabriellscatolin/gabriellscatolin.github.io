@@ -7,6 +7,7 @@ import {
   goalEscalado,
 } from "../scoring.js";
 
+// Embaralha as alternativas para evitar memorização pela posição
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -20,10 +21,12 @@ function esperar(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Configuração da LLM usada para gerar respostas dinâmicas do NPC
 const GROQ_API_KEY = "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";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+// Roteiro principal da conversa com foco em validação, método e controle por venda
 const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
@@ -234,10 +237,12 @@ const ROTEIRO = [
   },
 ];
 
+// Capítulo usado pelo sistema global de pontuação
 const CAPITULO = "chapter1";
 const FASE = "escritorio";
 const N_CENAS = ROTEIRO.length;
 
+// Cores usadas no estado padrão, hover e feedback das respostas
 const COR_NEUTRO = 0x1d2b4a;
 const COR_HOVER = 0x2a3f6a;
 const COR_CORRETA = 0x1a5c1a;
@@ -247,6 +252,7 @@ const COR_ERRADA = 0x6a1a1a;
 export default class SceneDialogoEscritorio extends SceneDialogoBase {
   constructor() {
     super({ key: "SceneDialogoEscritorio" });
+    // Define a arte e o perfil base usados nesta conversa
     this.imagemKey = "falaEscritorio";
     this.respostaRoteiroEstrita = true;
     this.promptLLM =
@@ -256,6 +262,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
 
   init(dados) {
     super.init(dados);
+    // Estado inicial da conversa e da pontuação da fase
     this.cenaIdx = 0;
     this.pontuacaoFase = 0;
     this.cieloCoinsGanhasDialogo = 0;
@@ -267,6 +274,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   preload() {
+    // Carrega a arte principal desta cena de diálogo
     if (!this.textures.exists("falaEscritorio")) {
       this.load.image(
         "falaEscritorio",
@@ -276,6 +284,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   create() {
+    // Medidas-base para montar a tela de diálogo e o painel inferior
     const W = this.scale.width;
     const H = this.scale.height;
     const CX = W / 2;
@@ -294,14 +303,17 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     const BTN_H = 82;
     const CONT_Y = PANEL_TOP + PANEL_H - 38;
 
+    // Guarda a posição do botão de continuar para reaproveitar em outros estados
     this._CONT_Y = CONT_Y;
 
+    // Camada escura para destacar a interface da conversa
     this.add
       .rectangle(CX, H / 2, W, H, 0x000000, 0.78)
       .setScrollFactor(0)
       .setDepth(0)
       .setInteractive();
 
+    // Imagem principal da personagem/cena
     const img = this.add
       .image(CX, IMG_CY, "falaEscritorio")
       .setScrollFactor(0)
@@ -310,6 +322,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     const escala = Math.min(W / img.width, IMG_H / img.height);
     img.setScale(escala);
 
+    // Painel inferior onde ficam fala, narrativa e escolhas
     this.add
       .rectangle(CX, PANEL_CY, W, PANEL_H, 0x060d1a, 0.96)
       .setScrollFactor(0)
@@ -319,6 +332,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Nome do cliente exibido apenas quando há fala direta da NPC
     this.textoNome = this.add
       .text(CX - BTN_W / 2, NOME_Y, "Gabriel  -  Escritório", {
         fontSize: "20px",
@@ -330,6 +344,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setDepth(3)
       .setVisible(false);
 
+    // Texto de contextualização usado nas aberturas das cenas
     this.textoNarracao = this.add
       .text(CX, NAR_Y + 30, "", {
         fontSize: "40px",
@@ -343,6 +358,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Campo principal para a fala da NPC
     this.textoNpc = this.add
       .text(CX, TEXTO_NPC_Y, "", {
         fontSize: "40px",
@@ -355,6 +371,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(3);
 
+    // Título do feedback após o jogador escolher uma alternativa
     this.textoFeedbackTitulo = this.add
       .text(CX, PANEL_TOP + 60, "", {
         fontSize: "38px",
@@ -368,6 +385,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // Mensagem explicando por que a escolha foi correta, neutra ou errada
     this.textoFeedback = this.add
       .text(CX, TEXTO_NPC_Y, "", {
         fontSize: "32px",
@@ -381,9 +399,11 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // Cria os três botões reutilizáveis das alternativas A, B e C
     this.botoesEscolha = BTN_Y.map((by, i) => {
       const letra = ["A", "B", "C"][i];
 
+      // Fundo clicável da alternativa
       const bg = this.add
         .rectangle(CX, by + BTN_H / 2, BTN_W, BTN_H, COR_NEUTRO)
         .setScrollFactor(0)
@@ -392,6 +412,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
 
+      // Indicador visual da letra da alternativa
       const labelLetra = this.add
         .text(CX - BTN_W / 2 + 16, by + BTN_H / 2, `[${letra}]`, {
           fontSize: "20px",
@@ -404,6 +425,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
         .setDepth(4)
         .setVisible(false);
 
+      // Texto principal da resposta escolhível
       const txtEscolha = this.add
         .text(CX - BTN_W / 2 + 70, by + BTN_H / 2, "", {
           fontSize: "30px",
@@ -416,6 +438,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
         .setDepth(4)
         .setVisible(false);
 
+      // Estados visuais simples para deixar clara a interação disponível
       bg.on("pointerover", () => {
         if (!this.aguardandoLLM) bg.setFillStyle(COR_HOVER);
       });
@@ -429,6 +452,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       return { bg, labelLetra, txtEscolha };
     });
 
+    // Botão único usado para responder, continuar ou fechar o diálogo
     this.btnContinuar = this.add
       .rectangle(CX, CONT_Y, 340, 56, 0x1a5c1a)
       .setScrollFactor(0)
@@ -436,6 +460,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setStrokeStyle(1, 0x2a9c2a)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
+    // Texto interno do botão de continuar, alterado conforme o estado
     this.txtContinuar = this.add
       .text(CX, CONT_Y, "", {
         fontSize: "22px",
@@ -456,6 +481,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     );
     this.btnContinuar.on("pointerdown", () => this._aoContinuar());
 
+    // Mensagem temporária exibida enquanto a próxima fala é preparada
     this.textoCarregando = this.add
       .text(CX, CONT_Y, "Gabriel está pensando...", {
         fontSize: "21px",
@@ -468,6 +494,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setDepth(4)
       .setVisible(false);
 
+    // HUD local para mostrar o total global e o ganho acumulado nesta conversa
     this.textoCieloCoin = this.add
       .text(W - 20, 16, "Cielo Coins: 0 / 600", {
         fontSize: "30px",
@@ -480,6 +507,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(10);
 
+    // Indicador do progresso dentro do roteiro atual
     this.textoCena = this.add
       .text(20, 16, "", {
         fontSize: "40px",
@@ -492,11 +520,15 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       .setScrollFactor(0)
       .setDepth(10);
 
+    // Atalho de fechamento usado no final do diálogo
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
+    // Antes de começar, exibe uma tela curta explicando a dinâmica da fase
     this._criarTutorial(W, H, CX, H / 2);
   }
 
   update() {
+    // Permite encerrar a cena final também pelo teclado
     if (this.estado === "fim" && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
       this._fechar();
     }
@@ -506,6 +538,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     const els = [];
     const D = 5;
 
+    // Overlay que bloqueia a interação com a conversa até o jogador iniciar
     els.push(
       this.add
         .rectangle(CX, CY, W, H, 0x000000, 0.88)
@@ -520,6 +553,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
         .setDepth(D + 0.1)
         .setStrokeStyle(2, 0x2a5ba0),
     );
+    // Título e divisor visual do tutorial
     els.push(
       this.add
         .text(CX, CY - 270, "Como funciona esta conversa", {
@@ -540,6 +574,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     );
 
     const linhas = [
+      // Resume o objetivo geral da conversa
       {
         icone: "🎯",
         texto:
@@ -557,6 +592,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       },
     ];
 
+    // Monta visualmente as regras em linhas com ícone e descrição
     linhas.forEach(({ icone, texto }, i) => {
       els.push(
         this.add
@@ -583,6 +619,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     });
 
     const btnY = CY + 255;
+    // Botão que fecha o tutorial e libera o início do roteiro
     const btnBg = this.add
       .rectangle(CX, btnY, 300, 58, 0x1a5c1a)
       .setScrollFactor(0)
@@ -614,6 +651,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarCena(idx) {
+    // Carrega a cena correspondente do roteiro e limpa resíduos da etapa anterior
     const cena = ROTEIRO[idx];
     this.cenaIdx = idx;
     this.estado = "intro";
@@ -634,6 +672,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNarracao.setText(cena.narracao || "");
     this.textoNpc.setText(cena.npcInicial ? `"${cena.npcInicial}"` : "");
 
+    // Se a cena já começa sem fala introdutória, pula direto para as escolhas
     if (!cena.narracao && !cena.npcInicial) {
       this._mostrarEscolhas();
     } else {
@@ -643,6 +682,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarEscolhas() {
+    // Troca a interface para o modo de decisão do jogador
     const cena = ROTEIRO[this.cenaIdx];
     this.estado = "escolha";
 
@@ -655,6 +695,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
+    // Embaralha e preenche os três botões com as respostas da cena atual
     this.escolhasOrdenadas = shuffleArray(cena.escolhas);
     this.escolhasOrdenadas.forEach(({ texto }, i) => {
       const { bg, labelLetra, txtEscolha } = this.botoesEscolha[i];
@@ -666,6 +707,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarFeedbackEscolha(escolha) {
+    // Exibe a leitura pedagógica da alternativa antes da reação da NPC
     this.estado = "feedback";
 
     this.textoNarracao.setText("");
@@ -684,6 +726,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarRespostaNpc(resposta) {
+    // Mostra a fala da NPC depois do feedback da escolha
     this.estado = "resposta";
 
     this.textoFeedbackTitulo.setVisible(false);
@@ -699,11 +742,14 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   async _aoEscolher(indice) {
+    // Processa a alternativa escolhida, atualiza pontuação e prepara a reação da NPC
     if (this.aguardandoLLM || this.estado !== "escolha") return;
 
+    // Recupera a alternativa clicada dentro da ordem embaralhada visível
     const cena = ROTEIRO[this.cenaIdx];
     const escolha = this.escolhasOrdenadas[indice];
 
+    // Guarda a escolha e soma os coins ganhos nesta fase
     this.escolhaAtual = escolha;
 
     const ganhos = handleAnswer(this.registry, CAPITULO, escolha.tipo);
@@ -721,12 +767,14 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       this.botoesEscolha[indice].bg.setFillStyle(COR_NEUTRA);
     }
 
+    // Bloqueia novas interações até concluir a reação da NPC
     this.aguardandoLLM = true;
     this._esconderBotoes(indice);
     this.textoCarregando.setVisible(true);
 
     await esperar(350);
 
+    // Busca a resposta da NPC e guarda para a próxima etapa do fluxo
     const resposta = await this._chamarLLM(escolha, cena);
     this.respostaAtualNpc = resposta;
 
@@ -738,6 +786,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _aoContinuar() {
+    // Centraliza as transições entre introdução, feedback, resposta e fim
     if (this.estado === "intro") {
       const cena = ROTEIRO[this.cenaIdx];
       if (!cena.escolhas?.length) {
@@ -763,7 +812,9 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarResultadoFinal() {
+    // Tela final com percentual, meta atingida e mensagem de desempenho
     this.estado = "fim";
+    // Marca a fase como concluída para liberar a progressão do jogo
     this.registry.set("escritorio_dialogo_concluido", true);
     this._esconderBotoes();
     this.textoFeedbackTitulo.setVisible(false);
@@ -792,6 +843,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       ? "Meta atingida!"
       : `Meta não atingida (precisava de ${meta} coins)`;
 
+    // Reaproveita o campo principal de fala para mostrar o resumo final
     this.textoNpc
       .setText(
         `Conversa encerrada!\n\n` +
@@ -808,16 +860,19 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   _mostrarContinuar(label) {
+    // Mostra o botão principal com o texto adequado ao momento
     this.btnContinuar.setVisible(true);
     this.txtContinuar.setVisible(true).setText(label);
   }
 
   _ocultarContinuar() {
+    // Esconde temporariamente o botão principal
     this.btnContinuar.setVisible(false);
     this.txtContinuar.setVisible(false);
   }
 
   _esconderBotoes(manter = -1) {
+    // Oculta todas as alternativas, exceto a que deve permanecer destacada
     this.botoesEscolha.forEach(({ bg, labelLetra, txtEscolha }, i) => {
       if (i !== manter) {
         bg.setVisible(false);
@@ -828,10 +883,12 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
   }
 
   async _chamarLLM(escolha, cena) {
+    // Usa a resposta fixa do roteiro ou tenta gerar uma variante contextual
     if (this.respostaRoteiroEstrita) {
       return cena.npcResposta;
     }
 
+    // Sem chave válida, mantém o diálogo funcional usando o fallback do roteiro
     if (!GROQ_API_KEY || GROQ_API_KEY === "SUA_CHAVE_GROQ_AQUI") {
       return cena.npcResposta;
     }
@@ -853,6 +910,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       `${guias[escolha.tipo]}`;
 
     try {
+      // Gera uma resposta curta contextualizada pela cena e pela escolha do jogador
       const res = await fetch(GROQ_URL, {
         method: "POST",
         headers: {
@@ -874,6 +932,7 @@ export default class SceneDialogoEscritorio extends SceneDialogoBase {
       const data = await res.json();
       return data.choices?.[0]?.message?.content?.trim() || cena.npcResposta;
     } catch (err) {
+      // Em falha de rede/API, volta para a resposta pré-definida do roteiro
       console.warn(
         "[SceneDialogoEscritorio] Falha na LLM, usando roteiro:",
         err.message,
