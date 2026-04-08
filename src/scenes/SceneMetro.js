@@ -68,6 +68,11 @@
       "src/assets/imagens/mapsjson/tileSets/Interiors_S5_640.png",
     );
 
+    this.load.image(
+      "imagemTutorialMetro",
+      "src/assets/imagens/imagensPopUps/imagemTutorialMetro.jpeg",
+    );
+
     // Sprites do personagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
@@ -396,6 +401,58 @@
     this.events.on("shutdown", () => {
       this.musica.stop();
     });
+
+    this.mostrarTutorialMetro();
+  }
+
+  mostrarTutorialMetro() {
+    const cx = this.scale.width / 2;
+    const cy = this.scale.height / 2;
+    this.elementosTutorialMetro = [];
+
+    // Fundo escuro semi-transparente
+    this.elementosTutorialMetro.push(
+      this.add
+        .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000, 0.7)
+        .setDepth(50)
+        .setScrollFactor(0),
+    );
+
+    // Imagem do tutorial do metrô
+    this.elementosTutorialMetro.push(
+      this.add
+        .image(cx, cy, "imagemTutorialMetro")
+        .setDepth(51)
+        .setScrollFactor(0),
+    );
+
+    // Botão "Fechar"
+    const botaoFechar = this.add
+      .text(cx, cy + 230, "Fechar", {
+        fontSize: "20px",
+        fontStyle: "bold",
+        color: "#ffffff",
+        backgroundColor: "#333333",
+        padding: { x: 24, y: 10 },
+      })
+      .setDepth(52)
+      .setScrollFactor(0)
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+    this.elementosTutorialMetro.push(botaoFechar);
+
+    botaoFechar.on("pointerover", () =>
+      botaoFechar.setStyle({ backgroundColor: "#555555" }),
+    );
+    botaoFechar.on("pointerout", () =>
+      botaoFechar.setStyle({ backgroundColor: "#333333" }),
+    );
+    botaoFechar.on("pointerdown", () => this.fecharTutorialMetro());
+  }
+
+  fecharTutorialMetro() {
+    this.elementosTutorialMetro.forEach((el) => el.destroy());
+    this.elementosTutorialMetro = [];
   }
 
   update() {
