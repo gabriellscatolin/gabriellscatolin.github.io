@@ -418,17 +418,22 @@
         .setScrollFactor(0),
     );
 
-    // Imagem do tutorial do metrô
-    this.elementosTutorialMetro.push(
-      this.add
-        .image(cx, cy, "imagemTutorialMetro")
-        .setDepth(51)
-        .setScrollFactor(0),
-    );
+    // Imagem do tutorial do metrô (proporcional, máx 85% da tela)
+    const imgMetro = this.add
+      .image(cx, cy, "imagemTutorialMetro")
+      .setDepth(51)
+      .setScrollFactor(0);
+    const maxW = this.scale.width * 0.85;
+    const maxH = this.scale.height * 0.85;
+    const escala = Math.min(maxW / imgMetro.width, maxH / imgMetro.height);
+    imgMetro.setScale(escala);
+    this.elementosTutorialMetro.push(imgMetro);
+
+    const btnY = cy + imgMetro.displayHeight / 2 + 30;
 
     // Botão "Fechar"
     const botaoFechar = this.add
-      .text(cx, cy + 230, "Fechar", {
+      .text(cx, btnY, "Fechar", {
         fontSize: "20px",
         fontStyle: "bold",
         color: "#ffffff",

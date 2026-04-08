@@ -19,12 +19,18 @@ export default class SceneVitoria extends Phaser.Scene {
       .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000)
       .setDepth(0);
 
-    // Imagem de vitória
-    this.add.image(cx, cy, "imagemVitoria").setDepth(1);
+    // Imagem de vitória (proporcional, máx 85% da tela)
+    const imgVitoria = this.add.image(cx, cy, "imagemVitoria").setDepth(1);
+    const maxW = this.scale.width * 0.85;
+    const maxH = this.scale.height * 0.85;
+    const escala = Math.min(maxW / imgVitoria.width, maxH / imgVitoria.height);
+    imgVitoria.setScale(escala);
+
+    const btnY = cy + imgVitoria.displayHeight / 2 + 30;
 
     // Botão "Fechar"
     const botaoFechar = this.add
-      .text(cx, cy + 430, "Fechar", {
+      .text(cx, btnY, "Fechar", {
         fontSize: "28px",
         fontStyle: "bold",
         color: "#ffffff",

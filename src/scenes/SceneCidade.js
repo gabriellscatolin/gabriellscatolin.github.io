@@ -1351,17 +1351,22 @@ export default class SceneCidade extends Phaser.Scene {
         .setScrollFactor(0),
     );
 
-    // Imagem do tutorial do mapa
-    this.elementosTutorialMapa.push(
-      this.add
-        .image(cx, cy, "imagemTutorialMapa")
-        .setDepth(51)
-        .setScrollFactor(0),
-    );
+    // Imagem do tutorial do mapa (proporcional, máx 85% da tela)
+    const imgMapa = this.add
+      .image(cx, cy, "imagemTutorialMapa")
+      .setDepth(51)
+      .setScrollFactor(0);
+    const maxW = this.scale.width * 0.85;
+    const maxH = this.scale.height * 0.85;
+    const escala = Math.min(maxW / imgMapa.width, maxH / imgMapa.height);
+    imgMapa.setScale(escala);
+    this.elementosTutorialMapa.push(imgMapa);
+
+    const btnY = cy + imgMapa.displayHeight / 2 + 30;
 
     // Botão "Fechar"
     const botaoFechar = this.add
-      .text(cx, cy + 230, "Fechar", {
+      .text(cx, btnY, "Fechar", {
         fontSize: "20px",
         fontStyle: "bold",
         color: "#ffffff",
