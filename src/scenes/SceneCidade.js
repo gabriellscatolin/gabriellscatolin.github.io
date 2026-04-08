@@ -1362,9 +1362,16 @@ export default class SceneCidade extends Phaser.Scene {
     let dW = maxW, dH = maxW / ratio;
     if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
     imgMapa.setDisplaySize(dW, dH);
-    imgMapa.setInteractive({ useHandCursor: true });
-    imgMapa.on("pointerdown", () => this.fecharTutorialMapa());
     this.elementosTutorialMapa.push(imgMapa);
+
+    // Zona invisível clicável sobre o botão "Entendi!" (parte inferior central da imagem)
+    const btnZone = this.add
+      .zone(cx, cy + dH * 0.38, dW * 0.55, dH * 0.14)
+      .setDepth(52)
+      .setScrollFactor(0)
+      .setInteractive({ useHandCursor: true });
+    btnZone.on("pointerdown", () => this.fecharTutorialMapa());
+    this.elementosTutorialMapa.push(btnZone);
   }
 
   fecharTutorialMapa() {
