@@ -3,7 +3,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     super({ key: "SceneAgencia03" });
   }
 
-  // Registra os dados do personagem para uso na cena
+  // Registra os dados do spritePersonagem para uso na cena
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -69,7 +69,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/npcPJ1.png",
     );
 
-    // ── Spritesheet do personagem ─────────────────────────────────────────────
+    // ── Spritesheet do spritePersonagem ─────────────────────────────────────────────
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -91,7 +91,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     }
   }
 
-  // Cria a cena, o mapa, o personagem e as interações
+  // Cria a cena, o mapa, o spritePersonagem e as interações
   create() {
     const mapa = this.make.tilemap({ key: "agencia03" });
     this.mapa = mapa;
@@ -195,7 +195,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
 
-    // ── Animações do personagem ───────────────────────────────────────────────
+    // ── Animações do spritePersonagem ───────────────────────────────────────────────
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
@@ -215,7 +215,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     const limitesCena = this._calcularLimitesCena(mapa, OX, OY);
 
-    // ── Spawn do personagem ───────────────────────────────────────────────────
+    // ── Spawn do spritePersonagem ───────────────────────────────────────────────────
     // Usa a posição passada por outra cena; caso contrário, usa o centro visual
     // do mapa já compensado pelo offset aplicado nas camadas (OX/OY).
     const temSpawnCustom =
@@ -237,24 +237,28 @@ export default class SceneAgencia03 extends Phaser.Scene {
       : SPAWN_PADRAO_Y;
 
     // ── Personagem e física ───────────────────────────────────────────────────
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
 
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     // Colisões com camadas
     [paredeC, linhaC, escadaC, objetC]
       .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+      .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
     // ── NPC ───────────────────────────────────────────────────────────────────
     this.npcAgencia = this.physics.add
@@ -263,7 +267,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     this.npcAgencia.setScale(0.09);
     this.npcAgencia.refreshBody();
-    this.physics.add.collider(this.personagem, this.npcAgencia);
+    this.physics.add.collider(this.spritePersonagem, this.npcAgencia);
 
     this.labelNpc = this.add
       .text(this.npcAgencia.x, this.npcAgencia.y, "[E] Falar", {
@@ -313,7 +317,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // ── Câmera ────────────────────────────────────────────────────────────────
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(
       limitesCena.x,
@@ -532,7 +536,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -542,42 +546,42 @@ export default class SceneAgencia03 extends Phaser.Scene {
       }
     }
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
     // ── Interação com NPC ───────────────────────────────────────────────────
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       this.npcAgencia.x,
       this.npcAgencia.y,
     );
@@ -612,8 +616,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
     // ── Detecção da zona de saída ─────────────────────────────────────────────
     const zonaSaidaAtual = (this.zonasSaida || []).find((z) => {
       const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
+        spritePersonagem.x,
+        spritePersonagem.y,
         z.x,
         z.y,
       );
@@ -628,7 +632,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
     }
 
     if (dentroSaida) {
-      this.labelSair.setPosition(personagem.x, personagem.y - 10);
+      this.labelSair.setPosition(spritePersonagem.x, spritePersonagem.y - 10);
       this.labelNpc.setVisible(false);
     }
 

@@ -3,13 +3,13 @@ export default class SceneEscritorio extends Phaser.Scene {
     super({ key: "SceneEscritorio" });
   }
 
-  // Recebe os dados do personagem vindos da cena anterior
+  // Recebe os dados do spritePersonagem vindos da cena anterior
   init(dados) {
     this.nomePastaEscolhida = dados.nomePasta || "Pedro";
     this.prefixoEscolhido = dados.prefixo || "HB";
   }
 
-  // Carrega mapa,áudios, tileset e sprites do personagem escolhido
+  // Carrega mapa,áudios, tileset e sprites do spritePersonagem escolhido
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -45,7 +45,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/npcEscritorio.png",
     );
 
-    // Carrega os frames de animação do personagem em todas as direções
+    // Carrega os frames de animação do spritePersonagem em todas as direções
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -67,7 +67,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     }
   }
 
-  // Monta o mapa, personagem, áudios, colisões, câmera e saída com tecla E
+  // Monta o mapa, spritePersonagem, áudios, colisões, câmera e saída com tecla E
   create() {
     // Adiciona áudios a cena
     this.musica = this.sound.add("trilhaSceneEscritorio", {
@@ -95,7 +95,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     mapa.createLayer("chao", tiles, 0, 0);
     mapa.createLayer("semcolis", tiles, 0, 0);
 
-    // Camadas com colisão (bloqueiam o personagem)
+    // Camadas com colisão (bloqueiam o spritePersonagem)
     const objcomcolis = mapa.createLayer("objcomcolis", tiles, 0, 0);
     const obcomcolis2 = mapa.createLayer("obcomcolis2", tiles, 0, 0);
     const borda = mapa.createLayer("borda", tiles, 0, 0);
@@ -121,7 +121,7 @@ export default class SceneEscritorio extends Phaser.Scene {
       }
     });
 
-    // Cria as animações de movimento do personagem
+    // Cria as animações de movimento do spritePersonagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`esp_andar_${dir}`)) {
@@ -143,31 +143,35 @@ export default class SceneEscritorio extends Phaser.Scene {
     const spawnX = 340;
     const spawnY = 392;
 
-    // Cria o personagem com física
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    // Cria o spritePersonagem com física
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Ajusta escala e hitbox para melhor encaixe no tilemap
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     // Aplica colisões com as camadas sólidas
-    this.physics.add.collider(this.personagem, objcomcolis);
-    this.physics.add.collider(this.personagem, obcomcolis2);
-    this.physics.add.collider(this.personagem, borda);
+    this.physics.add.collider(this.spritePersonagem, objcomcolis);
+    this.physics.add.collider(this.spritePersonagem, obcomcolis2);
+    this.physics.add.collider(this.spritePersonagem, borda);
 
     // NPC do escritório
     this.npcEscritorio = this.physics.add
       .staticImage(338, 258, "npc_escritorio")
       .setDepth(5);
-    const alturaAlvoNpc = this.personagem.displayHeight;
+    const alturaAlvoNpc = this.spritePersonagem.displayHeight;
     this.npcEscritorio.setDisplaySize(
       (this.npcEscritorio.width / this.npcEscritorio.height) *
         (alturaAlvoNpc * 1.2),
@@ -175,7 +179,7 @@ export default class SceneEscritorio extends Phaser.Scene {
     );
     this.npcEscritorio.refreshBody();
 
-    this.physics.add.collider(this.personagem, this.npcEscritorio);
+    this.physics.add.collider(this.spritePersonagem, this.npcEscritorio);
 
     this.labelNpc = this.add
       .text(338, 277, "[E] Falar", {
@@ -229,8 +233,8 @@ export default class SceneEscritorio extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    // Configura a câmera para seguir o personagem
-    this.cameras.main.startFollow(this.personagem);
+    // Configura a câmera para seguir o spritePersonagem
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
@@ -269,7 +273,7 @@ export default class SceneEscritorio extends Phaser.Scene {
   // Atualiza movimento, animações, interação com NPC e saída por tecla E
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -280,46 +284,46 @@ export default class SceneEscritorio extends Phaser.Scene {
     }
 
     // Zera a velocidade a cada frame para controle preciso
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
 
     let movendo = false;
 
     // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     // Mantém sprite parado na última direção quando não há movimento
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
     // Interação com NPC por proximidade
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       this.npcEscritorio.x,
       this.npcEscritorio.y,
     );
@@ -360,11 +364,11 @@ export default class SceneEscritorio extends Phaser.Scene {
       return;
     }
 
-    // Verifica se o personagem entrou na zona de saída
+    // Verifica se o spritePersonagem entrou na zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(
       this.zonaSaida,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {

@@ -3,7 +3,7 @@ export default class SceneRestaurante extends Phaser.Scene {
     super({ key: "SceneRestaurante" });
   }
 
-  // Recebe os dados do personagem e possível posição customizada de spawn
+  // Recebe os dados do spritePersonagem e possível posição customizada de spawn
   init(dados) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -13,7 +13,7 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.spawnYCustom = dados.spawnY ?? null;
   }
 
-  // Carrega mapa, tilesets grandes e sprites do personagem
+  // Carrega mapa, tilesets grandes e sprites do spritePersonagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -86,7 +86,7 @@ export default class SceneRestaurante extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/npcRestaurante.png",
     );
 
-    // Sprites do personagem
+    // Sprites do spritePersonagem
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -283,7 +283,7 @@ export default class SceneRestaurante extends Phaser.Scene {
       .setOrigin(0, 0)
       .setDepth(-10);
 
-    // Animações do personagem
+    // Animações do spritePersonagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`rest_andar_${dir}`)) {
@@ -305,18 +305,22 @@ export default class SceneRestaurante extends Phaser.Scene {
     const spawnX = this.spawnXCustom ?? 377;
     const spawnY = this.spawnYCustom ?? 425;
 
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "rest_frente_1");
-    this.personagem.setScale(0.028);
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "rest_frente_1",
+    );
+    this.spritePersonagem.setScale(0.028);
+    this.spritePersonagem.setCollideWorldBounds(true);
 
-    this.physics.add.collider(this.personagem, paredeC);
-    this.physics.add.collider(this.personagem, objC);
+    this.physics.add.collider(this.spritePersonagem, paredeC);
+    this.physics.add.collider(this.spritePersonagem, objC);
 
     // NPC do restaurante
     this.npcRestaurante = this.physics.add
       .staticImage(375, 310, "npc_restaurante")
       .setDepth(50);
-    const alturaAlvo = this.personagem.displayHeight;
+    const alturaAlvo = this.spritePersonagem.displayHeight;
     this.npcRestaurante.setDisplaySize(
       (this.npcRestaurante.width / this.npcRestaurante.height) *
         (alturaAlvo * 1.2),
@@ -331,7 +335,7 @@ export default class SceneRestaurante extends Phaser.Scene {
       this.npcRestaurante.width * 0.2,
       this.npcRestaurante.height * 0.2,
     );
-    this.physics.add.collider(this.personagem, this.npcRestaurante);
+    this.physics.add.collider(this.spritePersonagem, this.npcRestaurante);
 
     this.labelNpc = this.add
       .text(375, 330, "[E] Falar", {
@@ -380,7 +384,7 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Câmera
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(6);
     this.cameras.main.setBounds(area.x, area.y, area.width, area.height);
     this.physics.world.setBounds(area.x, area.y, area.width, area.height);
@@ -420,44 +424,44 @@ export default class SceneRestaurante extends Phaser.Scene {
 
   update() {
     const velocidade = 100;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("rest_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("rest_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("rest_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("rest_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("rest_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("rest_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("rest_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("rest_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`rest_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`rest_${this.direcaoAtual}_1`);
     }
 
     // Interação com NPC por proximidade
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       this.npcRestaurante.x,
       this.npcRestaurante.y,
     );
@@ -493,8 +497,8 @@ export default class SceneRestaurante extends Phaser.Scene {
     // Detecção da zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(
       this.zonaSaida,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -514,8 +518,7 @@ export default class SceneRestaurante extends Phaser.Scene {
 
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
-        const missaoPosRestaurante =
-          "Missão: Siga a PJ Camila até o Mercado.";
+        const missaoPosRestaurante = "Missão: Siga a PJ Camila até o Mercado.";
         this.registry.set("ag02_escolta_pj_restaurante", false);
         this.registry.set("ag02_escolta_pj_supermercado", true);
         this.registry.set("ag02_pj_supermercado_retorno", false);
@@ -531,6 +534,5 @@ export default class SceneRestaurante extends Phaser.Scene {
         });
       });
     }
-
   }
 }

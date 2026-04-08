@@ -3,7 +3,7 @@ export default class SceneAgencia extends Phaser.Scene {
     super({ key: "SceneAg" });
   }
 
-  // Inicializa dados do personagem vindos da cena anterior
+  // Inicializa dados do spritePersonagem vindos da cena anterior
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -138,7 +138,7 @@ export default class SceneAgencia extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/Iza/Iza_parado02.png",
     );
 
-    // Sprites do personagem selecionado
+    // Sprites do spritePersonagem selecionado
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -243,7 +243,7 @@ export default class SceneAgencia extends Phaser.Scene {
       }
     });
 
-    // Garante espaço livre no ponto de spawn para não empurrar o personagem.
+    // Garante espaço livre no ponto de spawn para não empurrar o spritePersonagem.
     const colSpawn = Math.floor(spawnX / tileW);
     const linSpawn = Math.floor(spawnY / tileH);
     camadasColisao.forEach((camada) => {
@@ -273,20 +273,24 @@ export default class SceneAgencia extends Phaser.Scene {
     });
 
     // ── PERSONAGEM ────────────────────────────────────────────────────────────
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
     const escala = Math.min(
       (tileW * 0.4) / larguraSprite,
       (tileW * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     camadasColisao.forEach((c) =>
-      this.physics.add.collider(this.personagem, c),
+      this.physics.add.collider(this.spritePersonagem, c),
     );
 
     // ── NPC ───────────────────────────────────────────────────────────────────
@@ -298,14 +302,14 @@ export default class SceneAgencia extends Phaser.Scene {
     this.npcAgenciaTrocaTempo = 0;
     this.npcAgenciaTrocaIntervalo = 250;
     this.npcAgencia.body.setImmovable(true);
-    const alturaAlvo = this.personagem.displayHeight;
+    const alturaAlvo = this.spritePersonagem.displayHeight;
     this.npcAgencia.setDisplaySize(
       (this.npcAgencia.width / this.npcAgencia.height) * (alturaAlvo * 1.2),
       alturaAlvo * 1.2,
     );
     this.npcAgencia.refreshBody();
 
-    this.physics.add.collider(this.personagem, this.npcAgencia);
+    this.physics.add.collider(this.spritePersonagem, this.npcAgencia);
 
     this.labelNpc = this.add
       .text(65, 76, "[E] Falar", {
@@ -346,13 +350,13 @@ export default class SceneAgencia extends Phaser.Scene {
     // ── NPC IZA ───────────────────────────────────────────────────────────────
     this.npcIza = this.physics.add.sprite(183, 126, "npc_iza_1").setDepth(5);
     this.npcIza.body.setImmovable(true);
-    const alturaAlvo2 = this.personagem.displayHeight;
+    const alturaAlvo2 = this.spritePersonagem.displayHeight;
     this.npcIza.setDisplaySize(
       (this.npcIza.width / this.npcIza.height) * (alturaAlvo2 * 1),
       alturaAlvo2 * 1,
     );
     this.npcIza.refreshBody();
-    this.physics.add.collider(this.personagem, this.npcIza);
+    this.physics.add.collider(this.spritePersonagem, this.npcIza);
 
     // Animação contínua de alternância de sprites
     this.npcIzaProximaTroca = 0;
@@ -409,7 +413,7 @@ export default class SceneAgencia extends Phaser.Scene {
     });
 
     // ── CÂMERA ────────────────────────────────────────────────────────────────
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(6.5);
     const larguraVisivel = this.cameras.main.width / this.cameras.main.zoom;
     const alturaVisivel = this.cameras.main.height / this.cameras.main.zoom;
@@ -493,7 +497,7 @@ export default class SceneAgencia extends Phaser.Scene {
   }
 
   _atualizarGuiaPJ() {
-    if (!this.pjGuiandoParaSaida || !this.npcAgencia || !this.personagem)
+    if (!this.pjGuiandoParaSaida || !this.npcAgencia || !this.spritePersonagem)
       return;
 
     const distNpcSaida = Phaser.Math.Distance.Between(
@@ -516,8 +520,8 @@ export default class SceneAgencia extends Phaser.Scene {
     }
 
     const distJogadorNpc = Phaser.Math.Distance.Between(
-      this.personagem.x,
-      this.personagem.y,
+      this.spritePersonagem.x,
+      this.spritePersonagem.y,
       this.npcAgencia.x,
       this.npcAgencia.y,
     );
@@ -706,7 +710,7 @@ export default class SceneAgencia extends Phaser.Scene {
 
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
     const izaConcluidaAgora =
       this.registry.get("ag01_dialogo_gg_concluido") === true;
 
@@ -750,42 +754,42 @@ export default class SceneAgencia extends Phaser.Scene {
       }
     }
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
     // ── INTERAÇÃO COM NPC ───────────────────────────────────────────────────
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       this.npcAgencia.x,
       this.npcAgencia.y,
     );
@@ -846,8 +850,8 @@ export default class SceneAgencia extends Phaser.Scene {
 
       // Detecção de proximidade com Iza
       const distIza = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
+        spritePersonagem.x,
+        spritePersonagem.y,
         this.npcIza.x,
         this.npcIza.y,
       );
@@ -887,8 +891,8 @@ export default class SceneAgencia extends Phaser.Scene {
     // ── SAÍDA AUTOMÁTICA ─────────────────────────────────────────────────────
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
+        spritePersonagem.x,
+        spritePersonagem.y,
         z.x,
         z.y,
       );

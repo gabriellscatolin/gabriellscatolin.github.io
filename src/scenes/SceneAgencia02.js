@@ -293,25 +293,29 @@ export default class SceneAgencia02 extends Phaser.Scene {
     const saidaY = 382;
 
     // Cria o personagem com física e limita seu movimento ao mapa
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
 
     // Ajusta escala e hitbox para encaixar melhor no cenário
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     // Cria colisões entre o personagem e os elementos sólidos do mapa
     [objCbaixo, parC, estante, linhasparede, mesinha, objC, cabine]
       .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+      .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
     this.npcCamila = this.physics.add
       .sprite(159, 156, "npc_camila")
@@ -321,13 +325,13 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.npcCamilaProximaTroca = 0;
     this.npcCamilaIntervaloTroca = 130;
 
-    const alturaAlvoNpc = this.personagem.displayHeight;
+    const alturaAlvoNpc = this.spritePersonagem.displayHeight;
     this.npcCamila.setDisplaySize(
       (this.npcCamila.width / this.npcCamila.height) * (alturaAlvoNpc * 1.2),
       alturaAlvoNpc * 1.2,
     );
 
-    this.physics.add.collider(this.personagem, this.npcCamila);
+    this.physics.add.collider(this.spritePersonagem, this.npcCamila);
 
     this.labelNpcCamila = this.add
       .text(159, 175, "[E] Falar", {
@@ -374,7 +378,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       alturaAlvoNpc * 1.2,
     );
 
-    this.physics.add.collider(this.personagem, this.npcEnzo);
+    this.physics.add.collider(this.spritePersonagem, this.npcEnzo);
 
     this.time.addEvent({
       delay: 450,
@@ -439,7 +443,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // Configura a câmera para acompanhar o personagem
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(
       limitesCena.x,
@@ -981,7 +985,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     } else {
       this.labelNpcCamila.setVisible(pertoCamila);
       if (pertoCamila) {
-        this.labelNpcCamila.setPosition(this.npcCamila.x, this.npcCamila.y + 19);
+        this.labelNpcCamila.setPosition(
+          this.npcCamila.x,
+          this.npcCamila.y + 19,
+        );
       }
     }
 
@@ -992,7 +999,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
       );
     }
 
-    if (camilaConcluidaAgora && this.camilaGuiandoParaSaida && !this.camilaChegouSaida) {
+    if (
+      camilaConcluidaAgora &&
+      this.camilaGuiandoParaSaida &&
+      !this.camilaChegouSaida
+    ) {
       const distJogadorCamila = Phaser.Math.Distance.Between(
         personagem.x,
         personagem.y,
@@ -1025,7 +1036,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     const camilaEmMovimento =
-      (camilaConcluidaAgora && this.camilaGuiandoParaSaida && !this.camilaChegouSaida && !this.camilaEsperandoJogador) ||
+      (camilaConcluidaAgora &&
+        this.camilaGuiandoParaSaida &&
+        !this.camilaChegouSaida &&
+        !this.camilaEsperandoJogador) ||
       (!camilaConcluidaAgora && !pertoCamila);
     if (camilaEmMovimento) {
       const agora = this.time.now;
@@ -1087,15 +1101,17 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     const saidaLiberada = !camilaConcluidaAgora || this.camilaChegouSaida;
-    const dentroSaida = saidaLiberada && (this.zonasSaida || []).some((z) => {
-      const distancia = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
-        z.x,
-        z.y,
-      );
-      return distancia <= z.raio;
-    });
+    const dentroSaida =
+      saidaLiberada &&
+      (this.zonasSaida || []).some((z) => {
+        const distancia = Phaser.Math.Distance.Between(
+          personagem.x,
+          personagem.y,
+          z.x,
+          z.y,
+        );
+        return distancia <= z.raio;
+      });
 
     // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {

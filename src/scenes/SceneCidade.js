@@ -403,12 +403,12 @@ export default class SceneCidade extends Phaser.Scene {
     const spawnY = this.spawnYCustom || 900;
 
     // Jogador
-    this.personagem = this.physics.add.sprite(
+    this.spritePersonagem = this.physics.add.sprite(
       spawnX,
       spawnY,
       "sprite_frente_1",
     );
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Label de coordenadas acima do personagem
     this.coordLabel = this.add
@@ -427,28 +427,28 @@ export default class SceneCidade extends Phaser.Scene {
       .setDepth(1002);
 
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
     const escala = Math.min(
       (tamTile * 0.6) / larguraSprite,
       (tamTile * 0.6) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.03));
-    this.personagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
+    this.spritePersonagem.setScale(Math.max(escala, 0.03));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.5, alturaSprite * 0.5);
 
     if (caminhoInferior)
-      this.physics.add.collider(this.personagem, caminhoInferior);
+      this.physics.add.collider(this.spritePersonagem, caminhoInferior);
     if (carrosVeiculos)
-      this.physics.add.collider(this.personagem, carrosVeiculos);
+      this.physics.add.collider(this.spritePersonagem, carrosVeiculos);
     if (objetosInferior2)
-      this.physics.add.collider(this.personagem, objetosInferior2);
+      this.physics.add.collider(this.spritePersonagem, objetosInferior2);
     if (estabelecimentos)
-      this.physics.add.collider(this.personagem, estabelecimentos);
+      this.physics.add.collider(this.spritePersonagem, estabelecimentos);
 
     // Colisao manual para bloquear o ponto x:1035 y:1048.
     this.colisaoManualCidade = this.add.zone(1035, 1048, 16, 16);
     this.physics.add.existing(this.colisaoManualCidade, true);
-    this.physics.add.collider(this.personagem, this.colisaoManualCidade);
+    this.physics.add.collider(this.spritePersonagem, this.colisaoManualCidade);
 
     // Colisao manual continua na faixa y:963 de x:1055 ate x:1485.
     this.colisaoFaixaCidade = this.add.zone(
@@ -458,7 +458,7 @@ export default class SceneCidade extends Phaser.Scene {
       16,
     );
     this.physics.add.existing(this.colisaoFaixaCidade, true);
-    this.physics.add.collider(this.personagem, this.colisaoFaixaCidade);
+    this.physics.add.collider(this.spritePersonagem, this.colisaoFaixaCidade);
 
     // Colisao manual continua na faixa x:1478 de y:980 ate y:1064.
     this.colisaoFaixaVerticalCidade = this.add.zone(
@@ -468,7 +468,10 @@ export default class SceneCidade extends Phaser.Scene {
       1064 - 980 + 16,
     );
     this.physics.add.existing(this.colisaoFaixaVerticalCidade, true);
-    this.physics.add.collider(this.personagem, this.colisaoFaixaVerticalCidade);
+    this.physics.add.collider(
+      this.spritePersonagem,
+      this.colisaoFaixaVerticalCidade,
+    );
 
     // Colisao manual continua na faixa x:1062 de y:979 ate y:1048.
     this.colisaoFaixaVerticalCidade2 = this.add.zone(
@@ -479,7 +482,7 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.physics.add.existing(this.colisaoFaixaVerticalCidade2, true);
     this.physics.add.collider(
-      this.personagem,
+      this.spritePersonagem,
       this.colisaoFaixaVerticalCidade2,
     );
 
@@ -491,12 +494,12 @@ export default class SceneCidade extends Phaser.Scene {
       16,
     );
     this.physics.add.existing(this.colisaoFaixaCidade2, true);
-    this.physics.add.collider(this.personagem, this.colisaoFaixaCidade2);
+    this.physics.add.collider(this.spritePersonagem, this.colisaoFaixaCidade2);
 
     // Colisao manual no ponto solicitado x:1192 y:1240.
     this.colisaoManualCidade3 = this.add.zone(1192, 1240, 16, 16);
     this.physics.add.existing(this.colisaoManualCidade3, true);
-    this.physics.add.collider(this.personagem, this.colisaoManualCidade3);
+    this.physics.add.collider(this.spritePersonagem, this.colisaoManualCidade3);
 
     this.pjAcompanhandoAgencia2 =
       this.escoltaPJAgencia2Ativa ||
@@ -547,8 +550,8 @@ export default class SceneCidade extends Phaser.Scene {
         this.escoltaPJMetroAtiva ||
         this.escoltaPJRestauranteAtiva ||
         this.escoltaPJSupermercadoAtiva
-        ? "npc_camila"
-        : "npc_agencia";
+          ? "npc_camila"
+          : "npc_agencia";
       const spriteInicialGuia = `${this.npcGuiaPrefix}_frente_1`;
       this.registry.set("ag01_escolta_pj_agencia2", true);
       this.registry.set("ag01_pj_retorno", false);
@@ -558,7 +561,7 @@ export default class SceneCidade extends Phaser.Scene {
         .setDepth(9);
       this.npcTheoGuia.setCollideWorldBounds(true);
 
-      const alturaTheo = this.personagem.displayHeight;
+      const alturaTheo = this.spritePersonagem.displayHeight;
       this.npcTheoGuia.setDisplaySize(
         (this.npcTheoGuia.width / this.npcTheoGuia.height) * alturaTheo,
         alturaTheo,
@@ -588,7 +591,7 @@ export default class SceneCidade extends Phaser.Scene {
       );
       this.physics.add.collider(this.npcTheoGuia, this.colisaoFaixaCidade2);
       this.physics.add.collider(this.npcTheoGuia, this.colisaoManualCidade3);
-      this.physics.add.collider(this.personagem, this.npcTheoGuia);
+      this.physics.add.collider(this.spritePersonagem, this.npcTheoGuia);
 
       this.labelTheoGuia = this.add
         .text(
@@ -645,7 +648,7 @@ export default class SceneCidade extends Phaser.Scene {
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     // Câmera principal seguindo o personagem
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
     this.physics.world.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
@@ -1114,8 +1117,8 @@ export default class SceneCidade extends Phaser.Scene {
 
       const recadoPJ = this.add
         .text(
-          this.personagem.x,
-          this.personagem.y - 22,
+          this.spritePersonagem.x,
+          this.spritePersonagem.y - 22,
           "[Vire à direita e siga a rua até a Agência 02. Boa sorte!]",
           {
             fontSize: "6px",
@@ -1347,9 +1350,14 @@ export default class SceneCidade extends Phaser.Scene {
       .setScrollFactor(0);
     const src = this.textures.get("imagemTutorialMapa").source[0];
     const ratio = src.width / src.height;
-    const maxW = 240, maxH = 160;
-    let dW = maxW, dH = maxW / ratio;
-    if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
+    const maxW = 240,
+      maxH = 160;
+    let dW = maxW,
+      dH = maxW / ratio;
+    if (dH > maxH) {
+      dH = maxH;
+      dW = maxH * ratio;
+    }
     imgMapa.setDisplaySize(dW, dH);
     this.elementosTutorialMapa.push(imgMapa);
 
@@ -1612,9 +1620,9 @@ export default class SceneCidade extends Phaser.Scene {
       }
 
       // Guarda a posicao atual para retornar ao mesmo ponto apos fechar o mapa.
-      if (this.personagem) {
-        this.registry.set("cidadeRetornoX", this.personagem.x);
-        this.registry.set("cidadeRetornoY", this.personagem.y);
+      if (this.spritePersonagem) {
+        this.registry.set("cidadeRetornoX", this.spritePersonagem.x);
+        this.registry.set("cidadeRetornoY", this.spritePersonagem.y);
       }
       this.registry.set("mapaRetornoCena", "SceneCidade");
 
@@ -2819,7 +2827,10 @@ export default class SceneCidade extends Phaser.Scene {
       return true;
     }
 
-    if (alvo === "cabeleireiro" && this.registry.get("ag02_pj_retorno") === true) {
+    if (
+      alvo === "cabeleireiro" &&
+      this.registry.get("ag02_pj_retorno") === true
+    ) {
       return true;
     }
 
@@ -2874,7 +2885,11 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _atualizarAcompanhamentoPJCidade() {
-    if (!this.pjAcompanhandoAgencia2 || !this.npcTheoGuia || !this.personagem)
+    if (
+      !this.pjAcompanhandoAgencia2 ||
+      !this.npcTheoGuia ||
+      !this.spritePersonagem
+    )
       return;
 
     const pontoAtual = this.pjRotaWaypoints[this.pjRotaIndiceAtual];
@@ -3047,8 +3062,8 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     const distJogadorNpc = Phaser.Math.Distance.Between(
-      this.personagem.x,
-      this.personagem.y,
+      this.spritePersonagem.x,
+      this.spritePersonagem.y,
       this.npcTheoGuia.x,
       this.npcTheoGuia.y,
     );
@@ -3124,7 +3139,7 @@ export default class SceneCidade extends Phaser.Scene {
                   ? "[Chegamos. Entre no Restaurante]"
                   : this.pjDestinoAtual === "supermercado"
                     ? "[Chegamos. Entre no Mercado]"
-              : "[Chegamos. Entre na Padaria]";
+                    : "[Chegamos. Entre na Padaria]";
       const textoSeguir =
         this.pjDestinoAtual === "farmacia"
           ? "[Me siga até a Farmácia]"
@@ -3138,7 +3153,7 @@ export default class SceneCidade extends Phaser.Scene {
                   ? "[Me siga até o Restaurante]"
                   : this.pjDestinoAtual === "supermercado"
                     ? "[Me siga até o Mercado]"
-              : "[Siga o PJ]";
+                    : "[Siga o PJ]";
 
       this.labelTheoGuia
         .setVisible(true)
@@ -3217,7 +3232,7 @@ export default class SceneCidade extends Phaser.Scene {
       }
     }
     const velocidade = 150;
-    const { teclas, wasd, personagem, coordLabel } = this;
+    const { teclas, wasd, spritePersonagem, coordLabel } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -3228,36 +3243,36 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     // Movimento do jogador
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`sprite_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`sprite_${this.direcaoAtual}_1`);
     }
 
     this._atualizarAcompanhamentoPJCidade();
@@ -3265,8 +3280,8 @@ export default class SceneCidade extends Phaser.Scene {
     // Mostra ou oculta labels ao entrar nas zonas
     const dentroAgencia = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroAgencia !== this.dentroZonaAgencia) {
       this.dentroZonaAgencia = dentroAgencia;
@@ -3275,8 +3290,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroEscritorio = Phaser.Geom.Rectangle.Contains(
       this.zonaEscritorio,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroEscritorio !== this.dentroZonaEscritorio) {
       this.dentroZonaEscritorio = dentroEscritorio;
@@ -3285,8 +3300,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroPadaria = Phaser.Geom.Rectangle.Contains(
       this.zonaPadaria,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroPadaria !== this.dentroZonaPadaria) {
       this.dentroZonaPadaria = dentroPadaria;
@@ -3295,8 +3310,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroFarmacia = Phaser.Geom.Rectangle.Contains(
       this.zonaFarmacia,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroFarmacia !== this.dentroZonaFarmacia) {
       this.dentroZonaFarmacia = dentroFarmacia;
@@ -3305,8 +3320,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroRestaurante = Phaser.Geom.Rectangle.Contains(
       this.zonaRestaurante,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroRestaurante !== this.dentroZonaRestaurante) {
       this.dentroZonaRestaurante = dentroRestaurante;
@@ -3315,8 +3330,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroMetro = Phaser.Geom.Rectangle.Contains(
       this.zonaMetro,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroMetro !== this.dentroZonaMetro) {
       this.dentroZonaMetro = dentroMetro;
@@ -3325,8 +3340,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroLojaDeRoupas = Phaser.Geom.Rectangle.Contains(
       this.zonaLojaDeRoupas,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroLojaDeRoupas !== this.dentroZonaLojaDeRoupas) {
       this.dentroZonaLojaDeRoupas = dentroLojaDeRoupas;
@@ -3336,8 +3351,8 @@ export default class SceneCidade extends Phaser.Scene {
     // Mostra o botão [E] para entrar no supermercado ao chegar perto da posição x=2924, y=344
     const dentroSupermercado = Phaser.Geom.Rectangle.Contains(
       this.zonaSupermercado,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroSupermercado !== this.dentroZonaSupermercado) {
       this.dentroZonaSupermercado = dentroSupermercado;
@@ -3349,8 +3364,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroPostoDeGasolina = Phaser.Geom.Rectangle.Contains(
       this.zonaPostoDeGasolina,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroPostoDeGasolina !== this.dentroZonaPostoDeGasolina) {
       this.dentroZonaPostoDeGasolina = dentroPostoDeGasolina;
@@ -3359,8 +3374,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroAgencia02 = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia02,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroAgencia02 !== this.dentroZonaAgencia02) {
       this.dentroZonaAgencia02 = dentroAgencia02;
@@ -3369,8 +3384,8 @@ export default class SceneCidade extends Phaser.Scene {
 
     const dentroAgencia03 = Phaser.Geom.Rectangle.Contains(
       this.zonaAgencia03,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
     if (dentroAgencia03 !== this.dentroZonaAgencia03) {
       this.dentroZonaAgencia03 = dentroAgencia03;
@@ -3383,18 +3398,18 @@ export default class SceneCidade extends Phaser.Scene {
         : "";
 
     // Atualiza label de coordenadas acima do personagem
-    if (coordLabel && personagem) {
+    if (coordLabel && spritePersonagem) {
       coordLabel.setText(
-        `x: ${Math.round(personagem.x)}\ny: ${Math.round(personagem.y)}`,
+        `x: ${Math.round(spritePersonagem.x)}\ny: ${Math.round(spritePersonagem.y)}`,
       );
       coordLabel.setPosition(
-        personagem.x,
-        personagem.y - personagem.displayHeight / 2 - 10,
+        spritePersonagem.x,
+        spritePersonagem.y - spritePersonagem.displayHeight / 2 - 10,
       );
       coordLabel.setVisible(true);
     }
 
-    this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
+    this.minimapPlayerDot.setPosition(spritePersonagem.x, spritePersonagem.y);
     this._atualizarHudCidade();
     this._atualizarHudDebugCoords();
     this._atualizarHudCoins();

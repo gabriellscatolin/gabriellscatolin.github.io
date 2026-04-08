@@ -3,7 +3,7 @@ export default class ScenePadaria extends Phaser.Scene {
     super({ key: "ScenePadaria" });
   }
 
-  // Recebe os dados do personagem vindos da cena anterior
+  // Recebe os dados do spritePersonagem vindos da cena anterior
   init(dados) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -11,7 +11,7 @@ export default class ScenePadaria extends Phaser.Scene {
       dados.prefixo || this.registry.get("prefixo") || "HB";
   }
 
-  // Carrega mapa, tilesets e sprites do personagem
+  // Carrega mapa, tilesets e sprites do spritePersonagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -52,7 +52,7 @@ export default class ScenePadaria extends Phaser.Scene {
       "src/assets/imagens/imagensPersonagens/NPC/npcPadaria.png",
     );
 
-    // Sprites do personagem (4 direções × 4 frames)
+    // Sprites do spritePersonagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -74,7 +74,7 @@ export default class ScenePadaria extends Phaser.Scene {
     }
   }
 
-  // Monta mapa, personagem, colisões, câmera e saída
+  // Monta mapa, spritePersonagem, colisões, câmera e saída
   create() {
     const mapa = this.make.tilemap({ key: "padaria" });
     this.mapa = mapa;
@@ -152,8 +152,12 @@ export default class ScenePadaria extends Phaser.Scene {
     const spawnX = 83;
     const spawnY = 215;
 
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Colisões extras com zonas invisíveis (objetos específicos)
     const pontosColisao = [
@@ -168,38 +172,38 @@ export default class ScenePadaria extends Phaser.Scene {
     pontosColisao.forEach(({ x, y, w, h }) => {
       const zona = this.add.zone(x, y, w, h).setOrigin(0, 0);
       this.physics.add.existing(zona, true);
-      this.physics.add.collider(this.personagem, zona);
+      this.physics.add.collider(this.spritePersonagem, zona);
       this.colisoesExtras.push(zona);
     });
 
     // Ajusta escala e hitbox (colisão mais precisa nos pés)
     const tamTile = mapa.tileHeight || 16;
     const escala = Math.min(
-      (tamTile * 0.6) / this.personagem.width,
-      (tamTile * 0.6) / this.personagem.height,
+      (tamTile * 0.6) / this.spritePersonagem.width,
+      (tamTile * 0.6) / this.spritePersonagem.height,
     );
-    this.personagem.setScale(Math.max(escala, 0.03));
+    this.spritePersonagem.setScale(Math.max(escala, 0.03));
 
-    this.personagem.body.setSize(
-      this.personagem.width * 0.45,
-      this.personagem.height * 0.35,
+    this.spritePersonagem.body.setSize(
+      this.spritePersonagem.width * 0.45,
+      this.spritePersonagem.height * 0.35,
     );
-    this.personagem.body.setOffset(
-      this.personagem.width * 0.275,
-      this.personagem.height * 0.65,
+    this.spritePersonagem.body.setOffset(
+      this.spritePersonagem.width * 0.275,
+      this.spritePersonagem.height * 0.65,
     );
 
     // Colisão com camadas do mapa
     [paredeC, objC, bordaC]
       .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+      .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
     // NPC da padaria
     this.npcPadaria = this.physics.add.staticImage(125, 168, "npc_padaria");
     this.npcPadaria.setScale(0.07);
     this.npcPadaria.refreshBody();
     this.npcPadaria.setDepth(5);
-    this.physics.add.collider(this.personagem, this.npcPadaria);
+    this.physics.add.collider(this.spritePersonagem, this.npcPadaria);
 
     this.labelNpc = this.add
       .text(this.npcPadaria.x, this.npcPadaria.y, "[E] Falar", {
@@ -246,8 +250,8 @@ export default class ScenePadaria extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    // Câmera segue o personagem
-    this.cameras.main.startFollow(this.personagem);
+    // Câmera segue o spritePersonagem
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(6);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.physics.world.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
@@ -547,7 +551,7 @@ export default class ScenePadaria extends Phaser.Scene {
   // Atualiza movimento e saída da cena
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
     const dialogoPadariaConcluido =
       this.registry.get("padaria_dialogo_concluido") === true;
 
@@ -566,42 +570,42 @@ export default class ScenePadaria extends Phaser.Scene {
       }
     }
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
     // Interação com NPC por proximidade (ponto solicitado)
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       101,
       165,
     );
@@ -638,9 +642,9 @@ export default class ScenePadaria extends Phaser.Scene {
       );
     }
 
-    // Verifica se o personagem entrou na zona de saída
+    // Verifica se o spritePersonagem entrou na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
+      Phaser.Geom.Rectangle.Contains(z, spritePersonagem.x, spritePersonagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -650,7 +654,7 @@ export default class ScenePadaria extends Phaser.Scene {
     }
 
     if (dentroSaida) {
-      this.labelSair.setPosition(personagem.x, personagem.y - 10);
+      this.labelSair.setPosition(spritePersonagem.x, spritePersonagem.y - 10);
     }
 
     // Evita saída imediata ao entrar na cena: precisa sair da zona uma vez

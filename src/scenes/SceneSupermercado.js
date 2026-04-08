@@ -3,7 +3,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     super({ key: "SceneSupermercado" });
   }
 
-  // Registra os dados do personagem para uso na cena
+  // Registra os dados do spritePersonagem para uso na cena
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -112,7 +112,7 @@ export default class SceneSupermercado extends Phaser.Scene {
   }
   //___________________________________________________________________________________________________
 
-  //__________________________Cria a cena, o mapa, o áudio e o personagem e as interações________________________
+  //__________________________Cria a cena, o mapa, o áudio e o spritePersonagem e as interações________________________
 
   create() {
     const mapa = this.make.tilemap({ key: "supermercado" });
@@ -199,7 +199,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this._criarCamada(mapa, "Vidro", tilesets);
     this._criarCamada(mapa, "Player", tilesets);
 
-    // Camadas sólidas que bloqueiam o personagem
+    // Camadas sólidas que bloqueiam o spritePersonagem
     const paredeC = this._criarCamada(mapa, "ParedeComColisão", tilesets);
     const objC = this._criarCamada(mapa, "ObjComColisão", tilesets);
     const objC2 = this._criarCamada(mapa, "ObjComColisão2", tilesets);
@@ -228,14 +228,18 @@ export default class SceneSupermercado extends Phaser.Scene {
       }
     });
 
-    // Posição inicial do personagem na cena
+    // Posição inicial do spritePersonagem na cena
     const spawnX = 124;
     const spawnY = 183;
     //________________________________________________________________________________________________
 
-    //_________________________________Cria o personagem e as colisões_________________________________
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    //_________________________________Cria o spritePersonagem e as colisões_________________________________
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Colisões extras para corrigir limitações do Tiled em alguns pontos do mapa
     const pontosColisao = [
@@ -250,40 +254,40 @@ export default class SceneSupermercado extends Phaser.Scene {
     pontosColisao.forEach(({ x, y, w, h }) => {
       const zona = this.add.zone(x, y, w, h).setOrigin(0, 0);
       this.physics.add.existing(zona, true);
-      this.physics.add.collider(this.personagem, zona);
+      this.physics.add.collider(this.spritePersonagem, zona);
       this.colisoesExtras.push(zona);
     });
 
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
 
-    // Ajusta escala e hitbox do personagem para melhor encaixe no mapa
+    // Ajusta escala e hitbox do spritePersonagem para melhor encaixe no mapa
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
     // Colisões com as camadas sólidas do mapa
     [paredeC, objC, objC2, bordaC]
       .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+      .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
     // NPC do supermercado
     this.npcSupermercado = this.physics.add
       .staticImage(53, 157, "npc_supermercado")
       .setDepth(5);
-    // Deixa o tamanho do NPC igual ao do personagem
-    const alturaAlvoNpc = this.personagem.displayHeight;
+    // Deixa o tamanho do NPC igual ao do spritePersonagem
+    const alturaAlvoNpc = this.spritePersonagem.displayHeight;
     this.npcSupermercado.setDisplaySize(
       (this.npcSupermercado.width / this.npcSupermercado.height) *
         alturaAlvoNpc,
       alturaAlvoNpc,
     );
     this.npcSupermercado.refreshBody();
-    this.physics.add.collider(this.personagem, this.npcSupermercado);
+    this.physics.add.collider(this.spritePersonagem, this.npcSupermercado);
 
     // Botão [E] igual às outras cenas
     this.labelNpc = this.add
@@ -333,7 +337,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     //____________________________________________________________________________________________________________
 
     //_________________________________Configura a câmera para seguir o personagem_________________________________
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(5);
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
     this.cameras.main.centerOn(mapa.widthInPixels / 2, mapa.heightInPixels / 2);
@@ -363,7 +367,7 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    this.direcaoAtual = "frente"; // Guarda a direção inicial do personagem
+    this.direcaoAtual = "frente"; // Guarda a direção inicial do spritePersonagem
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -517,7 +521,7 @@ export default class SceneSupermercado extends Phaser.Scene {
   //__________________________Lógica de movimentação do personagem______________________________________________
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -527,45 +531,45 @@ export default class SceneSupermercado extends Phaser.Scene {
       }
     }
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("esp_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("esp_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     // Movimento vertical
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("esp_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     // Mantém o sprite parado na última direção usada
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`esp_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
     // Botão [E] igual às outras cenas: aparece ao se aproximar do NPC
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       this.npcSupermercado.x,
       this.npcSupermercado.y,
     );
@@ -605,8 +609,8 @@ export default class SceneSupermercado extends Phaser.Scene {
     // Detecção por aproximação da porta
     const dentroSaida = (this.zonasSaida || []).some((z) => {
       const d = Phaser.Math.Distance.Between(
-        personagem.x,
-        personagem.y,
+        spritePersonagem.x,
+        spritePersonagem.y,
         z.x,
         z.y,
       );

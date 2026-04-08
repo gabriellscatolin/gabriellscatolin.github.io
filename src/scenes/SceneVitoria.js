@@ -23,9 +23,14 @@ export default class SceneVitoria extends Phaser.Scene {
     const imgVitoria = this.add.image(cx, cy, "imagemVitoria").setDepth(1);
     const src = this.textures.get("imagemVitoria").source[0];
     const ratio = src.width / src.height;
-    const maxW = 240, maxH = 160;
-    let dW = maxW, dH = maxW / ratio;
-    if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
+    const maxW = 240,
+      maxH = 160;
+    let dW = maxW,
+      dH = maxW / ratio;
+    if (dH > maxH) {
+      dH = maxH;
+      dW = maxH * ratio;
+    }
     imgVitoria.setDisplaySize(dW, dH);
 
     const btnY = cy + dH / 2 + 30;

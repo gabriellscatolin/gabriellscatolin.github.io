@@ -3,7 +3,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     super({ key: "SceneFarmacia" });
   }
 
-  // Recupera os dados do personagem escolhidos anteriormente
+  // Recupera os dados do spritePersonagem escolhidos anteriormente
   init(dados = {}) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -13,7 +13,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     this.spawnYCustom = dados.spawnY ?? null;
   }
 
-  // Carrega mapa, tilesets, NPC e sprites do personagem
+  // Carrega mapa, tilesets, NPC e sprites do spritePersonagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -63,7 +63,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       "src/assets/imagens/mapsjson/tileSets/Room_Builder_16x16.png",
     );
 
-    // Sprites do personagem (4 direções × 4 frames)
+    // Sprites do spritePersonagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -85,7 +85,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
   }
 
-  // Monta o mapa, personagem, colisões, NPC e interações
+  // Monta o mapa, spritePersonagem, colisões, NPC e interações
   create() {
     const mapa = this.make.tilemap({ key: "farmacia" });
     this.mapa = mapa;
@@ -154,7 +154,7 @@ export default class SceneFarmacia extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => c.setCollisionByExclusion([-1]));
 
-    // Cria animações do personagem
+    // Cria animações do spritePersonagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`farm_andar_${dir}`)) {
@@ -172,26 +172,30 @@ export default class SceneFarmacia extends Phaser.Scene {
       }
     });
 
-    // Spawn do personagem próximo à entrada
+    // Spawn do spritePersonagem próximo à entrada
     const spawnX = this.spawnXCustom ?? 154;
     const spawnY = this.spawnYCustom ?? 215;
     const saidaX = 142;
     const saidaY = 235;
 
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "farm_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "farm_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Ajusta escala e hitbox
-    this.personagem.setScale(0.028);
-    this.personagem.body.setSize(
-      this.personagem.width * 0.35,
-      this.personagem.height * 0.35,
+    this.spritePersonagem.setScale(0.028);
+    this.spritePersonagem.body.setSize(
+      this.spritePersonagem.width * 0.35,
+      this.spritePersonagem.height * 0.35,
     );
 
     // Colisões com o cenário
     [paredeC, arm3C, arm2C, armC, arm0C, objC, cadeiraC, plantasC]
       .filter(Boolean)
-      .forEach((c) => this.physics.add.collider(this.personagem, c));
+      .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
     // Controles (setas + WASD)
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -202,8 +206,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       direita: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    // Câmera segue o personagem com zoom alto (ambiente interno)
-    this.cameras.main.startFollow(this.personagem);
+    // Câmera segue o spritePersonagem com zoom alto (ambiente interno)
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(7);
     this.cameras.main.roundPixels = true;
     this.cameras.main.setBounds(0, 0, mapa.widthInPixels, mapa.heightInPixels);
@@ -224,9 +228,9 @@ export default class SceneFarmacia extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    // NPC da farmácia com escala proporcional ao personagem
+    // NPC da farmácia com escala proporcional ao spritePersonagem
     this.npcFarmacia = this.add.image(79, 141, "npc_farmacia").setDepth(5);
-    const alturaAlvo = this.personagem.displayHeight;
+    const alturaAlvo = this.spritePersonagem.displayHeight;
     this.npcFarmacia.setDisplaySize(
       (this.npcFarmacia.width / this.npcFarmacia.height) * alturaAlvo,
       alturaAlvo,
@@ -552,7 +556,7 @@ export default class SceneFarmacia extends Phaser.Scene {
   // Atualiza movimento, interação com NPC e saída da cena
   update() {
     const velocidade = 100;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
     const dialogoFarmaciaConcluido =
       this.registry.get("farmacia_dialogo_concluido") === true;
 
@@ -563,45 +567,45 @@ export default class SceneFarmacia extends Phaser.Scene {
       this._atualizarPopupMissaoFarmacia(false);
     }
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     // Movimento horizontal
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("farm_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("farm_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("farm_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("farm_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     // Movimento vertical com prioridade menor (evita animação diagonal)
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("farm_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("farm_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("farm_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("farm_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     // Mantém sprite parado na última direção
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`farm_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
     // Novo raio maior para mostrar o botão [E] antes de chegar perto do NPC
     const distNpc = Phaser.Math.Distance.Between(
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
       79,
       141,
     );
@@ -655,7 +659,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     // Detecta entrada na zona de saída
     const dentroSaida = (this.zonasSaida || []).some((z) =>
-      Phaser.Geom.Rectangle.Contains(z, personagem.x, personagem.y),
+      Phaser.Geom.Rectangle.Contains(z, spritePersonagem.x, spritePersonagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {

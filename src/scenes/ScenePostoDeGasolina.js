@@ -268,22 +268,26 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     const spawnX = 301;
     const spawnY = 396;
 
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "esp_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "esp_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
     // Ajusta escala e hitbox para encaixar melhor no cenário
     const tamTile = mapa.tileWidth || 16;
-    const larguraSprite = this.personagem.width;
-    const alturaSprite = this.personagem.height;
+    const larguraSprite = this.spritePersonagem.width;
+    const alturaSprite = this.spritePersonagem.height;
     const escala = Math.min(
       (tamTile * 0.4) / larguraSprite,
       (tamTile * 0.4) / alturaSprite,
     );
-    this.personagem.setScale(Math.max(escala, 0.04));
-    this.personagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
+    this.spritePersonagem.setScale(Math.max(escala, 0.04));
+    this.spritePersonagem.body.setSize(larguraSprite * 0.4, alturaSprite * 0.4);
 
-    if (parede) this.physics.add.collider(this.personagem, parede);
-    if (objetos) this.physics.add.collider(this.personagem, objetos);
+    if (parede) this.physics.add.collider(this.spritePersonagem, parede);
+    if (objetos) this.physics.add.collider(this.spritePersonagem, objetos);
 
     // Controles de movimento e interação
     this.teclas = this.input.keyboard.createCursorKeys();
@@ -296,7 +300,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Configura a câmera para seguir o personagem
-    this.cameras.main.startFollow(this.personagem);
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(6.5);
     this.cameras.main.setBounds(
       this.origemMapaX,
@@ -345,11 +349,11 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       .setDepth(5);
     this.npcPosto.setDisplaySize(
       (this.npcPosto.width / this.npcPosto.height) *
-        (this.personagem.displayHeight * 1.1),
-      this.personagem.displayHeight * 1.1,
+        (this.spritePersonagem.displayHeight * 1.1),
+      this.spritePersonagem.displayHeight * 1.1,
     );
     this.npcPosto.refreshBody();
-    this.physics.add.collider(this.personagem, this.npcPosto);
+    this.physics.add.collider(this.spritePersonagem, this.npcPosto);
 
     this.labelNpcPosto = this.add
       .text(npcX, npcY, "[E] Falar", {

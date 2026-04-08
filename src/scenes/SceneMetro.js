@@ -3,7 +3,7 @@
     super({ key: "SceneMetro" });
   }
 
-  // Recebe os dados do personagem vindos da cena anterior
+  // Recebe os dados do spritePersonagem vindos da cena anterior
   init(dados) {
     this.nomePastaEscolhida =
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
@@ -11,7 +11,7 @@
       dados.prefixo || this.registry.get("prefixo") || "HB";
   }
 
-  // Carrega mapa, tilesets grandes e sprites do personagem
+  // Carrega mapa, tilesets grandes e sprites do spritePersonagem
   preload() {
     const nomePasta = this.nomePastaEscolhida;
     const prefixo = this.prefixoEscolhido;
@@ -73,7 +73,7 @@
       "src/assets/imagens/imagensPopUps/imagemTutorialMetro.jpeg",
     );
 
-    // Sprites do personagem (4 direções × 4 frames)
+    // Sprites do spritePersonagem (4 direções × 4 frames)
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
     for (let i = 1; i <= 4; i++) {
       this.load.image(
@@ -276,7 +276,7 @@
       .setOrigin(0, 0)
       .setDepth(-10);
 
-    // Animações do personagem
+    // Animações do spritePersonagem
     const direcoes = ["frente", "tras", "direita", "esquerda"];
     direcoes.forEach((dir) => {
       if (!this.anims.exists(`farm_andar_${dir}`)) {
@@ -298,20 +298,26 @@
     const spawnX = 273;
     const spawnY = 250;
 
-    this.personagem = this.physics.add.sprite(spawnX, spawnY, "farm_frente_1");
-    this.personagem.setCollideWorldBounds(true);
+    this.spritePersonagem = this.physics.add.sprite(
+      spawnX,
+      spawnY,
+      "farm_frente_1",
+    );
+    this.spritePersonagem.setCollideWorldBounds(true);
 
-    this.personagem.setScale(0.028);
-    this.personagem.body.setSize(
-      this.personagem.width * 0.35,
-      this.personagem.height * 0.35,
+    this.spritePersonagem.setScale(0.028);
+    this.spritePersonagem.body.setSize(
+      this.spritePersonagem.width * 0.35,
+      this.spritePersonagem.height * 0.35,
     );
 
     [paredeC, chaoC, objC, vagaoC]
       .filter(Boolean)
-      .forEach((camada) => this.physics.add.collider(this.personagem, camada));
+      .forEach((camada) =>
+        this.physics.add.collider(this.spritePersonagem, camada),
+      );
 
-    // Camadas que devem ficar acima do personagem
+    // Camadas que devem ficar acima do spritePersonagem
     criarCamada("N - Pixos");
     criarCamada("N- Pixos2");
     criarCamada("N - Pixos 3");
@@ -343,8 +349,8 @@
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    // Câmera segue o personagem
-    this.cameras.main.startFollow(this.personagem);
+    // Câmera segue o spritePersonagem
+    this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(4);
     this.cameras.main.setBounds(
       bounds.x,
@@ -415,9 +421,14 @@
       .setScrollFactor(0);
     const src = this.textures.get("imagemTutorialMetro").source[0];
     const ratio = src.width / src.height;
-    const maxW = 240, maxH = 160;
-    let dW = maxW, dH = maxW / ratio;
-    if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
+    const maxW = 240,
+      maxH = 160;
+    let dW = maxW,
+      dH = maxW / ratio;
+    if (dH > maxH) {
+      dH = maxH;
+      dW = maxH * ratio;
+    }
     imgMetro.setDisplaySize(dW, dH);
     this.elementosTutorialMetro.push(imgMetro);
 
@@ -454,45 +465,45 @@
 
   update() {
     const velocidade = 100;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, wasd, spritePersonagem } = this;
 
-    personagem.setVelocity(0);
+    spritePersonagem.setVelocity(0);
     let movendo = false;
 
     if (teclas.left.isDown || wasd.esquerda.isDown) {
-      personagem.setVelocityX(-velocidade);
-      personagem.anims.play("farm_andar_esquerda", true);
+      spritePersonagem.setVelocityX(-velocidade);
+      spritePersonagem.anims.play("farm_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
     } else if (teclas.right.isDown || wasd.direita.isDown) {
-      personagem.setVelocityX(velocidade);
-      personagem.anims.play("farm_andar_direita", true);
+      spritePersonagem.setVelocityX(velocidade);
+      spritePersonagem.anims.play("farm_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
     if (teclas.up.isDown || wasd.cima.isDown) {
-      personagem.setVelocityY(-velocidade);
-      if (!movendo) personagem.anims.play("farm_andar_tras", true);
+      spritePersonagem.setVelocityY(-velocidade);
+      if (!movendo) spritePersonagem.anims.play("farm_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
     } else if (teclas.down.isDown || wasd.baixo.isDown) {
-      personagem.setVelocityY(velocidade);
-      if (!movendo) personagem.anims.play("farm_andar_frente", true);
+      spritePersonagem.setVelocityY(velocidade);
+      if (!movendo) spritePersonagem.anims.play("farm_andar_frente", true);
       this.direcaoAtual = "frente";
       movendo = true;
     }
 
     if (!movendo) {
-      personagem.anims.stop();
-      personagem.setTexture(`farm_${this.direcaoAtual}_1`);
+      spritePersonagem.anims.stop();
+      spritePersonagem.setTexture(`farm_${this.direcaoAtual}_1`);
     }
 
     // Verifica entrada na zona de saída
     const dentroSaida = Phaser.Geom.Rectangle.Contains(
       this.zonaSaida,
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -502,8 +513,8 @@
 
     const entrarMiniGame = Phaser.Geom.Rectangle.Contains(
       this.zonaMiniGame, // ← G maiúsculo, igual ao create()
-      personagem.x,
-      personagem.y,
+      spritePersonagem.x,
+      spritePersonagem.y,
     );
 
     if (entrarMiniGame !== this.entrarMiniGame) {
