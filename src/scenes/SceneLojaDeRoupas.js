@@ -327,16 +327,6 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setVisible(false);
 
-    this.debugText = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ff0",
-        backgroundColor: "#000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // Pausa  a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
@@ -535,10 +525,5 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
         });
       }
     }
-
-    this.debugText.setText(
-      `x: ${Math.round(player.x).toString().padStart(4)} y: ${Math.round(player.y).toString().padStart(4)}`,
-    );
-    this.debugText.setPosition(player.x - 20, player.y - 20);
   }
 }

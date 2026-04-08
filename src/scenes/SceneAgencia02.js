@@ -127,9 +127,6 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
   // Monta a cena, cria o mapa, o personagem e as interações principais
   create() {
-    // Carrega o áudio da cena
-    this.load.audio("trilhaAgencia02", "src/assets/audios/trilhaAgencia02.mp3");
-
     const mapa = this.make.tilemap({ key: "agencia02" });
     this.mapa = mapa;
     const mapaBruto = this.cache.tilemap.get("agencia02")?.data;
@@ -511,17 +508,6 @@ export default class SceneAgencia02 extends Phaser.Scene {
 
     // Guarda a última direção para manter o sprite parado corretamente
     this.direcaoAtual = "frente";
-
-    // Texto de debug para mostrar coordenadas do personagem
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
 
     // HUD de missão no topo, seguindo o mesmo padrão da Agencia 01.
     this._criarPopupMissaoAgencia();
@@ -1153,12 +1139,6 @@ export default class SceneAgencia02 extends Phaser.Scene {
         });
       });
     }
-
-    // Exibe as coordenadas atuais do personagem para debug
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
 
     this._reposicionarPopupMissaoAgencia();
   }

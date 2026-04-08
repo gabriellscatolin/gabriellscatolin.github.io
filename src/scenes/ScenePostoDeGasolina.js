@@ -337,17 +337,6 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    // Texto de debug com as coordenadas atuais
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // NPC
     const npcX = this.origemChaoX + this.larguraChao * 0.55;
     const npcY = this.origemChaoY + this.alturaChao * 0.45;
@@ -764,11 +753,5 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         });
       });
     }
-
-    // Atualiza o texto de debug com as coordenadas atuais
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

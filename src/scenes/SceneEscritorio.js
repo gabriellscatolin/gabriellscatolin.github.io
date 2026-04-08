@@ -260,17 +260,6 @@ export default class SceneEscritorio extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    // Texto de debug com coordenadas do personagem
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
@@ -402,11 +391,5 @@ export default class SceneEscritorio extends Phaser.Scene {
         });
       });
     }
-
-    // Atualiza debug com posição atual do personagem
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

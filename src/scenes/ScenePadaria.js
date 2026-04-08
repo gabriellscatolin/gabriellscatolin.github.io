@@ -283,17 +283,6 @@ export default class ScenePadaria extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Debug de posição
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // HUD de missão no topo (mesmo conceito da Agência 01).
     this._criarPopupMissaoPadaria();
 
@@ -686,12 +675,6 @@ export default class ScenePadaria extends Phaser.Scene {
         });
       });
     }
-
-    // Debug de coordenadas
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
 
     this._reposicionarPopupMissaoPadaria();
     if (dialogoPadariaConcluido) {

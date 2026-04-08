@@ -351,17 +351,6 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.perto_npc = false;
     this.falouComNpc = false;
 
-    // ── Debug de coordenadas ──────────────────────────────────────────────────
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // Pausa  a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
@@ -657,11 +646,5 @@ export default class SceneAgencia03 extends Phaser.Scene {
         });
       });
     }
-
-    // ── Debug de coordenadas ──────────────────────────────────────────────────
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
   }
 }

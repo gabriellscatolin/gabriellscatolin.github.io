@@ -807,16 +807,6 @@ export default class SceneCidade extends Phaser.Scene {
     this.dentroZonaAgencia02 = false;
     this.dentroZonaAgencia03 = false;
 
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     this.direcaoAtual = "frente";
 
     // Minimapa com câmera separada
@@ -1076,7 +1066,6 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelPostoDeGasolina,
       this.labelAgencia02,
       this.labelAgencia03,
-      this.debugTxt,
     ]);
 
     // HUD da maquininha e das moedas
@@ -3405,7 +3394,6 @@ export default class SceneCidade extends Phaser.Scene {
       coordLabel.setVisible(true);
     }
 
-    this.debugTxt.setVisible(false);
     this.minimapPlayerDot.setPosition(personagem.x, personagem.y);
     this._atualizarHudCidade();
     this._atualizarHudDebugCoords();

@@ -387,16 +387,6 @@
     this.dentroZonaSaida = false;
     this.entrarMiniGame = false;
 
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "3px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
@@ -568,9 +558,6 @@
       });
     }
 
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
+    this._atualizarCamara();
   }
 }

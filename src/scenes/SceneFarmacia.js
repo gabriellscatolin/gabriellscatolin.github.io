@@ -284,17 +284,6 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Debug com coordenadas
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "3px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     if (this.falouComNpc && this.exclamacaoNpc) {
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
@@ -698,12 +687,6 @@ export default class SceneFarmacia extends Phaser.Scene {
         });
       });
     }
-
-    // Atualiza debug com coordenadas
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 8, personagem.y - 14);
 
     this._reposicionarPopupMissaoFarmacia();
   }

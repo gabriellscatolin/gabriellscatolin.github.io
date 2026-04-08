@@ -465,17 +465,6 @@ export default class SceneAgencia extends Phaser.Scene {
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
-    // ── DEBUG ─────────────────────────────────────────────────────────────────
-    this.debugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "4px",
-        color: "#ffff00",
-        backgroundColor: "#000000",
-        padding: { x: 1, y: 1 },
-        resolution: 4,
-      })
-      .setDepth(999);
-
     // HUD de missão no topo da cena (mesma lógica visual da cidade).
     this._criarPopupMissaoAgencia();
 
@@ -954,12 +943,6 @@ export default class SceneAgencia extends Phaser.Scene {
         });
       });
     }
-
-    // ── Debug ─────────────────────────────────────────────────────────────
-    this.debugTxt.setText(
-      `x:${Math.round(personagem.x)} y:${Math.round(personagem.y)}`,
-    );
-    this.debugTxt.setPosition(personagem.x - 10, personagem.y - 14);
 
     const textoMissaoAtual = this._resolverTextoMissaoAgencia();
     if (
