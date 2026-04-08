@@ -1331,8 +1331,9 @@ export default class SceneCidade extends Phaser.Scene {
       this.musica.stop();
     });
 
-    // Mostra tutorial do mapa quando vem da cutscene do ônibus
-    if (this.fromCutscene) {
+    // Mostra tutorial do mapa na primeira vez que o jogador entra na cena
+    if (!this.registry.get("tutorialMapaVisto")) {
+      this.registry.set("tutorialMapaVisto", true);
       this.mostrarTutorialMapa();
     }
   }
