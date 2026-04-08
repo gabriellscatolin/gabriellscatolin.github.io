@@ -12,6 +12,7 @@ import SceneSupermercado from "./src/scenes/SceneSupermercado.js";
 import SceneLojaDeRoupas from "./src/scenes/SceneLojaDeRoupas.js";
 import ScenePadaria from "./src/scenes/ScenePadaria.js";
 import ScenePostoDeGasolina from "./src/scenes/ScenePostoDeGasolina.js";
+import SceneVitoria from "./src/scenes/SceneVitoria.js";
 import SceneAgencia01 from "./src/scenes/SceneAgencia01.js";
 import SceneAgencia02 from "./src/scenes/SceneAgencia02.js";
 import SceneAgencia03 from "./src/scenes/SceneAgencia03.js";
@@ -77,6 +78,7 @@ const config = {
     SceneDialogoSupermercado,
     SceneDialogoLojaDeRoupas,
     SceneDialogoPostoDeGasolina,
+    SceneVitoria,
   ],
 };
 

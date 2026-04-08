@@ -940,4 +940,10 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
       return cena.npcResposta;
     }
   }
+
+  _fechar() {
+    // Ao fechar o diálogo do posto (fim de jogo), vai direto para a tela de vitória
+    if (this.cenaOrigem) this.scene.stop(this.cenaOrigem);
+    this.scene.start("SceneVitoria");
+  }
 }
