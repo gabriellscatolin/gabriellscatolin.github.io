@@ -418,18 +418,20 @@
         .setScrollFactor(0),
     );
 
-    // Imagem do tutorial do metrô (proporcional, máx 85% da tela)
+    // Imagem do tutorial do metrô (proporcional, máx 70% da tela)
     const imgMetro = this.add
       .image(cx, cy, "imagemTutorialMetro")
       .setDepth(51)
       .setScrollFactor(0);
-    const maxW = this.scale.width * 0.85;
-    const maxH = this.scale.height * 0.85;
-    const escala = Math.min(maxW / imgMetro.width, maxH / imgMetro.height);
-    imgMetro.setScale(escala);
+    const src = this.textures.get("imagemTutorialMetro").source[0];
+    const ratio = src.width / src.height;
+    const maxW = 240, maxH = 160;
+    let dW = maxW, dH = maxW / ratio;
+    if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
+    imgMetro.setDisplaySize(dW, dH);
     this.elementosTutorialMetro.push(imgMetro);
 
-    const btnY = cy + imgMetro.displayHeight / 2 + 30;
+    const btnY = cy + dH / 2 + 30;
 
     // Botão "Fechar"
     const botaoFechar = this.add

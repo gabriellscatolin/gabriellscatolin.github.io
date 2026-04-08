@@ -19,14 +19,16 @@ export default class SceneVitoria extends Phaser.Scene {
       .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000)
       .setDepth(0);
 
-    // Imagem de vitória (proporcional, máx 85% da tela)
+    // Imagem de vitória (máx 480x320 canvas pixels = ~25% da largura da tela)
     const imgVitoria = this.add.image(cx, cy, "imagemVitoria").setDepth(1);
-    const maxW = this.scale.width * 0.85;
-    const maxH = this.scale.height * 0.85;
-    const escala = Math.min(maxW / imgVitoria.width, maxH / imgVitoria.height);
-    imgVitoria.setScale(escala);
+    const src = this.textures.get("imagemVitoria").source[0];
+    const ratio = src.width / src.height;
+    const maxW = 240, maxH = 160;
+    let dW = maxW, dH = maxW / ratio;
+    if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
+    imgVitoria.setDisplaySize(dW, dH);
 
-    const btnY = cy + imgVitoria.displayHeight / 2 + 30;
+    const btnY = cy + dH / 2 + 30;
 
     // Botão "Fechar"
     const botaoFechar = this.add
