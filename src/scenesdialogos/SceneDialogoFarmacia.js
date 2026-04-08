@@ -36,13 +36,13 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
-    npcInicial: "Ol?, tudo bem? Sim, sou eu mesma, pode falar comigo.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Prometo ser r?pido. Vi que est? corrido... no fim do m?s, esse movimento todo vira resultado pra voc??",
+          "Prometo ser rápido. Vi que estás corrido... no fim do mês, esse movimento todo vira resultado pra você?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Respeita o tempo, lê o ambiente e entra direto na dor.",
@@ -75,7 +75,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Isso acontece bastante... voc? vende bem, mas n?o tem muita clareza de quando o dinheiro entra na conta do banco, n??",
+          "Isso acontece bastante... você vende bem, mas não tem muita clareza de quando o dinheiro entra na conta do banco, né?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Conecta com a dor e traz o banco de forma natural.",
@@ -91,7 +91,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Mas isso n?o ? s? quest?o de organizar melhor o caixa e acompanhar os valores com mais frequ?ncia?",
+          "Mas isso não é só questão de organizar melhor o caixa e acompanhar os valores com mais frequência?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Simplifica demais o problema.",
@@ -131,7 +131,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Ent?o o problema � que eu posso vender bem e mesmo assim ficar sem dinheiro dispon?vel?",
+      "Então o problema é que eu posso vender bem e mesmo assim ficar sem dinheiro disponível?",
   },
   {
     titulo: "CENA 4 - CLAREZA",
@@ -734,7 +734,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= ROTEIRO.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
   }
 
   async _aoEscolher(indice) {

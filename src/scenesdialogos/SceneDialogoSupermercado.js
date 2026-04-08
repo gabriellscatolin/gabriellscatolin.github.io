@@ -234,7 +234,7 @@ const ROTEIRO = [
 ];
 
 // Identificadores usados pela pontuação global e pela meta desta fase
-const CAPITULO = "chapter1";
+const CAPITULO = "chapter2";
 const FASE = "supermercado";
 const N_CENAS = ROTEIRO.length;
 

@@ -36,14 +36,14 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
     npcInicial:
-      "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo, mas rapidinho. Aqui eu cuido muito da experi?ncia do cliente.",
+      "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo, mas rapidinho. Aqui eu cuido muito da experiência do cliente.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Perfeito, e foi exatamente isso que me chamou aten??o. Como est? sendo a experi?ncia do cliente na hora de pagar hoje?",
+          "Perfeito, e foi exatamente isso que me chamou atenção. Como está sendo a experiência do cliente na hora de pagar hoje?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -135,7 +135,7 @@ const ROTEIRO = [
           "Parece lógico, mas está errado. A decisão ainda não está totalmente consolidada.",
       },
     ],
-    npcResposta: "E o que daria pra fazer pra deixar isso mais fluido?",
+    npcResposta: "E o que daria pra fazer pra deixar isso mais fluído?",
   },
   {
     titulo: "CENA 4 - TÉCNICA (BANCO + TC)",
@@ -169,7 +169,7 @@ const ROTEIRO = [
           "Parece solução prática, mas não resolve o problema estrutural de fluxo e integração.",
       },
     ],
-    npcResposta: "Mas isso muda tanto assim na pr?tica?",
+    npcResposta: "Mas isso muda tanto assim na prática?",
   },
   {
     titulo: "CENA 5 - IMPACTO NA CONVERSÃO",

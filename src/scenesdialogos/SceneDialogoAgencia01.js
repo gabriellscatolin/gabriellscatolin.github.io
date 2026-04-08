@@ -41,7 +41,7 @@ const ROTEIRO_GG = [
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
-          "Objetivo, respeitoso e j? conecta com apoio ? operaÃ§Ã£o.",
+          "Objetivo, respeitoso e já conecta com apoio a operação.",
       },
       {
         letra: "B",
@@ -59,10 +59,10 @@ const ROTEIRO_GG = [
       },
     ],
     npcResposta:
-      "Bom dia! Est? mesmo... hoje est? puxado. Como posso te ajudar?",
+      "Bom dia! Hoje está puxado, agência cheia. Como posso te ajudar?",
   },
   {
-    titulo: "ETAPA 2 - POSICIONAMENTO E INTEN??O",
+    titulo: "ETAPA 2 - POSICIONAMENTO E INTENÇÃO",
     narracao: null,
     npcInicial: null,
     escolhas: [
@@ -96,7 +96,7 @@ const ROTEIRO_GG = [
   {
     titulo: "CENA 3 - ALINHAMENTO DE ATUAÇÃO",
     narracao: null,
-    npcInicial: "E qual ? a sua ideia de atua??o aqui hoje?",
+    npcInicial: "E qual é a sua ideia de atuação aqui hoje?",
     escolhas: [
       {
         letra: "A",
@@ -194,7 +194,7 @@ const ROTEIRO_GG = [
       {
         letra: "A",
         texto:
-          "Posso come?ar com dois clientes priorit?rios essa semana e te mandar um resumo do andamento?",
+          "Posso começar com dois clientes prioritários essa semana e te mandar um resumo do andamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Proposta concreta + organização + previsibilidade.",
@@ -248,10 +248,10 @@ const ROTEIRO_PJ = [
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
-          "Parece v?lido, mas ignora o alinhamento com o PJ.",
+          "Parece válido, mas ignora o alinhamento com o PJ.",
       },
     ],
-    npcResposta: "Legal! O que voc? trouxe de oportunidades?",
+    npcResposta: "Legal! O que você trouxe de oportunidades?",
   },
   {
     titulo: "ETAPA 2 - GERAÇÃO DE INTERESSE",
@@ -286,7 +286,7 @@ const ROTEIRO_PJ = [
   {
     titulo: "CENA 3 - CONSTRUÇÃO DE VALOR",
     narracao: null,
-    npcInicial: "Mas o que voc? enxerga de ganho nesses clientes?",
+    npcInicial: "Mas o que você enxerga de ganho nesses clientes?",
     escolhas: [
       {
         letra: "A",
@@ -930,7 +930,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.textoNpc.setText(`"${resposta}"`);
 
     const ultimo = this.cenaIdx >= this.roteiro.length - 1;
-    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Pr?xima cena  ->");
+    this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
   }
 
   async _aoEscolher(indice) {
@@ -1031,7 +1031,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     const textoFinal =
       this.tipoDialogo === "PJ"
-        ? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sess?o: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
+        ? `${resumoFasePJ}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessão: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`
         : `Conversa encerrada!\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\nTotal da sessão: ${getScore(this.registry)}\n\n${statusMeta}\n\n${avaliacao}`;
 
     // Reaproveita o campo principal de fala para mostrar o resumo final

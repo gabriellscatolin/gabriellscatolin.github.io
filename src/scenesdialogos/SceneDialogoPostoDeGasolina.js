@@ -31,8 +31,8 @@ const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
-    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
   },
   {
     titulo: "CENA 1 - RETOMADA DE RELAÇÃO",
@@ -135,7 +135,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "T?, ent?o me explica sem enrolar. Como eu continuo vendendo sem maquininha?",
+      "Tudo bem, então me explica sem enrolar. Como eu continuo vendendo sem maquininha?",
   },
   {
     titulo: "CENA 4 - TÉCNICA (COM PROVA SIMPLES)",
@@ -167,7 +167,7 @@ const ROTEIRO = [
         feedbackTexto: "Incorreto. Aumenta risco e quebra o fluxo.",
       },
     ],
-    npcResposta: "Isso a? qualquer um fala que tem. O que muda de verdade?",
+    npcResposta: "Isso aí qualquer um fala que tem. O que muda de verdade?",
   },
   {
     titulo: "CENA 5 - ATAQUE AO DIFERENCIAL",
