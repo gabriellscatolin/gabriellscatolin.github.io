@@ -32,7 +32,100 @@
 
 ## 📜 Descrição
 
-*Descreva seu projeto (até 600 palavras)*
+# Mini Mundo Cielo
+
+## Descrição
+
+**Mini Mundo Cielo** é um jogo digital do tipo *serious game*, desenvolvido para capacitar e engajar novos Gerentes de Negócios (GNs) da Cielo S.A. por meio de uma experiência interativa e gamificada.
+
+O jogo simula o cotidiano da área comercial, permitindo que o jogador vivencie situações reais de atendimento, negociação e vendas em um ambiente seguro e controlado.
+
+A experiência se passa em uma cidade interativa em **pixel art**, onde o jogador assume o papel de um gerente em início de carreira e percorre diferentes estabelecimentos comerciais, como padarias, farmácias e postos de gasolina. Ao longo da jornada, o jogador interage com NPCs, toma decisões estratégicas e resolve desafios que refletem o dia a dia da profissão.
+
+Combinando narrativa, simulação e mecânicas leves de RPG, o jogo transforma o processo de onboarding em uma experiência prática, acessível e envolvente, promovendo aprendizado ativo e retenção de conhecimento.
+
+---
+
+## Objetivo do Jogo
+
+O objetivo do **Mini Mundo Cielo** é desenvolver competências essenciais de vendas e atendimento ao cliente, como:
+
+- Identificação de necessidades do cliente
+- Comunicação persuasiva
+- Argumentação comercial
+- Resolução de objeções
+- Tomada de decisão estratégica
+
+O jogador progride por meio de missões que simulam interações reais do mercado, acumulando **CieloCoins** como recompensa por boas decisões. Cada escolha impacta diretamente o desempenho, incentivando o aprendizado com base em tentativa, erro e feedback imediato.
+
+---
+
+## Conhecimento, Princípios e Propósito
+
+O jogo foi projetado como uma ferramenta de aprendizagem prática, alinhada às necessidades reais da operação comercial da Cielo.
+
+Ele promove:
+
+- **Aprendizado aplicado:** o jogador aprende fazendo, ao simular situações reais de vendas
+- **Autonomia:** progresso no próprio ritmo, sem a pressão de um ambiente real
+- **Feedback contínuo:** respostas imediatas que reforçam o aprendizado
+- **Padronização do conhecimento:** todos os jogadores têm acesso ao mesmo conteúdo
+
+Além disso, o jogo reforça o domínio do portfólio da Cielo, incluindo soluções de pagamento e serviços, preparando o usuário para desafios reais do campo.
+
+---
+
+## Jogo Corporativo
+
+O **Mini Mundo Cielo** foi desenvolvido como uma solução inovadora para treinamento corporativo, substituindo modelos tradicionais por uma abordagem gamificada e interativa.
+
+Seus principais diferenciais são:
+
+- Ser **100% online**, com acesso via navegador
+- Permitir treinamento escalável em nível nacional
+- Reduzir custos com treinamentos presenciais
+- Aumentar o engajamento dos colaboradores
+
+A proposta é transformar o onboarding em uma experiência mais leve, prática e eficiente, conectando diretamente o aprendizado à realidade profissional.
+
+---
+
+## Inclusão e Representatividade
+
+O jogo foi cuidadosamente desenvolvido para refletir a diversidade brasileira e promover identificação com o público-alvo.
+
+Entre os aspectos valorizados, destacam-se:
+
+- Personagens que representam diferentes regiões do Brasil
+- Valorização da diversidade étnica e cultural
+- Faixa etária e perfil dos personagens compatíveis com o público real, com média aproximada de 44 anos
+- Ausência de vantagens mecânicas entre personagens, garantindo equidade total na experiência
+
+Essa abordagem fortalece o sentimento de pertencimento e torna o treinamento mais acessível e inclusivo.
+
+---
+
+## Experiência do Jogador
+
+Durante a jornada, o jogador:
+
+- Inicia o dia em uma agência bancária
+- Recebe missões de gerentes e supervisores
+- Visita estabelecimentos comerciais
+- Interage com clientes (NPCs)
+- Responde a quizzes e toma decisões
+- Ganha recompensas em **CieloCoins**
+- Evolui progressivamente na carreira dentro do jogo
+
+Tudo isso é estruturado em sessões curtas, de aproximadamente **15 minutos**, com uma experiência completa de cerca de **3 horas**.
+
+---
+
+## Resumo
+
+O **Mini Mundo Cielo** é mais do que um jogo: trata-se de uma ferramenta estratégica de capacitação corporativa, que alia tecnologia, narrativa e gamificação para desenvolver competências essenciais de forma prática, escalável e envolvente.
+
+Ao simular situações reais do universo comercial da Cielo em um ambiente acessível e inclusivo, o jogo contribui para um onboarding mais eficiente, moderno e conectado às necessidades da organização e de seus colaboradores.
 
 *Inclua o link para o jogo aqui*
 
@@ -51,7 +144,39 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 ## 🔧 Como executar o código
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o código e executar o jogo a partir de sua máquina ou seu repositório.*
+## Para executar o código, siga estes passos
+
+### Pré-requisitos
+
+#### [Visual Studio Code (VS Code)](https://code.visualstudio.com/download)
+Instale a versão mais recente do Visual Studio Code.
+
+#### [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+Adicione a extensão Live Server ao VS Code para permitir a execução do projeto em tempo real.
+
+---
+
+### Configuração
+
+#### Instalação do VS Code
+Faça o download do VS Code por meio deste link: [Download](https://code.visualstudio.com/download)
+
+#### Configuração do ambiente
+Siga as instruções detalhadas neste guia para configurar corretamente o VS Code: [ambiente](https://code.visualstudio.com/docs)
+
+#### Instalação do Live Server
+Consulte o tutorial para instalar e configurar a extensão: [Microsoft Tutorial](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+---
+
+### Execução do projeto
+
+1. Abra o VS Code.
+2. Em seguida, abra o arquivo `index.html`.
+3. Execute o arquivo usando o Live Server:
+   - clique com o botão direito no arquivo;
+   - selecione **Open with Live Server**.
+4. Uma nova guia será aberta no navegador com o projeto em execução.
 
 
 ## 🗃 Histórico de lançamentos
