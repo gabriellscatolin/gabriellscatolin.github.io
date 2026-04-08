@@ -1362,32 +1362,9 @@ export default class SceneCidade extends Phaser.Scene {
     let dW = maxW, dH = maxW / ratio;
     if (dH > maxH) { dH = maxH; dW = maxH * ratio; }
     imgMapa.setDisplaySize(dW, dH);
+    imgMapa.setInteractive({ useHandCursor: true });
+    imgMapa.on("pointerdown", () => this.fecharTutorialMapa());
     this.elementosTutorialMapa.push(imgMapa);
-
-    const btnY = cy + dH / 2 + 30;
-
-    // Botão "Fechar"
-    const botaoFechar = this.add
-      .text(cx, btnY, "Fechar", {
-        fontSize: "20px",
-        fontStyle: "bold",
-        color: "#ffffff",
-        backgroundColor: "#333333",
-        padding: { x: 24, y: 10 },
-      })
-      .setDepth(52)
-      .setScrollFactor(0)
-      .setOrigin(0.5)
-      .setInteractive({ useHandCursor: true });
-    this.elementosTutorialMapa.push(botaoFechar);
-
-    botaoFechar.on("pointerover", () =>
-      botaoFechar.setStyle({ backgroundColor: "#555555" }),
-    );
-    botaoFechar.on("pointerout", () =>
-      botaoFechar.setStyle({ backgroundColor: "#333333" }),
-    );
-    botaoFechar.on("pointerdown", () => this.fecharTutorialMapa());
   }
 
   fecharTutorialMapa() {
