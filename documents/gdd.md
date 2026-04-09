@@ -2734,31 +2734,34 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 
 ## 6.1. Atingimento dos Objetivos
 
-&emsp;O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
+&emsp; O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
 
-**Objetivos atingidos:**
+&emsp; **Objetivos atingidos:**
 - Implementação completa do fluxo de jogo: menu inicial → seleção de personagem → gameplay → interação com NPC → transição de cena.
-- Desenvolvimento de 4 personagen jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
+- Desenvolvimento de 4 personagens jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
 - Criação de 8 NPCs secundários com identidades, estabelecimentos e contextos de venda distintos.
 - Sistema de movimentação funcional com WASD, colisão com obstáculos, limites de mapa e detecção de proximidade para interação.
 - Implementação de opções de acessibilidade (modo daltônico, controle de volume e brilho) nas configurações do jogo.
 - Identidade visual alinhada à marca Cielo, com uso de cores institucionais, logotipos e referências ao portfólio da empresa.
 - Sistema de diálogo com múltipla escolha e feedback imediato, replicando as etapas de negociação do processo de venda.
 
-**Objetivos parcialmente atingidos:**
+&emsp; **Objetivos parcialmente atingidos:**
+
 - A Cidade 2 foi planejada mas não completamente implementada no MVP, sendo identificada como prioridade para versões futuras.
 - O sistema de ranking regional foi arquitetado nas mecânicas, mas a integração com backend para persistência de dados não foi realizada neste ciclo.
 
 ## 6.2. Pontos Fortes e Pontos de Melhoria
 
-**Pontos fortes:**
+&emsp; **Pontos fortes:**
+
 - A escolha do Phaser.js como framework permitiu desenvolvimento ágil e compatibilidade nativa com navegadores modernos, sem necessidade de plugins ou instalação.
 - A estrutura modular do código (separação de cenas, assets e lógica) facilita a manutenção e a colaboração em equipe, além de simplificar a adição de novas funcionalidades.
 - O design dos personagens e do mundo em pixel art transmite uma estética coesa e acessível, compatível com o público-alvo sem exigir hardware de alto desempenho.
 - A representatividade étnica e regional nos personagens jogáveis e NPCs é um diferencial que reforça o senso de pertencimento dos GNs ao interagir com o jogo.
 - O sistema de transições animadas (pixelização e clock wipe) eleva a qualidade percebida do produto, conferindo ao jogo uma identidade visual distinta.
 
-**Pontos de melhoria:**
+&emsp; **Pontos de melhoria:**
+
 - O input lag identificado no playtest indica necessidade de otimização da lógica de movimento no ciclo `update()`.
 - A curva de aprendizagem poderia ser mais suave com um tutorial mais completo que apresente gradualmente todos os controles disponíveis.
 - A ausência de feedback visual explícito ao completar missões reduz a sensação de recompensa do jogador.
@@ -2766,7 +2769,10 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 
 ## 6.3. Plano de Trabalhos Futuros
 
-&emsp;Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+&emsp; Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+
+<div align="center">
+<sub>Tabela 17 - Melhorias</sub>
 
 | # | Melhoria | Descrição | Impacto Esperado |
 |---|----------|-----------|-----------------|
@@ -2778,7 +2784,10 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 | F6 | Versão mobile | Adaptar controles para toque e redimensionar a interface para telas menores | Amplia o alcance do treinamento para GNs que utilizam tablets ou smartphones no campo |
 | F7 | Atualização dinâmica de conteúdo | Parametrizar diálogos e produtos em arquivos externos (JSON), permitindo atualização do portfólio Cielo sem refatoração de código | Garante relevância do conteúdo a longo prazo sem depender de intervenção técnica |
 
-&emsp;O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+&emsp; O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
 
 # <a name="c7"></a>7. Referências (sprint 5)
 
