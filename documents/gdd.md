@@ -2743,62 +2743,70 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 
 ## 6.1. Atingimento dos Objetivos
 
-&emsp; O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
+&emsp; O Mini Mundo Cielo foi desenvolvido com o objetivo de explorar o potencial da gamificação como ferramenta de apoio ao treinamento de Gerentes de Negócios da Cielo S.A., simulando situações de interação com clientes em um ambiente virtual. Ao longo das sprints de desenvolvimento, o projeto evoluiu até a entrega de um MVP funcional, permitindo validar as principais mecânicas de exploração, movimentação e interação com personagens não jogáveis (NPCs).
+
+&emsp; Durante o desenvolvimento, a equipe optou por priorizar melhorias relacionadas à experiência do jogador e à clareza das mecânicas, especialmente a partir dos feedbacks obtidos nos testes de jogabilidade e nos relatórios de playtest realizados nas sprints intermediárias. Esses testes indicaram dificuldades iniciais dos usuários em compreender os controles do jogo, identificar os objetivos das interações e entender a progressão dentro do ambiente. Dessa forma, parte do esforço de desenvolvimento foi direcionado para ajustes de usabilidade e feedback visual.
 
 &emsp; **Objetivos atingidos:**
-- Implementação completa do fluxo de jogo: menu inicial → seleção de personagem → gameplay → interação com NPC → transição de cena.
-- Desenvolvimento de 4 personagens jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
-- Criação de 8 NPCs secundários com identidades, estabelecimentos e contextos de venda distintos.
-- Sistema de movimentação funcional com WASD, colisão com obstáculos, limites de mapa e detecção de proximidade para interação.
+- Implementação do fluxo principal do jogo, incluindo menu inicial, seleção de personagem, entrada no mapa e interação com NPCs.
+- Desenvolvimento de personagens jogáveis com animações em múltiplas direções, permitindo movimentação livre pelo ambiente.
+- Implementação de sistema de movimentação com teclado, posteriormente refinado a partir dos testes de jogabilidade para melhorar a responsividade dos controles.
+- Criação de NPCs distribuídos por estabelecimentos pelo mapa, possibilitando interações e diálogos que simulam situações de abordagem comercial.
 - Implementação de opções de acessibilidade (modo daltônico, controle de volume e brilho) nas configurações do jogo.
-- Identidade visual alinhada à marca Cielo, com uso de cores institucionais, logotipos e referências ao portfólio da empresa.
+- Implementação de um contador de moedas, utilizado como elemento inicial de progressão e recompensa dentro da experiência de jogo.s e referências ao portfólio da empresa.
 - Sistema de diálogo com múltipla escolha e feedback imediato, replicando as etapas de negociação do processo de venda.
+- Inclusão de tutoriais e orientações adicionais, com o objetivo de reduzir a dificuldade inicial percebida pelos jogadores nos primeiros testes.
 
 &emsp; **Objetivos parcialmente atingidos:**
 
-- A Cidade 2 foi planejada mas não completamente implementada no MVP, sendo identificada como prioridade para versões futuras.
-- O sistema de ranking regional foi arquitetado nas mecânicas, mas a integração com backend para persistência de dados não foi realizada neste ciclo.
+- Não foi implementado HUDs de missões dentro da maquininha.
+- O sistema de ranking entre jogadores, planejado como mecanismo de competição e engajamento, não foi implementado nesta versão, permanecendo apenas o sistema básico de contagem de moedas.
+- Nem todas as colisões previstas nos cenários foram implementadas, sendo priorizadas apenas aquelas necessárias para garantir a navegação básica pelo mapa.
 
 ## 6.2. Pontos Fortes e Pontos de Melhoria
 
+&emsp; Os testes de jogabilidade realizados ao longo do desenvolvimento permitiram identificar tanto os aspectos positivos da experiência quanto as principais dificuldades encontradas pelos usuários. Essas observações foram fundamentais para orientar as decisões de desenvolvimento nas sprints finais do projeto.
+
 &emsp; **Pontos fortes:**
 
-- A escolha do Phaser.js como framework permitiu desenvolvimento ágil e compatibilidade nativa com navegadores modernos, sem necessidade de plugins ou instalação.
-- A estrutura modular do código (separação de cenas, assets e lógica) facilita a manutenção e a colaboração em equipe, além de simplificar a adição de novas funcionalidades.
-- O design dos personagens e do mundo em pixel art transmite uma estética coesa e acessível, compatível com o público-alvo sem exigir hardware de alto desempenho.
+- O uso do Phaser.js possibilitou o desenvolvimento de um jogo executável diretamente no navegador, ampliando a acessibilidade da solução.
+- A estrutura modular do projeto, com separação entre cenas, assets e lógica de jogo, facilita futuras expansões e manutenção do código.
+- O estilo visual em pixel art contribui para uma estética simples e consistente, adequada ao escopo do projeto e compatível com diferentes dispositivos.
 - A representatividade étnica e regional nos personagens jogáveis e NPCs é um diferencial que reforça o senso de pertencimento dos GNs ao interagir com o jogo.
-- O sistema de transições animadas (pixelização e clock wipe) eleva a qualidade percebida do produto, conferindo ao jogo uma identidade visual distinta.
+- Ajustes nos controles de movimentação contribuíram para tornar a navegação no mapa mais intuitiva e responsiva.
+- A implementação de tutoriais e orientações adicionais melhorou significativamente a compreensão inicial do jogo durante os testes mais recentes.
 
 &emsp; **Pontos de melhoria:**
 
+- Alguns jogadores ainda apresentaram dificuldade em compreender os objetivos das interações com NPCs, indicando necessidade de melhorar a comunicação das tarefas no jogo.
 - O input lag identificado no playtest indica necessidade de otimização da lógica de movimento no ciclo `update()`.
 - A curva de aprendizagem poderia ser mais suave com um tutorial mais completo que apresente gradualmente todos os controles disponíveis.
 - A ausência de feedback visual explícito ao completar missões reduz a sensação de recompensa do jogador.
-- A documentação de sprints 3, 4 e 5 no GDD poderia ser mais detalhada, com screenshots e descrições de cada funcionalidade implementada.
+- Algumas áreas do mapa poderiam ser melhor delimitadas com colisões adicionais, evitando que o jogador tente acessar espaços não planejados.
 
 ## 6.3. Plano de Trabalhos Futuros
 
-&emsp; Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+&emsp; Com base nos resultados obtidos durante o desenvolvimento e nos feedbacks coletados nos testes de jogabilidade, foram identificadas diversas oportunidades de evolução para versões futuras do Mini Mundo Cielo. Essas melhorias buscam ampliar a profundidade da experiência, fortalecer o aprendizado e aumentar o engajamento dos jogadores:
 
 <div align="center">
 <sub>Tabela 17 - Melhorias</sub>
 
 | # | Melhoria | Descrição | Impacto Esperado |
 |---|----------|-----------|-----------------|
-| F1 | Implementação completa da Cidade 2 | Desenvolver a segunda cidade com estabelecimentos de maior complexidade e NPCs com missões avançadas de venda | Aumenta o tempo de jogo para ~3h e aprofunda o aprendizado do portfólio |
-| F2 | Backend e persistência de dados | Implementar servidor para salvar progresso do jogador, histórico de missões e pontuações | Permite ranking real entre GNs e geração de relatórios de desempenho para a Cielo |
-| F3 | Sistema de ranking regional | Exibir leaderboard por região do Brasil, incentivando competição saudável entre GNs | Aumenta engajamento e permite à Cielo identificar regiões com melhor performance |
-| F4 | Expansão do sistema de quizzes | Adicionar mais variações de perguntas por NPC e embaralhar opções de resposta a cada sessão | Evita memorização mecânica das respostas e garante aprendizado genuíno |
-| F5 | Otimização de performance | Refatorar o ciclo `update()` para reduzir input lag; implementar carregamento lazy de assets | Melhora a experiência de jogo, especialmente em computadores com hardware limitado |
-| F6 | Versão mobile | Adaptar controles para toque e redimensionar a interface para telas menores | Amplia o alcance do treinamento para GNs que utilizam tablets ou smartphones no campo |
-| F7 | Atualização dinâmica de conteúdo | Parametrizar diálogos e produtos em arquivos externos (JSON), permitindo atualização do portfólio Cielo sem refatoração de código | Garante relevância do conteúdo a longo prazo sem depender de intervenção técnica |
+| F1 | Implementação do sistema de missões | Criar missões estruturadas relacionadas à venda de maquininhas e soluções da Cielo | Fortalece o vínculo entre o jogo e o treinamento comercial |
+| F2 | Expansão do mapa com Cidade 2 | Desenvolver nova cidade com estabelecimentos e desafios adicionais | Amplia a duração e diversidade da experiência |
+| F3 | Sistema de ranking e pontuação | Implementar leaderboard entre jogadores baseado em desempenho | Aumenta engajamento e competitividade |
+| F4 | Expansão do sistema de feedback | Adicionar indicadores visuais de progresso, conquistas e conclusão de tarefas | Melhora a sensação de progresso e recompensa |
+| F5 | Aprimoramento das colisões | Refinar colisões em todo o mapa para melhorar navegação e imersão | Torna o ambiente mais consistente e realista |
+| F6 | Evolução do sistema de recompensas | Expandir o uso das moedas para desbloqueio de conteúdos ou conquistas | Aumenta motivação e retenção dos jogadores |
 
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
+&emsp; A experiência obtida durante o desenvolvimento do projeto demonstra que a utilização de elementos de gamificação em contextos de treinamento corporativo possui potencial para tornar o processo de aprendizagem mais interativo e envolvente. Embora o MVP desenvolvido represente uma versão inicial da proposta, os resultados dos testes indicam que a abordagem adotada pode ser expandida e aprimorada em versões futuras, consolidando o Mini Mundo Cielo como uma possível ferramenta complementar de capacitação para os profissionais da empresa em todo o Brasil.
 
 # <a name="c7"></a>7. Referências (sprint 5)
+
 
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
 
