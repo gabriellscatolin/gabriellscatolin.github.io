@@ -1574,7 +1574,7 @@ $$
 ## 4.1. Desenvolvimento preliminar do jogo (sprint 1)
 
 ## 1. Estrutura do projeto: 
-O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
+O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema emaaarquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
 Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
 Os principais arquivos são:
 Main.js: arquivo responsável por inicializar o jogo e gerenciar as cenas.
