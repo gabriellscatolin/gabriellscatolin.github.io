@@ -1574,24 +1574,22 @@ $$
 
 ## 4.1. Desenvolvimento preliminar do jogo (sprint 1)
 
-### 4.1. 1. Estrutura do projeto: 
+&emsp;A Sprint 1 teve como objetivo principal a estruturação conceitual e visual do jogo, estabelecendo as bases do projeto antes do desenvolvimento técnico aprofundado. As entregas desta etapa concentraram-se em três frentes: a organização do repositório e arquitetura inicial do código, a criação dos personagens jogáveis e NPCs em pixel art, e o desenvolvimento dos cenários que compõem o mapa do jogo.
+&emsp;O jogo foi concebido como uma simulação de cidade, na qual o jogador assume o papel de um Gerente de Negócios da Cielo e percorre diferentes estabelecimentos comerciais realizando interações de venda. Essa decisão conceitual orienta diretamente a estrutura de níveis, missões e mecânicas de interação previstas nos requisitos funcionais.
 
-&emsp; O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
-&emsp; Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
+####  Estrutura do Projeto
+&emsp;O projeto foi estruturado de forma modular, separando os diferentes componentes do sistema em arquivos e pastas distintas: cenas, assets (imagens, spritesheets e áudios) e arquivos de lógica principal. Essa organização facilita a manutenção, a leitura do código e o trabalho colaborativo em equipe.
+&emsp;  Os arquivos centrais desta etapa são:
 
-&emsp; Os principais arquivos são:
+**main.js**: responsável por inicializar o jogo via Phaser 3 e gerenciar o carregamento e a transição entre cenas.
+**index.html**: responsável pelas configurações da página web e pela integração com o main.js, viabilizando o acesso ao jogo diretamente pelo navegador, atendendo ao RNF01, que determina que o jogo deve ser desenvolvido para plataforma web sem necessidade de instalação.
 
-&emsp; **Main.js:** arquivo responsável por inicializar o jogo e gerenciar as cenas.
-&emsp; **index.html:** arquivo responsável pelas configurações da página web e pela integração com o main.js.
-
-### 4.1.2. Estrutura dos Personagens:
-
-&emsp; A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+&emsp;A escolha do framework Phaser 3 foi motivada pela sua compatibilidade nativa com navegadores, suporte a spritesheets e animações 2D, sistema de cenas e câmera, e ampla documentação; fatores que sustentam a implementação futura de requisitos como movimentação (RF02), câmera de acompanhamento (RF06) e sistema de cenas e cutscenes (RF14).
 
 #### Desenvolvimento de personagens jogáveis:
 
-&emsp; Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
-&emsp;Os personagens foram pensados para permitir futuras animações.
+&emsp; Nesta sprint, foram desenvolvidos os personagens jogáveis em pixel art 2D utilizando a ferramenta Piskel. Os sprites foram criados seguindo um padrão consistente de tamanho e proporção, o que facilita sua integração futura no código e a implementação de animações de movimento. Essa etapa estabelece a base visual para a tela de seleção de personagens prevista no RF04.
+&emsp; Cada personagem foi desenhado com frames separados que permitirão futuras animações de movimentação (andar, parar, interagir), diretamente relacionadas ao controle pelas setas do teclado numérico, definido no RF02.
 
 &emsp; **Sprites dos personagens jogáveis:**
 
@@ -1602,14 +1600,16 @@ $$
  <sub>Imagem 23 - Personagens jogáveis</sub>
  <img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
 
- <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
+ <sub>Fonte: Autoria Própria usando o Piskel (2026)
+ Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
 	
-&emsp; Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
 
-2.2. Desenvolvimento de personagens secundários:
 
-&emsp; Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
+#### Desenvolvimento de personagens secundários:
+
+&emsp;Além dos personagens jogáveis, foram desenvolvidos os NPCs que representam lojistas e funcionários dos estabelecimentos comerciais presentes no mapa. Cada NPC foi associado a um integrante do grupo e a um tipo de comércio específico, contribuindo tanto para a ambientação quanto para a narrativa do jogo.
+&emsp;Esses personagens são a base para as mecânicas de interação de venda simulada previstas no RF07 (interação com NPCs em situações de atendimento) e no RF08 (execução das etapas de venda conforme o padrão do parceiro Cielo). A definição visual dos NPCs nesta sprint viabiliza que, nas próximas iterações, sejam implementados os diálogos e os fluxos de negociação vinculados a cada personagem.
 
 &emsp; **Sprites dos personagens secundários:**
 
@@ -1620,11 +1620,13 @@ $$
  <sub>Imagem 25 - Foto perfil personagens secundários </sub>
  <img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
 
- <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
+ <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) 
+ Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo.</sub>
 </div>
 
-### 4.1.3. Estrutura dos cenários iniciais:
-&emsp; Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
+#### 4.1.3. Estrutura dos cenários iniciais:
+&emsp; Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Essa decisão atende ao RNF05, que determina que as missões e rotas do jogo devem ser baseadas em situações reais enfrentadas pelos vendedores da Cielo.
+
 
 &emsp; Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
 
