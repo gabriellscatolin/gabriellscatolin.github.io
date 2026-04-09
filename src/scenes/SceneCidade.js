@@ -1262,6 +1262,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.pjAguardandoPadaria = false;
       this.pjDestinoAtual = "restaurante";
       this.pjRotaWaypoints = [
+        { x: 2851, y: 1173 },
         { x: 2699, y: 449 },
         { x: 2644, y: 318 },
       ];
