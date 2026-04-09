@@ -416,17 +416,6 @@ export default class SceneAgencia03 extends Phaser.Scene {
       this.musica.stop();
     });
 
-    // ── Mouse Debug ──────────────────────────────────────────────────────────
-    this.mouseDebugInfo = this.add
-      .text(0, 0, "", {
-        fontSize: "5px",
-        color: "#ffffff",
-        backgroundColor: "#000000cc",
-        padding: { x: 2, y: 2 },
-        resolution: 10,
-      })
-      .setDepth(100)
-      .setVisible(true);
   }
 
   // ── Funções auxiliares ────────────────────────────────────────────────────
@@ -767,17 +756,5 @@ export default class SceneAgencia03 extends Phaser.Scene {
       });
     }
 
-    // ── Update Mouse Debug ───────────────────────────────────────────────────
-    const pointer = this.input.activePointer;
-    if (this.mouseDebugInfo && pointer) {
-      // Ajusta para a escala da câmera (zoom 5)
-      const zoom = this.cameras.main.zoom;
-      this.mouseDebugInfo.setPosition(pointer.worldX + 2, pointer.worldY + 2);
-      this.mouseDebugInfo.setText(
-        `SCREEN: ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
-        `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}\n` +
-        `MAP: ${Math.round(pointer.worldX - this.OX)},${Math.round(pointer.worldY - this.OY)}`,
-      );
-    }
   }
 }

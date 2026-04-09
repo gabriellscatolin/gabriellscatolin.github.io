@@ -415,22 +415,6 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.spritePersonagem.setCollideWorldBounds(true);
 
-    // Label de coordenadas - agora fixa na tela para não tremer
-    this.coordLabel = this.add
-      .text(10, 70, "", {
-        fontSize: "14px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#ffff00",
-        stroke: "#000000",
-        strokeThickness: 3,
-        backgroundColor: "#00000088",
-        padding: { x: 4, y: 2 },
-      })
-      .setOrigin(0, 0)
-      .setDepth(1002)
-      .setScrollFactor(0);
-
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.spritePersonagem.width;
     const alturaSprite = this.spritePersonagem.height;
@@ -1091,18 +1075,6 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCam.setBackgroundColor("rgba(0,0,0,0)"); // V7: Transparência explícita via string
     this.hudCam.clearBeforeRender = false;          // V4: Crucial para ver o mundo abaixo
 
-    // Lista de elementos que pertencem APENAS à HUD
-    // Debug de coordenadas no mouse (criado antes para entrar na lista de HUD)
-    this.mouseDebugInfo = this.add
-      .text(0, 0, "", {
-        fontSize: "16px",
-        color: "#ffffff",
-        backgroundColor: "#000000cc",
-        padding: { x: 4, y: 2 },
-      })
-      .setDepth(5000) // Profundidade máxima
-      .setScrollFactor(0);
-
     const elementosHud = [
       this.hudIcon,
       this.hudCloseBg,
@@ -1125,8 +1097,6 @@ export default class SceneCidade extends Phaser.Scene {
       this.popupListaMissoesHint,
       this.popupListaMissoesFecharBg,
       this.popupListaMissoesFecharTxt,
-      this.coordLabel,
-      this.mouseDebugInfo,
     ].filter((e) => e); // Remove nulos caso algum não tenha sido criado
 
     // Se houver popups complexos, eles serão adicionados às listas de ignorar conforme necessário
@@ -3444,7 +3414,7 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     const velocidade = 150;
-    const { teclas, spritePersonagem, coordLabel } = this;
+    const { teclas, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -3606,33 +3576,10 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.minimapPlayerDot.setPosition(spritePersonagem.x, spritePersonagem.y);
 
-    const hudLocalInfo =
-      this.hudNoCentro && Number.isFinite(this.hudDebugLocalX)
-        ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
-        : "";
-
-    // Debug do Mouse na HUD Cam (1920x1080)
-    const pointer = this.input.activePointer;
-    if (this.mouseDebugInfo && pointer) {
-      // V16: Alinhamento exato ao ponteiro
-      this.mouseDebugInfo.setPosition(pointer.x + 5, pointer.y + 5);
-      this.mouseDebugInfo.setText(
-        `SCREEN (0-1920): ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
-          `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`,
-      );
-    }
     this._atualizarHudCidade();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();
     this._reposicionarPopupListaMissoes();
-
-    // Atualiza label de coordenadas fixo na tela
-    if (this.coordLabel && spritePersonagem) {
-      this.coordLabel.setVisible(true);
-      this.coordLabel.setText(
-        `X: ${Math.round(spritePersonagem.x)} Y: ${Math.round(spritePersonagem.y)}`,
-      );
-    }
 
     // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
