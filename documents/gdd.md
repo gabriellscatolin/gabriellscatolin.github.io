@@ -38,7 +38,7 @@ Cielitos
 
 &emsp; A Cielo S.A. posiciona-se como a líder nacional no setor de adquirência e serviços financeiros, desempenhando um papel sistêmico na economia brasileira. Fundada em 1995 (originalmente como VisaNet), a companhia evoluiu de uma processadora de transações para uma plataforma de tecnologia de ponta voltada ao varejo. Com presença capilarizada em 99% do território nacional, a Cielo detém uma abrangência sem paralelos, atendendo desde microempreendedores até gigantes do varejo corporativo.[\[1\]](#ref1)
 
-&emsp; O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações, movimentando o equivalente a 7% do Produto Interno Bruto (PIB) brasileiro. [\[2\]](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
+&emsp; O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações no mercado brasileiro, evidenciando sua relevância no ecossistema nacional de pagamentos eletrônicos.. [\[2\]](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
 
 &emsp; Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [\[3\]](#ref3) Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
 
@@ -57,7 +57,7 @@ Cielitos
  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
+&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional, criando barreiras competitivas adicionais frente à entrada de novos players digitais no setor de pagamentos.
 
 &emsp; O poder de barganha dos fornecedores é considerado moderado. No setor de adquirência, fornecedores estratégicos incluem bandeiras de cartão como Visa, Mastercard e Elo, além de provedores de tecnologia responsáveis pelos terminais de pagamento e infraestrutura digital, como Ingenico e serviços de computação em nuvem. Esses fornecedores exercem influência relevante ao estabelecer padrões tecnológicos e operacionais essenciais para o funcionamento do sistema de pagamentos. Contudo, devido à sua escala e posição consolidada no mercado brasileiro, a Cielo possui maior capacidade de negociação em comparação a empresas menores, o que reduz parcialmente o poder desses fornecedores.
 
@@ -436,7 +436,9 @@ A utilização de gamificação no Mini Mundo Cielo busca tornar o processo de t
 
 ## Personagens Controláveis
 
-&emsp; Os personagens controláveis representam os novos Gerentes de Negócios da Cielo em processo de onboarding. Embora possuam identidades visuais e histórias individuais distintas, todos os personagens compartilham a diversidade étnica e cultural brasileira, refletindo o compromisso do projeto com a representatividade. Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 frames, que estão organizados em quatro direções de movimentação com quatro frames de animação cada, o que permite movimentação fluida no mapa em formato top-down. As diferenças entre os personagens são de natureza narrativa e representativa, não havendo distinções de vantagem mecânica entre eles, o que assegura equidade na experiência de aprendizagem. A escolha do personagem pelo jogador impacta exclusivamente na identificação e na imersão visual, sem interferir no desempenho ou nas mecânicas de jogo.
+&emsp; Os personagens controláveis representam os novos Gerentes de Negócios da Cielo em processo de onboarding. Embora possuam identidades visuais e histórias individuais distintas, todos os personagens compartilham a diversidade étnica e cultural brasileira, refletindo o compromisso do projeto com a representatividade. 
+
+Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 frames, que estão organizados em quatro direções de movimentação com quatro frames de animação cada, o que permite movimentação fluida no mapa em formato top-down. As diferenças entre os personagens são de natureza narrativa e representativa, não havendo distinções de vantagem mecânica entre eles, o que assegura equidade na experiência de aprendizagem. A escolha do personagem pelo jogador impacta exclusivamente na identificação e na imersão visual, sem interferir no desempenho ou nas mecânicas de jogo.
 
 &emsp; Nota: Todos os personagens compartilham a mesma estrutura visual: uniforme azul com crachá institucional e dispositivo de pagamento portátil. As distinções entre eles são exclusivamente de ordem narrativa e representativa.
 
@@ -822,7 +824,7 @@ Ambas as telas foram concebidas de modo a manter coerência estética com os dem
 
 ## 3.6. Regras do jogo (sprint 3)
 
-&emsp; As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
+&emsp; As regras do Mini Mundo Cielo definem as condições de progresso, sucesso e falha dentro da experiência do jogador. Elas determinam como as missões podem ser iniciadas, como as negociações funcionam e quais critérios devem ser atendidos para avançar na jornada profissional simulada no jogo
 
 ### Fluxo de Navegação e Menus
 
@@ -860,7 +862,7 @@ A proximidade habilita o prompt da tecla [E].
 
 ### Sistema de Negociação (Interação com Clientes)
 
-&emsp; O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
+&emsp; Durante a negociação, o jogador deve selecionar uma entre três opções de resposta para reagir às objeções apresentadas pelo cliente. Cada escolha influencia diretamente o progresso da negociação e a pontuação obtida ao final da interação:
 
 - Estrutura da Resposta: Cada pergunta apresenta 3 níveis de eficácia:
 
@@ -884,7 +886,7 @@ A proximidade habilita o prompt da tecla [E].
 
 ## 3.7. Mecânicas do jogo (sprint 3)
 
-&emsp; Esta seção descreve as mecânicas de controle e interação disponíveis ao jogador, detalhando:
+&emsp; Esta seção descreve as principais mecânicas de controle e interação disponíveis ao jogador, detalhando como o personagem se movimenta, interage com o ambiente e realiza negociações dentro do Mini Mundo Cielo:
 
 - Dispositivos de entrada utilizados;  
 - Comandos disponíveis; 
@@ -893,8 +895,7 @@ A proximidade habilita o prompt da tecla [E].
 
 **Plataforma**: Desktop  
 **Dispositivos de entrada:** Teclado e Mouse  
-**Modelo de interação:** Tempo real com eventos condicionais  
-
+**Modelo de interação:** Tempo real com eventos condicionais.
 
 ### 3.7.2. Mecânicas de Interface e Navegação
 
@@ -1131,8 +1132,7 @@ Essa mecânica define o sistema de pontuação e recompensas obtidas pelo jogado
 
 ####  Condição de ativação
 
-Conclusão de uma negociação ou interação com cliente dentro de um estabelecimento.
-
+Após a conclusão de uma negociação, o jogador recebe recompensas em CieloCoins, que refletem seu desempenho durante a interação e contribuem para sua progressão no jogo.
 
 #### Sistema de pontuação
 
@@ -1174,8 +1174,7 @@ Resultado: Abertura da tela de ranking regional
 - Scroll vertical para navegação  
 - Botão Fechar para retorno ao mapa  
 
-Modelo: Interface informacional não interativa com dados dinâmicos  
-
+Modelo: Interface informacional não interativa com dados dinâmicos.
 
 ### 3.7.9. Classificação das Mecânicas
 
@@ -1242,6 +1241,7 @@ if (teclas.up.isDown) {
 #### Interpretação
 
 &emsp; A cada frame, o motor de física do Phaser atualiza automaticamente a posição do personagem com base nas velocidades definidas, garantindo um movimento uniforme (sem aceleração) em cada eixo.
+
 &emsp; Assim, o personagem percorre distâncias proporcionais ao tempo, mantendo velocidade constante enquanto uma tecla de direção estiver pressionada.
 
 ### 3.8.3. Detecção de Proximidade com NPCs
