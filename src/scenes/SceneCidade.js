@@ -410,22 +410,6 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.spritePersonagem.setCollideWorldBounds(true);
 
-    // Label de coordenadas acima do personagem
-    this.coordLabel = this.add
-      .text(spawnX, spawnY - 40, "", {
-        fontSize: "20px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#ffff00",
-        stroke: "#000000",
-        strokeThickness: 4,
-        align: "center",
-        backgroundColor: "#00000088",
-        padding: { x: 6, y: 2 },
-      })
-      .setOrigin(0.5, 1)
-      .setDepth(1002);
-
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.spritePersonagem.width;
     const alturaSprite = this.spritePersonagem.height;
@@ -1530,38 +1514,6 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCloseBg.on("pointerdown", fecharHud);
     this.hudCloseTxt.on("pointerdown", fecharHud);
 
-    this.hudDebugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "16px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#ffffff",
-        backgroundColor: "#000000ee",
-        padding: { x: 8, y: 6 },
-      })
-      .setDepth(1000)
-      .setScrollFactor(0)
-      .setVisible(false);
-
-    this.hudDebugMarker = this.add
-      .text(0, 0, "+", {
-        fontSize: "18px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#00ff66",
-        stroke: "#000000",
-        strokeThickness: 3,
-      })
-      .setDepth(1001)
-      .setOrigin(0.5)
-      .setVisible(false);
-
-    this.miniMapCam.ignore(this.hudDebugTxt);
-    this.borderCam.ignore(this.hudDebugTxt);
-    this.miniMapCam.ignore(this.hudDebugMarker);
-    this.borderCam.ignore(this.hudDebugMarker);
-    this._hudDebugWorldPoint = new Phaser.Math.Vector2();
-
     // Botao: mapa interativo
     this.hudBotao1Area = this.add
       .image(0, 0, "botaoMapaHud")
@@ -1873,7 +1825,6 @@ export default class SceneCidade extends Phaser.Scene {
       this._atualizarBotaoConfigHud(centerX, centerY, true);
       this._atualizarBotaoRankingHud(centerX, centerY, true);
       this._atualizarBotaoMissaoHud(centerX, centerY, true);
-      this._atualizarHudDebugCoords();
       return;
     }
 
@@ -1882,8 +1833,6 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudIcon.setPosition(hudX, hudY);
     this.hudCloseBg.setVisible(false);
     this.hudCloseTxt.setVisible(false);
-    if (this.hudDebugTxt) this.hudDebugTxt.setVisible(false);
-    if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
     this._atualizarBotao1Hud(hudX, hudY, false);
     this._atualizarBotaoConfigHud(hudX, hudY, false);
     this._atualizarBotaoRankingHud(hudX, hudY, false);
@@ -2027,51 +1976,6 @@ export default class SceneCidade extends Phaser.Scene {
         this.hudBotaoMissaoGlowTween = null;
       }
       if (this.hudBotaoMissaoGlow) this.hudBotaoMissaoGlow.setVisible(false);
-    }
-  }
-
-  _atualizarHudDebugCoords() {
-    if (!this.hudDebugTxt || !this.hudIcon || !this._hudDebugWorldPoint) return;
-    // Força ocultação do debug de coordenadas
-    if (
-      this.hudDebugForceHide ||
-      !this.hudDebugEnabled ||
-      !this.hudNoCentro ||
-      this.hudAnimando
-    ) {
-      this.hudDebugTxt.setVisible(false);
-      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
-      return;
-    }
-
-    const pointer = this.input.activePointer;
-    if (!pointer) {
-      this.hudDebugTxt.setVisible(false);
-      if (this.hudDebugMarker) this.hudDebugMarker.setVisible(false);
-      return;
-    }
-
-    pointer.positionToCamera(this.cameras.main, this._hudDebugWorldPoint);
-
-    const localX =
-      (this._hudDebugWorldPoint.x - this.hudIcon.x) / this.hudUiScale;
-    const localY =
-      (this._hudDebugWorldPoint.y - this.hudIcon.y) / this.hudUiScale;
-
-    this.hudDebugLocalX = Math.round(localX);
-    this.hudDebugLocalY = Math.round(localY);
-
-    this.hudDebugTxt
-      .setText(
-        `HUD local\nX: ${this.hudDebugLocalX}  Y: ${this.hudDebugLocalY}`,
-      )
-      .setPosition(14, 140)
-      .setVisible(true);
-
-    if (this.hudDebugMarker) {
-      this.hudDebugMarker
-        .setPosition(this._hudDebugWorldPoint.x, this._hudDebugWorldPoint.y)
-        .setVisible(true);
     }
   }
 
@@ -3226,7 +3130,7 @@ export default class SceneCidade extends Phaser.Scene {
       }
     }
     const velocidade = 150;
-    const { teclas, spritePersonagem, coordLabel } = this;
+    const { teclas, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -3386,26 +3290,8 @@ export default class SceneCidade extends Phaser.Scene {
       this.labelAgencia03.setVisible(dentroAgencia03);
     }
 
-    const hudLocalInfo =
-      this.hudNoCentro && Number.isFinite(this.hudDebugLocalX)
-        ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
-        : "";
-
-    // Atualiza label de coordenadas acima do personagem
-    if (coordLabel && spritePersonagem) {
-      coordLabel.setText(
-        `x: ${Math.round(spritePersonagem.x)}\ny: ${Math.round(spritePersonagem.y)}`,
-      );
-      coordLabel.setPosition(
-        spritePersonagem.x,
-        spritePersonagem.y - spritePersonagem.displayHeight / 2 - 10,
-      );
-      coordLabel.setVisible(true);
-    }
-
     this.minimapPlayerDot.setPosition(spritePersonagem.x, spritePersonagem.y);
     this._atualizarHudCidade();
-    this._atualizarHudDebugCoords();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();
     this._reposicionarPopupListaMissoes();

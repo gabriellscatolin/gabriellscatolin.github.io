@@ -889,7 +889,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
   // Atualiza movimentação, animação, saída e debug a cada frame
   update() {
     const velocidade = 150;
-    const { teclas, personagem } = this;
+    const teclas = this.teclas;
+    const personagem = this.spritePersonagem;
+    if (!teclas || !personagem) return;
     const camilaConcluidaAgora =
       this.registry.get("ag02_dialogo_camila_concluido") === true;
     const enzoConcluidoAgora =
