@@ -640,7 +640,5 @@ export default class SceneSupermercado extends Phaser.Scene {
     }
 
     //_______________________________________________________________________________________________
-
-    this._atualizarSalaoCidade();
   }
 }

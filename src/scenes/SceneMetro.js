@@ -467,8 +467,8 @@
       .setScrollFactor(0);
     const src = this.textures.get("imagemTutorialMetro").source[0];
     const ratio = src.width / src.height;
-    const maxW = Math.round(180 * uiScale);
-    const maxH = Math.round(120 * uiScale);
+    const maxW = Math.round(90 * uiScale);
+    const maxH = Math.round(60 * uiScale);
     let dW = maxW,
       dH = maxW / ratio;
     if (dH > maxH) {
@@ -564,8 +564,8 @@
     const uiScale = this._calcularEscalaUiMetro(largura, altura);
     const src = this.textures.get("imagemTutorialMetro").source[0];
     const ratio = src.width / src.height;
-    const maxW = Math.min(largura * 0.45, Math.round(520 * uiScale));
-    const maxH = Math.min(altura * 0.4, Math.round(320 * uiScale));
+    const maxW = Math.min(largura * 0.225, Math.round(260 * uiScale));
+    const maxH = Math.min(altura * 0.2, Math.round(160 * uiScale));
     let dW = maxW;
     let dH = maxW / ratio;
     if (dH > maxH) {

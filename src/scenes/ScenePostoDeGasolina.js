@@ -643,7 +643,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
   // Atualiza movimento, saída da cena e texto de debug
   update() {
     const velocidade = 150;
-    const { teclas, personagem } = this;
+    const { teclas, spritePersonagem: personagem } = this;
 
     personagem.setVelocity(0);
 
@@ -689,8 +689,8 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         this.npcPosto.x,
         this.npcPosto.y,
       );
-      const mostrarBotaoE = distNpc < 60;
-      const pertoNpc = distNpc < 30;
+      const mostrarBotaoE = distNpc < 80;
+      const pertoNpc = distNpc < 45;
 
       if (mostrarBotaoE !== this.perto_npc) {
         this.perto_npc = mostrarBotaoE;
@@ -700,13 +700,7 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         this.labelNpcPosto.setPosition(this.npcPosto.x, this.npcPosto.y + 2);
       }
 
-      // Só permite diálogo se NÃO estiver na zona de saída
-      if (
-        pertoNpc &&
-        !this.falouComNpc &&
-        !this.dentroZonaSaida &&
-        Phaser.Input.Keyboard.JustDown(this.teclaE)
-      ) {
+      if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
         this.falouComNpc = true;
         this.exclamacaoPosto.setVisible(false);
         this.scene.pause();
