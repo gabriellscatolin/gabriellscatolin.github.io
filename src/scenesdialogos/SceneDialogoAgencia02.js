@@ -334,13 +334,13 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     if (!this.textures.exists("falaAgencia02PJ")) {
       this.load.image(
         "falaAgencia02PJ",
-        "src/assets/imagens/imagensFalas/AgÃªncia02 - PJ - F.png",
+        "src/assets/imagens/imagensFalas/Agência02 - PJ - F.png",
       );
     }
     if (!this.textures.exists("falaAgencia02GG")) {
       this.load.image(
         "falaAgencia02GG",
-        "src/assets/imagens/imagensFalas/AgÃªncia02 - GG - F.png",
+        "src/assets/imagens/imagensFalas/Agência02 - GG - F.png",
       );
     }
   }
