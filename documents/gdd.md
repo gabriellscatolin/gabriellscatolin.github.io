@@ -2304,7 +2304,188 @@ this.events.on("shutdown", () => {
 
 ## 4.5. Revisão do MVP (sprint 5)
 
-*Descreva e ilustre aqui o desenvolvimento dos refinamentos e revisões da versão final do jogo, explicando brevemente o que foi entregue em termos de MVP. Utilize prints de tela para ilustrar.*
+O desenvolvimento do Mini Mundo Cielo ao longo das quatro sprints anteriores percorreu um caminho progressivo: na sprint 1 foram definidos a estrutura modular do projeto e os primeiros elementos visuais em pixel art; na sprint 2 foram implementadas as funcionalidades básicas de jogabilidade; na sprint 3 o jogo ganhou um ambiente explorável com mapa, câmera dinâmica e zonas de interação; e na sprint 4 o projeto atingiu o estágio de MVP com integração completa dos cenários, sistema de pontuação, HUD, mini game e sonoplastia. A sprint 5 foi dedicada ao refinamento e polimento desse MVP, corrigindo inconsistências e validando a experiência com usuários reais.
+
+Elementos desenvolvidos na sprint 5:
+
+- Implementação das imagens de tutorial nas cenas de diálogo e no mapa da cidade
+- Correção do bug de HUD em múltiplas cenas internas
+- Criação do feedback imediato por escolha nos quizzes e melhoria do feedback final
+- Correção das pontuações no sistema de Cielo Coins
+- Correção e reformulação do mini game do metrô
+- Adição do HUD de missões nas cenas internas que ainda não o possuíam
+- Implementação do PJ Theo e da PJ Camila como guias de navegação no mapa da cidade
+- Correção das zonas de interação com os estabelecimentos
+- Implementação da tela de vitória (`SceneVitoria`)
+- Deploy do mini game
+- Playtests realizados com públicos distintos ao redor da faculdade
+- Revisão e refinamento geral do jogo
+
+### Tutorial nas cenas de diálogo e no mapa da cidade
+
+Cada cena de diálogo passou a exibir uma tela de tutorial antes do início da conversa, orientando o jogador sobre as mecânicas da negociação. O tutorial é construído com elementos Phaser destruídos ao clicar em "Começar", sem interferir no estado da cena.
+
+```js
+btnBg.on("pointerdown", () => {
+  els.forEach((el) => el?.destroy?.());
+  this._mostrarCena(0);
+});
+```
+
+Além disso, foi implementado um tutorial do mapa exibido na primeira vez que o jogador entra na `SceneCidade`. O estado de exibição é persistido no `Phaser.Registry` para que o tutorial apareça apenas uma vez por sessão.
+
+```js
+mostrarTutorialMapa() {
+  if (!this.registry.get("tutorialMapaVisto")) {
+    this.registry.set("tutorialMapaVisto", true);
+    // Exibe imagem com zona clicável sobre o botão "Entendi!"
+    const btnZone = this.add.zone(cx, cy + dH * 0.38, dW * 0.55, dH * 0.14)
+      .setInteractive({ useHandCursor: true });
+    btnZone.on("pointerdown", () => this.fecharTutorialMapa());
+  }
+}
+```
+
+<sub>Figura XX - Tela de tutorial das cenas de diálogo</sub>
+
+`<img src="../gdd_images/telaTutorialDialogo.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Feedback imediato por escolha e melhoria do feedback final
+
+Nesta sprint foi criado o sistema de feedback imediato, exibido logo após cada escolha e antes da resposta do NPC. Ao selecionar uma opção, a cena entra no estado `"feedback"` e exibe um título e texto explicativo específicos para aquela resposta, informando se a abordagem foi correta, neutra ou inadequada.
+
+```js
+_mostrarFeedbackEscolha(escolha) {
+  this.estado = "feedback";
+  this.textoFeedbackTitulo.setText(escolha.feedbackTitulo).setVisible(true);
+  this.textoFeedback.setText(escolha.feedbackTexto).setVisible(true);
+  this._mostrarContinuar("Continuar  ->");
+}
+```
+
+O fluxo completo de uma escolha passou a seguir a sequência: seleção → feedback imediato → réplica do NPC → próxima cena. O feedback final também foi melhorado, apresentando avaliação qualitativa com cor e mensagem distintas por faixa de desempenho.
+
+```js
+if (pct >= 40) { avaliacao = "Vendedor nato! Negócio fechado!"; cor = "#44ff88"; }
+else           { avaliacao = "Quase...";                        cor = "#ff6644"; }
+```
+
+<sub>Figura XX - Feedback imediato após escolha do jogador</sub>
+
+`<img src="../gdd_images/feedbackEscolha.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Correção das pontuações
+
+O módulo `scoring.js` foi revisado e expandido para contemplar todos os capítulos com valores e regras distintas. O capítulo 2 recebeu sua configuração própria com pontuações mais altas, o capítulo 3 passou a penalizar respostas erradas, e o mini game do metrô recebeu um limite de colisões configurável de forma centralizada.
+
+```js
+export const SCORING_CONFIG = {
+  chapter1: { correct: 100, generic:  50, wrong:   0 },
+  chapter2: { correct: 200, generic: 100, wrong:   0 },
+  chapter3: { correct: 300, generic: 150, wrong: -50 },
+  metro_minigame: { coin_value: 50, max_collisions: 3 },
+};
+```
+
+### Correção e reformulação do mini game do metrô
+
+O mini game foi reformulado com um timer global de 120 segundos, com fases alternando automaticamente a cada 30 segundos via fade de câmera e troca de trilha sonora, sem acúmulo de objetos ou sobreposição de áudio.
+
+```js
+trocarFase(novaFase, novaImagem, novaMusicaKey) {
+  this.faseAtual = novaFase;
+  this.cameras.main.fade(400, 0, 0, 0);
+  this.time.delayedCall(400, () => {
+    this.fundo1.setTexture(novaImagem);
+    this.musica.stop();
+    this.musica = this.sound.add(novaMusicaKey, { loop: true, volume: 0.5 });
+    this.musica.play();
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+  });
+}
+```
+
+Ao fim do tempo, os pontos são convertidos em Cielo Coins globais e o jogador retorna à cena do metrô com fade-out. O mini game foi também deployado de forma independente nesta sprint.
+
+IMAGEM MINI GAME
+
+### PJ Theo e PJ Camila como guias de navegação
+
+Nesta sprint o sistema de escolta por NPCs foi expandido. O PJ Theo guia o jogador nos atendimentos do capítulo 1, enquanto a PJ Camila assume a escolta no capítulo 2, conduzindo o jogador até a Loja de Roupas, o Metrô, o Restaurante e o Supermercado. Ambos os personagens receberam animações completas com 4 frames em 4 direções, alternando o sprite conforme o sentido do deslocamento.
+
+
+Cada guia segue uma rota de waypoints predefinida e exibe um balão de fala contextual conforme seu estado, aguardando o jogador caso ele se distancie além do raio configurável.
+
+```js
+this.labelTheoGuia.setText(
+  this.pjChegouDestinoRota  ? "[Chegamos. Entre na Padaria]"  :
+  this.pjEsperandoJogador   ? "[Vem comigo! Estou esperando]" : "[Siga o PJ]"
+);
+```
+
+Após a conclusão de cada atendimento, o guia reativa automaticamente com uma nova rota em direção ao próximo estabelecimento, persistindo esse estado no `Phaser.Registry`.
+
+```js
+if (this.pjAguardandoPadaria && this.registry.get("padaria_dialogo_concluido") === true) {
+  this.pjDestinoAtual  = "farmacia";
+  this.pjRotaWaypoints = [
+    { x: 1488, y: 915 }, { x: 1596, y: 915 },
+    { x: 1596, y: 1295 }, { x: 1126, y: 1295 },
+  ];
+  this.registry.set("ag01_escolta_pj_agencia2", true);
+}
+```
+
+<sub>Figura XX - PJ Theo acompanhando o personagem no mapa da cidade</sub>
+
+`<img src="../gdd_images/pjTheoGuia.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Correção das zonas de interação
+
+As zonas de interação de todos os estabelecimentos foram recalibradas. Cada zona é verificada quadro a quadro no `update()`, exibindo o label `[E] Entrar` apenas quando o personagem está dentro da área correspondente. O sistema também passou a validar se o PJ guia já chegou ao destino antes de liberar a entrada, evitando que o jogador acesse o estabelecimento antes do momento correto da narrativa.
+
+```js
+this.zonaPadaria  = new Phaser.Geom.Rectangle(1425, 818, 100, 80);
+this.zonaFarmacia = new Phaser.Geom.Rectangle(1081, 1181,  80, 80);
+
+// Entrada só liberada quando o guia chegou ao destino
+if (!this._podeEntrarNoEstabelecimento(alvoTentado)) return;
+```
+
+### Tela de vitória
+
+Foi implementada a `SceneVitoria`, exibida ao final do jogo após a conclusão de todos os atendimentos. A cena apresenta uma imagem de encerramento e um botão que retorna o jogador à tela inicial.
+
+```js
+botaoFechar.on("pointerdown", () => {
+  this.scene.start("SceneInicial");
+});
+```
+IMAGEM DA CENA 
+
+### Playtests e validação com usuários
+
+Durante esta sprint foram realizadas sessões de playtest ao redor da faculdade com dois grupos: pessoas mais jovens, próximas à faixa etária de estagiários, e profissionais adultos alinhados ao perfil do público-alvo principal. As sessões foram conduzidas de forma supervisionada, com observação do comportamento durante a navegação, interações com NPCs e realização dos quizzes. Os resultados orientaram os ajustes finais de diálogos, tutoriais e feedbacks implementados nesta sprint.
+
+IMAGENS 
+
+### Dificuldades
+
+- Garantir que o feedback imediato fosse exibido e ocultado corretamente no ciclo de estados da cena de diálogo sem interferir na sequência de resposta do NPC
+- Implementar a troca de guia entre Theo e Camila conforme o capítulo ativo, mantendo consistência de estado no registry entre cenas
+- Calibrar as zonas de interação de todos os estabelecimentos e implementar a validação de chegada do PJ antes de liberar a entrada
+- Balancear o tempo da sprint entre correções técnicas, validação com usuários e o deploy do mini game
+
+### Conclusão da Sprint 5
+
+A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em sua versão mais polida e estável. A criação do sistema de feedback imediato, a expansão do sistema de escolta com Theo e Camila, a reformulação do mini game, a implementação dos tutoriais e da tela de vitória, e a validação com usuários reais consolidaram o projeto como uma experiência de treinamento gamificada funcional, coerente com os objetivos propostos no GDD e pronta para apresentação ao parceiro Cielo. Foi uma trajetória de 05 sprints de muito aprendizado e crescimento e estamos muito felizes com o resultado final. 
+
 
 # <a name="c5"></a>5. Testes
 
