@@ -239,7 +239,7 @@ export default class SceneJogo extends Phaser.Scene {
 
     // Botão "Jogar!" para fechar o tutorial
     this.botaoJogarTutorial = this.add
-      .image(cx, cy + 170, "botaoJogarTutorial")
+      .image(cx - 17, cy + 145, "botaoJogarTutorial")
       .setScale(0.25)
       .setDepth(52)
       .setScrollFactor(0)
