@@ -80,6 +80,11 @@ export default class SceneMiniGame extends Phaser.Scene {
   }
 
   create() {
+    this.tamanhoAnteriorEscala = {
+      width: this.scale.width,
+      height: this.scale.height,
+    };
+
     // ─── TELA CHEIA ───────────────────────────────────────────────
     this.scale.resize(window.innerWidth, window.innerHeight);
 
@@ -342,6 +347,14 @@ export default class SceneMiniGame extends Phaser.Scene {
         if (this.anims.exists(key)) this.anims.remove(key);
       });
       window.removeEventListener("resize", this._onResize);
+
+      const larguraAnterior = Number(this.tamanhoAnteriorEscala?.width);
+      const alturaAnterior = Number(this.tamanhoAnteriorEscala?.height);
+      const larguraValida = Number.isFinite(larguraAnterior) && larguraAnterior > 0;
+      const alturaValida = Number.isFinite(alturaAnterior) && alturaAnterior > 0;
+      if (larguraValida && alturaValida) {
+        this.scale.resize(larguraAnterior, alturaAnterior);
+      }
     });
   }
 
@@ -494,6 +507,8 @@ export default class SceneMiniGame extends Phaser.Scene {
         this.scene.start("SceneMetro", {
           nomePasta: this.registry.get("nomePasta"),
           prefixo: this.registry.get("prefixo"),
+          spawnX: 295,
+          spawnY: 210,
         });
       });
     });

@@ -381,7 +381,11 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     });
 
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc = this.registry.get("posto_dialogo_concluido") === true;
+
+    if (this.falouComNpc && this.exclamacaoPosto) {
+      this.exclamacaoPosto.setVisible(false);
+    }
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -700,8 +704,13 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
         this.labelNpcPosto.setPosition(this.npcPosto.x, this.npcPosto.y + 2);
       }
 
-      if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      if (
+        !this.falouComNpc &&
+        pertoNpc &&
+        Phaser.Input.Keyboard.JustDown(this.teclaE)
+      ) {
         this.falouComNpc = true;
+        this.registry.set("posto_dialogo_concluido", true);
         this.exclamacaoPosto.setVisible(false);
         this.scene.pause();
         this.scene.launch("SceneDialogoPostoDeGasolina", {

@@ -308,9 +308,15 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     this.zonasSaida = this._criarZonasSaida();
     this.nearExit = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc =
+      this.registry.get("loja_roupas_dialogo_concluido") === true;
     this.isTransitioning = false;
     this.podeSairLoja = false;
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     this.exitLabel = this.add
       .text(73, 279, "[Saída]", {
@@ -477,8 +483,13 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       );
     }
 
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      !this.falouComNpc &&
+      pertoNpc &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.falouComNpc = true;
+      this.registry.set("loja_roupas_dialogo_concluido", true);
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       this.scene.pause();

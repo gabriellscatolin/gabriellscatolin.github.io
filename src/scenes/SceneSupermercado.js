@@ -357,11 +357,17 @@ export default class SceneSupermercado extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc =
+      this.registry.get("supermercado_dialogo_concluido") === true;
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     this.teclaF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
     this.direcaoAtual = "frente"; // Guarda a direção inicial do spritePersonagem
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -581,8 +587,13 @@ export default class SceneSupermercado extends Phaser.Scene {
       );
     }
 
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      !this.falouComNpc &&
+      pertoNpc &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.falouComNpc = true;
+      this.registry.set("supermercado_dialogo_concluido", true);
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneSupermercado] Interagiu com o NPC do supermercado");

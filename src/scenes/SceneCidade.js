@@ -1177,6 +1177,66 @@ export default class SceneCidade extends Phaser.Scene {
       this._atualizarPopupMissaoCidade(true);
     }
 
+    const retornoSupermercado =
+      this.registry.get("ag02_pj_supermercado_retorno") === true;
+    const recadoPosSupermercadoJaVisto =
+      this.registry.get("ag02_recado_pos_supermercado_visto") === true;
+
+    if (retornoSupermercado && !recadoPosSupermercadoJaVisto) {
+      this.registry.set("ag02_recado_pos_supermercado_visto", true);
+      this.registry.set("ag01_escolta_pj_agencia2", false);
+      this.registry.set("ag02_escolta_pj_salao", false);
+      this.registry.set("ag02_escolta_pj_metro", false);
+      this.registry.set("ag02_escolta_pj_restaurante", false);
+      this.registry.set("ag02_escolta_pj_supermercado", false);
+      this.registry.set("missaoCidadeTexto", "Missão: Ache a Agência 03 sozinho usando o mapa interativo da maquininha.");
+
+      this.pjAcompanhandoAgencia2 = false;
+      this.pjAcompanhamentoEncerrado = true;
+      this.pjAguardandoPadaria = false;
+      this.pjAguardandoDespedidaAgencia02 = false;
+
+      if (this.npcTheoGuia?.body) {
+        this.npcTheoGuia.body.setVelocity(0, 0);
+        this.npcTheoGuia.body.enable = false;
+      }
+      if (this.npcTheoGuia) {
+        this.npcTheoGuia.setVisible(false);
+      }
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia.setVisible(false);
+      }
+      if (this.exclamacaoPjAgencia02) {
+        this.exclamacaoPjAgencia02.setVisible(false);
+      }
+
+      const recadoPJ = this.add
+        .text(
+          this.spritePersonagem.x,
+          this.spritePersonagem.y - 24,
+          "[Foi um prazer te guiar até aqui, agora continue sua jornada sozinho e utilize o mapa interativo na maquininha para encontrar a Agência 03.]",
+          {
+            fontSize: "6px",
+            color: "#ffffff",
+            backgroundColor: "#000000cc",
+            padding: { x: 2, y: 1 },
+            resolution: 4,
+            wordWrap: { width: 290, useAdvancedWrap: true },
+            align: "center",
+          },
+        )
+        .setDepth(25)
+        .setOrigin(0.5, 1);
+
+      this.tweens.add({
+        targets: recadoPJ,
+        alpha: { from: 1, to: 0 },
+        duration: 3200,
+        delay: 2600,
+        onComplete: () => recadoPJ.destroy(),
+      });
+    }
+
     if (this.retornoFarmacia) {
       this.registry.set(
         "missaoCidadeTexto",
@@ -2754,6 +2814,7 @@ export default class SceneCidade extends Phaser.Scene {
 
   _abrirPopupDespedidaAgencia02() {
     if (this.pjPopupAgencia02Ativo) return;
+    this._limparPopupDespedidaAgencia02UI();
     this.pjPopupAgencia02Ativo = true;
 
     const cx = this.scale.width / 2;
@@ -2771,7 +2832,7 @@ export default class SceneCidade extends Phaser.Scene {
     const iH = this.popupDespedidaAgencia02Bg.displayHeight;
 
     this.popupDespedidaAgencia02Texto = this.add
-      .text(cx - iW * 0.12, cy - iH * 0.06, "", {
+      .text(cx - iW * 0.12, cy - iH * 0.1, "", {
         fontSize: "13px",
         color: "#000000",
         stroke: "#000000",
@@ -2838,23 +2899,7 @@ export default class SceneCidade extends Phaser.Scene {
     });
   }
 
-  _fecharPopupDespedidaAgencia02() {
-    if (!this.pjPopupAgencia02Ativo) return;
-    this.pjPopupAgencia02Ativo = false;
-    this.pjDespedidaAgencia02Feita = true;
-    this.pjAguardandoDespedidaAgencia02 = false;
-    this.registry.set("ag01_pj_retorno", true);
-    this.registry.set("ag01_escolta_pj_agencia2", false);
-
-    if (this.exclamacaoPjAgencia02) {
-      this.exclamacaoPjAgencia02.destroy();
-      this.exclamacaoPjAgencia02 = null;
-    }
-
-    if (this.labelTheoGuia) {
-      this.labelTheoGuia.setVisible(false);
-    }
-
+  _limparPopupDespedidaAgencia02UI() {
     if (this.popupDespedidaAgencia02Timer) {
       this.popupDespedidaAgencia02Timer.remove();
       this.popupDespedidaAgencia02Timer = null;
@@ -2872,6 +2917,26 @@ export default class SceneCidade extends Phaser.Scene {
       this.popupDespedidaAgencia02Bg.destroy();
       this.popupDespedidaAgencia02Bg = null;
     }
+  }
+
+  _fecharPopupDespedidaAgencia02() {
+    if (!this.pjPopupAgencia02Ativo) return;
+    this.pjPopupAgencia02Ativo = false;
+    this.pjDespedidaAgencia02Feita = true;
+    this.pjAguardandoDespedidaAgencia02 = false;
+    this.registry.set("ag01_pj_retorno", true);
+    this.registry.set("ag01_escolta_pj_agencia2", false);
+
+    if (this.exclamacaoPjAgencia02) {
+      this.exclamacaoPjAgencia02.destroy();
+      this.exclamacaoPjAgencia02 = null;
+    }
+
+    if (this.labelTheoGuia) {
+      this.labelTheoGuia.setVisible(false);
+    }
+
+    this._limparPopupDespedidaAgencia02UI();
 
     if (this.npcTheoGuia) {
       this.npcTheoGuia.setVisible(false);
@@ -2901,6 +2966,27 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _podeEntrarNoEstabelecimento(alvo) {
+    const faseLivrePosEstabelecimentos =
+      this.registry.get("ag02_pj_supermercado_retorno") === true ||
+      this.registry.get("ag02_recado_pos_supermercado_visto") === true;
+
+    if (
+      faseLivrePosEstabelecimentos &&
+      [
+        "padaria",
+        "farmacia",
+        "cabeleireiro",
+        "metro",
+        "restaurante",
+        "supermercado",
+        "agencia2",
+        "agencia3",
+        "posto",
+      ].includes(alvo)
+    ) {
+      return true;
+    }
+
     if (
       alvo === "agencia2" &&
       (this.pjAguardandoDespedidaAgencia02 || this.pjDespedidaAgencia02Feita)
@@ -3351,9 +3437,10 @@ export default class SceneCidade extends Phaser.Scene {
       this.pjAcompanhamentoEncerrado = false;
       this.pjDestinoAtual = "agencia2";
       this.pjRotaWaypoints = [
-        { x: 1597, y: 1571 },
-        { x: 1597, y: 1648 },
-        { x: 1792, y: 1648 },
+        { x: 1595, y: 1257 },
+        { x: 1595, y: 1567 },
+        { x: 1594, y: 1648 },
+        { x: 1802, y: 1646 },
       ];
       this.pjRotaIndiceAtual = 0;
       this.pjChegouDestinoRota = false;

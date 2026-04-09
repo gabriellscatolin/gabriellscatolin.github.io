@@ -347,7 +347,13 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.direcaoAtual = "frente";
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc =
+      this.registry.get("agencia03_dialogo_concluido") === true;
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     // Pausa  a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -590,8 +596,13 @@ export default class SceneAgencia03 extends Phaser.Scene {
       this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
     }
 
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      !this.falouComNpc &&
+      pertoNpc &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.falouComNpc = true;
+      this.registry.set("agencia03_dialogo_concluido", true);
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       this.scene.pause();

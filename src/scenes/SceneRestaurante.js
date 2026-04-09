@@ -404,7 +404,13 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.dentroZonaSaida = false;
     this.podeSairRestaurante = false;
     this.perto_npc = false;
-    this.falouComNpc = false;
+    this.falouComNpc =
+      this.registry.get("restaurante_dialogo_concluido") === true;
+
+    if (this.falouComNpc && this.exclamacaoNpc) {
+      this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -470,12 +476,17 @@ export default class SceneRestaurante extends Phaser.Scene {
       this.labelNpc.setPosition(375, 330);
     }
 
-    if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+    if (
+      !this.falouComNpc &&
+      pertoNpc &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
+    ) {
       this.scene.pause();
       this.scene.launch("SceneDialogoRestaurante", {
         cenaOrigem: "SceneRestaurante",
       });
       this.falouComNpc = true;
+      this.registry.set("restaurante_dialogo_concluido", true);
       this.exclamacaoNpc.setVisible(false);
       if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
       console.log("[SceneRestaurante] Interagiu com o NPC do Restaurante");

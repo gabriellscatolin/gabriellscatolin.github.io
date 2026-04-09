@@ -11,6 +11,12 @@
       dados.nomePasta || this.registry.get("nomePasta") || "Pedro";
     this.prefixoEscolhido =
       dados.prefixo || this.registry.get("prefixo") || "HB";
+    this.spawnXCustom = Number.isFinite(Number(dados.spawnX))
+      ? Number(dados.spawnX)
+      : null;
+    this.spawnYCustom = Number.isFinite(Number(dados.spawnY))
+      ? Number(dados.spawnY)
+      : null;
   }
 
   // Carrega mapa, tilesets grandes e sprites do spritePersonagem
@@ -297,8 +303,8 @@
     });
 
     // Personagem
-    const spawnX = 273;
-    const spawnY = 250;
+    const spawnX = Number.isFinite(this.spawnXCustom) ? this.spawnXCustom : 273;
+    const spawnY = Number.isFinite(this.spawnYCustom) ? this.spawnYCustom : 250;
 
     this.spritePersonagem = this.physics.add.sprite(
       spawnX,
@@ -347,7 +353,7 @@
 
     // HUD de orientação do metrô para guiar o jogador até o minigame.
     this.hudMiniGameTexto = this.add
-      .text(this.scale.width / 2, 20, "Suba para jogar o minigame.", {
+      .text(this.scale.width / 2, 20, "Suba o metrô para jogar o minigame.", {
         fontSize: "20px",
         color: "#ffffff",
         fontStyle: "bold",
@@ -361,14 +367,14 @@
     // Exclamação destacando o botão de entrada do minigame.
     this.exclamacaoMiniGame = this.add
       .text(676, 178, "!", {
-        fontSize: "24px",
+        fontSize: "38px",
         color: "#ffeb3b",
         stroke: "#000000",
         strokeThickness: 3,
       })
       .setOrigin(0.5, 1)
       .setDepth(21)
-      .setVisible(false);
+      .setVisible(true);
 
     this.tweenExclamacaoMiniGame = this.tweens.add({
       targets: this.exclamacaoMiniGame,
@@ -376,7 +382,7 @@
       duration: 450,
       yoyo: true,
       repeat: -1,
-      paused: true,
+      paused: false,
     });
 
     // Câmera segue o spritePersonagem
@@ -661,19 +667,9 @@
     if (entrarMiniGame !== this.entrarMiniGame) {
       this.entrarMiniGame = entrarMiniGame; // ← G maiúsculo
       this.labelE.setVisible(entrarMiniGame);
-      this.exclamacaoMiniGame.setVisible(entrarMiniGame);
-      if (this.tweenExclamacaoMiniGame) {
-        if (entrarMiniGame) {
-          this.tweenExclamacaoMiniGame.resume();
-        } else {
-          this.tweenExclamacaoMiniGame.pause();
-        }
-      }
     }
 
-    if (entrarMiniGame) {
-      this.exclamacaoMiniGame.setPosition(this.labelE.x, this.labelE.y - 12);
-    }
+    this.exclamacaoMiniGame.setPosition(this.labelE.x, this.labelE.y - 12);
 
     if (
       entrarMiniGame &&
@@ -683,6 +679,9 @@
       this.transicionando = true;
       this.labelE.setVisible(false);
       this.exclamacaoMiniGame.setVisible(false);
+      if (this.tweenExclamacaoMiniGame) {
+        this.tweenExclamacaoMiniGame.pause();
+      }
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.scene.start("SceneMiniGame", {
