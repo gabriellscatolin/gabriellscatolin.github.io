@@ -339,13 +339,13 @@ RNF07| O jogo deverá ser intuitivo, garantindo que o jogador compreenda a progr
 O projeto visa atender uma demanda anual de aproximadamente 3.000 novos profissionais, caracterizando-se por uma alta dispersão geográfica que justifica a digitalização do treinamento.
 
 - **Justificativa de Gamificação Digital**
-A transição dos jogos físicos presenciais para o Mini Mundo Cielo representa a evolução da estratégia de learning & development da companhia. Ao digitalizar dinâmicas que já possuem eficácia comprovada, a Cielo elimina barreiras geográficas e garante que um Gerente de Negócios no Norte tenha a mesma equidade de aprendizado e acesso às ferramentas que um profissional no Sudeste. 
+A utilização de gamificação no Mini Mundo Cielo busca tornar o processo de treinamento mais engajador e acessível para os Gerentes de Negócios da empresa. Ao transformar situações reais de vendas em desafios interativos, o jogo permite que os profissionais pratiquem tomada de decisão, comunicação e identificação de necessidades do cliente em um ambiente seguro e controlado. Além disso, o formato digital possibilita padronizar o treinamento em diferentes regiões do país, garantindo maior equidade no acesso ao aprendizado.
 
 # <a name="c2"></a>2. Visão Geral do Jogo (sprint 2)
 
 ## 2.1. Objetivos do Jogo (sprint 2)
 
-&emsp; O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. [19](#ref19)
+&emsp; O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. A conclusão do jogo ocorre quando o jogador completa todas as missões disponíveis nas cidades do mapa, atendendo diferentes estabelecimentos comerciais e acumulando pontuação e moedas por meio de decisões corretas nos desafios e quizzes. Ao finalizar todas as etapas, o jogador é reconhecido dentro da narrativa como um gerente de negócios preparado para atuar com excelência no atendimento e na venda de soluções da Cielo. [19](#ref19)
 
 
 ## 2.2. Características do Jogo (sprint 2)
@@ -1626,7 +1626,7 @@ $$
 
 &emsp; Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
 
-&emsp; Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
+&emsp; Cada cenário representa um tipo de estabelecimento comercial onde o jogador interage com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
 
 <div align="center">
  <sub>Imagem 26 - Cenários dos estabelecimentos internamente</sub>
