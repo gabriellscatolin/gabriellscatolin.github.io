@@ -403,7 +403,7 @@
       const altura = gameSize?.height ?? this.scale.height;
       this._ajustarLayoutResponsivoMetro(largura, altura);
       this._reposicionarTutorialMetro(largura, altura);
-      this._reposicionarHudMetro(largura);
+      this._reposicionarHudMetro(largura, altura);
     };
     this.scale.on("resize", this._onResizeMetro, this);
 
@@ -453,6 +453,7 @@
   mostrarTutorialMetro() {
     const cx = this.scale.width / 2;
     const cy = this.scale.height / 2;
+    const uiScale = this._calcularEscalaUiMetro(this.scale.width, this.scale.height);
     this.elementosTutorialMetro = [];
     this.tutorialMetroAtivo = true;
 
@@ -463,15 +464,15 @@
       .setScrollFactor(0);
     this.elementosTutorialMetro.push(this.tutorialMetroOverlay);
 
-    // Imagem do tutorial do metrô (proporcional, máx 70% da tela)
+    // Imagem do tutorial do metrô (menor e proporcional)
     this.tutorialMetroImagem = this.add
       .image(cx, cy, "imagemTutorialMetro")
       .setDepth(51)
       .setScrollFactor(0);
     const src = this.textures.get("imagemTutorialMetro").source[0];
     const ratio = src.width / src.height;
-    const maxW = 240,
-      maxH = 160;
+    const maxW = Math.round(180 * uiScale);
+    const maxH = Math.round(120 * uiScale);
     let dW = maxW,
       dH = maxW / ratio;
     if (dH > maxH) {
@@ -481,16 +482,19 @@
     this.tutorialMetroImagem.setDisplaySize(dW, dH);
     this.elementosTutorialMetro.push(this.tutorialMetroImagem);
 
-    const btnY = cy + dH / 2 + 30;
+    const btnY = cy + dH / 2 + Math.round(18 * uiScale);
+    const btnFontSize = Math.max(12, Math.round(14 * uiScale));
+    const btnPadX = Math.max(10, Math.round(14 * uiScale));
+    const btnPadY = Math.max(5, Math.round(6 * uiScale));
 
     // Botão "Fechar"
     this.tutorialMetroBotaoFechar = this.add
       .text(cx, btnY, "Fechar", {
-        fontSize: "20px",
+        fontSize: `${btnFontSize}px`,
         fontStyle: "bold",
         color: "#ffffff",
         backgroundColor: "#333333",
-        padding: { x: 24, y: 10 },
+        padding: { x: btnPadX, y: btnPadY },
       })
       .setDepth(52)
       .setScrollFactor(0)
@@ -527,8 +531,21 @@
       largura / this.resolucaoBaseMetro.width,
       altura / this.resolucaoBaseMetro.height,
     );
-    const novoZoom = Phaser.Math.Clamp(this.zoomBaseMetro * fatorEscala, 2.8, 5);
+    const novoZoom = Phaser.Math.Clamp(
+      this.zoomBaseMetro * fatorEscala,
+      2.8,
+      5,
+    );
     this.cameras.main.setZoom(novoZoom);
+    this._reposicionarHudMetro(largura, altura);
+  }
+
+  _calcularEscalaUiMetro(largura, altura) {
+    const fatorEscala = Math.min(
+      largura / this.resolucaoBaseMetro.width,
+      altura / this.resolucaoBaseMetro.height,
+    );
+    return Phaser.Math.Clamp(fatorEscala, 0.65, 1.15);
   }
 
   _reposicionarTutorialMetro(largura, altura) {
@@ -548,10 +565,11 @@
       .setDisplaySize(largura, altura);
 
     this.tutorialMetroImagem.setPosition(cx, cy);
+    const uiScale = this._calcularEscalaUiMetro(largura, altura);
     const src = this.textures.get("imagemTutorialMetro").source[0];
     const ratio = src.width / src.height;
-    const maxW = Math.min(largura * 0.72, 900);
-    const maxH = Math.min(altura * 0.62, 560);
+    const maxW = Math.min(largura * 0.45, Math.round(520 * uiScale));
+    const maxH = Math.min(altura * 0.4, Math.round(320 * uiScale));
     let dW = maxW;
     let dH = maxW / ratio;
     if (dH > maxH) {
@@ -560,12 +578,29 @@
     }
     this.tutorialMetroImagem.setDisplaySize(dW, dH);
 
-    this.tutorialMetroBotaoFechar.setPosition(cx, cy + dH / 2 + 30);
+    this.tutorialMetroBotaoFechar
+      .setStyle({
+        fontSize: `${Math.max(12, Math.round(14 * uiScale))}px`,
+        padding: {
+          x: Math.max(10, Math.round(14 * uiScale)),
+          y: Math.max(5, Math.round(6 * uiScale)),
+        },
+      })
+      .setPosition(cx, cy + dH / 2 + Math.round(18 * uiScale));
   }
 
-  _reposicionarHudMetro(largura) {
+  _reposicionarHudMetro(largura, altura) {
     if (this.hudMiniGameTexto) {
-      this.hudMiniGameTexto.setPosition(largura / 2, 20);
+      const uiScale = this._calcularEscalaUiMetro(largura, altura);
+      const fontSize = Math.round(16 * uiScale);
+      const padX = Math.round(8 * uiScale);
+      const padY = Math.round(3 * uiScale);
+      this.hudMiniGameTexto
+        .setPosition(largura / 2, Math.round(16 * uiScale))
+        .setStyle({
+          fontSize: `${fontSize}px`,
+          padding: { x: padX, y: padY },
+        });
     }
   }
 
