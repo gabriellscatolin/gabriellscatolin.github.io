@@ -903,14 +903,21 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
       : `Meta não atingida (precisava de ${meta} coins)`;
 
     // Reaproveita o campo principal de fala para mostrar o resumo final
-    this.textoNpc.setText(
-      `${resumo}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n` +
-        `Total da sessão: ${getScore(this.registry)}\n\n` +
-        `${statusMeta}\n\n${avaliacao}`,
-    ).setStyle({
-      color: cor,
-      fontSize: "32px",
-    });
+    this.textoNpc
+      .setText(
+        `${resumo}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n` +
+          `Total da sessão: ${getScore(this.registry)}\n\n` +
+          `${statusMeta}\n${avaliacao}`,
+      )
+      .setStyle({
+        color: cor,
+        fontSize: "26px",
+      })
+      .setOrigin(0.5, 0)
+      .setPosition(
+        this.scale.width / 2,
+        this.scale.height - (this.scale.height - 670) + 15,
+      );
 
     // Atualiza o progresso do jogo conforme o NPC concluído nesta agência
     if (this.tipoDialogo === "GG") {

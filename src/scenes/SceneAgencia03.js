@@ -68,6 +68,14 @@ export default class SceneAgencia03 extends Phaser.Scene {
       "npc_agencia03",
       "src/assets/imagens/imagensPersonagens/NPC/npcPJ1.png",
     );
+    this.load.image(
+      "npc_leticia",
+      "src/assets/imagens/imagensPersonagens/NPC/Leticia/leticia_parado01.png",
+    );
+    this.load.image(
+      "npc_pricila",
+      "src/assets/imagens/imagensPersonagens/NPC/Pricila/pricila_andandofrente01 (parado01).png",
+    );
 
     // ── Spritesheet do spritePersonagem ─────────────────────────────────────────────
     const caminhoBase = `src/assets/imagens/imagensPersonagens/${nomePasta}`;
@@ -106,8 +114,10 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     this._otimizarTilesetsPorUso(mapa);
 
-    const OX = 32 * 16; // 512
-    const OY = 16 * 16; // 256
+    const OX = 1000;
+    const OY = 1000;
+    this.OX = OX;
+    this.OY = OY;
 
     const tsRoomBuilder = mapa.addTilesetImage(
       "Room_Builder_16x16",
@@ -143,16 +153,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
       tsInteriorS5,
     ].filter(Boolean);
 
-    // Fundo neutro para evitar bordas pretas em telas maiores que o mapa
-    this.add
-      .rectangle(
-        0,
-        0,
-        mapa.widthInPixels + 200,
-        mapa.heightInPixels + 200,
-        0x888888,
-      )
-      .setOrigin(0, 0);
+    // Definimos uma cor de fundo sólida e elegante para a cena
+    this.cameras.main.setBackgroundColor("#3b3e4f");
 
     // ── Camadas sem colisão (ordem de profundidade / render) ──────────────────
     // Nomes extraídos do TMJ fornecido
@@ -222,16 +224,16 @@ export default class SceneAgencia03 extends Phaser.Scene {
       Number.isFinite(this.spawnXInicial) &&
       Number.isFinite(this.spawnYInicial);
 
-    const SPAWN_PADRAO_X = 955;
-    const SPAWN_PADRAO_Y = 518;
+    const SPAWN_PADRAO_X = OX + 443;
+    const SPAWN_PADRAO_Y = OY + 262;
 
     const spawnX = temSpawnCustom
-      ? this.spawnXInicial < limitesCena.x
+      ? this.spawnXInicial < 500 // Se vier de outra cena com coord baixa, provavelmente precisa de offset
         ? this.spawnXInicial + OX
         : this.spawnXInicial
       : SPAWN_PADRAO_X;
     const spawnY = temSpawnCustom
-      ? this.spawnYInicial < limitesCena.y
+      ? this.spawnYInicial < 500
         ? this.spawnYInicial + OY
         : this.spawnYInicial
       : SPAWN_PADRAO_Y;
@@ -260,31 +262,77 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .filter(Boolean)
       .forEach((c) => this.physics.add.collider(this.spritePersonagem, c));
 
-    // ── NPC ───────────────────────────────────────────────────────────────────
-    this.npcAgencia = this.physics.add
-      .staticImage(775, 372, "npc_agencia03")
+    // ── NPC Leticia ───────────────────────────────────────────────────────────
+    this.npcLeticia = this.physics.add
+      .staticImage(OX + 447, OY + 194, "npc_leticia")
       .setDepth(5);
 
-    this.npcAgencia.setScale(0.09);
-    this.npcAgencia.refreshBody();
-    this.physics.add.collider(this.spritePersonagem, this.npcAgencia);
+    this.npcLeticia.setScale(0.045);
+    this.npcLeticia.refreshBody();
+    this.physics.add.collider(this.spritePersonagem, this.npcLeticia);
 
-    this.labelNpc = this.add
-      .text(this.npcAgencia.x, this.npcAgencia.y, "[E] Falar", {
-        fontSize: "3px",
+    // ── NPC Pricila ───────────────────────────────────────────────────────────
+    this.npcPricila = this.physics.add
+      .staticImage(OX + 227, OY + 126, "npc_pricila")
+      .setDepth(5);
+
+    this.npcPricila.setScale(0.045);
+    this.npcPricila.refreshBody();
+    this.physics.add.collider(this.spritePersonagem, this.npcPricila);
+
+    this.labelNpcPricila = this.add
+      .text(this.npcPricila.x, this.npcPricila.y, "[E] Falar", {
+        fontSize: "5px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 2 },
         resolution: 4,
       })
       .setDepth(20)
       .setOrigin(0.5, 1)
       .setVisible(false);
 
-    this.exclamacaoNpc = this.add
+    this.exclamacaoNpcPricila = this.add
       .text(
-        this.npcAgencia.x,
-        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+        this.npcPricila.x,
+        this.npcPricila.y - this.npcPricila.displayHeight * 0.5,
+        "!",
+        {
+          fontSize: "24px",
+          color: "#ffeb3b",
+          stroke: "#000000",
+          strokeThickness: 2,
+          resolution: 4,
+        },
+      )
+      .setDepth(21)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.tweenExclamacaoPricila = this.tweens.add({
+      targets: this.exclamacaoNpcPricila,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+    });
+
+    this.labelNpcLeticia = this.add
+      .text(this.npcLeticia.x, this.npcLeticia.y, "[E] Falar", {
+        fontSize: "5px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 2 },
+        resolution: 4,
+      })
+      .setDepth(20)
+      .setOrigin(0.5, 1)
+      .setVisible(false);
+
+    this.exclamacaoNpcLeticia = this.add
+      .text(
+        this.npcLeticia.x,
+        this.npcLeticia.y - this.npcLeticia.displayHeight * 0.5,
         "!",
         {
           fontSize: "24px",
@@ -297,8 +345,8 @@ export default class SceneAgencia03 extends Phaser.Scene {
       .setDepth(21)
       .setOrigin(0.5, 1);
 
-    this.tweenExclamacaoNpc = this.tweens.add({
-      targets: this.exclamacaoNpc,
+    this.tweenExclamacaoLeticia = this.tweens.add({
+      targets: this.exclamacaoNpcLeticia,
       alpha: { from: 1, to: 0.25 },
       duration: 450,
       yoyo: true,
@@ -313,17 +361,21 @@ export default class SceneAgencia03 extends Phaser.Scene {
     // ── Câmera ────────────────────────────────────────────────────────────────
     this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(5);
+    
+    // Assegura que a câmera mostre o mapa com um recuo (padding) de 100px para o fundo ser visível
+    const padding = 100;
     this.cameras.main.setBounds(
-      limitesCena.x,
-      limitesCena.y,
-      limitesCena.width,
-      limitesCena.height,
+      limitesCena.x - padding,
+      limitesCena.y - padding,
+      limitesCena.width + padding * 2,
+      limitesCena.height + padding * 2,
     );
+    const alturaLimite = 1306 - limitesCena.y;
     this.physics.world.setBounds(
       limitesCena.x,
       limitesCena.y,
       limitesCena.width,
-      limitesCena.height,
+      alturaLimite,
     );
     this.cameras.main.centerOn(spawnX, spawnY);
 
@@ -332,11 +384,11 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.zonasSaida = this._criarZonasSaida();
 
     this.labelSair = this.add
-      .text(0, 0, "[Saída]", {
-        fontSize: "3px",
+      .text(0, 0, "[E] Sair", {
+        fontSize: "5px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
-        padding: { x: 1, y: 1 },
+        padding: { x: 2, y: 2 },
         resolution: 4,
       })
       .setDepth(20)
@@ -346,19 +398,35 @@ export default class SceneAgencia03 extends Phaser.Scene {
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.direcaoAtual = "frente";
-    this.perto_npc = false;
-    this.falouComNpc =
+    this.falouComLeticia = false;
+    this.falouComPricila =
       this.registry.get("agencia03_dialogo_concluido") === true;
 
-    if (this.falouComNpc && this.exclamacaoNpc) {
-      this.exclamacaoNpc.setVisible(false);
-      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    // Se o diálogo já foi concluído anteriormente (conforme registry), remove exclamacoes
+    if (this.falouComPricila) {
+      this.falouComLeticia = true; 
+      this.exclamacaoNpcLeticia.setVisible(false);
+      if (this.tweenExclamacaoLeticia) this.tweenExclamacaoLeticia.stop();
+      this.exclamacaoNpcPricila.setVisible(false);
+      if (this.tweenExclamacaoPricila) this.tweenExclamacaoPricila.stop();
     }
 
     // Pausa  a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
     });
+
+    // ── Mouse Debug ──────────────────────────────────────────────────────────
+    this.mouseDebugInfo = this.add
+      .text(0, 0, "", {
+        fontSize: "5px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 2, y: 2 },
+        resolution: 10,
+      })
+      .setDepth(100)
+      .setVisible(true);
   }
 
   // ── Funções auxiliares ────────────────────────────────────────────────────
@@ -522,9 +590,9 @@ export default class SceneAgencia03 extends Phaser.Scene {
   _criarZonasSaida() {
     return [
       {
-        x: 955,
-        y: 558,
-        raio: 14,
+        x: 1436,
+        y: 1289,
+        raio: 20,
         destino: "SceneCidade",
         spawnX: 2486,
         spawnY: 792,
@@ -578,44 +646,83 @@ export default class SceneAgencia03 extends Phaser.Scene {
       spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
-    // ── Interação com NPC ───────────────────────────────────────────────────
-    const distNpc = Phaser.Math.Distance.Between(
+    // ── Interação com Leticia ───────────────────────────────────────────────
+    const distLeticia = Phaser.Math.Distance.Between(
       spritePersonagem.x,
       spritePersonagem.y,
-      this.npcAgencia.x,
-      this.npcAgencia.y,
+      this.npcLeticia.x,
+      this.npcLeticia.y,
     );
-    const pertoNpc = distNpc < 30;
+    const pertoLeticia = distLeticia < 60;
 
-    if (pertoNpc !== this.perto_npc) {
-      this.perto_npc = pertoNpc;
-      this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
+    if (pertoLeticia !== this.perto_leticia) {
+      this.perto_leticia = pertoLeticia;
+      this.labelNpcLeticia.setVisible(pertoLeticia && !this.dentroZonaSaida);
     }
 
-    if (pertoNpc) {
-      this.labelNpc.setPosition(this.npcAgencia.x, this.npcAgencia.y + 2);
+    if (pertoLeticia) {
+      this.labelNpcLeticia.setPosition(this.npcLeticia.x, this.npcLeticia.y + 15);
     }
 
-    if (
-      !this.falouComNpc &&
-      pertoNpc &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
-      this.falouComNpc = true;
-      this.registry.set("agencia03_dialogo_concluido", true);
-      this.exclamacaoNpc.setVisible(false);
-      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    if (pertoLeticia && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+      this.falouComLeticia = true;
+      this.exclamacaoNpcLeticia.setVisible(false);
+      if (this.tweenExclamacaoLeticia) this.tweenExclamacaoLeticia.stop();
       this.scene.pause();
       this.scene.launch("SceneDialogoAgencia03", {
         cenaOrigem: "SceneAgencia03",
+        npc: "GG", // Leticia Gerente
       });
     }
 
-    if (!this.falouComNpc && this.exclamacaoNpc) {
-      this.exclamacaoNpc.setPosition(
-        this.npcAgencia.x,
-        this.npcAgencia.y - this.npcAgencia.displayHeight * 0.5,
+    if (!this.falouComLeticia && this.exclamacaoNpcLeticia) {
+      this.exclamacaoNpcLeticia.setPosition(
+        this.npcLeticia.x,
+        this.npcLeticia.y - this.npcLeticia.displayHeight * 0.5,
       );
+    }
+
+    // ── Interação com Pricila ────────────────────────────────────────────────
+    if (this.falouComLeticia) {
+      const distPricila = Phaser.Math.Distance.Between(
+        spritePersonagem.x,
+        spritePersonagem.y,
+        this.npcPricila.x,
+        this.npcPricila.y,
+      );
+      const pertoPricila = distPricila < 60;
+
+      if (!this.falouComPricila) {
+        this.exclamacaoNpcPricila.setVisible(true);
+      }
+
+      if (pertoPricila !== this.perto_pricila) {
+        this.perto_pricila = pertoPricila;
+        this.labelNpcPricila.setVisible(pertoPricila && !this.dentroZonaSaida);
+      }
+
+      if (pertoPricila) {
+        this.labelNpcPricila.setPosition(this.npcPricila.x, this.npcPricila.y + 15);
+      }
+
+      if (pertoPricila && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
+        this.falouComPricila = true;
+        this.registry.set("agencia03_dialogo_concluido", true);
+        this.exclamacaoNpcPricila.setVisible(false);
+        if (this.tweenExclamacaoPricila) this.tweenExclamacaoPricila.stop();
+        this.scene.pause();
+        this.scene.launch("SceneDialogoAgencia03", {
+          cenaOrigem: "SceneAgencia03",
+          npc: "PJ", // Priscila PJ
+        });
+      }
+
+      if (!this.falouComPricila && this.exclamacaoNpcPricila) {
+        this.exclamacaoNpcPricila.setPosition(
+          this.npcPricila.x,
+          this.npcPricila.y - this.npcPricila.displayHeight * 0.5,
+        );
+      }
     }
 
     // ── Detecção da zona de saída ─────────────────────────────────────────────
@@ -633,20 +740,19 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
+      this.labelSair.setVisible(dentroSaida);
     }
 
     if (dentroSaida) {
-      this.labelSair.setPosition(spritePersonagem.x, spritePersonagem.y - 10);
-      this.labelNpc.setVisible(false);
+      this.labelSair.setPosition(spritePersonagem.x, spritePersonagem.y + 15);
     }
 
-    // Transição automática ao entrar na zona de saída
+    // Transição manual ao apertar [E] na zona de saída
     if (
       !this.transicionando &&
-      this.falouComNpc &&
       dentroSaida &&
-      zonaSaidaAtual
+      zonaSaidaAtual &&
+      Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
@@ -659,6 +765,19 @@ export default class SceneAgencia03 extends Phaser.Scene {
           spawnY: zonaSaidaAtual.spawnY ?? 0,
         });
       });
+    }
+
+    // ── Update Mouse Debug ───────────────────────────────────────────────────
+    const pointer = this.input.activePointer;
+    if (this.mouseDebugInfo && pointer) {
+      // Ajusta para a escala da câmera (zoom 5)
+      const zoom = this.cameras.main.zoom;
+      this.mouseDebugInfo.setPosition(pointer.worldX + 2, pointer.worldY + 2);
+      this.mouseDebugInfo.setText(
+        `SCREEN: ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
+        `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}\n` +
+        `MAP: ${Math.round(pointer.worldX - this.OX)},${Math.round(pointer.worldY - this.OY)}`,
+      );
     }
   }
 }
