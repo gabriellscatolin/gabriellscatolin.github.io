@@ -1,10 +1,8 @@
-
-
 # GDD - Game Design Document - Módulo 1 - Inteli
-
 
 ## Nome do Grupo:
 Cielitos
+
 #### Nomes dos integrantes do grupo
 - Alícia Medina 
 - Eduardo Melquiades 
@@ -32,10 +30,6 @@ Cielitos
 
 [Anexos](#c8)
 
-<br>
-
-
-
 # <a name="c1"></a>1. Introdução (sprints 1 a 4)
 
 ## 1.1. Plano Estratégico do Projeto
@@ -43,138 +37,148 @@ Cielitos
 ### 1.1.1. Contexto da indústria (sprint 2)
 
 &emsp; A Cielo S.A. posiciona-se como a líder nacional no setor de adquirência e serviços financeiros, desempenhando um papel sistêmico na economia brasileira. Fundada em 1995 (originalmente como VisaNet), a companhia evoluiu de uma processadora de transações para uma plataforma de tecnologia de ponta voltada ao varejo. Com presença capilarizada em 99% do território nacional, a Cielo detém uma abrangência sem paralelos, atendendo desde microempreendedores até gigantes do varejo corporativo.[\[1\]](#ref1)
-<br>&emsp;O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações, movimentando o equivalente a 7% do Produto Interno Bruto (PIB) brasileiro. [\[2\]](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
-<br>&emsp;Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [\[3\]](#ref3) Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
-<br>&emsp;A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. [\[4\]](#ref4)
 
+&emsp; O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações, movimentando o equivalente a 7% do Produto Interno Bruto (PIB) brasileiro. [\[2\]](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
 
+&emsp; Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [\[3\]](#ref3) Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
+
+&emsp; A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. [\[4\]](#ref4)
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-<br>&emsp;A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[\[5\]](#ref5)
-<br>&emsp;Sob essa perspectiva, observa-se na Figura 01 a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
+&emsp; A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[\[5\]](#ref5)
 
+&emsp; Sob essa perspectiva, observa-se na imagem a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
 
 <div align="center">
-<sub>Figura 1 - Análise de 5 Forças de Porter - Cielo</sub>
-<img src="../gdd_images/forças_porter.jpeg" width= 90%>
+ <sub>Imagem 1 - Análise de 5 Forças de Porter - Cielo</sub>
+ <img src="../gdd_images/forças_porter.jpeg" width= 90%>
 
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-<br>&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
-<br>&emsp;O poder de barganha dos fornecedores é considerado moderado. No setor de adquirência, fornecedores estratégicos incluem bandeiras de cartão como Visa, Mastercard e Elo, além de provedores de tecnologia responsáveis pelos terminais de pagamento e infraestrutura digital, como Ingenico e serviços de computação em nuvem. Esses fornecedores exercem influência relevante ao estabelecer padrões tecnológicos e operacionais essenciais para o funcionamento do sistema de pagamentos. Contudo, devido à sua escala e posição consolidada no mercado brasileiro, a Cielo possui maior capacidade de negociação em comparação a empresas menores, o que reduz parcialmente o poder desses fornecedores.
-<br>&emsp;O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores apresentam alta sensibilidade a preços e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao elevado volume de transações processadas. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas. Para mitigar esse poder, a Cielo investe em estratégias de fidelização por meio da oferta de serviços agregados, como soluções de gestão de vendas, antecipação de recebíveis, integração com plataformas de e-commerce e ferramentas de análise de dados para comerciantes.
-<br>&emsp;A ameaça de produtos substitutos é considerada alta. Soluções como Pix, transferências via QR Code e carteiras digitais reduzem a dependência do arranjo tradicional de cartões. O crescimento do Pix é um exemplo claro dessa transformação: o sistema movimentou R$ 84,9 trilhões em cinco anos [\[21\]](#ref21), valor equivalente a mais de sete vezes o PIB brasileiro no período (Times Brasil, 2025). Esse avanço demonstra a rápida adoção de alternativas de pagamento que podem reduzir a relevância de modelos tradicionais baseados em maquininhas. Nesse contexto, a adaptação estratégica das adquirentes torna-se essencial para manter competitividade no mercado.
-<br>&emsp;Por fim, A rivalidade entre concorrentes existentes é intensa no setor de adquirência. Empresas como Stone, PagSeguro e Rede competem agressivamente por meio de diferenciação tecnológica, redução de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis, crédito para lojistas e soluções de gestão empresarial. Além disso, fintechs e plataformas digitais ampliam a competição no ecossistema de pagamentos. Esse ambiente competitivo pressiona margens e exige inovação constante, eficiência operacional e fortalecimento do relacionamento com clientes.
+&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional.
+
+&emsp; O poder de barganha dos fornecedores é considerado moderado. No setor de adquirência, fornecedores estratégicos incluem bandeiras de cartão como Visa, Mastercard e Elo, além de provedores de tecnologia responsáveis pelos terminais de pagamento e infraestrutura digital, como Ingenico e serviços de computação em nuvem. Esses fornecedores exercem influência relevante ao estabelecer padrões tecnológicos e operacionais essenciais para o funcionamento do sistema de pagamentos. Contudo, devido à sua escala e posição consolidada no mercado brasileiro, a Cielo possui maior capacidade de negociação em comparação a empresas menores, o que reduz parcialmente o poder desses fornecedores.
+
+&emsp; O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores apresentam alta sensibilidade a preços e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao elevado volume de transações processadas. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas. Para mitigar esse poder, a Cielo investe em estratégias de fidelização por meio da oferta de serviços agregados, como soluções de gestão de vendas, antecipação de recebíveis, integração com plataformas de e-commerce e ferramentas de análise de dados para comerciantes.
+
+&emsp; A ameaça de produtos substitutos é considerada alta. Soluções como Pix, transferências via QR Code e carteiras digitais reduzem a dependência do arranjo tradicional de cartões. O crescimento do Pix é um exemplo claro dessa transformação: o sistema movimentou R$ 84,9 trilhões em cinco anos [\[21\]](#ref21), valor equivalente a mais de sete vezes o PIB brasileiro no período (Times Brasil, 2025). Esse avanço demonstra a rápida adoção de alternativas de pagamento que podem reduzir a relevância de modelos tradicionais baseados em maquininhas. Nesse contexto, a adaptação estratégica das adquirentes torna-se essencial para manter competitividade no mercado.
+
+&emsp; Por fim, A rivalidade entre concorrentes existentes é intensa no setor de adquirência. Empresas como Stone, PagSeguro e Rede competem agressivamente por meio de diferenciação tecnológica, redução de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis, crédito para lojistas e soluções de gestão empresarial. Além disso, fintechs e plataformas digitais ampliam a competição no ecossistema de pagamentos. Esse ambiente competitivo pressiona margens e exige inovação constante, eficiência operacional e fortalecimento do relacionamento com clientes.
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
 &emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados. [\[6\]](#ref6) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. [\[2\]](#ref2)
 
-&emsp; A Figura 2 apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
-
+&emsp; A imagem apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
 
 <div align="center">
-  <sub>Figura 2 - Análise SWOT - Cielo</sub>
+  <sub>Imagem 2 - Análise SWOT - Cielo</sub>
   <img src="../gdd_images/swot.png">
 
   <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 #### Forças (Strengths) 
-1. **Liderança e Capilaridade de Mercado:** Presente em 99% do território brasileiro, a Cielo possui a maior rede de aceitação do país, o que garante uma vantagem competitiva em volume de transações.
+- **Liderança e Capilaridade de Mercado:** Presente em 99% do território brasileiro, a Cielo possui a maior rede de aceitação do país, o que garante uma vantagem competitiva em volume de transações.
 
-2. **Ecossistema Tecnológico Adaptativo:** A implementação de tecnologias como o Cielo Tap (NFC) transforma smartphones em maquininhas, reduzindo a barreira de entrada para microempreendedores
+- **Ecossistema Tecnológico Adaptativo:** A implementação de tecnologias como o Cielo Tap (NFC) transforma smartphones em maquininhas, reduzindo a barreira de entrada para microempreendedores
 
-3. **Multibandeira e Homologação:** A companhia é homologada com as principais bandeiras globais e locais, oferecendo segurança e estabilidade operacional superior aos novos entrantes.
+- **Multibandeira e Homologação:** A companhia é homologada com as principais bandeiras globais e locais, oferecendo segurança e estabilidade operacional superior aos novos entrantes.
 
-4. **Portfólio Customizado:** Capacidade de oferecer produtos distintos (Cielo Lio, Cielo Zip, e-commerce) que atendem desde o pequeno varejo até grandes corporações.
+- **Portfólio Customizado:** Capacidade de oferecer produtos distintos (Cielo Lio, Cielo Zip, e-commerce) que atendem desde o pequeno varejo até grandes corporações.
 
 ### Fraquezas (Weaknesses)
 
-1. **Dependência do Varejo Físico:** Embora esteja em transição digital, a maior parte da receita ainda provém de transações físicas, tornando-a vulnerável a crises de mobilidade ou fechamento de comércio
+- **Dependência do Varejo Físico:** Embora esteja em transição digital, a maior parte da receita ainda provém de transações físicas, tornando-a vulnerável a crises de mobilidade ou fechamento de comércio
 
-2. **Custos Operacionais Elevados:** A logística de manutenção e substituição de hardware (maquininhas) gera um custo fixo significativamente maior que o de competidores puramente digitais.
+- **Custos Operacionais Elevados:** A logística de manutenção e substituição de hardware (maquininhas) gera um custo fixo significativamente maior que o de competidores puramente digitais.
 
-3. **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel.[\[7\]](#ref7)
+- **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel.[\[7\]](#ref7)
 
 ### Oportunidades (Opportunities)
 
-1. **Expansão dos Meios Digitais:** O crescimento exponencial do Pix e do e-commerce permite à Cielo atuar como gateway de pagamento, indo além do hardware físico. 
+- **Expansão dos Meios Digitais:** O crescimento exponencial do Pix e do e-commerce permite à Cielo atuar como gateway de pagamento, indo além do hardware físico. 
 
-2. **Novos Modelos de Negócio (Logística):** O aumento do serviço de entregas (delivery) gera demanda por soluções de pagamento móveis e integradas a aplicativos. 
+- **Novos Modelos de Negócio (Logística):** O aumento do serviço de entregas (delivery) gera demanda por soluções de pagamento móveis e integradas a aplicativos. 
 
-3. **Data Intelligence:** Utilizar o grande volume de dados gerados pelo sistema de pagamentos brasileiro, responsável por bilhões de transações anuais, para oferecer serviços de análise de crédito e inteligência para lojistas.[\[21\]](#ref21)
+- **Data Intelligence:** Utilizar o grande volume de dados gerados pelo sistema de pagamentos brasileiro, responsável por bilhões de transações anuais, para oferecer serviços de análise de crédito e inteligência para lojistas.[\[21\]](#ref21)
 
 ### Ameaças (Threats)
-1. **Hipercompetitividade (Guerra de Taxas):** A entrada agressiva de players como Stone, PagSeguro e fintechs força a compressão das margens de lucro. 
 
-2. **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em transações eletrônicas representam riscos relevantes para instituições financeiras e empresas de pagamentos, podendo gerar impactos financeiros e danos reputacionais (Banco Central do Brasil, 2024). [\[22\]](#ref22)
+- **Hipercompetitividade (Guerra de Taxas):** A entrada agressiva de players como Stone, PagSeguro e fintechs força a compressão das margens de lucro. 
 
-3. **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
+- **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em transações eletrônicas representam riscos relevantes para instituições financeiras e empresas de pagamentos, podendo gerar impactos financeiros e danos reputacionais (Banco Central do Brasil, 2024). [\[22\]](#ref22)
 
- &emsp;Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [\[1\]](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
- &emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [\[5\]](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [\[6\]](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+- **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
+&emsp; Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [\[1\]](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
+
+&emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [\[5\]](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [\[6\]](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
-Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.[\[10\]](#ref10) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
+&emsp; Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.[\[10\]](#ref10) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
 
-**Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [\[9\]](#ref9)
+&emsp; **Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [\[9\]](#ref9)
 
-**Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
+&emsp; **Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
 
-**Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. [\[12\]](#ref12)
+&emsp; **Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. [\[12\]](#ref12)
 
-Equidade e Acessibilidade: Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
+&emsp; **Equidade e Acessibilidade:** Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
 
-Inovação e Gamificação: Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.[\[23\]](#ref23)
+&emsp; **Inovação e Gamificação:** Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.[\[23\]](#ref23)
 
-Aprendizagem Contínua (Lifelong Learning): Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[24\]](#ref24)
+&emsp; **Aprendizagem Contínua (Lifelong Learning):** Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[24\]](#ref24)
 
-Foco na Experiência (UX/Gamer): Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
+&emsp; **Foco na Experiência (UX/Gamer):** Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
 
-Impacto Social e Produtivo: Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [\[8\]](#ref8)
-
+&emsp; **Impacto Social e Produtivo:** Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [\[8\]](#ref8)
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
 <div align="center">
-<sub>Figura 3 - Canvas da Proposta de Valor</sub><br/>
-<img src="../gdd_images/CPV.png"width="200%"> 
+ <sub>Imagem 3 - Canvas da Proposta de Valor</sub>
+ <img src="../gdd_images/CPV.png"width="200%"> 
 
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Figura 3 apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. A figura evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática em situações reais e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
+&emsp; A imagem apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. 
 
-A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
+&emsp; A imagem evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática em situações reais e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
 
-Um dos principais diferenciais do Mini Mundo Cielo está no seu formato **totalmente online**, acessível via navegador e sem necessidade de instalação, o que reduz barreiras logísticas e amplia significativamente o alcance do treinamento. Além disso, a solução se posiciona como uma iniciativa inovadora ao utilizar gamificação e **simulação de cenários reais** como ferramenta central de aprendizagem, substituindo modelos tradicionais baseados em conteúdos passivos por experiências interativas orientadas à tomada de decisão.
+&emsp; A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
 
-Nesse contexto, o projeto se alinha a uma **transformação relevante** no ambiente corporativo, na qual treinamentos expositivos vêm sendo substituídos por abordagens mais eficazes, baseadas em prática, experimentação e feedback contínuo. Ao aproximar o treinamento da **realidade operacional** dos GNs/DDNs, o Mini Mundo Cielo aumenta a retenção do aprendizado, acelera o desenvolvimento de habilidades comerciais e contribui diretamente para melhoria de performance em campo.
+&emsp; Um dos principais diferenciais do Mini Mundo Cielo está no seu formato **totalmente online**, acessível via navegador e sem necessidade de instalação, o que reduz barreiras logísticas e amplia significativamente o alcance do treinamento. Além disso, a solução se posiciona como uma iniciativa inovadora ao utilizar gamificação e **simulação de cenários reais** como ferramenta central de aprendizagem, substituindo modelos tradicionais baseados em conteúdos passivos por experiências interativas orientadas à tomada de decisão.
 
-Embora o **Value Proposition Canvas** tenha sido estruturado a partir da perspectiva do Gerente de Negócios (GN/DDN), é possível analisar os impactos da solução em dois níveis complementares: o nível organizacional (Cielo S.A.) e o nível do usuário final (GN/DDN).
+&emsp; Nesse contexto, o projeto se alinha a uma **transformação relevante** no ambiente corporativo, na qual treinamentos expositivos vêm sendo substituídos por abordagens mais eficazes, baseadas em prática, experimentação e feedback contínuo. Ao aproximar o treinamento da **realidade operacional** dos GNs/DDNs, o Mini Mundo Cielo aumenta a retenção do aprendizado, acelera o desenvolvimento de habilidades comerciais e contribui diretamente para melhoria de performance em campo.
+
+&emsp; Embora o **Value Proposition Canvas** tenha sido estruturado a partir da perspectiva do Gerente de Negócios (GN/DDN), é possível analisar os impactos da solução em dois níveis complementares: o nível organizacional (Cielo S.A.) e o nível do usuário final (GN/DDN).
 
 **Para a Cielo S.A. (impacto organizacional):**
 
 - Ganhos gerados: padronização do treinamento comercial em escala nacional; redução da dependência de treinamentos presenciais; geração de métricas de desempenho; aceleração do onboarding de novos Gerentes de Negócios.
+
 - Dores aliviadas: disparidade no nível de preparo entre regiões; dificuldade de escalar treinamentos com consistência; limitações dos modelos tradicionais de capacitação.
+
 - Solução entregue: jogo educacional web-based que simula interações comerciais e permite acompanhamento mensurável do desenvolvimento dos profissionais.
 
 **Para os Gerentes de Negócios (cliente do Canvas):**
 
 - Ganhos gerados: aprendizado prático de técnicas de venda; possibilidade de treinar no próprio ritmo; feedback imediato; aumento da confiança em situações reais; maior domínio do portfólio de produtos.
+
 - Dores aliviadas (analgésicos): redução da insegurança na abordagem comercial; acesso a treinamento prático sem riscos reais; superação das limitações de materiais passivos de capacitação.
+
 - Produto/Serviço: experiência interativa baseada em simulação de cenários reais, com tomada de decisão, feedback contínuo e progressão por desempenho.
+
 - Criadores de ganho: gamificação do processo de aprendizagem, prática repetível de situações de venda e feedback imediato que auxilia na consolidação das habilidades comerciais.
 
-Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual e escalabilidade do treinamento corporativo.
+&emsp; Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no usuário, mas com impacto direto nos resultados organizacionais, ao alinhar desenvolvimento individual e escalabilidade do treinamento corporativo.
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
-
 
 &emsp; O time Comercial da Cielo atua no modelo porta a porta, visitando estabelecimentos para ofertar soluções de pagamento e serviços de valor agregado. Atualmente, a empresa conta com aproximadamente 3.500 profissionais distribuídos em todo o território nacional, o que impõe desafios relevantes ao processo de capacitação. Equipes fora dos grandes centros urbanos frequentemente enfrentam limitações de acesso a treinamentos presenciais, gerando assimetrias no nível de preparo. Conforme Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes organizações tende a comprometer a equidade no aprendizado e a padronização do conhecimento. 
 
@@ -186,10 +190,10 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário. Nesse contexto, a Tabela 1 apresenta as principais ameaças e oportunidades identificadas, estruturadas a partir da abordagem de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza ciclos iterativos de inspeção e adaptação ao longo das sprints.
+&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário. Nesse contexto, a Tabela apresenta as principais ameaças e oportunidades identificadas, estruturadas a partir da abordagem de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza ciclos iterativos de inspeção e adaptação ao longo das sprints.
 
 <div align="center">
-<sub>Tabela 2 - Matriz de Riscos e Oportunidades do Projeto</sub>
+<sub>Tabela 1 - Matriz de Riscos e Oportunidades do Projeto</sub>
 
 | # | Ameaça / Oportunidade  | Categoria | Descrição | Probabilidade (%) | Impacto | Responsável | Plano de Resposta |
 |---|---|---|---|:---:|:---:|---|---|
@@ -204,22 +208,21 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 | O4 | Oportunidade | Financeiro / Operacional | Redução de custos operacionais de treinamento | 30% | Baixo | Gabriel | Priorizar um MVP funcional que substitua parte dos treinamentos presenciais. |
 | O5 | Oportunidade | Tecnologia / Dados | Implementação de sistema robusto de salvamento e gestão de progresso do jogador | 20% | Baixo | Nicolas | Implementar salvamento de estado da sessão e estruturar base para futuras integrações com backend, aumentando a confiabilidade e escalabilidade do sistema. |
 
-<sub>Fonte: Autoria Própria (2026)</sub>
-</div>
-
-&emsp; A Tabela 2 apresenta a matriz de riscos do projeto, identificando as principais incertezas relacionadas ao desenvolvimento do Mini Mundo Cielo. A análise dos riscos evidencia que os fatores mais críticos do projeto estão concentrados na dimensão do usuário. O risco de desengajamento com o formato gamificado (R2) e a baixa adesão decorrente de dificuldades com ferramentas digitais (R5) combinam alta probabilidade com elevado impacto, configurando-se como os principais pontos de atenção. Esses riscos indicam que o sucesso da solução está menos condicionado a desafios técnicos e mais à capacidade de gerar uma experiência acessível, intuitiva e relevante para o público-alvo. Em contrapartida, riscos técnicos como incompatibilidade entre navegadores (R1) e mudanças no portfólio (R3) apresentam menor criticidade relativa, sendo mitigáveis por meio de boas práticas de desenvolvimento e parametrização do conteúdo.
-
-&emsp; No que se refere às oportunidades, destaca-se a possibilidade de padronização nacional do treinamento (O2), que apresenta alta probabilidade e impacto elevado, configurando-se como o principal vetor estratégico do projeto. Adicionalmente, o potencial de aumento de engajamento por meio da gamificação (O3) e a geração de feedback contínuo a partir de testes com usuários (O1) reforçam o caráter iterativo e orientado à melhoria contínua da solução. A redução de custos operacionais (O4) e a evolução tecnológica com sistemas de salvamento e gestão de progresso (O5) complementam os ganhos esperados, ainda que com menor impacto imediato.
-
 <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
+&emsp; A Tabela  apresenta a matriz de riscos do projeto, identificando as principais incertezas relacionadas ao desenvolvimento do Mini Mundo Cielo. A análise dos riscos evidencia que os fatores mais críticos do projeto estão concentrados na dimensão do usuário. O risco de desengajamento com o formato gamificado (R2) e a baixa adesão decorrente de dificuldades com ferramentas digitais (R5) combinam alta probabilidade com elevado impacto, configurando-se como os principais pontos de atenção. Esses riscos indicam que o sucesso da solução está menos condicionado a desafios técnicos e mais à capacidade de gerar uma experiência acessível, intuitiva e relevante para o público-alvo. Em contrapartida, riscos técnicos como incompatibilidade entre navegadores (R1) e mudanças no portfólio (R3) apresentam menor criticidade relativa, sendo mitigáveis por meio de boas práticas de desenvolvimento e parametrização do conteúdo.
+
+&emsp; No que se refere às oportunidades, destaca-se a possibilidade de padronização nacional do treinamento (O2), que apresenta alta probabilidade e impacto elevado, configurando-se como o principal vetor estratégico do projeto. Adicionalmente, o potencial de aumento de engajamento por meio da gamificação (O3) e a geração de feedback contínuo a partir de testes com usuários (O1) reforçam o caráter iterativo e orientado à melhoria contínua da solução. A redução de custos operacionais (O4) e a evolução tecnológica com sistemas de salvamento e gestão de progresso (O5) complementam os ganhos esperados, ainda que com menor impacto imediato.
+
 <div align="center">
-<sub>Figura 4 - Matriz de Riscos</sub><br/>
-<img src="../gdd_images/matrizDeRiscos.png"width="200%">
+ <sub>Imagem 4 - Matriz de Riscos</sub>
+ <img src="../gdd_images/matrizDeRiscos.png"width="200%">
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Figura 4 apresenta a matriz de riscos do projeto, relacionando probabilidade de ocorrência e impacto no desenvolvimento. A visualização permite identificar rapidamente os itens de maior criticidade, com destaque para R2 e R5, posicionados em zonas de maior atenção, e para O2, como principal oportunidade estratégica. Essa representação gráfica facilita a priorização de esforços e o direcionamento das ações ao longo das sprints.
+&emsp; A imagem apresenta a matriz de riscos do projeto, relacionando probabilidade de ocorrência e impacto no desenvolvimento. A visualização permite identificar rapidamente os itens de maior criticidade, com destaque para R2 e R5, posicionados em zonas de maior atenção, e para O2, como principal oportunidade estratégica. Essa representação gráfica facilita a priorização de esforços e o direcionamento das ações ao longo das sprints.
 
 &emsp; A análise integrada da matriz permite que a equipe direcione recursos e decisões de forma mais eficiente, priorizando riscos críticos e potencializando oportunidades de maior impacto. Alinhada aos princípios ágeis, essa abordagem contribui para a redução de retrabalho, aumento da qualidade do produto e maior aderência às necessidades reais dos usuários. Como resultado, o projeto evolui de forma controlada, mantendo consistência técnica e relevância prática para o contexto comercial da Cielo.
 
@@ -230,7 +233,7 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 &emsp; No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
 
 <div align="center">
-<sub>Tabela 3 - Objetivos SMART do Projeto</sub>
+<sub>Tabela 2 - Objetivos SMART do Projeto</sub>
 
 | # | Objetivo | Específico | Mensurável | Alcançável | Relevante | Temporal |
 |---|----------|-----------|-----------|-----------|----------|---------|
@@ -240,15 +243,15 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 | O4 | Garantir acessibilidade básica | Implementar modo daltônico, controle de volume e brilho | Todas as opções de acessibilidade funcionais nas configurações | Recursos já planejados na mecânica de configurações | Atende a diversidade do público-alvo de 3.000 GNs anuais | Até o final da Sprint 4 |
 | O5 | Representar diversidade no elenco de personagens | Criar 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional | 100% dos personagens com fichas técnicas e sprites finalizados | Personagens já desenvolvidos em pixel art nas primeiras sprints | Reflete a diversidade real da base de vendedores da Cielo no Brasil | Até o final da Sprint 2 |
 
-<sub>Fonte: Autoria Própria (2026)</sub>
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Tabela 3 apresenta os principais objetivos estratégicos do projeto estruturados de acordo com os critérios do modelo SMART. Cada objetivo foi detalhado considerando sua especificidade, forma de mensuração, viabilidade de execução, relevância para o projeto e prazo de realização. Essa organização permite que os objetivos do projeto sejam compreendidos de maneira clara e objetiva, além de garantir que cada meta possua critérios concretos para sua implementação e avaliação. Dessa forma, a equipe consegue alinhar o planejamento das sprints com os resultados esperados, assegurando que o desenvolvimento do jogo avance de forma estruturada e consistente.
+&emsp; A Tabela apresenta os principais objetivos estratégicos do projeto estruturados de acordo com os critérios do modelo SMART. Cada objetivo foi detalhado considerando sua especificidade, forma de mensuração, viabilidade de execução, relevância para o projeto e prazo de realização. Essa organização permite que os objetivos do projeto sejam compreendidos de maneira clara e objetiva, além de garantir que cada meta possua critérios concretos para sua implementação e avaliação. Dessa forma, a equipe consegue alinhar o planejamento das sprints com os resultados esperados, assegurando que o desenvolvimento do jogo avance de forma estruturada e consistente.
 
 &emsp; Para acompanhar a evolução do projeto, cada objetivo estratégico foi desdobrado em metas SMART e indicadores de desempenho (KPIs). Enquanto as metas definem os resultados esperados dentro de um prazo específico, os indicadores permitem monitorar quantitativamente o progresso e avaliar o alcance dos objetivos do projeto.
 
 <div align="center">
-<sub>Tabela 4 - Objetivo, Meta e Indicador</sub>
+<sub>Tabela 3 - Objetivo, Meta e Indicador</sub>
 
 | Objetivo | Meta (SMART) | Indicador (KPI) |
 |----------|--------------|----------------|
@@ -258,20 +261,19 @@ Dessa forma, o **Mini Mundo Cielo** consolida uma proposta de valor centrada no 
 | Garantir acessibilidade básica no jogo | Implementar modo daltônico, controle de volume e brilho no menu de configurações até a Sprint 4 | Número de funcionalidades de acessibilidade implementadas |
 | Representar diversidade entre personagens | Desenvolver 4 personagens jogáveis e 8 NPCs com diversidade étnica e regional até a Sprint 2 | Percentual de personagens finalizados (%) |
 
-<sub>Fonte: Autoria Própria (2026)</sub>
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A Tabela 4 apresenta o desdobramento dos objetivos estratégicos em metas SMART associadas a indicadores de desempenho (KPIs). Enquanto os objetivos definem a direção geral do projeto, as metas estabelecem resultados específicos a serem alcançados dentro de um período determinado. Já os indicadores permitem medir quantitativamente o progresso do desenvolvimento, possibilitando acompanhar a evolução do projeto ao longo das sprints. Essa relação entre objetivo, meta e indicador facilita o monitoramento contínuo das entregas e contribui para uma gestão mais eficiente e orientada a resultados.
+&emsp; A Tabela apresenta o desdobramento dos objetivos estratégicos em metas SMART associadas a indicadores de desempenho (KPIs). Enquanto os objetivos definem a direção geral do projeto, as metas estabelecem resultados específicos a serem alcançados dentro de um período determinado. Já os indicadores permitem medir quantitativamente o progresso do desenvolvimento, possibilitando acompanhar a evolução do projeto ao longo das sprints. Essa relação entre objetivo, meta e indicador facilita o monitoramento contínuo das entregas e contribui para uma gestão mais eficiente e orientada a resultados.
 
 &emsp; Dessa forma, a definição estruturada de objetivos, metas e indicadores contribui para garantir maior clareza no planejamento e no acompanhamento do projeto. A utilização do modelo SMART, aliada ao monitoramento por meio de indicadores de desempenho, permite avaliar de maneira objetiva o progresso das atividades e identificar possíveis necessidades de ajustes ao longo do desenvolvimento. Esse processo fortalece a gestão do projeto e assegura que as entregas estejam alinhadas aos objetivos estabelecidos e às expectativas do parceiro.
 
 ## 1.2. Requisitos do Projeto (sprints 1 e 2)
 
-Os requisitos do projeto descrevem as funcionalidades e características necessárias para o desenvolvimento do jogo, considerando as demandas do parceiro e as decisões do grupo. Eles orientam a implementação técnica e a experiência do usuário, devendo ser atualizados sempre que houver mudanças no projeto.
+&emsp; Os requisitos do projeto descrevem as funcionalidades e características necessárias para o desenvolvimento do jogo, considerando as demandas do parceiro e as decisões do grupo. Eles orientam a implementação técnica e a experiência do usuário, devendo ser atualizados sempre que houver mudanças no projeto.
 
 <div align="center">
-
-<sub>Tabela 1 - Requisitos Funcionais do Projeto</sub>
+<sub>Tabela 4 - Requisitos Funcionais do Projeto</sub>
 
 \# | Requisitos Funcionais (RF)
 --- | ---
@@ -292,8 +294,12 @@ RF14| O jogo deverá conter cutscenes para introduzir a narrativa e realizar tra
 RF15| O jogo deverá apresentar um Menu de pausa com opções de retornar ao jogo, configurações e sair.
 RF16| O jogo deverá apresentar instruções claras e progressivas sobre suas mecânicas e objetivos.
 RF17| O jogo deverá apresentar uma cena final de encerramento após a conclusão de todos os níveis e metas.
+ 
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-<sub>Tabela 2 - Requisitos Não Funcionais do Projeto</sub>
+<div align="center">
+<sub>Tabela 5 - Requisitos Não Funcionais do Projeto</sub>
 
 \# |  Requisitos Não Funcionais (RNF)
 --- |---|
@@ -305,105 +311,119 @@ RNF05| O jogo deverá basear suas missões e rotas em trajetos e situações rea
 RNF06| O jogo deverá permitir, através do menu de configurações, o ajuste de volume, brilho e a ativação de um modo de daltonismo.
 RNF07| O jogo deverá ser intuitivo, garantindo que o jogador compreenda a progressão sem auxílio externo.
 
-
-<sub>Fonte: Autoria Própria (2026) </sub>
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-<br>&emsp;O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [\[11\]](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
-<br>&emsp;O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
-<br>&emsp;Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
-<br>&emsp;Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
-<br>&emsp;A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
+&emsp; O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [\[11\]](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
+
+&emsp; O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
+
+&emsp; Trata-se de profissionais em fase ativa da carreira, muitos com responsabilidades pessoais e foco em estabilidade e crescimento profissional. A função de Gerente de Negócios representa uma oportunidade dentro do mercado formal, o que indica um público que valoriza resultados concretos e aplicabilidade prática no trabalho.
+
+&emsp; Por atuarem na área comercial, desenvolvem habilidades de comunicação e argumentação, embora possam apresentar diferentes níveis de familiaridade com ferramentas digitais. Assim, o jogo deve priorizar simplicidade, clareza e usabilidade, garantindo um treinamento acessível e alinhado à realidade desses profissionais em diferentes contextos regionais. 
+
+&emsp; A Cielo já utiliza jogos físicos em treinamentos presenciais, bem recebidos pelos participantes. O Mini Mundo Cielo surge como evolução dessa estratégia, digitalizando e ampliando o acesso ao aprendizado, ao mesmo tempo em que reforça a cultura da empresa e promove padronização do treinamento em escala nacional. 
 
 ### Perfil Demográfico e Profissional
-**Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
 
-**Escolaridade:** Ensino Médio completo (mínimo exigido para a função).
+- **Segmento:** Novos Gerentes de Negócios (GN) da área comercial da Cielo S.A.
 
-**Faixa Etária Média:** 44 anos (Perfil de adultos com experiência prévia em vendas ou transição de carreira).
+- **Escolaridade:** Ensino Médio completo (mínimo exigido para a função).
 
-**Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [\[1\]](#ref1)
+- **Faixa Etária Média:** 44 anos (Perfil de adultos com experiência prévia em vendas ou transição de carreira).
 
-**Distribuição Geográfica e Escala**
+- **Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [\[1\]](#ref1)
+
+- **Distribuição Geográfica e Escala**
 O projeto visa atender uma demanda anual de aproximadamente 3.000 novos profissionais, caracterizando-se por uma alta dispersão geográfica que justifica a digitalização do treinamento.
 
-**Justificativa de Gamificação Digital**
+- **Justificativa de Gamificação Digital**
 A transição dos jogos físicos presenciais para o Mini Mundo Cielo representa a evolução da estratégia de learning & development da companhia. Ao digitalizar dinâmicas que já possuem eficácia comprovada, a Cielo elimina barreiras geográficas e garante que um Gerente de Negócios no Norte tenha a mesma equidade de aprendizado e acesso às ferramentas que um profissional no Sudeste. 
-
-
 
 # <a name="c2"></a>2. Visão Geral do Jogo (sprint 2)
 
 ## 2.1. Objetivos do Jogo (sprint 2)
 
-&emsp;O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. [19](#ref19)
+&emsp; O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. [19](#ref19)
 
 
 ## 2.2. Características do Jogo (sprint 2)
-&emsp;O Mini Mundo Cielo é classificado como um Serious Game, projetado para equilibrar a carga pedagógica com o entretenimento. Suas características técnicas foram selecionadas para atender à diversidade do público-alvo e à complexidade do ecossistema de pagamentos. [\[4\]](#ref4)
+
+&emsp; O Mini Mundo Cielo é classificado como um Serious Game, projetado para equilibrar a carga pedagógica com o entretenimento. Suas características técnicas foram selecionadas para atender à diversidade do público-alvo e à complexidade do ecossistema de pagamentos. [\[4\]](#ref4)
 
 ### 2.2.1. Gênero do Jogo (sprint 2)
-&emsp;O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [\[20\]](#ref20)com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [\[4\]](#ref4)
-&emsp;A experiência mergulha o jogador em uma jornada interativa onde a progressão é pautada por missões de campo e tomada de decisão em tempo real. Cada fase funciona como um laboratório seguro para testar habilidades de negociação, resolução de problemas e domínio técnico do portfólio de produtos, transformando o onboarding em um processo dinâmico e envolvente.
+
+&emsp; O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [\[20\]](#ref20)com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [\[4\]](#ref4)
+
+&emsp; A experiência mergulha o jogador em uma jornada interativa onde a progressão é pautada por missões de campo e tomada de decisão em tempo real. Cada fase funciona como um laboratório seguro para testar habilidades de negociação, resolução de problemas e domínio técnico do portfólio de produtos, transformando o onboarding em um processo dinâmico e envolvente.
+
 ### 2.2.2. Plataforma do Jogo (sprint 2)
 
-O jogo será desenvolvido para desktop, com acesso via navegador, dispensando instalação.
+&emsp; O jogo será desenvolvido para desktop, com acesso via navegador, dispensando instalação.
 
-Dispositivo: Computadores desktop e notebooks.
-Sistema: Navegadores modernos compatíveis (Google Chrome, Microsoft Edge e Firefox).
+- **Dispositivo compatíveis:** Computadores desktop e notebooks.
+
+- **Sistemas compatíveis:** Navegadores modernos compatíveis (Google Chrome, Microsoft Edge e Firefox).
 
 ### 2.2.3. Número de jogadores (sprint 2)
 
-Mini Mundo Cielo é projetado para um jogador (single player), permitindo experiência individual focada no aprendizado e na progressão personalizada das habilidades de vendas.
+&emsp; Mini Mundo Cielo é projetado para um jogador (single player), permitindo experiência individual focada no aprendizado e na progressão personalizada das habilidades de vendas.
 
 ### 2.2.4. Títulos semelhantes e inspirações (sprint 2)
 
-&emsp;O projeto se inspira em jogos que utilizam progressão por tarefas, interação com personagens e evolução gradual do jogador. Um dos principais referenciais é Stardew Valley, que apresenta mecânicas de rotina, missões e interação com NPCs, influenciando a estrutura de progressão do jogo.
-
-&emsp;Outra inspiração é Pokémon FireRed, que contribui com a lógica de progressão por objetivos, desbloqueio de novas áreas e evolução contínua das habilidades do jogador. Esses elementos orientam a organização das fases e o sistema de recompensas do projeto.
+&emsp; O projeto se inspira em jogos que utilizam progressão por tarefas, interação com personagens e evolução gradual do jogador. Um dos principais referenciais é Stardew Valley, que apresenta mecânicas de rotina, missões e interação com NPCs, influenciando a estrutura de progressão do jogo.
 
 <div align="center">
-<sub>Figura 4 - Stardew Valley</sub><br/>
-<img src="../gdd_images/StardewValley.jpg"width= 87%>
+ <sub>Imagem 4 - Stardew Valley</sub><br/>
+ <img src="../gdd_images/StardewValley.jpg"width= 87%>
 
-<sup>Fonte: Stardew Valley, 2026.</sup><br/>
-<sub>Figura 5 - Pokemon FireRed</sub><br/>
-<img src="../gdd_images/PokemonFireRed.jpg" width= "85%">
+ <sup>Fonte: Stardew Valley, 2026.</sup><br/>
 
-  <sup>TechTudo (2016)</sup>
+ <sub>Imagem 5 - Stardew Valley</sub>
+ <img src="../gdd_images/StardewValley.jpg"width= 87%>
+
+ <sup>Fonte: Stardew Valley, 2026.</sup>
 </div>
 
+&emsp; Outra inspiração é Pokémon FireRed, que contribui com a lógica de progressão por objetivos, desbloqueio de novas áreas e evolução contínua das habilidades do jogador. Esses elementos orientam a organização das fases e o sistema de recompensas do projeto.
 
+<div align="center">
+ <sub>Imagem 6 - Pokemon FireRed</sub>
+ <img src="../gdd_images/PokemonFireRed.jpg" width= "85%">
 
-O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
+ <sup>TechTudo (2016)</sup>
+</div>
+
+&emsp; O jogo também se baseia em princípios de gamificação e serious games aplicados à aprendizagem profissional.
 
 ### 2.2.5. Tempo estimado de jogo (sprint 5)
 
-&emsp;O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases. 
-&emsp;Ressalta-se que essa estimativa será validada por meio de testes com o público-alvo, que permitirão avaliar o tempo real de conclusão, identificar possíveis ajustes de ritmo e refinar a duração total da experiência conforme o comportamento dos jogadores.
+&emsp; O jogo foi projetado para sessões curtas e progressivas, permitindo que cada partida tenha duração média de até 15 minutos, facilitando sua aplicação em contextos de aprendizagem e treinamento. A experiência completa é estimada em aproximadamente 3 horas, considerando a realização de todas as missões, desafios e interações previstas nas diferentes fases. 
+
+&emsp; Ressalta-se que essa estimativa será validada por meio de testes com o público-alvo, que permitirão avaliar o tempo real de conclusão, identificar possíveis ajustes de ritmo e refinar a duração total da experiência conforme o comportamento dos jogadores.
 
 # <a name="c3"></a>3. Game Design (sprints 2 e 3)
 
 ## 3.1. Enredo do Jogo (sprints 2 e 3)
 
-&emsp;O jogo simula o dia a dia de um DDN da Cielo, profissional responsável pelo relacionamento com estabelecimentos comerciais e pela expansão de soluções de pagamento da empresa. A experiência busca aproximar o jogador da realidade do trabalho em campo, apresentando situações comuns do cotidiano comercial.
+&emsp; O jogo simula o dia a dia de um DDN da Cielo, profissional responsável pelo relacionamento com estabelecimentos comerciais e pela expansão de soluções de pagamento da empresa. A experiência busca aproximar o jogador da realidade do trabalho em campo, apresentando situações comuns do cotidiano comercial.
 
-&emsp;A jornada do jogador começa em uma agência bancária parceira da Cielo, onde o personagem inicia seu dia de trabalho. Nesse ambiente, ele interage com o Gerente Geral e com o Gerente PJ, que apresentam os objetivos e direcionam a missão do dia.
+&emsp; A jornada do jogador começa em uma agência bancária parceira da Cielo, onde o personagem inicia seu dia de trabalho. Nesse ambiente, ele interage com o Gerente Geral e com o Gerente PJ, que apresentam os objetivos e direcionam a missão do dia.
 
-&emsp;A partir desse momento, o jogador passa a visitar diferentes estabelecimentos comerciais da região, onde precisa interagir com comerciantes, compreender suas necessidades e apresentar soluções adequadas de pagamento. Cada interação simula etapas reais do processo de vendas, como abordagem inicial, identificação de demandas do cliente, argumentação comercial e resolução de dúvidas.
+&emsp; A partir desse momento, o jogador passa a visitar diferentes estabelecimentos comerciais da região, onde precisa interagir com comerciantes, compreender suas necessidades e apresentar soluções adequadas de pagamento. Cada interação simula etapas reais do processo de vendas, como abordagem inicial, identificação de demandas do cliente, argumentação comercial e resolução de dúvidas.
 
-&emsp;Ao longo da experiência, o jogador recebe missões que representam desafios progressivamente mais complexos, exigindo tomada de decisão, comunicação estratégica e capacidade de negociação. Cada missão concluída contribui para o avanço na jornada profissional do personagem.
+&emsp; Ao longo da experiência, o jogador recebe missões que representam desafios progressivamente mais complexos, exigindo tomada de decisão, comunicação estratégica e capacidade de negociação. Cada missão concluída contribui para o avanço na jornada profissional do personagem.
 
-&emsp;A progressão narrativa acompanha essa evolução, permitindo que o jogador desbloqueie novos estabelecimentos, enfrente situações mais desafiadoras e aprofunde sua compreensão sobre o processo de vendas e relacionamento com clientes. Dessa forma, a narrativa funciona como um fio condutor da aprendizagem, contextualizando as atividades do jogo em situações inspiradas na prática profissional de um DDN da Cielo.
+&emsp; A progressão narrativa acompanha essa evolução, permitindo que o jogador desbloqueie novos estabelecimentos, enfrente situações mais desafiadoras e aprofunde sua compreensão sobre o processo de vendas e relacionamento com clientes. Dessa forma, a narrativa funciona como um fio condutor da aprendizagem, contextualizando as atividades do jogo em situações inspiradas na prática profissional de um DDN da Cielo.
 
 ## 3.2. Personagens (sprints 2 e 3)
 
 ### 3.2.1. Controláveis
 
 <div align="center">
-<sub>Quadro 2 - Personagens</sub>
+<sub>Tabela 6 - Personagens</sub>
 
 | \#  |          Personagem           |                  Spritesheet                  |
 | :-: | :---------------------------: | :-------------------------------------------: |
@@ -411,39 +431,49 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 |  2  | Maya Souza | <img src="../gdd_images/spriteMaya.png"> |
 |  3  | Dandara Santos | <img src="../gdd_images/spriteDandara.png">  |
 |  4  |João Victor | <img src="../gdd_images/spriteJoao.png">  |
+
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ## Personagens Controláveis
-&emsp;Os personagens controláveis representam os novos Gerentes de Negócios da Cielo em processo de onboarding. Embora possuam identidades visuais e histórias individuais distintas, todos os personagens compartilham a diversidade étnica e cultural brasileira, refletindo o compromisso do projeto com a representatividade. Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 frames, que estão organizados em quatro direções de movimentação com quatro frames de animação cada, o que permite movimentação fluida no mapa em formato top-down. As diferenças entre os personagens são de natureza narrativa e representativa, não havendo distinções de vantagem mecânica entre eles, o que assegura equidade na experiência de aprendizagem. A escolha do personagem pelo jogador impacta exclusivamente na identificação e na imersão visual, sem interferir no desempenho ou nas mecânicas de jogo.
 
-&emsp;Nota: Todos os personagens compartilham a mesma estrutura visual: uniforme azul com crachá institucional e dispositivo de pagamento portátil. As distinções entre eles são exclusivamente de ordem narrativa e representativa.
+&emsp; Os personagens controláveis representam os novos Gerentes de Negócios da Cielo em processo de onboarding. Embora possuam identidades visuais e histórias individuais distintas, todos os personagens compartilham a diversidade étnica e cultural brasileira, refletindo o compromisso do projeto com a representatividade. Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 frames, que estão organizados em quatro direções de movimentação com quatro frames de animação cada, o que permite movimentação fluida no mapa em formato top-down. As diferenças entre os personagens são de natureza narrativa e representativa, não havendo distinções de vantagem mecânica entre eles, o que assegura equidade na experiência de aprendizagem. A escolha do personagem pelo jogador impacta exclusivamente na identificação e na imersão visual, sem interferir no desempenho ou nas mecânicas de jogo.
 
-### Gabriel Oliveira
-&emsp;Gabriel Oliveira é um personagem masculino de 38 anos, oriundo de Recife (PE). Seu perfil narrativo foi concebido para representar o modelo de gerente orientado à construção e à manutenção de relacionamentos com clientes. No contexto do jogo, sua atuação está associada à gestão de carteira e ao atendimento recorrente, com ênfase na fidelização. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
-### Maya Souza
-&emsp;Maya Souza é uma personagem feminina de 42 anos, natural de Salvador (BA). Seu perfil narrativo representa o modelo de gerente com foco em desenvolvimento e crescimento de clientes. No âmbito do jogo, sua atuação está associada à expansão de negócios e ao cumprimento de metas de crescimento, com ênfase na ampliação de resultados da carteira sob sua responsabilidade. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
-### Dandara Santos
-&emsp;Dandara Santos é uma personagem feminina de 40 anos, originária de São Paulo (SP). Seu perfil narrativo representa o modelo de gerente voltado à negociação e à construção de confiança com o cliente. No contexto do jogo, sua atuação está associada a negociações complexas e ao atendimento consultivo, com ênfase na condução estruturada de interações comerciais. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+&emsp; Nota: Todos os personagens compartilham a mesma estrutura visual: uniforme azul com crachá institucional e dispositivo de pagamento portátil. As distinções entre eles são exclusivamente de ordem narrativa e representativa.
+
+### Gabriel Oliveira:
+
+&emsp; Gabriel Oliveira é um personagem masculino de 38 anos, oriundo de Recife (PE). Seu perfil narrativo foi concebido para representar o modelo de gerente orientado à construção e à manutenção de relacionamentos com clientes. No contexto do jogo, sua atuação está associada à gestão de carteira e ao atendimento recorrente, com ênfase na fidelização. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+
+### Maya Souza:
+
+&emsp; Maya Souza é uma personagem feminina de 42 anos, natural de Salvador (BA). Seu perfil narrativo representa o modelo de gerente com foco em desenvolvimento e crescimento de clientes. No âmbito do jogo, sua atuação está associada à expansão de negócios e ao cumprimento de metas de crescimento, com ênfase na ampliação de resultados da carteira sob sua responsabilidade. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+
+### Dandara Santos:
+
+&emsp; Dandara Santos é uma personagem feminina de 40 anos, originária de São Paulo (SP). Seu perfil narrativo representa o modelo de gerente voltado à negociação e à construção de confiança com o cliente. No contexto do jogo, sua atuação está associada a negociações complexas e ao atendimento consultivo, com ênfase na condução estruturada de interações comerciais. Visualmente, a personagem é apresentada em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+
 ### João Victor
-&emsp;João Victor é um personagem masculino de 45 anos, proveniente de Pelotas (RS). Seu perfil narrativo foi desenvolvido para representar o modelo de gerente voltado à conversão de novos clientes. No jogo, sua atuação está associada à aquisição de novos contratos, com ênfase na prospecção ativa e no fechamento inicial de vendas. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
+
+&emsp; João Victor é um personagem masculino de 45 anos, proveniente de Pelotas (RS). Seu perfil narrativo foi desenvolvido para representar o modelo de gerente voltado à conversão de novos clientes. No jogo, sua atuação está associada à aquisição de novos contratos, com ênfase na prospecção ativa e no fechamento inicial de vendas. Visualmente, o personagem é apresentado em pixel art 2D com uniforme azul, crachá institucional e dispositivo de pagamento portátil.
 
 #### Fichas técnicas visuais dos quatro personagens controláveis:
 
 <div align="center">
-  <sub>Figura 7 - Fixa técnica dos personagens jogáveis</sub>
-  <img src="../gdd_images/fixapersonagens.png" width= 88%>
+ <sub>Imagem 7 - Fixa técnica dos personagens jogáveis</sub>
+ <img src="../gdd_images/fixapersonagens.png" width= 88%>
 
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;Com isso, espera-se que o jogador se identifique com os personagens e se sinta representado ao longo da experiência. A diversidade narrativa, aliada à equidade mecânica, reforça a imersão e contribui para uma gameficação do onboarding mais envolvente e significativa.
+&emsp; Com isso, espera-se que o jogador se identifique com os personagens e se sinta representado ao longo da experiência. A diversidade narrativa, aliada à equidade mecânica, reforça a imersão e contribui para uma gameficação do onboarding mais envolvente e significativa.
 
 ### 3.2.2. Non-Playable Characters (NPC)
+
 &emsp; Os NPCs do Mini Mundo Cielo são fundamentais para a progressão do enredo, trazendo auxílio para a resolução de puzzles e determinação dos objetivos primários e secundários do jogador.
 
 <div align="center">
-
-**Quadro 5 — Lista de NPCs**
+<sub>Tabela 7 - NPCs</sub>
 
 | # | Personagem | Classificação | Ilustração |
 |:-:|:----------:|:-------------:|:----------:|
@@ -461,241 +491,224 @@ O jogo também se baseia em princípios de gamificação e serious games aplicad
 | 12 | Iza | Gerente da primeira agência | <img src="../gdd_images/Iza.png" width="80"> |
 | 13 | Enzo | Gerente da segunda agência | <img src="../gdd_images/Enzo.png" width="80"> |
 | 14 | Leticia | Gerente da terceira agência | <img src="../gdd_images/Leticia.png" width="80"> |
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 </div> 
-
-
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
-A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na capilaridade nacional dos gerentes de negócios da companhia. A escolha das personagens Dandara, Gabriel, João Vitor e Maya foi estruturada para transpor a barreira do entretenimento, atuando como um instrumento de equidade pedagógica. [\[14\]](#ref14)
+&emsp; A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na capilaridade nacional dos gerentes de negócios da companhia. A escolha das personagens Dandara, Gabriel, João Vitor e Maya foi estruturada para transpor a barreira do entretenimento, atuando como um instrumento de equidade pedagógica. [\[14\]](#ref14)
 
-1. **Embasamento na Realidade Brasileira:** As decisões de design estão ancoradas nos dados do Censo Demográfico 2022 (IBGE), que reporta uma população majoritariamente feminina e negra (pretos e pardos somam 55,5% dos brasileiros). [\[16\]](#ref16) Ao definir a idade média das personagens em 44 anos, o projeto espelha a maturidade profissional exigida pelo cargo de gestão na Cielo, enquanto a seleção de sobrenomes como "Santos" e "Souza" reflete a herança do registro civil nacional, gerando uma ancoragem realista e cotidiana. [\[13\]](#ref13)
+- **Embasamento na Realidade Brasileira:** As decisões de design estão ancoradas nos dados do Censo Demográfico 2022 (IBGE), que reporta uma população majoritariamente feminina e negra (pretos e pardos somam 55,5% dos brasileiros). [\[16\]](#ref16) Ao definir a idade média das personagens em 44 anos, o projeto espelha a maturidade profissional exigida pelo cargo de gestão na Cielo, enquanto a seleção de sobrenomes como "Santos" e "Souza" reflete a herança do registro civil nacional, gerando uma ancoragem realista e cotidiana. [\[13\]](#ref13)
 
-2. **Adequação ao Público-Alvo:** Conforme detalhado na Seção 1.3, o público-alvo é composto por adultos distribuídos por todo o território nacional. O jogo promove a representatividade ao apresentar avatares que ocupam a mesma faixa geracional e profissional dos usuários. Essa simetria entre jogador e personagem estabelece o pertencimento, transformando o treinamento corporativo em uma extensão do ambiente de trabalho real, o que potencializa o engajamento e a retenção do conteúdo.
+- **Adequação ao Público-Alvo:** Conforme detalhado na Seção 1.3, o público-alvo é composto por adultos distribuídos por todo o território nacional. O jogo promove a representatividade ao apresentar avatares que ocupam a mesma faixa geracional e profissional dos usuários. Essa simetria entre jogador e personagem estabelece o pertencimento, transformando o treinamento corporativo em uma extensão do ambiente de trabalho real, o que potencializa o engajamento e a retenção do conteúdo.
 
-3. **Justificativa de Equidade:** O projeto promove a equidade ao descentralizar a liderança de um único perfil hegemônico. A inclusão de Dandara Santos (mulher negra) e João Vitor (homem negro) em postos de gerência sênior atua na validação de grupos historicamente sub-representados em espaços de decisão. A autoridade dentro da narrativa do jogo é distribuída de forma equânime, reforçando o compromisso da Cielo com uma cultura inclusiva e o cumprimento de metas de ESG (Social). [\[12\]](#ref12)
+- **Justificativa de Equidade:** O projeto promove a equidade ao descentralizar a liderança de um único perfil hegemônico. A inclusão de Dandara Santos (mulher negra) e João Vitor (homem negro) em postos de gerência sênior atua na validação de grupos historicamente sub-representados em espaços de decisão. A autoridade dentro da narrativa do jogo é distribuída de forma equânime, reforçando o compromisso da Cielo com uma cultura inclusiva e o cumprimento de metas de ESG (Social). [\[12\]](#ref12)
 
-4. **Inovação e Criatividade:** A inovação reside na desconstrução de estereótipos regionais através da técnica de subversão de vieses inconscientes. [\[15\]](#ref15) Ao posicionar João Vitor como representante de Pelotas (RS) e Maya Souza como representante de Salvador (BA), o jogo desafia a homogeneização geográfica. Essa solução criativa celebra a miscigenação e a mobilidade profissional real do Brasil, oferecendo uma representação sofisticada que evita caricaturas e estimula o pensamento crítico sobre diversidade no ambiente corporativo.
+- **Inovação e Criatividade:** A inovação reside na desconstrução de estereótipos regionais através da técnica de subversão de vieses inconscientes. [\[15\]](#ref15) Ao posicionar João Vitor como representante de Pelotas (RS) e Maya Souza como representante de Salvador (BA), o jogo desafia a homogeneização geográfica. Essa solução criativa celebra a miscigenação e a mobilidade profissional real do Brasil, oferecendo uma representação sofisticada que evita caricaturas e estimula o pensamento crítico sobre diversidade no ambiente corporativo.
 
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
 ### 3.3.1. Locações Principais e/ou Mapas (sprints 2 e 3)
-&emsp;Os estabelecimentos representam os ambientes de missão do Mini Mundo Cielo. Cada local simula um tipo de cliente do cotidiano comercial e apresenta desafios específicos relacionados à abordagem, negociação e fechamento de vendas.
+
+&emsp; Os estabelecimentos representam os ambientes de missão do Mini Mundo Cielo. Cada local simula um tipo de cliente do cotidiano comercial e apresenta desafios específicos relacionados à abordagem, negociação e fechamento de vendas.
 Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a tecla de interação para iniciar diálogos e responder perguntas estratégicas em formato de quiz. As respostas geram recompensas em CieloCoins, que determinam o progresso dentro da missão. A dificuldade e a quantidade de moedas necessárias aumentam progressivamente ao longo das fases.
 
 ### Mapa Geral 
- &emsp;A Cidade constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
-  - introduzir os controles básicos do personagem; 
-  - instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
-  - permitir o deslocamento entre os estabelecimentos disponíveis; 
-  - desbloquear áreas progressivamente, conforme a conclusão das missões;
-  - representar simbolicamente a evolução profissional do jogador ao longo da experiência. 
+
+&emsp; A Cidade constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
+
+- introduzir os controles básicos do personagem; 
+- instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
+- permitir o deslocamento entre os estabelecimentos disponíveis; 
+- desbloquear áreas progressivamente, conforme a conclusão das missões;
+- representar simbolicamente a evolução profissional do jogador ao longo da experiência. 
 
 <div align="center">
-  <sub>Figura 10 - Mapa geral - Mini Mundo Cielo</sub>
-  <img src="../gdd_images/visãoMapa.jpg" width= 85%>
+ <sub>Imagem 8 - Mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/visãoMapa.jpg" width= 85%>
 
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
    
-&emsp;O mapa é delimitado por barreiras invisíveis e elementos urbanos, garantindo o controle narrativo do ambiente. Novos estabelecimentos tornam-se acessíveis à medida que as missões anteriores são concluídas, promovendo uma progressão estruturada e coerente com os objetivos de aprendizagem. 
+&emsp; O mapa é delimitado por barreiras invisíveis e elementos urbanos, garantindo o controle narrativo do ambiente. Novos estabelecimentos tornam-se acessíveis à medida que as missões anteriores são concluídas, promovendo uma progressão estruturada e coerente com os objetivos de aprendizagem. 
 
 ### Bancos (Agência 1, Agência 2 e Agência 3)
 
-&emsp;As agências bancárias representam o ponto inicial de organização das atividades do DDN dentro de cada capítulo do jogo. Nesse ambiente, o jogador realiza o check-in no aplicativo Salesforce e interage com o Gerente Geral (GG) e o Gerente PJ, responsáveis por apresentar as missões e orientar as visitas comerciais que deverão ser realizadas nos estabelecimentos da região. Durante as interações, o jogador responde perguntas em formato de quiz, recebendo CieloCoins de acordo com suas decisões. Os objetivos pedagógicos desta missão incluem:
+&emsp; As agências bancárias representam o ponto inicial de organização das atividades do DDN dentro de cada capítulo do jogo. Nesse ambiente, o jogador realiza o check-in no aplicativo Salesforce e interage com o Gerente Geral (GG) e o Gerente PJ, responsáveis por apresentar as missões e orientar as visitas comerciais que deverão ser realizadas nos estabelecimentos da região. Durante as interações, o jogador responde perguntas em formato de quiz, recebendo CieloCoins de acordo com suas decisões. Os objetivos pedagógicos desta missão incluem:
 
- - compreender o fluxo de trabalho inicial do DDN dentro da agência;
+- compreender o fluxo de trabalho inicial do DDN dentro da agência;
+- desenvolver abordagem profissional com diferentes perfis de gestores;
+- compreender o planejamento das visitas comerciais;
+- praticar tomada de decisão em interações estratégicas.
 
- - desenvolver abordagem profissional com diferentes perfis de gestores;
+<div align="center">
+ <sub>Imagem 9 - Agência - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorAgencia.jpg" width = 60%>             
 
- - compreender o planejamento das visitas comerciais;
-
- - praticar tomada de decisão em interações estratégicas.
-
- <div align="center">
-  <sub>Figura 11 - Agência - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/interiorAgencia.jpg" width = 60%>             
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;A exigência de pontuação aumenta ao longo dos capítulos. Na Agência 1 o jogador precisa atingir 150 CieloCoins, enquanto na Agência 2 a exigência sobe para 400 CieloCoins, representando maior domínio das estratégias de abordagem e negociação. Na Agência 3, além da maior pontuação exigida (500 CieloCoins), o jogador enfrenta um novo desafio: o PJ se recusa a acompanhá-lo na visita comercial, exigindo maior autonomia na tomada de decisão.
-
+&emsp; A exigência de pontuação aumenta ao longo dos capítulos. Na Agência 1 o jogador precisa atingir 150 CieloCoins, enquanto na Agência 2 a exigência sobe para 400 CieloCoins, representando maior domínio das estratégias de abordagem e negociação. Na Agência 3, além da maior pontuação exigida (500 CieloCoins), o jogador enfrenta um novo desafio: o PJ se recusa a acompanhá-lo na visita comercial, exigindo maior autonomia na tomada de decisão.
 
 ### Padaria
-&emsp;A padaria representa um comércio de bairro com fluxo constante de clientes e operações de baixo a médio ticket médio. A proprietária, Sofia, manifesta preocupações relacionadas a taxas, agilidade no atendimento e controle do caixa. A missão estrutura-se por meio de diálogo interativo, no qual o jogador deve identificar e apresentar as soluções mais adequadas do portfólio da Cielo. Os objetivos pedagógicos desta fase contemplam: 
+
+&emsp; A padaria representa um comércio de bairro com fluxo constante de clientes e operações de baixo a médio ticket médio. A proprietária, Sofia, manifesta preocupações relacionadas a taxas, agilidade no atendimento e controle do caixa. A missão estrutura-se por meio de diálogo interativo, no qual o jogador deve identificar e apresentar as soluções mais adequadas do portfólio da Cielo. Os objetivos pedagógicos desta fase contemplam: 
+
 - apresentar soluções de pagamento rápidas e acessíveis; 
 - comunicar as taxas de forma clara e transparente; 
 - fortalecer o relacionamento com pequenos empreendedores.
 
- <div align="center">
- <sub>Figura 12 - Padaria - Mini Mundo Cielo</sub>
+<div align="center">
+ <sub>Imagem 10 - Padaria - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorPadaria.jpg" width= 60%>
 
-  <img src="../gdd_images/interiorPadaria.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Farmácia
-&emsp;A farmácia simboliza estabelecimentos com alta demanda transacional e sensibilidade a questões de segurança e estabilidade operacional. A NPC Rachel questiona a confiabilidade e a segurança do sistema. Os objetivos pedagógicos desta missão incluem: 
+
+&emsp; A farmácia simboliza estabelecimentos com alta demanda transacional e sensibilidade a questões de segurança e estabilidade operacional. A NPC Rachel questiona a confiabilidade e a segurança do sistema. Os objetivos pedagógicos desta missão incluem: 
+
 - argumentar sobre segurança transacional; 
 - diferenciar as soluções da Cielo em relação à concorrência;
 - reforçar a credibilidade institucional da empresa.
 
- <div align="center">
+<div align="center">
+ <sub>Imagem 11 - Farmácia - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/InteriorFarmacia.jpg" width= 60%>
 
-  <sub>Figura 13 - Farmácia - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/InteriorFarmacia.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
- &emsp;O foco central desta fase é o desenvolvimento da autoridade técnica e da confiança junto ao cliente.
-
+&emsp; O foco central desta fase é o desenvolvimento da autoridade técnica e da confiança junto ao cliente.
 
 ### Escritório
-&emsp;O escritório representa um ambiente corporativo no qual o DDN interage com o responsável pelo estabelecimento, o NPC Gabriel. Nesse cenário, o jogador precisa conduzir uma negociação mais estruturada, considerando as necessidades específicas do negócio e demonstrando domínio das soluções da Cielo. Durante a interação, o jogador deve responder às perguntas do sistema de quiz, simulando etapas reais do processo comercial, desde a abordagem inicial até o fechamento da venda. Os objetivos pedagógicos desta missão incluem:
+
+&emsp; O escritório representa um ambiente corporativo no qual o DDN interage com o responsável pelo estabelecimento, o NPC Gabriel. Nesse cenário, o jogador precisa conduzir uma negociação mais estruturada, considerando as necessidades específicas do negócio e demonstrando domínio das soluções da Cielo. Durante a interação, o jogador deve responder às perguntas do sistema de quiz, simulando etapas reais do processo comercial, desde a abordagem inicial até o fechamento da venda. Os objetivos pedagógicos desta missão incluem:
+
 - desenvolver uma abordagem profissional em ambientes corporativos;
 - trabalhar a argumentação estratégica durante a negociação;
 - identificar as necessidades específicas de clientes empresariais;
 - consolidar o processo de apresentação e fechamento de vendas.
 
- <div align="center">
-  <sub>Figura 14 - Escritório - Mini Mundo Cielo</sub>
+<div align="center">
+ <sub>Imagem 12 - Escritório - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorEscritorio.png" width=60%>
 
-  <img src="../gdd_images/interiorEscritorio.png" width=60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;O foco central desta fase é fortalecer a capacidade de negociação em contextos mais formais e estratégicos, exigindo do jogador maior preparo na comunicação e na apresentação das soluções da Cielo.
-
+&emsp; O foco central desta fase é fortalecer a capacidade de negociação em contextos mais formais e estratégicos, exigindo do jogador maior preparo na comunicação e na apresentação das soluções da Cielo.
 
 ### Loja de roupas 
-&emsp;A loja de roupas representa negócios do setor de serviços com recorrência de clientes. O NPC Eduardo manifesta preocupações relacionadas ao fluxo de caixa e à antecipação de recebíveis. Os objetivos pedagógicos desta fase compreendem: 
+
+&emsp; A loja de roupas representa negócios do setor de serviços com recorrência de clientes. O NPC Eduardo manifesta preocupações relacionadas ao fluxo de caixa e à antecipação de recebíveis. Os objetivos pedagógicos desta fase compreendem: 
+
 - compreender o funcionamento da antecipação de recebíveis; 
 - explicar conceitos de gestão financeira de forma acessível;
 - adotar postura consultiva junto ao cliente; 
 - personalizar soluções conforme o perfil do estabelecimento.
 
- <div align="center">
-  <sub>Figura 15 - Loja de roupas - Mini Mundo Cielo</sub>
+<div align="center">
+ <sub>Imagem 13 - Loja de roupas - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorCabelereiro.jpg" width= 60%>
 
-  <img src="../gdd_images/interiorCabelereiro.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;Nesta fase, o jogador expande sua atuação para um perfil consultivo, diferenciando-se da abordagem meramente transacional das etapas anteriores.
+&emsp; Nesta fase, o jogador expande sua atuação para um perfil consultivo, diferenciando-se da abordagem meramente transacional das etapas anteriores.
 
-&emsp;A partir do Capítulo 2, o nível de dificuldade aumenta significativamente. Nesta fase o jogador precisa atingir 400 CieloCoins para convencer o cliente e concluir a negociação.
+&emsp; A partir do Capítulo 2, o nível de dificuldade aumenta significativamente. Nesta fase o jogador precisa atingir 400 CieloCoins para convencer o cliente e concluir a negociação.
 
 
 ### Metrô (Minigame)
 
-&emsp;O metrô introduz uma dinâmica diferente das demais fases do jogo. Nesse ambiente ocorre um mini game de coleta de moedas, no qual o personagem se movimenta automaticamente enquanto o jogador controla os deslocamentos laterais para evitar obstáculos e coletar CieloCoins. Os objetivos desta fase incluem:
+&emsp; O metrô introduz uma dinâmica diferente das demais fases do jogo. Nesse ambiente ocorre um mini game de coleta de moedas, no qual o personagem se movimenta automaticamente enquanto o jogador controla os deslocamentos laterais para evitar obstáculos e coletar CieloCoins. Os objetivos desta fase incluem:
 
- - introduzir dinamismo à experiência de jogo;
+- introduzir dinamismo à experiência de jogo;
+- incentivar a exploração do mapa;
+- oferecer recompensas adicionais em CieloCoins;
+- criar uma pausa entre as missões de negociação.
 
- - incentivar a exploração do mapa;
+<div align="center">
+ <sub>Imagem 14 - Metrô - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorMetro.jpg" width= 60%>
 
- - oferecer recompensas adicionais em CieloCoins;
-
- - criar uma pausa entre as missões de negociação.
-
-  <div align="center">
-
-  <sub>Figura 16 - Metrô - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/interiorMetro.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 &emsp; As moedas coletadas durante o mini game são somadas ao total do jogador, funcionando como bônus dentro da progressão do jogo.
 
 
 ### Restaurante de Comida Japonesa
+
 &emsp; O restaurante simboliza estabelecimentos com alto fluxo de clientes e demanda por soluções ágeis e integradas de pagamento. O NPC Lucas apresenta objeções que exigem maior domínio técnico do portfólio da Cielo e maior complexidade argumentativa durante a negociação. Os objetivos pedagógicos desta missão incluem:
 
- - aprofundar o domínio das estratégias de venda;
+- aprofundar o domínio das estratégias de venda;
+- lidar com objeções mais complexas;
+- aplicar argumentação comercial estruturada;
+- conduzir negociações em ambientes de maior movimentação.
 
- - lidar com objeções mais complexas;
+<div align="center">
+ <sub>Imagem 15 - Restaurante - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorRestaurante.jpg" width= 60%>
 
- - aplicar argumentação comercial estruturada;
-
- - conduzir negociações em ambientes de maior movimentação.
-
-  <div align="center">
-
-  <sub>Figura 17 - Restaurante - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/interiorRestaurante.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Mercado
-&emsp;O mercado representa estabelecimentos varejistas com grande volume de vendas e operações mais complexas. A NPC Alicia responsável apresenta objeções relacionadas a taxas e concorrência, exigindo do jogador maior domínio argumentativo e capacidade de negociação. Os objetivos pedagógicos desta missão incluem:
+
+&emsp; O mercado representa estabelecimentos varejistas com grande volume de vendas e operações mais complexas. A NPC Alicia responsável apresenta objeções relacionadas a taxas e concorrência, exigindo do jogador maior domínio argumentativo e capacidade de negociação. Os objetivos pedagógicos desta missão incluem:
 
 - consolidar as competências de abordagem e negociação;
-
 - trabalhar argumentação comercial em cenários competitivos;
-
 - aplicar estratégias de fechamento de vendas;
-
 - desenvolver tomada de decisão estratégica.
 
- <div align="center">
+<div align="center">
+ <sub>Imagem 16 - Mercado - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorMercado.png" width= 60%>
 
-  <sub>Figura 18 - Mercado - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/interiorMercado.png" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
  
 ### Posto de Gasolina
+
 &emsp; O posto de gasolina representa o desafio final do Mini Mundo Cielo. O estabelecimento possui alto volume de transações e exige soluções integradas que garantam fluidez no atendimento e eficiência operacional. Durante a negociação, o jogador precisa demonstrar domínio completo das estratégias de venda desenvolvidas ao longo do jogo para o NPC Nicolas. Os objetivos pedagógicos desta missão incluem:
 
 - aplicar todas as competências desenvolvidas nas fases anteriores;
-
 - conduzir negociações em cenários de alta complexidade;
-
 - apresentar soluções integradas do portfólio da Cielo;
-
 - realizar o fechamento estratégico da venda.
 
- <div align="center">
+<div align="center">
+ <sub>Imagem 17 - Posto de gasolina - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 60%>
 
-  <sub>Figura 19 - Posto de gasolina - Mini Mundo Cielo</sub>
-
-  <img src="../gdd_images/interiorPostodeGasolina.jpg" width= 60%>
-
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
- &emsp;Esta é a fase mais difícil do jogo. O jogador precisa atingir 750 CieloCoins para convencer o cliente e concluir a missão. Diferentemente das fases anteriores, respostas erradas passam a resultar em perda de pontos, aumentando o nível de desafio.
+&emsp; Esta é a fase mais difícil do jogo. O jogador precisa atingir 750 CieloCoins para convencer o cliente e concluir a missão. Diferentemente das fases anteriores, respostas erradas passam a resultar em perda de pontos, aumentando o nível de desafio.
 
 ### Síntese das Locações
-Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cielo, articulando de forma integrada os elementos narrativos, as mecânicas de jogo e os objetivos pedagógicos. A progressão entre os ambientes é concebida de maneira gradual e aplicada, promovendo o desenvolvimento contínuo das competências profissionais do jogador ao longo de toda a jornada.
 
+&emsp; Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cielo, articulando de forma integrada os elementos narrativos, as mecânicas de jogo e os objetivos pedagógicos. A progressão entre os ambientes é concebida de maneira gradual e aplicada, promovendo o desenvolvimento contínuo das competências profissionais do jogador ao longo de toda a jornada.
 
 ### 3.3.2. Navegação pelo mundo (sprints 2 e 3)
 
-&emsp;A dinâmica de movimentação dos personagens no mundo do jogo foi concebida para reforçar a sensação de progressão e descoberta gradual. O deslocamento ocorre livremente dentro das áreas já desbloqueadas, por meio de movimentação direcional no mapa urbano, permitindo ao jogador explorar ruas, aproximar-se de estabelecimentos e interagir com pontos específicos do cenário. Essa exploração não é apenas espacial, mas também estratégica, pois cada interação representa a possibilidade de iniciar um novo desafio de vendas, diretamente vinculado ao avanço narrativo e ao desenvolvimento profissional do personagem.
+&emsp; A dinâmica de movimentação dos personagens no mundo do jogo foi concebida para reforçar a sensação de progressão e descoberta gradual. O deslocamento ocorre livremente dentro das áreas já desbloqueadas, por meio de movimentação direcional no mapa urbano, permitindo ao jogador explorar ruas, aproximar-se de estabelecimentos e interagir com pontos específicos do cenário. Essa exploração não é apenas espacial, mas também estratégica, pois cada interação representa a possibilidade de iniciar um novo desafio de vendas, diretamente vinculado ao avanço narrativo e ao desenvolvimento profissional do personagem.
 
-&emsp;O mundo do jogo é estruturado em uma única cidade interativa, organizada segundo uma lógica de progressão sequencial baseada em capítulos e missões. O ponto inicial de cada capítulo é a agência bancária parceira da Cielo, onde o jogador realiza seu check-in e recebe orientações do Gerente Geral (GG) e do Gerente PJ sobre as visitas comerciais que deverão ser realizadas. A partir desse momento, o jogador passa a se deslocar pelo mapa urbano para visitar os estabelecimentos designados, cada um representando um desafio específico dentro do processo de vendas.
+&emsp; O mundo do jogo é estruturado em uma única cidade interativa, organizada segundo uma lógica de progressão sequencial baseada em capítulos e missões. O ponto inicial de cada capítulo é a agência bancária parceira da Cielo, onde o jogador realiza seu check-in e recebe orientações do Gerente Geral (GG) e do Gerente PJ sobre as visitas comerciais que deverão ser realizadas. A partir desse momento, o jogador passa a se deslocar pelo mapa urbano para visitar os estabelecimentos designados, cada um representando um desafio específico dentro do processo de vendas.
 
-&emsp;No Capítulo 1, o jogador inicia sua jornada profissional e realiza visitas a estabelecimentos que introduzem as mecânicas básicas de negociação, incluindo a padaria, a farmácia e o escritório. Cada fase apresenta metas específicas de desempenho e exige que o jogador alcance uma pontuação mínima de CieloCoins para concluir a missão e desbloquear o próximo estabelecimento. Caso os critérios não sejam atingidos, o desafio deve ser repetido até que o desempenho mínimo seja alcançado.
+&emsp; No Capítulo 1, o jogador inicia sua jornada profissional e realiza visitas a estabelecimentos que introduzem as mecânicas básicas de negociação, incluindo a padaria, a farmácia e o escritório. Cada fase apresenta metas específicas de desempenho e exige que o jogador alcance uma pontuação mínima de CieloCoins para concluir a missão e desbloquear o próximo estabelecimento. Caso os critérios não sejam atingidos, o desafio deve ser repetido até que o desempenho mínimo seja alcançado.
 
-&emsp;No Capítulo 2, a complexidade das interações aumenta, introduzindo novos tipos de estabelecimentos e desafios comerciais mais elaborados, como o salão de beleza, o restaurante e o mercado. Nesse estágio, o jogador também tem acesso a um mini game localizado no metrô, que adiciona dinamismo à experiência e permite a coleta de moedas adicionais. A progressão continua sendo condicionada ao desempenho nas missões, reforçando a curva de aprendizagem ao longo do jogo.
+&emsp; No Capítulo 2, a complexidade das interações aumenta, introduzindo novos tipos de estabelecimentos e desafios comerciais mais elaborados, como o salão de beleza, o restaurante e o mercado. Nesse estágio, o jogador também tem acesso a um mini game localizado no metrô, que adiciona dinamismo à experiência e permite a coleta de moedas adicionais. A progressão continua sendo condicionada ao desempenho nas missões, reforçando a curva de aprendizagem ao longo do jogo.
 
-&emsp;Por fim, o Capítulo 3 representa o momento mais desafiador da jornada do jogador. Nesse estágio, o personagem retorna à agência para uma nova avaliação e recebe a missão final de negociação no posto de gasolina, um cenário que exige maior domínio das estratégias de venda desenvolvidas nas fases anteriores. Após superar esse desafio, o jogador retorna à agência para a conclusão da experiência.
+&emsp; Por fim, o Capítulo 3 representa o momento mais desafiador da jornada do jogador. Nesse estágio, o personagem retorna à agência para uma nova avaliação e recebe a missão final de negociação no posto de gasolina, um cenário que exige maior domínio das estratégias de venda desenvolvidas nas fases anteriores. Após superar esse desafio, o jogador retorna à agência para a conclusão da experiência.
 
-&emsp;Em síntese, o sistema de movimentação e desbloqueio estrutura a progressão do jogo de forma clara e estratégica, integrando exploração do mapa, desempenho nas missões e evolução narrativa. Assim, cada novo estabelecimento visitado simboliza não apenas o avanço espacial dentro da cidade, mas também o desenvolvimento contínuo das competências profissionais do personagem ao longo da experiência.
+&emsp; Em síntese, o sistema de movimentação e desbloqueio estrutura a progressão do jogo de forma clara e estratégica, integrando exploração do mapa, desempenho nas missões e evolução narrativa. Assim, cada novo estabelecimento visitado simboliza não apenas o avanço espacial dentro da cidade, mas também o desenvolvimento contínuo das competências profissionais do personagem ao longo da experiência.
 
 ### 3.3.3. Condições climáticas e temporais (sprints 2 e 3)
 
@@ -707,50 +720,48 @@ Em síntese, as locações descritas estruturam a experiência do Mini Mundo Cie
 
 ### 3.3.4. Concept Art (sprint 2)
 
-&emsp;O termo concept art, traduzido como "arte de conceito", refere-se a ilustrações elaboradas com a finalidade de representar visualmente a identidade, a atmosfera e a direção estética de um projeto. No contexto do presente jogo, as concept arts desempenharam papel fundamental na consolidação do estilo visual, na definição da ambientação das cidades fictícias e no estabelecimento da personalidade dos personagens. Após a consolidação do enredo, procedeu-se ao desenvolvimento dos personagens e ao level design de cada módulo, buscando-se coerência entre narrativa, mecânica e estética.
+&emsp; O termo concept art, traduzido como "arte de conceito", refere-se a ilustrações elaboradas com a finalidade de representar visualmente a identidade, a atmosfera e a direção estética de um projeto. No contexto do presente jogo, as concept arts desempenharam papel fundamental na consolidação do estilo visual, na definição da ambientação das cidades fictícias e no estabelecimento da personalidade dos personagens. Após a consolidação do enredo, procedeu-se ao desenvolvimento dos personagens e ao level design de cada módulo, buscando-se coerência entre narrativa, mecânica e estética.
 
 ### Integração dos Cenários
-&emsp;Previamente à etapa de implementação final, foi elaborada uma arte conceitual representando a integração dos cenários do jogo. Tal ilustração demonstra a forma pela qual os ambientes se conectam visualmente dentro da proposta das duas cidades, apresentando a composição geral dos espaços urbanos. Essa produção funcionou como guia orientador para a construção dos mapas e do trajeto que o jogador passará.
+
+&emsp; Previamente à etapa de implementação final, foi elaborada uma arte conceitual representando a integração dos cenários do jogo. Tal ilustração demonstra a forma pela qual os ambientes se conectam visualmente dentro da proposta das duas cidades, apresentando a composição geral dos espaços urbanos. Essa produção funcionou como guia orientador para a construção dos mapas e do trajeto que o jogador passará.
 
 <div align="center">
-  <sub>Figura 8 - Concept Art - integração entre cenários</sub>
-  <img src="../gdd_images/conceptart1.jpeg" width="60%">
+ <sub>Imagem 18 - Concept Art - integração entre cenários</sub>
+ <img src="../gdd_images/conceptart1.jpeg" width="60%">
 
-  <sup> Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup> Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Telas de Interface: Tela Inicial e Tela da Ponte
-Foram elaboradas concept arts para as telas de interface do jogo, a saber:
+
+&emsp; Foram elaboradas concept arts para as telas de interface do jogo, a saber:
+
 - Tela Inicial: responsável por apresentar a identidade visual do jogo e proporcionar a primeira impressão ao jogador;
 - Tela da Ponte: corresponde à transição entre a cena incial e a primeira cidade.
 Ambas as telas foram concebidas de modo a manter coerência estética com os demais elementos do jogo, garantindo unidade visual e favorecendo a imersão do jogador.
 
 <div align="center">
-  <sub>Figura 9 - Concept Art - Cidades do jogo</sub>
-  <img src="../gdd_images/conceptart2.png"width="60%">
+ <sub>Imagem 19 - Concept Art - Cidades do jogo</sub>
+ <img src="../gdd_images/conceptart2.png"width="60%">
   
-  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram a base estrutural para a construção visual do mapa do jogo, orientando decisões de design, ambientação e identidade gráfica anteriormente à etapa de implementação definitiva.
-
+&emsp; Em síntese, as concept arts desenvolvidas no âmbito do Sprint 2 constituíram a base estrutural para a construção visual do mapa do jogo, orientando decisões de design, ambientação e identidade gráfica anteriormente à etapa de implementação definitiva.
 
 ### 3.3.5. Trilha sonora (sprint 4)
 
-&emsp;A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
-
+&emsp; A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
 
 &emsp; De acordo com Lucas Correia Meneguette (2016) [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
 
+&emsp; No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
 
-&emsp;No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
-
-
-Com base nisso, os áudios do jogo foram organizados e classificados conforme sua função e sua relação com o universo narrativo, conforme apresentado na tabela a seguir:
+&emsp; Com base nisso, os áudios do jogo foram organizados e classificados conforme sua função e sua relação com o universo narrativo, conforme apresentado na tabela a seguir:
 
 <div align="center">
-
-<sub>Tabela 6 - Plano de Melhorias Pós-Playtest</sub>
+<sub>Tabela 8 - Sons</sub>
 
 | # | Título | Tipo | Autoria | Uso no jogo |
 |---|--------|------|---------|-------------|
@@ -774,53 +785,63 @@ Com base nisso, os áudios do jogo foram organizados e classificados conforme su
 | 18 | Trilha sonora cena da cielo do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da cielo no mini game do metrô |
 | 19 | Trilha sonora cena da floresta do mini game do metrô | Trilha / Som não-diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada na cena da floresta no mini game do metrô |
 | 20 | Efeito sonoro de coleta de moeda | Efeito / Som diegético | [Hooksounds](https://www.hooksounds.com/pt-br/royalty-free-music/) | Executada quando o personagem coleta uma moeda |
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ## 3.4. Inventário  (sprint 3)
 
+<div align="center">
+<sub>Tabela 9 - Inventário</sub>
 
 \# | item | | descrição | como obter | função | efeito sonoro
 --- | --- | --- | --- | --- | --- | ---
 | CieloCoin |<img src="../gdd_images/cieloCoin.png" width="300">|Moeda virtual utilizada como recompensa dentro do jogo, representando o progresso do jogador durante as atividades. | Obtida ao completar tarefas, vencer mini games ou coletar moedas espalhadas pelo mapa durante a exploração dos cenários. | Indicar o progresso e recompensar o desempenho do jogador ao longo da jornada no jogo. | Som curto de moeda/coleta ao receber uma CieloCoin.|
 
-
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 ## 3.5. Gameflow (Diagrama de cenas) (sprint 2)
 
 &emsp; O Gameflow é uma técnica que permite a análise visual completa da progressão de um jogo de forma não-linear, encadeando as diferentes telas e cenários, bem como as interações que o usuário deve fazer para transitar entre eles.[17](#ref17) Por ser conciso e bem abrangente, o Gameflow traz um entendimento geral do funcionamento do jogo de forma efetiva. Abaixo, um esquema que descreve o diagrama de cenas do Mini mundo cielo.
 
 <div align='center'>
-<sub>Figura 6 - Página 1 do Diagrama de Cenas</sub>
-<img src='../gdd_images/diagrama_cenas.png'>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 20 - Página 1 do Diagrama de Cenas</sub>
+ <img src='../gdd_images/diagrama_cenas.png'>
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-### 3.6. Regras do jogo (sprint 3)
+&emsp;O diagrama de cenas abaixo representa o fluxo completo de navegação entre as telas do Mini Mundo Cielo, desde o menu inicial até as transições entre as cidades do jogo.
 
+- **SceneInicial** → tela de menu principal com botões Jogar, Configurações e Créditos.
+- **ScenePersonagem** → tela de seleção dos 4 personagens jogáveis.
+- **SceneCutscene** → vídeo introdutório que contextualiza a narrativa do jogo.
+- **SceneJogo** → cena principal de gameplay (Cidade 1), com movimentação do personagem, interação com NPCs e sistema de missões.
+- **SceneCidade2** → cena da segunda cidade, desbloqueada após completar as missões da Cidade 1 com pontuação mínima.
+- **SceneFinal** → tela de encerramento com certificado de conclusão na sede da Cielo.
 
-&emsp;As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
+## 3.6. Regras do jogo (sprint 3)
 
-#### Fluxo de Navegação e Menus
+&emsp; As regras definem a lógica operacional do sistema, estabelecendo limites, objetivos e as consequências das ações do jogador para garantir uma experiência equilibrada e funcional.
 
-##### Menu Inicial:
+### Fluxo de Navegação e Menus
+
+#### Menu Inicial:
 
 - Jogar: Gatilho para a cena de Seleção de Personagens.
-
 - Créditos: Sobreposição ou transição para a lista de colaboradores.
-
 - Configurações: Acesso a sub-menu de ajustes globais (Volume: 0–100%, Brilho, Filtro de Daltonismo: On/Off).
 
-##### Seleção de Personagens:
+#### Seleção de Personagens:
 
 - Feedback Visual: O hover (passar o mouse) ativa uma animação de destaque e escala (+10%) no card do personagem.
-
 - Informação: Exibição dinâmica de descrição e status de vida (HP/Resistência). A Resistência indica quantos erros de diálogo o jogador pode cometer durante as negociações.
-
 - Confirmação: O clique bloqueia a seleção e inicia o carregamento (loading) do Nível 1.
 
-#### Regras de Início (Prólogo)
+### Regras de Início (Prólogo)
 
-##### Interação com NPC (Vanessa):
+#### Interação com NPC (Vanessa):
 
 A proximidade habilita o prompt da tecla [E].
 
@@ -828,19 +849,19 @@ A proximidade habilita o prompt da tecla [E].
 
 - Gatilho de Progressão: O fim do diálogo ativa o script de follow (Vanessa caminha até a ponte). A entrada no ônibus (trigger de área) dispara a cutscene de transição para o Banco.
 
-##### O Hub do Banco e Missões
+### O Hub do Banco e Missões
 
 - Gerente-Geral: Atua como o Quest Giver. O diálogo concede ao jogador a rota da missão.
 
-##### Logística de Venda:
+### Logística de Venda:
 
-&emsp;Objetivo Secundário: Otimização da rota de visita aos estabelecimentos, incentivando o jogador a planejar a ordem das interações.
+&emsp; Objetivo Secundário: Otimização da rota de visita aos estabelecimentos, incentivando o jogador a planejar a ordem das interações.
 
 - Parceiro (PJ): O personagem PJ deve estar dentro de um raio de distância específico para que as interações com clientes sejam habilitadas. Caso o parceiro esteja fora desse raio, o diálogo com o cliente não pode ser iniciado.
 
-##### Sistema de Negociação (Interação com Clientes)
+### Sistema de Negociação (Interação com Clientes)
 
-&emsp;O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
+&emsp; O sucesso da venda é baseado em um sistema de pontuação oculta derivado das escolhas de diálogo:
 
 - Estrutura da Resposta: Cada pergunta apresenta 3 níveis de eficácia:
 
@@ -850,131 +871,123 @@ A proximidade habilita o prompt da tecla [E].
 
 - Inadequada (0 Cielo Coins): Resposta errada, reduz a probabilidade de fechamento e diminui a barra de Resistência do personagem.
 
-##### Cálculo de Feedback: 
-&emsp;Ao final da árvore de diálogo, o sistema soma os pontos obtidos durante a interação.
+### Cálculo de Feedback: 
+
+&emsp; Ao final da árvore de diálogo, o sistema soma os pontos obtidos durante a interação.
 
 - Sucesso: Soma ≥ Limiar estipulado (Venda Concluída).
 
 - Falha: Soma < Limiar estipulado (Venda Perdida).
 
-Consequências da Falha: Quando a negociação falha, o cliente encerra a conversa e o estabelecimento fica temporariamente indisponível para nova tentativa. Caso todos os estabelecimentos da rota estejam indisponíveis, o jogador pode retornar ao Gerente-Geral para reiniciar a missão.
+&emsp; Consequências da Falha: Quando a negociação falha, o cliente encerra a conversa e o estabelecimento fica temporariamente indisponível para nova tentativa. Caso todos os estabelecimentos da rota estejam indisponíveis, o jogador pode retornar ao Gerente-Geral para reiniciar a missão.
 
-Resultado: Exibição de interface de feedback com o resumo da performance e impacto na progressão.
+&emsp; Resultado: Exibição de interface de feedback com o resumo da performance e impacto na progressão.
+
 ## 3.7. Mecânicas do jogo (sprint 3)
 
-**Controles e Mecânicas de Interação**
+&emsp; Esta seção descreve as mecânicas de controle e interação disponíveis ao jogador, detalhando:
 
-**1. Visão Geral**
+- Dispositivos de entrada utilizados;  
+- Comandos disponíveis; 
+- Estados do jogo afetados;
+- Respostas sistêmicas decorrentes de cada comando.
 
-&emsp;Esta seção descreve as mecânicas de controle e interação disponíveis ao jogador, detalhando:
-
-• Dispositivos de entrada utilizados  
-• Comandos disponíveis  
-• Estados do jogo afetados  
-• Respostas sistêmicas decorrentes de cada comando  
-
-Plataforma: Desktop  
-Dispositivos de entrada: Teclado e Mouse  
-Modelo de interação: Tempo real com eventos condicionais  
+**Plataforma**: Desktop  
+**Dispositivos de entrada:** Teclado e Mouse  
+**Modelo de interação:** Tempo real com eventos condicionais  
 
 
-### 2. Mecânicas de Interface e Navegação
+### 3.7.2. Mecânicas de Interface e Navegação
 
-#### 2.1 Tela Inicial
+#### Tela Inicial
 
-Dispositivo: Mouse  
-Modelo de interação: Clique pontual  
+**Dispositivo:** Mouse  
+**Modelo de interação:** Clique pontual  
 
-Elementos interativos:
+##### Elementos interativos:
 
-Botão Jogar  
+**Botão Jogar**
 Ação do jogador: Clique com o mouse  
 Resultado sistêmico: Transição para a cena de seleção de personagem  
 
-Botão Créditos  
+**Botão Créditos**
 Ação do jogador: Clique com o mouse  
 Resultado sistêmico: Abertura da tela de créditos com links externos (LinkedIn dos desenvolvedores e opção de gerar certificado para LinkedIn)  
 
-Botão Configurações  
+**Botão Configurações**
 Ação do jogador: Clique com o mouse  
 Resultado sistêmico: Abertura de pop-up de configurações  
 
-
-
-### 2.2 Seleção de Personagem
+#### Seleção de Personagem
 
 Dispositivo: Mouse  
 
-Elementos interativos:  
+##### Elementos interativos: 
+
 Quatro cartas de personagem disponíveis  
 
-Interações possíveis:
+###### Interações possíveis:
 
-Hover sobre carta  
+**Hover sobre carta**
 Ação do jogador: Passar o cursor do mouse sobre a carta do personagem  
 Resultado sistêmico: Ativação de animação de destaque com aumento de escala do elemento selecionado, indicando foco do jogador.
 
-Seleção de personagem  
+**Seleção de personagem**
 Ação do jogador: Clique em uma carta  
 Restrição: Seleção única  
 Resultado sistêmico: O personagem selecionado é definido como avatar ativo e carregado para o início da partida.
 
 
-### 3. Mecânicas de Configuração e Acessibilidade
+### 3.7.3 Mecânicas de Configuração e Acessibilidade
 
 Interface em formato pop-up modal.
 
-#### 3.1 Controle de Volume
+#### Controle de Volume
 
 Dispositivo: Mouse  
 
-Botão “+”  
+**Botão “+”*8
 Resultado: Incremento do volume global do jogo  
 
-Botão “–”  
+**Botão “–”**
 Resultado: Redução do volume global do jogo  
 
-
-
-#### 3.2 Controle de Brilho
+#### Controle de Brilho
 
 Dispositivo: Mouse  
 
-Botão “+”  
+**Botão “+”** 
 Resultado: Aumento do brilho da tela  
 
-Botão “–”  
+**Botão “–”** 
 Resultado: Redução do brilho da tela  
 
-
-
-
-#### 3.3 Modo Alto Contraste
+#### Modo Alto Contraste
 
 Dispositivo: Mouse  
 
-Botão ON  
+**Botão ON**  
 Estado visual: Verde  
 Resultado: Ativação de contraste elevado para melhoria de legibilidade  
 
-Botão OFF  
+**Botão OFF**
 Estado visual: Vermelho  
 Resultado: Retorno ao padrão visual original  
 
-#### 3.4 Modos para Daltonismo
+#### Modos para Daltonismo
 
 Dispositivo: Mouse  
 
-Opções disponíveis:
+**Opções disponíveis:**
 
-Normal  
-Deuteranomalia  
-Protanomalia  
-Tritanomalia  
+- Normal  
+- Deuteranomalia  
+- Protanomalia  
+- Tritanomalia  
 
 Resultado sistêmico: Ajuste da paleta de cores do jogo para adaptação visual conforme o perfil selecionado.
 
-#### 3.5 Fechar Configurações
+#### Fechar Configurações
 
 Dispositivo: Mouse  
 
@@ -982,14 +995,16 @@ Botão Fechar
 
 Resultado: Retorno à cena anterior sem reinicialização do estado do jogo.
 
+### 3.7.4. Mecânicas de Movimento e Controle em Tempo Real
 
-### 4. Mecânicas de Movimento e Controle em Tempo Real
-
-#### 4.1 Movimentação do Personagem
+#### Movimentação do Personagem
 
 Dispositivo: Teclado  
 
-Modelo: Movimento contínuo enquanto tecla estiver pressionada  
+Modelo: Movimento contínuo enquanto tecla estiver pressionada 
+
+<div align="center">
+<sub>Tabela 10 - Teclas de movimentação</sub>
 
 | Tecla | Ação |
 |------|------|
@@ -998,75 +1013,82 @@ Modelo: Movimento contínuo enquanto tecla estiver pressionada
 | S | Movimento para baixo |
 | D | Movimento para direita |
 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+ 
 Observação técnica: O deslocamento é contínuo e depende do tempo de pressão da tecla.
 
-#### 4.2 Interação com NPC
+#### Interação com NPC
 
-Pré-condição: Proximidade espacial com NPC  
+**Pré-condição**: Proximidade espacial com NPC  
 
-Tecla E  
+**Tecla E**  
 
-Resultado: Abertura de pop-up de diálogo  
+**Resultado:** Abertura de pop-up de diálogo  
 
 No pop-up:
 
-Botão “Vamos!”  
+**Botão “Vamos!”** 
 
 Dispositivo: Mouse  
 
-Resultado:  
+**Resultado:**  
 NPC executa movimento programado para a direita, iniciando o deslocamento narrativo do personagem até o ponto de transição da fase.
 
-Botão Fechar / Cancelar  
+**Botão Fechar / Cancelar**
 
 Dispositivo: Mouse  
 
-Resultado:  
+**Resultado:**  
 Fechamento do pop-up de diálogo sem progressão da interação, retornando o jogador ao estado normal de controle.
 
+#### Controle de Tela
 
-
-#### 4.3 Controle de Tela
+<div align="center">
+<sub>Tabela 11 - Teclas de controle de tela</sub>
 
 | Tecla | Resultado |
 |------|-----------|
 | F | Alterna modo tela cheia |
 | ESC | Sai da tela cheia ou pausa o jogo |
 
-Primeiro acionamento do ESC: Sai do modo tela cheia (se ativo)  
-Segundo acionamento: Pausa o jogo e abre menu principal  
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+**Primeiro acionamento do ESC:** Sai do modo tela cheia (se ativo)  
+**Segundo acionamento:** Pausa o jogo e abre menu principal  
 
 
-#### 4.4 Transição de Cena
+#### Transição de Cena
 
-Condição: Personagem atinge limite direito da tela  
+**Condição:** Personagem atinge limite direito da tela  
 
-Resultado sistêmico:
+**Resultado sistêmico:**
 
-• Mudança automática de cena  
-• Reprodução de vídeo (ambiente de ônibus)  
-• Interações do jogador ficam temporariamente desativadas durante a reprodução do vídeo.
+- Mudança automática de cena  
+- Reprodução de vídeo (ambiente de ônibus)  
+- Interações do jogador ficam temporariamente desativadas durante a reprodução do vídeo.
 
 
-### 5. Mecânicas de Exploração no Mapa
+### 3.7.5. Mecânicas de Exploração no Mapa
 
 Dispositivo: Teclado  
 
-Movimentação via WASD  
+**Movimentação via WASD**  
 
 Sistema de progressão:
 
-• O mapa segue ordem lógica de estabelecimentos  
-• Entrada condicionada ao posicionamento do jogador  
+- O mapa segue ordem lógica de estabelecimentos  
+- Entrada condicionada ao posicionamento do jogador  
 
 Condição de entrada:
 
 Quando o personagem está dentro da área de interação do estabelecimento.
 
-Resultado: Acesso ao interior.
+**Resultado:** Acesso ao interior.
 
 
-#### 5.1 Sistema de Progressão
+#### Sistema de Progressão
 
 Condição de ativação:  
 Conclusão da interação com cliente no estabelecimento atual.
@@ -1074,17 +1096,17 @@ Conclusão da interação com cliente no estabelecimento atual.
 Ação do jogador:  
 Finalizar a negociação com o cliente.
 
-Resultado sistêmico:
+**Resultado sistêmico:**
 
-• Caso a negociação seja bem-sucedida, o próximo estabelecimento é desbloqueado no mapa.  
-• Caso a negociação falhe, o estabelecimento atual fica temporariamente indisponível para nova tentativa, conforme regras descritas na seção 3.6.  
-• A missão ativa é atualizada de acordo com o resultado da interação.  
-• Continuidade da progressão do jogador no mapa.
+- Caso a negociação seja bem-sucedida, o próximo estabelecimento é desbloqueado no mapa.  
+- Caso a negociação falhe, o estabelecimento atual fica temporariamente indisponível para nova tentativa, conforme regras descritas na seção 3.6.  
+- A missão ativa é atualizada de acordo com o resultado da interação.  
+- Continuidade da progressão do jogador no mapa.
 
 
-### 6. Mecânica de Diálogo e Tomada de Decisão
+### 3.7.6. Mecânica de Diálogo e Tomada de Decisão
 
-Dentro dos estabelecimentos:
+**Dentro dos estabelecimentos:**
 
 Dispositivo: Mouse  
 
@@ -1094,27 +1116,29 @@ Ação do jogador:
 
 Clique em uma das opções disponíveis.
 
-Resultado sistêmico:
+**Resultado sistêmico:**
 
-• Progressão da árvore de diálogo.  
-• Acúmulo de pontuação de negociação conforme sistema descrito na seção 3.6.  
-• Cada escolha gera um valor de pontuação relacionado à eficácia da resposta durante a negociação.  
-• Ao final da árvore de diálogo ocorre o cálculo da pontuação total da negociação.  
-• O sistema determina sucesso ou falha da venda conforme o limiar estabelecido nas regras do jogo.  
-• O resultado da negociação impacta a progressão do jogador no mapa e o estado do estabelecimento visitado.
+- Progressão da árvore de diálogo.  
+- Acúmulo de pontuação de negociação conforme sistema descrito na seção 3.6.  
+- Cada escolha gera um valor de pontuação relacionado à eficácia da resposta durante a negociação.  
+- Ao final da árvore de diálogo ocorre o cálculo da pontuação total da negociação.  
+- O sistema determina sucesso ou falha da venda conforme o limiar estabelecido nas regras do jogo.  
+- O resultado da negociação impacta a progressão do jogador no mapa e o estado do estabelecimento visitado.
 
 
-### 7. Mecânica de Recompensa
+### 3.7.7. Mecânica de Recompensa
 
 Essa mecânica define o sistema de pontuação e recompensas obtidas pelo jogador durante as interações com clientes.
 
-#### 7.1 Condição de ativação
+####  Condição de ativação
 
 Conclusão de uma negociação ou interação com cliente dentro de um estabelecimento.
 
 
+#### Sistema de pontuação
 
-#### 7.2 Sistema de pontuação
+<div align="center">
+<sub>Tabela 12 - Sistema de pontuação</sub>
 
 | # | Tipo de resposta | Pontuação | Impacto |
 |---|---|---|---|
@@ -1122,38 +1146,39 @@ Conclusão de uma negociação ou interação com cliente dentro de um estabelec
 | 2 | Resposta intermediária | Pontuação parcial | Mantém negociação estável |
 | 3 | Resposta inadequada | Sem pontuação | Reduz eficácia da negociação |
 
-
-#### 7.3 Resultado sistêmico
-
-• Atualização do total de Cielo Coins do jogador  
-• Registro do desempenho da interação  
-• Atualização do ranking do jogador  
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
 
-#### 7.4 Feedback ao jogador
+#### Resultado sistêmico
 
-O sistema apresenta retorno visual indicando o resultado da escolha realizada.
+- Atualização do total de Cielo Coins do jogador  
+- Registro do desempenho da interação  
+- Atualização do ranking do jogador  
 
+#### Feedback ao jogador
 
-### 8. Mecânica de Ranking
+&emsp; O sistema apresenta retorno visual indicando o resultado da escolha realizada.
 
-Acesso via botão dedicado  
+### 3.7.8. Mecânica de Ranking
+
+**Acesso via botão dedicado**  
 
 Dispositivo: Mouse  
 
 Resultado: Abertura da tela de ranking regional  
 
-Funcionalidades:
+**Funcionalidades:**
 
-• Visualização de ranking por cidade  
-• Exibição comparativa de Cielo Coins acumuladas  
-• Scroll vertical para navegação  
-• Botão Fechar para retorno ao mapa  
+- Visualização de ranking por cidade  
+- Exibição comparativa de Cielo Coins acumuladas  
+- Scroll vertical para navegação  
+- Botão Fechar para retorno ao mapa  
 
 Modelo: Interface informacional não interativa com dados dinâmicos  
 
 
-### 9. Classificação das Mecânicas
+### 3.7.9. Classificação das Mecânicas
 
 Categorias de Mecânicas Implementadas
 
@@ -1173,14 +1198,15 @@ Sistema de diálogo com múltiplas opções que impactam a pontuação e progres
 
 ### 3.8.1. Movimentação do Personagem
 
-&emsp;O personagem se move com velocidade constante em quatro direções (cima, baixo, esquerda, direita), caracterizando um movimento uniforme em cada eixo do plano cartesiano.
-&emsp;A atualização da posição pode ser descrita pela equação vetorial do movimento uniforme:
+&emsp; O personagem se move com velocidade constante em quatro direções (cima, baixo, esquerda, direita), caracterizando um movimento uniforme em cada eixo do plano cartesiano.
+
+&emsp; A atualização da posição pode ser descrita pela equação vetorial do movimento uniforme:
 
 $$
 \vec{P}_{n+1} = \vec{P}_n + \vec{v} \cdot \Delta t
 $$
 
-&emsp;De forma equivalente, separando por eixos:
+&emsp; De forma equivalente, separando por eixos:
 
 $$
 x_{n+1} = x_n + v_x \cdot \Delta t
@@ -1195,11 +1221,11 @@ Onde:
 - $v_x$, $v_y$ = componentes da velocidade nos eixos horizontal e vertical
 - $\Delta t$ = intervalo de tempo entre frames
 
-&emsp;No sistema de coordenadas do Phaser, o eixo Y é invertido (valores positivos apontam para baixo), o que explica o uso de velocidade negativa para movimento para cima.
+&emsp; No sistema de coordenadas do Phaser, o eixo Y é invertido (valores positivos apontam para baixo), o que explica o uso de velocidade negativa para movimento para cima.
 
 #### Implementação
 
-```javascript
+```js
 personagem.setVelocity(0);
 
 if (teclas.left.isDown) {
@@ -1216,32 +1242,32 @@ if (teclas.up.isDown) {
 ```
 #### Interpretação
 
-&emsp;A cada frame, o motor de física do Phaser atualiza automaticamente a posição do personagem com base nas velocidades definidas, garantindo um movimento uniforme (sem aceleração) em cada eixo.
-&emsp;Assim, o personagem percorre distâncias proporcionais ao tempo, mantendo velocidade constante enquanto uma tecla de direção estiver pressionada.
+&emsp; A cada frame, o motor de física do Phaser atualiza automaticamente a posição do personagem com base nas velocidades definidas, garantindo um movimento uniforme (sem aceleração) em cada eixo.
+&emsp; Assim, o personagem percorre distâncias proporcionais ao tempo, mantendo velocidade constante enquanto uma tecla de direção estiver pressionada.
 
 ### 3.8.3. Detecção de Proximidade com NPCs
 
-&emsp;A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. Para isso, utiliza-se a distância euclidiana entre dois pontos no plano cartesiano 2D.
+&emsp; A interação com NPCs é ativada quando o personagem se encontra dentro de um raio de proximidade. Para isso, utiliza-se a distância euclidiana entre dois pontos no plano cartesiano 2D.
 
 $$
 d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 $$
 
-&emsp;Onde:
+&emsp; Onde:
 - $(x_1, y_1)$ representa a posição do personagem  
 - $(x_2, y_2)$ representa a posição do NPC  
 
-&emsp;No sistema implementado, considera-se que o personagem está próximo do NPC quando:
+&emsp; No sistema implementado, considera-se que o personagem está próximo do NPC quando:
 
 $$
 d < 30
 $$
 
-&emsp;Esse valor define o raio de interação em pixels. Quando essa condição é satisfeita, o indicador `[E]` é exibido na tela, permitindo a interação.
+&emsp; Esse valor define o raio de interação em pixels. Quando essa condição é satisfeita, o indicador `[E]` é exibido na tela, permitindo a interação.
 
 #### Implementação em Código
 
-```javascript
+```js
 const distNpc = Phaser.Math.Distance.Between(
   personagem.x,
   personagem.y,
@@ -1253,7 +1279,7 @@ const pertoNpc = distNpc < 30;
 ```
 #### Controle de Interface
 
-```javascript
+```js
 if (pertoNpc !== this.perto_npc) {
   this.perto_npc = pertoNpc;
   this.labelNpc.setVisible(pertoNpc && !this.dentroZonaSaida);
@@ -1262,7 +1288,7 @@ if (pertoNpc !== this.perto_npc) {
 
 #### Interação com o NPC
 
-```javascript
+```js
 if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   console.log("[SceneFarmacia] Interagiu com o NPC da farmácia");
 }
@@ -1270,9 +1296,9 @@ if (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
 
 #### Interpretação Matemática
 
-&emsp;A equação da distância euclidiana define uma região circular de raio $r = 30$ centrada no NPC. Sempre que o personagem entra nessa região, considera-se que ele está suficientemente próximo para interagir.
+&emsp; A equação da distância euclidiana define uma região circular de raio $r = 30$ centrada no NPC. Sempre que o personagem entra nessa região, considera-se que ele está suficientemente próximo para interagir.
 
-&emsp;Geometricamente, isso corresponde ao conjunto de pontos que satisfazem:
+&emsp; Geometricamente, isso corresponde ao conjunto de pontos que satisfazem:
 
 $$
 (x - x_{npc})^2 + (y - y_{npc})^2 < r^2
@@ -1280,44 +1306,44 @@ $$
 
 #### Conclusão
 
-&emsp;A implementação utiliza uma função matemática clássica da geometria analítica para detectar proximidade entre dois elementos no plano. O comportamento observado no jogo é consistente com o modelo teórico, garantindo uma interação precisa e eficiente com os NPCs.
+&emsp; A implementação utiliza uma função matemática clássica da geometria analítica para detectar proximidade entre dois elementos no plano. O comportamento observado no jogo é consistente com o modelo teórico, garantindo uma interação precisa e eficiente com os NPCs.
 
 ### 3.8.4. Animação Clock Wipe (Transição de Cenas)
 
-&emsp;A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela.
+&emsp; A transição entre a cutscene e a próxima cena é realizada por meio de um efeito clock wipe, no qual uma máscara circular reduz progressivamente a área visível da tela.
 
-&emsp;O progresso da animação é dado por $t \in [0,1]$, onde $t = 0$ representa o início e $t = 1$ o final da transição.
+&emsp; O progresso da animação é dado por $t \in [0,1]$, onde $t = 0$ representa o início e $t = 1$ o final da transição.
 
-&emsp;O ângulo inicial é dado por $\theta_0 = -\frac{\pi}{2}$ e evolui até completar $2\pi$ radianos:
+&emsp; O ângulo inicial é dado por $\theta_0 = -\frac{\pi}{2}$ e evolui até completar $2\pi$ radianos:
 
 $$
 \theta(t) = -\frac{\pi}{2} + t \cdot 2\pi
 $$
 
-&emsp;Aplicação no código:
+&emsp; Aplicação no código:
 
-```javascript
+```js
 const progress = tween.getValue();
 const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
 ```
 
 #### Sentidos da animação
 
-##### 1) Sentido horário (clockwise)
+##### Sentido horário (clockwise)
 
-&emsp;Ângulo inicial:
+&emsp; Ângulo inicial:
 
 $$
 \theta_{inicial}(t) = -\frac{\pi}{2} + t \cdot 2\pi
 $$
 
-&emsp;Ângulo final:
+&emsp; Ângulo final:
 
 $$
 \theta_{final} = -\frac{\pi}{2} + 2\pi
 $$
 
-```javascript
+```js
 if (clockwise) {
   const startAngle = -Math.PI / 2 + progress * Math.PI * 2;
   const endAngle = -Math.PI / 2 + Math.PI * 2;
@@ -1325,21 +1351,21 @@ if (clockwise) {
 }
 ```
 
-##### 2) Sentido anti-horário (counterclockwise)
+##### Sentido anti-horário (counterclockwise)
 
-&emsp;Ângulo inicial:
+&emsp; Ângulo inicial:
 
 $$
 \theta_{inicial} = -\frac{\pi}{2}
 $$
 
-&emsp;Ângulo final:
+&emsp; Ângulo final:
 
 $$
 \theta_{final}(t) = -\frac{\pi}{2} + (1 - t)\cdot 2\pi
 $$
 
-```javascript
+```js
 else {
   const startAngle = -Math.PI / 2;
   const endAngle = -Math.PI / 2 + (1 - progress) * Math.PI * 2;
@@ -1353,7 +1379,7 @@ $$
 r = \frac{\sqrt{w^2 + h^2}}{2}
 $$
 
-```javascript
+```js
 const raio = Math.hypot(this.scale.width, this.scale.height) / 2;
 ```
 
@@ -1363,35 +1389,41 @@ $$
 t' = \frac{1 - \cos(\pi t)}{2}
 $$
 
-```javascript
+```js
 this.tweens.add({
   targets: { progress: 0 },
   progress: 1,
   duration: this.CONFIG.WIPE_DURATION,
   ease: this.CONFIG.WIPE_EASE,
-});
+ }
+);
 ```
 
-&emsp;Essa interpolação torna a animação mais fluida, reduzindo a velocidade no início e no fim.
+&emsp; Essa interpolação torna a animação mais fluida, reduzindo a velocidade no início e no fim.
  
 ### 3.8.5. Animação Cinemática da Chuva (MU + MUV)
 
-&emsp;A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
+&emsp; A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
 
-&emsp;Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[33\]](#ref33)
+&emsp; Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[33\]](#ref33)
 
 <div align="center">
-<sub>Figura 28 - Relação matemática com a chuva do jogo</sub><br/>
-<img src="../gdd_images/gifGDDMat.gif" width="35%">
+ <sub>Imagem 21 - Relação matemática com a chuva do jogo</sub><br/>
+ <img src="../gdd_images/gifGDDMat.gif" width="35%">
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp;A função responsável pela animação é:
+&emsp; A função responsável pela animação é:
 
 - Arquivo: `src/scenes/SceneChuva.js`  
 - Função: `animacaoCinematica(g)`  
 - Linha: 60  
 
 #### Parâmetros do Modelo
+
+<div align="center">
+<sub>Tabela 13 - Parâmetros do modelo</sub>
 
 | Parâmetro            | Símbolo | Descrição |
 |---------------------|--------|-----------|
@@ -1403,9 +1435,12 @@ this.tweens.add({
 | Tempo corrente      | t      | Tempo acumulado da animação: $t \in [0, T]$. |
 | Elemento gráfico    | g      | Objeto que representa a gota e armazena seu estado. |
 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
 #### Modelagem Matemática
 
-&emsp;O movimento da gota é descrito pelo vetor posição:
+&emsp; O movimento da gota é descrito pelo vetor posição:
 
 $$
 \vec{r}(t) = (x(t), y(t))
@@ -1421,7 +1456,7 @@ $$
 x(t) = x_i + v_x \cdot t
 $$
 
-&emsp;A velocidade horizontal é constante, representando o efeito do vento.
+&emsp; A velocidade horizontal é constante, representando o efeito do vento.
 
 ##### Eixo Y — Movimento Uniformemente Variado (MUV)
 
@@ -1437,11 +1472,11 @@ $$
 y(t) = y_i + \frac{1}{2} a_y \cdot t^2
 $$
 
-&emsp;A gota parte do repouso vertical ($v_0 = 0$) e acelera continuamente, simulando a gravidade.
+&emsp; A gota parte do repouso vertical ($v_0 = 0$) e acelera continuamente, simulando a gravidade.
 
 #### Implementação da Função
 
-```javascript
+```js
 animacaoCinematica(g) {
     // Quando o tempo total termina, a gota chega ao destino e é desativada
     if (g.t >= g.T) {
@@ -1498,18 +1533,18 @@ animacaoCinematica(g) {
 
 #### Pré-cálculo dos Parâmetros
 
-```javascript
+```js
 g.vx = (g.xf - g.xi) / g.T;
 g.ay = (2 * (g.yf - g.yi)) / (g.T * g.T);
 ```
 
 #### Atualização Temporal
 
-```javascript
+```js
 g.t += delta / 1000;
 ```
 
-&emsp;O uso do delta garante que a animação seja independente da taxa de frames.
+&emsp; O uso do delta garante que a animação seja independente da taxa de frames.
 
 #### Interpretação Física
 
@@ -1523,7 +1558,7 @@ $$
 
 #### Validação (Console)
 
-&emsp;Os logs confirmam o comportamento esperado:
+&emsp; Os logs confirmam o comportamento esperado:
 
 - $v_x$ constante → MU validado  
 - $v_y$ crescente → MUV validado  
@@ -1532,115 +1567,101 @@ $$
 
 #### Conclusão
 
-&emsp;A implementação atende todos os requisitos propostos, utilizando apenas operações matemáticas básicas e modelagem física coerente. O comportamento visual da chuva reproduz corretamente um movimento bidimensional com MU no eixo X e MUV no eixo Y.
-
+&emsp; A implementação atende todos os requisitos propostos, utilizando apenas operações matemáticas básicas e modelagem física coerente. O comportamento visual da chuva reproduz corretamente um movimento bidimensional com MU no eixo X e MUV no eixo Y.
 
 # <a name="c4"></a>4. Desenvolvimento do Jogo
 
 ## 4.1. Desenvolvimento preliminar do jogo (sprint 1)
 
-## 1. Estrutura do projeto: 
-O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
-Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
-Os principais arquivos são:
-Main.js: arquivo responsável por inicializar o jogo e gerenciar as cenas.
-index.html: arquivo responsável pelas configurações da página web e pela integração com o main.js.
+### 4.1. 1. Estrutura do projeto: 
 
-## 2. Estrutura dos Personagens:
-A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+&emsp; O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
+&emsp; Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
 
-2.1. Desenvolvimento de personagens jogáveis:
+&emsp; Os principais arquivos são:
 
-Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
-Os personagens foram pensados para permitir futuras animações.
-Sprites dos personagens jogáveis:
+&emsp; **Main.js:** arquivo responsável por inicializar o jogo e gerenciar as cenas.
+&emsp; **index.html:** arquivo responsável pelas configurações da página web e pela integração com o main.js.
+
+### 4.1.2. Estrutura dos Personagens:
+
+&emsp; A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+
+#### Desenvolvimento de personagens jogáveis:
+
+&emsp; Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
+&emsp;Os personagens foram pensados para permitir futuras animações.
+
+&emsp; **Sprites dos personagens jogáveis:**
 
 <div align="center">
-	
-<sub>Figura 1 - Sprite sheet personagens jogáveis</sub>
+ <sub>Imagem 22 - Sprite sheet personagens jogáveis</sub>
+ <img src="../src/assets/imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
 
-<img src="../src/assets/imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
+ <sub>Imagem 23 - Personagens jogáveis</sub>
+ <img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
 
-<sub>Figura 2 - Personagens jogáveis</sub>
-
-<img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
-
-<sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
+ <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
 	
-Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
+&emsp; Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
 
 2.2. Desenvolvimento de personagens secundários:
 
-Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
-Sprites dos personagens secundários:
+&emsp; Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
+
+&emsp; **Sprites dos personagens secundários:**
 
 <div align="center">
-	
-<sub>Figura 3 - Personagens secundários </sub>
+ <sub>Imagem 24 - Personagens secundários </sub>
+ <img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png" width= 95%>
 
-<img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png" width= 95%>
+ <sub>Imagem 25 - Foto perfil personagens secundários </sub>
+ <img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
+
+ <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
+
+### 4.1.3. Estrutura dos cenários iniciais:
+&emsp; Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
+
+&emsp; Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
+
+&emsp; Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
 
 <div align="center">
-<sub>Fonte: Autoria Própria usando o Piskel (2026) Descrição: imagem dos personagens secundários que trabalham no comércios do jogo</sub>
-</div>
-	
-<sub>Figura 4 - Foto perfil personagens secundários </sub>
+ <sub>Imagem 26 - Cenários dos estabelecimentos internamente</sub>
+ <img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
 
-<img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
-
-<div align="center">
-<sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
-</div>
-
-## 3. Estrutura dos cenários iniciais:
-&emsp;Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
-
-&emsp;Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
-
-&emsp;Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
-
-<sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
-
-<img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
-
-<sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
+ <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
-&emsp;No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
+&emsp; No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
 
-&emsp;Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
+&emsp; Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
 
-&emsp;Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+&emsp; Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
 
-1.Implementação da cutscene inicial que introduz o contexto do jogo.
+- Implementação da cutscene inicial que introduz o contexto do jogo;
+- Criação da tela inicial (menu principal);
+- Desenvolvimento da tela de seleção de personagem;
+- Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade;
+- Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste).
 
-2.Criação da tela inicial (menu principal).
+&emsp; Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
 
-3.Desenvolvimento da tela de seleção de personagem.
+- Implementação da cena do mapa da cidade.
+- Desenvolvimento da cena da agência bancária.
+- Implementação da cena do escritório.
+- Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
 
-4.Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade.
+&emsp; A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
 
-5.Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste)
+Imagem 27 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
 
-&emsp;Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
-
-1.Implementação da cena do mapa da cidade.
-
-2.Desenvolvimento da cena da agência bancária.
-
-3.Implementação da cena do escritório.
-
-4.Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
-
-&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
-
-Figura 28 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
-
-&emsp;O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
+&emsp; O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
 
 ```js
 this.CONFIG = {
@@ -1654,7 +1675,7 @@ this.CONFIG = {
 };
 ```
 
-&emsp;Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
+&emsp; Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
 
 ```js
 btn.on("pointerover", () => btn.setScale(botao.scale * 1.07));
@@ -1670,40 +1691,31 @@ startGame() {
 }
 ```
 Algumas cenas de telas do jogo:
+<div align="center">
+ <sub>Imagem 28 - Tela Inicial </sub>
+ <img src="../gdd_images/telaInicial.jpg" width= "800">
+ 
+ <sub>Imagem 29 - Tela de Configurações </sub>
+ <img src="../gdd_images/telaConfig.jpg" width= "800">
 
-<sub>Tela Inicial </sub>
+ <sub>Imagem 30 - Tela de seleção de personagens </sub>
+ <img src="../gdd_images/telaSeleçao.jpg" width= "800">
 
-<img src="../gdd_images/telaInicial.jpg" width= "800">
+ <sub>Imagem 31 - Tela de tutorial </sub>
+ <img src="../gdd_images/telaTutorial.jpg" width= "800">
 
-<sub>Tela de Configurações </sub>
+ <sub>Imagem 32 - Tela da ponte </sub>
+ <img src="../gdd_images/telaPonte.jpg" width= "800">
 
-<img src="../gdd_images/telaConfig.jpg" width= "800">
+ <sub>Imagem 33 - Tela da Cutscene </sub>
+ <img src="../gdd_images/telaCutScene.jpg" width= "800">
 
-<sub>Tela de seleção de personagens </sub>
+ <sub>Imagem 34 - Tela de seleção de personagens</sub>
 
-<img src="../gdd_images/telaSeleçao.jpg" width= "800">
+ <sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+</div>
 
-<sub>Tela de tutorial </sub>
-
-<img src="../gdd_images/telaTutorial.jpg" width= "800">
-
-<sub>Tela da ponte </sub>
-
-<img src="../gdd_images/telaPonte.jpg" width= "800">
-
-<sub>Tela da Cutscene </sub>
-
-<img src="../gdd_images/telaCutScene.jpg" width= "800">
-
-
-
-
-
-
-
-Figura 29 - Tela de seleção de personagens &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
-
-&emsp;Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
+&emsp; Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
 
 ```js
 this.listaPersonagens = [
@@ -1732,8 +1744,7 @@ for (let i = 1; i <= 4; i++) {
 }
 ```
 
-&emsp;Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
-
+&emsp; Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
 
 ```js
 criarAnimacoes() {
@@ -1749,7 +1760,7 @@ criarAnimacoes() {
 }
 ```
 
-&emsp;Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
+&emsp; Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
 
 ```js
 update() {
@@ -1769,7 +1780,7 @@ update() {
 }
 ```
 
-&emsp;Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
+&emsp; Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
 
 ```js
 // Colisão — impede o jogador de passar pelo NPC
@@ -1785,10 +1796,13 @@ if (distNpc < 150 && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.mostrarDialogoObjetivo(); // Abre diálogo com efeito typewriter
 }
 ```
+<div align="center">
+ <sub>Imagem 35 - Cena de gameplay com o NPC Vanessa na ponte</sub>
 
-Figura 30 - Cena de gameplay com o NPC Vanessa na ponte &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-&emsp;Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
+&emsp; Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
 
 ```js
 iniciarClockWipe() {
@@ -1808,14 +1822,13 @@ iniciarClockWipe() {
 }
 ```
 
-
-Dificuldades
+&emsp; **Dificuldades**:
 
 - Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações
 - Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X
 - Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento
 
-Próximos passos
+&emsp; **Próximos passos**
 
 - Criar o mapa interno dos estabelecimentos para a fase seguinte
 - Adicionar os puzzles e desafios de vendas do jogo
@@ -1823,64 +1836,59 @@ Próximos passos
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
-Durante a terceira sprint do projeto, o foco do desenvolvimento foi expandir o ambiente jogável do jogo, implementando o mapa principal da cidade e iniciando a criação dos cenários internos dos estabelecimentos presentes no jogo. Essa etapa teve como objetivo transformar o jogo em um ambiente explorável mais amplo, permitindo ao jogador navegar por um cenário urbano e iniciar a interação com diferentes locais da narrativa.
+&emsp; Durante a terceira sprint do projeto, o foco do desenvolvimento foi expandir o ambiente jogável do jogo, implementando o mapa principal da cidade e iniciando a criação dos cenários internos dos estabelecimentos presentes no jogo. Essa etapa teve como objetivo transformar o jogo em um ambiente explorável mais amplo, permitindo ao jogador navegar por um cenário urbano e iniciar a interação com diferentes locais da narrativa.
 
-A partir da estrutura desenvolvida nas sprints anteriores, foi criada a cena SceneCidade.js, responsável por gerenciar o mapa urbano, a movimentação do personagem nesse ambiente, o sistema de colisões com elementos do cenário e as zonas de interação que permitem acessar determinados estabelecimentos.
+&emsp; A partir da estrutura desenvolvida nas sprints anteriores, foi criada a cena SceneCidade.js, responsável por gerenciar o mapa urbano, a movimentação do personagem nesse ambiente, o sistema de colisões com elementos do cenário e as zonas de interação que permitem acessar determinados estabelecimentos.
 
-Além disso, também foi iniciado o desenvolvimento dos ambientes internos dos estabelecimentos do jogo utilizando o software Tiled, permitindo estruturar os cenários que serão utilizados nas próximas etapas da narrativa.
+&emsp; Além disso, também foi iniciado o desenvolvimento dos ambientes internos dos estabelecimentos do jogo utilizando o software Tiled, permitindo estruturar os cenários que serão utilizados nas próximas etapas da narrativa.
 
-Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+&emsp; Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
 
-- Implementação do mapa principal da cidade utilizando o sistema de Tilemaps do Phaser.js.
-
-- Integração dos tilesets gráficos responsáveis pela composição visual do cenário urbano.
-
-- Desenvolvimento do sistema de colisão entre o personagem e objetos do ambiente, como prédios, veículos e obstáculos.
-
-- Implementação da câmera dinâmica, que acompanha o personagem durante a movimentação pelo mapa.
-
-- Criação do sistema de interação com estabelecimentos, permitindo acessar ambientes internos.
-
-- Desenvolvimento dos cenários internos de diversos estabelecimentos utilizando o editor de mapas Tiled.
-
+- Implementação do mapa principal da cidade utilizando o sistema de Tilemaps do Phaser.js;
+- Integração dos tilesets gráficos responsáveis pela composição visual do cenário urbano;
+- Desenvolvimento do sistema de colisão entre o personagem e objetos do ambiente, como prédios, veículos e obstáculos;
+- Implementação da câmera dinâmica, que acompanha o personagem durante a movimentação pelo mapa;
+- Criação do sistema de interação com estabelecimentos, permitindo acessar ambientes internos;
+- Desenvolvimento dos cenários internos de diversos estabelecimentos utilizando o editor de mapas Tiled;
 - Exportação desses cenários para o projeto no formato JSON, preparando sua futura integração ao jogo.
 
 ### Implementação do mapa da cidade:
 
-Para a construção do cenário urbano do jogo foi utilizado o software Tiled, um editor amplamente utilizado no desenvolvimento de jogos 2D para criação de mapas baseados em tiles.
+&emsp; Para a construção do cenário urbano do jogo foi utilizado o software Tiled, um editor amplamente utilizado no desenvolvimento de jogos 2D para criação de mapas baseados em tiles.
 
-O mapa da cidade foi projetado no Tiled e posteriormente exportado no formato JSON, permitindo sua integração com o motor de jogos Phaser.js. O carregamento desse mapa ocorre dentro do método `preload()` da cena responsável pelo ambiente urbano.
+&emsp; O mapa da cidade foi projetado no Tiled e posteriormente exportado no formato JSON, permitindo sua integração com o motor de jogos Phaser.js. O carregamento desse mapa ocorre dentro do método `preload()` da cena responsável pelo ambiente urbano.
 
 ```js
 this.load.tilemapTiledJSON('mapaGeral', 'src/assets/imagens/mapsjson/tileMaps/mapaMiniMundoVF.tmj?v=5');
 ```
 
-Além do arquivo de mapa, também foram carregados os tilesets, que são os conjuntos de imagens utilizados para compor visualmente o cenário.
+&emsp; Além do arquivo de mapa, também foram carregados os tilesets, que são os conjuntos de imagens utilizados para compor visualmente o cenário.
 
 ```js
 this.load.image('tilesMapaTopo', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png?v=1');
 this.load.image('tilesMapaBase', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1');
 ```
 
-Após o carregamento desses recursos, o mapa é instanciado na cena utilizando o método `make.tilemap()`, permitindo acessar suas camadas e estruturas internas.
+&emsp; Após o carregamento desses recursos, o mapa é instanciado na cena utilizando o método `make.tilemap()`, permitindo acessar suas camadas e estruturas internas.
 
 ```js
 const mapa = this.make.tilemap({ key: 'mapaGeral' });
 ```
 
-Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
+&emsp; Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
 
 <div align="center">
-<sub>Figura 20 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/visãoMapa.jpg"width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 36 - Mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/visãoMapa.jpg"width= 97%>
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Organização das camadas do mapa:
 
-O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
+&emsp; O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
 
-Para evitar repetição de código durante a criação das camadas, foi implementada uma função auxiliar responsável por instanciá-las no Phaser.
+&emsp; Para evitar repetição de código durante a criação das camadas, foi implementada uma função auxiliar responsável por instanciá-las no Phaser.
 
 ```js
 _criarCamada(mapa, nome, tilesets) {
@@ -1889,16 +1897,13 @@ _criarCamada(mapa, nome, tilesets) {
 }
 ```
 
-As camadas do mapa foram divididas em três categorias principais:
+&emsp; As camadas do mapa foram divididas em três categorias principais:
 
 - Camadas de chão e elementos decorativos, responsáveis apenas pela composição visual do cenário;
-
 - Camadas de objetos com colisão, que impedem a movimentação do personagem;
-
 - Camadas de elementos posicionados acima do personagem, utilizadas para criar sensação de profundidade no cenário.
 
-
-Para as camadas que devem bloquear o movimento do jogador, foi utilizado o método `setCollisionByExclusion()`.
+&emsp; Para as camadas que devem bloquear o movimento do jogador, foi utilizado o método **`setCollisionByExclusion()`**:
 
 ```js
 caminhoInferior.setCollisionByExclusion([-1]);
@@ -1906,195 +1911,180 @@ carrosVeiculos.setCollisionByExclusion([-1]);
 estabelecimentos.setCollisionByExclusion([-1]);
 ```
 
-Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
+&emsp; Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
 
 ### Movimentação do personagem no mapa:
 
-O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
+&emsp; O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
 
 ```js
 this.personagem = this.physics.add.sprite(spawnX, spawnY, 'sprite_frente_1');
 this.personagem.setCollideWorldBounds(true);
 ```
 
-O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
+&emsp; O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
 
 ```js
 this.teclas = this.input.keyboard.createCursorKeys();
 ```
 
-Durante o loop de atualização do jogo `(update())`, o sistema verifica quais teclas estão pressionadas e aplica velocidade ao personagem, além de reproduzir a animação correspondente à direção do movimento.
+&emsp; Durante o loop de atualização do jogo `(update())`, o sistema verifica quais teclas estão pressionadas e aplica velocidade ao personagem, além de reproduzir a animação correspondente à direção do movimento.
 
-Quando o jogador interrompe o movimento, a animação é pausada e o sprite retorna ao primeiro frame da direção atual, representando o estado de repouso do personagem.
+&emsp; Quando o jogador interrompe o movimento, a animação é pausada e o sprite retorna ao primeiro frame da direção atual, representando o estado de repouso do personagem.
 
 ### Sistema de câmera dinâmica:
 
-Para melhorar a experiência de navegação pelo cenário, foi implementado um sistema de câmera que acompanha automaticamente o personagem durante sua movimentação.
+&emsp; Para melhorar a experiência de navegação pelo cenário, foi implementado um sistema de câmera que acompanha automaticamente o personagem durante sua movimentação.
 
 ```js
 this.cameras.main.startFollow(this.personagem);
 ```
 
-Além disso, foi aplicado um nível de zoom específico para melhorar a visualização do cenário.
+&emsp; Além disso, foi aplicado um nível de zoom específico para melhorar a visualização do cenário.
 
 ```js
 this.cameras.main.setZoom(4);
 ```
 
-Também foram definidos limites para a câmera, impedindo que o jogador visualize áreas externas ao mapa.
+&emsp; Também foram definidos limites para a câmera, impedindo que o jogador visualize áreas externas ao mapa.
 
 ```js
 this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 ```
 
 <div align="center">
-<sub>Figura 21 - Personagem no mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/personagemMapa.jpg"width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>imagem 37 - Personagem no mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/personagemMapa.jpg"width= 97%>
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Sistema de interação com estabelecimentos:
 
-Uma das principais funcionalidades desenvolvidas nesta sprint foi o sistema de interação que permite ao jogador acessar determinados estabelecimentos presentes no mapa da cidade.
-Para isso, foi criada uma zona de interação utilizando um retângulo geométrico que representa a área próxima à entrada de um prédio.
+&emsp; Uma das principais funcionalidades desenvolvidas nesta sprint foi o sistema de interação que permite ao jogador acessar determinados estabelecimentos presentes no mapa da cidade. Para isso, foi criada uma zona de interação utilizando um retângulo geométrico que representa a área próxima à entrada de um prédio.
 
 ```js
 this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
 ```
 
-Quando o personagem entra nessa área, um indicador visual é exibido informando que a tecla E pode ser pressionada para entrar no local.
+&emsp; Quando o personagem entra nessa área, um indicador visual é exibido informando que a tecla E pode ser pressionada para entrar no local.
 
 ```JS
 this.labelE = this.add.text(993, 838, '[E] Entrar');
 ``` 
 
-Caso o jogador pressione a tecla correspondente, é iniciada uma transição de cena utilizando um efeito de fade-out da câmera.
+&emsp; Caso o jogador pressione a tecla correspondente, é iniciada uma transição de cena utilizando um efeito de fade-out da câmera.
 
 ```JS
 this.cameras.main.fadeOut(800, 0, 0, 0);
 ```
 
-Após a conclusão da animação, o jogo inicia a cena interna do estabelecimento.
+&emsp; Após a conclusão da animação, o jogo inicia a cena interna do estabelecimento.
 
 ```JS
 this.scene.start('SceneEscritorio');
 ```
 
-Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
+&emsp; Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
 
 <div align="center">
-<sub>Figura 22 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/interacaoEstabelecimento.jpg" width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 38 - Mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interacaoEstabelecimento.jpg" width= 97%>
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Desenvolvimento dos cenários internos:
 
-Além da implementação do mapa principal da cidade, também foi iniciado o desenvolvimento dos cenários internos dos estabelecimentos presentes no jogo. Esses ambientes foram projetados utilizando o software Tiled, seguindo o mesmo padrão estrutural utilizado na construção do mapa externo.
+&emsp; Além da implementação do mapa principal da cidade, também foi iniciado o desenvolvimento dos cenários internos dos estabelecimentos presentes no jogo. Esses ambientes foram projetados utilizando o software Tiled, seguindo o mesmo padrão estrutural utilizado na construção do mapa externo.
 
-Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
+&emsp; Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
 
-- Agência bancária
+- Agências bancárias 1 2 e 3;
+- Padaria;
+- Farmácia;
+- Loja de roupa;
+- Estação de metrô;
+- Restaurante;
+- Supermercado;
+- Posto de gasolina.
 
-- Padaria
-
-- Farmácia
-
-- Loja de roupa
-
-- Estação de metrô
-
-- Restaurante
-
-- Supermercado
-
-- Posto de gasolina
-
-
-Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
+&emsp; Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
 Após a criação no Tiled, os mapas foram exportados no formato JSON, tornando possível sua integração com o motor Phaser.js por meio do sistema de carregamento de tilemaps.
 
-Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
+&emsp; Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
 
 <div align="center">
-<sub>Figura 23 e 24 - Estabelecimentos internos - Mini Mundo Cielo</sub>
-<img src="../gdd_images/MapasCenarios.png">
-<img src="../gdd_images/MapasCenarios2.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagens 39 e 40 - Estabelecimentos internos - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/MapasCenarios.png">
+ <img src="../gdd_images/MapasCenarios2.png">
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Dificuldades:
 
-Durante o desenvolvimento desta sprint, algumas dificuldades técnicas foram encontradas, principalmente relacionadas à integração do mapa com o sistema de movimentação do personagem e com os elementos interativos do cenário.
+&emsp; Durante o desenvolvimento desta sprint, algumas dificuldades técnicas foram encontradas, principalmente relacionadas à integração do mapa com o sistema de movimentação do personagem e com os elementos interativos do cenário.
 
 Entre os principais desafios estão:
 
-- Integrar corretamente o mapa criado no editor Tiled ao motor Phaser.js.
-
-- Configurar o sistema de colisão em múltiplas camadas do mapa, sem interferir nos elementos decorativos.
-
-- Ajustar a escala do personagem para manter proporção adequada em relação ao tamanho dos tiles do cenário.
-
-- Implementar um sistema confiável de detecção de proximidade para interação com estabelecimentos.
-
+- Integrar corretamente o mapa criado no editor Tiled ao motor Phaser.js;
+- Configurar o sistema de colisão em múltiplas camadas do mapa, sem interferir nos elementos decorativos;
+- Ajustar a escala do personagem para manter proporção adequada em relação ao tamanho dos tiles do cenário;
+- Implementar um sistema confiável de detecção de proximidade para interação com estabelecimentos;
 - Organizar a estrutura dos mapas internos dos estabelecimentos para futura integração ao sistema de navegação do jogo.
 
 
 ### Próximos passos:
 
-Nas próximas sprints, o desenvolvimento será direcionado para ampliar as interações dentro do jogo e finalizar a integração dos cenários internos ao mapa da cidade.
+&emsp; Nas próximas sprints, o desenvolvimento será direcionado para ampliar as interações dentro do jogo e finalizar a integração dos cenários internos ao mapa da cidade.
 Entre os próximos objetivos estão:
 
 - Integrar todos os estabelecimentos internos ao mapa da cidade.
-
 - Implementar NPCs adicionais com diálogos e objetivos específicos.
-
 - Implementar novas interações com NPCs dentro dos estabelecimentos.
-
 - Desenvolver os desafios e puzzles relacionados à temática do jogo.
-
 - Adicionar novas mecânicas de gameplay ligadas ao sistema de progressão do jogador.
-
 - Realizar ajustes visuais e melhorias na navegação pelo mapa.
-
 
 ## 4.4. Desenvolvimento final do MVP (sprint 4)
 
-O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
+&emsp; O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
 
-Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
+&emsp; Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
 
-Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
+&emsp; Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
 
-Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
+&emsp; Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
 
-Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
-Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
-Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+&emsp; Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
 
- Elementos desenvolvidos na sprint 4: 
+&emsp; Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
 
-- Finalização dos cenários internos (metrô e agências) utilizando o Tiled
-- Integração completa das cenas ao sistema principal (SceneCidade.js)
-- Implementação da navegação entre o mapa e os estabelecimentos
-- Desenvolvimento e integração do mini game do metrô
-- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática
-- Organização e estruturação das pastas do projeto no VS Code
-- Integração das interações dentro dos estabelecimentos
-- Integração da IA nos diálogos e interações
-- Estruturação do fluxo de progressão do jogador
+&emsp; Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+
+&emsp; **Elementos desenvolvidos na sprint 4:**
+
+- Finalização dos cenários internos (metrô e agências) utilizando o Tiled;
+- Integração completa das cenas ao sistema principal (SceneCidade.js);
+- Implementação da navegação entre o mapa e os estabelecimentos;
+- Desenvolvimento e integração do mini game do metrô;
+- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática;
+- Integração das interações dentro dos estabelecimentos;
+- Integração da IA nos diálogos e interações;
+- Estruturação do fluxo de progressão do jogador;
 - Interface e experiência do usuário (HUD):
-    - Mini-mapa
-    - Interface da maquininha Cielo
-    - Aba de missões
-    - Contador de progresso
+    - Mini-mapa;
+    - Interface da maquininha Cielo;
+    - Aba de missões;
+    - Contador de progresso;
 - Recursos visuais e sonoros:
-    - Criação e implementação de novas sprite sheets
-    - Implementação de trilha sonora e efeitos sonoros
+    - Criação e implementação de novas sprite sheets;
+    - Implementação de trilha sonora e efeitos sonoros.
 
  ### SceneCidade.js como hub central de navegação
  
-A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
+&emsp; A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
 
 ```js
 init(dados = {}) {
@@ -2105,14 +2095,14 @@ init(dados = {}) {
 } 
 ```
 
- A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
+&emsp; A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
 
  ```js
 jsthis.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
 this.labelE = this.add.text(976, 856, "[E] Entrar", { fontSize: "6px", color: "#ffffff" }).setVisible(false); 
 ```
 
-A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
+&emsp; A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
 
 ```js
 js_avancarSequenciaSetas(localAtual) {
@@ -2125,34 +2115,36 @@ js_avancarSequenciaSetas(localAtual) {
 
 ### Finalização dos cenários internos
 
-Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
-O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
-````JS
+&emsp; Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
+
+&emsp; O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
+
+```js
 jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
 [paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
  ```
 
-A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
-
+&emsp; A função auxiliar `_criarCamada()` foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
 
 ### Integração das interações dentro dos estabelecimentos
 
-As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
+As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador `[E]` Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
 
 ```js
 jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.scene.pause();
-  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
+  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" })
+};
 ```
-Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
-Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
+&emsp; Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
 
-Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
+&emsp; Após a escolha, o método `_chamarLLM()` gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
 
+&emsp; Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
 ### Mini game do metrô
 
-Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
+&emsp; Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
 
 ```js
 jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
@@ -2160,26 +2152,28 @@ jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
 }
 ```
 
-Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
+&emsp; Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
 
 ```js
 jsthis.time.addEvent({ delay: 20000, callback: this.spawnMoedaExtra, loop: true });
 this.time.addEvent({ delay: 10000, callback: () => { this.spawnBomba(); }, loop: true });
 ```
 
-Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
+&emsp; Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
 
 ```js
 jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
 const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
 this.registry.set("cieloCoins", totalAtual + coinsGanhas);
-````
-Figura XXX - print do mini game 
+```
+Imagem XXX - print do mini game 
 ### Interface e experiência do usuário (HUD)
 
-Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
-O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
-````JS
+&emsp; Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
+
+&emsp; O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
+
+```js
 jsthis.hudIcon.on("pointerdown", () => {
   this.tweens.add({
     targets: this.hudIcon,
@@ -2188,28 +2182,35 @@ jsthis.hudIcon.on("pointerdown", () => {
     scale: this.hudIconZoomScale,
     duration: 260,
     ease: "Quad.Out",
-````
-O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
+  })
+ }
+)
+```
+
+&emsp; O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
 O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
 
-O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
+&emsp; O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
 
 ```js
 jsthis.input.keyboard?.once("keydown-ESC", () => {
   const retornoX = Number(this.registry.get("cidadeRetornoX"));
   const retornoY = Number(this.registry.get("cidadeRetornoY"));
   this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
-````
-Figura XX - HUD 
-Figura XXX - maquininha 
+});
+```
+Imagem 41 - HUD 
+Imagem 42 - maquininha 
+
 ### Desenvolvimento de novas sprite sheets
 
-Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
-Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
+&emsp; Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
+
+&emsp; Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
 ### Fluxo de progressão do jogador
 
-O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
+&emsp; O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
 A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
 
 ```js
@@ -2219,7 +2220,7 @@ jsexport const SCORING_CONFIG = {
 }
 ```
 
-A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
+&emsp; A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
 
 ```js
 jsexport function handleAnswer(registry, chapter, tipo) {
@@ -2231,35 +2232,41 @@ jsexport function handleAnswer(registry, chapter, tipo) {
   return amount;
 }
 ```
-Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+
+&emsp; Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+
 <div align="center">
-<sub>Figura 33 - Resultado Diálogo - Mini Mundo Cielo</sub>
-<img src="../gdd_images/resultado_dialogo.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 41 - Resultado Diálogo - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/resultado_dialogo.png">
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Efeitos dinâmicos de ambiente Chuva
 
-Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
-O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
+&emsp; Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
+
+&emsp; O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
 
 ```js
 jsvar x_atual = g.xi + g.vx * t;
 var y_atual = g.yi + 0.5 * g.ay * t * t;
 ```
 
-A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
+&emsp; A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
 
 <div align="center">
-<sub>Figura 34 - Efeito de Chuva - Mini Mundo Cielo</sub>
-<img src="../gdd_images/chuva.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 42 - Efeito de Chuva - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/chuva.png">
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Trilha sonora e efeitos sonoros
 
-A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
-Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
+&emsp; A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
+
+&emsp; Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
 
 ```js
 jsthis.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5 });
@@ -2270,20 +2277,20 @@ this.events.on("shutdown", () => {
 })
 ```
 
-Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
+&emsp; Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
 
 ### Dificuldades
 
-Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
+&emsp; Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
 
-- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
-- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa
-- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados
+- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry;
+- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa;
+- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados;
 - Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
 
 ### Próximos passos
 
-Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
+&emsp; Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
 
 - Corrigir inconsistências visuais, de colisão e de fluxo identificadas durante os testes
 - Corrigir e ajustar os diálogos com NPCs para garantir coerência narrativa
@@ -2293,21 +2300,205 @@ Para as próximas etapas do desenvolvimento, o foco será o refinamento e o poli
 
 ### Conclusão da Sprint 4
 
-Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
+&emsp; Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
 
 ## 4.5. Revisão do MVP (sprint 5)
 
-*Descreva e ilustre aqui o desenvolvimento dos refinamentos e revisões da versão final do jogo, explicando brevemente o que foi entregue em termos de MVP. Utilize prints de tela para ilustrar.*
+O desenvolvimento do Mini Mundo Cielo ao longo das quatro sprints anteriores percorreu um caminho progressivo: na sprint 1 foram definidos a estrutura modular do projeto e os primeiros elementos visuais em pixel art; na sprint 2 foram implementadas as funcionalidades básicas de jogabilidade; na sprint 3 o jogo ganhou um ambiente explorável com mapa, câmera dinâmica e zonas de interação; e na sprint 4 o projeto atingiu o estágio de MVP com integração completa dos cenários, sistema de pontuação, HUD, mini game e sonoplastia. A sprint 5 foi dedicada ao refinamento e polimento desse MVP, corrigindo inconsistências e validando a experiência com usuários reais.
+
+Elementos desenvolvidos na sprint 5:
+
+- Implementação das imagens de tutorial nas cenas de diálogo e no mapa da cidade
+- Correção do bug de HUD em múltiplas cenas internas
+- Criação do feedback imediato por escolha nos quizzes e melhoria do feedback final
+- Correção das pontuações no sistema de Cielo Coins
+- Correção e reformulação do mini game do metrô
+- Adição do HUD de missões nas cenas internas que ainda não o possuíam
+- Implementação do PJ Theo e da PJ Camila como guias de navegação no mapa da cidade
+- Correção das zonas de interação com os estabelecimentos
+- Implementação da tela de vitória (`SceneVitoria`)
+- Deploy do mini game
+- Playtests realizados com públicos distintos ao redor da faculdade
+- Revisão e refinamento geral do jogo
+
+### Tutorial nas cenas de diálogo e no mapa da cidade
+
+Cada cena de diálogo passou a exibir uma tela de tutorial antes do início da conversa, orientando o jogador sobre as mecânicas da negociação. O tutorial é construído com elementos Phaser destruídos ao clicar em "Começar", sem interferir no estado da cena.
+
+```js
+btnBg.on("pointerdown", () => {
+  els.forEach((el) => el?.destroy?.());
+  this._mostrarCena(0);
+});
+```
+
+Além disso, foi implementado um tutorial do mapa exibido na primeira vez que o jogador entra na `SceneCidade`. O estado de exibição é persistido no `Phaser.Registry` para que o tutorial apareça apenas uma vez por sessão.
+
+```js
+mostrarTutorialMapa() {
+  if (!this.registry.get("tutorialMapaVisto")) {
+    this.registry.set("tutorialMapaVisto", true);
+    // Exibe imagem com zona clicável sobre o botão "Entendi!"
+    const btnZone = this.add.zone(cx, cy + dH * 0.38, dW * 0.55, dH * 0.14)
+      .setInteractive({ useHandCursor: true });
+    btnZone.on("pointerdown", () => this.fecharTutorialMapa());
+  }
+}
+```
+
+<sub>Figura XX - Tela de tutorial das cenas de diálogo</sub>
+
+`<img src="../gdd_images/telaTutorialDialogo.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Feedback imediato por escolha e melhoria do feedback final
+
+Nesta sprint foi criado o sistema de feedback imediato, exibido logo após cada escolha e antes da resposta do NPC. Ao selecionar uma opção, a cena entra no estado `"feedback"` e exibe um título e texto explicativo específicos para aquela resposta, informando se a abordagem foi correta, neutra ou inadequada.
+
+```js
+_mostrarFeedbackEscolha(escolha) {
+  this.estado = "feedback";
+  this.textoFeedbackTitulo.setText(escolha.feedbackTitulo).setVisible(true);
+  this.textoFeedback.setText(escolha.feedbackTexto).setVisible(true);
+  this._mostrarContinuar("Continuar  ->");
+}
+```
+
+O fluxo completo de uma escolha passou a seguir a sequência: seleção → feedback imediato → réplica do NPC → próxima cena. O feedback final também foi melhorado, apresentando avaliação qualitativa com cor e mensagem distintas por faixa de desempenho.
+
+```js
+if (pct >= 40) { avaliacao = "Vendedor nato! Negócio fechado!"; cor = "#44ff88"; }
+else           { avaliacao = "Quase...";                        cor = "#ff6644"; }
+```
+
+<sub>Figura XX - Feedback imediato após escolha do jogador</sub>
+
+`<img src="../gdd_images/feedbackEscolha.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Correção das pontuações
+
+O módulo `scoring.js` foi revisado e expandido para contemplar todos os capítulos com valores e regras distintas. O capítulo 2 recebeu sua configuração própria com pontuações mais altas, o capítulo 3 passou a penalizar respostas erradas, e o mini game do metrô recebeu um limite de colisões configurável de forma centralizada.
+
+```js
+export const SCORING_CONFIG = {
+  chapter1: { correct: 100, generic:  50, wrong:   0 },
+  chapter2: { correct: 200, generic: 100, wrong:   0 },
+  chapter3: { correct: 300, generic: 150, wrong: -50 },
+  metro_minigame: { coin_value: 50, max_collisions: 3 },
+};
+```
+
+### Correção e reformulação do mini game do metrô
+
+O mini game foi reformulado com um timer global de 120 segundos, com fases alternando automaticamente a cada 30 segundos via fade de câmera e troca de trilha sonora, sem acúmulo de objetos ou sobreposição de áudio.
+
+```js
+trocarFase(novaFase, novaImagem, novaMusicaKey) {
+  this.faseAtual = novaFase;
+  this.cameras.main.fade(400, 0, 0, 0);
+  this.time.delayedCall(400, () => {
+    this.fundo1.setTexture(novaImagem);
+    this.musica.stop();
+    this.musica = this.sound.add(novaMusicaKey, { loop: true, volume: 0.5 });
+    this.musica.play();
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+  });
+}
+```
+
+Ao fim do tempo, os pontos são convertidos em Cielo Coins globais e o jogador retorna à cena do metrô com fade-out. O mini game foi também deployado de forma independente nesta sprint.
+
+IMAGEM MINI GAME
+
+### PJ Theo e PJ Camila como guias de navegação
+
+Nesta sprint o sistema de escolta por NPCs foi expandido. O PJ Theo guia o jogador nos atendimentos do capítulo 1, enquanto a PJ Camila assume a escolta no capítulo 2, conduzindo o jogador até a Loja de Roupas, o Metrô, o Restaurante e o Supermercado. Ambos os personagens receberam animações completas com 4 frames em 4 direções, alternando o sprite conforme o sentido do deslocamento.
+
+
+Cada guia segue uma rota de waypoints predefinida e exibe um balão de fala contextual conforme seu estado, aguardando o jogador caso ele se distancie além do raio configurável.
+
+```js
+this.labelTheoGuia.setText(
+  this.pjChegouDestinoRota  ? "[Chegamos. Entre na Padaria]"  :
+  this.pjEsperandoJogador   ? "[Vem comigo! Estou esperando]" : "[Siga o PJ]"
+);
+```
+
+Após a conclusão de cada atendimento, o guia reativa automaticamente com uma nova rota em direção ao próximo estabelecimento, persistindo esse estado no `Phaser.Registry`.
+
+```js
+if (this.pjAguardandoPadaria && this.registry.get("padaria_dialogo_concluido") === true) {
+  this.pjDestinoAtual  = "farmacia";
+  this.pjRotaWaypoints = [
+    { x: 1488, y: 915 }, { x: 1596, y: 915 },
+    { x: 1596, y: 1295 }, { x: 1126, y: 1295 },
+  ];
+  this.registry.set("ag01_escolta_pj_agencia2", true);
+}
+```
+
+<sub>Figura XX - PJ Theo acompanhando o personagem no mapa da cidade</sub>
+
+`<img src="../gdd_images/pjTheoGuia.jpg" width="800">`
+
+<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+
+### Correção das zonas de interação
+
+As zonas de interação de todos os estabelecimentos foram recalibradas. Cada zona é verificada quadro a quadro no `update()`, exibindo o label `[E] Entrar` apenas quando o personagem está dentro da área correspondente. O sistema também passou a validar se o PJ guia já chegou ao destino antes de liberar a entrada, evitando que o jogador acesse o estabelecimento antes do momento correto da narrativa.
+
+```js
+this.zonaPadaria  = new Phaser.Geom.Rectangle(1425, 818, 100, 80);
+this.zonaFarmacia = new Phaser.Geom.Rectangle(1081, 1181,  80, 80);
+
+// Entrada só liberada quando o guia chegou ao destino
+if (!this._podeEntrarNoEstabelecimento(alvoTentado)) return;
+```
+
+### Tela de vitória
+
+Foi implementada a `SceneVitoria`, exibida ao final do jogo após a conclusão de todos os atendimentos. A cena apresenta uma imagem de encerramento e um botão que retorna o jogador à tela inicial.
+
+```js
+botaoFechar.on("pointerdown", () => {
+  this.scene.start("SceneInicial");
+});
+```
+IMAGEM DA CENA 
+
+### Playtests e validação com usuários
+
+Durante esta sprint foram realizadas sessões de playtest ao redor da faculdade com dois grupos: pessoas mais jovens, próximas à faixa etária de estagiários, e profissionais adultos alinhados ao perfil do público-alvo principal. As sessões foram conduzidas de forma supervisionada, com observação do comportamento durante a navegação, interações com NPCs e realização dos quizzes. Os resultados orientaram os ajustes finais de diálogos, tutoriais e feedbacks implementados nesta sprint.
+
+IMAGENS 
+
+### Dificuldades
+
+- Garantir que o feedback imediato fosse exibido e ocultado corretamente no ciclo de estados da cena de diálogo sem interferir na sequência de resposta do NPC
+- Implementar a troca de guia entre Theo e Camila conforme o capítulo ativo, mantendo consistência de estado no registry entre cenas
+- Calibrar as zonas de interação de todos os estabelecimentos e implementar a validação de chegada do PJ antes de liberar a entrada
+- Balancear o tempo da sprint entre correções técnicas, validação com usuários e o deploy do mini game
+
+### Conclusão da Sprint 5
+
+A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em sua versão mais polida e estável. A criação do sistema de feedback imediato, a expansão do sistema de escolta com Theo e Camila, a reformulação do mini game, a implementação dos tutoriais e da tela de vitória, e a validação com usuários reais consolidaram o projeto como uma experiência de treinamento gamificada funcional, coerente com os objetivos propostos no GDD e pronta para apresentação ao parceiro Cielo. Foi uma trajetória de 05 sprints de muito aprendizado e crescimento e estamos muito felizes com o resultado final. 
+
 
 # <a name="c5"></a>5. Testes
 
 ## 5.1. Casos de Teste (sprints 2 a 4)
 
-*Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.*  
+&emsp; Os casos de teste são conjuntos de condições, ações, dados de entrada e resultados esperados, projetados para verificar se uma funcionalidade específica de um software funciona corretamente.
 
-# Casos de Teste — Mini Mundo Cielo
+### Casos de Teste — Mini Mundo Cielo
 
-## Tabela de Casos de Teste
+#### Tabela de Casos de Teste
+
+<div align="center">
+<sub>Tabela 14 - Tabela dos casos de testes</sub>
 
 | # | Pré-condição | Descrição do teste | Pós-condição | Requisitos Relacionados |
 |---|---|---|---|---|
@@ -2382,126 +2573,123 @@ Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (M
 | 69 | O jogador concluiu a última missão do último nível do jogo. | Verificar se o sistema encerra a progressão principal e direciona o jogador para a cena final. | A progressão é encerrada corretamente e a cena final é iniciada. | RF17 |
 | 70 | A cena final do jogo foi iniciada após a conclusão de todos os objetivos principais. | Assistir à execução completa da cena final e verificar se o encerramento é apresentado corretamente. | O jogo exibe a tela de encerramento ou os créditos finais de forma adequada. | RF17 |
 
-<sub>Fonte: Autoria Própria (2026) </sub>
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ## 5.2. Testes de jogabilidade (playtests) (sprint 5)
 
 ### 5.2.1 Registros de testes
 
-Para avaliar a experiência do jogador e identificar possíveis melhorias no jogo, foram realizados 12 playtests com dois grupos de participantes:
+&emsp; Para avaliar a experiência do jogador e identificar possíveis melhorias no jogo, foram realizados 12 playtests com dois grupos de participantes:
 
 - **7 estudantes universitários**
 - **5 participantes com perfil semelhante ao público-alvo do jogo**
 
-Os nomes apresentados são fictícios, utilizados apenas para fins de organização e registro das sessões de teste.
+&emsp; Os nomes apresentados são fictícios, utilizados apenas para fins de organização e registro das sessões de teste.
 
-A divisão entre os grupos permitiu comparar a experiência de jogadores com maior familiaridade com jogos digitais com a de jogadores que representam o público-alvo principal do projeto.
+&emsp; A divisão entre os grupos permitiu comparar a experiência de jogadores com maior familiaridade com jogos digitais com a de jogadores que representam o público-alvo principal do projeto.
 
-Os testes foram realizados em notebooks, em sessões individuais com duração média entre 10 e 15 minutos. Durante esse período, os participantes exploraram o jogo livremente enquanto foram observados aspectos relacionados à compreensão das mecânicas, progressão nas missões, dificuldades encontradas e percepção geral da experiência.
+&emsp; Os testes foram realizados em notebooks, em sessões individuais com duração média entre 10 e 15 minutos. Durante esse período, os participantes exploraram o jogo livremente enquanto foram observados aspectos relacionados à compreensão das mecânicas, progressão nas missões, dificuldades encontradas e percepção geral da experiência.
 
-As sessões ocorreram sem interferência direta dos avaliadores, permitindo observar dificuldades naturais de navegação, interação e compreensão dos objetivos. Ao final da experiência, os participantes também forneceram comentários qualitativos e uma nota geral para o jogo.
+&emsp; As sessões ocorreram sem interferência direta dos avaliadores, permitindo observar dificuldades naturais de navegação, interação e compreensão dos objetivos. Ao final da experiência, os participantes também forneceram comentários qualitativos e uma nota geral para o jogo.
 
-# Registro detalhado dos participantes
+#### Registro detalhado dos participantes
 
-A Tabela 1 apresenta o registro completo dos 12 playtests realizados, incluindo informações sobre o perfil dos participantes, experiência prévia com jogos, compreensão das mecânicas, progressão no jogo, dificuldades relatadas, avaliação geral e sugestões de melhoria.
+&emsp; A Tabela apresenta o registro completo dos 12 playtests realizados, incluindo informações sobre o perfil dos participantes, experiência prévia com jogos, compreensão das mecânicas, progressão no jogo, dificuldades relatadas, avaliação geral e sugestões de melhoria.
 
-| Teste | Tipo | Nome | Experiência prévia com games | Conseguiu iniciar o jogo ? | Entendeu regras e mecânicas ? | Conseguiu progredir ? | Dificuldades | Nota | O que gostou | O que pode melhorar ? |
+<div align="center">
+<sub>Tabela 15 - Registros dos casos de testes</sub>
+
+| Teste | Tipo | Nome | Experiência prévia com games | Conseguiu iniciar o jogo? | Entendeu regras e mecânicas? | Conseguiu progredir? | Dificuldades | Nota | O que gostou | O que pode melhorar |
 |------|------|------|------|------|------|------|------|------|------|------|
-| 1 | Estudante | Lucas Andrade | Sim, jogador casual | Sim | Parcialmente | Sim | Dificuldade em identificar objetivo | 7.5 | Design visual | Objetivos mais claros |
-| 2 | Estudante | Mariana Costa | Não | Sim | Parcialmente | Parcialmente | Ficou perdida após padaria | 6.5 | Música | Instruções iniciais |
-| 3 | Estudante | Pedro Henrique | Sim | Sim | Sim | Sim | Bugs de interface | 8.0 | Design | Reduzir perguntas |
-| 4 | Estudante | Ana Ribeiro | Sim | Sim | Parcialmente | Sim | Bugs no mapa | 7.0 | Cutscenes | Menos texto |
-| 5 | Estudante | Rafael Martins | Sim | Sim | Sim | Sim | Falta feedback quizzes | 8.0 | Mini game | Feedback respostas |
-| 6 | Estudante | Beatriz Ferreira | Sim | Sim | Sim | Sim | Bugs movimentação | 7.5 | Visual | Melhorar movimentação |
-| 7 | Estudante | Gabriel Rocha | Sim | Sim | Parcialmente | Sim | Objetivos no mapa | 7.0 | Ambientação | Melhor orientação |
-| 8 | Público-alvo | Carlos Menezes | Sim casual | Sim | Sim | Sim | Demorou para perceber interação | 8.5 | Mini game | Destacar interações |
-| 9 | Público-alvo | Fernanda Lopes | Sim | Sim | Parcialmente | Sim | Ficou perdida | 7.5 | História | Melhor orientação |
-| 10 | Público-alvo | João Victor | Sim | Sim | Sim | Sim | Quiz longo | 8.0 | Mini game | Reduzir perguntas |
-| 11 | Público-alvo | Juliana Martins | Sim casual | Sim | Sim | Sim | Bugs no mapa | 8.0 | Visual | Corrigir colisão |
-| 12 | Público-alvo | Roberto Almeida | Baixa experiência | Sim | Parcialmente | Parcialmente | WASD e interações | 7.0 | Personagens | Tutorial mais claro |
+| 1 | Estudante | Lucas | Sim, jogador casual | Sim | Parcialmente, entendeu a movimentação, mas não percebeu o HUD de missões | Sim, porém com alguma dificuldade | Dificuldade em identificar o objetivo da missão | 7.5 | Design visual do mapa | Tornar os objetivos mais claros |
+| 2 | Estudante | Marina | Não, joga raramente | Sim | Parcialmente, teve dificuldade em entender as instruções iniciais | Parcialmente | Ficou perdida após a cena da padaria | 6.5 | Música e ambientação | Melhorar as instruções iniciais |
+| 3 | Estudante | Henrique | Sim, jogador frequente | Sim | Sim | Sim | Encontrou bugs ao abrir algumas interfaces | 8.0 | Modo daltônico e design | Reduzir número de perguntas |
+| 4 | Estudante | Ana | Sim | Sim | Parcialmente | Sim | Encontrou bugs no mapa | 7.0 | Cutscenes | Diminuir quantidade de texto |
+| 5 | Estudante | Martins | Sim | Sim | Sim | Sim | Sentiu falta de feedback nos quizzes | 8.0 | Mini game do metrô | Feedback após respostas |
+| 6 | Estudante | Beatriz | Sim | Sim | Sim | Sim | Bugs de movimentação no mini game | 7.5 | Visual do jogo | Melhorar movimentação do personagem |
+| 7 | Estudante | Gabriel | Sim | Sim | Parcialmente | Sim | Dificuldade em encontrar objetivos no mapa | 7.0 | Ambientação e personagens | Melhorar orientação no mapa |
+| 8 | Público-alvo | Menezes | Sim, jogador casual | Sim | Sim | Sim | Demorou para perceber a maquininha | 8.5 | Design e mini game | Destacar elementos interativos |
+| 9 | Público-alvo | Fernanda  | Sim | Sim | Parcialmente | Sim | Ficou perdida em alguns momentos | 7.5 | História e ambientação | Melhorar orientação das missões |
+| 10 | Público-alvo | João | Sim | Sim | Sim | Sim | Achou o quiz longo | 8.0 | Mini game | Reduzir quantidade de perguntas |
+| 11 | Público-alvo | Juliana | Sim, casual | Sim | Sim | Sim | Pequenos bugs no mapa | 8.0 | Visual do jogo | Corrigir bugs de colisão |
+| 12 | Público-alvo | Roberto | Sim, porém baixa experiência | Sim | Parcialmente, leu o tutorial mas teve dificuldade em compreender algumas interações | Parcialmente, avançou até a padaria e o mini game | Dificuldade com WASD, zonas de interação e mecânicas do mini game | 7.0 | Personagens e proposta do jogo | Tutorial mais claro e melhorar zonas de interação |
 
-Esses registros permitiram identificar padrões de comportamento e diferenças entre jogadores experientes e jogadores que representam o público-alvo.
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-# Perfil dos participantes
+&emsp; Esses registros permitiram identificar padrões de comportamento e diferenças entre jogadores experientes e jogadores que representam o público-alvo.
 
-[FIGURA 1 — Experiência prévia com jogos digitais]
+#### Perfil dos participantes
 
-O gráfico apresenta a proporção de participantes com experiência prévia em jogos. Observa-se que a maioria dos estudantes já possuía familiaridade com jogos digitais, enquanto parte dos participantes do público-alvo apresentou experiência limitada, o que influencia diretamente a facilidade de compreensão das mecânicas e controles.
+[Imagem 43 — Experiência prévia com jogos digitais]
 
-# Distribuição das Avaliações
+&emsp; O gráfico apresenta a proporção de participantes com experiência prévia em jogos. Observa-se que a maioria dos estudantes já possuía familiaridade com jogos digitais, enquanto parte dos participantes do público-alvo apresentou experiência limitada, o que influencia diretamente a facilidade de compreensão das mecânicas e controles.
 
-[FIGURA 2 — Distribuição das notas atribuídas pelos jogadores]
+#### Distribuição das Avaliações
 
-A maior parte das avaliações ficou entre 7 e 8 pontos, indicando uma percepção geral positiva da experiência. Mesmo entre participantes com menor experiência em jogos, o jogo foi considerado interessante e visualmente atrativo.
+[Imagem 44 — Distribuição das notas atribuídas pelos jogadores]
 
-# Análise dos Testes — Estudantes
+&emsp;A maior parte das avaliações ficou entre 7 e 8 pontos, indicando uma percepção geral positiva da experiência. Mesmo entre participantes com menor experiência em jogos, o jogo foi considerado interessante e visualmente atrativo.
 
-Entre os estudantes, a maioria conseguiu iniciar e progredir no jogo sem grandes dificuldades, demonstrando boa compreensão dos controles e das mecânicas básicas.
+#### Análise dos Testes — Estudantes
 
-As principais dificuldades observadas foram:
+&emsp; Entre os estudantes, a maioria conseguiu iniciar e progredir no jogo sem grandes dificuldades, demonstrando boa compreensão dos controles e das mecânicas básicas.
+
+&emsp; As principais dificuldades observadas foram:
 
 - identificação de objetivos no mapa  
 - alguns bugs de interface  
 - quantidade de perguntas nos quizzes  
 
-Apesar dessas questões, vários participantes destacaram positivamente o design visual, ambientação, cutscenes e o mini game.
+&emsp; Apesar dessas questões, vários participantes destacaram positivamente o design visual, ambientação, cutscenes e o mini game.
 
-# Interpretação
+##### Interpretação:
 
-Os estudantes demonstraram maior facilidade em compreender os controles e as mecânicas básicas, porém ainda foram identificados problemas relacionados principalmente à interface e à clareza dos objetivos das missões.
+&emsp; Os estudantes demonstraram maior facilidade em compreender os controles e as mecânicas básicas, porém ainda foram identificados problemas relacionados principalmente à interface e à clareza dos objetivos das missões. Isso indica que, mesmo para jogadores experientes, alguns elementos do jogo ainda precisam de melhorias para facilitar a progressão. 
 
-Isso indica que, mesmo para jogadores experientes, alguns elementos do jogo ainda precisam de melhorias para facilitar a progressão. 
+#### Análise dos Testes — Público-Alvo (Jogadores mais velhos)
 
+&emsp; Os participantes que representam o público-alvo apresentaram maior dificuldade com controles e interações iniciais, especialmente aqueles com menor experiência prévia em jogos digitais.
 
-# Análise dos Testes — Público-Alvo (Jogadores mais velhos)
-
-Os participantes que representam o público-alvo apresentaram maior dificuldade com controles e interações iniciais, especialmente aqueles com menor experiência prévia em jogos digitais.
-
-As principais dificuldades observadas foram:
+&emsp; As principais dificuldades observadas foram:
 
 - movimentação utilizando WASD
 - identificação de zonas de interação
 - compreensão de alguns elementos do HUD
 - entendimento do mini game
 
-Durante alguns testes foi observado que alguns jogadores **exploraram o cenário por alguns minutos antes de perceber o NPC responsável por iniciar a missão**, indicando que a sinalização de objetivos poderia ser mais clara.
+&emsp; Durante alguns testes foi observado que alguns jogadores **exploraram o cenário por alguns minutos antes de perceber o NPC responsável por iniciar a missão**, indicando que a sinalização de objetivos poderia ser mais clara. Apesar dessas dificuldades, os participantes destacaram positivamente a diversidade dos personagens, narrativa, ambientação e o mini game.
 
-Apesar dessas dificuldades, os participantes destacaram positivamente a diversidade dos personagens, narrativa, ambientação e o mini game.
+##### Interpretação
 
-# Interpretação
+&emsp; Jogadores com menor experiência em jogos digitais apresentaram maior dificuldade em compreender os controles e as interações básicas do jogo. Esse resultado indica a necessidade de melhorias como tutoriais mais claros e instruções mais objetivas
 
-Jogadores com menor experiência em jogos digitais apresentaram maior dificuldade em compreender os controles e as interações básicas do jogo.
+#### Comparação entre grupos
 
-Esse resultado indica a necessidade de melhorias como tutoriais mais claros e instruções mais objetivas
+[Imagem 45 — Comparação de dificuldades entre estudantes e público-alvo]
 
-# Comparação entre grupos
+&emsp; A imagem apresenta uma comparação entre as dificuldades relatadas por estudantes e participantes com perfil semelhante ao público-alvo do jogo. Os estudantes relataram com maior frequência bugs e problemas de orientação no mapa, enquanto o público-alvo apresentou mais dificuldades relacionadas à interação com objetos e compreensão de algumas mecânicas.
 
-[FIGURA 3 — Comparação de dificuldades entre estudantes e público-alvo]
+&emsp; Essa diferença indica que jogadores com menor familiaridade com jogos digitais podem necessitar de tutoriais mais claros, feedback visual e melhor sinalização de elementos interativos, contribuindo para tornar a experiência mais acessível e intuitiva.
 
-A figura apresenta uma comparação entre as dificuldades relatadas por estudantes e participantes com perfil semelhante ao público-alvo do jogo. Os estudantes relataram com maior frequência bugs e problemas de orientação no mapa, enquanto o público-alvo apresentou mais dificuldades relacionadas à interação com objetos e compreensão de algumas mecânicas.
+##### Análise Geral dos Playtests
 
-Essa diferença indica que jogadores com menor familiaridade com jogos digitais podem necessitar de tutoriais mais claros, feedback visual e melhor sinalização de elementos interativos, contribuindo para tornar a experiência mais acessível e intuitiva.
+[imagem 46 — Principais dificuldades encontradas durante os testes]
 
-# Análise Geral dos Playtests
+&emsp; A imagem apresenta a frequência das principais dificuldades relatadas pelos participantes durante os testes do jogo. Observa-se que os problemas mais recorrentes estiveram relacionados a bugs técnicos, orientação de objetivos no mapa e interação com elementos do jogo, indicando pontos em que a experiência do jogador pode ser aprimorada.
 
-[FIGURA 4 — Principais dificuldades encontradas durante os testes]
+&emsp; Esses problemas foram observados em ambos os grupos, mas tiveram **maior impacto entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
 
-A figura apresenta a frequência das principais dificuldades relatadas pelos participantes durante os testes do jogo. Observa-se que os problemas mais recorrentes estiveram relacionados a bugs técnicos, orientação de objetivos no mapa e interação com elementos do jogo, indicando pontos em que a experiência do jogador pode ser aprimorada.
+#### Conclusão
 
-Esses problemas foram observados em ambos os grupos, mas tiveram **maior impacto entre jogadores do público-alvo**, reforçando a importância de tornar o jogo mais acessível.
+&emsp; Os playtests realizados permitiram identificar pontos importantes de melhoria relacionados principalmente à interface, orientação do jogador e feedback das mecânicas.
 
-# Conclusão
+&emsp; Também foi possível observar diferenças relevantes entre jogadores experientes e jogadores que representam o **público-alvo do projeto**, especialmente em relação à compreensão dos controles e das interações iniciais.
 
-Os playtests realizados permitiram identificar pontos importantes de melhoria relacionados principalmente à interface, orientação do jogador e feedback das mecânicas.
+&emsp; Apesar dessas dificuldades, os participantes apresentaram **avaliações positivas sobre o jogo**, destacando principalmente o **design visual, ambientação, personagens e mini game**.
 
-Também foi possível observar diferenças relevantes entre jogadores experientes e jogadores que representam o **público-alvo do projeto**, especialmente em relação à compreensão dos controles e das interações iniciais.
-
-Apesar dessas dificuldades, os participantes apresentaram **avaliações positivas sobre o jogo**, destacando principalmente o **design visual, ambientação, personagens e mini game**.
-
-Esses resultados indicam que o projeto possui uma base sólida, podendo ser aprimorado com melhorias voltadas à acessibilidade, clareza das mecânicas e orientação do jogador, especialmente considerando as necessidades do público-alvo mais velho.
-
-
+&emsp; Esses resultados indicam que o projeto possui uma base sólida, podendo ser aprimorado com melhorias voltadas à acessibilidade, clareza das mecânicas e orientação do jogador, especialmente considerando as necessidades do público-alvo mais velho.
 
 ### 5.2.2 Melhorias
 
@@ -2509,14 +2697,14 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 
 &emsp; A análise das sessões de teste indicou que parte dos participantes, especialmente aqueles com menor experiência prévia com jogos digitais, apresentou dificuldades na compreensão inicial das interações e objetivos do jogo. Considerando que o público-alvo do projeto inclui jogadores mais velhos, essas melhorias foram definidas com o objetivo de tornar a experiência mais acessível, intuitiva e compreensível.
 
-# Justificativa das Prioridades
+#### Justificativa das Prioridades
 
 &emsp; A priorização das melhorias foi definida considerando principalmente o *impacto* de cada problema na experiência inicial do jogador, bem como sua influência na compreensão das mecânicas fundamentais do jogo.
 
-&emsp; A *Tabela 8* apresenta os principais problemas identificados durante os testes, bem como sua origem, prioridade de desenvolvimento e o plano de ação proposto.
+&emsp; A Tabela apresenta os principais problemas identificados durante os testes, bem como sua origem, prioridade de desenvolvimento e o plano de ação proposto.
 
 <div align="center">
-<sub>Tabela 8 - Plano de Melhorias Pós-Playtest</sub>
+<sub>Tabela 16 - Plano de Melhorias Pós-Playtest</sub>
 
 | # | Problema Identificado | Origem | Prioridade | Plano de Ação |
 |---|---|---|---|---|
@@ -2536,7 +2724,7 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 
 &emsp; Por fim, a melhoria **M6** recebeu prioridade **baixa**, pois está relacionada ao balanceamento das escolhas nos primeiros diálogos de negociação. Embora essa melhoria contribua para aprimorar a experiência narrativa e estratégica do jogo, ela não impede diretamente a progressão do jogador.
 
-# Conclusão
+#### Conclusão
 
 &emsp; A identificação dessas melhorias evidencia a importância da realização de playtests durante o desenvolvimento de jogos, pois permite identificar dificuldades reais enfrentadas pelos jogadores e orientar decisões de design baseadas na experiência do usuário.
 
@@ -2546,9 +2734,9 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 
 ## 6.1. Atingimento dos Objetivos
 
-&emsp;O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
+&emsp; O Mini Mundo Cielo foi desenvolvido com o objetivo central de capacitar Gerentes de Negócios da Cielo S.A. por meio de uma experiência gamificada que simula situações reais de venda do portfólio da empresa. Ao longo das sprints de desenvolvimento, o projeto avançou de forma significativa em direção a esse objetivo, entregando um MVP funcional com as seguintes realizações:
 
-**Objetivos atingidos:**
+&emsp; **Objetivos atingidos:**
 - Implementação completa do fluxo de jogo: menu inicial → seleção de personagem → gameplay → interação com NPC → transição de cena.
 - Desenvolvimento de 4 personagens jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
 - Criação de 8 NPCs secundários com identidades, estabelecimentos e contextos de venda distintos.
@@ -2557,20 +2745,23 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 - Identidade visual alinhada à marca Cielo, com uso de cores institucionais, logotipos e referências ao portfólio da empresa.
 - Sistema de diálogo com múltipla escolha e feedback imediato, replicando as etapas de negociação do processo de venda.
 
-**Objetivos parcialmente atingidos:**
+&emsp; **Objetivos parcialmente atingidos:**
+
 - A Cidade 2 foi planejada mas não completamente implementada no MVP, sendo identificada como prioridade para versões futuras.
 - O sistema de ranking regional foi arquitetado nas mecânicas, mas a integração com backend para persistência de dados não foi realizada neste ciclo.
 
 ## 6.2. Pontos Fortes e Pontos de Melhoria
 
-**Pontos fortes:**
+&emsp; **Pontos fortes:**
+
 - A escolha do Phaser.js como framework permitiu desenvolvimento ágil e compatibilidade nativa com navegadores modernos, sem necessidade de plugins ou instalação.
 - A estrutura modular do código (separação de cenas, assets e lógica) facilita a manutenção e a colaboração em equipe, além de simplificar a adição de novas funcionalidades.
 - O design dos personagens e do mundo em pixel art transmite uma estética coesa e acessível, compatível com o público-alvo sem exigir hardware de alto desempenho.
 - A representatividade étnica e regional nos personagens jogáveis e NPCs é um diferencial que reforça o senso de pertencimento dos GNs ao interagir com o jogo.
 - O sistema de transições animadas (pixelização e clock wipe) eleva a qualidade percebida do produto, conferindo ao jogo uma identidade visual distinta.
 
-**Pontos de melhoria:**
+&emsp; **Pontos de melhoria:**
+
 - O input lag identificado no playtest indica necessidade de otimização da lógica de movimento no ciclo `update()`.
 - A curva de aprendizagem poderia ser mais suave com um tutorial mais completo que apresente gradualmente todos os controles disponíveis.
 - A ausência de feedback visual explícito ao completar missões reduz a sensação de recompensa do jogador.
@@ -2578,7 +2769,10 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 
 ## 6.3. Plano de Trabalhos Futuros
 
-&emsp;Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+&emsp; Com base nos aprendizados do desenvolvimento do MVP, nos feedbacks dos testes de jogabilidade e nas limitações de escopo identificadas, foram definidas as seguintes prioridades para versões futuras do Mini Mundo Cielo:
+
+<div align="center">
+<sub>Tabela 17 - Melhorias</sub>
 
 | # | Melhoria | Descrição | Impacto Esperado |
 |---|----------|-----------|-----------------|
@@ -2590,39 +2784,59 @@ Esses resultados indicam que o projeto possui uma base sólida, podendo ser apri
 | F6 | Versão mobile | Adaptar controles para toque e redimensionar a interface para telas menores | Amplia o alcance do treinamento para GNs que utilizam tablets ou smartphones no campo |
 | F7 | Atualização dinâmica de conteúdo | Parametrizar diálogos e produtos em arquivos externos (JSON), permitindo atualização do portfólio Cielo sem refatoração de código | Garante relevância do conteúdo a longo prazo sem depender de intervenção técnica |
 
-&emsp;O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
+<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+&emsp; O Mini Mundo Cielo demonstrou, ao longo deste ciclo de desenvolvimento, que a gamificação aplicada ao treinamento corporativo é uma estratégia viável, engajante e alinhada às necessidades da Cielo S.A. O feedback positivo dos testes de jogabilidade valida a premissa pedagógica do projeto e aponta para um produto com potencial real de impacto na capacitação de milhares de Gerentes de Negócios em todo o Brasil.
 
 # <a name="c7"></a>7. Referências (sprint 5)
 
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
-## 7. Referências
 
 <br><a name="ref1">[1]:</a>
 CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
+
 <br><a name="ref2">[2]:</a> 
 Cielo S.A. (2025). Integrated annual report 2024. https://www.cielo.com.br/docs/sustentabilidade/2024/eng/Integrated_Annual_Report_2024.pdf?srsltid=AfmBOopjbujbqFTNRcEC8_5eRj9k4r1myFfLZ4ijzCengVUfgUoG7B5-&utm_source=
+
 <br><a name="ref3">[3]:</a>
 VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
+
 <br><a name="ref4">[4]:</a>
  HARVARD BUSINESS REVIEW. **How Gamification Can Help Your Employees Learn**. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
+
 <br><a name="ref5">[5]:</a> 
 Júnior, H. (2015). As cinco forças de porter e os fatores críticos de sucesso: Uma análise da tomada de decisões estratégicas na empresa Total Eletro em Pau dos Ferros-RN. Universidade do Estado do Rio Grande do Norte. Disponível em: https://www.uern.br/controledepaginas/2015-/arquivos/5018helder_viana_marinho_de_oliveira_janior.pdf. Acesso em: 26 fev. 2026.
+
 <br><a name="ref6">[6]:</a> Cielo. (s.d.). Como fazer análise SWOT. Blog Cielo. 
 https://blog.cielo.com.br/vender/como-fazer-analise-swot/ acesso em 26 fev. 2026
+
 <br><a name="ref7">[7]:</a> Exame. (2020, janeiro 27). O pior da guerra das maquininhas de fato passou para a Cielo? Exame. https://exame.<br><a name="ref8">[8]:</a>com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/ Acesso em: 26 fevereiro 2026.
 Exame. (2016, maio 3). Cielo vê concorrência mais agressiva e retração de clientes. Exame. https://exame.com/negocios/cielo-ve-concorrencia-mais-agressiva-e-retracao-de-clientes/ Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref9">[9]:</a>Kotler, P.; Keller, K. Administração de Marketing.
 Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 2026
+
 <br><a name="ref10">[10]:</a> Corrales, J. A. (2019, maio 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content - BR; Rock Content. https://rockcontent.com/br/blog/missao-e-visao
+
 <br><a name="ref11">[11]:</a>Desidério, M. (2017, agosto 14). 5 dicas essenciais para definir o público-alvo do seu negócio. Exame. https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/ Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref12">[12]:</a>Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae). (s.d.). ESG: o que é e qual é a importância? Saiba aqui! https://sebrae.com.br/sites/PortalSebrae/ufs/pe/artigos/esg-o-que-e-e-qual-e-a-importancia-saiba-aqui,4ef39fd767ede710VgnVCM100000d701210aRCRD Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref13">[13]:</a>Souza, B. (2025, novembro 4). IBGE revela nomes e sobrenomes mais populares do Brasil; veja ranking. CNN Brasil. https://www.cnnbrasil.com.br/nacional/brasil/ibge-revela-nomes-e-sobrenomes-mais-populares-do-brasil-veja-ranking/ Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref14">[14]:</a>Instituto Claro. (2022, agosto 26). Construção de identidade: a importância da representatividade. Instituto Claro. https://www.institutoclaro.org.br/educacao/para-ensinar/planos-de-aula/construcao-de-identidade-a-importancia-da-representatividade/ Acesso em: 26 fevereiro 2026
+
 <br><a name="ref15">[15]:</a>Avelino, D. (2023, abril 20). Como os vieses inconscientes impactam a diversidade nas empresas. StartSe. https://www.startse.com/artigos/vies-inconsciente-nas-empresas/ Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref16">[16]:</a>nstituto Brasileiro de Geografia e Estatística (IBGE). (2023, dezembro 22). Censo 2022: pela primeira vez desde 1991 a maior parte da população do Brasil se declara parda. Agência IBGE Notícias. https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/38719-censo-2022-pela-primeira-vez-desde-1991-a-maior-parte-da-populacao-do-brasil-se-declara-parda Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref17">[17]:</a>Oniria. (s.d.). Como os games motivam o aprendizado e desenvolvimento profissional dos colaboradores. Oniria. https://oniria.com.br/como-os-games-motivam-o-aprendizado-e-desenvolvimento-profissional-dos-colaboradores/Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref18">[18]:</a>Neogrid. (2020, dezembro 15). O poder de barganha dos compradores na cadeia de suprimentos pode ser o vilão dos consumidores. Neogrid. https://neogrid.com/o-poder-de-barganha-dos-compradores-na-cadeia-de-suprimentos-e-frequentemente-o-vilao-dos-consumidores/Acesso em: 26 fevereiro 2026.
+
 <br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
+
 <br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
 <br><a name="ref21">[21]:</a> Times Brasil. (2025, novembro 16). Em cinco anos, Pix soma R$ 84,9 trilhões e supera sete vezes o PIB do Brasil, mostra estudo. https://timesbrasil.com.br/brasil/economia-brasileira/em-cinco-anos-pix-soma-r-849-trilhoes-e-supera-sete-vezes-o-pib-do-brasil-mostra-estudo/?utm_source=chatgpt.com

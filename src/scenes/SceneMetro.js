@@ -682,8 +682,8 @@
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
-          spawnX: 2632,
-          spawnY: 471,
+          spawnX: 3080,
+          spawnY: 1230,
           escoltaPJRestaurante: true,
           missaoCidadeTexto: "Missão: Siga a PJ Camila até o Restaurante.",
         });
