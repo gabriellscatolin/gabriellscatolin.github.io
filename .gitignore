@@ -1,3 +1,12 @@
+# Dependências
 node_modules/
-package-lock.json
-.claude
+
+
+# Ambiente e Ferramentas
+.claude/
+.vscode/
+
+# Sistema Operacional
+desktop.ini
+Thumbs.db
+.DS_Store

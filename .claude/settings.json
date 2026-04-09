@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(find c:/Users/Inteli/Documents/Nicolas/cielo-gameplay/public/src/assets/imagens -type f -iname *npc* -o -iname *farmacia* -o -iname *farmácia* -o -iname *atendente* -o -iname *funcionario*)",
-      "Bash(grep -E \"\\\\.\\(js|json|png|jpg\\)$\")"
-    ]
-  }
-}
