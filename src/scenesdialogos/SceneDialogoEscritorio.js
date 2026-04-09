@@ -36,13 +36,13 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
-    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Perfeito. Vou ser direto. Hoje voc? olha mais o total no final, ou costuma conferir venda por venda?",
+          "Perfeito. Vou ser direto. Hoje você olha mais o total no final, ou costuma conferir venda por venda?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -100,7 +100,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Eu sinto que existe essa diferen?a que passa batida. Por que ser??",
+      "Eu sinto que existe essa diferença que passa batida. Por que será?",
   },
   {
     titulo: "CENA 3 - EXPLORAÇÃO COM EXEMPLO",
@@ -212,7 +212,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Se fizer sentido, eu te mostro isso na pr?tica em 10 minutos, j? integrado com o banco e com as vendas organizadas por entrada. Quando fica melhor pra voc?, agora ou mais tarde?",
+          "Se fizer sentido, eu te mostro isso na prática em 10 minutos, já integrado com o banco e com as vendas organizadas por entrada. Quando fica melhor pra você, agora ou mais tarde?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:

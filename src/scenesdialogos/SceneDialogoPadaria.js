@@ -37,13 +37,13 @@ const ROTEIRO = [
   {
     titulo: "CENA 1 - ABERTURA",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
-    npcInicial: "Ol?, tudo bem? Sim, sou eu mesma, pode falar comigo.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesma, pode falar comigo.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Movimento forte hoje, n?? T? sendo um daqueles dias puxados desde cedo?",
+          "Movimento forte hoje, não é? sendo um daqueles dias puxados desde cedo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -51,7 +51,7 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Perfeito. Esse hor?rio costuma ser o mais cheio aqui?",
+        texto: "Perfeito. Esse horário costuma ser o mais cheio aqui?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -60,7 +60,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Ent?o, eu trabalho com solu??es financeiras pra padaria. Posso te explicar rapidinho. Como est?o seus hor�rios?",
+          "Então, eu trabalho com soluções financeiras pra padaria. Posso te explicar rapidinho. Como estão seus horários?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -78,7 +78,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Imagino o quanto cansa... e no fim do m?s, esse movimento todo acaba compensando?",
+          "Imagino o quanto cansa... e no fim do mês, esse movimento todo acaba compensando?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -86,14 +86,14 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Mas pelo menos ? bom que n?o falta cliente, n??",
+        texto: "Mas pelo menos é bom que não falta cliente, né?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto: "Comentário positivo, mas não aprofunda o problema.",
       },
       {
         letra: "C",
-        texto: "Com esse movimento todo, voc? deve estar faturando bem, n??",
+        texto: "Com esse movimento todo, você deve estar faturando bem, né?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -111,7 +111,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Hoje voc? consegue ter uma vis?o clara de quanto entra e quanto realmente vira resultado no fim do m?s?",
+          "Hoje você consegue ter uma visão clara de quanto entra e quanto realmente vira resultado no fim do mês?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto:
@@ -119,7 +119,7 @@ const ROTEIRO = [
       },
       {
         letra: "B",
-        texto: "Aqui o pessoal paga mais no cart?o ou no dinheiro?",
+        texto: "Aqui o pessoal paga mais no cartão ou no dinheiro?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -128,7 +128,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Isso costuma ser problema de gest?o ou equipe... tem que olhar melhor isso a?. J� olhou isso?",
+          "Isso costuma ser problema de gestão ou equipe... tem que olhar melhor isso aí. Já olhou?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto:
@@ -190,7 +190,7 @@ const ROTEIRO = [
       {
         letra: "B",
         texto:
-          "A Cielo tem v?rias solu??es que podem ajudar nisso. Posso te mostrar depois?",
+          "A Cielo tem várias soluções que podem ajudar nisso. Posso te mostrar depois?",
         tipo: "neutra",
         feedbackTitulo: "Escolha neutra",
         feedbackTexto:
@@ -850,7 +850,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
     }
 
     const statusMeta = atingiu
-      ? "Meta atingida! Parab?ns, voc? conseguiu trazer a experi?ncia Cielo para o cliente!"
+      ? "Meta atingida! Parabéns, você conseguiu trazer a experiência Cielo para o cliente!"
       : `Tente novamente... você precisava de ${meta} coins`;
 
     // Reaproveita o campo principal de fala para mostrar o resumo final

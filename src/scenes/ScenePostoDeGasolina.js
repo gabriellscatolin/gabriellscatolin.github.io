@@ -291,12 +291,6 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
 
     // Controles de movimento e interação
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys({
-      cima: Phaser.Input.Keyboard.KeyCodes.W,
-      baixo: Phaser.Input.Keyboard.KeyCodes.S,
-      esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita: Phaser.Input.Keyboard.KeyCodes.D,
-    });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Configura a câmera para seguir o personagem
@@ -649,19 +643,19 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
   // Atualiza movimento, saída da cena e texto de debug
   update() {
     const velocidade = 150;
-    const { teclas, wasd, personagem } = this;
+    const { teclas, personagem } = this;
 
     personagem.setVelocity(0);
 
     let movendo = false;
 
     // Movimento horizontal
-    if (teclas.left.isDown || wasd.esquerda.isDown) {
+    if (teclas.left.isDown) {
       personagem.setVelocityX(-velocidade);
       personagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
-    } else if (teclas.right.isDown || wasd.direita.isDown) {
+    } else if (teclas.right.isDown) {
       personagem.setVelocityX(velocidade);
       personagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
@@ -669,12 +663,12 @@ export default class ScenePostoDeGasolina extends Phaser.Scene {
     }
 
     // Movimento vertical
-    if (teclas.up.isDown || wasd.cima.isDown) {
+    if (teclas.up.isDown) {
       personagem.setVelocityY(-velocidade);
       if (!movendo) personagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
-    } else if (teclas.down.isDown || wasd.baixo.isDown) {
+    } else if (teclas.down.isDown) {
       personagem.setVelocityY(velocidade);
       if (!movendo) personagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";

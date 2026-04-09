@@ -326,14 +326,8 @@ export default class SceneSupermercado extends Phaser.Scene {
       repeat: -1,
     });
 
-    // Controles de movimento (setas + WASD)
+    // Controles de movimento (setas)
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys({
-      cima: Phaser.Input.Keyboard.KeyCodes.W,
-      baixo: Phaser.Input.Keyboard.KeyCodes.S,
-      esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita: Phaser.Input.Keyboard.KeyCodes.D,
-    });
     //____________________________________________________________________________________________________________
 
     //_________________________________Configura a câmera para seguir o personagem_________________________________
@@ -521,7 +515,7 @@ export default class SceneSupermercado extends Phaser.Scene {
   //__________________________Lógica de movimentação do personagem______________________________________________
   update() {
     const velocidade = 150;
-    const { teclas, wasd, spritePersonagem } = this;
+    const { teclas, spritePersonagem } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -535,12 +529,12 @@ export default class SceneSupermercado extends Phaser.Scene {
     let movendo = false;
 
     // Movimento horizontal
-    if (teclas.left.isDown || wasd.esquerda.isDown) {
+    if (teclas.left.isDown) {
       spritePersonagem.setVelocityX(-velocidade);
       spritePersonagem.anims.play("esp_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
-    } else if (teclas.right.isDown || wasd.direita.isDown) {
+    } else if (teclas.right.isDown) {
       spritePersonagem.setVelocityX(velocidade);
       spritePersonagem.anims.play("esp_andar_direita", true);
       this.direcaoAtual = "direita";
@@ -548,12 +542,12 @@ export default class SceneSupermercado extends Phaser.Scene {
     }
 
     // Movimento vertical
-    if (teclas.up.isDown || wasd.cima.isDown) {
+    if (teclas.up.isDown) {
       spritePersonagem.setVelocityY(-velocidade);
       if (!movendo) spritePersonagem.anims.play("esp_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
-    } else if (teclas.down.isDown || wasd.baixo.isDown) {
+    } else if (teclas.down.isDown) {
       spritePersonagem.setVelocityY(velocidade);
       if (!movendo) spritePersonagem.anims.play("esp_andar_frente", true);
       this.direcaoAtual = "frente";

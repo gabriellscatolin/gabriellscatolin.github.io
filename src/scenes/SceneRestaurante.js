@@ -375,12 +375,6 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     // Controles
     this.teclas = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys({
-      cima: Phaser.Input.Keyboard.KeyCodes.W,
-      baixo: Phaser.Input.Keyboard.KeyCodes.S,
-      esquerda: Phaser.Input.Keyboard.KeyCodes.A,
-      direita: Phaser.Input.Keyboard.KeyCodes.D,
-    });
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Câmera
@@ -424,29 +418,29 @@ export default class SceneRestaurante extends Phaser.Scene {
 
   update() {
     const velocidade = 100;
-    const { teclas, wasd, spritePersonagem } = this;
+    const { teclas, spritePersonagem } = this;
 
     spritePersonagem.setVelocity(0);
     let movendo = false;
 
-    if (teclas.left.isDown || wasd.esquerda.isDown) {
+    if (teclas.left.isDown) {
       spritePersonagem.setVelocityX(-velocidade);
       spritePersonagem.anims.play("rest_andar_esquerda", true);
       this.direcaoAtual = "esquerda";
       movendo = true;
-    } else if (teclas.right.isDown || wasd.direita.isDown) {
+    } else if (teclas.right.isDown) {
       spritePersonagem.setVelocityX(velocidade);
       spritePersonagem.anims.play("rest_andar_direita", true);
       this.direcaoAtual = "direita";
       movendo = true;
     }
 
-    if (teclas.up.isDown || wasd.cima.isDown) {
+    if (teclas.up.isDown) {
       spritePersonagem.setVelocityY(-velocidade);
       if (!movendo) spritePersonagem.anims.play("rest_andar_tras", true);
       this.direcaoAtual = "tras";
       movendo = true;
-    } else if (teclas.down.isDown || wasd.baixo.isDown) {
+    } else if (teclas.down.isDown) {
       spritePersonagem.setVelocityY(velocidade);
       if (!movendo) spritePersonagem.anims.play("rest_andar_frente", true);
       this.direcaoAtual = "frente";

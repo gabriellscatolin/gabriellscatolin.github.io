@@ -31,19 +31,19 @@ const ROTEIRO = [
   {
     titulo: "INTRODUÇÃO",
     narracao:
-      "Ol?, boa tarde, tudo bem? Sou gerente de neg?cios da Cielo. Deixa eu te perguntar: voc? ? a pessoa respons?vel pelo neg�cio?",
-    npcInicial: "Ol?, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
+      "Olá, boa tarde, tudo bem? Sou gerente de negócios da Cielo. Deixa eu te perguntar: você é a pessoa responsável pelo negócio?",
+    npcInicial: "Olá, tudo bem? Sim, sou eu mesmo, pode falar comigo.",
   },
   {
     titulo: "CENA 1 - ABORDAGEM",
     narracao: "Ambiente: Restaurante cheio, equipe correndo, pedidos saindo.",
     npcInicial:
-      "Fala... pode ser r?pido? Aqui qualquer minuto j? vira problema.",
+      "Fala... pode ser rápido? Aqui qualquer minuto já vira problema.",
     escolhas: [
       {
         letra: "A",
         texto:
-          "Claro. Hoje, quando fecha um pedido, o pagamento j? sai direto do sistema ou algu?m ainda digita na maquininha?",
+          "Claro. Hoje, quando fecha um pedido, o pagamento já sai direto do sistema ou alguém ainda digita na maquininha?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Começa natural, focado no fluxo da operação.",
@@ -59,7 +59,7 @@ const ROTEIRO = [
       {
         letra: "C",
         texto:
-          "Hoje voc? usa s� maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
+          "Hoje você usa só maquininha normal, que costuma ser mais simples e funciona melhor no dia a dia?",
         tipo: "errada",
         feedbackTitulo: "Escolha inadequada",
         feedbackTexto: "Parece lógico, mas é incorreto.",
@@ -76,7 +76,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Ent?o voc? fecha o pedido no sistema e depois algu?m precisa digitar o valor de novo pra cobrar, certo?",
+          "Então você fecha o pedido no sistema e depois alguém precisa digitar o valor de novo pra cobrar, certo?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Valida o fluxo real antes de aprofundar.",
@@ -108,7 +108,7 @@ const ROTEIRO = [
       {
         letra: "A",
         texto:
-          "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferen?a no fechamento?",
+          "Tipo digitar um valor errado, esquecer de registrar no sistema ou dar diferença no fechamento?",
         tipo: "correta",
         feedbackTitulo: "Escolha correta",
         feedbackTexto: "Nomeia erros reais de forma prática.",
@@ -163,7 +163,7 @@ const ROTEIRO = [
       },
     ],
     npcResposta:
-      "Entendi... isso tem algum nome ou ? s? uma forma diferente de operar?",
+      "Entendi... isso tem algum nome ou é só uma forma diferente de operar?",
   },
   {
     titulo: "CENA 5 - INTRODUÇÃO DAS SIGLAS (COM PARCERIA)",

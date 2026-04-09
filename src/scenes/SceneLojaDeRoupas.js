@@ -290,7 +290,6 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     // Controles
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys("W,A,S,D");
     this.teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     // Câmera
@@ -410,29 +409,29 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
   update() {
     const speed = 150;
-    const { player, cursors, wasd } = this;
+    const { player, cursors } = this;
 
     player.setVelocity(0);
     let moving = false;
 
-    if (cursors.left.isDown || wasd.A.isDown) {
+    if (cursors.left.isDown) {
       player.setVelocityX(-speed);
       player.anims.play("loja_walk_esquerda", true);
       this.direction = "esquerda";
       moving = true;
-    } else if (cursors.right.isDown || wasd.D.isDown) {
+    } else if (cursors.right.isDown) {
       player.setVelocityX(speed);
       player.anims.play("loja_walk_direita", true);
       this.direction = "direita";
       moving = true;
     }
 
-    if (cursors.up.isDown || wasd.W.isDown) {
+    if (cursors.up.isDown) {
       player.setVelocityY(-speed);
       if (!moving) player.anims.play("loja_walk_tras", true);
       this.direction = "tras";
       moving = true;
-    } else if (cursors.down.isDown || wasd.S.isDown) {
+    } else if (cursors.down.isDown) {
       player.setVelocityY(speed);
       if (!moving) player.anims.play("loja_walk_frente", true);
       this.direction = "frente";

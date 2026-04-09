@@ -119,13 +119,8 @@ export default class SceneJogo extends Phaser.Scene {
       .setScale(0.15);
     this.physics.add.existing(this.personagemSprite);
 
-    // Teclas WASD
-    this.teclasControl = this.input.keyboard.addKeys({
-      w: Phaser.Input.Keyboard.KeyCodes.W,
-      a: Phaser.Input.Keyboard.KeyCodes.A,
-      s: Phaser.Input.Keyboard.KeyCodes.S,
-      d: Phaser.Input.Keyboard.KeyCodes.D,
-    });
+    // Teclas de movimento
+    this.teclasControl = this.input.keyboard.createCursorKeys();
 
     // Variáveis de controle de estado
     this.velocidadePersonagem = 300;
@@ -468,21 +463,21 @@ export default class SceneJogo extends Phaser.Scene {
     corpoFisico.setVelocity(0);
     let estaAndando = false;
 
-    if (this.teclasControl.a.isDown) {
+    if (this.teclasControl.left.isDown) {
       corpoFisico.setVelocityX(-this.velocidadePersonagem);
       this.personagemSprite.anims.play("andar_esquerda", true);
       estaAndando = true;
-    } else if (this.teclasControl.d.isDown) {
+    } else if (this.teclasControl.right.isDown) {
       corpoFisico.setVelocityX(this.velocidadePersonagem);
       this.personagemSprite.anims.play("andar_direita", true);
       estaAndando = true;
     }
 
-    if (this.teclasControl.w.isDown) {
+    if (this.teclasControl.up.isDown) {
       corpoFisico.setVelocityY(-this.velocidadePersonagem);
       if (!estaAndando) this.personagemSprite.anims.play("andar_tras", true);
       estaAndando = true;
-    } else if (this.teclasControl.s.isDown) {
+    } else if (this.teclasControl.down.isDown) {
       corpoFisico.setVelocityY(this.velocidadePersonagem);
       if (!estaAndando) this.personagemSprite.anims.play("andar_frente", true);
       estaAndando = true;
