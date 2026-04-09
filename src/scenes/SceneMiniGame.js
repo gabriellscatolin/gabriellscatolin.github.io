@@ -80,41 +80,30 @@ export default class SceneMiniGame extends Phaser.Scene {
   }
 
   create() {
-    this.tamanhoAnteriorEscala = {
-      width: this.scale.width,
-      height: this.scale.height,
-    };
-
-    // ─── TELA CHEIA ───────────────────────────────────────────────
-    this.scale.resize(window.innerWidth, window.innerHeight);
-
-    this._onResize = () =>
-      this.scale.resize(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", this._onResize);
+    this._onResize = null;
 
     const GW = this.scale.width;
     const GH = this.scale.height;
+    const zoomMinigame = 0.62;
+    const worldWidth = Math.round(GW / zoomMinigame);
+    const worldHeight = Math.round(GH / zoomMinigame);
 
-    // ─── REMOVE ANIMAÇÕES ANTERIORES ─────────────────────────────
     ["andar_direita", "andar_esquerda", "pulo", "parado"].forEach((key) => {
       if (this.anims.exists(key)) this.anims.remove(key);
     });
 
-    // ─── FÍSICA ───────────────────────────────────────────────────
     this.physics.world.gravity.y = 1200;
-    this.physics.world.setBounds(0, 0, GW, GH);
+    this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
 
     this.faseAtual = 1;
     this.pontuacao = 0;
     this.direcao = "direita";
     this.jogoAcabou = false;
 
-    // ─── TIMER DE JOGO (2 minutos = 120 segundos) ─────────────────
-    this.tempoTotal = 120; // segundos
+    this.tempoTotal = 120;
     this.tempoRestante = this.tempoTotal;
-    this.tempoFaseAtual = 0; // segundos desde a última troca de fase
+    this.tempoFaseAtual = 0;
 
-    // Tick a cada 1 segundo
     this.time.addEvent({
       delay: 1000,
       loop: true,
@@ -122,7 +111,6 @@ export default class SceneMiniGame extends Phaser.Scene {
       callbackScope: this,
     });
 
-    // ─── SOM ──────────────────────────────────────────────────────
     this.musica = this.sound.add("musicaFase1", { loop: true, volume: 0.5 });
     this.somColeta = this.sound.add("somColeta", { volume: 0.7 });
 
@@ -133,35 +121,29 @@ export default class SceneMiniGame extends Phaser.Scene {
       if (this.musica && !this.musica.isPlaying) this.musica.play();
     });
 
-    // ─── FUNDO ────────────────────────────────────────────────────
     this.fundo1 = this.add
-      .image(GW / 2, GH / 2, "background1")
-      .setDisplaySize(GW, GH);
+      .image(worldWidth / 2, worldHeight / 2, "background1")
+      .setDisplaySize(worldWidth, worldHeight);
 
-    // ─── PERSONAGEM ───────────────────────────────────────────────
     this.patoBranco = this.physics.add
-      .sprite(GW * 0.2, GH * 0.5, "patoBAndandoDireita")
+      .sprite(worldWidth * 0.2, worldHeight * 0.5, "patoBAndandoDireita")
       .setScale(0.3)
       .setCollideWorldBounds(true);
-
     this.patoBranco.body.setSize(500, 700);
     this.patoBranco.body.setOffset(262, 280);
 
-    // ─── TECLADO ──────────────────────────────────────────────────
     this.teclado = this.input.keyboard.createCursorKeys();
 
-    // ─── CHÃO ─────────────────────────────────────────────────────
-    this.chao1 = this.physics.add.staticImage(GW / 2, GH + 10, null);
-    this.chao1.displayWidth = GW;
+    this.chao1 = this.physics.add.staticImage(worldWidth / 2, worldHeight + 10, null);
+    this.chao1.displayWidth = worldWidth;
     this.chao1.displayHeight = 60;
     this.chao1.refreshBody();
     this.chao1.setVisible(false);
     this.physics.add.collider(this.patoBranco, this.chao1);
 
-    // ─── PLATAFORMAS ──────────────────────────────────────────────
     this.plataformaNuvem = this.physics.add.sprite(
-      GW * 0.28,
-      GH * 0.62,
+      worldWidth * 0.28,
+      worldHeight * 0.62,
       "plataformaNuvem",
     );
     this.plataformaNuvem.setScale(1.5);
@@ -172,8 +154,8 @@ export default class SceneMiniGame extends Phaser.Scene {
     this.physics.add.collider(this.patoBranco, this.plataformaNuvem);
 
     this.plataformaNuvem2 = this.physics.add.sprite(
-      GW * 0.72,
-      GH * 0.42,
+      worldWidth * 0.72,
+      worldHeight * 0.42,
       "plataformaNuvem",
     );
     this.plataformaNuvem2.setScale(1.5);
@@ -183,8 +165,7 @@ export default class SceneMiniGame extends Phaser.Scene {
     this.plataformaNuvem2.body.setOffset(450, 500);
     this.physics.add.collider(this.patoBranco, this.plataformaNuvem2);
 
-    // ─── MOEDAS ───────────────────────────────────────────────────
-    this.moedaComum = this.physics.add.sprite(GW / 2, 0, "moedaComum");
+    this.moedaComum = this.physics.add.sprite(worldWidth / 2, 0, "moedaComum");
     this.moedaComum.setScale(0.23);
     this.moedaComum.body.setSize(
       this.moedaComum.width * 0.6,
@@ -210,7 +191,6 @@ export default class SceneMiniGame extends Phaser.Scene {
     this.physics.add.collider(this.moedaExtra, this.plataformaNuvem2);
     this.physics.add.collider(this.moedaExtra, this.chao1);
 
-    // ─── BOMBA ────────────────────────────────────────────────────
     this.bomba = this.physics.add.sprite(0, 0, "bomba");
     this.bomba.setScale(0.23);
     this.bomba.body.setSize(this.bomba.width * 0.6, this.bomba.height * 0.6);
@@ -221,13 +201,11 @@ export default class SceneMiniGame extends Phaser.Scene {
     this.physics.add.collider(this.bomba, this.plataformaNuvem2);
     this.physics.add.collider(this.bomba, this.chao1);
 
-    // ─── HUD ──────────────────────────────────────────────────────
-    // Fundo semitransparente
     this.hudBg = this.add
       .rectangle(20, 20, 420, 80, 0x000000, 0.45)
-      .setOrigin(0, 0);
+      .setOrigin(0, 0)
+      .setScrollFactor(0);
 
-    // Placar de moedas
     this.placar = this.add.text(30, 28, "Cielocoins: " + this.pontuacao, {
       fontSize: "90px",
       fontFamily: "poppins",
@@ -236,13 +214,13 @@ export default class SceneMiniGame extends Phaser.Scene {
       stroke: "#000000",
       strokeThickness: 6,
     });
+    this.placar.setScrollFactor(0);
 
-    // Fundo do timer (canto superior direito)
     this.timerBg = this.add
       .rectangle(GW - 20, 20, 320, 80, 0x000000, 0.45)
-      .setOrigin(1, 0);
+      .setOrigin(1, 0)
+      .setScrollFactor(0);
 
-    // Texto do timer
     this.timerTexto = this.add
       .text(GW - 30, 28, this._formatarTempo(this.tempoRestante), {
         fontSize: "90px",
@@ -252,11 +230,11 @@ export default class SceneMiniGame extends Phaser.Scene {
         stroke: "#000000",
         strokeThickness: 6,
       })
-      .setOrigin(1, 0);
+      .setOrigin(1, 0)
+      .setScrollFactor(0);
 
     this._ajustarHud();
 
-    // ─── EVENTOS PERIÓDICOS ───────────────────────────────────────
     this.time.addEvent({
       delay: 20000,
       callback: this.spawnMoedaExtra,
@@ -272,7 +250,6 @@ export default class SceneMiniGame extends Phaser.Scene {
       },
     });
 
-    // ─── OVERLAPS ────────────────────────────────────────────────
     this.physics.add.overlap(this.patoBranco, this.moedaExtra, () => {
       if (!this.moedaExtra.active) return;
       this.somColeta.play();
@@ -292,14 +269,13 @@ export default class SceneMiniGame extends Phaser.Scene {
     this.physics.add.overlap(this.patoBranco, this.moedaComum, () => {
       this.moedaComum.setVisible(false);
       this.somColeta.play();
-      const posicaoX = Phaser.Math.Between(50, GW - 50);
+      const posicaoX = Phaser.Math.Between(50, worldWidth - 50);
       this.moedaComum.setPosition(posicaoX, 50);
       this.pontuacao += 1;
       this._atualizarPlacar();
       this.moedaComum.setVisible(true);
     });
 
-    // ─── ANIMAÇÕES ────────────────────────────────────────────────
     this.anims.create({
       key: "andar_direita",
       frames: this.anims.generateFrameNumbers("patoBAndandoDireita", {
@@ -340,21 +316,16 @@ export default class SceneMiniGame extends Phaser.Scene {
       repeat: -1,
     });
 
-    // ─── SHUTDOWN ────────────────────────────────────────────────
+    this.cameras.main.startFollow(this.patoBranco);
+    this.cameras.main.setZoom(zoomMinigame);
+    this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+    this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
+
     this.events.on("shutdown", () => {
       if (this.musica) this.musica.stop();
       ["andar_direita", "andar_esquerda", "pulo", "parado"].forEach((key) => {
         if (this.anims.exists(key)) this.anims.remove(key);
       });
-      window.removeEventListener("resize", this._onResize);
-
-      const larguraAnterior = Number(this.tamanhoAnteriorEscala?.width);
-      const alturaAnterior = Number(this.tamanhoAnteriorEscala?.height);
-      const larguraValida = Number.isFinite(larguraAnterior) && larguraAnterior > 0;
-      const alturaValida = Number.isFinite(alturaAnterior) && alturaAnterior > 0;
-      if (larguraValida && alturaValida) {
-        this.scale.resize(larguraAnterior, alturaAnterior);
-      }
     });
   }
 
@@ -433,7 +404,7 @@ export default class SceneMiniGame extends Phaser.Scene {
 
     // ─── Pulo muito mais alto (-1300) ─────────────────────────────
     if (this.teclado.up.isDown && this.patoBranco.body.touching.down) {
-      this.patoBranco.setVelocityY(-1900);
+      this.patoBranco.setVelocityY(-1350);
     }
 
     // ─── Animações ────────────────────────────────────────────────
@@ -508,7 +479,7 @@ export default class SceneMiniGame extends Phaser.Scene {
           nomePasta: this.registry.get("nomePasta"),
           prefixo: this.registry.get("prefixo"),
           spawnX: 295,
-          spawnY: 210,
+          spawnY: 140,
         });
       });
     });

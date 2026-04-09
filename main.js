@@ -49,7 +49,7 @@ const config = {
     },
   },
   scene: [
-    SceneDialogoAgencia01,
+     SceneMiniGame,
     SceneCidade,
     SceneInicial,
     ScenePersonagem,
@@ -57,7 +57,7 @@ const config = {
     SceneChuva,
     SceneJogo,
     SceneMetro,
-    SceneMiniGame,
+    
     SceneMapaInterativo,
     SceneEscritorio,
     ScenePadaria,
@@ -69,7 +69,7 @@ const config = {
     SceneAgencia01,
     SceneAgencia02,
     SceneAgencia03,
-    
+    SceneDialogoAgencia01,
     SceneDialogoAgencia02,
     SceneDialogoAgencia03,
     SceneDialogoPadaria,
