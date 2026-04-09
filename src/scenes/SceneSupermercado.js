@@ -613,13 +613,13 @@ export default class SceneSupermercado extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
     }
     // Sempre posiciona o botão na porta, mesmo se já visível
     this.labelSair.setPosition(129, 200 - 10);
 
     // Sai automaticamente ao se aproximar da porta
-    if (!this.transicionando && dentroSaida) {
+    if (!this.transicionando && this.falouComNpc && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);

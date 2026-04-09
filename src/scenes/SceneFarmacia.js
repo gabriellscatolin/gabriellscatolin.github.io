@@ -233,7 +233,7 @@ export default class SceneFarmacia extends Phaser.Scene {
     // Botão [E] igual às outras cenas
     this.labelNpc = this.add
       .text(79, 163, "[E] Falar", {
-        fontSize: "3px",
+        fontSize: "5px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
         padding: { x: 1, y: 1 },
@@ -603,8 +603,8 @@ export default class SceneFarmacia extends Phaser.Scene {
       79,
       141,
     );
-    const mostrarBotaoE = distNpc < 90; // raio maior para mostrar
-    const pertoNpc = distNpc < 65; // raio de interação mais abrangente
+    const mostrarBotaoE = distNpc < 130; // raio maior para mostrar
+    const pertoNpc = distNpc < 92; // raio de interação mais abrangente
 
     if (mostrarBotaoE !== this.perto_npc) {
       this.perto_npc = mostrarBotaoE;
@@ -658,7 +658,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
@@ -668,7 +668,12 @@ export default class SceneFarmacia extends Phaser.Scene {
     }
 
     // Transição automática de volta para a cidade ao entrar na saída
-    if (!this.transicionando && this.podeSairFarmacia && dentroSaida) {
+    if (
+      !this.transicionando &&
+      this.falouComNpc &&
+      this.podeSairFarmacia &&
+      dentroSaida
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -677,11 +682,11 @@ export default class SceneFarmacia extends Phaser.Scene {
         this.scene.start("SceneCidade", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
+          // Retorna para a porta da farmácia para iniciar a rota até o escritório.
           spawnX: 1121,
-          spawnY: 1261,
+          spawnY: 1248,
           retornoFarmacia: true,
-          missaoCidadeTexto:
-            "Missão: Vire à direita e siga a rua até a Agência 02.",
+          missaoCidadeTexto: "Missão: Vá até o escritório.",
         });
       });
     }

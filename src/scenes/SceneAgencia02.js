@@ -330,6 +330,11 @@ export default class SceneAgencia02 extends Phaser.Scene {
       (this.npcCamila.width / this.npcCamila.height) * (alturaAlvoNpc * 1.2),
       alturaAlvoNpc * 1.2,
     );
+    this.npcCamila.body.setSize(
+      this.npcCamila.body.width * 0.25,
+      this.npcCamila.body.height * 0.25,
+      true,
+    );
 
     this.physics.add.collider(this.spritePersonagem, this.npcCamila);
 
@@ -498,6 +503,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       this.exclamacaoCamila?.setVisible(false);
       this.tweenExclamacaoCamila?.stop();
       this.camilaGuiandoParaSaida = true;
+      this.npcCamila.setImmovable(false);
     }
     if (this.falouComEnzo) {
       this.exclamacaoEnzo?.setVisible(false);
@@ -889,7 +895,8 @@ export default class SceneAgencia02 extends Phaser.Scene {
   // Atualiza movimentação, animação, saída e debug a cada frame
   update() {
     const velocidade = 150;
-    const { teclas, personagem } = this;
+    const { teclas, spritePersonagem: personagem } = this;
+    if (!teclas || !personagem) return;
     const camilaConcluidaAgora =
       this.registry.get("ag02_dialogo_camila_concluido") === true;
     const enzoConcluidoAgora =
@@ -901,6 +908,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
       if (this.tweenExclamacaoCamila) this.tweenExclamacaoCamila.stop();
       this.camilaGuiandoParaSaida = true;
       this.camilaChegouSaida = false;
+      this.npcCamila.setImmovable(false);
       this._atualizarPopupMissaoAgencia(true);
     }
 
@@ -1094,7 +1102,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return;
     }
 
-    const saidaLiberada = !camilaConcluidaAgora || this.camilaChegouSaida;
+    const saidaLiberada =
+      this.falouComCamila &&
+      (!camilaConcluidaAgora || this.camilaChegouSaida);
     const dentroSaida =
       saidaLiberada &&
       (this.zonasSaida || []).some((z) => {
@@ -1110,7 +1120,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComCamila);
       if (!dentroSaida) {
         this.transicionando = false;
       }
@@ -1121,7 +1131,10 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Ao entrar na zona, inicia automaticamente a transição para a cidade
-    if (!this.transicionando && dentroSaida) {
+    const podeTransicionarParaCidade =
+      dentroSaida || (camilaConcluidaAgora && this.camilaChegouSaida);
+
+    if (!this.transicionando && podeTransicionarParaCidade) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);

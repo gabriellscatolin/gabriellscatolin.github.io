@@ -387,14 +387,9 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.direcaoAtual = "frente";
 
     // Zona de saída
-    this.zonaSaida = new Phaser.Geom.Rectangle(
-      spawnX - 30,
-      spawnY - 18,
-      60,
-      36,
-    );
+    this.zonasSaida = this._criarZonasSaida(spawnX, spawnY);
     this.labelSair = this.add
-      .text(spawnX, spawnY - 2, "[E] Sair", {
+      .text(spawnX, spawnY - 2, "[Saída]", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -407,6 +402,7 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     this.transicionando = false;
     this.dentroZonaSaida = false;
+    this.podeSairRestaurante = false;
     this.perto_npc = false;
     this.falouComNpc = false;
 
@@ -414,6 +410,10 @@ export default class SceneRestaurante extends Phaser.Scene {
     this.events.on("shutdown", () => {
       this.musica.stop();
     });
+  }
+
+  _criarZonasSaida(saidaX, saidaY) {
+    return [new Phaser.Geom.Rectangle(saidaX - 30, saidaY - 20, 60, 40)];
   }
 
   update() {
@@ -489,24 +489,22 @@ export default class SceneRestaurante extends Phaser.Scene {
     }
 
     // Detecção da zona de saída
-    const dentroSaida = Phaser.Geom.Rectangle.Contains(
-      this.zonaSaida,
-      spritePersonagem.x,
-      spritePersonagem.y,
+    const dentroSaida = (this.zonasSaida || []).some((z) =>
+      Phaser.Geom.Rectangle.Contains(z, spritePersonagem.x, spritePersonagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
     // Transição para a cidade ao pressionar E
-    if (
-      dentroSaida &&
-      !this.transicionando &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    if (!this.podeSairRestaurante && !dentroSaida) {
+      this.podeSairRestaurante = true;
+    }
+
+    if (dentroSaida && !this.transicionando && this.podeSairRestaurante) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
 

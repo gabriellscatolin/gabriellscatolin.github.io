@@ -104,13 +104,23 @@ export default class SceneEscritorio extends Phaser.Scene {
     obcomcolis2.setCollisionByExclusion([-1]);
     borda.setCollisionByExclusion([-1]);
 
-    // Remove colisao nas faixas de saida (x=312,y=280 e x=280,y=248)
+    // Zona de saída no mesmo padrão das outras cenas
+    const saidaX = 351;
+    const saidaY = 382;
+    const saidaLargura = 60;
+    const saidaAltura = 40;
+
+    // Remove colisao na faixa da zona de saída atual
     const tileW = mapa.tileWidth || 16;
     const tileH = mapa.tileHeight || 16;
-    const colInicio = Math.floor(280 / tileW);
-    const colFim = Math.ceil(324 / tileW);
-    const linInicio = Math.floor(248 / tileH);
-    const linFim = Math.ceil(292 / tileH);
+    const saidaEsquerda = saidaX - saidaLargura / 2;
+    const saidaDireita = saidaX + saidaLargura / 2;
+    const saidaTopo = saidaY - saidaAltura / 2;
+    const saidaBase = saidaY + saidaAltura / 2;
+    const colInicio = Math.floor(saidaEsquerda / tileW);
+    const colFim = Math.ceil(saidaDireita / tileW);
+    const linInicio = Math.floor(saidaTopo / tileH);
+    const linFim = Math.ceil(saidaBase / tileH);
 
     [objcomcolis, obcomcolis2, borda].forEach((camada) => {
       for (let col = colInicio; col <= colFim; col++) {
@@ -217,13 +227,6 @@ export default class SceneEscritorio extends Phaser.Scene {
       repeat: -1,
     });
 
-    console.log(
-      "[SceneEscritorio] NPC criado em:",
-      this.npcEscritorio.x,
-      this.npcEscritorio.y,
-    );
-    console.log("[SceneEscritorio] Label NPC criado:", !!this.labelNpc);
-
     // Controles de movimento (setas)
     this.teclas = this.input.keyboard.createCursorKeys();
 
@@ -236,10 +239,14 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Define zona de saída próxima à porta
-    this.zonaSaida = new Phaser.Geom.Rectangle(310, 372, 60, 40);
+    this.zonaSaida = new Phaser.Geom.Rectangle(
+      saidaX - saidaLargura / 2,
+      saidaY - saidaAltura / 2,
+      saidaLargura,
+      saidaAltura,
+    );
     this.labelSair = this.add
-      .text(340, 392, "[E] Sair", {
+      .text(saidaX, saidaY, "[E] Sair", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -268,6 +275,14 @@ export default class SceneEscritorio extends Phaser.Scene {
   update() {
     const velocidade = 150;
     const { teclas, spritePersonagem } = this;
+    const dialogoEscritorioConcluido =
+      this.registry.get("escritorio_dialogo_concluido") === true;
+
+    if (dialogoEscritorioConcluido && !this.falouComNpc) {
+      this.falouComNpc = true;
+      if (this.exclamacaoNpc) this.exclamacaoNpc.setVisible(false);
+      if (this.tweenExclamacaoNpc) this.tweenExclamacaoNpc.stop();
+    }
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -314,6 +329,13 @@ export default class SceneEscritorio extends Phaser.Scene {
       spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // Verifica se o spritePersonagem entrou na zona de saída
+    const dentroSaida = Phaser.Geom.Rectangle.Contains(
+      this.zonaSaida,
+      spritePersonagem.x,
+      spritePersonagem.y,
+    );
+
     // Interação com NPC por proximidade
     const distNpc = Phaser.Math.Distance.Between(
       spritePersonagem.x,
@@ -321,11 +343,11 @@ export default class SceneEscritorio extends Phaser.Scene {
       this.npcEscritorio.x,
       this.npcEscritorio.y,
     );
-    const pertoNpc = distNpc < 50;
-
-    console.log(
-      `[Debug] Dist NPC: ${distNpc.toFixed(0)}px, Perto: ${pertoNpc}, Label visível: ${this.labelNpc ? this.labelNpc.visible : "null"}`,
-    );
+    const raioEntrarNpc = 52;
+    const raioSairNpc = 58;
+    const pertoNpc = this.perto_npc
+      ? distNpc <= raioSairNpc
+      : distNpc <= raioEntrarNpc;
 
     this.perto_npc = pertoNpc;
     this.labelNpc.setVisible(pertoNpc);
@@ -358,25 +380,15 @@ export default class SceneEscritorio extends Phaser.Scene {
       return;
     }
 
-    // Verifica se o spritePersonagem entrou na zona de saída
-    const dentroSaida = Phaser.Geom.Rectangle.Contains(
-      this.zonaSaida,
-      spritePersonagem.x,
-      spritePersonagem.y,
-    );
+    this.labelSair.setVisible(dentroSaida && this.falouComNpc);
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
-    // Ao pressionar E na zona, inicia a transição para a cidade
-    if (
-      dentroSaida &&
-      !this.transicionando &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    // Ao entrar na zona, inicia a transição automática para a cidade
+    if (dentroSaida && this.falouComNpc && !this.transicionando) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -386,6 +398,8 @@ export default class SceneEscritorio extends Phaser.Scene {
           prefixo: this.prefixoEscolhido,
           spawnX: 1741,
           spawnY: 1256,
+          continuarAposEscritorio:
+            this.registry.get("escritorio_dialogo_concluido") === true,
         });
       });
     }

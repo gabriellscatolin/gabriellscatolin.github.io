@@ -433,7 +433,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     // Seleciona o roteiro, a arte e o comportamento da NPC conforme o perfil escolhido
     this.roteiro = this.tipoDialogo === "PJ" ? ROTEIRO_PJ : ROTEIRO_GG;
     this.maxPts = this.roteiro.length * 2;
-    this.nomeNpcDialogo = this.tipoDialogo === "PJ" ? "PJ" : "GG";
+    this.nomeNpcDialogo = this.tipoDialogo === "PJ" ? "Theo" : "Iza";
     this.promptLLM =
       this.tipoDialogo === "PJ"
         ? "Voc? ? o PJ da Ag?ncia Cielo. Seja objetivo e comercial."
@@ -768,7 +768,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
      // Resume o objetivo geral da conversa
      {
         icone: "🎯",
-        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.`,
       },
       {
         icone: "💬",

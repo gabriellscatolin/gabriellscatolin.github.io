@@ -48,12 +48,6 @@ export default class SceneMapaInterativo extends Phaser.Scene {
     });
     this.musica.play();
 
-    // DEBUG — texto no canto inferior esquerdo mostrando as coordenadas
-    // do cursor em tempo real. Útil para ajustar as zonas (zona.x/y/w/h).
-    const txtDebugCoords = this.add.text(16, height - 16, {
-      fontSize: "16px",
-    });
-
     // DADOS DOS ESTABELECIMENTOS
     // Cada objeto representa um local clicável no mapa.
     //
@@ -560,11 +554,6 @@ export default class SceneMapaInterativo extends Phaser.Scene {
 
     // EVENTO GLOBAL DE MOVIMENTO DO MOUSE
     this.input.on("pointermove", (pointer) => {
-      // Atualiza coordenadas de debug
-      txtDebugCoords.setText(
-        `x: ${Math.round(pointer.x)} y: ${Math.round(pointer.y)}`,
-      );
-
       // Lógica de drag só roda se o botão estiver pressionado
       if (!pointer.isDown) return;
 

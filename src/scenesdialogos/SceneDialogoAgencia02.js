@@ -312,7 +312,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.fase = ehGG ? "agency2_gg" : "agency2_pj";
     this.roteiro = ehGG ? ROTEIRO_GG : ROTEIRO_PJ;
     this.maxPts = this.roteiro.length * 200;
-    this.nomeNpcDialogo = this.tipoDialogo;
+    this.nomeNpcDialogo = npcAlvo;
     this.promptLLM = ehGG
       ? "Você é o Gerente Geral (GG) da Agência 02. Seja objetivo, cordial e profissional."
       : "Você é o Gerente PJ da Agência 02. Seja objetivo, profissional e seletivo no uso do tempo.";
@@ -645,7 +645,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       // Resume o objetivo geral da conversa
       {
         icone: "🎯",
-        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 02.",
+        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 02.`,
       },
       {
         icone: "💬",
