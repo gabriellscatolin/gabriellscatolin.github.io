@@ -1194,7 +1194,10 @@ export default class SceneCidade extends Phaser.Scene {
       this.registry.set("ag02_escolta_pj_metro", false);
       this.registry.set("ag02_escolta_pj_restaurante", false);
       this.registry.set("ag02_escolta_pj_supermercado", false);
-      this.registry.set("missaoCidadeTexto", "Missão: Ache a Agência 03 sozinho usando o mapa interativo da maquininha.");
+      this.registry.set(
+        "missaoCidadeTexto",
+        "Missão: Ache a Agência 03 sozinho usando o mapa interativo da maquininha.",
+      );
 
       this.pjAcompanhandoAgencia2 = false;
       this.pjAcompanhamentoEncerrado = true;
@@ -1206,39 +1209,29 @@ export default class SceneCidade extends Phaser.Scene {
         this.npcTheoGuia.body.enable = false;
       }
       if (this.npcTheoGuia) {
-        this.npcTheoGuia.setVisible(false);
+        this.npcTheoGuia.setVisible(true);
       }
       if (this.labelTheoGuia) {
-        this.labelTheoGuia.setVisible(false);
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Foi um prazer te guiar até aqui. Agora siga sozinho]")
+          .setPosition(this.npcTheoGuia?.x ?? this.spritePersonagem.x, (this.npcTheoGuia?.y ?? this.spritePersonagem.y) - 18);
       }
       if (this.exclamacaoPjAgencia02) {
         this.exclamacaoPjAgencia02.setVisible(false);
       }
 
-      const recadoPJ = this.add
-        .text(
-          this.spritePersonagem.x,
-          this.spritePersonagem.y - 24,
-          "[Foi um prazer te guiar até aqui, agora continue sua jornada sozinho e utilize o mapa interativo na maquininha para encontrar a Agência 03.]",
-          {
-            fontSize: "6px",
-            color: "#ffffff",
-            backgroundColor: "#000000cc",
-            padding: { x: 2, y: 1 },
-            resolution: 4,
-            wordWrap: { width: 290, useAdvancedWrap: true },
-            align: "center",
-          },
-        )
-        .setDepth(25)
-        .setOrigin(0.5, 1);
-
-      this.tweens.add({
-        targets: recadoPJ,
-        alpha: { from: 1, to: 0 },
-        duration: 3200,
-        delay: 2600,
-        onComplete: () => recadoPJ.destroy(),
+      this.time.delayedCall(3800, () => {
+        if (this.labelTheoGuia) {
+          this.labelTheoGuia.setVisible(false);
+        }
+        if (this.npcTheoGuia?.body) {
+          this.npcTheoGuia.body.setVelocity(0, 0);
+          this.npcTheoGuia.body.enable = false;
+        }
+        if (this.npcTheoGuia) {
+          this.npcTheoGuia.setVisible(false);
+        }
       });
     }
 
