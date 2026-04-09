@@ -174,7 +174,7 @@ export default class SceneFarmacia extends Phaser.Scene {
 
     // Spawn do spritePersonagem próximo à entrada
     const spawnX = this.spawnXCustom ?? 154;
-    const spawnY = this.spawnYCustom ?? 215;
+    const spawnY = this.spawnYCustom ?? 190; // V17: Afastado da porta para não ativar "Sair" logo no início
     const saidaX = 142;
     const saidaY = 235;
 
@@ -230,9 +230,9 @@ export default class SceneFarmacia extends Phaser.Scene {
       alturaAlvo,
     );
 
-    // Botão [E] igual às outras cenas
+    // Botão [E] flutuando acima da NPC
     this.labelNpc = this.add
-      .text(79, 163, "[E] Falar", {
+      .text(79, 130, "[E] Falar", {
         fontSize: "5px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -609,11 +609,14 @@ export default class SceneFarmacia extends Phaser.Scene {
     if (mostrarBotaoE !== this.perto_npc) {
       this.perto_npc = mostrarBotaoE;
       this.labelNpc.setVisible(
-        mostrarBotaoE && !this.dentroZonaSaida && !dialogoFarmaciaConcluido,
+        mostrarBotaoE && !this.dentroZonaSaida, // V17: Aparece sempre que estiver perto, livre de trava de flag
       );
     }
-    if (mostrarBotaoE && !dialogoFarmaciaConcluido) {
-      this.labelNpc.setPosition(this.npcFarmacia.x, this.npcFarmacia.y + 2);
+    if (mostrarBotaoE) {
+      this.labelNpc.setPosition(
+        this.npcFarmacia.x,
+        this.npcFarmacia.y - this.npcFarmacia.displayHeight * 0.5 - 2, // V17: Acima da cabeça
+      );
     }
 
     if (!this.falouComNpc && this.exclamacaoNpc) {
