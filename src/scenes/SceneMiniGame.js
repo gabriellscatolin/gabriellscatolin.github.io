@@ -3,6 +3,15 @@ export default class SceneMiniGame extends Phaser.Scene {
     super({ key: "SceneMiniGame" });
   }
 
+  init(dados = {}) {
+    this.retornoSpawnX = Number.isFinite(Number(dados.spawnX))
+      ? Number(dados.spawnX)
+      : 676;
+    this.retornoSpawnY = Number.isFinite(Number(dados.spawnY))
+      ? Number(dados.spawnY)
+      : 200;
+  }
+
   preload() {
     this.load.image(
       "background1",
@@ -478,8 +487,8 @@ export default class SceneMiniGame extends Phaser.Scene {
         this.scene.start("SceneMetro", {
           nomePasta: this.registry.get("nomePasta"),
           prefixo: this.registry.get("prefixo"),
-          spawnX: 295,
-          spawnY: 140,
+          spawnX: this.retornoSpawnX,
+          spawnY: this.retornoSpawnY,
         });
       });
     });

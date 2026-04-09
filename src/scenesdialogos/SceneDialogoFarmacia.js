@@ -492,7 +492,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
 
     // HUD local para mostrar o total global e o ganho acumulado nesta conversa
     this.textoCieloCoin = this.add
-      .text(W - 20, 16, "Cielo Coins: 0 / 500", {
+      .text(W - 20, 16, "Cielo Coins: 0 / 600", {
         fontSize: "30px",
         color: "#ffd700",
         backgroundColor: "#000000bb",
@@ -574,7 +574,7 @@ export default class SceneDialogoFarmacia extends SceneDialogoBase {
       {
         icone: "🎯",
         texto:
-          "Você vai conduzir uma conversa consultiva com Rachel, entendendo a dor antes de avançar para a solução.",
+          "Você vai conduzir uma conversa consultiva com a Rachel, entendendo a dor antes de avançar para a solução.",
       },
       {
         icone: "💬",

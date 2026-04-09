@@ -581,7 +581,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
       {
         icone: "🎯",
         texto:
-          "Você vai conversar com Eduardo, conectando pagamento, fluidez e experiência de marca.",
+          "Você vai conversar com o Eduardo, conectando pagamento, fluidez e experiência de marca.",
       },
       {
         icone: "💬",
@@ -826,7 +826,7 @@ export default class SceneDialogoLojaDeRoupas extends SceneDialogoBase {
     this.textoCena.setText("Resultado Final");
 
     const meta = goalEscalado(FASE);
-    const maxPts = N_CENAS * 100;
+    const maxPts = N_CENAS * 200;
     const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 

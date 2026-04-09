@@ -571,7 +571,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       // Resume o objetivo geral da conversa
       {
         icone: "🎯",
-        texto: "Você vai conduzir a conversa com Lucas no restaurante.",
+        texto: "Você vai conduzir a conversa com o Lucas no restaurante.",
       },
       {
         icone: "💬",
@@ -816,7 +816,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
     this.textoCena.setText("Resultado Final");
 
     const meta = goalEscalado(FASE);
-    const maxPts = N_CENAS * 100;
+    const maxPts = N_CENAS * 200;
     const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 

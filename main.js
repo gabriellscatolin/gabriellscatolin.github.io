@@ -49,7 +49,6 @@ const config = {
     },
   },
   scene: [
-     SceneMiniGame,
     SceneCidade,
     SceneInicial,
     ScenePersonagem,
@@ -57,7 +56,6 @@ const config = {
     SceneChuva,
     SceneJogo,
     SceneMetro,
-    
     SceneMapaInterativo,
     SceneEscritorio,
     ScenePadaria,
@@ -65,6 +63,7 @@ const config = {
     SceneRestaurante,
     SceneSupermercado,
     SceneLojaDeRoupas,
+    SceneMiniGame,
     ScenePostoDeGasolina,
     SceneAgencia01,
     SceneAgencia02,

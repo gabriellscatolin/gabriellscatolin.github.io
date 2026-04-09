@@ -676,6 +676,8 @@
       !this.transicionando &&
       Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {
+      const retornoSpawnX = this.spritePersonagem?.x ?? 676;
+      const retornoSpawnY = this.spritePersonagem?.y ?? 200;
       this.transicionando = true;
       this.labelE.setVisible(false);
       this.exclamacaoMiniGame.setVisible(false);
@@ -687,6 +689,8 @@
         this.scene.start("SceneMiniGame", {
           nomePasta: this.nomePastaEscolhida,
           prefixo: this.prefixoEscolhido,
+          spawnX: retornoSpawnX,
+          spawnY: retornoSpawnY,
         });
       });
     }
