@@ -31,7 +31,7 @@ const ROTEIRO_GG = [
   {
     titulo: "ETAPA 1 - ABORDAGEM INICIAL",
     narracao:
-      "Ambiente: Agência organizada, clima leve e receptivo. Equipe colaborativa, clientes sendo atendidos com tranquilidade. O GG demonstra abertura, atenção e disposição para ajudar desde o primeiro contato.",
+      "Ambiente: Agência organizada, clima leve e receptivo. Equipe colaborativa, clientes sendo atendidos com tranquilidade. O GG demonstra abertura, atenção e disposição.",
     npcInicial: "Oi! Tudo bem? Pode falar, seja bem-vindo!",
     escolhas: [
       {
@@ -436,7 +436,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.nomeNpcDialogo = this.tipoDialogo === "PJ" ? "Theo" : "Iza";
     this.promptLLM =
       this.tipoDialogo === "PJ"
-        ? "Voc? ? o PJ da Ag?ncia Cielo. Seja objetivo e comercial."
+        ? "Você é o PJ da Agência Cielo. Seja objetivo e comercial."
         : "Você é o Gerente Geral (GG) da Agência Cielo. Seja profissional e acolhedor.";
     this.imagemKey =
       this.tipoDialogo === "PJ" ? "falaAgencia01PJ" : "falaAgencia01GG";
@@ -768,7 +768,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
      // Resume o objetivo geral da conversa
      {
         icone: "🎯",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência.`,
+        texto: `Você vai conduzir a conversa na Agência.`,
       },
       {
         icone: "💬",
@@ -778,7 +778,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       {
         icone: "🪙",
         texto:
-          "Cada escolha vale Cielo Coins. Resposta correta = +2. Neutra = +1. Errada = +0",
+          "Cada escolha vale Cielo Coins. Resposta correta = +100. Neutra = +50. Errada = +0",
       },
     ];
 
@@ -883,7 +883,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
     this.textoNpc.setVisible(true);
 
     this.textoNarracao.setText("");
-    this.textoNpc.setText("O que voc? diz?");
+    this.textoNpc.setText("O que você diz?");
     this.textoNome.setVisible(false);
     this._ocultarContinuar();
 
