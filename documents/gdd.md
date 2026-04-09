@@ -188,9 +188,11 @@ Cielitos
 
 &emsp; Com a implementação da solução, espera-se promover maior padronização e escalabilidade do treinamento comercial, reduzindo disparidades regionais e elevando o nível médio de preparo da equipe. Além disso, o uso de jogos educativos tende a aumentar o engajamento e a retenção do conhecimento, aspectos fundamentais para a aplicação prática no campo. Conforme Gee (2017) [\[28\]](#ref28), ambientes interativos favorecem o desenvolvimento de competências complexas. Como consequência, projeta-se impacto positivo em indicadores como qualidade da abordagem comercial, taxa de conversão e desempenho geral de vendas.
 
+&emsp; No fluxo de capacitação da Cielo, o Mini Mundo Cielo pode ser integrado à etapa inicial do processo de onboarding dos novos Gerentes de Negócios, após a apresentação institucional da empresa e o treinamento conceitual sobre o portfólio de soluções de pagamento. Nesse contexto, o jogo funciona como um ambiente de prática aplicada, no qual o colaborador pode simular situações reais de abordagem comercial e negociação antes de atuar diretamente em campo. Além disso, a ferramenta também pode ser utilizada como recurso complementar de reciclagem para profissionais já atuantes, permitindo atualização contínua de conhecimentos, estratégias de venda e domínio das soluções oferecidas pela empresa.
+
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário. Nesse contexto, a Tabela apresenta as principais ameaças e oportunidades identificadas, estruturadas a partir da abordagem de gerenciamento de incertezas proposta por Schwaber e Sutherland (2020) [\[31\]](#ref31), que enfatiza ciclos iterativos de inspeção e adaptação ao longo das sprints.
+&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Esse processo está alinhado às práticas de gestão de riscos propostas pelo Project Management Institute (PMI), que define a identificação, análise e planejamento de respostas aos riscos como etapas fundamentais para reduzir incertezas e aumentar a probabilidade de sucesso em projetos (Project Management Institute, 2021). Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário.
 
 <div align="center">
 <sub>Tabela 1 - Matriz de Riscos e Oportunidades do Projeto</sub>
@@ -237,7 +239,7 @@ Cielitos
 
 | # | Objetivo | Específico | Mensurável | Alcançável | Relevante | Temporal |
 |---|----------|-----------|-----------|-----------|----------|---------|
-| O1 | Entregar MVP funcional com Cidade 1 completa | Implementar mapa, cenas de estabelecimentos internas, 7 NPCs com diálogos e sistema de moedas | 100% dos requisitos da Cidade 1 implementados e testados | Escopo dimensionado para 5 sprints com equipe de 8 pessoas | Permite validar o core loop do jogo com o parceiro | Até o final da Sprint 4 |
+| O1 | Entregar MVP funcional com Cidade 1 completa | Implementar mapa, cenas de estabelecimentos internas, 7 NPCs com diálogos e sistema de moedas | 100% dos requisitos da Cidade 1 implementados e testados | Escopo dimensionado para 5 sprints com equipe de 8 pessoas, alinhado a práticas ágeis de desenvolvimento incremental recomendadas pelo Scrum Guide | Permite validar o core loop do jogo com o parceiro | Até o final da Sprint 4 |
 | O2 | Melhorar navegação no mapa | Ajustar colisões e movimentação | ≤ 2 erros de colisão por mapa | Baseado no tiled map já desenvolvido | GGarante jogabilidade fluida | Até o final da Sprint 5 |
 | O3 | Validar o jogo com testes de jogabilidade | Realizar sessões de playtest com pelo menos 5 usuários externos | Coletar avaliação mínima de 7/10 de satisfação nos testes | Acessar usuários por meio da rede de contatos da equipe e da Inteli | Fundamenta decisões de melhoria com base em dados reais | Até o final da Sprint 5 |
 | O4 | Garantir acessibilidade básica | Implementar modo daltônico, controle de volume e brilho | Todas as opções de acessibilidade funcionais nas configurações | Recursos já planejados na mecânica de configurações | Atende a diversidade do público-alvo de 3.000 GNs anuais | Até o final da Sprint 4 |
@@ -2862,6 +2864,8 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 <br><a name="ref32">[32]:</a> Meneguette, L. C. (2016). A afinação do mundo virtual: identidade sonora em jogos digitais. Pontifícia Universidade Católica de São Paulo (PUCSP). https://repositorio.pucsp.br/handle/handle/19060
 
 <br><a name="ref33">[33]:</a> Halliday, D., Resnick, R., & Walker, J. (2016). Fundamentos de física (10ª ed.). LTC.
+
+<br><a name="ref34">[34]:</a> Project Management Institute. (2021). *A guide to the project management body of knowledge (PMBOK® Guide)* (7th ed.). PMI.
 
 # <a name="c8"></a>Anexos
 
