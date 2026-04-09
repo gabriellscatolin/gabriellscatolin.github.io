@@ -282,6 +282,9 @@ export default class SceneCidade extends Phaser.Scene {
 
   // Monta mapa, personagem e interfaces
   create() {
+    // Garante zoom correto ao retornar de outra cena (ex: SceneMetro)
+    this.cameras.main.setZoom(4);
+
     // Zona de interação para o supermercado.
     this.zonaSupermercado = new Phaser.Geom.Rectangle(
       2924 - 16,
