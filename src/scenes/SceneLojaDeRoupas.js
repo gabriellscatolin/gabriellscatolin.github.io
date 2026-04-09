@@ -305,17 +305,15 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     this._atualizarPopupMissaoLoja(true);
 
     // Zona de saída (principal + tolerância para garantir interação)
-    this.zonasSaida = [
-      { x: 73, y: 279, raio: 42 },
-      { x: 76, y: 289, raio: 36 },
-    ];
+    this.zonasSaida = this._criarZonasSaida();
     this.nearExit = false;
     this.perto_npc = false;
     this.falouComNpc = false;
     this.isTransitioning = false;
+    this.podeSairLoja = false;
 
     this.exitLabel = this.add
-      .text(73, 279, "[E] Sair", {
+      .text(73, 279, "[Saída]", {
         fontSize: "6px",
         color: "#fff",
         backgroundColor: "#000c",
@@ -407,6 +405,13 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     });
   }
 
+  _criarZonasSaida() {
+    return [
+      new Phaser.Geom.Rectangle(43, 259, 60, 40),
+      new Phaser.Geom.Rectangle(46, 269, 60, 40),
+    ];
+  }
+
   update() {
     const speed = 150;
     const { player, cursors } = this;
@@ -444,15 +449,9 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     }
 
     // Detecção da zona de saída
-    const inExit = (this.zonasSaida || []).some((zona) => {
-      const distancia = Phaser.Math.Distance.Between(
-        player.x,
-        player.y,
-        zona.x,
-        zona.y,
-      );
-      return distancia <= zona.raio;
-    });
+    const inExit = (this.zonasSaida || []).some((zona) =>
+      Phaser.Geom.Rectangle.Contains(zona, player.x, player.y),
+    );
 
     const distNpc = Phaser.Math.Distance.Between(
       player.x,
@@ -497,11 +496,13 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
     if (inExit) {
       this.exitLabel.setPosition(player.x, player.y - 15);
 
-      if (
-        this.falouComNpc &&
-        !this.isTransitioning &&
-        Phaser.Input.Keyboard.JustDown(this.teclaE)
-      ) {
+    }
+
+    if (!this.podeSairLoja && !inExit) {
+      this.podeSairLoja = true;
+    }
+
+    if (inExit && !this.isTransitioning && this.podeSairLoja) {
         this.isTransitioning = true;
         this.exitLabel.setVisible(false);
         this.cameras.main.fadeOut(800, 0, 0, 0);
@@ -523,7 +524,6 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
             missaoCidadeTexto: "Missão: Siga a PJ Camila até o Metrô.",
           });
         });
-      }
     }
   }
 }

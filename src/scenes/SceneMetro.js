@@ -412,14 +412,9 @@
     // Zona de saída (entrada da estação)
     const saidaX = 295;
     const saidaY = 165;
-    this.zonaSaida = new Phaser.Geom.Rectangle(
-      saidaX - 30,
-      saidaY - 18,
-      60,
-      36,
-    );
+    this.zonasSaida = this._criarZonasSaida(saidaX, saidaY);
     this.labelSair = this.add
-      .text(saidaX, saidaY, "[E] Sair", {
+      .text(saidaX, saidaY, "[Saída]", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -433,6 +428,7 @@
     this.transicionando = false;
     this.dentroZonaSaida = false;
     this.entrarMiniGame = false;
+    this.podeSairMetro = false;
 
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
@@ -604,6 +600,10 @@
     }
   }
 
+  _criarZonasSaida(saidaX, saidaY) {
+    return [new Phaser.Geom.Rectangle(saidaX - 30, saidaY - 20, 60, 40)];
+  }
+
   update() {
     const velocidade = 100;
     const { teclas, spritePersonagem } = this;
@@ -643,10 +643,8 @@
     }
 
     // Verifica entrada na zona de saída
-    const dentroSaida = Phaser.Geom.Rectangle.Contains(
-      this.zonaSaida,
-      spritePersonagem.x,
-      spritePersonagem.y,
+    const dentroSaida = (this.zonasSaida || []).some((z) =>
+      Phaser.Geom.Rectangle.Contains(z, spritePersonagem.x, spritePersonagem.y),
     );
 
     if (dentroSaida !== this.dentroZonaSaida) {
@@ -694,12 +692,12 @@
       });
     }
 
-    // Transição para a cidade ao pressionar E
-    if (
-      dentroSaida &&
-      !this.transicionando &&
-      Phaser.Input.Keyboard.JustDown(this.teclaE)
-    ) {
+    if (!this.podeSairMetro && !dentroSaida) {
+      this.podeSairMetro = true;
+    }
+
+    // Transição automática para a cidade ao entrar na zona de saída
+    if (dentroSaida && !this.transicionando && this.podeSairMetro) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
 
@@ -725,7 +723,6 @@
       });
     }
 
-    this._atualizarCamara();
   }
 
   _atualizarCamara() {

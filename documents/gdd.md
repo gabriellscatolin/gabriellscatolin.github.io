@@ -2901,4 +2901,3 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 
 <sub>Fonte: Autoria Própria (2026)</sub>
 </div>
-=======;
