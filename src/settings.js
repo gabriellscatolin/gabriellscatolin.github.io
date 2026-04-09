@@ -94,8 +94,8 @@ export function abrirPopupConfig(scene, { onFechar, depth = 200, scrollFactor = 
   const LABEL_Y_OFF = (BTN_H - 22) / 2; // (altura botão - font size) / 2
 
   // ─── Estrutura base ─────────────────────────────────────────────────────────
-  // Overlay escuro
-  add(scene.add.rectangle(cx, cy, w, h, 0x000000, 0.72)
+  // Overlay escuro (V15: Removido/Transparente conforme solicitado)
+  add(scene.add.rectangle(cx, cy, w, h, 0x000000, 0)
     .setDepth(depth).setScrollFactor(scrollFactor));
 
   // Caixa principal do painel

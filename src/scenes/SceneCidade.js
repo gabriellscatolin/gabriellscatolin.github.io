@@ -1092,6 +1092,17 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCam.clearBeforeRender = false;          // V4: Crucial para ver o mundo abaixo
 
     // Lista de elementos que pertencem APENAS à HUD
+    // Debug de coordenadas no mouse (criado antes para entrar na lista de HUD)
+    this.mouseDebugInfo = this.add
+      .text(0, 0, "", {
+        fontSize: "16px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 4, y: 2 },
+      })
+      .setDepth(5000) // Profundidade máxima
+      .setScrollFactor(0);
+
     const elementosHud = [
       this.hudIcon,
       this.hudCloseBg,
@@ -1162,17 +1173,6 @@ export default class SceneCidade extends Phaser.Scene {
       );
       this._atualizarPopupMissaoCidade(true);
     }
-
-    // Debug de coordenadas no mouse (solicitado pelo usuário)
-    this.mouseDebugInfo = this.add
-      .text(0, 0, "", {
-        fontSize: "14px",
-        color: "#ffffff",
-        backgroundColor: "#000000cc",
-        padding: { x: 4, y: 2 },
-      })
-      .setDepth(2000)
-      .setScrollFactor(0);
 
     if (this.escoltaPJSupermercadoAtiva) {
       this.registry.set(
@@ -1658,37 +1658,6 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCloseBg.on("pointerdown", fecharHud);
     this.hudCloseTxt.on("pointerdown", fecharHud);
 
-    this.hudDebugTxt = this.add
-      .text(0, 0, "", {
-        fontSize: "16px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#ffffff",
-        backgroundColor: "#000000ee",
-        padding: { x: 8, y: 6 },
-      })
-      .setDepth(1000)
-      .setScrollFactor(0)
-      .setVisible(false);
-
-    this.hudDebugMarker = this.add
-      .text(0, 0, "+", {
-        fontSize: "18px",
-        fontFamily: "monospace",
-        fontStyle: "bold",
-        color: "#00ff66",
-        stroke: "#000000",
-        strokeThickness: 3,
-      })
-      .setDepth(1001)
-      .setScrollFactor(0)
-      .setOrigin(0.5)
-      .setVisible(false);
-
-    this.miniMapCam.ignore(this.hudDebugTxt);
-    this.borderCam.ignore(this.hudDebugTxt);
-    this.miniMapCam.ignore(this.hudDebugMarker);
-    this.borderCam.ignore(this.hudDebugMarker);
     this._hudDebugWorldPoint = new Phaser.Math.Vector2();
     // Botao: mapa interativo
     this.hudBotao1Area = this.add
@@ -2571,15 +2540,28 @@ export default class SceneCidade extends Phaser.Scene {
     if (this._elementosConfig) return;
 
     this._elementosConfig = abrirPopupConfigModule(this, {
-      depth: 300,
+      depth: 3000, // Depth bem alta para garantir sobreposição no Scene
       scrollFactor: 0,
       onFechar: () => {
+        // V15: Remove do isolamento ao fechar para liberar memória visual
+        if (window.elementosHudGlobal && this._elementosConfig) {
+          window.elementosHudGlobal = window.elementosHudGlobal.filter(
+            (el) => !this._elementosConfig.includes(el),
+          );
+          this._isolarCâmerasDoMundo();
+        }
         this._elementosConfig = null;
       },
     });
 
-    // Reducao visual do popup mantendo proporcoes e centro da tela.
-    const escalaPopup = 0.35;
+    // V15: Adiciona elementos do popup à lista de HUD para que a hudCam os renderize no topo
+    if (window.elementosHudGlobal && this._elementosConfig) {
+      window.elementosHudGlobal.push(...this._elementosConfig);
+      this._isolarCâmerasDoMundo();
+    }
+
+    // V15: Redução visual do popup mantendo proporções e centro da tela.
+    const escalaPopup = 1.05; // Aumentado conforme solicitado
     const centroX = this.scale.width / 2;
     const centroY = this.scale.height / 2;
 
@@ -3552,10 +3534,11 @@ export default class SceneCidade extends Phaser.Scene {
     // Debug do Mouse na HUD Cam (1920x1080)
     const pointer = this.input.activePointer;
     if (this.mouseDebugInfo && pointer) {
-      this.mouseDebugInfo.setPosition(pointer.x + 15, pointer.y + 15);
+      // V16: Alinhamento exato ao ponteiro
+      this.mouseDebugInfo.setPosition(pointer.x + 5, pointer.y + 5);
       this.mouseDebugInfo.setText(
         `SCREEN (0-1920): ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
-        `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`
+          `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`,
       );
     }
     this._atualizarHudCidade();
