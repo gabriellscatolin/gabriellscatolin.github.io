@@ -306,10 +306,10 @@ export default class SceneCidade extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setVisible(false);
     // Área jogável usada por câmera e física
-    const MAPA_X = 720;
-    const MAPA_Y = 100;
-    const MAPA_LARGURA = 2432;
-    const MAPA_ALTURA = 1760;
+    const MAPA_X = 785; // V9: +110px de corte esquerdo
+    const MAPA_Y = 180;  // V9: +80px de corte superior
+    const MAPA_LARGURA = 2200; // V11: Reduzido agressivamente
+    const MAPA_ALTURA = 1480;  // V9: Cortada para evitar o preto de baixo
 
     // Adiciona audios a cena
     this.musica = this.sound.add("trilhaSceneCidade", {
@@ -555,9 +555,9 @@ export default class SceneCidade extends Phaser.Scene {
     if (this.pjAcompanhandoAgencia2) {
       this.npcGuiaPrefix =
         this.escoltaPJSalaoAtiva ||
-        this.escoltaPJMetroAtiva ||
-        this.escoltaPJRestauranteAtiva ||
-        this.escoltaPJSupermercadoAtiva
+          this.escoltaPJMetroAtiva ||
+          this.escoltaPJRestauranteAtiva ||
+          this.escoltaPJSupermercadoAtiva
           ? "npc_camila"
           : "npc_agencia";
       const spriteInicialGuia = `${this.npcGuiaPrefix}_frente_1`;
@@ -842,8 +842,12 @@ export default class SceneCidade extends Phaser.Scene {
 
     const MM_X = 10;
     const MM_Y = 10;
-    const TM_W = 3328;
-    const TM_H = 2048;
+    // V9: Focando o minimapa estritamente na área jogável (bordas cortadas)
+    // Minimapa: Medidas aproximadas apenas da ARTE do mapa, cortando o fundo verde
+    const TM_W = 2305; // Removeu o restinho verde da direita
+    const TM_H = 1720; // Cortou 50 pixels de baixo
+    const TM_X = 650;  // Empurrou o lado esquerdo em +30 pixels
+    const TM_Y = 0;
     const MM_W = 335;
     const MM_H = Math.round((MM_W * TM_H) / TM_W);
 
@@ -1043,9 +1047,10 @@ export default class SceneCidade extends Phaser.Scene {
     const zoomFit = Math.min(MM_W / TM_W, MM_H / TM_H);
     this.miniMapCam = this.cameras.add(MM_X, MM_Y, MM_W, MM_H);
     this.miniMapCam.setZoom(zoomFit);
-    this.miniMapCam.scrollX = TM_W / 2;
-    this.miniMapCam.scrollY = TM_H / 2;
-    this.miniMapCam.setBackgroundColor(0x000000);
+    // V10: Centralizando a lente exatamente no meio do recorte da arte
+    this.miniMapCam.scrollX = TM_X + (TM_W / 2);
+    this.miniMapCam.scrollY = TM_Y + (TM_H / 2);
+    this.miniMapCam.setBackgroundColor("#3a5a40"); // Verde escuro (grama) no lugar do preto absoluto para disfarçar o vazio
     this.miniMapCam.clearBeforeRender = false; // V4: Não apaga a câmera principal abaixo
     this.borderCam.clearBeforeRender = false;  // V4: Não apaga a câmera principal abaixo
 
@@ -1126,7 +1131,7 @@ export default class SceneCidade extends Phaser.Scene {
     // 3. V6: Isolamento agressivo do mundo para a câmera de interface
     // Salva referências para serem usadas na varredura de isolamento
     window.elementosHudGlobal = elementosHud;
-    
+
     // Executa o isolamento inicial e agenda um reforço (delayedCall)
     // para garantir que camadas assíncronas do tilemap sejam capturadas.
     this._isolarCâmerasDoMundo();
@@ -1452,7 +1457,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (window.elementosHudGlobal) {
       window.elementosHudGlobal.push(...this.elementosTutorialMapa);
     }
-    
+
     // V7: Roda o isolamento APÓS adicionar a zona de clique
     this._isolarCâmerasDoMundo();
   }
@@ -1487,15 +1492,15 @@ export default class SceneCidade extends Phaser.Scene {
   // não renderize NADA que seja do mapa, personagem ou jogo.
   _isolarCâmerasDoMundo() {
     if (!this.hudCam) return;
-    
+
     const hudEls = window.elementosHudGlobal || [];
-    
+
     // Buscamos TODOS os objetos da cena
     const allObjects = this.children.list;
-    
+
     // A Câmera de Interface (HUD) deve ignorar TUDO que não estiver explicitamente na lista de HUD
     const worldObjects = allObjects.filter(obj => !hudEls.includes(obj));
-    
+
     if (worldObjects.length > 0) {
       this.hudCam.ignore(worldObjects);
     }
@@ -2676,8 +2681,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.missaoCidadeExclamacao = this.add
       .text(
         this.missaoCidadeBg.x +
-          this.missaoCidadeBg.width * 0.5 +
-          14 * this.popupMissaoUiScale,
+        this.missaoCidadeBg.width * 0.5 +
+        14 * this.popupMissaoUiScale,
         this.missaoCidadeBg.y,
         "!",
         {
@@ -3213,33 +3218,33 @@ export default class SceneCidade extends Phaser.Scene {
           ? "[Chegamos. Interaja na Farmácia]"
           : this.pjDestinoAtual === "escritorio"
             ? "[Chegamos. Entre no escritório]"
-          : this.pjDestinoAtual === "agencia2"
-            ? "[Chegamos. Entre na Agência 02]"
-            : this.pjDestinoAtual === "loja_roupas"
-              ? "[Chegamos. Entre na Loja de Roupas]"
-              : this.pjDestinoAtual === "metro"
-                ? "[Chegamos. Entre no Metrô]"
-                : this.pjDestinoAtual === "restaurante"
-                  ? "[Chegamos. Entre no Restaurante]"
-                  : this.pjDestinoAtual === "supermercado"
-                    ? "[Chegamos. Entre no Mercado]"
-                    : "[Chegamos. Entre na Padaria]";
+            : this.pjDestinoAtual === "agencia2"
+              ? "[Chegamos. Entre na Agência 02]"
+              : this.pjDestinoAtual === "loja_roupas"
+                ? "[Chegamos. Entre na Loja de Roupas]"
+                : this.pjDestinoAtual === "metro"
+                  ? "[Chegamos. Entre no Metrô]"
+                  : this.pjDestinoAtual === "restaurante"
+                    ? "[Chegamos. Entre no Restaurante]"
+                    : this.pjDestinoAtual === "supermercado"
+                      ? "[Chegamos. Entre no Mercado]"
+                      : "[Chegamos. Entre na Padaria]";
       const textoSeguir =
         this.pjDestinoAtual === "farmacia"
           ? "[Me siga até a Farmácia]"
           : this.pjDestinoAtual === "escritorio"
             ? "[Me siga até o escritório]"
-          : this.pjDestinoAtual === "agencia2"
-            ? "[Me siga até a Agência 02]"
-            : this.pjDestinoAtual === "loja_roupas"
-              ? "[Me siga até a Loja de Roupas]"
-              : this.pjDestinoAtual === "metro"
-                ? "[Me siga até o Metrô]"
-                : this.pjDestinoAtual === "restaurante"
-                  ? "[Me siga até o Restaurante]"
-                  : this.pjDestinoAtual === "supermercado"
-                    ? "[Me siga até o Mercado]"
-                    : "[Siga o PJ]";
+            : this.pjDestinoAtual === "agencia2"
+              ? "[Me siga até a Agência 02]"
+              : this.pjDestinoAtual === "loja_roupas"
+                ? "[Me siga até a Loja de Roupas]"
+                : this.pjDestinoAtual === "metro"
+                  ? "[Me siga até o Metrô]"
+                  : this.pjDestinoAtual === "restaurante"
+                    ? "[Me siga até o Restaurante]"
+                    : this.pjDestinoAtual === "supermercado"
+                      ? "[Me siga até o Mercado]"
+                      : "[Siga o PJ]";
 
       this.labelTheoGuia
         .setVisible(true)
@@ -3547,7 +3552,7 @@ export default class SceneCidade extends Phaser.Scene {
       this.mouseDebugInfo.setPosition(pointer.x + 15, pointer.y + 15);
       this.mouseDebugInfo.setText(
         `SCREEN (0-1920): ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
-          `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`
+        `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`
       );
     }
     this._atualizarHudCidade();
