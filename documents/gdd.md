@@ -2807,6 +2807,7 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 
 # <a name="c7"></a>7. Referências (sprint 5)
 
+
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
 
 <br><a name="ref1">[1]:</a>
