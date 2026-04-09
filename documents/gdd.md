@@ -1624,7 +1624,7 @@ $$
  Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo.</sub>
 </div>
 
-#### 4.1.3. Estrutura dos cenários iniciais:
+#### Estrutura dos cenários iniciais:
 &emsp; Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Essa decisão atende ao RNF05, que determina que as missões e rotas do jogo devem ser baseadas em situações reais enfrentadas pelos vendedores da Cielo.
 
 
@@ -1632,12 +1632,19 @@ $$
 
 &emsp; Cada cenário representa um tipo de estabelecimento comercial onde o jogador interage com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
 
-<div align="center">
- <sub>Imagem 26 - Cenários dos estabelecimentos internamente</sub>
- <img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
 
- <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
+<div align="center">
+  <sub>Imagem 26 - Cenários internos dos estabelecimentos</sub><br>
+  <img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png" width="95%"><br>
+  <sup>Fonte: Autoria própria utilizando Inteligência Artificial (2026)</sup>
 </div>
+
+#### Limitações Atuais do Protótipo
+&emsp;Por se tratar de uma sprint inicial com foco em conceituação e estruturação, o protótipo desta fase apresenta as seguintes limitações:
+
+ - Nenhuma mecânica funcional implementada: os personagens e cenários existem apenas como assets visuais; movimentação, colisões e interações ainda não foram codificadas.
+ - Ausência de sistema de cenas no Phaser: o main.js inicializa o framework, mas ainda não há cenas funcionais carregadas - tela inicial (RF01), seleção de personagens (RF04) e cutscenes (RF14) estão previstas para as próximas sprints.
+ - Assets não integrados ao código: os spritesheets e cenários foram criados, mas ainda não foram carregados nem referenciados no código do jogo.
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
