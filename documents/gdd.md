@@ -2557,7 +2557,7 @@ this.events.on("shutdown", () => {
 
 **Objetivos atingidos:**
 - Implementação completa do fluxo de jogo: menu inicial → seleção de personagem → gameplay → interação com NPC → transição de cena.
-- Desenvolvimento de 4 personagens jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
+- Desenvolvimento de 4 personagen jogáveis representativos da diversidade brasileira, cada um com sprite sheet animado em 4 direções e 16 frames.
 - Criação de 8 NPCs secundários com identidades, estabelecimentos e contextos de venda distintos.
 - Sistema de movimentação funcional com WASD, colisão com obstáculos, limites de mapa e detecção de proximidade para interação.
 - Implementação de opções de acessibilidade (modo daltônico, controle de volume e brilho) nas configurações do jogo.
