@@ -643,7 +643,7 @@ export default class ScenePadaria extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
@@ -657,7 +657,12 @@ export default class ScenePadaria extends Phaser.Scene {
     }
 
     // Transição automática para a cidade ao entrar na zona de saída
-    if (!this.transicionando && this.podeSairPadaria && dentroSaida) {
+    if (
+      !this.transicionando &&
+      this.falouComNpc &&
+      this.podeSairPadaria &&
+      dentroSaida
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
 

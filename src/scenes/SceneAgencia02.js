@@ -1096,7 +1096,9 @@ export default class SceneAgencia02 extends Phaser.Scene {
       return;
     }
 
-    const saidaLiberada = !camilaConcluidaAgora || this.camilaChegouSaida;
+    const saidaLiberada =
+      this.falouComCamila &&
+      (!camilaConcluidaAgora || this.camilaChegouSaida);
     const dentroSaida =
       saidaLiberada &&
       (this.zonasSaida || []).some((z) => {
@@ -1112,7 +1114,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     // Mostra ou esconde a label conforme a proximidade da saída
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComCamila);
       if (!dentroSaida) {
         this.transicionando = false;
       }
@@ -1123,7 +1125,7 @@ export default class SceneAgencia02 extends Phaser.Scene {
     }
 
     // Ao entrar na zona, inicia automaticamente a transição para a cidade
-    if (!this.transicionando && dentroSaida) {
+    if (!this.transicionando && this.falouComCamila && dentroSaida) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);

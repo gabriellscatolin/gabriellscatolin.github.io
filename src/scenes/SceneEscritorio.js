@@ -236,10 +236,14 @@ export default class SceneEscritorio extends Phaser.Scene {
 
     this.direcaoAtual = "frente";
 
-    // Define zona de saída próxima à porta
-    this.zonaSaida = new Phaser.Geom.Rectangle(310, 372, 60, 40);
+    // Define zona de saída um pouco abaixo do spawn do escritório
+    this.zonaSaida = new Phaser.Geom.Rectangle(308, 408, 64, 44);
+    this.zonaSaidaDebug = this.add
+      .rectangle(308 + 32, 408 + 22, 64, 44, 0xff0000, 0.14)
+      .setDepth(2)
+      .setStrokeStyle(1, 0xff0000, 0.85);
     this.labelSair = this.add
-      .text(340, 392, "[E] Sair", {
+      .text(340, 430, "[E] Sair", {
         fontSize: "3px",
         color: "#ffffff",
         backgroundColor: "#000000cc",
@@ -249,6 +253,18 @@ export default class SceneEscritorio extends Phaser.Scene {
       .setDepth(20)
       .setOrigin(0.5, 1)
       .setVisible(false);
+
+    this.coordLabel = this.add
+      .text(0, 0, "", {
+        fontSize: "4px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 1, y: 1 },
+        resolution: 4,
+      })
+      .setDepth(25)
+      .setOrigin(0.5, 1)
+      .setVisible(true);
 
     this.dentroZonaSaida = false;
     this.transicionando = false;
@@ -314,6 +330,24 @@ export default class SceneEscritorio extends Phaser.Scene {
       spritePersonagem.setTexture(`esp_${this.direcaoAtual}_1`);
     }
 
+    // Verifica se o spritePersonagem entrou na zona de saída
+    const dentroSaida = Phaser.Geom.Rectangle.Contains(
+      this.zonaSaida,
+      spritePersonagem.x,
+      spritePersonagem.y,
+    );
+
+    if (this.coordLabel) {
+      this.coordLabel
+        .setText(
+          `x: ${Math.round(spritePersonagem.x)}\ny: ${Math.round(spritePersonagem.y)}\nsaida: ${dentroSaida ? "dentro" : "fora"}`,
+        )
+        .setPosition(
+          spritePersonagem.x,
+          spritePersonagem.y - spritePersonagem.displayHeight / 2 - 12,
+        );
+    }
+
     // Interação com NPC por proximidade
     const distNpc = Phaser.Math.Distance.Between(
       spritePersonagem.x,
@@ -358,22 +392,16 @@ export default class SceneEscritorio extends Phaser.Scene {
       return;
     }
 
-    // Verifica se o spritePersonagem entrou na zona de saída
-    const dentroSaida = Phaser.Geom.Rectangle.Contains(
-      this.zonaSaida,
-      spritePersonagem.x,
-      spritePersonagem.y,
-    );
-
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
     // Ao pressionar E na zona, inicia a transição para a cidade
     if (
       dentroSaida &&
+      this.falouComNpc &&
       !this.transicionando &&
       Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {
@@ -386,6 +414,8 @@ export default class SceneEscritorio extends Phaser.Scene {
           prefixo: this.prefixoEscolhido,
           spawnX: 1741,
           spawnY: 1256,
+          continuarAposEscritorio:
+            this.registry.get("escritorio_dialogo_concluido") === true,
         });
       });
     }

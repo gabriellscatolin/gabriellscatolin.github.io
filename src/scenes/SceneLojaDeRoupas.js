@@ -490,7 +490,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
 
     if (inExit !== this.nearExit) {
       this.nearExit = inExit;
-      this.exitLabel.setVisible(inExit);
+      this.exitLabel.setVisible(inExit && this.falouComNpc);
       if (inExit) this.labelNpc.setVisible(false);
     }
 
@@ -498,6 +498,7 @@ export default class SceneLojaDeRoupas extends Phaser.Scene {
       this.exitLabel.setPosition(player.x, player.y - 15);
 
       if (
+        this.falouComNpc &&
         !this.isTransitioning &&
         Phaser.Input.Keyboard.JustDown(this.teclaE)
       ) {

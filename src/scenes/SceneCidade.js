@@ -26,6 +26,7 @@ export default class SceneCidade extends Phaser.Scene {
       Boolean(this.registry.get("limparDestaqueMissaoCidadeAoRetornarDoMapa"));
     this.fromCutscene = Boolean(dados.fromCutscene);
     this.retornoFarmacia = Boolean(dados.retornoFarmacia);
+    this.continuarAposEscritorio = Boolean(dados.continuarAposEscritorio);
     this.escoltaPJSalaoAtiva =
       Boolean(dados.escoltaPJSalao) ||
       Boolean(this.registry.get("ag02_escolta_pj_salao"));
@@ -410,6 +411,21 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.spritePersonagem.setCollideWorldBounds(true);
 
+    this.coordLabel = this.add
+      .text(spawnX, spawnY - 40, "", {
+        fontSize: "20px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#ffff00",
+        stroke: "#000000",
+        strokeThickness: 4,
+        align: "center",
+        backgroundColor: "#00000088",
+        padding: { x: 6, y: 2 },
+      })
+      .setOrigin(0.5, 1)
+      .setDepth(1002);
+
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.spritePersonagem.width;
     const alturaSprite = this.spritePersonagem.height;
@@ -521,6 +537,9 @@ export default class SceneCidade extends Phaser.Scene {
     }
     if (this.escoltaPJSupermercadoAtiva) {
       this.pjDestinoAtual = "supermercado";
+    }
+    if (this.continuarAposEscritorio) {
+      this.pjDestinoAtual = "agencia2";
     }
     this.npcTheoProximaTroca = 0;
     this.npcTheoSpriteAtual = 1;
@@ -1089,7 +1108,7 @@ export default class SceneCidade extends Phaser.Scene {
     if (this.retornoFarmacia) {
       this.registry.set(
         "missaoCidadeTexto",
-        "Missão: Vire à direita e siga a rua até a Agência 02.",
+        "Missão: Vá até o escritório.",
       );
       this._atualizarPopupMissaoCidade(true);
 
@@ -1097,7 +1116,7 @@ export default class SceneCidade extends Phaser.Scene {
         .text(
           this.spritePersonagem.x,
           this.spritePersonagem.y - 22,
-          "[Vire à direita e siga a rua até a Agência 02. Boa sorte!]",
+          "[Vá até o escritório. Boa sorte!]",
           {
             fontSize: "6px",
             color: "#ffffff",
@@ -1121,26 +1140,24 @@ export default class SceneCidade extends Phaser.Scene {
         this.pjAcompanhandoAgencia2 = true;
         this.pjAcompanhamentoEncerrado = false;
         this.pjAguardandoPadaria = false;
-        this.pjDestinoAtual = "agencia2";
+        this.pjDestinoAtual = "escritorio";
         this.pjRotaWaypoints = [
-          { x: 1126, y: 1295 },
-          { x: 1578, y: 1295 },
-          { x: 1578, y: 1655 },
-          { x: 1806, y: 1655 },
+          { x: 1176, y: 1288 },
+          { x: 1561, y: 1288 },
+          { x: 1627, y: 1268 },
+          { x: 1787, y: 1268 },
         ];
         this.pjRotaIndiceAtual = 0;
         this.pjChegouDestinoRota = false;
-        this.pjDespedidaAgencia02Feita = false;
-        this.pjAguardandoDespedidaAgencia02 = false;
         this.registry.set("ag01_escolta_pj_agencia2", true);
         this.registry.set("ag01_pj_retorno", false);
-        this.registry.set("missaoCidadeTexto", "Missão: Fale com o PJ Theo.");
+        this.registry.set("missaoCidadeTexto", "Missão: Vá até o escritório.");
         if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
         this.npcTheoGuia.setVisible(true);
         if (this.labelTheoGuia) {
           this.labelTheoGuia
             .setVisible(true)
-            .setText("[Me siga até a Agência 02]")
+            .setText("[Me siga até o escritório]")
             .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
         }
       }
@@ -2761,6 +2778,7 @@ export default class SceneCidade extends Phaser.Scene {
     const destinoPorAlvo = {
       padaria: "padaria",
       farmacia: "farmacia",
+      escritorio: "escritorio",
       agencia2: "agencia2",
       cabeleireiro: "loja_roupas",
       metro: "metro",
@@ -3027,6 +3045,8 @@ export default class SceneCidade extends Phaser.Scene {
       const textoChegada =
         this.pjDestinoAtual === "farmacia"
           ? "[Chegamos. Interaja na Farmácia]"
+          : this.pjDestinoAtual === "escritorio"
+            ? "[Chegamos. Entre no escritório]"
           : this.pjDestinoAtual === "agencia2"
             ? "[Chegamos. Entre na Agência 02]"
             : this.pjDestinoAtual === "loja_roupas"
@@ -3041,6 +3061,8 @@ export default class SceneCidade extends Phaser.Scene {
       const textoSeguir =
         this.pjDestinoAtual === "farmacia"
           ? "[Me siga até a Farmácia]"
+          : this.pjDestinoAtual === "escritorio"
+            ? "[Me siga até o escritório]"
           : this.pjDestinoAtual === "agencia2"
             ? "[Me siga até a Agência 02]"
             : this.pjDestinoAtual === "loja_roupas"
@@ -3080,6 +3102,29 @@ export default class SceneCidade extends Phaser.Scene {
       } else {
         this.pjChegouDestinoRota = true;
         this.npcTheoGuia.body?.setVelocity(0, 0);
+        if (this.pjDestinoAtual === "escritorio") {
+          this.pjAcompanhandoAgencia2 = false;
+          this.pjAcompanhamentoEncerrado = true;
+          this.pjAguardandoEscritorio = true;
+          this.registry.set("ag01_escolta_pj_agencia2", false);
+          this.registry.set("ag01_pj_retorno", false);
+          this.registry.set(
+            "missaoCidadeTexto",
+            "Missão: Entre no escritório e fale com o NPC.",
+          );
+          this._atualizarPopupMissaoCidade(true);
+          if (this.npcTheoGuia.body) {
+            this.npcTheoGuia.body.setVelocity(0, 0);
+            this.npcTheoGuia.body.enable = false;
+          }
+          if (this.labelTheoGuia) {
+            this.labelTheoGuia
+              .setVisible(true)
+              .setText("[Chegamos. Entre no escritório]")
+              .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+          }
+          return;
+        }
         if (this.pjDestinoAtual === "agencia2") {
           this.pjAguardandoDespedidaAgencia02 = true;
           this.registry.set("missaoCidadeTexto", "Missão: Fale com o PJ Theo.");
@@ -3129,8 +3174,41 @@ export default class SceneCidade extends Phaser.Scene {
         if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
       }
     }
+
+    if (
+      this.continuarAposEscritorio &&
+      this.registry.get("escritorio_dialogo_concluido") === true
+    ) {
+      this.continuarAposEscritorio = false;
+      this.pjAguardandoEscritorio = false;
+      this.pjAcompanhandoAgencia2 = true;
+      this.pjAcompanhamentoEncerrado = false;
+      this.pjDestinoAtual = "agencia2";
+      this.pjRotaWaypoints = [
+        { x: 1597, y: 1571 },
+        { x: 1597, y: 1648 },
+        { x: 1792, y: 1648 },
+      ];
+      this.pjRotaIndiceAtual = 0;
+      this.pjChegouDestinoRota = false;
+      this.registry.set("ag01_escolta_pj_agencia2", true);
+      this.registry.set("ag01_pj_retorno", false);
+      this.registry.set("missaoCidadeTexto", "Missão: Vá até a Agência 02.");
+      this._atualizarPopupMissaoCidade(true);
+      if (this.npcTheoGuia) {
+        if (this.npcTheoGuia.body) this.npcTheoGuia.body.enable = true;
+        this.npcTheoGuia.setVisible(true);
+      }
+      if (this.labelTheoGuia) {
+        this.labelTheoGuia
+          .setVisible(true)
+          .setText("[Me siga até a Agência 02]")
+          .setPosition(this.npcTheoGuia.x, this.npcTheoGuia.y - 18);
+      }
+    }
+
     const velocidade = 150;
-    const { teclas, spritePersonagem } = this;
+    const { teclas, spritePersonagem, coordLabel } = this;
 
     if (Phaser.Input.Keyboard.JustDown(this.teclaF)) {
       if (this.scale.isFullscreen) {
@@ -3291,6 +3369,16 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     this.minimapPlayerDot.setPosition(spritePersonagem.x, spritePersonagem.y);
+    if (coordLabel && spritePersonagem) {
+      coordLabel.setText(
+        `x: ${Math.round(spritePersonagem.x)}\ny: ${Math.round(spritePersonagem.y)}`,
+      );
+      coordLabel.setPosition(
+        spritePersonagem.x,
+        spritePersonagem.y - spritePersonagem.displayHeight / 2 - 10,
+      );
+      coordLabel.setVisible(true);
+    }
     this._atualizarHudCidade();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();

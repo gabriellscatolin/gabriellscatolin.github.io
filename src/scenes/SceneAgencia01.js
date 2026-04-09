@@ -908,7 +908,8 @@ export default class SceneAgencia extends Phaser.Scene {
 
     // Transição para a cidade: ocorre ao entrar na saída ou quando o PJ conclui o guia até a saída.
     const podeTransicionarParaCidade =
-      dentroSaida || (pjConcluidoAgora && this.pjChegouNaSaida);
+      this.falouComNpc &&
+      (dentroSaida || (pjConcluidoAgora && this.pjChegouNaSaida));
 
     if (podeTransicionarParaCidade && !this.transicionando) {
       this.transicionando = true;

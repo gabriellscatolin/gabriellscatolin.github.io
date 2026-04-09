@@ -622,7 +622,7 @@ export default class SceneAgencia03 extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
     }
 
     if (dentroSaida) {
@@ -631,7 +631,12 @@ export default class SceneAgencia03 extends Phaser.Scene {
     }
 
     // Transição automática ao entrar na zona de saída
-    if (!this.transicionando && dentroSaida && zonaSaidaAtual) {
+    if (
+      !this.transicionando &&
+      this.falouComNpc &&
+      dentroSaida &&
+      zonaSaidaAtual
+    ) {
       this.transicionando = true;
       this.labelSair.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);

@@ -497,13 +497,14 @@ export default class SceneRestaurante extends Phaser.Scene {
 
     if (dentroSaida !== this.dentroZonaSaida) {
       this.dentroZonaSaida = dentroSaida;
-      this.labelSair.setVisible(dentroSaida);
+      this.labelSair.setVisible(dentroSaida && this.falouComNpc);
       if (dentroSaida) this.labelNpc.setVisible(false);
     }
 
     // Transição para a cidade ao pressionar E
     if (
       dentroSaida &&
+      this.falouComNpc &&
       !this.transicionando &&
       Phaser.Input.Keyboard.JustDown(this.teclaE)
     ) {

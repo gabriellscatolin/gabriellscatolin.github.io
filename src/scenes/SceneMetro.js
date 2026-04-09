@@ -1,6 +1,8 @@
 ﻿export default class SceneMetro extends Phaser.Scene {
   constructor() {
     super({ key: "SceneMetro" });
+    this.zoomBaseMetro = 4;
+    this.resolucaoBaseMetro = { width: 1920, height: 1080 };
   }
 
   // Recebe os dados do spritePersonagem vindos da cena anterior
@@ -343,6 +345,40 @@
       .setOrigin(0.5, 1)
       .setVisible(false);
 
+    // HUD de orientação do metrô para guiar o jogador até o minigame.
+    this.hudMiniGameTexto = this.add
+      .text(this.scale.width / 2, 20, "Suba para jogar o minigame.", {
+        fontSize: "20px",
+        color: "#ffffff",
+        fontStyle: "bold",
+        backgroundColor: "#000000bb",
+        padding: { x: 10, y: 4 },
+      })
+      .setOrigin(0.5, 0)
+      .setScrollFactor(0)
+      .setDepth(30);
+
+    // Exclamação destacando o botão de entrada do minigame.
+    this.exclamacaoMiniGame = this.add
+      .text(676, 178, "!", {
+        fontSize: "24px",
+        color: "#ffeb3b",
+        stroke: "#000000",
+        strokeThickness: 3,
+      })
+      .setOrigin(0.5, 1)
+      .setDepth(21)
+      .setVisible(false);
+
+    this.tweenExclamacaoMiniGame = this.tweens.add({
+      targets: this.exclamacaoMiniGame,
+      alpha: { from: 1, to: 0.25 },
+      duration: 450,
+      yoyo: true,
+      repeat: -1,
+      paused: true,
+    });
+
     // Câmera segue o spritePersonagem
     this.cameras.main.startFollow(this.spritePersonagem);
     this.cameras.main.setZoom(4);
@@ -359,6 +395,17 @@
       bounds.height,
     );
     this.cameras.main.fadeIn(600, 0, 0, 0);
+
+    // Aplica zoom responsivo inicial e reage a resize/fullscreen.
+    this._ajustarLayoutResponsivoMetro(this.scale.width, this.scale.height);
+    this._onResizeMetro = (gameSize) => {
+      const largura = gameSize?.width ?? this.scale.width;
+      const altura = gameSize?.height ?? this.scale.height;
+      this._ajustarLayoutResponsivoMetro(largura, altura);
+      this._reposicionarTutorialMetro(largura, altura);
+      this._reposicionarHudMetro(largura);
+    };
+    this.scale.on("resize", this._onResizeMetro, this);
 
     this.direcaoAtual = "frente";
 
@@ -390,6 +437,14 @@
     // Pausa a trilha sonora ao iniciar nova cena
     this.events.on("shutdown", () => {
       this.musica.stop();
+      if (this.tweenExclamacaoMiniGame) {
+        this.tweenExclamacaoMiniGame.stop();
+        this.tweenExclamacaoMiniGame = null;
+      }
+      if (this._onResizeMetro) {
+        this.scale.off("resize", this._onResizeMetro, this);
+        this._onResizeMetro = null;
+      }
     });
 
     this.mostrarTutorialMetro();
@@ -399,17 +454,17 @@
     const cx = this.scale.width / 2;
     const cy = this.scale.height / 2;
     this.elementosTutorialMetro = [];
+    this.tutorialMetroAtivo = true;
 
     // Fundo escuro semi-transparente
-    this.elementosTutorialMetro.push(
-      this.add
-        .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000, 0.7)
-        .setDepth(50)
-        .setScrollFactor(0),
-    );
+    this.tutorialMetroOverlay = this.add
+      .rectangle(cx, cy, this.scale.width, this.scale.height, 0x000000, 0.7)
+      .setDepth(50)
+      .setScrollFactor(0);
+    this.elementosTutorialMetro.push(this.tutorialMetroOverlay);
 
     // Imagem do tutorial do metrô (proporcional, máx 70% da tela)
-    const imgMetro = this.add
+    this.tutorialMetroImagem = this.add
       .image(cx, cy, "imagemTutorialMetro")
       .setDepth(51)
       .setScrollFactor(0);
@@ -423,13 +478,13 @@
       dH = maxH;
       dW = maxH * ratio;
     }
-    imgMetro.setDisplaySize(dW, dH);
-    this.elementosTutorialMetro.push(imgMetro);
+    this.tutorialMetroImagem.setDisplaySize(dW, dH);
+    this.elementosTutorialMetro.push(this.tutorialMetroImagem);
 
     const btnY = cy + dH / 2 + 30;
 
     // Botão "Fechar"
-    const botaoFechar = this.add
+    this.tutorialMetroBotaoFechar = this.add
       .text(cx, btnY, "Fechar", {
         fontSize: "20px",
         fontStyle: "bold",
@@ -441,25 +496,84 @@
       .setScrollFactor(0)
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true });
-    this.elementosTutorialMetro.push(botaoFechar);
+    this.elementosTutorialMetro.push(this.tutorialMetroBotaoFechar);
 
-    botaoFechar.on("pointerover", () =>
-      botaoFechar.setStyle({ backgroundColor: "#555555" }),
+    this.tutorialMetroBotaoFechar.on("pointerover", () =>
+      this.tutorialMetroBotaoFechar.setStyle({ backgroundColor: "#555555" }),
     );
-    botaoFechar.on("pointerout", () =>
-      botaoFechar.setStyle({ backgroundColor: "#333333" }),
+    this.tutorialMetroBotaoFechar.on("pointerout", () =>
+      this.tutorialMetroBotaoFechar.setStyle({ backgroundColor: "#333333" }),
     );
-    botaoFechar.on("pointerdown", () => this.fecharTutorialMetro());
+    this.tutorialMetroBotaoFechar.on("pointerdown", () =>
+      this.fecharTutorialMetro(),
+    );
+
+    this._reposicionarTutorialMetro(this.scale.width, this.scale.height);
   }
 
   fecharTutorialMetro() {
     this.elementosTutorialMetro.forEach((el) => el.destroy());
     this.elementosTutorialMetro = [];
+    this.tutorialMetroAtivo = false;
+    this.tutorialMetroOverlay = null;
+    this.tutorialMetroImagem = null;
+    this.tutorialMetroBotaoFechar = null;
+  }
+
+  _ajustarLayoutResponsivoMetro(largura, altura) {
+    if (!this.cameras?.main) return;
+
+    const fatorEscala = Math.min(
+      largura / this.resolucaoBaseMetro.width,
+      altura / this.resolucaoBaseMetro.height,
+    );
+    const novoZoom = Phaser.Math.Clamp(this.zoomBaseMetro * fatorEscala, 2.8, 5);
+    this.cameras.main.setZoom(novoZoom);
+  }
+
+  _reposicionarTutorialMetro(largura, altura) {
+    if (!this.tutorialMetroAtivo) return;
+    if (
+      !this.tutorialMetroOverlay ||
+      !this.tutorialMetroImagem ||
+      !this.tutorialMetroBotaoFechar
+    ) {
+      return;
+    }
+
+    const cx = largura / 2;
+    const cy = altura / 2;
+    this.tutorialMetroOverlay
+      .setPosition(cx, cy)
+      .setDisplaySize(largura, altura);
+
+    this.tutorialMetroImagem.setPosition(cx, cy);
+    const src = this.textures.get("imagemTutorialMetro").source[0];
+    const ratio = src.width / src.height;
+    const maxW = Math.min(largura * 0.72, 900);
+    const maxH = Math.min(altura * 0.62, 560);
+    let dW = maxW;
+    let dH = maxW / ratio;
+    if (dH > maxH) {
+      dH = maxH;
+      dW = maxH * ratio;
+    }
+    this.tutorialMetroImagem.setDisplaySize(dW, dH);
+
+    this.tutorialMetroBotaoFechar.setPosition(cx, cy + dH / 2 + 30);
+  }
+
+  _reposicionarHudMetro(largura) {
+    if (this.hudMiniGameTexto) {
+      this.hudMiniGameTexto.setPosition(largura / 2, 20);
+    }
   }
 
   update() {
     const velocidade = 100;
     const { teclas, spritePersonagem } = this;
+
+    if (!teclas || !spritePersonagem) return;
 
     spritePersonagem.setVelocity(0);
     let movendo = false;
@@ -514,6 +628,18 @@
     if (entrarMiniGame !== this.entrarMiniGame) {
       this.entrarMiniGame = entrarMiniGame; // ← G maiúsculo
       this.labelE.setVisible(entrarMiniGame);
+      this.exclamacaoMiniGame.setVisible(entrarMiniGame);
+      if (this.tweenExclamacaoMiniGame) {
+        if (entrarMiniGame) {
+          this.tweenExclamacaoMiniGame.resume();
+        } else {
+          this.tweenExclamacaoMiniGame.pause();
+        }
+      }
+    }
+
+    if (entrarMiniGame) {
+      this.exclamacaoMiniGame.setPosition(this.labelE.x, this.labelE.y - 12);
     }
 
     if (
@@ -523,6 +649,7 @@
     ) {
       this.transicionando = true;
       this.labelE.setVisible(false);
+      this.exclamacaoMiniGame.setVisible(false);
       this.cameras.main.fadeOut(800, 0, 0, 0);
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.scene.start("SceneMiniGame", {
@@ -564,5 +691,14 @@
     }
 
     this._atualizarCamara();
+  }
+
+  _atualizarCamara() {
+    if (!this.cameras?.main || !this.spritePersonagem) return;
+
+    const camera = this.cameras.main;
+    if (camera.scrollX === undefined || camera.scrollY === undefined) return;
+
+    camera.startFollow(this.spritePersonagem);
   }
 }

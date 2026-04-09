@@ -571,7 +571,7 @@ export default class SceneDialogoRestaurante extends SceneDialogoBase {
       // Resume o objetivo geral da conversa
       {
         icone: "🎯",
-        texto: "Você vai conduzir a conversa com ${this.nomeNpcDialogo} no restaurante.",
+        texto: "Você vai conduzir a conversa com Lucas no restaurante.",
       },
       {
         icone: "💬",
