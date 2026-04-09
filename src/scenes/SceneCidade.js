@@ -285,6 +285,7 @@ export default class SceneCidade extends Phaser.Scene {
   create() {
     // Garante zoom correto ao retornar de outra cena (ex: SceneMetro)
     this.cameras.main.setZoom(4);
+    this.camadasMundo = []; // V5: Lista para rastrear todas as camadas do mapa automaticamente
 
     // Zona de interação para o supermercado.
     this.zonaSupermercado = new Phaser.Geom.Rectangle(
@@ -414,20 +415,21 @@ export default class SceneCidade extends Phaser.Scene {
     );
     this.spritePersonagem.setCollideWorldBounds(true);
 
+    // Label de coordenadas - agora fixa na tela para não tremer
     this.coordLabel = this.add
-      .text(spawnX, spawnY - 40, "", {
-        fontSize: "20px",
+      .text(10, 70, "", {
+        fontSize: "14px",
         fontFamily: "monospace",
         fontStyle: "bold",
         color: "#ffff00",
         stroke: "#000000",
-        strokeThickness: 4,
-        align: "center",
+        strokeThickness: 3,
         backgroundColor: "#00000088",
-        padding: { x: 6, y: 2 },
+        padding: { x: 4, y: 2 },
       })
-      .setOrigin(0.5, 1)
-      .setDepth(1002);
+      .setOrigin(0, 0)
+      .setDepth(1002)
+      .setScrollFactor(0);
 
     const tamTile = mapa.tileWidth || 16;
     const larguraSprite = this.spritePersonagem.width;
@@ -1044,6 +1046,8 @@ export default class SceneCidade extends Phaser.Scene {
     this.miniMapCam.scrollX = TM_W / 2;
     this.miniMapCam.scrollY = TM_H / 2;
     this.miniMapCam.setBackgroundColor(0x000000);
+    this.miniMapCam.clearBeforeRender = false; // V4: Não apaga a câmera principal abaixo
+    this.borderCam.clearBeforeRender = false;  // V4: Não apaga a câmera principal abaixo
 
     this.cameras.main.ignore([this.minimapPlayerDot, this.minimapDestDot]);
     this.miniMapCam.ignore([
@@ -1076,6 +1080,60 @@ export default class SceneCidade extends Phaser.Scene {
     this._criarHudCoins();
     this._criarPopupMissaoCidade();
 
+    // --- NOVA CÂMERA DE HUD DEDICADA ---
+    // Cria uma câmera que cobre toda a tela (1920x1080) com zoom 1.0
+    this.hudCam = this.cameras.add(0, 0, 1920, 1080).setName("HUD_Cam");
+    this.hudCam.setBackgroundColor("rgba(0,0,0,0)"); // V7: Transparência explícita via string
+    this.hudCam.clearBeforeRender = false;          // V4: Crucial para ver o mundo abaixo
+
+    // Lista de elementos que pertencem APENAS à HUD
+    const elementosHud = [
+      this.hudIcon,
+      this.hudCloseBg,
+      this.hudCloseTxt,
+      this.hudBotao1Area,
+      this.hudBotao1Glow,
+      this.hudBotaoConfigArea,
+      this.hudBotaoConfigGlow,
+      this.hudBotaoRankingArea,
+      this.hudBotaoRankingGlow,
+      this.hudBotaoMissaoArea,
+      this.hudBotaoMissaoGlow,
+      this.hudCoinsBg,
+      this.hudCoinsTxt,
+      this.missaoCidadeBg,
+      this.missaoCidadeTexto,
+      this.popupListaMissoesBg,
+      this.popupListaMissoesTitulo,
+      this.popupListaMissoesTexto,
+      this.popupListaMissoesHint,
+      this.popupListaMissoesFecharBg,
+      this.popupListaMissoesFecharTxt,
+      this.coordLabel,
+      this.mouseDebugInfo,
+    ].filter((e) => e); // Remove nulos caso algum não tenha sido criado
+
+    // Se houver popups complexos, eles serão adicionados às listas de ignorar conforme necessário
+    // Por enquanto, os elementos base da HUD:
+
+    // 1. A câmera principal IGNORA a HUD
+    this.cameras.main.ignore(elementosHud);
+
+    // 2. A câmera do Minimapa e borda IGNORA a HUD
+    this.miniMapCam.ignore(elementosHud);
+    this.borderCam.ignore(elementosHud);
+
+    // 3. V6: Isolamento agressivo do mundo para a câmera de interface
+    // Salva referências para serem usadas na varredura de isolamento
+    window.elementosHudGlobal = elementosHud;
+    
+    // Executa o isolamento inicial e agenda um reforço (delayedCall)
+    // para garantir que camadas assíncronas do tilemap sejam capturadas.
+    this._isolarCâmerasDoMundo();
+    this.time.delayedCall(100, () => this._isolarCâmerasDoMundo());
+    this.time.delayedCall(500, () => this._isolarCâmerasDoMundo());
+    // -----------------------------------
+
     if (this.escoltaPJSalaoAtiva) {
       this.registry.set(
         "missaoCidadeTexto",
@@ -1099,6 +1157,17 @@ export default class SceneCidade extends Phaser.Scene {
       );
       this._atualizarPopupMissaoCidade(true);
     }
+
+    // Debug de coordenadas no mouse (solicitado pelo usuário)
+    this.mouseDebugInfo = this.add
+      .text(0, 0, "", {
+        fontSize: "14px",
+        color: "#ffffff",
+        backgroundColor: "#000000cc",
+        padding: { x: 4, y: 2 },
+      })
+      .setDepth(2000)
+      .setScrollFactor(0);
 
     if (this.escoltaPJSupermercadoAtiva) {
       this.registry.set(
@@ -1342,15 +1411,15 @@ export default class SceneCidade extends Phaser.Scene {
         .setScrollFactor(0),
     );
 
-    // Imagem do tutorial do mapa (proporcional, máx 70% da tela)
+    // Imagem do tutorial do mapa (proporcional, máx 960x640 em 1920x1080)
     const imgMapa = this.add
       .image(cx, cy, "imagemTutorialMapa")
       .setDepth(51)
       .setScrollFactor(0);
     const src = this.textures.get("imagemTutorialMapa").source[0];
     const ratio = src.width / src.height;
-    const maxW = 240,
-      maxH = 160;
+    const maxW = 960,
+      maxH = 640;
     let dW = maxW,
       dH = maxW / ratio;
     if (dH > maxH) {
@@ -1360,14 +1429,32 @@ export default class SceneCidade extends Phaser.Scene {
     imgMapa.setDisplaySize(dW, dH);
     this.elementosTutorialMapa.push(imgMapa);
 
+    // Garantir que os elementos do tutorial sejam ignorados por TODAS as câmeras de jogo
+    // e vistos APENAS pela hudCam
+    if (this.cameras.main) this.cameras.main.ignore(this.elementosTutorialMapa);
+    if (this.miniMapCam) this.miniMapCam.ignore(this.elementosTutorialMapa);
+    if (this.borderCam) this.borderCam.ignore(this.elementosTutorialMapa);
     // Zona invisível clicável sobre o botão "Entendi!" (parte inferior central da imagem)
     const btnZone = this.add
       .zone(cx, cy + dH * 0.38, dW * 0.55, dH * 0.14)
       .setDepth(52)
       .setScrollFactor(0)
       .setInteractive({ useHandCursor: true });
-    btnZone.on("pointerdown", () => this.fecharTutorialMapa());
+
+    btnZone.on("pointerdown", () => {
+      console.log("[Tutorial] Botão Entendi clicado");
+      this.fecharTutorialMapa();
+    });
+
     this.elementosTutorialMapa.push(btnZone);
+
+    // V7: Adiciona os elementos do tutorial à lista global de HUD
+    if (window.elementosHudGlobal) {
+      window.elementosHudGlobal.push(...this.elementosTutorialMapa);
+    }
+    
+    // V7: Roda o isolamento APÓS adicionar a zona de clique
+    this._isolarCâmerasDoMundo();
   }
 
   fecharTutorialMapa() {
@@ -1379,7 +1466,11 @@ export default class SceneCidade extends Phaser.Scene {
   _criarCamada(mapa, nome, tilesets) {
     try {
       const camada = mapa.createLayer(nome, tilesets, 0, 0);
-      if (!camada) console.warn("[SceneCidade] Camada não encontrada:", nome);
+      if (!camada) {
+        console.warn("[SceneCidade] Camada não encontrada:", nome);
+      } else {
+        if (this.camadasMundo) this.camadasMundo.push(camada); // V5: Rastreio automático
+      }
       return camada;
     } catch (erro) {
       console.error(
@@ -1390,6 +1481,33 @@ export default class SceneCidade extends Phaser.Scene {
       );
       return null;
     }
+  }
+
+  // V6: Método centralizado para garantir que a câmera de interface 
+  // não renderize NADA que seja do mapa, personagem ou jogo.
+  _isolarCâmerasDoMundo() {
+    if (!this.hudCam) return;
+    
+    const hudEls = window.elementosHudGlobal || [];
+    
+    // Buscamos TODOS os objetos da cena
+    const allObjects = this.children.list;
+    
+    // A Câmera de Interface (HUD) deve ignorar TUDO que não estiver explicitamente na lista de HUD
+    const worldObjects = allObjects.filter(obj => !hudEls.includes(obj));
+    
+    if (worldObjects.length > 0) {
+      this.hudCam.ignore(worldObjects);
+    }
+
+    // A Câmera Principal (Jogo) deve ignorar TUDO que for HUD
+    if (this.cameras.main && hudEls.length > 0) {
+      this.cameras.main.ignore(hudEls);
+    }
+
+    // Minimapa e Borda também ignoram HUD
+    if (this.miniMapCam && hudEls.length > 0) this.miniMapCam.ignore(hudEls);
+    if (this.borderCam && hudEls.length > 0) this.borderCam.ignore(hudEls);
   }
 
   _removerColisaoNoPonto(camada, xMundo, yMundo) {
@@ -1416,34 +1534,36 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _criarHudCidade() {
-    // Estado inicial da maquininha (canto e compacta)
-    this.hudMargemDireita = 34;
-    this.hudMargemBaixo = 44;
-    this.hudUiScale = 1 / this.cameras.main.zoom;
+    // Estado inicial da maquininha (canto e compacta em 1920x1080)
+    // Coordenadas absolutas na tela 1920x1080
+    this.hudMargemDireita = 120;
+    this.hudMargemBaixo = 120;
+    this.hudUiScale = 1.0; // Zoom 1.0 na câmera HUD
     this.hudNoCentro = false;
     this.hudAnimando = false;
     this.hudDebugEnabled = false;
-    // Garante que debug de coordenadas nunca aparece
     this.hudDebugForceHide = true;
-    this.hudIconBaseScale = 0.45 * this.hudUiScale;
-    this.hudIconZoomScale = 1.25 * this.hudUiScale;
+    this.hudIconBaseScale = 0.45;
+    this.hudIconZoomScale = 1.25;
 
     this.hudIcon = this.add
       .image(0, 0, "maquininhaCielo")
       .setScale(this.hudIconBaseScale)
       .setOrigin(0.5)
       .setDepth(200)
+      .setScrollFactor(0)
       .setInteractive({ useHandCursor: true });
 
-    const closeRadius = 12 * this.hudUiScale;
+    const closeRadius = 12;
     this.hudCloseBg = this.add
       .circle(0, 0, closeRadius, 0xcf1f1f, 0.95)
-      .setStrokeStyle(Math.max(1, Math.round(2 * this.hudUiScale)), 0x7a0000, 1)
+      .setStrokeStyle(2, 0x7a0000, 1)
       .setDepth(210)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
 
-    const closeFont = Math.max(8, Math.round(14 * this.hudUiScale));
+    const closeFont = 14;
     this.hudCloseTxt = this.add
       .text(0, 0, "X", {
         fontSize: `${closeFont}px`,
@@ -1452,6 +1572,7 @@ export default class SceneCidade extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setDepth(211)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
 
@@ -1478,12 +1599,10 @@ export default class SceneCidade extends Phaser.Scene {
       if (!this.hudNoCentro) {
         // Primeiro clique: vai para o centro e aumenta
         this.hudAnimando = true;
-        const cam = this.cameras.main;
-
         this.tweens.add({
           targets: this.hudIcon,
-          x: cam.worldView.centerX,
-          y: cam.worldView.centerY,
+          x: 960,
+          y: 540,
           scale: this.hudIconZoomScale,
           duration: 260,
           ease: "Quad.Out",
@@ -1514,9 +1633,8 @@ export default class SceneCidade extends Phaser.Scene {
       this.hudCloseBg.setVisible(false);
       this.hudCloseTxt.setVisible(false);
 
-      const cam = this.cameras.main;
-      const alvoX = cam.worldView.right - this.hudMargemDireita;
-      const alvoY = cam.worldView.bottom - this.hudMargemBaixo;
+      const alvoX = 1920 - this.hudMargemDireita;
+      const alvoY = 1080 - this.hudMargemBaixo;
 
       this.tweens.add({
         targets: this.hudIcon,
@@ -1535,16 +1653,50 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudCloseBg.on("pointerdown", fecharHud);
     this.hudCloseTxt.on("pointerdown", fecharHud);
 
+    this.hudDebugTxt = this.add
+      .text(0, 0, "", {
+        fontSize: "16px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#ffffff",
+        backgroundColor: "#000000ee",
+        padding: { x: 8, y: 6 },
+      })
+      .setDepth(1000)
+      .setScrollFactor(0)
+      .setVisible(false);
+
+    this.hudDebugMarker = this.add
+      .text(0, 0, "+", {
+        fontSize: "18px",
+        fontFamily: "monospace",
+        fontStyle: "bold",
+        color: "#00ff66",
+        stroke: "#000000",
+        strokeThickness: 3,
+      })
+      .setDepth(1001)
+      .setScrollFactor(0)
+      .setOrigin(0.5)
+      .setVisible(false);
+
+    this.miniMapCam.ignore(this.hudDebugTxt);
+    this.borderCam.ignore(this.hudDebugTxt);
+    this.miniMapCam.ignore(this.hudDebugMarker);
+    this.borderCam.ignore(this.hudDebugMarker);
+    this._hudDebugWorldPoint = new Phaser.Math.Vector2();
     // Botao: mapa interativo
     this.hudBotao1Area = this.add
       .image(0, 0, "botaoMapaHud")
       .setDepth(206)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
     this.hudBotao1Glow = this.add
       .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.18)
       .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(207)
+      .setScrollFactor(0)
       .setVisible(false);
     this.hudBotao1OffsetX = 1;
     this.hudBotao1OffsetY = -121;
@@ -1605,12 +1757,14 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudBotaoConfigArea = this.add
       .image(0, 0, "botaoConfiguracaoHud")
       .setDepth(206)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
     this.hudBotaoConfigGlow = this.add
       .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.28)
       .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(208)
+      .setScrollFactor(0)
       .setVisible(false);
     this.hudBotaoConfigOffsetX = -22;
     this.hudBotaoConfigOffsetY = 14;
@@ -1659,12 +1813,14 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudBotaoRankingArea = this.add
       .image(0, 0, "botaoRankingHud")
       .setDepth(206)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
     this.hudBotaoRankingGlow = this.add
       .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
       .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(208)
+      .setScrollFactor(0)
       .setVisible(false);
     this.hudBotaoRankingOffsetX = -54;
     this.hudBotaoRankingOffsetY = -52;
@@ -1713,12 +1869,14 @@ export default class SceneCidade extends Phaser.Scene {
     this.hudBotaoMissaoArea = this.add
       .image(0, 0, "botaoMissaoHud")
       .setDepth(206)
+      .setScrollFactor(0)
       .setVisible(false)
       .setInteractive({ useHandCursor: true });
     this.hudBotaoMissaoGlow = this.add
       .rectangle(0, 0, 1, 1, 0x6cc8ff, 0.24)
       .setStrokeStyle(2, 0xcdf0ff, 0.95)
       .setDepth(208)
+      .setScrollFactor(0)
       .setVisible(false);
     this.hudBotaoMissaoOffsetX = -49;
     this.hudBotaoMissaoOffsetY = 78;
@@ -1790,19 +1948,20 @@ export default class SceneCidade extends Phaser.Scene {
       this.registry.set("cieloCoins", 0);
     }
 
-    this.hudCoinsUiScale = 1 / this.cameras.main.zoom;
+    this.hudCoinsUiScale = 1.0;
     this.hudCoinsValorAtual = -1;
-    this.hudCoinsScale = 0.56 * this.hudCoinsUiScale;
-    this.hudCoinsOffsetRight = 106 * this.hudCoinsUiScale;
-    this.hudCoinsOffsetTop = 8 * this.hudCoinsUiScale;
+    this.hudCoinsScale = 0.56;
+    this.hudCoinsOffsetRight = 150; // V7: Mais colado no canto superior direito
+    this.hudCoinsOffsetTop = 80;    // V7: Mais colado no canto superior direito
 
     this.hudCoinsBg = this.add
       .image(0, 0, "cieloCoinsHud")
       .setOrigin(1, 0)
       .setScale(this.hudCoinsScale)
-      .setDepth(230);
+      .setDepth(230)
+      .setScrollFactor(0);
 
-    const coinFont = Math.max(7, Math.round(22 * this.hudCoinsUiScale));
+    const coinFont = 22;
     this.hudCoinsTxt = this.add
       .text(0, 0, "", {
         fontSize: `${coinFont}px`,
@@ -1813,7 +1972,8 @@ export default class SceneCidade extends Phaser.Scene {
         resolution: 4,
       })
       .setOrigin(0, 0.5)
-      .setDepth(231);
+      .setDepth(231)
+      .setScrollFactor(0);
 
     // HUD de moedas também fica fora do minimapa
     this.miniMapCam.ignore([this.hudCoinsBg, this.hudCoinsTxt]);
@@ -1825,17 +1985,16 @@ export default class SceneCidade extends Phaser.Scene {
   _atualizarHudCidade() {
     if (!this.hudIcon) return;
 
-    const cam = this.cameras.main;
     if (this.hudAnimando) return;
 
     if (this.hudNoCentro) {
-      // Enquanto estiver aberta, acompanha o centro da câmera
-      const centerX = cam.worldView.centerX;
-      const centerY = cam.worldView.centerY;
+      // Enquanto estiver aberta, fica no centro do viewport (HUD Cam é 1920x1080)
+      const centerX = 960;
+      const centerY = 540;
       this.hudIcon.setPosition(centerX, centerY);
 
-      const closeOffsetX = 112 * this.hudUiScale;
-      const closeOffsetY = 292 * this.hudUiScale;
+      const closeOffsetX = 112;
+      const closeOffsetY = 292;
       this.hudCloseBg
         .setPosition(centerX + closeOffsetX, centerY - closeOffsetY)
         .setVisible(true);
@@ -1849,8 +2008,8 @@ export default class SceneCidade extends Phaser.Scene {
       return;
     }
 
-    const hudX = cam.worldView.right - this.hudMargemDireita;
-    const hudY = cam.worldView.bottom - this.hudMargemBaixo;
+    const hudX = 1920 - this.hudMargemDireita;
+    const hudY = 1080 - this.hudMargemBaixo;
     this.hudIcon.setPosition(hudX, hudY);
     this.hudCloseBg.setVisible(false);
     this.hudCloseTxt.setVisible(false);
@@ -2003,9 +2162,8 @@ export default class SceneCidade extends Phaser.Scene {
   _atualizarHudCoins() {
     if (!this.hudCoinsBg || !this.hudCoinsTxt) return;
 
-    const cam = this.cameras.main;
-    const posX = cam.worldView.right - this.hudCoinsOffsetRight;
-    const posY = cam.worldView.top + this.hudCoinsOffsetTop;
+    const posX = 1920 - this.hudCoinsOffsetRight;
+    const posY = this.hudCoinsOffsetTop;
 
     this.hudCoinsBg.setPosition(posX, posY);
 
@@ -2037,16 +2195,16 @@ export default class SceneCidade extends Phaser.Scene {
       this.registry.set("missaoCidadeTexto", this.missaoCidadeTextoCustom);
     }
 
-    this.popupMissaoUiScale = 1 / this.cameras.main.zoom;
-    this.popupMissaoOffsetTopo = 102 * this.popupMissaoUiScale;
+    this.popupMissaoUiScale = 1.0;
+    this.popupMissaoOffsetTopo = 80;
 
-    const cam = this.cameras.main;
-    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
-    const popupX = cam.worldView.centerX;
+    const popupY = this.popupMissaoOffsetTopo;
+    const popupX = 960;
 
     this.missaoCidadeBg = this.add
       .rectangle(popupX, popupY, 360, 56, 0x000000, 0.62)
       .setDepth(240)
+      .setScrollFactor(0)
       .setScale(this.popupMissaoUiScale);
 
     this.missaoCidadeTexto = this.add
@@ -2059,6 +2217,7 @@ export default class SceneCidade extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setDepth(241)
+      .setScrollFactor(0)
       .setScale(this.popupMissaoUiScale);
 
     this.miniMapCam.ignore([this.missaoCidadeBg, this.missaoCidadeTexto]);
@@ -2167,24 +2326,23 @@ export default class SceneCidade extends Phaser.Scene {
   }
 
   _criarPopupListaMissoes() {
-    const uiScale = 1 / this.cameras.main.zoom;
-    const cam = this.cameras.main;
-    const popupX = cam.worldView.centerX;
-    const popupY = cam.worldView.top + 214 * uiScale;
-
-    this.popupListaMissoesUiScale = uiScale;
-    this.popupListaMissoesOffsetTopo = 214 * uiScale;
+    this.popupListaMissoesUiScale = 1.0;
+    this.popupListaMissoesOffsetTopo = 540; // Meio da tela (centralizado)
     this.popupListaMissoesAberto = false;
+
+    const popupX = 960;
+    const popupY = this.popupListaMissoesOffsetTopo;
 
     this.popupListaMissoesBg = this.add
       .rectangle(popupX, popupY, 760, 430, 0x020914, 0.9)
       .setStrokeStyle(2, 0x2a5ba0, 0.95)
       .setDepth(260)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setVisible(false);
 
     this.popupListaMissoesTitulo = this.add
-      .text(popupX, popupY - 182 * uiScale, "Diario de Missoes", {
+      .text(popupX, popupY - 182, "Diario de Missoes", {
         fontSize: "24px",
         color: "#e6f2ff",
         fontStyle: "bold",
@@ -2193,11 +2351,12 @@ export default class SceneCidade extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setDepth(261)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setVisible(false);
 
     this.popupListaMissoesTexto = this.add
-      .text(popupX - 340 * uiScale, popupY - 146 * uiScale, "", {
+      .text(popupX - 340, popupY - 146, "", {
         fontSize: "19px",
         color: "#d8e7ff",
         lineSpacing: 8,
@@ -2205,24 +2364,26 @@ export default class SceneCidade extends Phaser.Scene {
       })
       .setOrigin(0, 0)
       .setDepth(261)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setVisible(false);
 
     this.popupListaMissoesHint = this.add
-      .text(popupX, popupY + 184 * uiScale, "Use o X para fechar", {
+      .text(popupX, popupY + 184, "Use o X para fechar", {
         fontSize: "16px",
         color: "#9bbce6",
         fontStyle: "italic",
       })
       .setOrigin(0.5)
       .setDepth(261)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setVisible(false);
 
     this.popupListaMissoesFecharBg = this.add
       .rectangle(
-        popupX + 338 * uiScale,
-        popupY - 182 * uiScale,
+        popupX + 338,
+        popupY - 182,
         34,
         34,
         0x17304d,
@@ -2230,19 +2391,21 @@ export default class SceneCidade extends Phaser.Scene {
       )
       .setStrokeStyle(1, 0x9bc9ff, 0.95)
       .setDepth(262)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setInteractive({ useHandCursor: true })
       .setVisible(false);
 
     this.popupListaMissoesFecharTxt = this.add
-      .text(popupX + 338 * uiScale, popupY - 182 * uiScale, "X", {
+      .text(popupX + 338, popupY - 182, "X", {
         fontSize: "20px",
         color: "#ffffff",
         fontStyle: "bold",
       })
       .setOrigin(0.5)
       .setDepth(263)
-      .setScale(uiScale)
+      .setScrollFactor(0)
+      .setScale(1.0)
       .setVisible(false);
 
     this.popupListaMissoesFecharBg.on("pointerdown", () => {
@@ -2370,9 +2533,8 @@ export default class SceneCidade extends Phaser.Scene {
 
   _reposicionarPopupListaMissoes() {
     if (!this.popupListaMissoesBg) return;
-    const cam = this.cameras.main;
-    const popupX = cam.worldView.centerX;
-    const popupY = cam.worldView.top + this.popupListaMissoesOffsetTopo;
+    const popupX = 960;
+    const popupY = this.popupListaMissoesOffsetTopo;
 
     this.popupListaMissoesBg.setPosition(popupX, popupY);
     this.popupListaMissoesTitulo.setPosition(
@@ -2527,6 +2689,7 @@ export default class SceneCidade extends Phaser.Scene {
         },
       )
       .setDepth(242)
+      .setScrollFactor(0)
       .setScale(this.popupMissaoUiScale)
       .setOrigin(0.5);
 
@@ -2574,9 +2737,8 @@ export default class SceneCidade extends Phaser.Scene {
 
   _reposicionarPopupMissaoCidade() {
     if (!this.missaoCidadeBg || !this.missaoCidadeTexto) return;
-    const cam = this.cameras.main;
-    const popupX = cam.worldView.centerX;
-    const popupY = cam.worldView.top + this.popupMissaoOffsetTopo;
+    const popupX = 960;
+    const popupY = this.popupMissaoOffsetTopo;
     this.missaoCidadeBg.setX(popupX);
     this.missaoCidadeBg.setY(popupY);
     this.missaoCidadeTexto.setX(popupX);
@@ -3373,20 +3535,33 @@ export default class SceneCidade extends Phaser.Scene {
     }
 
     this.minimapPlayerDot.setPosition(spritePersonagem.x, spritePersonagem.y);
-    if (coordLabel && spritePersonagem) {
-      coordLabel.setText(
-        `x: ${Math.round(spritePersonagem.x)}\ny: ${Math.round(spritePersonagem.y)}`,
+
+    const hudLocalInfo =
+      this.hudNoCentro && Number.isFinite(this.hudDebugLocalX)
+        ? `\nhudX:${this.hudDebugLocalX} hudY:${this.hudDebugLocalY}`
+        : "";
+
+    // Debug do Mouse na HUD Cam (1920x1080)
+    const pointer = this.input.activePointer;
+    if (this.mouseDebugInfo && pointer) {
+      this.mouseDebugInfo.setPosition(pointer.x + 15, pointer.y + 15);
+      this.mouseDebugInfo.setText(
+        `SCREEN (0-1920): ${Math.round(pointer.x)},${Math.round(pointer.y)}\n` +
+          `WORLD: ${Math.round(pointer.worldX)},${Math.round(pointer.worldY)}`
       );
-      coordLabel.setPosition(
-        spritePersonagem.x,
-        spritePersonagem.y - spritePersonagem.displayHeight / 2 - 10,
-      );
-      coordLabel.setVisible(true);
     }
     this._atualizarHudCidade();
     this._atualizarHudCoins();
     this._reposicionarPopupMissaoCidade();
     this._reposicionarPopupListaMissoes();
+
+    // Atualiza label de coordenadas fixo na tela
+    if (this.coordLabel && spritePersonagem) {
+      this.coordLabel.setVisible(true);
+      this.coordLabel.setText(
+        `X: ${Math.round(spritePersonagem.x)} Y: ${Math.round(spritePersonagem.y)}`,
+      );
+    }
 
     // Tecla E para transição entre cenas
     if (!this.transicionando && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
