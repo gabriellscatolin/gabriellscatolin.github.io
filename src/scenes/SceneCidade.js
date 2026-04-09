@@ -1541,8 +1541,8 @@ export default class SceneCidade extends Phaser.Scene {
   _criarHudCidade() {
     // Estado inicial da maquininha (canto e compacta em 1920x1080)
     // Coordenadas absolutas na tela 1920x1080
-    this.hudMargemDireita = 120;
-    this.hudMargemBaixo = 120;
+    this.hudMargemDireita = 140; // V14: Empurra a maquininha pra Esquerda
+    this.hudMargemBaixo = 180;   // V14: Empurra a maquininha pra Cima
     this.hudUiScale = 1.0; // Zoom 1.0 na câmera HUD
     this.hudNoCentro = false;
     this.hudAnimando = false;
@@ -1955,9 +1955,9 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.hudCoinsUiScale = 1.0;
     this.hudCoinsValorAtual = -1;
-    this.hudCoinsScale = 0.56;
-    this.hudCoinsOffsetRight = 150; // V7: Mais colado no canto superior direito
-    this.hudCoinsOffsetTop = 80;    // V7: Mais colado no canto superior direito
+    this.hudCoinsScale = 0.30;      // HUD Diminuída
+    this.hudCoinsOffsetRight = 40;  // Mais alocado para a direita
+    this.hudCoinsOffsetTop = 30;    // Mais alocado para cima
 
     this.hudCoinsBg = this.add
       .image(0, 0, "cieloCoinsHud")
@@ -1966,7 +1966,7 @@ export default class SceneCidade extends Phaser.Scene {
       .setDepth(230)
       .setScrollFactor(0);
 
-    const coinFont = 22;
+    const coinFont = 20; // V12: Contagem de moedas aumentada
     this.hudCoinsTxt = this.add
       .text(0, 0, "", {
         fontSize: `${coinFont}px`,
@@ -2172,9 +2172,12 @@ export default class SceneCidade extends Phaser.Scene {
 
     this.hudCoinsBg.setPosition(posX, posY);
 
-    const txtX = posX + 14 * this.hudCoinsUiScale;
+    // V13: Retornou um pouco para a direita (de -15 para -5)
+    const txtX = posX + 5 * this.hudCoinsUiScale;
     const txtY = posY + this.hudCoinsBg.displayHeight * 0.5;
     this.hudCoinsTxt.setPosition(txtX, txtY);
+    // Para alinhar o texto crescendo para a esquerda
+    this.hudCoinsTxt.setOrigin(1, 0.5);
 
     const bruto = Number(this.registry.get("cieloCoins") ?? 0);
     const saldo = Number.isFinite(bruto) ? Math.max(0, Math.floor(bruto)) : 0;
