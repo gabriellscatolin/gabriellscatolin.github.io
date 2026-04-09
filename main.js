@@ -55,7 +55,6 @@ const config = {
     SceneCutscene,
     SceneChuva,
     SceneJogo,
-
     SceneMiniGame,
     SceneMapaInterativo,
     SceneEscritorio,
