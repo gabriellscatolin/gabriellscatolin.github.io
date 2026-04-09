@@ -804,7 +804,7 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
     this.textoNarracao.setText("");
     this.textoNome.setVisible(true);
     this.textoNpc.setVisible(true);
-    this.textoNpc.setText(`"${resposta}"`);
+    this.textoNpc.setText(`"${resposta || ""}"`);
 
     const ultimo = this.cenaIdx >= this.roteiro.length - 1;
     this._mostrarContinuar(ultimo ? "Ver resultado  ->" : "Próxima cena  ->");
@@ -902,15 +902,19 @@ export default class SceneDialogoAgencia02 extends SceneDialogoBase {
       ? "Meta atingida!"
       : `Meta não atingida (precisava de ${meta} coins)`;
 
-    // Reaproveita o campo principal de fala para mostrar o resumo final
-    this.textoNpc.setText(
-      `${resumo}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n` +
+    const textoFinal = `${resumo}\n\nCoins da fase: ${this.pontuacao} / ${this.maxPts} (${pct}%)\n` +
         `Total da sessão: ${getScore(this.registry)}\n\n` +
-        `${statusMeta}\n\n${avaliacao}`,
-    ).setStyle({
-      color: cor,
-      fontSize: "32px",
-    });
+        `${statusMeta}\n\n${avaliacao}`;
+
+    // Reaproveita o campo principal de fala para mostrar o resumo final
+    this.textoNpc
+      .setText(textoFinal)
+      .setStyle({
+        color: cor,
+        fontSize: "26px",
+      })
+      .setOrigin(0.5, 0)
+      .setPosition(this.cameras.main.centerX, 685);
 
     // Atualiza o progresso do jogo conforme o NPC concluído nesta agência
     if (this.npcAlvo === "Camila") {
