@@ -1573,108 +1573,95 @@ $$
 
 ## 4.1. Desenvolvimento preliminar do jogo (sprint 1)
 
-## 1. Estrutura do projeto: 
-O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema emaaarquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
-Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
-Os principais arquivos são:
-Main.js: arquivo responsável por inicializar o jogo e gerenciar as cenas.
-index.html: arquivo responsável pelas configurações da página web e pela integração com o main.js.
+### 4.1. 1. Estrutura do projeto: 
 
-## 2. Estrutura dos Personagens:
-A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+&emsp; O projeto foi estruturado de forma modular, separando os diferentes eixos do sistema em arquivos distintos, como cenas, assets e códigos principais, incluindo a separação do arquivo main.js. 
+&emsp; Essa organização facilita a manutenção, a leitura do código e o trabalho em equipe.
 
-2.1. Desenvolvimento de personagens jogáveis:
+&emsp; Os principais arquivos são:
 
-Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
-Os personagens foram pensados para permitir futuras animações.
-Sprites dos personagens jogáveis:
+&emsp; **Main.js:** arquivo responsável por inicializar o jogo e gerenciar as cenas.
+&emsp; **index.html:** arquivo responsável pelas configurações da página web e pela integração com o main.js.
+
+### 4.1.2. Estrutura dos Personagens:
+
+&emsp; A primeira versão do jogo teve como foco principal o desenvolvimento visual e conceitual, priorizando a criação dos personagens e dos cenários iniciais que compõem o universo do jogo.
+
+#### Desenvolvimento de personagens jogáveis:
+
+&emsp; Nesta etapa, foram desenvolvidos alguns personagens jogáveis em pixel art 2D utilizando o site piskelapp.com.
+&emsp;Os personagens foram pensados para permitir futuras animações.
+
+&emsp; **Sprites dos personagens jogáveis:**
 
 <div align="center">
-	
-<sub>Figura 1 - Sprite sheet personagens jogáveis</sub>
+ <sub>Imagem 22 - Sprite sheet personagens jogáveis</sub>
+ <img src="../src/assets/imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
 
-<img src="../src/assets/imagens/imagensGdd/sprite_sheet_protagonistas_gdd.png">
+ <sub>Imagem 23 - Personagens jogáveis</sub>
+ <img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
 
-<sub>Figura 2 - Personagens jogáveis</sub>
-
-<img src="../src/assets/imagens/imagensGdd/personagens_protagonistas_gdd.png" width= 95%>
-
-<sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
+ <sub>Fonte: Autoria Própria usando o Piskel (2026)Descrição: imagem do sprite sheet dos personagens jogáveis</sub>
 </div>
 	
-Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
+&emsp; Os sprites foram criados seguindo um padrão de tamanho e proporção, facilitando sua utilização posterior no código do jogo e garantindo consistência visual entre os personagens.
 
 2.2. Desenvolvimento de personagens secundários:
 
-Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
-Sprites dos personagens secundários:
+&emsp; Além dos personagens jogáveis, foram desenvolvidos personagens secundários (NPCs), que representam diferentes profissões e ambientes do jogo. Esses NPCs contribuem para a ambientação e a narrativa, sendo que cada um representa um integrante do grupo.
+
+&emsp; **Sprites dos personagens secundários:**
 
 <div align="center">
-	
-<sub>Figura 3 - Personagens secundários </sub>
+ <sub>Imagem 24 - Personagens secundários </sub>
+ <img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png" width= 95%>
 
-<img src="../src/assets/imagens/imagensGdd/personagens_secundarios_gdd.png" width= 95%>
+ <sub>Imagem 25 - Foto perfil personagens secundários </sub>
+ <img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
+
+ <sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
 </div>
+
+### 4.1.3. Estrutura dos cenários iniciais:
+&emsp; Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
+
+&emsp; Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
+
+&emsp; Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
 
 <div align="center">
-<sub>Fonte: Autoria Própria usando o Piskel (2026) Descrição: imagem dos personagens secundários que trabalham no comércios do jogo</sub>
-</div>
-	
-<sub>Figura 4 - Foto perfil personagens secundários </sub>
+ <sub>Imagem 26 - Cenários dos estabelecimentos internamente</sub>
+ <img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
 
-<img src="../src/assets/imagens/imagensGdd/fotos_personagens_secundarios_gdd.png" width= 95%>
-
-<div align="center">
-<sub>Fonte: Autoria Própria usando o Piskel e Inteligência Artifcial (2026) Descrição: imagens detalhada dos personagens secundários que trabalham no comércios do jogo</sub>
-</div>
-
-## 3. Estrutura dos cenários iniciais:
-&emsp;Os cenários iniciais do jogo representam os primeiros ambientes exploráveis pelo jogador durante a experiência de treinamento. Esses espaços simulam estabelecimentos comerciais que fazem parte da rotina de atuação de um Gerente de Negócios da Cielo.
-
-&emsp;Os ambientes foram concebidos em estilo pixel art, utilizando ferramentas de inteligência artificial como apoio na geração inicial das imagens, que posteriormente foram adaptadas para o contexto visual do jogo. A escolha desse estilo visual busca garantir leveza gráfica, fácil leitura visual e compatibilidade com o design do jogo.
-
-&emsp;Cada cenário representa um tipo de estabelecimento comercial onde o jogador poderá interagir com clientes e realizar simulações de venda de soluções de pagamento. Esses ambientes funcionam como espaços de interação, nos quais o jogador inicia diálogos, toma decisões e avança na progressão do treinamento.
-
-<sub>Figura 5 - Cenários dos estabelecimentos internamente</sub>
-
-<img src="../src/assets/imagens/imagensGdd/foto_cenarios_gdd.png">
-
-<sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
+ <sub>Fonte: Autoria Própria usando Inteligência Artifcial (2026) Descrição: imagens dos cenários internos do jogo</sub>
 </div>
 
 ## 4.2. Desenvolvimento básico do jogo (sprint 2)
 
-&emsp;No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
+&emsp; No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
 
-&emsp;Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
+&emsp; Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
 
-&emsp;Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+&emsp; Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
 
-1.Implementação da cutscene inicial que introduz o contexto do jogo.
+- Implementação da cutscene inicial que introduz o contexto do jogo;
+- Criação da tela inicial (menu principal);
+- Desenvolvimento da tela de seleção de personagem;
+- Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade;
+- Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste).
 
-2.Criação da tela inicial (menu principal).
+&emsp; Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
 
-3.Desenvolvimento da tela de seleção de personagem.
+- Implementação da cena do mapa da cidade.
+- Desenvolvimento da cena da agência bancária.
+- Implementação da cena do escritório.
+- Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
 
-4.Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade.
+&emsp; A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
 
-5.Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste)
+Imagem 27 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
 
-&emsp;Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
-
-1.Implementação da cena do mapa da cidade.
-
-2.Desenvolvimento da cena da agência bancária.
-
-3.Implementação da cena do escritório.
-
-4.Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
-
-&emsp;A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
-
-Figura 28 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
-
-&emsp;O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
+&emsp; O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
 
 ```js
 this.CONFIG = {
@@ -1688,7 +1675,7 @@ this.CONFIG = {
 };
 ```
 
-&emsp;Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
+&emsp; Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
 
 ```js
 btn.on("pointerover", () => btn.setScale(botao.scale * 1.07));
@@ -1704,40 +1691,31 @@ startGame() {
 }
 ```
 Algumas cenas de telas do jogo:
+<div align="center">
+ <sub>Imagem 28 - Tela Inicial </sub>
+ <img src="../gdd_images/telaInicial.jpg" width= "800">
+ 
+ <sub>Imagem 29 - Tela de Configurações </sub>
+ <img src="../gdd_images/telaConfig.jpg" width= "800">
 
-<sub>Tela Inicial </sub>
+ <sub>Imagem 30 - Tela de seleção de personagens </sub>
+ <img src="../gdd_images/telaSeleçao.jpg" width= "800">
 
-<img src="../gdd_images/telaInicial.jpg" width= "800">
+ <sub>Imagem 31 - Tela de tutorial </sub>
+ <img src="../gdd_images/telaTutorial.jpg" width= "800">
 
-<sub>Tela de Configurações </sub>
+ <sub>Imagem 32 - Tela da ponte </sub>
+ <img src="../gdd_images/telaPonte.jpg" width= "800">
 
-<img src="../gdd_images/telaConfig.jpg" width= "800">
+ <sub>Imagem 33 - Tela da Cutscene </sub>
+ <img src="../gdd_images/telaCutScene.jpg" width= "800">
 
-<sub>Tela de seleção de personagens </sub>
+ <sub>Imagem 34 - Tela de seleção de personagens</sub>
 
-<img src="../gdd_images/telaSeleçao.jpg" width= "800">
+ <sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+</div>
 
-<sub>Tela de tutorial </sub>
-
-<img src="../gdd_images/telaTutorial.jpg" width= "800">
-
-<sub>Tela da ponte </sub>
-
-<img src="../gdd_images/telaPonte.jpg" width= "800">
-
-<sub>Tela da Cutscene </sub>
-
-<img src="../gdd_images/telaCutScene.jpg" width= "800">
-
-
-
-
-
-
-
-Figura 29 - Tela de seleção de personagens &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
-
-&emsp;Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
+&emsp; Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
 
 ```js
 this.listaPersonagens = [
@@ -1766,8 +1744,7 @@ for (let i = 1; i <= 4; i++) {
 }
 ```
 
-&emsp;Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
-
+&emsp; Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
 
 ```js
 criarAnimacoes() {
@@ -1783,7 +1760,7 @@ criarAnimacoes() {
 }
 ```
 
-&emsp;Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
+&emsp; Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
 
 ```js
 update() {
@@ -1803,7 +1780,7 @@ update() {
 }
 ```
 
-&emsp;Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
+&emsp; Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
 
 ```js
 // Colisão — impede o jogador de passar pelo NPC
@@ -1819,10 +1796,13 @@ if (distNpc < 150 && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.mostrarDialogoObjetivo(); // Abre diálogo com efeito typewriter
 }
 ```
+<div align="center">
+ <sub>Imagem 35 - Cena de gameplay com o NPC Vanessa na ponte</sub>
 
-Figura 30 - Cena de gameplay com o NPC Vanessa na ponte &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-&emsp;Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
+&emsp; Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
 
 ```js
 iniciarClockWipe() {
@@ -1842,14 +1822,13 @@ iniciarClockWipe() {
 }
 ```
 
-
-Dificuldades
+&emsp; **Dificuldades**:
 
 - Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações
 - Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X
 - Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento
 
-Próximos passos
+&emsp; **Próximos passos**
 
 - Criar o mapa interno dos estabelecimentos para a fase seguinte
 - Adicionar os puzzles e desafios de vendas do jogo
@@ -1857,64 +1836,59 @@ Próximos passos
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
-Durante a terceira sprint do projeto, o foco do desenvolvimento foi expandir o ambiente jogável do jogo, implementando o mapa principal da cidade e iniciando a criação dos cenários internos dos estabelecimentos presentes no jogo. Essa etapa teve como objetivo transformar o jogo em um ambiente explorável mais amplo, permitindo ao jogador navegar por um cenário urbano e iniciar a interação com diferentes locais da narrativa.
+&emsp; Durante a terceira sprint do projeto, o foco do desenvolvimento foi expandir o ambiente jogável do jogo, implementando o mapa principal da cidade e iniciando a criação dos cenários internos dos estabelecimentos presentes no jogo. Essa etapa teve como objetivo transformar o jogo em um ambiente explorável mais amplo, permitindo ao jogador navegar por um cenário urbano e iniciar a interação com diferentes locais da narrativa.
 
-A partir da estrutura desenvolvida nas sprints anteriores, foi criada a cena SceneCidade.js, responsável por gerenciar o mapa urbano, a movimentação do personagem nesse ambiente, o sistema de colisões com elementos do cenário e as zonas de interação que permitem acessar determinados estabelecimentos.
+&emsp; A partir da estrutura desenvolvida nas sprints anteriores, foi criada a cena SceneCidade.js, responsável por gerenciar o mapa urbano, a movimentação do personagem nesse ambiente, o sistema de colisões com elementos do cenário e as zonas de interação que permitem acessar determinados estabelecimentos.
 
-Além disso, também foi iniciado o desenvolvimento dos ambientes internos dos estabelecimentos do jogo utilizando o software Tiled, permitindo estruturar os cenários que serão utilizados nas próximas etapas da narrativa.
+&emsp; Além disso, também foi iniciado o desenvolvimento dos ambientes internos dos estabelecimentos do jogo utilizando o software Tiled, permitindo estruturar os cenários que serão utilizados nas próximas etapas da narrativa.
 
-Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
+&emsp; Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
 
-- Implementação do mapa principal da cidade utilizando o sistema de Tilemaps do Phaser.js.
-
-- Integração dos tilesets gráficos responsáveis pela composição visual do cenário urbano.
-
-- Desenvolvimento do sistema de colisão entre o personagem e objetos do ambiente, como prédios, veículos e obstáculos.
-
-- Implementação da câmera dinâmica, que acompanha o personagem durante a movimentação pelo mapa.
-
-- Criação do sistema de interação com estabelecimentos, permitindo acessar ambientes internos.
-
-- Desenvolvimento dos cenários internos de diversos estabelecimentos utilizando o editor de mapas Tiled.
-
+- Implementação do mapa principal da cidade utilizando o sistema de Tilemaps do Phaser.js;
+- Integração dos tilesets gráficos responsáveis pela composição visual do cenário urbano;
+- Desenvolvimento do sistema de colisão entre o personagem e objetos do ambiente, como prédios, veículos e obstáculos;
+- Implementação da câmera dinâmica, que acompanha o personagem durante a movimentação pelo mapa;
+- Criação do sistema de interação com estabelecimentos, permitindo acessar ambientes internos;
+- Desenvolvimento dos cenários internos de diversos estabelecimentos utilizando o editor de mapas Tiled;
 - Exportação desses cenários para o projeto no formato JSON, preparando sua futura integração ao jogo.
 
 ### Implementação do mapa da cidade:
 
-Para a construção do cenário urbano do jogo foi utilizado o software Tiled, um editor amplamente utilizado no desenvolvimento de jogos 2D para criação de mapas baseados em tiles.
+&emsp; Para a construção do cenário urbano do jogo foi utilizado o software Tiled, um editor amplamente utilizado no desenvolvimento de jogos 2D para criação de mapas baseados em tiles.
 
-O mapa da cidade foi projetado no Tiled e posteriormente exportado no formato JSON, permitindo sua integração com o motor de jogos Phaser.js. O carregamento desse mapa ocorre dentro do método `preload()` da cena responsável pelo ambiente urbano.
+&emsp; O mapa da cidade foi projetado no Tiled e posteriormente exportado no formato JSON, permitindo sua integração com o motor de jogos Phaser.js. O carregamento desse mapa ocorre dentro do método `preload()` da cena responsável pelo ambiente urbano.
 
 ```js
 this.load.tilemapTiledJSON('mapaGeral', 'src/assets/imagens/mapsjson/tileMaps/mapaMiniMundoVF.tmj?v=5');
 ```
 
-Além do arquivo de mapa, também foram carregados os tilesets, que são os conjuntos de imagens utilizados para compor visualmente o cenário.
+&emsp; Além do arquivo de mapa, também foram carregados os tilesets, que são os conjuntos de imagens utilizados para compor visualmente o cenário.
 
 ```js
 this.load.image('tilesMapaTopo', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Top.png?v=1');
 this.load.image('tilesMapaBase', 'src/assets/imagens/mapsjson/tileSets/Modern_Exteriors_Bottom.png?v=1');
 ```
 
-Após o carregamento desses recursos, o mapa é instanciado na cena utilizando o método `make.tilemap()`, permitindo acessar suas camadas e estruturas internas.
+&emsp; Após o carregamento desses recursos, o mapa é instanciado na cena utilizando o método `make.tilemap()`, permitindo acessar suas camadas e estruturas internas.
 
 ```js
 const mapa = this.make.tilemap({ key: 'mapaGeral' });
 ```
 
-Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
+&emsp; Essa abordagem permite organizar o cenário em diferentes camadas e facilita a implementação de elementos como colisões, objetos interativos e elementos decorativos.
 
 <div align="center">
-<sub>Figura 20 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/visãoMapa.jpg"width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 36 - Mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/visãoMapa.jpg"width= 97%>
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Organização das camadas do mapa:
 
-O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
+&emsp; O mapa da cidade foi estruturado utilizando múltiplas camadas, permitindo separar elementos visuais e objetos com colisão. Essa organização facilita tanto a construção do cenário quanto a implementação da lógica de interação com o ambiente.
 
-Para evitar repetição de código durante a criação das camadas, foi implementada uma função auxiliar responsável por instanciá-las no Phaser.
+&emsp; Para evitar repetição de código durante a criação das camadas, foi implementada uma função auxiliar responsável por instanciá-las no Phaser.
 
 ```js
 _criarCamada(mapa, nome, tilesets) {
@@ -1923,16 +1897,13 @@ _criarCamada(mapa, nome, tilesets) {
 }
 ```
 
-As camadas do mapa foram divididas em três categorias principais:
+&emsp; As camadas do mapa foram divididas em três categorias principais:
 
 - Camadas de chão e elementos decorativos, responsáveis apenas pela composição visual do cenário;
-
 - Camadas de objetos com colisão, que impedem a movimentação do personagem;
-
 - Camadas de elementos posicionados acima do personagem, utilizadas para criar sensação de profundidade no cenário.
 
-
-Para as camadas que devem bloquear o movimento do jogador, foi utilizado o método `setCollisionByExclusion()`.
+&emsp; Para as camadas que devem bloquear o movimento do jogador, foi utilizado o método **`setCollisionByExclusion()`**:
 
 ```js
 caminhoInferior.setCollisionByExclusion([-1]);
@@ -1940,195 +1911,180 @@ carrosVeiculos.setCollisionByExclusion([-1]);
 estabelecimentos.setCollisionByExclusion([-1]);
 ```
 
-Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
+&emsp; Esse sistema garante que o personagem não atravesse elementos como veículos, prédios e outros obstáculos presentes no mapa.
 
 ### Movimentação do personagem no mapa:
 
-O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
+&emsp; O personagem é criado utilizando o sistema de física do Phaser, permitindo controlar sua velocidade e detectar colisões com os objetos do cenário.
 
 ```js
 this.personagem = this.physics.add.sprite(spawnX, spawnY, 'sprite_frente_1');
 this.personagem.setCollideWorldBounds(true);
 ```
 
-O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
+&emsp; O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
 
 ```js
 this.teclas = this.input.keyboard.createCursorKeys();
 ```
 
-Durante o loop de atualização do jogo `(update())`, o sistema verifica quais teclas estão pressionadas e aplica velocidade ao personagem, além de reproduzir a animação correspondente à direção do movimento.
+&emsp; Durante o loop de atualização do jogo `(update())`, o sistema verifica quais teclas estão pressionadas e aplica velocidade ao personagem, além de reproduzir a animação correspondente à direção do movimento.
 
-Quando o jogador interrompe o movimento, a animação é pausada e o sprite retorna ao primeiro frame da direção atual, representando o estado de repouso do personagem.
+&emsp; Quando o jogador interrompe o movimento, a animação é pausada e o sprite retorna ao primeiro frame da direção atual, representando o estado de repouso do personagem.
 
 ### Sistema de câmera dinâmica:
 
-Para melhorar a experiência de navegação pelo cenário, foi implementado um sistema de câmera que acompanha automaticamente o personagem durante sua movimentação.
+&emsp; Para melhorar a experiência de navegação pelo cenário, foi implementado um sistema de câmera que acompanha automaticamente o personagem durante sua movimentação.
 
 ```js
 this.cameras.main.startFollow(this.personagem);
 ```
 
-Além disso, foi aplicado um nível de zoom específico para melhorar a visualização do cenário.
+&emsp; Além disso, foi aplicado um nível de zoom específico para melhorar a visualização do cenário.
 
 ```js
 this.cameras.main.setZoom(4);
 ```
 
-Também foram definidos limites para a câmera, impedindo que o jogador visualize áreas externas ao mapa.
+&emsp; Também foram definidos limites para a câmera, impedindo que o jogador visualize áreas externas ao mapa.
 
 ```js
 this.cameras.main.setBounds(MAPA_X, MAPA_Y, MAPA_LARGURA, MAPA_ALTURA);
 ```
 
 <div align="center">
-<sub>Figura 21 - Personagem no mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/personagemMapa.jpg"width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>imagem 37 - Personagem no mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/personagemMapa.jpg"width= 97%>
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Sistema de interação com estabelecimentos:
 
-Uma das principais funcionalidades desenvolvidas nesta sprint foi o sistema de interação que permite ao jogador acessar determinados estabelecimentos presentes no mapa da cidade.
-Para isso, foi criada uma zona de interação utilizando um retângulo geométrico que representa a área próxima à entrada de um prédio.
+&emsp; Uma das principais funcionalidades desenvolvidas nesta sprint foi o sistema de interação que permite ao jogador acessar determinados estabelecimentos presentes no mapa da cidade. Para isso, foi criada uma zona de interação utilizando um retângulo geométrico que representa a área próxima à entrada de um prédio.
 
 ```js
 this.zonaAgencia = new Phaser.Geom.Rectangle(950, 840, 90, 80);
 ```
 
-Quando o personagem entra nessa área, um indicador visual é exibido informando que a tecla E pode ser pressionada para entrar no local.
+&emsp; Quando o personagem entra nessa área, um indicador visual é exibido informando que a tecla E pode ser pressionada para entrar no local.
 
 ```JS
 this.labelE = this.add.text(993, 838, '[E] Entrar');
 ``` 
 
-Caso o jogador pressione a tecla correspondente, é iniciada uma transição de cena utilizando um efeito de fade-out da câmera.
+&emsp; Caso o jogador pressione a tecla correspondente, é iniciada uma transição de cena utilizando um efeito de fade-out da câmera.
 
 ```JS
 this.cameras.main.fadeOut(800, 0, 0, 0);
 ```
 
-Após a conclusão da animação, o jogo inicia a cena interna do estabelecimento.
+&emsp; Após a conclusão da animação, o jogo inicia a cena interna do estabelecimento.
 
 ```JS
 this.scene.start('SceneEscritorio');
 ```
 
-Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
+&emsp; Esse sistema estabelece a base para a navegação entre o mapa da cidade e os diferentes ambientes internos do jogo.
 
 <div align="center">
-<sub>Figura 22 - Mapa geral - Mini Mundo Cielo</sub>
-<img src="../gdd_images/interacaoEstabelecimento.jpg" width= 97%>
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 38 - Mapa geral - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/interacaoEstabelecimento.jpg" width= 97%>
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Desenvolvimento dos cenários internos:
 
-Além da implementação do mapa principal da cidade, também foi iniciado o desenvolvimento dos cenários internos dos estabelecimentos presentes no jogo. Esses ambientes foram projetados utilizando o software Tiled, seguindo o mesmo padrão estrutural utilizado na construção do mapa externo.
+&emsp; Além da implementação do mapa principal da cidade, também foi iniciado o desenvolvimento dos cenários internos dos estabelecimentos presentes no jogo. Esses ambientes foram projetados utilizando o software Tiled, seguindo o mesmo padrão estrutural utilizado na construção do mapa externo.
 
-Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
+&emsp; Durante essa etapa foram desenvolvidos os mapas internos dos seguintes estabelecimentos:
 
-- Agência bancária
+- Agências bancárias 1 2 e 3;
+- Padaria;
+- Farmácia;
+- Loja de roupa;
+- Estação de metrô;
+- Restaurante;
+- Supermercado;
+- Posto de gasolina.
 
-- Padaria
-
-- Farmácia
-
-- Loja de roupa
-
-- Estação de metrô
-
-- Restaurante
-
-- Supermercado
-
-- Posto de gasolina
-
-
-Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
+&emsp; Cada ambiente foi criado como um tilemap independente, permitindo maior organização do projeto e facilitando a implementação de interações específicas dentro de cada local.
 Após a criação no Tiled, os mapas foram exportados no formato JSON, tornando possível sua integração com o motor Phaser.js por meio do sistema de carregamento de tilemaps.
 
-Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
+&emsp; Apesar de esses cenários já estarem implementados e exportados para o projeto, a integração completa desses ambientes ao mapa da cidade ainda não foi finalizada durante esta sprint. Dessa forma, a conexão entre o mapa principal e todos os estabelecimentos será concluída nas próximas etapas do desenvolvimento.
 
 <div align="center">
-<sub>Figura 23 e 24 - Estabelecimentos internos - Mini Mundo Cielo</sub>
-<img src="../gdd_images/MapasCenarios.png">
-<img src="../gdd_images/MapasCenarios2.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagens 39 e 40 - Estabelecimentos internos - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/MapasCenarios.png">
+ <img src="../gdd_images/MapasCenarios2.png">
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Dificuldades:
 
-Durante o desenvolvimento desta sprint, algumas dificuldades técnicas foram encontradas, principalmente relacionadas à integração do mapa com o sistema de movimentação do personagem e com os elementos interativos do cenário.
+&emsp; Durante o desenvolvimento desta sprint, algumas dificuldades técnicas foram encontradas, principalmente relacionadas à integração do mapa com o sistema de movimentação do personagem e com os elementos interativos do cenário.
 
 Entre os principais desafios estão:
 
-- Integrar corretamente o mapa criado no editor Tiled ao motor Phaser.js.
-
-- Configurar o sistema de colisão em múltiplas camadas do mapa, sem interferir nos elementos decorativos.
-
-- Ajustar a escala do personagem para manter proporção adequada em relação ao tamanho dos tiles do cenário.
-
-- Implementar um sistema confiável de detecção de proximidade para interação com estabelecimentos.
-
+- Integrar corretamente o mapa criado no editor Tiled ao motor Phaser.js;
+- Configurar o sistema de colisão em múltiplas camadas do mapa, sem interferir nos elementos decorativos;
+- Ajustar a escala do personagem para manter proporção adequada em relação ao tamanho dos tiles do cenário;
+- Implementar um sistema confiável de detecção de proximidade para interação com estabelecimentos;
 - Organizar a estrutura dos mapas internos dos estabelecimentos para futura integração ao sistema de navegação do jogo.
 
 
 ### Próximos passos:
 
-Nas próximas sprints, o desenvolvimento será direcionado para ampliar as interações dentro do jogo e finalizar a integração dos cenários internos ao mapa da cidade.
+&emsp; Nas próximas sprints, o desenvolvimento será direcionado para ampliar as interações dentro do jogo e finalizar a integração dos cenários internos ao mapa da cidade.
 Entre os próximos objetivos estão:
 
 - Integrar todos os estabelecimentos internos ao mapa da cidade.
-
 - Implementar NPCs adicionais com diálogos e objetivos específicos.
-
 - Implementar novas interações com NPCs dentro dos estabelecimentos.
-
 - Desenvolver os desafios e puzzles relacionados à temática do jogo.
-
 - Adicionar novas mecânicas de gameplay ligadas ao sistema de progressão do jogador.
-
 - Realizar ajustes visuais e melhorias na navegação pelo mapa.
-
 
 ## 4.4. Desenvolvimento final do MVP (sprint 4)
 
-O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
+&emsp; O desenvolvimento do jogo ao longo das três primeiras sprints foi estruturado de forma progressiva, partindo da base conceitual até a construção de um ambiente jogável mais completo.
 
-Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
+&emsp; Na sprint 1, o foco esteve na definição da estrutura inicial do projeto, com a organização modular dos arquivos e a criação dos primeiros elementos visuais do jogo, incluindo personagens jogáveis, NPCs e cenários em pixel art, estabelecendo a identidade estética e narrativa da experiência.
 
-Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
+&emsp; Na sprint 2, o desenvolvimento avançou para a implementação das funcionalidades básicas de jogabilidade, como o menu principal, a seleção de personagens, a cutscene introdutória e o sistema inicial de movimentação do jogador. Também foram estruturadas as primeiras interações com NPCs e iniciadas as transições entre cenas, consolidando a base técnica do jogo.
 
-Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
+&emsp; Já na sprint 3, o projeto evoluiu para um ambiente mais robusto e explorável, com a implementação do mapa principal da cidade, sistema de câmera dinâmica, colisões com o cenário e a criação das zonas de interação que permitem acessar estabelecimentos. Além disso, foi iniciado o desenvolvimento dos cenários internos utilizando tilemaps, ampliando as possibilidades de navegação e interação dentro do jogo.
 
-Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
-Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
-Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+&emsp; Durante a quarta sprint, o foco do desenvolvimento foi a consolidação do jogo como um Produto Mínimo Viável (MVP), integrando os sistemas previamente construídos em uma experiência coesa, com início, meio e fim bem definidos.
 
- Elementos desenvolvidos na sprint 4: 
+&emsp; Nessa etapa, os ambientes internos foram finalizados e conectados ao mapa principal, garantindo a navegação contínua entre cenas e a interação com diferentes estabelecimentos. Além disso, foram implementados o roteiro narrativo, os sistemas de interface (HUD), a sonoplastia e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente (chuva e vento), elevando o nível de imersão do jogador.
 
-- Finalização dos cenários internos (metrô e agências) utilizando o Tiled
-- Integração completa das cenas ao sistema principal (SceneCidade.js)
-- Implementação da navegação entre o mapa e os estabelecimentos
-- Desenvolvimento e integração do mini game do metrô
-- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática
-- Organização e estruturação das pastas do projeto no VS Code
-- Integração das interações dentro dos estabelecimentos
-- Integração da IA nos diálogos e interações
-- Estruturação do fluxo de progressão do jogador
+&emsp; Apesar dos desafios técnicos relacionados à integração entre cenas e à organização estrutural do projeto, a sprint resultou em uma versão funcional do jogo, apta para testes e refinamentos na etapa seguinte.
+
+&emsp; **Elementos desenvolvidos na sprint 4:**
+
+- Finalização dos cenários internos (metrô e agências) utilizando o Tiled;
+- Integração completa das cenas ao sistema principal (SceneCidade.js);
+- Implementação da navegação entre o mapa e os estabelecimentos;
+- Desenvolvimento e integração do mini game do metrô;
+- Implementação de efeitos dinâmicos (chuva e vento) baseados em lógica matemática;
+- Integração das interações dentro dos estabelecimentos;
+- Integração da IA nos diálogos e interações;
+- Estruturação do fluxo de progressão do jogador;
 - Interface e experiência do usuário (HUD):
-    - Mini-mapa
-    - Interface da maquininha Cielo
-    - Aba de missões
-    - Contador de progresso
+    - Mini-mapa;
+    - Interface da maquininha Cielo;
+    - Aba de missões;
+    - Contador de progresso;
 - Recursos visuais e sonoros:
-    - Criação e implementação de novas sprite sheets
-    - Implementação de trilha sonora e efeitos sonoros
+    - Criação e implementação de novas sprite sheets;
+    - Implementação de trilha sonora e efeitos sonoros.
 
  ### SceneCidade.js como hub central de navegação
  
-A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
+&emsp; A SceneCidade.js foi estruturada como o ponto central de articulação do Mini Mundo Cielo, concentrando em uma única cena os sistemas responsáveis pelo carregamento do mapa, movimentação do personagem, controle de câmera, interface visual e gestão das transições entre ambientes. Seu método init() recebe os dados de contexto transmitidos entre cenas, como personagem escolhido, posição de spawn e progresso de missão,  e os recupera do Phaser.Registry quando não estão disponíveis diretamente.
 
 ```js
 init(dados = {}) {
@@ -2139,14 +2095,14 @@ init(dados = {}) {
 } 
 ```
 
- A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
+&emsp; A conexão com os estabelecimentos é gerenciada por zonas de interação geométricas instanciadas individualmente para cada local. Ao detectar o personagem nessas áreas, a cena exibe um indicador visual e aguarda o acionamento da tecla E para iniciar a transição com fade-out da câmera.
 
  ```js
 jsthis.zonaAgencia = new Phaser.Geom.Rectangle(976, 856, 90, 80);
 this.labelE = this.add.text(976, 856, "[E] Entrar", { fontSize: "6px", color: "#ffffff" }).setVisible(false); 
 ```
 
-A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
+&emsp; A progressão pelo mapa é orientada por setas-guia sequenciais, cujo índice é persistido no registry. O método _avancarSequenciaSetas() valida se o jogador acessou o estabelecimento correto antes de avançar para o próximo destino, estruturando a experiência de forma linear sem bloquear a exploração livre.
 
 ```js
 js_avancarSequenciaSetas(localAtual) {
@@ -2159,34 +2115,36 @@ js_avancarSequenciaSetas(localAtual) {
 
 ### Finalização dos cenários internos
 
-Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
-O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
-````JS
+&emsp; Com a estrutura de navegação da SceneCidade.js consolidada, esta sprint foi dedicada à finalização e integração dos cenários internos de todos os estabelecimentos. Cada ambiente foi implementado como uma cena independente - SceneAgencia01, ScenePadaria, SceneEscritorio, entre outros - seguindo um padrão estrutural comum com os métodos init, preload, create e update.
+
+&emsp; O sistema de colisão interna foi estruturado com uma convenção de nomenclatura nas camadas do Tiled: camadas prefixadas com N - compõem apenas a camada visual, enquanto camadas prefixadas com C - recebem colisão ativa.
+
+```js
 jsconst paredeC = this._criarCamada(mapa, "C - ParedeComColid", tilesets);
 [paredeC].filter(Boolean).forEach((c) => c.setCollisionByExclusion([-1]));
  ```
 
-A função auxiliar _criarCamada() foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
-
+&emsp; A função auxiliar `_criarCamada()` foi reaproveitada em todas as cenas, centralizando o tratamento de erros e evitando repetição de código. A saída de cada estabelecimento é gerenciada por uma zona geométrica que inicia a transição de volta à SceneCidade.js com fade-out, devolvendo o jogador ao ponto de entrada correspondente.
 
 ### Integração das interações dentro dos estabelecimentos
 
-As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador [E] Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
+As interações com NPCs dentro dos estabelecimentos seguem um padrão comum a todas as cenas internas: ao se aproximar de um personagem, o jogador visualiza um indicador `[E]` Falar e um símbolo de exclamação animado. Ao pressionar a tecla, a cena atual é pausada e uma cena de diálogo é iniciada em paralelo via scene.launch(), preservando o estado do ambiente.
 
 ```js
 jsif (pertoNpc && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.scene.pause();
-  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" });
+  this.scene.launch("SceneDialogoPadaria", { cenaOrigem: "ScenePadaria" })
+};
 ```
-Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
-Após a escolha, o método _chamarLLM() gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
+&emsp; Cada cena de diálogo foi estruturada com um roteiro desenvolvido em parceria com o advisor da Cielo, simulando situações reais de abordagem comercial. A cada cena, o jogador escolhe entre três respostas classificadas como correta, neutra ou errada, com pesos distintos no sistema de Cielo Coins.
 
-Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
+&emsp; Após a escolha, o método `_chamarLLM()` gera a réplica do NPC. No modo estrito, a resposta vem diretamente do roteiro. Quando desativado, ela é gerada dinamicamente pela API da Groq com o modelo llama-3.1-8b-instant, orientada por um prompt que contextualiza o perfil do NPC e o tom esperado conforme a qualidade da resposta do jogador.
 
+&emsp; Ao final do roteiro, é exibida uma tela de resultado com a pontuação da fase, o total de Cielo Coins acumulados e uma avaliação qualitativa do desempenho. O progresso é registrado no Phaser.Registry, permitindo que a SceneCidade.js reconheça a conclusão do diálogo e avance o fluxo de missões.
 
 ### Mini game do metrô
 
-Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
+&emsp; Como mecânica complementar ao fluxo principal, foi desenvolvido um mini game acessível dentro da cena do metrô com o objetivo de tornar a experiência mais dinâmica e interativa, além de oferecer ao jogador uma oportunidade de acumular Cielo Coins de forma expressiva. O jogador controla um personagem em um cenário de plataforma, coletando moedas e desviando de bombas. O jogo é dividido em quatro fases com cenários e trilhas sonoras distintas, que se alternam automaticamente conforme a pontuação avança.
 
 ```js
 jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
@@ -2194,26 +2152,28 @@ jsif (this.pontuacao >= 10 && this.faseAtual === 1) {
 }
 ```
 
-Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
+&emsp; Os itens coletáveis são spawados periodicamente durante a partida. A moeda comum vale +1 ponto, a moeda extra +3 e a bomba desconta -1, incentivando o jogador a se movimentar com atenção pelo cenário.
 
 ```js
 jsthis.time.addEvent({ delay: 20000, callback: this.spawnMoedaExtra, loop: true });
 this.time.addEvent({ delay: 10000, callback: () => { this.spawnBomba(); }, loop: true });
 ```
 
-Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
+&emsp; Ao atingir 40 moedas, o jogo é encerrado e os pontos são convertidos em Cielo Coins globais, acumulados no Phaser.Registry e refletidos no HUD da cidade. O jogador é então devolvido automaticamente à cena do metrô com um efeito de fade-out.
 
 ```js
 jsconst coinsGanhas = Math.max(0, this.pontuacao) * 50;
 const totalAtual = Number(this.registry.get("cieloCoins") ?? 0);
 this.registry.set("cieloCoins", totalAtual + coinsGanhas);
-````
-Figura XXX - print do mini game 
+```
+Imagem XXX - print do mini game 
 ### Interface e experiência do usuário (HUD)
 
-Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
-O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
-````JS
+&emsp; Para apoiar a navegação e o acompanhamento do progresso, foram implementados durante esta sprint os principais elementos de interface do jogo, todos integrados diretamente à SceneCidade.js e configurados para não aparecerem no minimapa.
+
+&emsp; O elemento central do HUD é a maquininha Cielo, posicionada no canto inferior direito da tela. Ao ser clicada, ela se expande com uma animação de tween até o centro da câmera, revelando quatro botões de ação: mapa interativo, configurações, ranking e diário de missões. Um botão de fechar a recolhe de volta ao canto com a mesma suavidade.
+
+```js
 jsthis.hudIcon.on("pointerdown", () => {
   this.tweens.add({
     targets: this.hudIcon,
@@ -2222,28 +2182,35 @@ jsthis.hudIcon.on("pointerdown", () => {
     scale: this.hudIconZoomScale,
     duration: 260,
     ease: "Quad.Out",
-````
-O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
+  })
+ }
+)
+```
+
+&emsp; O contador de Cielo Coins é exibido no canto superior direito e atualizado a cada frame com base no valor armazenado no Phaser.Registry, refletindo em tempo real os ganhos obtidos nos diálogos e no mini game.
 O diário de missões é acessado pelo botão correspondente na maquininha e exibe a lista de objetivos da fase com seus respectivos status - pendente, em andamento ou concluída - sincronizados automaticamente com o registry sempre que um evento de progressão é disparado.
 
-O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
+&emsp; O minimapa foi implementado com uma câmera secundária independente (miniMapCam), que renderiza o mapa em escala reduzida no canto superior esquerdo e exibe um ponto verde indicando a posição atual do jogador. O botão de mapa interativo da maquininha redireciona o jogador para a SceneMapaInterativo, que pode ser fechada com ESC para retornar ao ponto exato onde o jogador estava.
 
 ```js
 jsthis.input.keyboard?.once("keydown-ESC", () => {
   const retornoX = Number(this.registry.get("cidadeRetornoX"));
   const retornoY = Number(this.registry.get("cidadeRetornoY"));
   this.scene.start("SceneCidade", { spawnX: retornoX, spawnY: retornoY });
-````
-Figura XX - HUD 
-Figura XXX - maquininha 
+});
+```
+Imagem 41 - HUD 
+Imagem 42 - maquininha 
+
 ### Desenvolvimento de novas sprite sheets
 
-Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
-Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
+&emsp; Para atender às necessidades narrativas da sprint 4, foram desenvolvidos novos personagens em pixel art 2D utilizando o site Piskel App, seguindo o mesmo processo adotado nas sprints anteriores. Cada agência recebeu dois NPCs distintos, um representando o Gerente Geral (GG) e outro o Parceiro de Negócios (PJ), totalizando novos personagens distribuídos ao longo dos ambientes internos do jogo.
+
+&emsp; Assim como nos personagens jogáveis, parte dos NPCs foi desenvolvida com animações de movimento em múltiplas direções, enquanto outros utilizam sprites estáticos, adequados para personagens que permanecem fixos em seus postos durante as interações. Essa abordagem mista permitiu equilibrar a qualidade visual com o esforço de produção dentro do prazo da sprint.
 
 ### Fluxo de progressão do jogador
 
-O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
+&emsp; O sistema de progressão do Mini Mundo Cielo foi estruturado em torno de um módulo centralizado de pontuação, o "scoring.js", responsável por gerenciar o saldo de Cielo Coins do jogador ao longo de toda a sessão. Esse módulo é importado pelas cenas de diálogo e pelo mini game, garantindo que os coins acumulados em cada fase sejam somados a um total global persistido no Phaser.Registry.
 A pontuação é organizada em três capítulos com valores e regras distintas. No capítulo 1, respostas corretas valem 100 coins e erros não penalizam. No capítulo 3, a dificuldade aumenta e respostas erradas passam a subtrair 50 coins, exigindo maior atenção do jogador.
 
 ```js
@@ -2253,7 +2220,7 @@ jsexport const SCORING_CONFIG = {
 }
 ```
 
-A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
+&emsp; A função handleAnswer() é chamada a cada escolha do jogador nas cenas de diálogo, aplicando os coins correspondentes ao capítulo e tipo de resposta. O total é atualizado diretamente no registry e refletido em tempo real no HUD.
 
 ```js
 jsexport function handleAnswer(registry, chapter, tipo) {
@@ -2265,35 +2232,41 @@ jsexport function handleAnswer(registry, chapter, tipo) {
   return amount;
 }
 ```
-Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+
+&emsp; Cada fase possui uma meta de coins definida em METAS_BASE, verificada ao final do diálogo via checkGoal(). O resultado determina a avaliação qualitativa exibida na tela de encerramento, incentivando o jogador a revisitar as fases e aprimorar seu desempenho.
+
 <div align="center">
-<sub>Figura 33 - Resultado Diálogo - Mini Mundo Cielo</sub>
-<img src="../gdd_images/resultado_dialogo.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 41 - Resultado Diálogo - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/resultado_dialogo.png">
+
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Efeitos dinâmicos de ambiente Chuva
 
-Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
-O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
+&emsp; Para aumentar a imersão no mapa da cidade, foi implementada a SceneChuva, uma cena paralela lançada junto à SceneCidade.js com fundo transparente, sobrepondo o cenário sem interferir na jogabilidade. O efeito utiliza um pool de 800 gotas reutilizáveis, evitando a criação contínua de objetos e preservando a performance.
+
+&emsp; O movimento de cada gota foi calculado com base em equações cinemáticas, integrando o artefato de matemática do projeto diretamente ao código. No eixo X a gota se desloca com velocidade constante (MU) e no eixo Y a queda é simulada com aceleração crescente (MUV).
 
 ```js
 jsvar x_atual = g.xi + g.vx * t;
 var y_atual = g.yi + 0.5 * g.ay * t * t;
 ```
 
-A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
+&emsp; A chuva inicia automaticamente após 30 segundos de jogo, dura 50 segundos e é acompanhada de trilha sonora própria. As gotas são desenhadas quadro a quadro com gradiente de opacidade para simular o brilho natural da água.
 
 <div align="center">
-<sub>Figura 34 - Efeito de Chuva - Mini Mundo Cielo</sub>
-<img src="../gdd_images/chuva.png">
-<sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+ <sub>Imagem 42 - Efeito de Chuva - Mini Mundo Cielo</sub>
+ <img src="../gdd_images/chuva.png">
+ 
+ <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
 ### Trilha sonora e efeitos sonoros
 
-A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
-Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
+&emsp; A implementação da sonoplastia seguiu a organização conceitual já detalhada na seção 3.3.5 do documento, que distingue sons diegéticos e não diegéticos conforme sua relação com o universo narrativo do jogo. Na sprint 4, essa estrutura foi integrada ao código de todas as cenas internas e do mapa principal.
+
+&emsp; Cada cena carrega e inicializa sua própria trilha sonora no método preload() e a reproduz em loop no create(). Ao encerrar a cena, o áudio é interrompido via evento de shutdown, evitando sobreposição de trilhas durante as transições.
 
 ```js
 jsthis.musica = this.sound.add('trilhaAgencia01', { loop: true, volume: 0.5 });
@@ -2304,20 +2277,20 @@ this.events.on("shutdown", () => {
 })
 ```
 
-Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
+&emsp; Além das trilhas por ambiente, foram implementados efeitos sonoros pontuais, como o som de coleta de itens no mini game do metrô, reforçando o feedback imediato das ações do jogador.
 
 ### Dificuldades
 
-Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
+&emsp; Durante o desenvolvimento desta sprint, os principais desafios estiveram relacionados à integração dos múltiplos sistemas desenvolvidos em paralelo por toda a equipe. Entre as principais dificuldades encontradas estão:
 
-- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry
-- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa
-- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados
+- Conectar todas as cenas internas ao mapa principal, exigindo atenção constante à consistência dos dados transmitidos entre cenas, como posições de spawn, estado das missões e progresso persistido no Phaser.Registry;
+- Replicar e ajustar individualmente o mecanismo completo de entrada e saída para cada estabelecimento, envolvendo detecção de zona, indicadores visuais, fade-out, transição de cena e retorno ao ponto correto do mapa;
+- Integrar simultaneamente trilha sonora, diálogos com IA e sistema de pontuação, onde qualquer inconsistência no ciclo de vida das cenas, como uma trilha não interrompida no shutdown, causava sobreposição de áudios e comportamentos inesperados;
 - Trabalhar com toda a equipe no mesmo código ao mesmo tempo, o que exigiu organização rigorosa para evitar conflitos e regressões entre as funcionalidades desenvolvidas em paralelo.
 
 ### Próximos passos
 
-Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
+&emsp; Para as próximas etapas do desenvolvimento, o foco será o refinamento e o polimento da experiência construída durante o MVP. Entre os principais objetivos estão:
 
 - Corrigir inconsistências visuais, de colisão e de fluxo identificadas durante os testes
 - Corrigir e ajustar os diálogos com NPCs para garantir coerência narrativa
@@ -2327,7 +2300,7 @@ Para as próximas etapas do desenvolvimento, o foco será o refinamento e o poli
 
 ### Conclusão da Sprint 4
 
-Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
+&emsp; Ao final da sprint 4, o projeto atingiu o estágio de Produto Mínimo Viável (MVP), apresentando um fluxo completo de jogabilidade com início, desenvolvimento e conclusão de objetivos. O jogo já permite a navegação entre ambientes, interação com NPCs, progressão estruturada por missões, sistema de pontuação integrado e mecânicas complementares, como o mini game e efeitos dinâmicos de ambiente. Dessa forma, o MVP atende aos requisitos propostos no GDD, estando apto para testes, validação com usuários e refinamentos nas etapas seguintes do desenvolvimento
 
 ## 4.5. Revisão do MVP (sprint 5)
 
