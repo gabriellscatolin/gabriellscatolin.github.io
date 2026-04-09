@@ -1645,33 +1645,25 @@ $$
  - Nenhuma mecânica funcional implementada: os personagens e cenários existem apenas como assets visuais; movimentação, colisões e interações ainda não foram codificadas.
  - Ausência de sistema de cenas no Phaser: o main.js inicializa o framework, mas ainda não há cenas funcionais carregadas - tela inicial (RF01), seleção de personagens (RF04) e cutscenes (RF14) estão previstas para as próximas sprints.
  - Assets não integrados ao código: os spritesheets e cenários foram criados, mas ainda não foram carregados nem referenciados no código do jogo.
+## 4.2. Desenvolvimento Básico do Jogo (Sprint 2)
 
-## 4.2. Desenvolvimento básico do jogo (sprint 2)
+&emsp; O objetivo da Sprint 2 foi implementar os sistemas fundamentais de jogabilidade e estruturar as cenas iniciais do jogo. O foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
 
-&emsp; No desenvolvimento preliminar do jogo, o principal objetivo foi estruturar as cenas iniciais e implementar os sistemas fundamentais de jogabilidade. Para isso, o foco esteve na criação do menu principal, na tela de seleção de personagens, no mapa de gameplay com movimentação do jogador, no primeiro NPC interativo e na cutscene introdutória com transições personalizadas.
+&emsp; Durante essa sprint, foram desenvolvidos os seguintes elementos do jogo:
 
-&emsp; Durante esse processo, foi identificado um erro no sistema de animação do personagem: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com frames carregados dinamicamente conforme o personagem escolhido na tela anterior.
-
-&emsp; Durante esta sprint foram desenvolvidos os seguintes elementos do jogo:
-
-- Implementação da cutscene inicial que introduz o contexto do jogo;
 - Criação da tela inicial (menu principal);
 - Desenvolvimento da tela de seleção de personagem;
 - Implementação da cena da ponte, que representa a transição inicial do jogador para a cidade;
-- Criação de acessibilidades na cena de configuração (Daltonismo, mudança de brilho e contraste).
+- Implementação da cutscene inicial que introduz o contexto do jogo, acionada ao final da cena da ponte;
+- Criação de acessibilidades na cena de configuração (daltonismo, mudança de brilho e contraste).
 
-&emsp; Alguns elementos ainda estão em desenvolvimento e serão finalizados nas próximas sprints:
+&emsp; Os arquivos principais e suas responsabilidades são: `SceneInicial.js` (menu principal com botões e transição por pixelização), `ScenePersonagem.js` (seleção de personagem e passagem de dados para a cena de jogo), `SceneJogo.js` (movimentação do jogador, animações, colisão e interação com NPC), `SceneCutscene.js` (reprodução da cutscene introdutória e transição clock wipe) e `SceneConfig.js` (configurações de acessibilidade).
 
-- Implementação da cena do mapa da cidade.
-- Desenvolvimento da cena da agência bancária.
-- Implementação da cena do escritório.
-- Integração entre as diferentes cenas do jogo, garantindo a transição correta entre elas.
+&emsp; Os seguintes elementos ficaram pendentes para as próximas sprints: implementação da cena do mapa da cidade, desenvolvimento da cena da agência bancária, implementação da cena do escritório e integração completa entre todas as cenas do jogo.
 
-&emsp; A maior dificuldade foi sincronizar esse carregamento dinâmico com o sistema de animação, garantindo que as imagens corretas fossem carregadas no `preload()` antes de serem referenciadas no `create()`. Isso exigiu um sistema de passagem de dados entre cenas, onde o nome da pasta e o prefixo do personagem são transmitidos como parâmetro ao iniciar a `SceneJogo`. 
+### Menu Principal
 
-Imagem 27 - Tela inicial do Mini Mundo Cielo &emsp;<sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
-
-&emsp; O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). Primeiramente, foram criadas as variáveis de configuração da cena e definida a lista de botões com suas posições, escalas e ações correspondentes:
+&emsp; O primeiro cenário desenvolvido foi o menu principal (`SceneInicial.js`). As variáveis de configuração da cena e a lista de botões com suas posições, escalas e ações foram centralizadas em um objeto `CONFIG`, facilitando ajustes futuros sem necessidade de alterar a lógica dos métodos, atendendo ao **RF01**:
 
 ```js
 this.CONFIG = {
@@ -1685,7 +1677,7 @@ this.CONFIG = {
 };
 ```
 
-&emsp; Em seguida, os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
+&emsp; Os botões foram adicionados de forma iterativa com efeitos de hover. A transição para a próxima cena aplica um efeito de pixelização progressiva usando postFX do Phaser:
 
 ```js
 btn.on("pointerover", () => btn.setScale(botao.scale * 1.07));
@@ -1700,32 +1692,20 @@ startGame() {
   });
 }
 ```
-Algumas cenas de telas do jogo:
+
 <div align="center">
- <sub>Imagem 28 - Tela Inicial </sub>
- <img src="../gdd_images/telaInicial.jpg" width= "800">
- 
- <sub>Imagem 29 - Tela de Configurações </sub>
- <img src="../gdd_images/telaConfig.jpg" width= "800">
+ <sub>Imagem 28 - Tela Inicial</sub>
+ <img src="../gdd_images/telaInicial.jpg" width="800">
 
- <sub>Imagem 30 - Tela de seleção de personagens </sub>
- <img src="../gdd_images/telaSeleçao.jpg" width= "800">
+ <sub>Imagem 29 - Tela de Configurações</sub>
+ <img src="../gdd_images/telaConfig.jpg" width="800">
 
- <sub>Imagem 31 - Tela de tutorial </sub>
- <img src="../gdd_images/telaTutorial.jpg" width= "800">
-
- <sub>Imagem 32 - Tela da ponte </sub>
- <img src="../gdd_images/telaPonte.jpg" width= "800">
-
- <sub>Imagem 33 - Tela da Cutscene </sub>
- <img src="../gdd_images/telaCutScene.jpg" width= "800">
-
- <sub>Imagem 34 - Tela de seleção de personagens</sub>
-
- <sub>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sub>
+ <sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; Na tela de seleção (`ScenePersonagem.js`), foram criadas as variáveis para definir os quatro personagens jogáveis com suas posições, escalas e prefixos de arquivo. Ao clicar, os dados do personagem escolhido são passados para a cena seguinte:
+### Seleção de Personagem
+
+&emsp; Na tela de seleção (`ScenePersonagem.js`), os quatro personagens jogáveis foram definidos com suas posições, escalas e prefixos de arquivo, atendendo ao **RF04**. Ao clicar em um personagem, os dados são passados diretamente para a cena seguinte via parâmetros de inicialização, eliminando o uso de variáveis globais e mantendo o estado encapsulado:
 
 ```js
 this.listaPersonagens = [
@@ -1739,10 +1719,19 @@ this.listaPersonagens = [
 this.scene.start("SceneJogo", { nomePasta: dados.id, prefixo: dados.prefixoArquivo });
 ```
 
-&emsp;No arquivo `SceneJogo.js`, foram criadas as variáveis de estado que controlam todas as interações da cena, e os 16 frames do personagem (4 direções × 4 frames) são carregados dinamicamente no `preload()` com base no personagem recebido:
+<div align="center">
+ <sub>Imagem 30 - Tela de seleção de personagens</sub>
+ <img src="../gdd_images/telaSeleçao.jpg" width="800">
+
+ <sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
+</div>
+
+### Cena da Ponte e Movimentação do Jogador
+
+&emsp; Durante o desenvolvimento da `SceneJogo.js`, foi identificado um erro no sistema de animação: ao trocar de direção durante o movimento, os frames continuavam sendo reproduzidos no estado anterior. A solução foi implementar animações separadas para cada direção, com os 16 frames do personagem (4 direções × 4 frames) carregados dinamicamente no `preload()` com base no personagem recebido da cena anterior, atendendo ao **RF02**:
 
 ```js
-this.podeMover       = false; // Bloqueado até fechar o tutorial
+this.podeMover        = false; // Bloqueado até fechar o tutorial
 this.dialogoNpcAberto = false;
 this.npcPartiu        = false;
 this.transicaoAtiva   = false;
@@ -1754,7 +1743,7 @@ for (let i = 1; i <= 4; i++) {
 }
 ```
 
-&emsp; Após isso, foi desenvolvida a função `criarAnimacoes()`, que cria de forma iterativa as animações das quatro direções de movimento:
+&emsp; As animações das quatro direções foram criadas de forma iterativa pela função `criarAnimacoes()`, garantindo consistência e reduzindo repetição de código:
 
 ```js
 criarAnimacoes() {
@@ -1766,11 +1755,9 @@ criarAnimacoes() {
       frameRate: 8,
       repeat: -1
     });
-  });
-}
 ```
 
-&emsp; Na sequência, utilizando a função `update()`, nativa do Phaser.js, foi implementada a movimentação do personagem pelas teclas WASD, com a animação pausando automaticamente ao soltar as teclas, e os limites de mapa restringindo a área de movimento:
+&emsp; A movimentação foi implementada na função `update()` nativa do Phaser, com pausa automática da animação ao soltar as teclas e restrição de área via `Phaser.Math.Clamp()`, atendendo ao **RF09**:
 
 ```js
 update() {
@@ -1790,7 +1777,7 @@ update() {
 }
 ```
 
-&emsp; Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla:
+&emsp; Para estar de acordo com o princípio de reutilização de código da POO, foi desenvolvido um sistema padrão de interação com objetos do cenário. No caso do NPC Vanessa, uma colisão por posição impede o jogador de ultrapassá-lo, e a detecção de proximidade com `Phaser.Math.Distance.Between()` exibe o indicador `[E]` e abre o diálogo ao pressionar a tecla, atendendo ao **RF03** e ao **RF07**:
 
 ```js
 // Colisão — impede o jogador de passar pelo NPC
@@ -1806,13 +1793,20 @@ if (distNpc < 150 && Phaser.Input.Keyboard.JustDown(this.teclaE)) {
   this.mostrarDialogoObjetivo(); // Abre diálogo com efeito typewriter
 }
 ```
-<div align="center">
- <sub>Imagem 35 - Cena de gameplay com o NPC Vanessa na ponte</sub>
 
- <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
+<div align="center">
+ <sub>Imagem 31 - Tela de tutorial</sub>
+ <img src="../gdd_images/telaTutorial.jpg" width="800">
+
+ <sub>Imagem 32 - Tela da ponte com NPC Vanessa</sub>
+ <img src="../gdd_images/telaPonte.jpg" width="800">
+
+ <sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; Por fim, ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser. Essa mesma função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo introdutório:
+### Transição Clock Wipe e Cutscene
+
+&emsp; Ao chegar na borda direita do mapa, é acionada a transição clock wipe em sentido horário usando máscara de geometria do Phaser, levando o jogador à cutscene introdutória. Essa função foi encapsulada e reutilizada na `SceneCutscene.js` ao final do vídeo, atendendo ao **RF14**:
 
 ```js
 iniciarClockWipe() {
@@ -1828,21 +1822,27 @@ iniciarClockWipe() {
       maskGraphics.fillPath();
     },
     onComplete: () => { this.scene.start("SceneCutscene"); }
-  });
 }
 ```
 
-&emsp; **Dificuldades**:
+<div align="center">
+ <sub>Imagem 33 - Tela da Cutscene</sub>
+ <img src="../gdd_images/telaCutScene.jpg" width="800">
 
-- Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações
-- Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X
-- Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento
+ <sup>Fonte: Equipe Cielitos, Faculdade Inteli 2026</sup>
+</div>
 
-&emsp; **Próximos passos**
+### Dificuldades
 
-- Criar o mapa interno dos estabelecimentos para a fase seguinte
-- Adicionar os puzzles e desafios de vendas do jogo
-- Implementar mais NPCs com diálogos e interações variadas
+- Implementar o carregamento dinâmico dos sprites conforme o personagem selecionado, garantindo que todos os frames estivessem disponíveis antes de criar as animações;
+- Criar o sistema de colisão simples com o NPC sem utilizar physics bodies, usando apenas comparação de posições no eixo X;
+- Corrigir a animação do personagem para que pausasse e retomasse corretamente ao parar e reiniciar o movimento.
+
+### Próximos Passos
+
+- Criar o mapa interno dos estabelecimentos para a fase seguinte;
+- Adicionar os puzzles e desafios de vendas do jogo;
+- Implementar mais NPCs com diálogos e interações variadas.
 
 ## 4.3. Desenvolvimento intermediário do jogo (sprint 3)
 
