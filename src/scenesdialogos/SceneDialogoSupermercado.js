@@ -822,7 +822,7 @@ export default class SceneDialogoSupermercado extends SceneDialogoBase {
     this.textoCena.setText("Resultado Final");
 
     const meta = goalEscalado(FASE);
-    const maxPts = N_CENAS * 100;
+    const maxPts = N_CENAS * 200;
     const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 

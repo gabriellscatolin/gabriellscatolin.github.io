@@ -508,7 +508,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
 
     // HUD local para mostrar o total global e o ganho acumulado nesta conversa
     this.textoCieloCoin = this.add
-      .text(W - 20, 16, "Cielo Coins: 0 / 500", {
+      .text(W - 20, 16, "Cielo Coins: 0 / 600", {
         fontSize: "30px",
         color: "#ffd700",
         backgroundColor: "#000000bb",
@@ -590,7 +590,7 @@ export default class SceneDialogoPadaria extends SceneDialogoBase {
       {
         icone: "🎯",
         texto:
-          "Você vai entrar em uma negociação consultiva. Seu objetivo é entender a dor da cliente e gerar valor antes de oferecer a solução.",
+          "Você vai entrar em uma negociação consultiva. Seu objetivo é entender a dor da Sofia e gerar valor antes de oferecer a solução.",
       },
       {
         icone: "💬",

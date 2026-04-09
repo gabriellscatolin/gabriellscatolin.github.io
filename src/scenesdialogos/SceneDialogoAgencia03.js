@@ -563,7 +563,7 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
 
     // HUD local para mostrar o total global e o ganho acumulado nesta conversa
     this.textoCieloCoin = this.add
-      .text(W - 20, 16, "Cielo Coins: 0 / 900", {
+      .text(W - 20, 16, "Cielo Coins: 0", {
         fontSize: "30px",
         color: "#ffd700",
         backgroundColor: "#000000bb",
@@ -645,7 +645,7 @@ export default class SceneDialogoAgencia03 extends SceneDialogoBase {
       // Resume o objetivo geral da conversa
       {
         icone: "•",
-        texto: `Você vai conduzir a conversa com ${this.nomeNpcDialogo} na Agência 03.`,
+        texto: `Você vai conduzir a conversa na Agência 03.`,
       },
       {
         icone: "•",

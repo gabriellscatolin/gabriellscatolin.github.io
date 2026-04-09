@@ -822,7 +822,7 @@ export default class SceneDialogoPostoDeGasolina extends SceneDialogoBase {
     this.textoCena.setText("Resultado Final");
 
     const meta = goalEscalado(FASE);
-    const maxPts = N_CENAS * 100;
+    const maxPts = N_CENAS * 300;
     const atingiu = checkGoal(FASE, this.pontuacaoFase);
     const pct = Math.round((this.pontuacaoFase / maxPts) * 100);
 

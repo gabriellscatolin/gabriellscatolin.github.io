@@ -69,7 +69,6 @@ const config = {
     SceneAgencia01,
     SceneAgencia02,
     SceneAgencia03,
-    
     SceneDialogoAgencia02,
     SceneDialogoAgencia03,
     SceneDialogoPadaria,

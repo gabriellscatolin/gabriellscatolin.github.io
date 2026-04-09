@@ -1054,7 +1054,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
       this.registry.set("ag01_pj_retorno", false);
       this.registry.set(
         "missaoCidadeTexto",
-        "Missao: Siga o PJ ate a Padaria.",
+        "Missão: Siga o PJ ate a Padaria.",
       );
     }
 
