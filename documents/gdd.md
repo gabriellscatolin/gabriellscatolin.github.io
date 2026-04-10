@@ -38,15 +38,15 @@ Cielitos
 
 &emsp; A Cielo S.A. posiciona-se como a líder nacional no setor de adquirência e serviços financeiros, desempenhando um papel sistêmico na economia brasileira. Fundada em 1995 (originalmente como VisaNet), a companhia evoluiu de uma processadora de transações para uma plataforma de tecnologia de ponta voltada ao varejo. Com presença capilarizada em 99% do território nacional, a Cielo detém uma abrangência sem paralelos, atendendo desde microempreendedores até gigantes do varejo corporativo.[\[1\]](#ref1)
 
-&emsp; O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações no mercado brasileiro, evidenciando sua relevância no ecossistema nacional de pagamentos eletrônicos.. [\[2\]](#ref2) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
+&emsp; O impacto da organização é mensurável: em 2022, a empresa processou aproximadamente 9 bilhões de transações no mercado brasileiro, evidenciando sua relevância no ecossistema nacional de pagamentos eletrônicos.. [\[6\]](#ref6) Esse volume financeiro é sustentado por um ecossistema que ultrapassa a "maquininha", incluindo soluções de e-commerce, logística de pagamentos, antecipação de recebíveis e análise de dados (Big Data).
 
-&emsp; Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [\[3\]](#ref3) Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
+&emsp; Atualmente, a indústria de meios de pagamento no Brasil atravessa um cenário de hipercompetitividade e disrupção tecnológica. A Cielo enfrenta concorrentes de peso como Rede, Stone, Getnet e PagSeguro, além da ascensão das fintechs e do sistema PIX, que alteraram o comportamento de consumo. [\[30\]](#ref30) Nesse contexto, o diferencial competitivo da Cielo não reside apenas na tecnologia, mas na capacidade consultiva de sua força de vendas.
 
-&emsp; A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. [\[4\]](#ref4)
+&emsp; A estratégia atual da companhia foca na transformação digital e na excelência do atendimento. Para manter a liderança, é imperativo que o time de vendas possua um conhecimento homogêneo e profundo sobre o portfólio. O uso de ferramentas de gamificação surge, portanto, como uma resposta estratégica para garantir a equidade no aprendizado e a atualização constante dos vendedores em um mercado que se redefine a cada ciclo tecnológico. [\[26\]](#ref26)
 
 #### 1.1.1.1. Modelo de 5 Forças de Porter (sprint 2)
 
-&emsp; A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[\[5\]](#ref5)
+&emsp; A Análise das 5 Forças de Porter é um framework estratégico utilizado para compreender o nível de competitividade de uma empresa a partir da influência de agentes externos: a ameaça de novos entrantes, o poder de barganha dos fornecedores, o poder de barganha dos clientes, a ameaça de produtos substitutos e a rivalidade entre concorrentes existentes.[\[20\]](#ref20)
 
 &emsp; Sob essa perspectiva, observa-se na imagem a análise desenvolvida pelo grupo com foco no setor de adquirência e meios de pagamento eletrônicos no Brasil, buscando compreender os principais desafios estruturais enfrentados pela Cielo e identificar fatores que impactam sua sustentabilidade competitiva.
 
@@ -57,19 +57,19 @@ Cielitos
  <sup>Fonte: Equipe cielitos, Faculdade Inteli 2026</sup>
 </div>
 
-&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[21\]](#ref21) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional, criando barreiras competitivas adicionais frente à entrada de novos players digitais no setor de pagamentos.
+&emsp; A ameaça de novos entrantes é considerada alta no mercado de adquirência e subadquirência. O avanço da digitalização e a expansão das fintechs reduziram significativamente as barreiras de entrada. Segundo dados do Banco Central, o sistema de pagamentos brasileiro registrou mais de 196 bilhões de transações via Pix entre 2020 e 2025 [\[30\]](#ref30) , evidenciando a rápida transformação do setor e a abertura para novos modelos de pagamento (Times Brasil, 2025). Além disso, empresas como Stone, PagSeguro e Mercado Pago ampliaram sua participação no mercado ao oferecer soluções integradas de pagamento e crédito para pequenos comerciantes. Apesar desse cenário competitivo, a Cielo mantém vantagens estruturais relevantes, como o suporte acionário do Banco do Brasil e do Bradesco, além de elevada capacidade de investimento em tecnologia, segurança e inovação. Outro diferencial competitivo são os DDNs (Distribuidores de Negócios), que ampliam sua capilaridade comercial e fortalecem o relacionamento com clientes em todo o território nacional, criando barreiras competitivas adicionais frente à entrada de novos players digitais no setor de pagamentos.
 
 &emsp; O poder de barganha dos fornecedores é considerado moderado. No setor de adquirência, fornecedores estratégicos incluem bandeiras de cartão como Visa, Mastercard e Elo, além de provedores de tecnologia responsáveis pelos terminais de pagamento e infraestrutura digital, como Ingenico e serviços de computação em nuvem. Esses fornecedores exercem influência relevante ao estabelecer padrões tecnológicos e operacionais essenciais para o funcionamento do sistema de pagamentos. Contudo, devido à sua escala e posição consolidada no mercado brasileiro, a Cielo possui maior capacidade de negociação em comparação a empresas menores, o que reduz parcialmente o poder desses fornecedores.
 
 &emsp; O poder de barganha dos clientes é elevado. Pequenos e médios empreendedores apresentam alta sensibilidade a preços e condições comerciais, enquanto grandes varejistas possuem forte poder de negociação devido ao elevado volume de transações processadas. Além disso, o baixo custo de troca entre adquirentes intensifica a competição por taxas mais atrativas. Para mitigar esse poder, a Cielo investe em estratégias de fidelização por meio da oferta de serviços agregados, como soluções de gestão de vendas, antecipação de recebíveis, integração com plataformas de e-commerce e ferramentas de análise de dados para comerciantes.
 
-&emsp; A ameaça de produtos substitutos é considerada alta. Soluções como Pix, transferências via QR Code e carteiras digitais reduzem a dependência do arranjo tradicional de cartões. O crescimento do Pix é um exemplo claro dessa transformação: o sistema movimentou R$ 84,9 trilhões em cinco anos [\[21\]](#ref21), valor equivalente a mais de sete vezes o PIB brasileiro no período (Times Brasil, 2025). Esse avanço demonstra a rápida adoção de alternativas de pagamento que podem reduzir a relevância de modelos tradicionais baseados em maquininhas. Nesse contexto, a adaptação estratégica das adquirentes torna-se essencial para manter competitividade no mercado.
+&emsp; A ameaça de produtos substitutos é considerada alta. Soluções como Pix, transferências via QR Code e carteiras digitais reduzem a dependência do arranjo tradicional de cartões. O crescimento do Pix é um exemplo claro dessa transformação: o sistema movimentou R$ 84,9 trilhões em cinco anos [\[28\]](#ref28), valor equivalente a mais de sete vezes o PIB brasileiro no período (Times Brasil, 2025). Esse avanço demonstra a rápida adoção de alternativas de pagamento que podem reduzir a relevância de modelos tradicionais baseados em maquininhas. Nesse contexto, a adaptação estratégica das adquirentes torna-se essencial para manter competitividade no mercado.
 
 &emsp; Por fim, A rivalidade entre concorrentes existentes é intensa no setor de adquirência. Empresas como Stone, PagSeguro e Rede competem agressivamente por meio de diferenciação tecnológica, redução de taxas e oferta de serviços financeiros adicionais, como antecipação de recebíveis, crédito para lojistas e soluções de gestão empresarial. Além disso, fintechs e plataformas digitais ampliam a competição no ecossistema de pagamentos. Esse ambiente competitivo pressiona margens e exige inovação constante, eficiência operacional e fortalecimento do relacionamento com clientes.
 
 ### 1.1.2. Análise SWOT (sprint 2)
 
-&emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados. [\[6\]](#ref6) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. [\[2\]](#ref2)
+&emsp; A Matriz SWOT (Strengths, Weaknesses, Opportunities e Threats) é um framework que busca trazer uma análise abrangente das diferentes características de uma empresa, projeto ou processo, visando avaliar a posição competitiva deste elemento no mercado com base em dados. [\[7\]](#ref7) Por meio da Matriz SWOT, é possível visualizar fatores internos (Forças e Fraquezas) e fatores externos (Oportunidades e Ameaças) que afetam o desempenho do objeto em questão. [\[6\]](#ref6)
 
 &emsp; A imagem apresenta uma Matriz SWOT elaborada para a empresa Cielo, com base nos princípios descritos no parágrafo anterior. Essa matriz destaca como a organização se posiciona frente aos principais fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) identificados na análise.
 
@@ -95,7 +95,7 @@ Cielitos
 
 - **Custos Operacionais Elevados:** A logística de manutenção e substituição de hardware (maquininhas) gera um custo fixo significativamente maior que o de competidores puramente digitais.
 
-- **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel.[\[7\]](#ref7)
+- **Desafios de Fidelização (Churn):** Devido à "guerra das maquininhas", a fidelidade do cliente é baixa, com alta sensibilidade a taxas e custos de aluguel.[\[13\]](#ref13)
 
 ### Oportunidades (Opportunities)
 
@@ -103,39 +103,39 @@ Cielitos
 
 - **Novos Modelos de Negócio (Logística):** O aumento do serviço de entregas (delivery) gera demanda por soluções de pagamento móveis e integradas a aplicativos. 
 
-- **Data Intelligence:** Utilizar o grande volume de dados gerados pelo sistema de pagamentos brasileiro, responsável por bilhões de transações anuais, para oferecer serviços de análise de crédito e inteligência para lojistas.[\[21\]](#ref21)
+- **Data Intelligence:** Utilizar o grande volume de dados gerados pelo sistema de pagamentos brasileiro, responsável por bilhões de transações anuais, para oferecer serviços de análise de crédito e inteligência para lojistas.[\[31\]](#ref31)
 
 ### Ameaças (Threats)
 
 - **Hipercompetitividade (Guerra de Taxas):** A entrada agressiva de players como Stone, PagSeguro e fintechs força a compressão das margens de lucro. 
 
-- **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em transações eletrônicas representam riscos relevantes para instituições financeiras e empresas de pagamentos, podendo gerar impactos financeiros e danos reputacionais (Banco Central do Brasil, 2024). [\[22\]](#ref22)
+- **Insegurança e Fraudes:** Ataques cibernéticos e fraudes em transações eletrônicas representam riscos relevantes para instituições financeiras e empresas de pagamentos, podendo gerar impactos financeiros e danos reputacionais (Banco Central do Brasil, 2024). [\[4\]](#ref4)
 
 - **Desintermediação (Blockchain/DeFi):** O surgimento de tecnologias que eliminam intermediários financeiros pode ameaçar o modelo de negócio de adquirência a longo prazo.
 
-&emsp; Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [\[1\]](#ref1)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
+&emsp; Com base nesta análise SWOT, destacamos que a Cielo S.A. pode utilizar sua liderança absoluta e capilaridade de mercado para aproveitar as oportunidades de expansão nos meios de pagamento digitais e serviços baseados em dados, como o Pix e o e-commerce. [\[5\]](#ref5)Isso mitigaria os riscos de dependência do varejo físico, aplicando uma estratégia de diversificação de receita que vai além do hardware tradicional. 
 
-&emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [\[5\]](#ref5) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [\[6\]](#ref6) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
+&emsp; Além disso, a Cielo fortaleceria sua posição contra a concorrência acirrada e a ameaça de novos entrantes ao investir na capacitação de sua força de vendas, garantindo que inovações como o Cielo Tap sejam disseminadas com eficiência e segurança. [\[20\]](#ref20) Ademais, a hipercompetitividade do setor e a volatilidade econômica são dificultadores diretos, já que a compressão de margens exige uma operação extremamente enxuta e consultiva. Este cenário em que a Cielo está inserida é altamente desafiador e compartilhado por concorrentes como Rede, Stone e PagSeguro. [\[7\]](#ref7) Entretanto, seu foco em tecnologia de ponta e a busca por equidade no aprendizado de seus colaboradores são fatores essenciais que lhe permitem manter a soberania e a competitividade no mercado nacional.
 
 ### 1.1.3. Missão / Visão / Valores (sprint 2)
 
-&emsp; Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.[\[10\]](#ref10) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
+&emsp; Missão, Visão e Valores são os três pilares fundamentais que definem a identidade e o propósito de uma empresa ou projeto.[\[8\]](#ref8) Definir esses conceitos é essencial para ter uma concepção clara de si mesma, de sua filosofia e até mesmo da maneira como deve ser estruturada e gerida.
 
-&emsp; **Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [\[9\]](#ref9)
+&emsp; **Missão:** Desenvolver um jogo educacional capaz de capacitar gerentes de negócios que vivem em regiões mais afastadas, promovendo equidade no acesso à formação em vendas e reduzindo a diferença de aprendizado em relação aos profissionais localizados nos grandes centros urbanos. [\[22\]](#ref22)
 
 &emsp; **Visão:** Ser referência em jogos educacionais para capacitação em vendas, destacando-se pela acessibilidade, jogabilidade e impacto social
 
-&emsp; **Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. [\[12\]](#ref12)
+&emsp; **Valores:** Os valores do projeto refletem os princípios éticos e operacionais que guiam o desenvolvimento do jogo, assegurando o alinhamento com a cultura de inovação e responsabilidade da Cielo S.A. [\[30\]](#ref30)
 
 &emsp; **Equidade e Acessibilidade:** Garantir a democratização do conhecimento, assegurando que o aprendizado esteja disponível para todos os profissionais, independentemente de sua localização geográfica ou condição socioeconômica.
 
-&emsp; **Inovação e Gamificação:** Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.[\[23\]](#ref23)
+&emsp; **Inovação e Gamificação:** Utilizar tecnologias disruptivas para transformar processos de treinamento tradicionais em experiências de aprendizado dinâmicas e eficazes.[\[9\]](#ref9)
 
-&emsp; **Aprendizagem Contínua (Lifelong Learning):** Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[24\]](#ref24)
+&emsp; **Aprendizagem Contínua (Lifelong Learning):** Fomentar uma cultura de autodesenvolvimento, incentivando a atualização constante das competências necessárias para o mercado de adquirência. [\[14\]](#ref14)
 
 &emsp; **Foco na Experiência (UX/Gamer):** Priorizar a usabilidade e a jogabilidade, garantindo uma interface simples, intuitiva e envolvente para maximizar a retenção do conhecimento.
 
-&emsp; **Impacto Social e Produtivo:** Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [\[8\]](#ref8)
+&emsp; **Impacto Social e Produtivo:** Contribuir diretamente para a formação profissional de qualidade, gerando oportunidades reais de crescimento e performance na rede de vendas. [\[12\]](#ref12)
 
 ### 1.1.4. Proposta de Valor (sprint 4)
 
@@ -148,9 +148,9 @@ Cielitos
 
 &emsp; A imagem apresenta o **Value Proposition Canvas** do projeto Mini Mundo Cielo, ferramenta estratégica utilizada para estruturar a proposta de valor a partir do alinhamento entre as necessidades do cliente e as soluções oferecidas. O Canvas organiza, de um lado, o **perfil do cliente**, composto por suas tarefas, dores e ganhos, e, de outro, o **mapa de valor**, que descreve produtos e serviços, criadores de ganho e analgésicos. No contexto analisado, o cliente central é o **Gerente de Negócios** (GN/DDN), profissional responsável por prospectar estabelecimentos, compreender perfis de clientes, contornar objeções e conduzir negociações comerciais. 
 
-&emsp; A imagem evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática em situações reais e potencializando o desenvolvimento de competências comerciais.[\[29\]](#ref29)
+&emsp; A imagem evidencia que esses profissionais enfrentam desafios relevantes, como insegurança na abordagem, dificuldade de acesso a treinamentos práticos e limitação no domínio do portfólio, ao mesmo tempo em que buscam ganhos como maior confiança, aprendizado aplicado e evolução no desempenho comercial. Em resposta a esse cenário, o Mini Mundo Cielo se posiciona como uma solução baseada em **simulação interativa**, oferecendo treinamento prático, progressivo e orientado por feedback imediato, reduzindo o risco da prática em situações reais e potencializando o desenvolvimento de competências comerciais.[\[11\]](#ref11)
 
-&emsp; A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[30\]](#ref30)
+&emsp; A proposta de valor do **Mini Mundo Cielo foi**, portanto, estruturada com base nessa lógica, conectando diretamente as necessidades dos GNs/DDNs a uma experiência de aprendizagem ativa. Embora o usuário direto da solução seja o profissional de vendas, a **Cielo S.A.** também se beneficia de forma estratégica, uma vez que o desenvolvimento dessas competências impacta diretamente a qualidade do atendimento, a eficiência do onboarding e a consistência das práticas comerciais em escala nacional. Dessa forma, o projeto articula dois níveis de valor complementares: no **nível individual**, promove aprendizado prático, autonomia e confiança; no **nível organizacional**, viabiliza um modelo de capacitação mais escalável, padronizado e mensurável.[27\]](#ref27)
 
 &emsp; Um dos principais diferenciais do Mini Mundo Cielo está no seu formato **totalmente online**, acessível via navegador e sem necessidade de instalação, o que reduz barreiras logísticas e amplia significativamente o alcance do treinamento. Além disso, a solução se posiciona como uma iniciativa inovadora ao utilizar gamificação e **simulação de cenários reais** como ferramenta central de aprendizagem, substituindo modelos tradicionais baseados em conteúdos passivos por experiências interativas orientadas à tomada de decisão.
 
@@ -180,19 +180,19 @@ Cielitos
 
 ### 1.1.5. Descrição da Solução Desenvolvida (sprint 4)
 
-&emsp; O time Comercial da Cielo atua no modelo porta a porta, visitando estabelecimentos para ofertar soluções de pagamento e serviços de valor agregado. Atualmente, a empresa conta com aproximadamente 3.500 profissionais distribuídos em todo o território nacional, o que impõe desafios relevantes ao processo de capacitação. Equipes fora dos grandes centros urbanos frequentemente enfrentam limitações de acesso a treinamentos presenciais, gerando assimetrias no nível de preparo. Conforme Armstrong e Landers (2018) [\[25\]](#ref25), a dispersão geográfica em grandes organizações tende a comprometer a equidade no aprendizado e a padronização do conhecimento. 
+&emsp; O time Comercial da Cielo atua no modelo porta a porta, visitando estabelecimentos para ofertar soluções de pagamento e serviços de valor agregado. Atualmente, a empresa conta com aproximadamente 3.500 profissionais distribuídos em todo o território nacional, o que impõe desafios relevantes ao processo de capacitação. Equipes fora dos grandes centros urbanos frequentemente enfrentam limitações de acesso a treinamentos presenciais, gerando assimetrias no nível de preparo. Conforme Armstrong e Landers (2018) [\[1\]](#ref1), a dispersão geográfica em grandes organizações tende a comprometer a equidade no aprendizado e a padronização do conhecimento. 
 
-&emsp; Para mitigar esse cenário, foi desenvolvido o Mini Mundo Cielo, um serious game acessado via navegador que aplica mecânicas de gamificação ao treinamento comercial. Fundamentado nos princípios de Kapp (2012) [\[26\]](#ref26), o jogo utiliza elementos típicos de jogos para facilitar a aprendizagem em contextos corporativos. A solução simula o cotidiano de um Gerente de Negócios, permitindo ao usuário explorar um ambiente em pixel art e interagir com clientes fictícios por meio de diálogos de múltipla escolha. Dessa forma, o colaborador pratica abordagens comerciais, contorna objeções e desenvolve domínio sobre o portfólio em um ambiente seguro e controlado.
+&emsp; Para mitigar esse cenário, foi desenvolvido o Mini Mundo Cielo, um serious game acessado via navegador que aplica mecânicas de gamificação ao treinamento comercial. Fundamentado nos princípios de Kapp (2012) [\[21\]](#ref21), o jogo utiliza elementos típicos de jogos para facilitar a aprendizagem em contextos corporativos. A solução simula o cotidiano de um Gerente de Negócios, permitindo ao usuário explorar um ambiente em pixel art e interagir com clientes fictícios por meio de diálogos de múltipla escolha. Dessa forma, o colaborador pratica abordagens comerciais, contorna objeções e desenvolve domínio sobre o portfólio em um ambiente seguro e controlado.
 
-&emsp; A solução foi concebida como uma ferramenta de treinamento assíncrono e de fácil acesso. Por operar diretamente no navegador, elimina barreiras técnicas e amplia o alcance da capacitação, garantindo que colaboradores de diferentes regiões tenham acesso à mesma experiência de aprendizado. De acordo com Werbach e Hunter (2012) [\[27\]](#ref27), a incorporação de elementos de game design em processos organizacionais permite a simulação de situações reais, favorecendo a aprendizagem prática sem riscos operacionais.
+&emsp; A solução foi concebida como uma ferramenta de treinamento assíncrono e de fácil acesso. Por operar diretamente no navegador, elimina barreiras técnicas e amplia o alcance da capacitação, garantindo que colaboradores de diferentes regiões tenham acesso à mesma experiência de aprendizado. De acordo com Werbach e Hunter (2012) [\[33\]](#ref33), a incorporação de elementos de game design em processos organizacionais permite a simulação de situações reais, favorecendo a aprendizagem prática sem riscos operacionais.
 
-&emsp; Com a implementação da solução, espera-se promover maior padronização e escalabilidade do treinamento comercial, reduzindo disparidades regionais e elevando o nível médio de preparo da equipe. Além disso, o uso de jogos educativos tende a aumentar o engajamento e a retenção do conhecimento, aspectos fundamentais para a aplicação prática no campo. Conforme Gee (2017) [\[28\]](#ref28), ambientes interativos favorecem o desenvolvimento de competências complexas. Como consequência, projeta-se impacto positivo em indicadores como qualidade da abordagem comercial, taxa de conversão e desempenho geral de vendas.
+&emsp; Com a implementação da solução, espera-se promover maior padronização e escalabilidade do treinamento comercial, reduzindo disparidades regionais e elevando o nível médio de preparo da equipe. Além disso, o uso de jogos educativos tende a aumentar o engajamento e a retenção do conhecimento, aspectos fundamentais para a aplicação prática no campo. Conforme Gee (2017) [\[15\]](#ref15), ambientes interativos favorecem o desenvolvimento de competências complexas. Como consequência, projeta-se impacto positivo em indicadores como qualidade da abordagem comercial, taxa de conversão e desempenho geral de vendas.
 
 &emsp; No fluxo de capacitação da Cielo, o Mini Mundo Cielo pode ser integrado à etapa inicial do processo de onboarding dos novos Gerentes de Negócios, após a apresentação institucional da empresa e o treinamento conceitual sobre o portfólio de soluções de pagamento. Nesse contexto, o jogo funciona como um ambiente de prática aplicada, no qual o colaborador pode simular situações reais de abordagem comercial e negociação antes de atuar diretamente em campo. Além disso, a ferramenta também pode ser utilizada como recurso complementar de reciclagem para profissionais já atuantes, permitindo atualização contínua de conhecimentos, estratégias de venda e domínio das soluções oferecidas pela empresa.
 
 ### 1.1.6. Matriz de Riscos (sprint 4)
 
-&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Esse processo está alinhado às práticas de gestão de riscos propostas pelo Project Management Institute (PMI), que define a identificação, análise e planejamento de respostas aos riscos como etapas fundamentais para reduzir incertezas e aumentar a probabilidade de sucesso em projetos (Project Management Institute, 2021). Segundo Kapp (2012) [\[26\]](#ref26), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário.
+&emsp; A antecipação de falhas críticas em projetos de tecnologia educacional exige uma abordagem que equilibre viabilidade técnica e engajamento do usuário. Esse processo está alinhado às práticas de gestão de riscos propostas pelo Project Management Institute (PMI), que define a identificação, análise e planejamento de respostas aos riscos como etapas fundamentais para reduzir incertezas e aumentar a probabilidade de sucesso em projetos (Project Management Institute, 2021). Segundo Kapp (2012) [\[21\]](#ref21), o sucesso de um serious game não depende apenas da estabilidade técnica, mas da capacidade de manter o fluxo de aprendizagem sem interrupções que comprometam a experiência do usuário.
 
 <div align="center">
 <sub>Tabela 1 - Matriz de Riscos e Oportunidades do Projeto</sub>
@@ -230,9 +230,9 @@ Cielitos
 
 ### 1.1.7. Objetivos, Metas e Indicadores (sprint 4)
 
-&emsp; O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[29\]](#ref29), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. 
+&emsp; O modelo SMART, proposto por George T. Doran, (Doran, 1981) [\[11\]](#ref11), é uma abordagem amplamente utilizada na definição de objetivos, baseada em cinco critérios: específicos (Specific), mensuráveis (Measurable), alcançáveis (Achievable), relevantes (Relevant) e temporais (Time-bound). Essa metodologia permite estruturar metas de forma clara e objetiva, facilitando o acompanhamento do progresso e a avaliação dos resultados ao longo do tempo. 
 
-&emsp; No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[30\]](#ref30).
+&emsp; No contexto do projeto Mini Mundo Cielo, a aplicação do modelo SMART contribui para organizar o desenvolvimento em etapas bem definidas, garantindo que cada entrega esteja alinhada às expectativas do parceiro e às necessidades dos usuários, além de seguir boas práticas de gerenciamento de projetos, conforme orientado pelo PMBOK Guide do Project Management Institute (2021) [\[27\]](#ref27).
 
 <div align="center">
 <sub>Tabela 2 - Objetivos SMART do Projeto</sub>
@@ -317,7 +317,7 @@ RNF07| O jogo deverá ser intuitivo, garantindo que o jogador compreenda a progr
 
 ## 1.3. Público-alvo do Projeto (sprint 2)
 
-&emsp; O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [\[11\]](#ref11) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
+&emsp; O público-alvo é definido como o extrato demográfico e profissional para o qual o produto é direcionado, permitindo a personalização da linguagem e das mecânicas de engajamento para maximizar a conversão educacional. [\[10\]](#ref10) No contexto do Mini Mundo Cielo, o foco reside na padronização da excelência comercial em escala nacional. 
 
 &emsp; O público-alvo é composto por novos Gerentes de Negócios (GNs) da área comercial da Cielo. São adultos com ensino médio completo, com idade média aproximada de 44 anos, distribuídos por todo o território brasileiro. Anualmente, cerca de 3.000 novos profissionais ingressam na função, com maior concentração na região Sudeste (aproximadamente 2.000), seguida pelo Nordeste (315), Sul (340), Centro-Oeste (200) e Norte (100), evidenciando um público geograficamente diverso.
 
@@ -335,7 +335,7 @@ RNF07| O jogo deverá ser intuitivo, garantindo que o jogador compreenda a progr
 
 - **Faixa Etária Média:** 44 anos (Perfil de adultos com experiência prévia em vendas ou transição de carreira).
 
-- **Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [\[1\]](#ref1)
+- **Necessidade Operacional:** Profissionais em fase de onboarding que necessitam de domínio rápido do portfólio (Cielo Tap, Lio, e-commerce) e da cultura organizacional. [\[5\]](#re5)
 
 - **Distribuição Geográfica e Escala**
 O projeto visa atender uma demanda anual de aproximadamente 3.000 novos profissionais, caracterizando-se por uma alta dispersão geográfica que justifica a digitalização do treinamento.
@@ -347,16 +347,16 @@ A utilização de gamificação no Mini Mundo Cielo busca tornar o processo de t
 
 ## 2.1. Objetivos do Jogo (sprint 2)
 
-&emsp; O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. A conclusão do jogo ocorre quando o jogador completa todas as missões disponíveis nas cidades do mapa, atendendo diferentes estabelecimentos comerciais e acumulando pontuação e moedas por meio de decisões corretas nos desafios e quizzes. Ao finalizar todas as etapas, o jogador é reconhecido dentro da narrativa como um gerente de negócios preparado para atuar com excelência no atendimento e na venda de soluções da Cielo. [19](#ref19)
+&emsp; O objetivo do jogo é capacitar o jogador no desenvolvimento de competências específicas de atendimento e vendas, como identificação de necessidades do cliente, comunicação persuasiva e resolução de objeções. A aprendizagem ocorre por meio de missões interativas que simulam situações reais do cotidiano comercial, nas quais o jogador deve interagir com NPCs, responder quizzes e tomar decisões que impactam o resultado da negociação. A progressão é estruturada em fases com sistemas de pontuação, feedback imediato e recompensas, permitindo mensurar o desempenho e acompanhar a evolução das habilidades ao longo da experiência. A conclusão do jogo ocorre quando o jogador completa todas as missões disponíveis nas cidades do mapa, atendendo diferentes estabelecimentos comerciais e acumulando pontuação e moedas por meio de decisões corretas nos desafios e quizzes. Ao finalizar todas as etapas, o jogador é reconhecido dentro da narrativa como um gerente de negócios preparado para atuar com excelência no atendimento e na venda de soluções da Cielo. [24](#ref24)
 
 
 ## 2.2. Características do Jogo (sprint 2)
 
-&emsp; O Mini Mundo Cielo é classificado como um Serious Game, projetado para equilibrar a carga pedagógica com o entretenimento. Suas características técnicas foram selecionadas para atender à diversidade do público-alvo e à complexidade do ecossistema de pagamentos. [\[4\]](#ref4)
+&emsp; O Mini Mundo Cielo é classificado como um Serious Game, projetado para equilibrar a carga pedagógica com o entretenimento. Suas características técnicas foram selecionadas para atender à diversidade do público-alvo e à complexidade do ecossistema de pagamentos. [\[17\]](#ref17)
 
 ### 2.2.1. Gênero do Jogo (sprint 2)
 
-&emsp; O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [\[20\]](#ref20)com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [\[4\]](#ref4)
+&emsp; O Mini Mundo Cielo é classificado tecnicamente como um Serious Game (Jogo Sério) educacional, [\[3\]](#ref3)com uma estrutura híbrida que combina elementos de Simulação, RPG Leve e Aventura Narrativa. O foco central não reside apenas no entretenimento, mas na validação de competências críticas para o sucesso comercial dentro da Cielo S.A. [\[17\]](#ref17)
 
 &emsp; A experiência mergulha o jogador em uma jornada interativa onde a progressão é pautada por missões de campo e tomada de decisão em tempo real. Cada fase funciona como um laboratório seguro para testar habilidades de negociação, resolução de problemas e domínio técnico do portfólio de produtos, transformando o onboarding em um processo dinâmico e envolvente.
 
@@ -501,15 +501,15 @@ Cada personagem foi desenvolvido em pixel art 2D, com spritesheet contendo 16 fr
 
 ### 3.2.3. Diversidade e Representatividade dos Personagens
 
-&emsp; A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na capilaridade nacional dos gerentes de negócios da companhia. A escolha das personagens Dandara, Gabriel, João Vitor e Maya foi estruturada para transpor a barreira do entretenimento, atuando como um instrumento de equidade pedagógica. [\[14\]](#ref14)
+&emsp; A concepção do elenco do Mini Mundo Cielo fundamenta-se na senioridade e na capilaridade nacional dos gerentes de negócios da companhia. A escolha das personagens Dandara, Gabriel, João Vitor e Maya foi estruturada para transpor a barreira do entretenimento, atuando como um instrumento de equidade pedagógica. [\[19\]](#ref19)
 
-- **Embasamento na Realidade Brasileira:** As decisões de design estão ancoradas nos dados do Censo Demográfico 2022 (IBGE), que reporta uma população majoritariamente feminina e negra (pretos e pardos somam 55,5% dos brasileiros). [\[16\]](#ref16) Ao definir a idade média das personagens em 44 anos, o projeto espelha a maturidade profissional exigida pelo cargo de gestão na Cielo, enquanto a seleção de sobrenomes como "Santos" e "Souza" reflete a herança do registro civil nacional, gerando uma ancoragem realista e cotidiana. [\[13\]](#ref13)
+- **Embasamento na Realidade Brasileira:** As decisões de design estão ancoradas nos dados do Censo Demográfico 2022 (IBGE), que reporta uma população majoritariamente feminina e negra (pretos e pardos somam 55,5% dos brasileiros). [\[18\]](#ref18) Ao definir a idade média das personagens em 44 anos, o projeto espelha a maturidade profissional exigida pelo cargo de gestão na Cielo, enquanto a seleção de sobrenomes como "Santos" e "Souza" reflete a herança do registro civil nacional, gerando uma ancoragem realista e cotidiana. [\[30\]](#ref30)
 
 - **Adequação ao Público-Alvo:** Conforme detalhado na Seção 1.3, o público-alvo é composto por adultos distribuídos por todo o território nacional. O jogo promove a representatividade ao apresentar avatares que ocupam a mesma faixa geracional e profissional dos usuários. Essa simetria entre jogador e personagem estabelece o pertencimento, transformando o treinamento corporativo em uma extensão do ambiente de trabalho real, o que potencializa o engajamento e a retenção do conteúdo.
 
-- **Justificativa de Equidade:** O projeto promove a equidade ao descentralizar a liderança de um único perfil hegemônico. A inclusão de Dandara Santos (mulher negra) e João Vitor (homem negro) em postos de gerência sênior atua na validação de grupos historicamente sub-representados em espaços de decisão. A autoridade dentro da narrativa do jogo é distribuída de forma equânime, reforçando o compromisso da Cielo com uma cultura inclusiva e o cumprimento de metas de ESG (Social). [\[12\]](#ref12)
+- **Justificativa de Equidade:** O projeto promove a equidade ao descentralizar a liderança de um único perfil hegemônico. A inclusão de Dandara Santos (mulher negra) e João Vitor (homem negro) em postos de gerência sênior atua na validação de grupos historicamente sub-representados em espaços de decisão. A autoridade dentro da narrativa do jogo é distribuída de forma equânime, reforçando o compromisso da Cielo com uma cultura inclusiva e o cumprimento de metas de ESG (Social). [\[30\]](#ref30)
 
-- **Inovação e Criatividade:** A inovação reside na desconstrução de estereótipos regionais através da técnica de subversão de vieses inconscientes. [\[15\]](#ref15) Ao posicionar João Vitor como representante de Pelotas (RS) e Maya Souza como representante de Salvador (BA), o jogo desafia a homogeneização geográfica. Essa solução criativa celebra a miscigenação e a mobilidade profissional real do Brasil, oferecendo uma representação sofisticada que evita caricaturas e estimula o pensamento crítico sobre diversidade no ambiente corporativo.
+- **Inovação e Criatividade:** A inovação reside na desconstrução de estereótipos regionais através da técnica de subversão de vieses inconscientes. [\[2\]](#ref2) Ao posicionar João Vitor como representante de Pelotas (RS) e Maya Souza como representante de Salvador (BA), o jogo desafia a homogeneização geográfica. Essa solução criativa celebra a miscigenação e a mobilidade profissional real do Brasil, oferecendo uma representação sofisticada que evita caricaturas e estimula o pensamento crítico sobre diversidade no ambiente corporativo.
 
 ## 3.3. Mundo do jogo (sprints 2 e 3)
 
@@ -520,7 +520,7 @@ Em cada estabelecimento o jogador interage com um NPC comerciante, utilizando a 
 
 ### Mapa Geral 
 
-&emsp; A Cidade constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das teclas WASD. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
+&emsp; A Cidade constitui a área de entrada do jogo e permite a movimentação livre do personagem por meio das setas do teclato numérico. O ambiente simula a rotina de visitas do GN e cumpre as seguintes funções narrativas e pedagógicas:
 
 - introduzir os controles básicos do personagem; 
 - instruir o jogador por meio de missões mediadas pela NPC tutora Vanessa; 
@@ -757,7 +757,7 @@ Ambas as telas foram concebidas de modo a manter coerência estética com os dem
 
 &emsp; A construção da sonoplastia do jogo não se limita apenas à inserção de trilhas e efeitos sonoros, mas envolve uma organização conceitual que considera a origem e a função desses sons dentro da experiência do jogador. Nesse sentido, é fundamental distinguir os conceitos de som diegético e não diegético, amplamente discutidos na literatura de áudio para jogos digitais.
 
-&emsp; De acordo com Lucas Correia Meneguette (2016) [\[32\]](#ref32), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
+&emsp; De acordo com Lucas Correia Meneguette (2016) [\[32\]](#ref23), o som pode ser classificado conforme sua relação com o universo ficcional do jogo, sendo o som diegético aquele que pertence ao mundo do jogo, com fonte inserida na narrativa e potencialmente perceptível pelos personagens, enquanto o som não diegético é direcionado exclusivamente ao jogador, como trilhas sonoras de fundo e efeitos de interface. Essa distinção é essencial para a construção da identidade sonora e da imersão, uma vez que os sons diegéticos reforçam a coerência do mundo ficcional (cosmopoiese), ao passo que os não diegéticos atuam principalmente na modulação emocional e no direcionamento da experiência do jogador.
 
 &emsp; No contexto do Mini Mundo Cielo, essa distinção se torna ainda mais relevante, uma vez que o jogo é baseado em interações, tomada de decisão e simulação de situações reais de negociação. Assim, os elementos sonoros foram planejados para reforçar tanto a narrativa quanto o aprendizado do jogador. Os arquivos utilizados estão em formato MP3 e contam com trilhas sonoras diferentes para cada estabelecimento, com o objetivo de gerar a experiência esperada em cada fase.
 
@@ -806,7 +806,7 @@ Ambas as telas foram concebidas de modo a manter coerência estética com os dem
 
 ## 3.5. Gameflow (Diagrama de cenas) (sprint 2)
 
-&emsp; O Gameflow é uma técnica que permite a análise visual completa da progressão de um jogo de forma não-linear, encadeando as diferentes telas e cenários, bem como as interações que o usuário deve fazer para transitar entre eles.[17](#ref17) Por ser conciso e bem abrangente, o Gameflow traz um entendimento geral do funcionamento do jogo de forma efetiva. Abaixo, um esquema que descreve o diagrama de cenas do Mini mundo cielo.
+&emsp; O Gameflow é uma técnica que permite a análise visual completa da progressão de um jogo de forma não-linear, encadeando as diferentes telas e cenários, bem como as interações que o usuário deve fazer para transitar entre eles.[26](#ref26) Por ser conciso e bem abrangente, o Gameflow traz um entendimento geral do funcionamento do jogo de forma efetiva. Abaixo, um esquema que descreve o diagrama de cenas do Mini mundo cielo.
 
 <div align='center'>
  <sub>Imagem 20 - Página 1 do Diagrama de Cenas</sub>
@@ -1076,7 +1076,7 @@ Fechamento do pop-up de diálogo sem progressão da interação, retornando o jo
 
 Dispositivo: Teclado  
 
-**Movimentação via WASD**  
+**Movimentação via setas do teclado numérico**  
 
 Sistema de progressão:
 
@@ -1188,7 +1188,7 @@ Interação com menus, telas de configuração e navegação entre cenas.
 
 **Mecânicas de Movimento em Tempo Real**
 
-Controle do personagem no mapa utilizando teclado (WASD) e interação contextual com NPCs.
+Controle do personagem no mapa utilizando teclado (setas do teclado numéricos) e interação contextual com NPCs.
 
 **Mecânicas de Escolha e Decisão**
 
@@ -1406,7 +1406,7 @@ this.tweens.add({
 
 &emsp; A chuva é implementada em uma cena paralela (`SceneChuva`), iniciada via `this.scene.launch('SceneChuva')`. Essa abordagem evita interferências do zoom da câmera principal e garante que as coordenadas das gotas correspondam diretamente aos pixels da tela.
 
-&emsp; Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[33\]](#ref33)
+&emsp; Cada gota é modelada como uma partícula em movimento bidimensional, onde os eixos são independentes: no eixo X ocorre Movimento Uniforme (MU) e no eixo Y ocorre Movimento Uniformemente Variado (MUV), com velocidade inicial nula.[\[16\]](#ref16)
 
 <div align="center">
  <sub>Imagem 21 - Relação matemática com a chuva do jogo</sub><br/>
@@ -1932,7 +1932,7 @@ this.personagem = this.physics.add.sprite(spawnX, spawnY, 'sprite_frente_1');
 this.personagem.setCollideWorldBounds(true);
 ```
 
-&emsp; O sistema de controle permite utilizar tanto as setas direcionais quanto as teclas WASD, oferecendo maior flexibilidade ao jogador.
+&emsp; O sistema de controle permite utilizar tanto as setas direcionais quanto as setas do teclado numérico, oferecendo maior flexibilidade ao jogador.
 
 ```js
 this.teclas = this.input.keyboard.createCursorKeys();
@@ -2811,78 +2811,75 @@ A sprint 5 encerrou o ciclo de desenvolvimento do Mini Mundo Cielo com o jogo em
 &emsp; Optou-se pela utilização das normas da APA (American Psychological Association) em vez das normas da ABNT (Associação Brasileira de Normas Técnicas), com o intuito de alinhar o projeto a padrões internacionais de formatação e citação, favorecendo sua aplicação e reconhecimento em contextos acadêmicos e profissionais fora do Brasil.
 
 <br><a name="ref1">[1]:</a>
-CIELO S.A. **Quem somos**. Disponível em: https://www.cielo.com.br/institucional/. Acesso em: 26 fev. 2026.
+Armstrong, M. B., & Landers, R. N. (2018). Gamification of employee training and development. International Journal of Training and Development, 22(2). https://doi.org/10.1111/ijtd.12124
 
 <br><a name="ref2">[2]:</a> 
-Cielo S.A. (2025). Integrated annual report 2024. https://www.cielo.com.br/docs/sustentabilidade/2024/eng/Integrated_Annual_Report_2024.pdf?srsltid=AfmBOopjbujbqFTNRcEC8_5eRj9k4r1myFfLZ4ijzCengVUfgUoG7B5-&utm_source=
+Avelino, D. (2023, April 20). Como os vieses inconscientes impactam a diversidade nas empresas. StartSe. https://www.startse.com/artigos/vies-inconsciente-nas-empresas/
 
 <br><a name="ref3">[3]:</a>
-VALOR ECONÔMICO. **Guerra das maquininhas: Cielo reage e disputa se acirra**. Disponível em: https://valor.globo.com/. Acesso em: 26 fev. 2026.
+Baldissera, O. (2021, August 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
 
 <br><a name="ref4">[4]:</a>
- HARVARD BUSINESS REVIEW. **How Gamification Can Help Your Employees Learn**. Disponível em: https://hbr.org/. Acesso em: 26 fev. 2026.
+Banco Central do Brasil. (2025). Relatório integrado 2024. https://www.bcb.gov.br/content/publicacoes/rig/RIG_2024.pdf
 
 <br><a name="ref5">[5]:</a> 
-Júnior, H. (2015). As cinco forças de porter e os fatores críticos de sucesso: Uma análise da tomada de decisões estratégicas na empresa Total Eletro em Pau dos Ferros-RN. Universidade do Estado do Rio Grande do Norte. Disponível em: https://www.uern.br/controledepaginas/2015-/arquivos/5018helder_viana_marinho_de_oliveira_janior.pdf. Acesso em: 26 fev. 2026.
+Cielo S.A. (n.d.). Quem somos. https://www.cielo.com.br/institucional/
 
-<br><a name="ref6">[6]:</a> Cielo. (s.d.). Como fazer análise SWOT. Blog Cielo. 
-https://blog.cielo.com.br/vender/como-fazer-analise-swot/ acesso em 26 fev. 2026
+<br><a name="ref6">[6]:</a> Cielo S.A. (2025). Integrated annual report 2024. https://www.cielo.com.br/docs/sustentabilidade/2024/eng/Integrated_Annual_Report_2024.pdf
 
-<br><a name="ref7">[7]:</a> Exame. (2020, janeiro 27). O pior da guerra das maquininhas de fato passou para a Cielo? Exame. https://exame.<br><a name="ref8">[8]:</a>com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/ Acesso em: 26 fevereiro 2026.
-Exame. (2016, maio 3). Cielo vê concorrência mais agressiva e retração de clientes. Exame. https://exame.com/negocios/cielo-ve-concorrencia-mais-agressiva-e-retracao-de-clientes/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref7">[7]:</a> Cielo. (n.d.). Como fazer análise SWOT. Blog Cielo. https://blog.cielo.com.br/vender/como-fazer-analise-swot/
 
-<br><a name="ref9">[9]:</a>Kotler, P.; Keller, K. Administração de Marketing.
-Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 2026
+<br><a name="ref8">[8]:</a> Corrales, J. A. (2019, May 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content. https://rockcontent.com/br/blog/missao-e-visao
 
-<br><a name="ref10">[10]:</a> Corrales, J. A. (2019, maio 8). Entenda o que é a missão e a visão de uma empresa com o exemplo de 3 marcas de sucesso. Rock Content - BR; Rock Content. https://rockcontent.com/br/blog/missao-e-visao
+<br><a name="ref9">[9]:</a> Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011). From game design elements to gamefulness: Defining gamification. In Proceedings of the 15th International Academic MindTrek Conference.
 
-<br><a name="ref11">[11]:</a>Desidério, M. (2017, agosto 14). 5 dicas essenciais para definir o público-alvo do seu negócio. Exame. https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref10">[10]:</a> Desidério, M. (2017, August 14). 5 dicas essenciais para definir o público-alvo do seu negócio. Exame. https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/
 
-<br><a name="ref12">[12]:</a>Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae). (s.d.). ESG: o que é e qual é a importância? Saiba aqui! https://sebrae.com.br/sites/PortalSebrae/ufs/pe/artigos/esg-o-que-e-e-qual-e-a-importancia-saiba-aqui,4ef39fd767ede710VgnVCM100000d701210aRCRD Acesso em: 26 fevereiro 2026.
+<br><a name="ref11">[11]:</a> Doran, G. T. (1981). There’s a S.M.A.R.T. way to write management’s goals and objectives. Management Review, 70(11), 35–36.
 
-<br><a name="ref13">[13]:</a>Souza, B. (2025, novembro 4). IBGE revela nomes e sobrenomes mais populares do Brasil; veja ranking. CNN Brasil. https://www.cnnbrasil.com.br/nacional/brasil/ibge-revela-nomes-e-sobrenomes-mais-populares-do-brasil-veja-ranking/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref12">[12]:</a> Exame. (2016, May 3). Cielo vê concorrência mais agressiva e retração de clientes. https://exame.com/negocios/cielo-ve-concorrencia-mais-agressiva-e-retracao-de-clientes/
 
-<br><a name="ref14">[14]:</a>Instituto Claro. (2022, agosto 26). Construção de identidade: a importância da representatividade. Instituto Claro. https://www.institutoclaro.org.br/educacao/para-ensinar/planos-de-aula/construcao-de-identidade-a-importancia-da-representatividade/ Acesso em: 26 fevereiro 2026
+<br><a name="ref13">[13]:</a> Exame. (2020, January 27). O pior da guerra das maquininhas de fato passou para a Cielo? https://exame.com/negocios/o-pior-da-guerra-das-maquininhas-de-fato-passou-para-a-cielo/
 
-<br><a name="ref15">[15]:</a>Avelino, D. (2023, abril 20). Como os vieses inconscientes impactam a diversidade nas empresas. StartSe. https://www.startse.com/artigos/vies-inconsciente-nas-empresas/ Acesso em: 26 fevereiro 2026.
+<br><a name="ref14">[14]:</a > Garvin, D. A. (1993). Building a learning organization. Harvard Business Review, 71(4), 78–91.
 
-<br><a name="ref16">[16]:</a>nstituto Brasileiro de Geografia e Estatística (IBGE). (2023, dezembro 22). Censo 2022: pela primeira vez desde 1991 a maior parte da população do Brasil se declara parda. Agência IBGE Notícias. https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/38719-censo-2022-pela-primeira-vez-desde-1991-a-maior-parte-da-populacao-do-brasil-se-declara-parda Acesso em: 26 fevereiro 2026.
+<br><a name="ref15">[15]:</a> Gee, J. P. (2017). Teaching, learning, literacy in our high-risk high-tech world: A framework for becoming human. Teachers College Press.
 
-<br><a name="ref17">[17]:</a>Oniria. (s.d.). Como os games motivam o aprendizado e desenvolvimento profissional dos colaboradores. Oniria. https://oniria.com.br/como-os-games-motivam-o-aprendizado-e-desenvolvimento-profissional-dos-colaboradores/Acesso em: 26 fevereiro 2026.
+<br><a name="ref16">[16]:</a> Halliday, D., Resnick, R., & Walker, J. (2016). Fundamentos de física (10ª ed.). LTC.
 
-<br><a name="ref18">[18]:</a>Neogrid. (2020, dezembro 15). O poder de barganha dos compradores na cadeia de suprimentos pode ser o vilão dos consumidores. Neogrid. https://neogrid.com/o-poder-de-barganha-dos-compradores-na-cadeia-de-suprimentos-e-frequentemente-o-vilao-dos-consumidores/Acesso em: 26 fevereiro 2026.
+<br><a name="ref17">[17]:</a> Harvard Business Review. (n.d.). How gamification can help your employees learn. https://hbr.org/
 
-<br><a name="ref19">[19]:</a>Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
+<br><a name="ref18">[18]:</a> Instituto Brasileiro de Geografia e Estatística. (2023, December 22). Censo 2022: Pela primeira vez desde 1991 a maior parte da população do Brasil se declara parda. https://agenciadenoticias.ibge.gov.br/
 
-<br><a name="ref20">[20]:</a>Baldissera, O. (2021, agosto 30). O que é serious game, estratégia poderosa de gamificação. Pós PUCPR Digital. https://posdigital.pucpr.br/blog/serious-game
+<br><a name="ref19">[19]:</a> Instituto Claro. (2022, August 26). Construção de identidade: A importância da representatividade. https://www.institutoclaro.org.br/educacao/para-ensinar/planos-de-aula/construcao-de-identidade-a-importancia-da-representatividade/
 
-<br><a name="ref21">[21]:</a> Times Brasil. (2025, novembro 16). Em cinco anos, Pix soma R$ 84,9 trilhões e supera sete vezes o PIB do Brasil, mostra estudo. https://timesbrasil.com.br/brasil/economia-brasileira/em-cinco-anos-pix-soma-r-849-trilhoes-e-supera-sete-vezes-o-pib-do-brasil-mostra-estudo/?utm_source=chatgpt.com
+<br><a name="ref20">[20]:</a> Júnior, H. (2015). As cinco forças de Porter e os fatores críticos de sucesso: Uma análise da tomada de decisões estratégicas na empresa Total Eletro em Pau dos Ferros-RN. Universidade do Estado do Rio Grande do Norte.
 
-<br><a name="ref22">[22]:</a> Banco Central do Brasil. (2025). Relatório integrado 2024. https://www.bcb.gov.br/content/publicacoes/rig/RIG_2024.pdf
+<br><a name="ref21">[21]:</a> Kapp, K. M. (2012). The gamification of learning and instruction: Game-based methods and strategies for training and education. Pfeiffer.
 
-<br><a name="ref23">[23]:</a>Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011). From game design elements to gamefulness: Defining gamification. Proceedings of the 15th International Academic MindTrek Conference.
+<br><a name="ref22">[22]:</a> Kotler, P., & Keller, K. (2012). Administração de marketing. Pearson.
 
-<br><a name="ref24">[24]:</a> Garvin, D. A. (1993). Building a learning organization. Harvard Business Review, 71(4), 78–91.
+<br><a name="ref23">[23]:</a> Meneguette, L. C. (2016). A afinação do mundo virtual: Identidade sonora em jogos digitais. Pontifícia Universidade Católica de São Paulo.
 
-<br><a name="ref25">[25]:</a> Armstrong, M. B., & Landers, R. N. (2018). Gamification of employee training and development: Gamification of employee training. International Journal of Training and Development, 22(2). https://doi.org/10.1111/ijtd.12124.
+<br><a name="ref24">[24]:</a> Michael, D. R., & Chen, S. L. (2005). Serious games: Games that educate, train, and inform. Thomson Course Technology.
 
-<br><a name="ref26">[26]:</a> Kapp, K. M. (2012). The gamification of learning and instruction: Game-based methods and strategies for training and education. Pfeiffer. https://www.wiley.com/en-us/The+Gamification+of+Learning+and+Instruction:+Game-based+Methods+and+Strategies+for+Training+and+Education-p-9781118096345.
+<br><a name="ref25">[25]:</a> Neogrid. (2020, December 15). O poder de barganha dos compradores na cadeia de suprimentos pode ser o vilão dos consumidores. https://neogrid.com/
 
-<br><a name="ref27">[27]:</a> Werbach, K., & Hunter, D. (2012). For the win: How game thinking can revolutionize your business. Wharton Digital Press. https://mackinstitute.wharton.upenn.edu/2012/for-the-win-how-game-thinking-can-revolutionize-your-business/.
+<br><a name="ref26">[26]:</a> Oniria. (n.d.). Como os games motivam o aprendizado e desenvolvimento profissional dos colaboradores. https://oniria.com.br/
 
-<br><a name="ref28">[28]:</a> Gee, J. P. (2017). Teaching, learning, literacy in our high-risk high-tech world: A framework for becoming human. Teachers College Press. https://www.tcpress.com/teaching-learning-literacy-in-our-high-risk-high-tech-world-9780807758601.
+<br><a name="ref27">[27]:</a> GProject Management Institute. (2021). A guide to the project management body of knowledge (PMBOK® guide) (7th ed.). PMI.
 
-<br><a name="ref29">[29]:</a> Doran, G. T. (1981). There's a S.M.A.R.T. way to write management's goals and objectives. Management Review, 70(11), 35–36. https://www.eval.fr/wp-content/uploads/2020/01/S.M.A.R.T-Way-Management-Review-eval.fr_.pdf.
+<br><a name="ref28">[28]:</a> Schwaber, K., & Sutherland, J. (2020). The Scrum guide: The definitive guide to Scrum. https://scrumguides.org/
 
-<br><a name="ref30">[30]:</a> Project Management Institute. (2021). A guide to the Project Management Body of Knowledge (PMBOK® Guide) (7th ed.). https://www.pmi.org/standards/pmbok.
+<br><a name="ref29">[29]:</a> Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae). (n.d.). ESG: O que é e qual é a importância? https://sebrae.com.br/
 
-<br><a name="ref31">[31]:</a> Schwaber, K., & Sutherland, J. (2020). The Scrum Guide: The definitive guide to Scrum: The rules of the game. https://scrumguides.org/scrum-guide.html.
+<br><a name="ref30">[30]:</a> Souza, B. (2025, November 4). IBGE revela nomes e sobrenomes mais populares do Brasil; veja ranking. CNN Brasil. https://www.cnnbrasil.com.br/
 
-<br><a name="ref32">[32]:</a> Meneguette, L. C. (2016). A afinação do mundo virtual: identidade sonora em jogos digitais. Pontifícia Universidade Católica de São Paulo (PUCSP). https://repositorio.pucsp.br/handle/handle/19060
+<br><a name="ref31">[31]:</a> Times Brasil. (2025, November 16). Em cinco anos, Pix soma R$ 84,9 trilhões e supera sete vezes o PIB do Brasil. https://timesbrasil.com.br/
 
-<br><a name="ref33">[33]:</a> Halliday, D., Resnick, R., & Walker, J. (2016). Fundamentos de física (10ª ed.). LTC.
+<br><a name="ref32">[32]:</a> Valor Econômico. (n.d.). Guerra das maquininhas: Cielo reage e disputa se acirra. https://valor.globo.com/
 
-<br><a name="ref34">[34]:</a> Project Management Institute. (2021). *A guide to the project management body of knowledge (PMBOK® Guide)* (7th ed.). PMI.
+<br><a name="ref34">[34]:</a> Werbach, K., & Hunter, D. (2012). For the win: How game thinking can revolutionize your business. Wharton Digital Press.
 
 # <a name="c8"></a>Anexos
 
@@ -2905,7 +2902,7 @@ Sebrae (2022). Planejamento estratégico empresarial. acessado em: 18 fevereiro 
 | Requisito | Descrição | Status |
 |-----------|-----------|:------:|
 | R1 | Tela inicial com opções Jogar, Créditos e Configurações | Implementado |
-| R2 | Controle do personagem via WASD | Implementado |
+| R2 | Controle do personagem via teclas do teclado numérico| Implementado |
 | R3 | Jogo para plataforma web sem instalação | Implementado |
 | R4 | Mapa interativo com deslocamento do personagem | Implementado |
 | R5 | Interação com NPCs que simulam situações de venda | Implementado |
