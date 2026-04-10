@@ -1008,7 +1008,7 @@ export default class SceneDialogoAgencia01 extends SceneDialogoBase {
 
     let avaliacao;
     let cor;
-    if (pct >= 50) {
+    if (pct >= 33) {
       avaliacao = "Excelente atendimento!";
       cor = "#44ff88";
     } else {

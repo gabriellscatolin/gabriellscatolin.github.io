@@ -32,8 +32,8 @@ export const SCORING_CONFIG = {
 
 // Metas por fase (para o número real de perguntas de cada fase)
 const METAS_BASE = {
-  agency1_gg:  150,
-  agency1_pj:  150,
+  agency1_gg:  200,
+  agency1_pj:  200,
   padaria:     350,
   farmacia:    400,
   escritorio:  450,
